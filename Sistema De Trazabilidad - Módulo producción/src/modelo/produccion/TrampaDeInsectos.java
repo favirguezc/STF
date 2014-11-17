@@ -1,32 +1,126 @@
 package modelo.produccion;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 import modelo.administracion.Persona;
 
-/***********************************************************************
- * Module:  TrampaDeInsectos.java
- * Author:  fredy
- * Purpose: Defines the Class TrampaDeInsectos
- ***********************************************************************/
+@Entity
+public class TrampaDeInsectos implements Serializable {
 
-/** @pdOid 4de7f642-1100-4ca2-a7e2-459f49162296 */
-public class TrampaDeInsectos {
-   /** @pdOid 663dabd7-81c5-499f-8353-bb78fd7998b0 */
-   private long id;
-   /** @pdOid ceed698f-faed-4fd2-96b3-f9e255b18079 */
-   private java.util.Calendar fecha;
-   /** @pdOid 2a274911-5dc0-4aa9-a005-7b64a3da1f3c */
-   private java.lang.String nombre;
-   /** @pdOid 42c9e180-ea81-4f77-91ce-26258d6cfe98 */
-   private java.lang.String especie;
-   /** @pdOid 1e241b23-33d8-410c-b01c-68dda5b7ce19 */
-   private int individuos;
-   /** @pdOid 98d4095e-f953-4f78-a885-a105ada89c6c */
-   private boolean cambio;
-   /** @pdOid cca2ca9a-0ad7-407c-8dd6-bb8d50d0f53f */
-   private java.lang.String observaciones;
-   /** @pdOid 95f135ed-69c1-4dac-b97a-7f36bc35b24b */
-   private Persona asistente;
-   /** @pdOid aef0fdef-e1d3-4e22-9cc0-4be7c581a937 */
-   private Persona productor;
+    @Id
+    @GeneratedValue
+    private long id;
+    @Basic
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+    @Basic
+    private String nombre;
+    @Basic
+    private String especie;
+    @Basic
+    private int individuos;
+    @Basic
+    private boolean cambio;
+    @Basic
+    private String observaciones;
+    @Basic
+    @ManyToOne
+    private Persona asistente;
+    @Basic
+    @ManyToOne
+    private Persona productor;
 
+    public TrampaDeInsectos() {
+    }
+
+    public TrampaDeInsectos(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones, Persona asistente, Persona productor) {
+        this.fecha = fecha;
+        this.nombre = nombre;
+        this.especie = especie;
+        this.individuos = individuos;
+        this.cambio = cambio;
+        this.observaciones = observaciones;
+        this.asistente = asistente;
+        this.productor = productor;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public int getIndividuos() {
+        return individuos;
+    }
+
+    public void setIndividuos(int individuos) {
+        this.individuos = individuos;
+    }
+
+    public boolean isCambio() {
+        return cambio;
+    }
+
+    public void setCambio(boolean cambio) {
+        this.cambio = cambio;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public Persona getAsistente() {
+        return asistente;
+    }
+
+    public void setAsistente(Persona asistente) {
+        this.asistente = asistente;
+    }
+
+    public Persona getProductor() {
+        return productor;
+    }
+
+    public void setProductor(Persona productor) {
+        this.productor = productor;
+    }
+    
+    
 }

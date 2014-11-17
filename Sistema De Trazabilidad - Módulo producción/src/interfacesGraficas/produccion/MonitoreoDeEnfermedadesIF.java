@@ -6,14 +6,14 @@
 package interfacesGraficas.produccion;
 
 import controlador.administracion.LoteControlador;
-import controlador.produccion.MonitoreoDePlagasControlador;
+import controlador.produccion.MonitoreoDeEnfermedadesControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.administracion.Lote;
-import modelo.produccion.MonitoreoDePlagas;
+import modelo.produccion.MonitoreoDeEnfermedades;
 
 /**
  *
@@ -22,18 +22,19 @@ import modelo.produccion.MonitoreoDePlagas;
 public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form MonitoreoDePlagasIF
+     * Creates new form MonitoreoDeEnfermedadesIF
      */
-    private MonitoreoDePlagasControlador controlador;
-    private MonitoreoDePlagas registroSeleccionado;
-    private List<MonitoreoDePlagas> lista;
+    private MonitoreoDeEnfermedadesControlador controlador;
+    private MonitoreoDeEnfermedades registroSeleccionado;
+    private List<MonitoreoDeEnfermedades> lista;
 
     public MonitoreoDeEnfermedadesIF() {
         initComponents();
-        controlador = new MonitoreoDePlagasControlador();
+        controlador = new MonitoreoDeEnfermedadesControlador();
         registroSeleccionado = null;
         cargarListaLotes();
         cargarTablaPrincipal();
+        guardar(false);
     }
 
     /**
@@ -61,30 +62,23 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         moduloSpinner = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        arañitaSpinner = new javax.swing.JSpinner();
-        thripsSpinner = new javax.swing.JSpinner();
+        botrytisSpinner = new javax.swing.JSpinner();
+        mycospharellaSpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        cyclamenSpinner = new javax.swing.JSpinner();
-        chisasSpinner = new javax.swing.JSpinner();
+        antracnosisSpinner = new javax.swing.JSpinner();
+        mildeoSpinner = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        otroTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        babosasSpinner = new javax.swing.JSpinner();
-        otroSpinner = new javax.swing.JSpinner();
-        florSpinner = new javax.swing.JSpinner();
-        frutoSpinner = new javax.swing.JSpinner();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        coronasSpinner = new javax.swing.JSpinner();
-        jLabel12 = new javax.swing.JLabel();
+        phytophthoraSpinner = new javax.swing.JSpinner();
+        bacteriosisSpinner = new javax.swing.JSpinner();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Monitoreo de Plagas");
+        setTitle("Monitoreo de Enfermedades");
         setMinimumSize(new java.awt.Dimension(1141, 592));
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -203,14 +197,14 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Módulo", "Arañita Roja", "Thrips", "Cylamen", "Chisas", "Babosas", "Otro", "Otro", "Flor", "Fruto", "N° Coronas"
+                "Módulo", "Botrytis", "Antracnosis", "Mycospharella", "Mildeo Polvoso", "Phytophthora", "Bacteriosis"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -233,7 +227,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
@@ -245,65 +239,40 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         moduloSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Arañita");
+        jLabel4.setText("Botrytis");
 
-        arañitaSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        arañitaSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 2, 1));
+        botrytisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        botrytisSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 2, 1));
 
-        thripsSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        thripsSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 2, 1));
+        mycospharellaSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mycospharellaSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 2, 1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Thrips");
+        jLabel5.setText("Antracnosis");
 
-        cyclamenSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cyclamenSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
+        antracnosisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        antracnosisSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
-        chisasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chisasSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
+        mildeoSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mildeoSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Cyclamen");
+        jLabel6.setText("Mycospharella");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Chisas");
+        jLabel7.setText("Mildeo Polvoso");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Babosas");
-
-        otroTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        otroTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                otroTextFieldActionPerformed(evt);
-            }
-        });
+        jLabel8.setText("Phytophthora");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Otro");
+        jLabel9.setText("Bacteriosis");
 
-        babosasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        babosasSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
+        phytophthoraSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        phytophthoraSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
-        otroSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        otroSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        florSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        florSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        frutoSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        frutoSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Flor");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Fruto");
-
-        coronasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        coronasSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Coronas");
+        bacteriosisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bacteriosisSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -312,37 +281,23 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(edicionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(96, 96, 96)
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(frutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(florSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coronasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(edicionPanelLayout.createSequentialGroup()
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(58, 58, 58)
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(arañitaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(thripsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cyclamenSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chisasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(babosasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(edicionPanelLayout.createSequentialGroup()
-                                .addComponent(otroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(otroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11))
-                .addGap(18, 41, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(58, 58, 58)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botrytisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mycospharellaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,40 +309,27 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(arañitaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botrytisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(thripsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(mycospharellaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cyclamenSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chisasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel7)
+                    .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(babosasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(otroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(otroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(florSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(frutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(coronasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -459,37 +401,27 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Lote lote = (Lote) loteComboBox.getSelectedItem();
         int modulo = (int) moduloSpinner.getValue();
-        int aranita = (int) arañitaSpinner.getValue();
-        int thrips = (int) thripsSpinner.getValue();
-        boolean cyclamen = false;
-        if (cyclamenSpinner.getValue().equals("Si")) {
-            cyclamen = true;
+        int botrytis = (int) botrytisSpinner.getValue();
+        boolean antracnosis = false;
+        if (antracnosisSpinner.getValue().equals("Si")) {
+            antracnosis = true;
         }
-        boolean chisas = false;
-        if (chisasSpinner.getValue().equals("Si")) {
-            chisas = true;
+        int mycospharella = (int) mycospharellaSpinner.getValue();
+        boolean mildeoPolvoso = false;
+        if (mildeoSpinner.getValue().equals("Si")) {
+            mildeoPolvoso = true;
         }
-        boolean babosas = false;
-        if (babosasSpinner.getValue().equals("Si")) {
-            cyclamen = true;
+        boolean phytophtora = false;
+        if (phytophthoraSpinner.getValue().equals("Si")) {
+            phytophtora = true;
         }
-        String otro = otroTextField.getText();
-        boolean otrov = false;
-        if (otroSpinner.getValue().equals("Si")) {
-            otrov = true;
+        boolean bacteriosis = false;
+        if (bacteriosisSpinner.getValue().equals("Si")) {
+            bacteriosis = true;
         }
-        boolean flor = false;
-        if (florSpinner.getValue().equals("Si")) {
-            flor = true;
-        }
-        boolean fruto = false;
-        if (frutoSpinner.getValue().equals("Si")) {
-            fruto = true;
-        }
-        int coronas = (int) coronasSpinner.getValue();
         Date fecha = fechaChooserCombo.getSelectedDate().getTime();
         if (registroSeleccionado == null) {
-            MonitoreoDePlagas nuevo = controlador.nuevo(lote, modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
+            MonitoreoDeEnfermedades nuevo = controlador.nuevo(lote, modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -497,17 +429,13 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 cargarTablaPrincipal();
             }
         } else {
-            registroSeleccionado.setAranita(aranita);
-            registroSeleccionado.setBabosas(babosas);
-            registroSeleccionado.setChisas(chisas);
-            registroSeleccionado.setCoronas(coronas);
-            registroSeleccionado.setCyclamen(cyclamen);
-            registroSeleccionado.setFlor(flor);
-            registroSeleccionado.setFruto(fruto);
             registroSeleccionado.setModulo(modulo);
-            registroSeleccionado.setOtro(otro);
-            registroSeleccionado.setOtrov(otrov);
-            registroSeleccionado.setThrips(thrips);
+            registroSeleccionado.setAntracnosis(antracnosis);
+            registroSeleccionado.setBacteriosis(bacteriosis);
+            registroSeleccionado.setBotrytis(botrytis);
+            registroSeleccionado.setMildeoPolvoso(mildeoPolvoso);
+            registroSeleccionado.setMycospharella(mycospharella);
+            registroSeleccionado.setPhytophtora(phytophtora);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -530,28 +458,17 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_fechaChooserComboOnSelectionChange
 
-    private void otroTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otroTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_otroTextFieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner arañitaSpinner;
-    private javax.swing.JSpinner babosasSpinner;
-    private javax.swing.JSpinner chisasSpinner;
-    private javax.swing.JSpinner coronasSpinner;
-    private javax.swing.JSpinner cyclamenSpinner;
+    private javax.swing.JSpinner antracnosisSpinner;
+    private javax.swing.JSpinner bacteriosisSpinner;
+    private javax.swing.JSpinner botrytisSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private datechooser.beans.DateChooserCombo fechaChooserCombo;
-    private javax.swing.JSpinner florSpinner;
-    private javax.swing.JSpinner frutoSpinner;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -564,12 +481,12 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox loteComboBox;
+    private javax.swing.JSpinner mildeoSpinner;
     private javax.swing.JSpinner moduloSpinner;
+    private javax.swing.JSpinner mycospharellaSpinner;
     private javax.swing.JButton nuevoButton;
-    private javax.swing.JSpinner otroSpinner;
-    private javax.swing.JTextField otroTextField;
+    private javax.swing.JSpinner phytophthoraSpinner;
     private javax.swing.JTable principalTable;
-    private javax.swing.JSpinner thripsSpinner;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTablaPrincipal() {
@@ -577,18 +494,14 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista((Lote) loteComboBox.getSelectedItem(), fechaChooserCombo.getSelectedDate().getTime());
-        for (MonitoreoDePlagas mp : lista) {
+        for (MonitoreoDeEnfermedades mp : lista) {
             Object[] row = {mp.getModulo(),
-                mp.getAranita(),
-                mp.getThrips(),
-                mp.isCyclamen(),
-                mp.isChisas(),
-                mp.isBabosas(),
-                mp.getOtro(),
-                mp.isOtrov(),
-                mp.isFlor(),
-                mp.isFruto(),
-                mp.getCoronas()};
+                mp.getBotrytis(),
+                mp.isAntracnosis(),
+                mp.getMycospharella(),
+                mp.isMildeoPolvoso(),
+                mp.isPhytophtora(),
+                mp.isBacteriosis()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
@@ -604,52 +517,36 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             moduloSpinner.setValue(0);
-            arañitaSpinner.setValue(0);
-            thripsSpinner.setValue(0);
-            cyclamenSpinner.setValue("No");
-            chisasSpinner.setValue("No");
-            babosasSpinner.setValue("No");
-            otroTextField.setText(null);
-            otroSpinner.setValue("No");
-            florSpinner.setValue("No");
-            frutoSpinner.setValue("No");
-            coronasSpinner.setValue(0);
+            botrytisSpinner.setValue(0);
+            mycospharellaSpinner.setValue(0);
+            antracnosisSpinner.setValue("No");
+            mildeoSpinner.setValue("No");
+            phytophthoraSpinner.setValue("No");
+            bacteriosisSpinner.setValue("No");
         } else {
             moduloSpinner.setValue(registroSeleccionado.getModulo());
-            arañitaSpinner.setValue(registroSeleccionado.getAranita());
-            thripsSpinner.setValue(registroSeleccionado.getThrips());
-            if (registroSeleccionado.isCyclamen()) {
-                cyclamenSpinner.setValue("Si");
+            botrytisSpinner.setValue(registroSeleccionado.getBotrytis());
+            mycospharellaSpinner.setValue(registroSeleccionado.getMycospharella());
+            if (registroSeleccionado.isAntracnosis()) {
+                antracnosisSpinner.setValue("Si");
             } else {
-                cyclamenSpinner.setValue("No");
+                antracnosisSpinner.setValue("No");
             }
-            if (registroSeleccionado.isChisas()) {
-                chisasSpinner.setValue("Si");
+            if (registroSeleccionado.isMildeoPolvoso()) {
+                mildeoSpinner.setValue("Si");
             } else {
-                chisasSpinner.setValue("No");
+                mildeoSpinner.setValue("No");
             }
-            if (registroSeleccionado.isBabosas()) {
-                babosasSpinner.setValue("Si");
+            if (registroSeleccionado.isPhytophtora()) {
+                phytophthoraSpinner.setValue("Si");
             } else {
-                babosasSpinner.setValue("No");
+                phytophthoraSpinner.setValue("No");
             }
-            otroTextField.setText(registroSeleccionado.getOtro());
-            if (registroSeleccionado.isOtrov()) {
-                otroSpinner.setValue("Si");
+            if (registroSeleccionado.isBacteriosis()) {
+                bacteriosisSpinner.setValue("Si");
             } else {
-                otroSpinner.setValue("No");
+                bacteriosisSpinner.setValue("No");
             }
-            if (registroSeleccionado.isFlor()) {
-                florSpinner.setValue("Si");
-            } else {
-                florSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isFruto()) {
-                frutoSpinner.setValue("Si");
-            } else {
-                frutoSpinner.setValue("No");
-            }
-            coronasSpinner.setValue(registroSeleccionado.getCoronas());
         }
     }
 

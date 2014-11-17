@@ -12,6 +12,7 @@ import interfacesGraficas.variablesClimaticas.LluviasIF;
 import dao.util.EntityManagerFactorySingleton;
 import interfacesGraficas.administracion.LoteIF;
 import interfacesGraficas.administracion.PersonaIF;
+import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -97,6 +98,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton3.setText("Enfermedades");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/card_32x32.png"))); // NOI18N
@@ -325,6 +331,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(TemperaturaIF.class)) {
+            TemperaturaIF tif = new TemperaturaIF();
+            panelEscritorio.add(tif);
+            tif.setVisible(true);
+            try {
+                tif.setSelected(true);
+                tif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -416,6 +433,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
+            MonitoreoDeEnfermedadesIF hif = new MonitoreoDeEnfermedadesIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

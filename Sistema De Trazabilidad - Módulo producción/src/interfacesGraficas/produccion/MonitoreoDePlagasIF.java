@@ -34,6 +34,7 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         registroSeleccionado = null;
         cargarListaLotes();
         cargarTablaPrincipal();
+        guardar(false);
     }
 
     /**

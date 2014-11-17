@@ -27,20 +27,20 @@ public class MonitoreoDeEnfermedades implements Serializable {
     @Basic
     private int botrytis;
     @Basic
-    private int antracnosis;
+    private boolean antracnosis;
     @Basic
     private int mycospharella;
     @Basic
-    private int mildeoPolvoso;
+    private boolean mildeoPolvoso;
     @Basic
-    private int phytophtora;
+    private boolean phytophtora;
     @Basic
-    private int bacteriosis;
+    private boolean bacteriosis;
 
     public MonitoreoDeEnfermedades() {
     }
 
-    public MonitoreoDeEnfermedades(Lote lote, int modulo, Date fecha, int botrytis, int antracnosis, int mycospharella, int mildeoPolvoso, int phytophtora, int bacteriosis) {
+    public MonitoreoDeEnfermedades(Lote lote, int modulo, Date fecha, int botrytis, boolean antracnosis, int mycospharella, boolean mildeoPolvoso, boolean phytophtora, boolean bacteriosis) {
         this.lote = lote;
         this.modulo = modulo;
         this.fecha = fecha;
@@ -51,7 +51,7 @@ public class MonitoreoDeEnfermedades implements Serializable {
         this.phytophtora = phytophtora;
         this.bacteriosis = bacteriosis;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -92,11 +92,11 @@ public class MonitoreoDeEnfermedades implements Serializable {
         this.botrytis = botrytis;
     }
 
-    public int getAntracnosis() {
+    public boolean isAntracnosis() {
         return antracnosis;
     }
 
-    public void setAntracnosis(int antracnosis) {
+    public void setAntracnosis(boolean antracnosis) {
         this.antracnosis = antracnosis;
     }
 
@@ -108,28 +108,30 @@ public class MonitoreoDeEnfermedades implements Serializable {
         this.mycospharella = mycospharella;
     }
 
-    public int getMildeoPolvoso() {
+    public boolean isMildeoPolvoso() {
         return mildeoPolvoso;
     }
 
-    public void setMildeoPolvoso(int mildeoPolvoso) {
+    public void setMildeoPolvoso(boolean mildeoPolvoso) {
         this.mildeoPolvoso = mildeoPolvoso;
     }
 
-    public int getPhytophtora() {
+    public boolean isPhytophtora() {
         return phytophtora;
     }
 
-    public void setPhytophtora(int phytophtora) {
+    public void setPhytophtora(boolean phytophtora) {
         this.phytophtora = phytophtora;
     }
 
-    public int getBacteriosis() {
+    public boolean isBacteriosis() {
         return bacteriosis;
     }
 
-    public void setBacteriosis(int bacteriosis) {
+    public void setBacteriosis(boolean bacteriosis) {
         this.bacteriosis = bacteriosis;
     }
+
+    
 
 }

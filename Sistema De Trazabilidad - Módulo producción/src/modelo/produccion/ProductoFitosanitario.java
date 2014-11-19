@@ -60,4 +60,9 @@ public class ProductoFitosanitario implements Serializable {
         this.unidades = unidades;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
 }

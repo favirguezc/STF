@@ -81,12 +81,12 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         nombre2TextField = new javax.swing.JTextField();
         apellido1TextField = new javax.swing.JTextField();
         apellido2TextField = new javax.swing.JTextField();
-        cedulaTextField = new javax.swing.JTextField();
-        telefonoTextField = new javax.swing.JTextField();
         gsComboBox = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         rhComboBox = new javax.swing.JComboBox();
         sexoComboBox = new javax.swing.JComboBox();
+        cedulaTextField = new util.IntegerTextField();
+        telefonoTextField = new util.IntegerTextField();
         rolPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         rolesList = new javax.swing.JList();
@@ -255,10 +255,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
         apellido2TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        cedulaTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        telefonoTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         gsComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "O", "AB" }));
 
@@ -269,6 +265,10 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
         sexoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sexoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
+
+        cedulaTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        telefonoTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -292,17 +292,17 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                     .addComponent(nombre2TextField)
                     .addComponent(apellido1TextField)
                     .addComponent(apellido2TextField)
-                    .addComponent(cedulaTextField)
-                    .addComponent(telefonoTextField)
                     .addComponent(rhComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sexoComboBox, 0, 180, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sexoComboBox, 0, 180, Short.MAX_VALUE)
+                    .addComponent(cedulaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telefonoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(edicionPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nombre1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -338,7 +338,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Edición", edicionPanel);
@@ -687,7 +687,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido1TextField;
     private javax.swing.JTextField apellido2TextField;
-    private javax.swing.JTextField cedulaTextField;
+    private util.IntegerTextField cedulaTextField;
     private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -724,7 +724,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox rolesComboBox;
     private javax.swing.JList rolesList;
     private javax.swing.JComboBox sexoComboBox;
-    private javax.swing.JTextField telefonoTextField;
+    private util.IntegerTextField telefonoTextField;
     // End of variables declaration//GEN-END:variables
 
     private void activarEdicionPanel() {

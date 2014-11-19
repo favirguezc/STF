@@ -11,8 +11,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -65,7 +63,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jLabel54 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        mmsTextField = new javax.swing.JTextField();
+        mmsTextField = new util.FloatTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -289,22 +287,6 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel12.setText("Milímetros De Lluvia");
 
-    mmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    mmsTextField.setText("0.0");
-    mmsTextField.setInputVerifier(new InputVerifier(){
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String cadena = tf.getText();
-            // Aqui verificamos si cadena es correcta y devolvemos
-            try{
-                Float.parseFloat(cadena);
-                return true;
-            }catch(Exception e){
-                return false;
-            }
-        }
-    });
-
     javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
     edicionPanel.setLayout(edicionPanelLayout);
     edicionPanelLayout.setHorizontalGroup(
@@ -477,7 +459,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField mmsTextField;
+    private util.FloatTextField mmsTextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     // End of variables declaration//GEN-END:variables

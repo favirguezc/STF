@@ -255,20 +255,20 @@
                           <Component id="nombre2TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="apellido1TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="apellido2TextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cedulaTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="telefonoTextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="rhComboBox" alignment="0" max="32767" attributes="0"/>
                           <Component id="gsComboBox" alignment="0" max="32767" attributes="0"/>
                           <Component id="sexoComboBox" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="cedulaTextField" max="32767" attributes="0"/>
+                          <Component id="telefonoTextField" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nombre1TextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -313,7 +313,7 @@
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rhComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -387,20 +387,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedulaTextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="telefonoTextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JComboBox" name="gsComboBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -444,6 +430,20 @@
                     <StringItem index="0" value="Masculino"/>
                     <StringItem index="1" value="Femenino"/>
                   </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.IntegerTextField" name="cedulaTextField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.IntegerTextField" name="telefonoTextField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>

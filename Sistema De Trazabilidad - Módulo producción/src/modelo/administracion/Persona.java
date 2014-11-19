@@ -126,10 +126,6 @@ public class Persona implements Serializable {
             cadena += nombre2 + " ";
         }
         cadena += apellido + " ";
-        if (apellido2 != null) {
-            cadena += apellido2 + " ";
-        }
-        cadena += cedula;
         return cadena;
     }
 

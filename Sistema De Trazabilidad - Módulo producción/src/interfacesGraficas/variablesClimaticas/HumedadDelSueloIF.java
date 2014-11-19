@@ -71,9 +71,9 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         horaSpinner = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        _15cmsTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        _30cmsTextField = new javax.swing.JTextField();
+        _15cmsTextField = new util.FloatTextField();
+        _30cmsTextField = new util.FloatTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -358,40 +358,12 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
     jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel12.setText("15 Cms");
 
-    _15cmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    _15cmsTextField.setText("0.0");
-    _15cmsTextField.setInputVerifier(new InputVerifier(){
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String cadena = tf.getText();
-            // Aqui verificamos si cadena es correcta y devolvemos
-            try{
-                Float.parseFloat(cadena);
-                return true;
-            }catch(Exception e){
-                return false;
-            }
-        }
-    });
-
     jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel13.setText("30 Cms");
 
+    _15cmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
     _30cmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    _30cmsTextField.setText("0.0");
-    _30cmsTextField.setInputVerifier(new InputVerifier(){
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String cadena = tf.getText();
-            // Aqui verificamos si cadena es correcta y devolvemos
-            try{
-                Float.parseFloat(cadena);
-                return true;
-            }catch(Exception e){
-                return false;
-            }
-        }
-    });
 
     javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
     edicionPanel.setLayout(edicionPanelLayout);
@@ -406,16 +378,12 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
                 .addComponent(jLabel12))
             .addGap(25, 25, 25)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(edicionPanelLayout.createSequentialGroup()
-                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(horaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(edicionPanelLayout.createSequentialGroup()
-                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(_15cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_30cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(_30cmsTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_15cmsTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(horaSpinner, javax.swing.GroupLayout.Alignment.LEADING)))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     edicionPanelLayout.setVerticalGroup(
         edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,11 +400,11 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel12)
                 .addComponent(_15cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(23, 23, 23)
+            .addGap(26, 26, 26)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel13)
                 .addComponent(_30cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(14, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -577,8 +545,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField _15cmsTextField;
-    private javax.swing.JTextField _30cmsTextField;
+    private util.FloatTextField _15cmsTextField;
+    private util.FloatTextField _30cmsTextField;
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;

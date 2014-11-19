@@ -7,13 +7,17 @@ package dao.produccion;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.administracion.Lote;
 import modelo.produccion.AplicacionFitosanitaria;
 
 /**
@@ -134,5 +138,18 @@ public class AplicacionFitosanitariaDAO implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<AplicacionFitosanitaria> findAplicacionFitosanitariaEntities(Lote lote,Date fecha1,Date fecha2) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<AplicacionFitosanitaria> query = em.createQuery("SELECT t FROM AplicacionFitosanitaria t WHERE t.fecha BETWEEN :fecha1 AND :fecha2 AND t.lote = :lote", AplicacionFitosanitaria.class);
+            query.setParameter("fecha1", fecha1, TemporalType.DATE);
+            query.setParameter("fecha2", fecha2,TemporalType.DATE);
+            query.setParameter("lote", lote);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

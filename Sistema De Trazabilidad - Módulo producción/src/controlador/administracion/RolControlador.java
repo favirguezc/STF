@@ -67,8 +67,8 @@ public class RolControlador {
     }
 
     public void comprobarRegistros() {
-        String[] roles = {"Recolector(a)", "Administrador(a)", "Asistente Técnico(a)", "Productor(a)", "Secretario(a)"};
-        boolean[] bs = {false, true, false, false, true};
+        String[] roles = {"Recolector(a)","Trabajador(a)", "Administrador(a)", "Asistente Técnico(a)", "Productor(a)", "Secretario(a)"};
+        boolean[] bs = {false, false, false, false, true};
         for (int i = 0; i < roles.length; i++) {
             try {
                 if (buscar(roles[i]) == null) {

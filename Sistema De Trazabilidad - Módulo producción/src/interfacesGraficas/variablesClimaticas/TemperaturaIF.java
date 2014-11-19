@@ -63,12 +63,12 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         jLabel55 = new javax.swing.JLabel();
         horaSpinner1 = new javax.swing.JSpinner();
         jLabel56 = new javax.swing.JLabel();
-        tempTextField1 = new javax.swing.JTextField();
+        tempTextField1 = new util.FloatTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         horaSpinner2 = new javax.swing.JSpinner();
-        tempTextField2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        tempTextField2 = new util.FloatTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
@@ -206,6 +206,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
                 true)));
     fechaDateChooserCombo.setCalendarPreferredSize(new java.awt.Dimension(330, 210));
     fechaDateChooserCombo.setNothingAllowed(false);
+    fechaDateChooserCombo.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
     fechaDateChooserCombo.setMinDate(new java.util.GregorianCalendar(2012, 0, 1));
     fechaDateChooserCombo.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11));
     fechaDateChooserCombo.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_SINGLE);
@@ -218,6 +219,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     jLabel55.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel55.setText("Hora");
 
+    horaSpinner1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     horaSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
     horaSpinner1.setEditor(new javax.swing.JSpinner.DateEditor(horaSpinner1, "HH:mm"));
 
@@ -225,20 +227,6 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     jLabel56.setText("Temperatura");
 
     tempTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    tempTextField1.setText("0.0");
-    tempTextField1.setInputVerifier(new InputVerifier(){
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String cadena = tf.getText();
-            // Aqui verificamos si cadena es correcta y devolvemos
-            try{
-                Float.parseFloat(cadena);
-                return true;
-            }catch(Exception e){
-                return false;
-            }
-        }
-    });
 
     javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
     jPanel43.setLayout(jPanel43Layout);
@@ -252,13 +240,13 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             .addGap(77, 77, 77)
             .addComponent(jLabel56)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tempTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tempTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
     );
     jPanel43Layout.setVerticalGroup(
         jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel43Layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap(14, Short.MAX_VALUE)
             .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel55)
                 .addComponent(horaSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,27 +259,14 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel11.setText("Hora");
 
+    horaSpinner2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     horaSpinner2.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
     horaSpinner2.setEditor(new javax.swing.JSpinner.DateEditor(horaSpinner2, "HH:mm"));
 
-    tempTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    tempTextField2.setText("0.0");
-    tempTextField2.setInputVerifier(new InputVerifier(){
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String cadena = tf.getText();
-            // Aqui verificamos si cadena es correcta y devolvemos
-            try{
-                Float.parseFloat(cadena);
-                return true;
-            }catch(Exception e){
-                return false;
-            }
-        }
-    });
-
     jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel12.setText("Temperatura");
+
+    tempTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
     jPanel13.setLayout(jPanel13Layout);
@@ -305,8 +280,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             .addGap(81, 81, 81)
             .addComponent(jLabel12)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tempTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tempTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addContainerGap())
     );
     jPanel13Layout.setVerticalGroup(
         jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,8 +290,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel11)
                 .addComponent(horaSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(tempTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel12)))
+                .addComponent(jLabel12)
+                .addComponent(tempTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
@@ -512,7 +487,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         .addGroup(jPanel3Layout.createSequentialGroup()
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+            .addComponent(jScrollPane1))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -666,8 +641,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     private javax.swing.JTable promediosMesTable;
-    private javax.swing.JTextField tempTextField1;
-    private javax.swing.JTextField tempTextField2;
+    private util.FloatTextField tempTextField1;
+    private util.FloatTextField tempTextField2;
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatosRegistroSeleccionado() {

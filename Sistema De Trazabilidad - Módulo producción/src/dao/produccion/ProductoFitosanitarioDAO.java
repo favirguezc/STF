@@ -7,6 +7,7 @@ package dao.produccion;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.administracion.Lote;
 import modelo.produccion.ProductoFitosanitario;
 
 /**
@@ -145,6 +147,10 @@ public class ProductoFitosanitarioDAO implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    public List<ProductoFitosanitario> findProductoFitosanitarioEntities(Lote lote, Date fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

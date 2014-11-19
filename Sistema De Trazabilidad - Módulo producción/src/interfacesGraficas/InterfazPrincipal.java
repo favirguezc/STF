@@ -12,6 +12,7 @@ import interfacesGraficas.variablesClimaticas.LluviasIF;
 import dao.util.EntityManagerFactorySingleton;
 import interfacesGraficas.administracion.LoteIF;
 import interfacesGraficas.administracion.PersonaIF;
+import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
 import interfacesGraficas.produccion.ProductoFitosanitarioIF;
@@ -123,6 +124,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton6.setText("Fumigación");
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,7 +147,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +173,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         );
         panelEscritorioLayout.setVerticalGroup(
             panelEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
         );
 
         jCheckBox1.setForeground(new java.awt.Color(0, 255, 0));
@@ -232,6 +238,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Aplicaciones Fitosanitarias");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
@@ -304,12 +315,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(panelEscritorio))
+                .addComponent(panelEscritorio)
                 .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,8 +326,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -342,8 +349,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(TemperaturaIF.class)) {
-            TemperaturaIF tif = new TemperaturaIF();
+        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
+            MonitoreoDeEnfermedadesIF tif = new MonitoreoDeEnfermedadesIF();
             panelEscritorio.add(tif);
             tif.setVisible(true);
             try {
@@ -475,6 +482,36 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(AplicacionFitosanitariaIF.class)) {
+            AplicacionFitosanitariaIF hif = new AplicacionFitosanitariaIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(AplicacionFitosanitariaIF.class)) {
+            AplicacionFitosanitariaIF hif = new AplicacionFitosanitariaIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -531,5 +568,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         EntityManagerFactorySingleton.getEntityManagerFactory();
         jCheckBox1.setSelected(true);
         new RolControlador().comprobarRegistros();
+        System.out.println(this.panelEscritorio.getPreferredSize().height);
     }
 }

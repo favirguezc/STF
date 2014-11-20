@@ -77,16 +77,16 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        nombre1TextField = new javax.swing.JTextField();
-        nombre2TextField = new javax.swing.JTextField();
-        apellido1TextField = new javax.swing.JTextField();
-        apellido2TextField = new javax.swing.JTextField();
         gsComboBox = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         rhComboBox = new javax.swing.JComboBox();
         sexoComboBox = new javax.swing.JComboBox();
-        cedulaTextField = new util.IntegerTextField();
-        telefonoTextField = new util.IntegerTextField();
+        cedulaLongField = new util.LongField();
+        telefonoLongField = new util.LongField();
+        nombre1TextField = new util.NameField();
+        nombre2TextField = new util.NameField();
+        apellido1TextField = new util.NameField();
+        apellido2TextField = new util.NameField();
         rolPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         rolesList = new javax.swing.JList();
@@ -247,14 +247,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
         jLabel8.setText("G.S");
 
-        nombre1TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        nombre2TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        apellido1TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        apellido2TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         gsComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         gsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "O", "AB" }));
 
@@ -266,9 +258,17 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         sexoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sexoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
 
-        cedulaTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cedulaLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        telefonoTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telefonoLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        nombre1TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        nombre2TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        apellido1TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        apellido2TextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -288,21 +288,21 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9))
                 .addGap(42, 42, 42)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nombre1TextField)
-                    .addComponent(nombre2TextField)
-                    .addComponent(apellido1TextField)
-                    .addComponent(apellido2TextField)
                     .addComponent(rhComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sexoComboBox, 0, 180, Short.MAX_VALUE)
-                    .addComponent(cedulaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telefonoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cedulaLongField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telefonoLongField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombre1TextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nombre2TextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(apellido1TextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(apellido2TextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(edicionPanelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nombre1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,11 +321,11 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cedulaLongField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(telefonoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefonoLongField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -338,7 +338,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(rhComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Edición", edicionPanel);
@@ -445,7 +445,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                         .addComponent(eliminarRolPersonaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(guardarRolPersonaButton)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Roles", rolPanel);
@@ -497,6 +497,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarTablaPrincipal();
@@ -534,23 +536,10 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         String nombre2 = nombre2TextField.getText();
         String apellido = apellido1TextField.getText();
         String apellido2 = apellido2TextField.getText();
-        long cedula = 0;
-        try {
-            cedula = Long.parseLong(cedulaTextField.getText());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "La cédula debe ser un número.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+        long cedula = cedulaLongField.getLong();
         String sexo = sexoComboBox.getSelectedItem().toString();
-        long telefono = 0;
-        try {
-            telefono = Long.parseLong(telefonoTextField.getText());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El número de teléfono debe ser un número.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+        long telefono = telefonoLongField.getLong();
         String sangre = gsComboBox.getSelectedItem().toString() + rhComboBox.getSelectedItem().toString();
-
         if (nuevo) {
             registroSeleccionado = new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, sangre);
         } else {
@@ -647,6 +636,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                     cargarRolesPersona();
                 } catch (NonexistentEntityException ex) {
                     JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }
@@ -685,9 +676,9 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField apellido1TextField;
-    private javax.swing.JTextField apellido2TextField;
-    private util.IntegerTextField cedulaTextField;
+    private util.NameField apellido1TextField;
+    private util.NameField apellido2TextField;
+    private util.LongField cedulaLongField;
     private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -713,8 +704,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField nombre1TextField;
-    private javax.swing.JTextField nombre2TextField;
+    private util.NameField nombre1TextField;
+    private util.NameField nombre2TextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JButton nuevoRolPersonaButton;
     private javax.swing.JTable principalTable;
@@ -724,7 +715,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox rolesComboBox;
     private javax.swing.JList rolesList;
     private javax.swing.JComboBox sexoComboBox;
-    private util.IntegerTextField telefonoTextField;
+    private util.LongField telefonoLongField;
     // End of variables declaration//GEN-END:variables
 
     private void activarEdicionPanel() {
@@ -761,8 +752,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             nombre2TextField.setText(null);
             apellido1TextField.setText(null);
             apellido2TextField.setText(null);
-            cedulaTextField.setText(null);
-            telefonoTextField.setText(null);
+            cedulaLongField.setLong(0);
+            telefonoLongField.setLong(0);
             sexoComboBox.setSelectedIndex(0);
             gsComboBox.setSelectedIndex(0);
             rhComboBox.setSelectedIndex(0);
@@ -771,8 +762,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             nombre2TextField.setText(registroSeleccionado.getNombre2());
             apellido1TextField.setText(registroSeleccionado.getApellido());
             apellido2TextField.setText(registroSeleccionado.getApellido2());
-            cedulaTextField.setText(registroSeleccionado.getCedula() + "");
-            telefonoTextField.setText(registroSeleccionado.getTelefono() + "");
+            cedulaLongField.setLong(registroSeleccionado.getCedula());
+            telefonoLongField.setLong(registroSeleccionado.getTelefono());
             if (registroSeleccionado.getSexo().equals("Masculino")) {
                 sexoComboBox.setSelectedIndex(0);
             } else {

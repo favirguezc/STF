@@ -53,8 +53,8 @@ public class LoteIF extends javax.swing.JInternalFrame {
         editarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
         edicionPanel = new javax.swing.JPanel();
-        nombreTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        nombreTextField = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -139,10 +139,10 @@ public class LoteIF extends javax.swing.JInternalFrame {
                 .addGap(315, 315, 315))
         );
 
-        nombreTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
+
+        nombreTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -151,18 +151,18 @@ public class LoteIF extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -228,6 +228,8 @@ public class LoteIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarLista();

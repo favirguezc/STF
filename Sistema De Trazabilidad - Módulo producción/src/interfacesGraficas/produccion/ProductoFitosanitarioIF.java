@@ -270,6 +270,8 @@ public class ProductoFitosanitarioIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarLista();

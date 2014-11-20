@@ -251,15 +251,15 @@
                       </Group>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="rhComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="gsComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="sexoComboBox" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="cedulaLongField" max="32767" attributes="0"/>
+                          <Component id="telefonoLongField" max="32767" attributes="0"/>
                           <Component id="nombre1TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="nombre2TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="apellido1TextField" alignment="0" max="32767" attributes="0"/>
                           <Component id="apellido2TextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rhComboBox" alignment="0" max="32767" attributes="0"/>
-                          <Component id="gsComboBox" alignment="0" max="32767" attributes="0"/>
-                          <Component id="sexoComboBox" alignment="0" pref="180" max="32767" attributes="0"/>
-                          <Component id="cedulaTextField" max="32767" attributes="0"/>
-                          <Component id="telefonoTextField" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
@@ -268,7 +268,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="nombre1TextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -291,12 +291,12 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cedulaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cedulaLongField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="telefonoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="telefonoLongField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -313,7 +313,7 @@
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rhComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -357,34 +357,6 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="G.S"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="nombre1TextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="nombre2TextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="apellido1TextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="apellido2TextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="gsComboBox">
@@ -433,14 +405,42 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.IntegerTextField" name="cedulaTextField">
+            <Component class="util.LongField" name="cedulaLongField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.IntegerTextField" name="telefonoTextField">
+            <Component class="util.LongField" name="telefonoLongField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.NameField" name="nombre1TextField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.NameField" name="nombre2TextField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.NameField" name="apellido1TextField">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="util.NameField" name="apellido2TextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -518,7 +518,7 @@
                               <Component id="guardarRolPersonaButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="136" max="32767" attributes="0"/>
+                      <EmptySpace pref="168" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

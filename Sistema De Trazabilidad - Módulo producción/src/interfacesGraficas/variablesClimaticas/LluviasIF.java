@@ -63,7 +63,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jLabel54 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        mmsTextField = new util.FloatTextField();
+        mmsFloatField = new util.FloatField();
 
         setClosable(true);
         setIconifiable(true);
@@ -299,7 +299,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
             .addGap(25, 25, 25)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(mmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(mmsFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     edicionPanelLayout.setVerticalGroup(
@@ -312,7 +312,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
             .addGap(18, 18, 18)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel12)
-                .addComponent(mmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(mmsFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,6 +374,8 @@ public class LluviasIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarTablaPrincipal();
@@ -406,27 +408,14 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         boolean transacionRealizada = false;
+        float mms = mmsFloatField.getFloat();
         if (registroSeleccionado == null) {
-            float mms = 0;
-            try {
-                mms = Float.parseFloat(mmsTextField.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Los milímetros de lluvia deben ser un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
             ControlDeLluvias nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), mms);
             if (controlador.validar(nueva, true)) {
                 controlador.guardar(nueva);
                 transacionRealizada = true;
             }
         } else {
-            float mms = 0;
-            try {
-                mms = Float.parseFloat(mmsTextField.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Los milímetros de lluvia deben ser un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
             registroSeleccionado.setFecha(fechaDateChooserCombo.getSelectedDate().getTime());
             registroSeleccionado.setMmDeLluvia(mms);
             if (controlador.validar(registroSeleccionado, false)) {
@@ -459,7 +448,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private util.FloatTextField mmsTextField;
+    private util.FloatField mmsFloatField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     // End of variables declaration//GEN-END:variables
@@ -505,12 +494,12 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
-            mmsTextField.setText("0.0");
+            mmsFloatField.setFloat(0);
         } else {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
-            mmsTextField.setText(registroSeleccionado.getMmDeLluvia() + "");
+            mmsFloatField.setFloat(registroSeleccionado.getMmDeLluvia());
         }
     }
 }

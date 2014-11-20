@@ -13,12 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import modelo.variablesClimaticas.HumedadDelSuelo;
 
 /**
@@ -72,8 +67,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        _15cmsTextField = new util.FloatTextField();
-        _30cmsTextField = new util.FloatTextField();
+        _15cmsFloatField = new util.FloatField();
+        _30cmsFloatField = new util.FloatField();
 
         setClosable(true);
         setIconifiable(true);
@@ -361,9 +356,9 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
     jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel13.setText("30 Cms");
 
-    _15cmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    _15cmsFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-    _30cmsTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    _30cmsFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
     edicionPanel.setLayout(edicionPanelLayout);
@@ -380,8 +375,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(_30cmsTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_15cmsTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_30cmsFloatField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_15cmsFloatField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(horaSpinner, javax.swing.GroupLayout.Alignment.LEADING)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -399,11 +394,11 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addGap(18, 18, 18)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel12)
-                .addComponent(_15cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(_15cmsFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(26, 26, 26)
             .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel13)
-                .addComponent(_30cmsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(_30cmsFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(14, Short.MAX_VALUE))
     );
 
@@ -466,8 +461,9 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
-
             registroSeleccionado = null;
             cargarTablaPrincipal();
         }
@@ -494,13 +490,13 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         if (registroSeleccionado == null) {
             float _15 = 0, _30 = 0;
             try {
-                _15 = Float.parseFloat(_15cmsTextField.getText());
+                _15 = Float.parseFloat(_15cmsFloatField.getText());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "La humedad del suelo en 15 cms no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             try {
-                _30 = Float.parseFloat(_30cmsTextField.getText());
+                _30 = Float.parseFloat(_30cmsFloatField.getText());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "La humedad del suelo en 30 cms no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
                 return;
@@ -513,13 +509,13 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         } else {
             float _15 = 0, _30 = 0;
             try {
-                _15 = Float.parseFloat(_15cmsTextField.getText());
+                _15 = Float.parseFloat(_15cmsFloatField.getText());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "La humedad del suelo en 15 cms no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
             try {
-                _30 = Float.parseFloat(_30cmsTextField.getText());
+                _30 = Float.parseFloat(_30cmsFloatField.getText());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "La humedad del suelo en 30 cms no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
                 return;
@@ -545,8 +541,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.FloatTextField _15cmsTextField;
-    private util.FloatTextField _30cmsTextField;
+    private util.FloatField _15cmsFloatField;
+    private util.FloatField _30cmsFloatField;
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -605,15 +601,15 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         if (registroSeleccionado == null) {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
             horaSpinner.setValue(new Date());
-            _15cmsTextField.setText("0.0");
-            _30cmsTextField.setText("0.0");
+            _15cmsFloatField.setText("0.0");
+            _30cmsFloatField.setText("0.0");
         } else {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
             horaSpinner.setValue(registroSeleccionado.getHora());
-            _15cmsTextField.setText(registroSeleccionado.get15Cms() + "");
-            _30cmsTextField.setText(registroSeleccionado.get30Cms() + "");
+            _15cmsFloatField.setText(registroSeleccionado.get15Cms() + "");
+            _30cmsFloatField.setText(registroSeleccionado.get30Cms() + "");
         }
     }
 }

@@ -63,12 +63,12 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         jLabel55 = new javax.swing.JLabel();
         horaSpinner1 = new javax.swing.JSpinner();
         jLabel56 = new javax.swing.JLabel();
-        tempTextField1 = new util.FloatTextField();
+        minTempFloatField = new util.FloatField();
         jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         horaSpinner2 = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
-        tempTextField2 = new util.FloatTextField();
+        maxTempFloatField = new util.FloatField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
@@ -226,7 +226,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     jLabel56.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel56.setText("Temperatura");
 
-    tempTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    minTempFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
     jPanel43.setLayout(jPanel43Layout);
@@ -240,7 +240,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             .addGap(77, 77, 77)
             .addComponent(jLabel56)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tempTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(minTempFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
     );
     jPanel43Layout.setVerticalGroup(
@@ -251,7 +251,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
                 .addComponent(jLabel55)
                 .addComponent(horaSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel56)
-                .addComponent(tempTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(minTempFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Máximo"));
@@ -266,7 +266,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel12.setText("Temperatura");
 
-    tempTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    maxTempFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
     jPanel13.setLayout(jPanel13Layout);
@@ -280,7 +280,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             .addGap(81, 81, 81)
             .addComponent(jLabel12)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tempTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+            .addComponent(maxTempFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
             .addContainerGap())
     );
     jPanel13Layout.setVerticalGroup(
@@ -291,7 +291,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addComponent(horaSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel12)
-                .addComponent(tempTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(maxTempFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
 
     javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
@@ -528,6 +528,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarTablaPrincipal();
@@ -554,19 +556,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         boolean transacionRealizada = false;
         if (registroSeleccionado == null) {
-            float t1 = 0, t2 = 0;
-            try {
-                t2 = Float.parseFloat(tempTextField1.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "La temperatura mínima no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            try {
-                t1 = Float.parseFloat(tempTextField2.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "La temperatura máxima no es un número real.", "Error de dato", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
+            float t1 = minTempFloatField.getFloat(), t2 = maxTempFloatField.getFloat();
             Temperatura nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), (Date) horaSpinner2.getValue(), (Date) horaSpinner1.getValue(), t1, t2);
             if (controlador.validar(nueva, true)) {
                 try {
@@ -581,8 +571,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setHoraMax((Date) horaSpinner2.getValue());
             registroSeleccionado.setHoraMin((Date) horaSpinner1.getValue());
             try {
-                registroSeleccionado.setTempMax(Float.parseFloat(tempTextField2.getText()));
-                registroSeleccionado.setTempMin(Float.parseFloat(tempTextField1.getText()));
+                registroSeleccionado.setTempMax(maxTempFloatField.getFloat());
+                registroSeleccionado.setTempMin(minTempFloatField.getFloat());
             } catch (Exception e) {
             }
             if (controlador.validar(registroSeleccionado, false)) {
@@ -637,12 +627,12 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel43;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private util.FloatField maxTempFloatField;
     private javax.swing.JComboBox mesComboBox;
+    private util.FloatField minTempFloatField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     private javax.swing.JTable promediosMesTable;
-    private util.FloatTextField tempTextField1;
-    private util.FloatTextField tempTextField2;
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatosRegistroSeleccionado() {
@@ -650,16 +640,16 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
             horaSpinner1.setValue(new Date());
             horaSpinner2.setValue(new Date());
-            tempTextField1.setText("0.0");
-            tempTextField2.setText("0.0");
+            minTempFloatField.setText("0.0");
+            maxTempFloatField.setText("0.0");
         } else {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
             horaSpinner1.setValue(registroSeleccionado.getHoraMin());
             horaSpinner2.setValue(registroSeleccionado.getHoraMax());
-            tempTextField1.setText(registroSeleccionado.getTempMin() + "");
-            tempTextField2.setText(registroSeleccionado.getTempMax() + "");
+            minTempFloatField.setText(registroSeleccionado.getTempMin() + "");
+            maxTempFloatField.setText(registroSeleccionado.getTempMax() + "");
         }
     }
 

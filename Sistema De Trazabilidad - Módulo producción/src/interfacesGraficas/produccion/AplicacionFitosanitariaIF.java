@@ -107,9 +107,9 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         productorComboBox = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        cantidadTextField = new util.FloatTextField();
-        aguaTextField = new util.FloatTextField();
-        jornalesTextField = new util.FloatTextField();
+        cantidadFloatField = new util.FloatField();
+        aguaFloatField = new util.FloatField();
+        jornalesFloatField = new util.FloatField();
 
         setClosable(true);
         setIconifiable(true);
@@ -365,11 +365,11 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Productor");
 
-        cantidadTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cantidadFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        aguaTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        aguaFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jornalesTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jornalesFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -378,43 +378,39 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, edicionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(productorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel17))
+                .addGap(25, 25, 25)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cantidadFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aguaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(equipoTextField)
+                    .addComponent(responsableComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(autorizadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jornalesFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(observacionesTextField)
+                    .addComponent(asistenteComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel8))
-                        .addGap(25, 25, 25)
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cantidadTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(aguaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(equipoTextField)
-                            .addComponent(responsableComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(autorizadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jornalesTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(observacionesTextField)
-                            .addComponent(asistenteComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(edicionPanelLayout.createSequentialGroup()
-                                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(trSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pcSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(motivoTextField)
-                            .addComponent(productoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fechaChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(trSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pcSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 103, Short.MAX_VALUE))
+                    .addComponent(motivoTextField)
+                    .addComponent(productoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         edicionPanelLayout.setVerticalGroup(
@@ -442,11 +438,11 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(cantidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidadFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(aguaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(aguaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(equipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,7 +458,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jornalesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jornalesFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(observacionesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,6 +517,8 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
             cargarTablaPrincipal();
@@ -548,12 +546,12 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         Date fecha = fechaChooserCombo.getCurrent().getTime();
         ProductoFitosanitario producto = (ProductoFitosanitario) productoComboBox.getSelectedItem();
         String motivo = motivoTextField.getText();
-        float cantidad = Float.parseFloat(cantidadTextField.getText());
-        float agua = Float.parseFloat(aguaTextField.getText());
+        float cantidad = cantidadFloatField.getFloat();
+        float agua = aguaFloatField.getFloat();
         String equipo = equipoTextField.getText();
         Persona responsable = (Persona) responsableComboBox.getSelectedItem();
         Persona aprobante = (Persona) autorizadoComboBox.getSelectedItem();
-        float jornales = Float.parseFloat(jornalesTextField.getText());
+        float jornales = jornalesFloatField.getFloat();
         String observaciones = observacionesTextField.getText();
         Persona asistente = (Persona) asistenteComboBox.getSelectedItem();
         Persona productor = (Persona) productorComboBox.getSelectedItem();
@@ -623,10 +621,10 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.FloatTextField aguaTextField;
+    private util.FloatField aguaFloatField;
     private javax.swing.JComboBox asistenteComboBox;
     private javax.swing.JComboBox autorizadoComboBox;
-    private util.FloatTextField cantidadTextField;
+    private util.FloatField cantidadFloatField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
@@ -655,7 +653,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private util.FloatTextField jornalesTextField;
+    private util.FloatField jornalesFloatField;
     private javax.swing.JComboBox loteComboBox;
     private javax.swing.JTextField motivoTextField;
     private javax.swing.JButton nuevoButton;
@@ -712,8 +710,8 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             motivoTextField.setText(null);
             pcSpinner.setValue("No");
             trSpinner.setValue("No");
-            cantidadTextField.setText("0");
-            aguaTextField.setText("0");
+            cantidadFloatField.setText("0");
+            aguaFloatField.setText("0");
             equipoTextField.setText(null);
             if (responsableComboBox.getItemCount() > 0) {
                 responsableComboBox.setSelectedIndex(0);
@@ -721,7 +719,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             if (autorizadoComboBox.getItemCount() > 0) {
                 autorizadoComboBox.setSelectedIndex(0);
             }
-            jornalesTextField.setText("0");
+            jornalesFloatField.setText("0");
             observacionesTextField.setText(null);
             asistenteComboBox.setSelectedIndex(0);
             productorComboBox.setSelectedIndex(0);
@@ -739,12 +737,12 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             if (registroSeleccionado.isTr()) {
                 trSpinner.setValue("Si");
             }
-            cantidadTextField.setText(registroSeleccionado.getCantidad() + "");
-            aguaTextField.setText(registroSeleccionado.getAgua() + "");
+            cantidadFloatField.setText(registroSeleccionado.getCantidad() + "");
+            aguaFloatField.setText(registroSeleccionado.getAgua() + "");
             equipoTextField.setText(registroSeleccionado.getEquipo());
             responsableComboBox.setSelectedItem(registroSeleccionado.getResponsable());
             autorizadoComboBox.setSelectedItem(registroSeleccionado.getAprobante());
-            jornalesTextField.setText(registroSeleccionado.getJornales() + "");
+            jornalesFloatField.setText(registroSeleccionado.getJornales() + "");
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             if (registroSeleccionado.getAsistente() != null) {
                 for (int i = 0; i < asistenteComboBox.getItemCount(); i++) {

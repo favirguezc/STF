@@ -1,0 +1,128 @@
+package modelo.produccion;
+
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import modelo.produccion.LaborCultural;
+import modelo.administracion.Persona;
+
+@Entity
+public class Trabajo implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private long id;
+    @Basic
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+    @Basic
+    private int modulo;
+    @Basic
+    @ManyToOne
+    private LaborCultural labor;
+    @Basic
+    @ManyToOne
+    private Persona operario;
+    @Basic
+    private float jornales;
+    @Basic
+    private String observaciones;
+    @Basic
+    @ManyToOne
+    private Persona asistente;
+    @Basic
+    @ManyToOne
+    private Persona productor;
+
+    public Trabajo() {
+    }
+
+    public Trabajo(Date fecha, int modulo, LaborCultural labor, Persona operario, float jornales, String observaciones, Persona asistente, Persona productor) {
+        this.fecha = fecha;
+        this.modulo = modulo;
+        this.labor = labor;
+        this.operario = operario;
+        this.jornales = jornales;
+        this.observaciones = observaciones;
+        this.asistente = asistente;
+        this.productor = productor;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(int modulo) {
+        this.modulo = modulo;
+    }
+
+    public LaborCultural getLabor() {
+        return labor;
+    }
+
+    public void setLabor(LaborCultural labor) {
+        this.labor = labor;
+    }
+
+    public Persona getOperario() {
+        return operario;
+    }
+
+    public void setOperario(Persona operario) {
+        this.operario = operario;
+    }
+
+    public float getJornales() {
+        return jornales;
+    }
+
+    public void setJornales(float jornales) {
+        this.jornales = jornales;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public Persona getAsistente() {
+        return asistente;
+    }
+
+    public void setAsistente(Persona asistente) {
+        this.asistente = asistente;
+    }
+
+    public Persona getProductor() {
+        return productor;
+    }
+
+    public void setProductor(Persona productor) {
+        this.productor = productor;
+    }
+
+}

@@ -14,6 +14,9 @@
     <class>modelo.produccion.AplicacionFitosanitaria</class>
     <class>modelo.produccion.ProductoFitosanitario</class>
     <class>modelo.produccion.TrampaDeInsectos</class>
+    <class>modelo.produccion.LaborCultural</class>
+    <class>modelo.produccion.Recoleccion</class>
+    <class>modelo.produccion.Trabajo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>

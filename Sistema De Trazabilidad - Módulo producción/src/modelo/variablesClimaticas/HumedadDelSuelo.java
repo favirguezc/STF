@@ -27,7 +27,7 @@ public class HumedadDelSuelo implements Serializable {
     private Date hora;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     public HumedadDelSuelo() {

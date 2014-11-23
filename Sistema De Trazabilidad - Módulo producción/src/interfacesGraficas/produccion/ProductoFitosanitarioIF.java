@@ -62,6 +62,8 @@ public class ProductoFitosanitarioIF extends javax.swing.JInternalFrame {
         setTitle("Administración de Productos Fitosanitarios");
         setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
+
         nombreTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

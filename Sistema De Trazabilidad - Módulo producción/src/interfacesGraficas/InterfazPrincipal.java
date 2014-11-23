@@ -16,6 +16,7 @@ import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
 import interfacesGraficas.produccion.ProductoFitosanitarioIF;
+import interfacesGraficas.produccion.TrampaDeInsectosIF;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +69,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -118,6 +120,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton5.setText("Trampa de Insectos");
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/globe_32x32.png"))); // NOI18N
@@ -266,6 +273,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText("Recolección");
         jMenu2.add(jMenuItem6);
+
+        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem12.setText("Trampa de Insectos");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem12);
 
         jMenuBar2.add(jMenu2);
 
@@ -512,6 +528,36 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
+            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
+            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -542,6 +588,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -568,6 +615,5 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         EntityManagerFactorySingleton.getEntityManagerFactory();
         jCheckBox1.setSelected(true);
         new RolControlador().comprobarRegistros();
-        System.out.println(this.panelEscritorio.getPreferredSize().height);
     }
 }

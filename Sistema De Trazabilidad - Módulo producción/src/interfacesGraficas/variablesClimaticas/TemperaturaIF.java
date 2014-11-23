@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelo.variablesClimaticas.Temperatura;
+import util.DateFormatter;
 
 /**
  *
@@ -666,14 +667,12 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         c.add(Calendar.DAY_OF_MONTH, -1);
         Date siguienteMes = c.getTime();
         lista = controlador.buscarLista(esteMes, siguienteMes);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy", new Locale("es", "CO"));
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
         for (int i = 0; i < lista.size(); i++) {
             Temperatura t = lista.get(i);
-            principalTable.getModel().setValueAt(dateFormat.format(t.getFecha()), i, 0);
-            principalTable.getModel().setValueAt(timeFormat.format(t.getHoraMax()), i, 1);
+            principalTable.getModel().setValueAt(DateFormatter.formatDate(t.getFecha()), i, 0);
+            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHoraMax()), i, 1);
             principalTable.getModel().setValueAt(t.getTempMax(), i, 2);
-            principalTable.getModel().setValueAt(timeFormat.format(t.getHoraMin()), i, 3);
+            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHoraMin()), i, 3);
             principalTable.getModel().setValueAt(t.getTempMin(), i, 4);
         }
     }

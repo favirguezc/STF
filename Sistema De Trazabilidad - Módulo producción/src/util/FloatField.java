@@ -15,30 +15,30 @@ import javax.swing.text.Document;
  * @author fredy
  */
 public class FloatField extends JTextField {
-    
+
     @Override
     protected Document createDefaultModel() {
         return new FloatTextDocument();
     }
-    
+
     public FloatField() {
         super();
         this.setInputVerifier(new InputVerifier() {
-            
+
             @Override
             public boolean verify(JComponent jc) {
                 return !(getText() == null || getText().equals(""));
             }
         });
     }
-    
+
     public float getFloat() {
         if (getText() == null || getText().equals("")) {
-            return Float.parseFloat(getText());
+            return 0;
         }
-        return 0;
+        return Float.parseFloat(getText());
     }
-    
+
     public void setFloat(float v) {
         setText(v + "");
     }

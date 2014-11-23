@@ -26,7 +26,7 @@ public  class Temperatura implements Serializable {
     private Date horaMin;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @Temporal(TemporalType.TIME)

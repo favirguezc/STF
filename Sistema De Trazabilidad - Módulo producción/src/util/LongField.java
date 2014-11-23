@@ -15,42 +15,42 @@ import javax.swing.text.Document;
  * @author fredy
  */
 public class LongField extends JTextField {
-    
+
     @Override
     protected Document createDefaultModel() {
-        return new IntegerTextDocument();
+        return new LongTextDocument();
     }
-    
+
     public LongField() {
         super();
         this.setInputVerifier(new InputVerifier() {
-            
+
             @Override
             public boolean verify(JComponent jc) {
                 return !(getText() == null || getText().equals(""));
             }
         });
     }
-    
+
     public int getInteger() {
         if (getText() == null || getText().equals("")) {
-            return Integer.parseInt(getText());
+            return 0;
         }
-        return 0;
+        return Integer.parseInt(getText());
     }
-    
+
     public void setInteger(int v) {
         setText(v + "");
     }
-    
-    public long getLong(){
+
+    public long getLong() {
         if (getText() == null || getText().equals("")) {
-            return Long.parseLong(getText());
+            return 0;
         }
-        return 0;
+        return Long.parseLong(getText());
     }
-    
-    public void setLong(long v){
+
+    public void setLong(long v) {
         setText(v + "");
     }
 }

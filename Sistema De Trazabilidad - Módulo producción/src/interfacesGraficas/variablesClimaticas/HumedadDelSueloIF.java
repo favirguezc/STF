@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import modelo.variablesClimaticas.HumedadDelSuelo;
+import util.DateFormatter;
 
 /**
  *
@@ -198,9 +199,16 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
                 "Fecha", "Hora", "15 cms", "30 cms"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -578,12 +586,10 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         c.add(Calendar.DAY_OF_MONTH, -1);
         Date siguienteMes = c.getTime();
         lista = controlador.buscarLista(esteMes, siguienteMes);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy", new Locale("es", "CO"));
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
         for (int i = 0; i < lista.size(); i++) {
             HumedadDelSuelo t = lista.get(i);
-            principalTable.getModel().setValueAt(dateFormat.format(t.getFecha()), i, 0);
-            principalTable.getModel().setValueAt(timeFormat.format(t.getHora()), i, 1);
+            principalTable.getModel().setValueAt(DateFormatter.formatDate(t.getFecha()), i, 0);
+            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHora()), i, 1);
             principalTable.getModel().setValueAt(t.get15Cms(), i, 2);
             principalTable.getModel().setValueAt(t.get30Cms(), i, 3);
         }
@@ -608,8 +614,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
             horaSpinner.setValue(registroSeleccionado.getHora());
-            _15cmsFloatField.setText(registroSeleccionado.get15Cms() + "");
-            _30cmsFloatField.setText(registroSeleccionado.get30Cms() + "");
+            _15cmsFloatField.setFloat(registroSeleccionado.get15Cms());
+            _30cmsFloatField.setFloat(registroSeleccionado.get30Cms());
         }
     }
 }

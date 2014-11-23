@@ -552,7 +552,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setSexo(sexo);
             registroSeleccionado.setTelefono(telefono);
         }
-        if (controlador.validar(registroSeleccionado, false)) {
+        if (controlador.validar(registroSeleccionado)) {
             boolean ok = false;
             if (nuevo) {
                 controlador.guardar(registroSeleccionado);

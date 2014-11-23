@@ -72,7 +72,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         phytophthoraSpinner = new javax.swing.JSpinner();
-        bacteriosisSpinner = new javax.swing.JSpinner();
+        bacteriosisSpinner = new util.BooleanComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -227,7 +227,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
@@ -272,7 +272,6 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         phytophthoraSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         bacteriosisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        bacteriosisSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -290,13 +289,14 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9))
                 .addGap(58, 58, 58)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botrytisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mycospharellaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botrytisSpinner)
+                        .addComponent(moduloSpinner)
+                        .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mycospharellaSpinner)
+                        .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -417,10 +417,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         if (phytophthoraSpinner.getValue().equals("Si")) {
             phytophtora = true;
         }
-        boolean bacteriosis = false;
-        if (bacteriosisSpinner.getValue().equals("Si")) {
-            bacteriosis = true;
-        }
+        boolean bacteriosis = bacteriosisSpinner.isSelected();
         Date fecha = fechaChooserCombo.getSelectedDate().getTime();
         if (registroSeleccionado == null) {
             MonitoreoDeEnfermedades nuevo = controlador.nuevo(lote, modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
@@ -463,7 +460,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner antracnosisSpinner;
-    private javax.swing.JSpinner bacteriosisSpinner;
+    private util.BooleanComboBox bacteriosisSpinner;
     private javax.swing.JSpinner botrytisSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -524,7 +521,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
             antracnosisSpinner.setValue("No");
             mildeoSpinner.setValue("No");
             phytophthoraSpinner.setValue("No");
-            bacteriosisSpinner.setValue("No");
+            bacteriosisSpinner.setSelected(false);
         } else {
             moduloSpinner.setValue(registroSeleccionado.getModulo());
             botrytisSpinner.setValue(registroSeleccionado.getBotrytis());
@@ -544,11 +541,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
             } else {
                 phytophthoraSpinner.setValue("No");
             }
-            if (registroSeleccionado.isBacteriosis()) {
-                bacteriosisSpinner.setValue("Si");
-            } else {
-                bacteriosisSpinner.setValue("No");
-            }
+            bacteriosisSpinner.setSelected(registroSeleccionado.isBacteriosis());
         }
     }
 

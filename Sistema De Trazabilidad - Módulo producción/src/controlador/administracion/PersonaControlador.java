@@ -52,7 +52,7 @@ public class PersonaControlador {
         return dao.findPersonaEntities();
     }
 
-    public boolean validar(Persona nuevo, boolean b) {
+    public boolean validar(Persona nuevo) {
         if (nuevo.getNombre() == null) {
             JOptionPane.showMessageDialog(null, "El campo nombre no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
@@ -68,17 +68,16 @@ public class PersonaControlador {
             return false;
         }
         if (nuevo.getCedula() == 0) {
+            JOptionPane.showMessageDialog(null, "El campo cédula no puede ser cero.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (b) {
-            try {
-                if (buscarPorCedula(nuevo.getCedula()) == null) {
-                    return false;
-                }
-            } catch (Exception e) {
+        try {
+            if (buscarPorCedula(nuevo.getCedula()) != null && buscarPorCedula(nuevo.getCedula()).getId() != nuevo.getId()) {
                 return false;
             }
+        } catch (Exception e) {
         }
+
         return true;
     }
 }

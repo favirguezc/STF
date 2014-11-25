@@ -5,8 +5,10 @@
  */
 package dao.produccion;
 
+import controlador.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,6 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.MonitoreoDeEnfermedades;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 
 /**
  *
@@ -93,16 +96,21 @@ public class MonitoreoDeEnfermedadesDAO implements Serializable {
         }
     }
     
-    public List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities(Lote lote,Date fecha){
+    public List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities(Lote lote, Date fecha) {
         EntityManager em = getEntityManager();
-        try {
-            TypedQuery<MonitoreoDeEnfermedades> query = em.createQuery("SELECT t FROM MonitoreoDeEnfermedades t WHERE t.fecha = :fecha AND t.lote = :lote", MonitoreoDeEnfermedades.class);
-            query.setParameter("fecha", fecha, TemporalType.DATE);
-            query.setParameter("lote", lote);
-            return query.getResultList();
-        } finally {
-            em.close();
+        List<Modulo> listaModulos = new ModuloControlador().leerLista(lote);
+        List<MonitoreoDeEnfermedades> lista = new ArrayList<>();
+        for (Modulo m : listaModulos) {
+            try {
+                TypedQuery<MonitoreoDeEnfermedades> query = em.createQuery("SELECT t FROM MonitoreoDeEnfermedades t WHERE t.fecha = :fecha AND t.modulo = :modulo", MonitoreoDeEnfermedades.class);
+                query.setParameter("fecha", fecha, TemporalType.DATE);
+                query.setParameter("modulo", m);
+                lista.addAll(query.getResultList());
+            } catch (Exception e) {
+            }
         }
+        em.close();
+        return lista;
     }
 
     public List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities() {

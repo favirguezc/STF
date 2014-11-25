@@ -3,10 +3,10 @@ package modelo.administracion;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,11 +19,9 @@ public class RolPersona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Persona persona;
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     private Rol rol;
     @Basic
     private String contraseña;

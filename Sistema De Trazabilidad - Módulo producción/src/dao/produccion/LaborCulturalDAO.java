@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.LaborCultural;
@@ -117,6 +118,17 @@ public class LaborCulturalDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(LaborCultural.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public LaborCultural findLaborCultural(String name) throws Exception {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<LaborCultural> query = em.createQuery("SELECT t FROM LaborCultural t WHERE t.nombre = :nombre", LaborCultural.class);
+            query.setParameter("nombre", name);
+            return query.getSingleResult();
         } finally {
             em.close();
         }

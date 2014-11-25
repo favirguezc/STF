@@ -11,7 +11,6 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.ProductoFitosanitario;
-import modelo.produccion.ProductoFitosanitario_;
 
 /**
  *

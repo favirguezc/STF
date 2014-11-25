@@ -53,12 +53,12 @@ public class RolControlador {
     }
 
     public boolean validar(Rol nuevo, boolean b) {
-        if (nuevo.getRol() == null) {
+        if (nuevo.getNombre() == null) {
             JOptionPane.showMessageDialog(null, "El campo nombre no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         try {
-            if (dao.findRol(nuevo.getRol()) != null) {
+            if (dao.findRol(nuevo.getNombre()) != null) {
                 return false;
             }
         } catch (Exception ex) {

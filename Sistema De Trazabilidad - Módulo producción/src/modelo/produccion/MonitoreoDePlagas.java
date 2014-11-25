@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 
 @Entity
 public class MonitoreoDePlagas implements Serializable {
@@ -17,10 +17,9 @@ public class MonitoreoDePlagas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
-    private Lote lote;
     @Basic
-    private int modulo;
+    @ManyToOne
+    private Modulo modulo;
     @Basic
     private int aranita;
     @Basic
@@ -48,8 +47,7 @@ public class MonitoreoDePlagas implements Serializable {
     public MonitoreoDePlagas() {
     }
 
-    public MonitoreoDePlagas(Lote lote, int modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
-        this.lote = lote;
+    public MonitoreoDePlagas(Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
         this.modulo = modulo;
         this.aranita = aranita;
         this.thrips = thrips;
@@ -72,19 +70,11 @@ public class MonitoreoDePlagas implements Serializable {
         this.id = id;
     }
 
-    public Lote getLote() {
-        return lote;
-    }
-
-    public void setLote(Lote lote) {
-        this.lote = lote;
-    }
-
-    public int getModulo() {
+    public Modulo getModulo() {
         return modulo;
     }
 
-    public void setModulo(int modulo) {
+    public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
 

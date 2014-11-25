@@ -126,7 +126,7 @@ public class RolDAO implements Serializable {
     public Rol findRol(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Rol> query = em.createQuery("SELECT t FROM Rol t WHERE t.rol = :nombre", Rol.class);
+            TypedQuery<Rol> query = em.createQuery("SELECT t FROM Rol t WHERE t.nombre = :nombre", Rol.class);
             query.setParameter("nombre", name);
             return query.getSingleResult();
         } finally {

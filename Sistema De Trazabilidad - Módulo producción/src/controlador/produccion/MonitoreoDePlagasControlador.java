@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 import modelo.produccion.MonitoreoDePlagas;
 
 /**
@@ -26,8 +27,8 @@ public class MonitoreoDePlagasControlador {
         dao = new MonitoreoDePlagasDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public MonitoreoDePlagas nuevo(Lote lote, int modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
-        return new MonitoreoDePlagas(lote, modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
+    public MonitoreoDePlagas nuevo( Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
+        return new MonitoreoDePlagas(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
     }
 
     public MonitoreoDePlagas buscar(long id) throws Exception {
@@ -57,10 +58,6 @@ public class MonitoreoDePlagasControlador {
         }
         if(monitoreo.getCoronas()<0){
             JOptionPane.showMessageDialog(null, "El campo número de coronas no puede ser negativo.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if(monitoreo.getModulo()<0){
-            JOptionPane.showMessageDialog(null, "El campo módulo no puede ser negativo.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if(monitoreo.getThrips()>2){

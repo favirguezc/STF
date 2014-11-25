@@ -5,8 +5,11 @@
  */
 package dao.produccion;
 
+import controlador.administracion.ModuloControlador;
+import dao.administracion.LoteDAO;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,6 +22,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.MonitoreoDePlagas;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 
 /**
  *
@@ -96,19 +100,24 @@ public class MonitoreoDePlagasDAO implements Serializable {
     public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities() {
         return findMonitoreoDePlagasEntities(true, -1, -1);
     }
-    
-    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(Lote lote,Date fecha) {
+
+    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(Lote lote, Date fecha) {
         EntityManager em = getEntityManager();
-        try {
-            TypedQuery<MonitoreoDePlagas> query = em.createQuery("SELECT t FROM MonitoreoDePlagas t WHERE t.fecha = :fecha AND t.lote = :lote", MonitoreoDePlagas.class);
-            query.setParameter("fecha", fecha, TemporalType.DATE);
-            query.setParameter("lote", lote);
-            return query.getResultList();
-        } finally {
-            em.close();
+        List<Modulo> listaModulos = new ModuloControlador().leerLista(lote);
+        List<MonitoreoDePlagas> lista = new ArrayList<>();
+        for (Modulo m : listaModulos) {
+            try {
+                TypedQuery<MonitoreoDePlagas> query = em.createQuery("SELECT t FROM MonitoreoDePlagas t WHERE t.fecha = :fecha AND t.modulo = :modulo", MonitoreoDePlagas.class);
+                query.setParameter("fecha", fecha, TemporalType.DATE);
+                query.setParameter("modulo", m);
+                lista.addAll(query.getResultList());
+            } catch (Exception e) {
+            }
         }
+        em.close();
+        return lista;
     }
-    
+
     public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(int maxResults, int firstResult) {
         return findMonitoreoDePlagasEntities(false, maxResults, firstResult);
     }
@@ -150,5 +159,5 @@ public class MonitoreoDePlagasDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

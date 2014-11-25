@@ -10,8 +10,6 @@ import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -581,6 +579,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 controladorRolPersona.guardar(nuevo);
                 contraseñaTextField.setText(null);
                 rolesComboBox.setSelectedIndex(0);
+                guardarRolPersonaButton.setEnabled(false);
             }
         } else {
             String contraseña = rolPersonaSeleccionado.getContraseña();
@@ -590,6 +589,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                     controladorRolPersona.editar(rolPersonaSeleccionado);
                     contraseñaTextField.setText(null);
                     rolesComboBox.setSelectedIndex(0);
+                    guardarRolPersonaButton.setEnabled(false);
                 } catch (Exception ex) {
                 }
             } else {
@@ -662,6 +662,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 contraseñaTextField.setText(rolPersonaSeleccionado.getContraseña());
+                guardarRolPersonaButton.setEnabled(true);
             }
         }
     }//GEN-LAST:event_editarRolPersonaButtonActionPerformed
@@ -672,6 +673,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         rolesComboBox.setEnabled(true);
         rolesComboBox.setSelectedIndex(0);
         rolPersonaSeleccionado = null;
+        guardarRolPersonaButton.setEnabled(true);
     }//GEN-LAST:event_nuevoRolPersonaButtonActionPerformed
 
 

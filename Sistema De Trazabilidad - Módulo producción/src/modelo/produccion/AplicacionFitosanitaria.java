@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import modelo.administracion.Persona;
@@ -21,7 +22,6 @@ public class AplicacionFitosanitaria implements Serializable {
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Basic
     @ManyToOne
     private ProductoFitosanitario producto;
     @Basic
@@ -36,23 +36,18 @@ public class AplicacionFitosanitaria implements Serializable {
     private float agua;
     @Basic
     private String equipo;
-    @Basic
     @ManyToOne
     private Persona responsable;
-    @Basic
     @ManyToOne
     private Persona aprobante;
     @Basic
     private float jornales;
     @Basic
     private String observaciones;
-    @Basic
     @ManyToOne
     private Lote lote;
-    @Basic
     @ManyToOne
     private Persona asistente;
-    @Basic
     @ManyToOne
     private Persona productor;
 

@@ -1,6 +1,7 @@
 package modelo.administracion;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ public class Rol implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Basic
-    private String rol;
+    private String nombre;
     @Basic
     private boolean exigeContraseña;
 
@@ -22,16 +23,16 @@ public class Rol implements Serializable {
     }
 
     public Rol(String rol, boolean exigeContraseña) {
-        this.rol = rol;
+        this.nombre = rol;
         this.exigeContraseña = exigeContraseña;
     }
 
-    public String getRol() {
-        return rol;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public long getId() {
@@ -52,6 +53,7 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return rol;
+        return nombre;
     }
+
 }

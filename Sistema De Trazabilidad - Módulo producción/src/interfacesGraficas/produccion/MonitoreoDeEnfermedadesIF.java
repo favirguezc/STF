@@ -6,6 +6,7 @@
 package interfacesGraficas.produccion;
 
 import controlador.administracion.LoteControlador;
+import controlador.administracion.ModuloControlador;
 import controlador.produccion.MonitoreoDeEnfermedadesControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 import modelo.produccion.MonitoreoDeEnfermedades;
 
 /**
@@ -60,19 +62,19 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         principalTable = new javax.swing.JTable();
         edicionPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        moduloSpinner = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         botrytisSpinner = new javax.swing.JSpinner();
         mycospharellaSpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        antracnosisSpinner = new javax.swing.JSpinner();
-        mildeoSpinner = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        phytophthoraSpinner = new javax.swing.JSpinner();
-        bacteriosisSpinner = new util.BooleanComboBox();
+        bacteriosisBooleanComboBox = new util.BooleanComboBox();
+        antracnosisBooleanComboBox = new util.BooleanComboBox();
+        mildeoBooleanComboBox = new util.BooleanComboBox();
+        phytophthoraBooleanComboBox = new util.BooleanComboBox();
+        moduloComboBox = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -136,6 +138,11 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         loteComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 loteComboBoxItemStateChanged(evt);
+            }
+        });
+        loteComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loteComboBoxActionPerformed(evt);
             }
         });
 
@@ -227,16 +234,13 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
         );
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Módulo");
-
-        moduloSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        moduloSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Botrytis");
@@ -250,12 +254,6 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Antracnosis");
 
-        antracnosisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        antracnosisSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        mildeoSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mildeoSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Mycospharella");
 
@@ -268,10 +266,15 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Bacteriosis");
 
-        phytophthoraSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        phytophthoraSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
+        bacteriosisBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        bacteriosisSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        antracnosisBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        mildeoBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        phytophthoraBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        moduloComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -290,14 +293,14 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 .addGap(58, 58, 58)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botrytisSpinner)
-                        .addComponent(moduloSpinner)
-                        .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(mycospharellaSpinner)
-                        .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addComponent(botrytisSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(mycospharellaSpinner))
+                    .addComponent(bacteriosisBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(antracnosisBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mildeoBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phytophthoraBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +308,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -313,24 +316,24 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(antracnosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(antracnosisBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(mycospharellaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(mildeoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mildeoBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(phytophthoraSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phytophthoraBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(bacteriosisSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bacteriosisBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -341,7 +344,8 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +380,7 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
-            }catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
@@ -401,26 +405,16 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        Lote lote = (Lote) loteComboBox.getSelectedItem();
-        int modulo = (int) moduloSpinner.getValue();
+        Modulo modulo = (Modulo) moduloComboBox.getSelectedItem();
         int botrytis = (int) botrytisSpinner.getValue();
-        boolean antracnosis = false;
-        if (antracnosisSpinner.getValue().equals("Si")) {
-            antracnosis = true;
-        }
+        boolean antracnosis = antracnosisBooleanComboBox.isSelected();
         int mycospharella = (int) mycospharellaSpinner.getValue();
-        boolean mildeoPolvoso = false;
-        if (mildeoSpinner.getValue().equals("Si")) {
-            mildeoPolvoso = true;
-        }
-        boolean phytophtora = false;
-        if (phytophthoraSpinner.getValue().equals("Si")) {
-            phytophtora = true;
-        }
-        boolean bacteriosis = bacteriosisSpinner.isSelected();
+        boolean mildeoPolvoso = mildeoBooleanComboBox.isSelected();
+        boolean phytophtora = phytophthoraBooleanComboBox.isSelected();
+        boolean bacteriosis = bacteriosisBooleanComboBox.isSelected();
         Date fecha = fechaChooserCombo.getSelectedDate().getTime();
         if (registroSeleccionado == null) {
-            MonitoreoDeEnfermedades nuevo = controlador.nuevo(lote, modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
+            MonitoreoDeEnfermedades nuevo = controlador.nuevo(modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -457,10 +451,16 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_fechaChooserComboOnSelectionChange
 
+    private void loteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteComboBoxActionPerformed
+        // TODO add your handling code here:
+        cargarTablaPrincipal();
+        cargarListaModulos();
+    }//GEN-LAST:event_loteComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner antracnosisSpinner;
-    private util.BooleanComboBox bacteriosisSpinner;
+    private util.BooleanComboBox antracnosisBooleanComboBox;
+    private util.BooleanComboBox bacteriosisBooleanComboBox;
     private javax.swing.JSpinner botrytisSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -480,11 +480,11 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox loteComboBox;
-    private javax.swing.JSpinner mildeoSpinner;
-    private javax.swing.JSpinner moduloSpinner;
+    private util.BooleanComboBox mildeoBooleanComboBox;
+    private javax.swing.JComboBox moduloComboBox;
     private javax.swing.JSpinner mycospharellaSpinner;
     private javax.swing.JButton nuevoButton;
-    private javax.swing.JSpinner phytophthoraSpinner;
+    private util.BooleanComboBox phytophthoraBooleanComboBox;
     private javax.swing.JTable principalTable;
     // End of variables declaration//GEN-END:variables
 
@@ -515,33 +515,21 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
 
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
-            moduloSpinner.setValue(0);
+            moduloComboBox.setSelectedIndex(0);
             botrytisSpinner.setValue(0);
             mycospharellaSpinner.setValue(0);
-            antracnosisSpinner.setValue("No");
-            mildeoSpinner.setValue("No");
-            phytophthoraSpinner.setValue("No");
-            bacteriosisSpinner.setSelected(false);
+            antracnosisBooleanComboBox.setSelected(false);
+            mildeoBooleanComboBox.setSelected(false);
+            phytophthoraBooleanComboBox.setSelected(false);
+            bacteriosisBooleanComboBox.setSelected(false);
         } else {
-            moduloSpinner.setValue(registroSeleccionado.getModulo());
+            moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
             botrytisSpinner.setValue(registroSeleccionado.getBotrytis());
             mycospharellaSpinner.setValue(registroSeleccionado.getMycospharella());
-            if (registroSeleccionado.isAntracnosis()) {
-                antracnosisSpinner.setValue("Si");
-            } else {
-                antracnosisSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isMildeoPolvoso()) {
-                mildeoSpinner.setValue("Si");
-            } else {
-                mildeoSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isPhytophtora()) {
-                phytophthoraSpinner.setValue("Si");
-            } else {
-                phytophthoraSpinner.setValue("No");
-            }
-            bacteriosisSpinner.setSelected(registroSeleccionado.isBacteriosis());
+            antracnosisBooleanComboBox.setSelected(registroSeleccionado.isAntracnosis());
+            mildeoBooleanComboBox.setSelected(registroSeleccionado.isBacteriosis());
+            phytophthoraBooleanComboBox.setSelected(registroSeleccionado.isPhytophtora());
+            bacteriosisBooleanComboBox.setSelected(registroSeleccionado.isBacteriosis());
         }
     }
 
@@ -553,6 +541,17 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
         }
         if (leerLista.size() > 0) {
             loteComboBox.setSelectedIndex(0);
+        }
+    }
+
+    private void cargarListaModulos() {
+        moduloComboBox.removeAllItems();
+        List<Modulo> leerLista = new ModuloControlador().leerLista((Lote) loteComboBox.getSelectedItem());
+        for (Modulo m : leerLista) {
+            moduloComboBox.addItem(m);
+        }
+        if (leerLista.size() > 0) {
+            moduloComboBox.setSelectedIndex(0);
         }
     }
 }

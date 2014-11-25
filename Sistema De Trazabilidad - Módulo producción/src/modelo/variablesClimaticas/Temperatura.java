@@ -15,28 +15,22 @@ public  class Temperatura implements Serializable {
 
 
     @Basic
-    private float tempMax;
-    
+    private float tempMax;    
     @Temporal(TemporalType.DATE)
     @Basic
     private Date fecha;
-
     @Temporal(TemporalType.TIME)
     @Basic
     private Date horaMin;
-
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-
     @Temporal(TemporalType.TIME)
     @Basic
     private Date horaMax;
-
-
     @Basic
     private float tempMin;
-
+    
     public Temperatura(){
 
     }

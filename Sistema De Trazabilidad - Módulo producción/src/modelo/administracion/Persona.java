@@ -1,12 +1,19 @@
 package modelo.administracion;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import modelo.produccion.AplicacionFitosanitaria;
+import modelo.produccion.Recoleccion;
+import modelo.produccion.Trabajo;
 
 @Entity
 public class Persona implements Serializable {
@@ -129,5 +136,4 @@ public class Persona implements Serializable {
         cadena += apellido + " ";
         return cadena;
     }
-
 }

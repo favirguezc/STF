@@ -14,18 +14,14 @@ import javax.persistence.TemporalType;
 public class HumedadDelSuelo implements Serializable {
 
     @Temporal(TemporalType.DATE)
-    private Date fecha;
-    
+    private Date fecha;    
     @Basic
-    private float _30Cms;
-    
+    private float _30Cms;    
     @Basic
-    private float _15Cms;
-    
+    private float _15Cms;    
     @Basic
     @Temporal(TemporalType.TIME)
     private Date hora;
-
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;

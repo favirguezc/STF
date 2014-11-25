@@ -15,10 +15,8 @@ public class ControlDeLluvias implements Serializable {
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-
     @Basic
     private float mmDeLluvia;
-
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;

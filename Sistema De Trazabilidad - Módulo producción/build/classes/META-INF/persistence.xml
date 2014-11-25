@@ -8,7 +8,6 @@
     <class>modelo.administracion.Lote</class>
     <class>modelo.administracion.Persona</class>
     <class>modelo.administracion.Rol</class>
-    <class>modelo.administracion.RolPersona</class>
     <class>modelo.produccion.MonitoreoDeEnfermedades</class>
     <class>modelo.produccion.MonitoreoDePlagas</class>
     <class>modelo.produccion.AplicacionFitosanitaria</class>
@@ -17,6 +16,8 @@
     <class>modelo.produccion.LaborCultural</class>
     <class>modelo.produccion.Recoleccion</class>
     <class>modelo.produccion.Trabajo</class>
+    <class>modelo.administracion.RolPersona</class>
+    <class>modelo.administracion.Modulo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>

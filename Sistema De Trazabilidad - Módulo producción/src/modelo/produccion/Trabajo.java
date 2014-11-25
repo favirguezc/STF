@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.LaborCultural;
+import modelo.administracion.Modulo;
 import modelo.administracion.Persona;
 
 @Entity
@@ -21,29 +21,25 @@ public class Trabajo implements Serializable {
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Basic
-    private int modulo;
-    @Basic
+    @ManyToOne
+    private Modulo modulo;
     @ManyToOne
     private LaborCultural labor;
-    @Basic
     @ManyToOne
     private Persona operario;
     @Basic
     private float jornales;
     @Basic
     private String observaciones;
-    @Basic
     @ManyToOne
     private Persona asistente;
-    @Basic
     @ManyToOne
     private Persona productor;
 
     public Trabajo() {
     }
 
-    public Trabajo(Date fecha, int modulo, LaborCultural labor, Persona operario, float jornales, String observaciones, Persona asistente, Persona productor) {
+    public Trabajo(Date fecha, Modulo modulo, LaborCultural labor, Persona operario, float jornales, String observaciones, Persona asistente, Persona productor) {
         this.fecha = fecha;
         this.modulo = modulo;
         this.labor = labor;
@@ -70,11 +66,11 @@ public class Trabajo implements Serializable {
         this.fecha = fecha;
     }
 
-    public int getModulo() {
+    public Modulo getModulo() {
         return modulo;
     }
 
-    public void setModulo(int modulo) {
+    public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
 

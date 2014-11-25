@@ -6,6 +6,7 @@
 package interfacesGraficas;
 
 import controlador.administracion.RolControlador;
+import controlador.produccion.LaborCulturalControlador;
 import interfacesGraficas.variablesClimaticas.TemperaturaIF;
 import interfacesGraficas.variablesClimaticas.HumedadDelSueloIF;
 import interfacesGraficas.variablesClimaticas.LluviasIF;
@@ -16,7 +17,9 @@ import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
 import interfacesGraficas.produccion.ProductoFitosanitarioIF;
+import interfacesGraficas.produccion.TrabajoIF;
 import interfacesGraficas.produccion.TrampaDeInsectosIF;
+import java.awt.Color;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,6 +117,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton4.setText("Labores Culturales");
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/shield_32x32.png"))); // NOI18N
@@ -558,15 +566,33 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (!ventanaActivaEnPanelEscritorio(TrabajoIF.class)) {
+            TrabajoIF hif = new TrabajoIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        JFrame.setDefaultLookAndFeelDecorated(true);
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SubstanceLookAndFeel.setSkin(new BusinessBlueSteelSkin());
+                try {
+                    JFrame.setDefaultLookAndFeelDecorated(true);
+                    SubstanceLookAndFeel.setSkin(new BusinessBlueSteelSkin());
+                } catch (Exception e) {
+                }
                 new InterfazPrincipal().setVisible(true);
             }
         });
@@ -610,10 +636,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
         return false;
     }
-
+    
     private void comenzarConexionBaseDeDatos() {
-        EntityManagerFactorySingleton.getEntityManagerFactory();
-        jCheckBox1.setSelected(true);
+        try {
+            EntityManagerFactorySingleton.getEntityManagerFactory();
+            jCheckBox1.setSelected(true);
+        } catch (Exception ex) {
+            jCheckBox1.setSelected(false);
+            jCheckBox1.setForeground(Color.RED);
+        }
         new RolControlador().comprobarRegistros();
+        new LaborCulturalControlador().comprobarRegistros();
     }
 }

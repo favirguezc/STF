@@ -437,6 +437,11 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
             mesComboBoxItemStateChanged(evt);
         }
     });
+    mesComboBox.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            mesComboBoxActionPerformed(evt);
+        }
+    });
 
     jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel2.setText("Año");
@@ -602,6 +607,10 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
         cargarTablaDePromedios();
     }//GEN-LAST:event_añoSpinnerStateChanged
+
+    private void mesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mesComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

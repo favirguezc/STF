@@ -5,15 +5,22 @@
  */
 package dao.produccion;
 
+import controlador.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 import modelo.produccion.Trabajo;
 
 /**
@@ -134,5 +141,23 @@ public class TrabajoDAO implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<Trabajo> findTrabajoEntities(Lote lote, Date inicio, Date fin) {
+        EntityManager em = getEntityManager();
+        List<Modulo> listaModulos = new ModuloControlador().leerLista(lote);
+        List<Trabajo> lista = new ArrayList<>();
+        for (Modulo m : listaModulos) {
+            try {
+                TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.modulo = :modulo AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
+                query.setParameter("inicio", inicio, TemporalType.DATE);
+                query.setParameter("fin", fin, TemporalType.DATE);
+                query.setParameter("modulo", m);
+                lista.addAll(query.getResultList());
+            } catch (Exception e) {
+            }
+        }
+        em.close();
+        return lista;
+    }
+
 }

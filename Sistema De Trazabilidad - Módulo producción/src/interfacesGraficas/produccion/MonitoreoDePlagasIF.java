@@ -6,6 +6,7 @@
 package interfacesGraficas.produccion;
 
 import controlador.administracion.LoteControlador;
+import controlador.administracion.ModuloControlador;
 import controlador.produccion.MonitoreoDePlagasControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 import modelo.produccion.MonitoreoDePlagas;
 
 /**
@@ -60,26 +62,26 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         principalTable = new javax.swing.JTable();
         edicionPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        moduloSpinner = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         arañitaSpinner = new javax.swing.JSpinner();
         thripsSpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        cyclamenSpinner = new javax.swing.JSpinner();
-        chisasSpinner = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         otroTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        babosasSpinner = new javax.swing.JSpinner();
-        otroSpinner = new javax.swing.JSpinner();
-        florSpinner = new javax.swing.JSpinner();
-        frutoSpinner = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        coronasSpinner = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
+        cyclamenBooleanComboBox = new util.BooleanComboBox();
+        chisasBooleanComboBox = new util.BooleanComboBox();
+        babosasBooleanComboBox = new util.BooleanComboBox();
+        otroBooleanComboBox = new util.BooleanComboBox();
+        florBooleanComboBox = new util.BooleanComboBox();
+        frutoBooleanComboBox = new util.BooleanComboBox();
+        coronasIntegerField = new util.LongField();
+        moduloComboBox = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -145,6 +147,11 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
                 loteComboBoxItemStateChanged(evt);
             }
         });
+        loteComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loteComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Fecha");
@@ -208,7 +215,7 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false
@@ -242,9 +249,6 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Módulo");
 
-        moduloSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        moduloSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Arañita");
 
@@ -256,12 +260,6 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Thrips");
-
-        cyclamenSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cyclamenSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        chisasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        chisasSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cyclamen");
@@ -282,29 +280,28 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Otro");
 
-        babosasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        babosasSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        otroSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        otroSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        florSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        florSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
-        frutoSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        frutoSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Flor");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Fruto");
 
-        coronasSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        coronasSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Coronas");
+
+        cyclamenBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        chisasBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        babosasBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        otroBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        florBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        frutoBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        moduloComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -313,13 +310,6 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(edicionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(96, 96, 96)
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(frutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(florSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coronasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -330,20 +320,28 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
                         .addGap(58, 58, 58)
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(arañitaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(thripsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cyclamenSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chisasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(babosasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(edicionPanelLayout.createSequentialGroup()
                                 .addComponent(otroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(otroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11))
-                .addGap(18, 41, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(otroBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cyclamenBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chisasBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(babosasBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(moduloComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(edicionPanelLayout.createSequentialGroup()
+                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(67, 67, 67)
+                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(frutoBooleanComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(florBooleanComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(coronasIntegerField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(47, 47, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +349,7 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(moduloSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -362,34 +360,34 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cyclamenSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(cyclamenBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chisasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(chisasBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(babosasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(babosasBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(otroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(otroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(otroBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(florSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(florBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(frutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(frutoBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(coronasSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel12)
+                    .addComponent(coronasIntegerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -460,39 +458,20 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        Lote lote = (Lote) loteComboBox.getSelectedItem();
-        int modulo = (int) moduloSpinner.getValue();
+        Modulo modulo = (Modulo) moduloComboBox.getSelectedItem();
         int aranita = (int) arañitaSpinner.getValue();
         int thrips = (int) thripsSpinner.getValue();
-        boolean cyclamen = false;
-        if (cyclamenSpinner.getValue().equals("Si")) {
-            cyclamen = true;
-        }
-        boolean chisas = false;
-        if (chisasSpinner.getValue().equals("Si")) {
-            chisas = true;
-        }
-        boolean babosas = false;
-        if (babosasSpinner.getValue().equals("Si")) {
-            cyclamen = true;
-        }
+        boolean cyclamen = cyclamenBooleanComboBox.isSelected();
+        boolean chisas = chisasBooleanComboBox.isSelected();
+        boolean babosas = babosasBooleanComboBox.isSelected();
         String otro = otroTextField.getText();
-        boolean otrov = false;
-        if (otroSpinner.getValue().equals("Si")) {
-            otrov = true;
-        }
-        boolean flor = false;
-        if (florSpinner.getValue().equals("Si")) {
-            flor = true;
-        }
-        boolean fruto = false;
-        if (frutoSpinner.getValue().equals("Si")) {
-            fruto = true;
-        }
-        int coronas = (int) coronasSpinner.getValue();
+        boolean otrov = otroBooleanComboBox.isSelected();
+        boolean flor = florBooleanComboBox.isSelected();
+        boolean fruto = frutoBooleanComboBox.isSelected();
+        int coronas = coronasIntegerField.getInteger();
         Date fecha = fechaChooserCombo.getSelectedDate().getTime();
         if (registroSeleccionado == null) {
-            MonitoreoDePlagas nuevo = controlador.nuevo(lote, modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
+            MonitoreoDePlagas nuevo = controlador.nuevo(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -534,22 +513,28 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_fechaChooserComboOnSelectionChange
 
     private void otroTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otroTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_otroTextFieldActionPerformed
+
+    private void loteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteComboBoxActionPerformed
+        // TODO add your handling code here:
+        cargarTablaPrincipal();
+        cargarListaModulos();
+    }//GEN-LAST:event_loteComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner arañitaSpinner;
-    private javax.swing.JSpinner babosasSpinner;
-    private javax.swing.JSpinner chisasSpinner;
-    private javax.swing.JSpinner coronasSpinner;
-    private javax.swing.JSpinner cyclamenSpinner;
+    private util.BooleanComboBox babosasBooleanComboBox;
+    private util.BooleanComboBox chisasBooleanComboBox;
+    private util.LongField coronasIntegerField;
+    private util.BooleanComboBox cyclamenBooleanComboBox;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private datechooser.beans.DateChooserCombo fechaChooserCombo;
-    private javax.swing.JSpinner florSpinner;
-    private javax.swing.JSpinner frutoSpinner;
+    private util.BooleanComboBox florBooleanComboBox;
+    private util.BooleanComboBox frutoBooleanComboBox;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -567,9 +552,9 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox loteComboBox;
-    private javax.swing.JSpinner moduloSpinner;
+    private javax.swing.JComboBox moduloComboBox;
     private javax.swing.JButton nuevoButton;
-    private javax.swing.JSpinner otroSpinner;
+    private util.BooleanComboBox otroBooleanComboBox;
     private javax.swing.JTextField otroTextField;
     private javax.swing.JTable principalTable;
     private javax.swing.JSpinner thripsSpinner;
@@ -606,53 +591,29 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
 
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
-            moduloSpinner.setValue(0);
+            moduloComboBox.setSelectedIndex(0);
             arañitaSpinner.setValue(0);
             thripsSpinner.setValue(0);
-            cyclamenSpinner.setValue("No");
-            chisasSpinner.setValue("No");
-            babosasSpinner.setValue("No");
+            cyclamenBooleanComboBox.setSelected(false);
+            chisasBooleanComboBox.setSelected(false);
+            babosasBooleanComboBox.setSelected(false);
             otroTextField.setText(null);
-            otroSpinner.setValue("No");
-            florSpinner.setValue("No");
-            frutoSpinner.setValue("No");
-            coronasSpinner.setValue(0);
+            otroBooleanComboBox.setSelected(false);
+            florBooleanComboBox.setSelected(false);
+            frutoBooleanComboBox.setSelected(false);
+            coronasIntegerField.setInteger(0);
         } else {
-            moduloSpinner.setValue(registroSeleccionado.getModulo());
+            moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
             arañitaSpinner.setValue(registroSeleccionado.getAranita());
             thripsSpinner.setValue(registroSeleccionado.getThrips());
-            if (registroSeleccionado.isCyclamen()) {
-                cyclamenSpinner.setValue("Si");
-            } else {
-                cyclamenSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isChisas()) {
-                chisasSpinner.setValue("Si");
-            } else {
-                chisasSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isBabosas()) {
-                babosasSpinner.setValue("Si");
-            } else {
-                babosasSpinner.setValue("No");
-            }
+            cyclamenBooleanComboBox.setSelected(registroSeleccionado.isCyclamen());
+            chisasBooleanComboBox.setSelected(registroSeleccionado.isChisas());
+            babosasBooleanComboBox.setSelected(registroSeleccionado.isBabosas());
             otroTextField.setText(registroSeleccionado.getOtro());
-            if (registroSeleccionado.isOtrov()) {
-                otroSpinner.setValue("Si");
-            } else {
-                otroSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isFlor()) {
-                florSpinner.setValue("Si");
-            } else {
-                florSpinner.setValue("No");
-            }
-            if (registroSeleccionado.isFruto()) {
-                frutoSpinner.setValue("Si");
-            } else {
-                frutoSpinner.setValue("No");
-            }
-            coronasSpinner.setValue(registroSeleccionado.getCoronas());
+            otroBooleanComboBox.setSelected(registroSeleccionado.isOtrov());
+            florBooleanComboBox.setSelected(registroSeleccionado.isFlor());
+            frutoBooleanComboBox.setSelected(registroSeleccionado.isFruto());
+            coronasIntegerField.setInteger(registroSeleccionado.getCoronas());
         }
     }
 
@@ -664,6 +625,17 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         }
         if (leerLista.size() > 0) {
             loteComboBox.setSelectedIndex(0);
+        }
+    }
+
+    private void cargarListaModulos() {
+        moduloComboBox.removeAllItems();
+        List<Modulo> leerLista = new ModuloControlador().leerLista((Lote) loteComboBox.getSelectedItem());
+        for (Modulo m : leerLista) {
+            moduloComboBox.addItem(m);
+        }
+        if (leerLista.size() > 0) {
+            moduloComboBox.setSelectedIndex(0);
         }
     }
 }

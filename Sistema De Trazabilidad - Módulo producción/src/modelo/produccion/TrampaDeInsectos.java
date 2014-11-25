@@ -30,10 +30,8 @@ public class TrampaDeInsectos implements Serializable {
     private boolean cambio;
     @Basic
     private String observaciones;
-    @Basic
     @ManyToOne
     private Persona asistente;
-    @Basic
     @ManyToOne
     private Persona productor;
 

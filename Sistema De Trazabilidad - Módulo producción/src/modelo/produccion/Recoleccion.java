@@ -18,7 +18,6 @@ public class Recoleccion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @ManyToOne
     private Lote lote;
     @Basic
@@ -38,7 +37,6 @@ public class Recoleccion implements Serializable {
     private float quinta;
     @Basic
     private float danada;
-    @Basic
     @ManyToOne
     private Persona recolector;
 

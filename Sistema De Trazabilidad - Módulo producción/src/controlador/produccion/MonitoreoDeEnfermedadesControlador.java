@@ -11,6 +11,7 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 import modelo.produccion.MonitoreoDeEnfermedades;
 
 /**
@@ -25,8 +26,8 @@ public class MonitoreoDeEnfermedadesControlador {
         dao = new MonitoreoDeEnfermedadesDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
     
-    public MonitoreoDeEnfermedades nuevo(Lote lote, int modulo, Date fecha, int botrytis, boolean antracnosis, int mycospharella, boolean mildeoPolvoso, boolean phytophtora, boolean bacteriosis){
-        return new MonitoreoDeEnfermedades(lote, modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
+    public MonitoreoDeEnfermedades nuevo(Modulo modulo, Date fecha, int botrytis, boolean antracnosis, int mycospharella, boolean mildeoPolvoso, boolean phytophtora, boolean bacteriosis){
+        return new MonitoreoDeEnfermedades(modulo, fecha, botrytis, antracnosis, mycospharella, mildeoPolvoso, phytophtora, bacteriosis);
     }
     
     public MonitoreoDeEnfermedades buscar(long id) throws Exception {

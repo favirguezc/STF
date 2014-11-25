@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.administracion.Lote;
+import modelo.administracion.Modulo;
 
 @Entity
 public class MonitoreoDeEnfermedades implements Serializable {
@@ -17,11 +17,8 @@ public class MonitoreoDeEnfermedades implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @ManyToOne
-    private Lote lote;
-    @Basic
-    private int modulo;
+    private Modulo modulo;
     @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
@@ -41,8 +38,7 @@ public class MonitoreoDeEnfermedades implements Serializable {
     public MonitoreoDeEnfermedades() {
     }
 
-    public MonitoreoDeEnfermedades(Lote lote, int modulo, Date fecha, int botrytis, boolean antracnosis, int mycospharella, boolean mildeoPolvoso, boolean phytophtora, boolean bacteriosis) {
-        this.lote = lote;
+    public MonitoreoDeEnfermedades(Modulo modulo, Date fecha, int botrytis, boolean antracnosis, int mycospharella, boolean mildeoPolvoso, boolean phytophtora, boolean bacteriosis) {
         this.modulo = modulo;
         this.fecha = fecha;
         this.botrytis = botrytis;
@@ -61,19 +57,11 @@ public class MonitoreoDeEnfermedades implements Serializable {
         this.id = id;
     }
 
-    public Lote getLote() {
-        return lote;
-    }
-
-    public void setLote(Lote lote) {
-        this.lote = lote;
-    }
-
-    public int getModulo() {
+    public Modulo getModulo() {
         return modulo;
     }
 
-    public void setModulo(int modulo) {
+    public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
 

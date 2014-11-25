@@ -32,7 +32,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
     private TrampaDeInsectos registroSeleccionado = null;
     private TrampaDeInsectosControlador controlador;
     private List<TrampaDeInsectos> lista;
-
+    
     public TrampaDeInsectosIF() {
         initComponents();
         controlador = new TrampaDeInsectosControlador();
@@ -55,7 +55,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         nombreNameField = new util.NameField();
         especieNameField = new util.NameField();
-        cambioSpinner = new javax.swing.JSpinner();
         observacionesTextField = new javax.swing.JTextField();
         asistenteComboBox = new javax.swing.JComboBox();
         productorComboBox = new javax.swing.JComboBox();
@@ -67,6 +66,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        cambioBooleanComboBox = new util.BooleanComboBox();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
@@ -80,7 +80,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Registro de Trampa de Insectos");
         setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        setMinimumSize(new java.awt.Dimension(1118, 567));
+        setMinimumSize(new java.awt.Dimension(1118, 560));
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
 
@@ -93,9 +93,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         nombreNameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         especieNameField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        cambioSpinner.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cambioSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"No", "Si"}));
 
         observacionesTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -126,6 +123,8 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Productor");
 
+        cambioBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
         edicionPanelLayout.setHorizontalGroup(
@@ -154,7 +153,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(cambioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cambioBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -176,10 +175,10 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(individuosLongField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cambioSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(cambioBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(observacionesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +302,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,10 +373,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         String nombre = nombreNameField.getText();
         String especie = especieNameField.getText();
         int individuos = individuosLongField.getInteger();
-        boolean cambio = true;
-        if (cambioSpinner.getValue().equals("No")) {
-            cambio = true;
-        }
+        boolean cambio = cambioBooleanComboBox.isSelected();
         String observaciones = observacionesTextField.getText();
         Persona asistente = (Persona) asistenteComboBox.getSelectedItem();
         Persona productor = (Persona) productorComboBox.getSelectedItem();
@@ -414,7 +410,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox asistenteComboBox;
-    private javax.swing.JSpinner cambioSpinner;
+    private util.BooleanComboBox cambioBooleanComboBox;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
@@ -447,18 +443,18 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             registroSeleccionado = null;
         }
     }
-
+    
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
             nombreNameField.setText(null);
             especieNameField.setText(null);
             individuosLongField.setInteger(0);
-            cambioSpinner.setValue("Si");
+            cambioBooleanComboBox.setSelected(true);
             observacionesTextField.setText(null);
             asistenteComboBox.setSelectedIndex(0);
             productorComboBox.setSelectedIndex(0);
-
+            
         } else {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());
@@ -466,16 +462,13 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             nombreNameField.setText(registroSeleccionado.getNombre());
             especieNameField.setText(registroSeleccionado.getEspecie());
             individuosLongField.setInteger(registroSeleccionado.getIndividuos());
-            cambioSpinner.setValue("Si");
-            if (!registroSeleccionado.isCambio()) {
-                cambioSpinner.setValue("No");
-            }
+            cambioBooleanComboBox.setSelected(registroSeleccionado.isCambio());
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             asistenteComboBox.setSelectedItem(registroSeleccionado.getAsistente());
             productorComboBox.setSelectedItem(registroSeleccionado.getProductor());
         }
     }
-
+    
     private void cargarTablaPrincipal() {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
@@ -493,12 +486,12 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
-
+    
     private void cargarListas() {
         cargarListaAsistentes();
         cargarListaProductores();
     }
-
+    
     private void cargarListaAsistentes() {
         asistenteComboBox.removeAllItems();
         asistenteComboBox.addItem(null);
@@ -511,7 +504,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             asistenteComboBox.addItem(p);
         }
     }
-
+    
     private void cargarListaProductores() {
         productorComboBox.removeAllItems();
         productorComboBox.addItem(null);

@@ -494,7 +494,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
-            mmsFloatField.setFloat(0);
+            mmsFloatField.setFloat(null);
         } else {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());

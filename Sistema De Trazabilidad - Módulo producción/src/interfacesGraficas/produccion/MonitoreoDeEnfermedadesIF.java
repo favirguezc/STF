@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.administracion.Lote;
 import modelo.administracion.Modulo;
 import modelo.produccion.MonitoreoDeEnfermedades;
+import util.TableColumnAdjuster;
 
 /**
  *
@@ -222,6 +223,9 @@ public class MonitoreoDeEnfermedadesIF extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        principalTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        TableColumnAdjuster tca = new TableColumnAdjuster(principalTable);
+        tca.adjustColumns();
         jScrollPane1.setViewportView(principalTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

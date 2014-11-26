@@ -95,7 +95,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Monitoreo de Plagas");
+        setTitle("Registro de Trabajos");
         setMinimumSize(new java.awt.Dimension(1141, 592));
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

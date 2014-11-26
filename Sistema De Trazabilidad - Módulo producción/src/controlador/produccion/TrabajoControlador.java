@@ -52,8 +52,8 @@ public class TrabajoControlador {
         return dao.findTrabajoEntities(lote, inicio, fin);
     }
 
-    public boolean validar(Trabajo monitoreo) {
-        
+    public boolean validar(Trabajo t) {
+
         return true;
     }
 }

@@ -290,7 +290,11 @@
                     <Column editable="false" title="Unidades" type="java.lang.String"/>
                   </Table>
                 </Property>
+                <Property name="autoResizeMode" type="int" value="4"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="TableColumnAdjuster tca = new TableColumnAdjuster(principalTable);&#xa;tca.adjustColumns();"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

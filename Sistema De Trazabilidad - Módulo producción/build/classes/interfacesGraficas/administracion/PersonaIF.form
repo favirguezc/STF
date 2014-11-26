@@ -210,6 +210,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="TableColumnAdjuster tca = new TableColumnAdjuster(principalTable);&#xa;tca.adjustColumns();"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

@@ -19,6 +19,7 @@ import modelo.administracion.Persona;
 import modelo.administracion.Rol;
 import modelo.produccion.TrampaDeInsectos;
 import util.DateFormatter;
+import util.TableColumnAdjuster;
 
 /**
  *
@@ -290,6 +291,9 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        principalTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        TableColumnAdjuster tca = new TableColumnAdjuster(principalTable);
+        tca.adjustColumns();
         jScrollPane2.setViewportView(principalTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

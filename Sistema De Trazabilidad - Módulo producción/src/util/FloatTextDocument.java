@@ -16,7 +16,7 @@ import javax.swing.text.PlainDocument;
  */
 public class FloatTextDocument extends PlainDocument {
 
-    private final static Pattern DIGITS = Pattern.compile("[0-9]+\\.?[0-9]*");
+    private final static Pattern DIGITS = Pattern.compile("[0-9]*\\.?[0-9]*");
 
     @Override
     public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {

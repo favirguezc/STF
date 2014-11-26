@@ -6,7 +6,6 @@
 package dao.produccion;
 
 import controlador.administracion.ModuloControlador;
-import dao.administracion.LoteDAO;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.ArrayList;

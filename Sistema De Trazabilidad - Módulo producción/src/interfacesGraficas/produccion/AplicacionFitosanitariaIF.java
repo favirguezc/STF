@@ -22,6 +22,7 @@ import modelo.administracion.Persona;
 import modelo.administracion.Rol;
 import modelo.produccion.AplicacionFitosanitaria;
 import modelo.produccion.ProductoFitosanitario;
+import util.DateFormatter;
 import util.TableColumnAdjuster;
 
 /**
@@ -280,7 +281,9 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1046, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +395,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel17))
                 .addGap(25, 25, 25)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productorComboBox, 0, 141, Short.MAX_VALUE)
+                    .addComponent(productorComboBox, 0, 55, Short.MAX_VALUE)
                     .addComponent(cantidadFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(aguaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(equipoTextField)
@@ -403,7 +406,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                     .addComponent(asistenteComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(motivoTextField)
                     .addComponent(productoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pcBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,7 +667,8 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         }
         lista = controlador.leerLista((Lote) loteComboBox.getSelectedItem(), fechaInicioChooserCombo.getSelectedDate().getTime(), fechaFinChooserCombo.getSelectedDate().getTime());
         for (AplicacionFitosanitaria mp : lista) {
-            Object[] row = {mp.getFecha(),
+            Object[] row = {
+                DateFormatter.formatDate(mp.getFecha()),
                 mp.getProducto(),
                 mp.getProducto().getIngredienteActivo(),
                 mp.getMotivo(),
@@ -788,7 +792,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         try {
             rol = new RolControlador().buscar("Trabajador(a)");
         } catch (Exception ex) {
-            System.out.println("Rol trabajador no encontrado"+ex.getMessage());
+            System.out.println("Rol trabajador no encontrado" + ex.getMessage());
         }
         for (Persona p : new RolPersonaControlador().leerLista(rol)) {
             responsableComboBox.addItem(p);

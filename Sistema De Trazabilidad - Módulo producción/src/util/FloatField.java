@@ -32,14 +32,14 @@ public class FloatField extends JTextField {
         });
     }
 
-    public float getFloat() {
+    public Float getFloat() {
         if (getText() == null || getText().equals("")) {
-            return 0;
+            return (float) 0;
         }
         return Float.parseFloat(getText());
     }
 
-    public void setFloat(float v) {
+    public void setFloat(Float v) {
         setText(v + "");
     }
 }

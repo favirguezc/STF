@@ -2,7 +2,6 @@ package modelo.produccion;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,30 +19,21 @@ public class Recoleccion implements Serializable {
     private long id;
     @ManyToOne
     private Lote lote;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Basic
-    private float extra;
-    @Basic
-    private float primera;
-    @Basic
-    private float segunda;
-    @Basic
-    private float tercera;
-    @Basic
-    private float cuarta;
-    @Basic
-    private float quinta;
-    @Basic
-    private float danada;
     @ManyToOne
     private Persona recolector;
+    private float extra;
+    private float primera;
+    private float segunda;
+    private float tercera;
+    private float cuarta;
+    private float dañada;
 
     public Recoleccion() {
     }
 
-    public Recoleccion(Lote lote, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float quinta, float danada, Persona recolector) {
+    public Recoleccion(Lote lote, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float danada, Persona recolector) {
         this.lote = lote;
         this.fecha = fecha;
         this.extra = extra;
@@ -51,8 +41,7 @@ public class Recoleccion implements Serializable {
         this.segunda = segunda;
         this.tercera = tercera;
         this.cuarta = cuarta;
-        this.quinta = quinta;
-        this.danada = danada;
+        this.dañada = danada;
         this.recolector = recolector;
     }
 
@@ -120,20 +109,12 @@ public class Recoleccion implements Serializable {
         this.cuarta = cuarta;
     }
 
-    public float getQuinta() {
-        return quinta;
+    public float getDañada() {
+        return dañada;
     }
 
-    public void setQuinta(float quinta) {
-        this.quinta = quinta;
-    }
-
-    public float getDanada() {
-        return danada;
-    }
-
-    public void setDanada(float danada) {
-        this.danada = danada;
+    public void setDañada(float dañada) {
+        this.dañada = dañada;
     }
 
     public Persona getRecolector() {

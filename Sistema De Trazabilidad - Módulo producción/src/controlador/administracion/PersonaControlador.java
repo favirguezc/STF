@@ -73,6 +73,7 @@ public class PersonaControlador {
         }
         try {
             if (buscarPorCedula(nuevo.getCedula()) != null && buscarPorCedula(nuevo.getCedula()).getId() != nuevo.getId()) {
+                JOptionPane.showMessageDialog(null, "El número de cédula " + nuevo.getCedula() + " ya se encuentra asignado.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         } catch (Exception e) {

@@ -546,7 +546,8 @@ public class LoteIF extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void guardarLote(boolean b) {
-        edicionPanel.setVisible(b);
+        //edicionPanel.setVisible(b);
+        nombreLoteTextField.setEnabled(b);
         guardarButton.setEnabled(b);
         if (!b) {
             registroSeleccionado = null;
@@ -554,7 +555,8 @@ public class LoteIF extends javax.swing.JInternalFrame {
     }
 
     private void guardarModulo(boolean b) {
-        edicionPanel1.setVisible(b);
+        //edicionPanel1.setVisible(b);
+        nombreModuloTextField.setEnabled(b);
         guardarRolPersonaButton.setEnabled(b);
         if (!b) {
             registroModuloSeleccionado = null;
@@ -563,7 +565,7 @@ public class LoteIF extends javax.swing.JInternalFrame {
 
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
-            nombreLoteTextField.setText("");
+            nombreLoteTextField.setText(null);
         } else {
             nombreLoteTextField.setText(registroSeleccionado.getNombre());
         }
@@ -572,15 +574,15 @@ public class LoteIF extends javax.swing.JInternalFrame {
     private void cargarListaLotes() {
         listModel.removeAllElements();
         lista = controlador.leerLista();
-        for (Lote l : lista) {
+        lista.stream().forEach((l) -> {
             listModel.addElement(l);
-        }
+        });
     }
 
     private void cargarListaModulos() {
         listModel2.removeAllElements();
-        for (Modulo m : new ModuloControlador().leerLista(registroSeleccionado)) {
+        new ModuloControlador().leerLista(registroSeleccionado).stream().forEach((m) -> {
             listModel2.addElement(m);
-        }
+        });
     }
 }

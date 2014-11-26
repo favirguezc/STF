@@ -17,6 +17,7 @@ import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
 import interfacesGraficas.produccion.ProductoFitosanitarioIF;
+import interfacesGraficas.produccion.RecoleccionIF;
 import interfacesGraficas.produccion.TrabajoIF;
 import interfacesGraficas.produccion.TrampaDeInsectosIF;
 import java.awt.Color;
@@ -89,6 +90,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton1.setText("Recolección");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/asterisk_32x32.png"))); // NOI18N
@@ -136,7 +142,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/globe_32x32.png"))); // NOI18N
-        jButton6.setText("Fumigación");
+        jButton6.setText("Aplicaciones Fitosanitarias");
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +168,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +285,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setText("Recolección");
+        jMenuItem6.setText("Recolecciones");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
@@ -297,7 +308,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setText("Lluvias");
+        jMenuItem7.setText("Monitoreo de Lluvias");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -306,7 +317,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem8.setText("Temperatura");
+        jMenuItem8.setText("Monitoreo de Temperatura");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -315,7 +326,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setText("Humedad del Suelo");
+        jMenuItem9.setText("Monitoreo de Humedad del Suelo");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -358,243 +369,100 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(TemperaturaIF.class)) {
-            TemperaturaIF tif = new TemperaturaIF();
-            panelEscritorio.add(tif);
-            tif.setVisible(true);
-            try {
-                tif.setSelected(true);
-                tif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirTemperatura();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
-            MonitoreoDeEnfermedadesIF tif = new MonitoreoDeEnfermedadesIF();
-            panelEscritorio.add(tif);
-            tif.setVisible(true);
-            try {
-                tif.setSelected(true);
-                tif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirMonitoreoDeEnfermedades();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(HumedadDelSueloIF.class)) {
-            HumedadDelSueloIF hif = new HumedadDelSueloIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirHumedadDelSuelo();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(LluviasIF.class)) {
-            LluviasIF hif = new LluviasIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirLluvias();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(LoteIF.class)) {
-            LoteIF hif = new LoteIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirLote();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(PersonaIF.class)) {
-            PersonaIF hif = new PersonaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirPersona();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDePlagasIF.class)) {
-            MonitoreoDePlagasIF hif = new MonitoreoDePlagasIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirMonitoreoDePlagas();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDePlagasIF.class)) {
-            MonitoreoDePlagasIF hif = new MonitoreoDePlagasIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirMonitoreoDePlagas();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
-            MonitoreoDeEnfermedadesIF hif = new MonitoreoDeEnfermedadesIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirMonitoreoDeEnfermedades();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(ProductoFitosanitarioIF.class)) {
-            ProductoFitosanitarioIF hif = new ProductoFitosanitarioIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirProductoFitosanitario();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(AplicacionFitosanitariaIF.class)) {
-            AplicacionFitosanitariaIF hif = new AplicacionFitosanitariaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirAplicacionFitosanitaria();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(AplicacionFitosanitariaIF.class)) {
-            AplicacionFitosanitariaIF hif = new AplicacionFitosanitariaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirAplicacionFitosanitaria();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
-            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirTrampaDeInsectos();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
-            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirTrampaDeInsectos();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        if (!ventanaActivaEnPanelEscritorio(TrabajoIF.class)) {
-            TrabajoIF hif = new TrabajoIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        abrirTrabajo();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        abrirRecoleccion();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        abrirRecoleccion();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JFrame.setDefaultLookAndFeelDecorated(true);
-                    SubstanceLookAndFeel.setSkin(new BusinessBlueSteelSkin());
-                } catch (Exception e) {
-                }
-                new InterfazPrincipal().setVisible(true);
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                JFrame.setDefaultLookAndFeelDecorated(true);
+                SubstanceLookAndFeel.setSkin(new BusinessBlueSteelSkin());
+            } catch (Exception e) {
             }
+            new InterfazPrincipal().setVisible(true);
         });
     }
 
@@ -629,14 +497,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean ventanaActivaEnPanelEscritorio(Class aClass) {
-        for (JInternalFrame jif : panelEscritorio.getAllFrames()) {
-            if (jif.getClass().equals(aClass)) {
+        for (JInternalFrame internalFrame : panelEscritorio.getAllFrames()) {
+            if (internalFrame.getClass().equals(aClass)) {
                 return true;
             }
         }
         return false;
     }
-    
+
     private void comenzarConexionBaseDeDatos() {
         try {
             EntityManagerFactorySingleton.getEntityManagerFactory();
@@ -647,5 +515,173 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
         new RolControlador().comprobarRegistros();
         new LaborCulturalControlador().comprobarRegistros();
+    }
+
+    private void abrirTemperatura() {
+        if (!ventanaActivaEnPanelEscritorio(TemperaturaIF.class)) {
+            TemperaturaIF tif = new TemperaturaIF();
+            panelEscritorio.add(tif);
+            tif.setVisible(true);
+            try {
+                tif.setSelected(true);
+                tif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirMonitoreoDeEnfermedades() {
+        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
+            MonitoreoDeEnfermedadesIF tif = new MonitoreoDeEnfermedadesIF();
+            panelEscritorio.add(tif);
+            tif.setVisible(true);
+            try {
+                tif.setSelected(true);
+                tif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirHumedadDelSuelo() {
+        if (!ventanaActivaEnPanelEscritorio(HumedadDelSueloIF.class)) {
+            HumedadDelSueloIF hif = new HumedadDelSueloIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirLluvias() {
+        if (!ventanaActivaEnPanelEscritorio(LluviasIF.class)) {
+            LluviasIF hif = new LluviasIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirLote() {
+        if (!ventanaActivaEnPanelEscritorio(LoteIF.class)) {
+            LoteIF hif = new LoteIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirPersona() {
+        if (!ventanaActivaEnPanelEscritorio(PersonaIF.class)) {
+            PersonaIF hif = new PersonaIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirMonitoreoDePlagas() {
+        if (!ventanaActivaEnPanelEscritorio(MonitoreoDePlagasIF.class)) {
+            MonitoreoDePlagasIF hif = new MonitoreoDePlagasIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirProductoFitosanitario() {
+        if (!ventanaActivaEnPanelEscritorio(ProductoFitosanitarioIF.class)) {
+            ProductoFitosanitarioIF hif = new ProductoFitosanitarioIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirAplicacionFitosanitaria() {
+        if (!ventanaActivaEnPanelEscritorio(AplicacionFitosanitariaIF.class)) {
+            AplicacionFitosanitariaIF hif = new AplicacionFitosanitariaIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirTrampaDeInsectos() {
+        if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
+            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirTrabajo() {
+        if (!ventanaActivaEnPanelEscritorio(TrabajoIF.class)) {
+            TrabajoIF hif = new TrabajoIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirRecoleccion() {
+        if (!ventanaActivaEnPanelEscritorio(RecoleccionIF.class)) {
+            RecoleccionIF hif = new RecoleccionIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.administracion.Persona;
 import modelo.administracion.Rol;
 import modelo.administracion.RolPersona;
+import util.TableColumnAdjuster;
 
 /**
  *
@@ -214,6 +215,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TableColumnAdjuster tca = new TableColumnAdjuster(principalTable);
+        tca.adjustColumns();
         jScrollPane1.setViewportView(principalTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -722,21 +725,39 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
     private void activarEdicionPanel() {
         guardarButton.setEnabled(true);
-        jTabbedPane1.setVisible(true);
         jTabbedPane1.setEnabledAt(0, true);
+        nombre1TextField.setEnabled(true);
+        nombre2TextField.setEnabled(true);
+        apellido1TextField.setEnabled(true);
+        apellido2TextField.setEnabled(true);
+        cedulaLongField.setEnabled(true);
+        telefonoLongField.setEnabled(true);
+        sexoComboBox.setEnabled(true);
+        gsComboBox.setEnabled(true);
+        rhComboBox.setEnabled(true);
         jTabbedPane1.setSelectedIndex(0);
         jTabbedPane1.setEnabledAt(1, false);
     }
 
     private void desactivarEdicionPanel() {
         guardarButton.setEnabled(false);
-        jTabbedPane1.setVisible(false);
+        nombre1TextField.setEnabled(false);
+        nombre2TextField.setEnabled(false);
+        apellido1TextField.setEnabled(false);
+        apellido2TextField.setEnabled(false);
+        cedulaLongField.setEnabled(false);
+        telefonoLongField.setEnabled(false);
+        sexoComboBox.setEnabled(false);
+        gsComboBox.setEnabled(false);
+        rhComboBox.setEnabled(false);
+        jTabbedPane1.setEnabledAt(0, false);
         registroSeleccionado = null;
     }
 
     private void activarRolesPanel() {
         guardarButton.setEnabled(false);
-        jTabbedPane1.setVisible(true);
+        rolesComboBox.setEnabled(true);
+        contraseñaTextField.setEnabled(true);
         jTabbedPane1.setEnabledAt(1, true);
         jTabbedPane1.setSelectedIndex(1);
         jTabbedPane1.setEnabledAt(0, false);
@@ -744,7 +765,9 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
     private void desactivarRolesPanel() {
         guardarButton.setEnabled(false);
-        jTabbedPane1.setVisible(false);
+        rolesComboBox.setEnabled(false);
+        contraseñaTextField.setEnabled(false);
+        jTabbedPane1.setEnabledAt(1, false);
         registroSeleccionado = null;
     }
 

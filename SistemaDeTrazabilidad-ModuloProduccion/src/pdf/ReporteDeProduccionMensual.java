@@ -23,7 +23,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.administracion.Lote;
+import modelo.administracion.Persona;
 import modelo.produccion.Recoleccion;
 import util.DateFormatter;
 import util.DateTools;
@@ -32,17 +38,24 @@ import util.DateTools;
  *
  * @author fredy
  */
-public class ReporteDeProduccionAnualPorMes {
+public class ReporteDeProduccionMensual {
 
     private int año;
+    private int mes;
     private String nombreDelArchivo;
+    private Persona recolector;
+    private Lote lote;
 
-    public ReporteDeProduccionAnualPorMes(int año, String nombreDelArchivo) {
+    public ReporteDeProduccionMensual(int año, int mes, String nombreDelArchivo, Persona recolector, Lote lote) {
         this.año = año;
+        this.mes = mes;
         this.nombreDelArchivo = nombreDelArchivo;
+        this.recolector = recolector;
+        this.lote = lote;
+        crearReporte();
     }
 
-    public void crearReporte() {
+    private void crearReporte() {
         Document archivo = new Document();
         try {
             PdfWriter.getInstance(archivo, new FileOutputStream(nombreDelArchivo));
@@ -60,23 +73,40 @@ public class ReporteDeProduccionAnualPorMes {
     }
 
     private Element encabezado() {
-        Paragraph encabezado = new Paragraph("REPORTE ANUAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
-        Paragraph paragraph = new Paragraph("AÑO " + año, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph encabezado = new Paragraph("REPORTE MENSUAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph paragraph = new Paragraph(DateTools.getMes(mes).toUpperCase() + " DE " + año, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         encabezado.add(paragraph);
+        if (recolector != null) {
+            try {
+                paragraph = new Paragraph("RECOLECTOR: " + recolector.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+                paragraph.setAlignment(Element.ALIGN_CENTER);
+                encabezado.add(paragraph);
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteDeProduccionMensual.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (lote != null) {
+            try {
+                paragraph = new Paragraph("LOTE: " + lote.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+                paragraph.setAlignment(Element.ALIGN_CENTER);
+                encabezado.add(paragraph);
+            } catch (Exception ex) {
+                Logger.getLogger(ReporteDeProduccionMensual.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         encabezado.setAlignment(Element.ALIGN_CENTER);
         return encabezado;
     }
 
     private Element tabla() {
-        PdfPTable tabla = new PdfPTable(9);
+        PdfPTable tabla = new PdfPTable(8);
         PdfPCell celda;
         Font fuenteBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.BLACK);
         Font fuenteNormal = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);
         //Agregar encabezados de la tabla
         celda = new PdfPCell(new Phrase("", fuenteBold));
         celda.setRowspan(2);
-        celda.setColspan(2);
         tabla.addCell(celda);
         String[] encabezados = {"Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Dañada", "Total"};
         for (int i = 0; i < encabezados.length; i++) {
@@ -84,44 +114,44 @@ public class ReporteDeProduccionAnualPorMes {
             celda.setRowspan(2);
             tabla.addCell(celda);
         }
-        float extraMes,
+        int dias = new GregorianCalendar(año, mes, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
+        float extraDia,
                 extraTotal = 0,
-                primeraMes,
+                primeraDia,
                 primeraTotal = 0,
-                segundaMes,
+                segundaDia,
                 segundaTotal = 0,
-                terceraMes,
+                terceraDia,
                 terceraTotal = 0,
-                cuartaMes,
+                cuartaDia,
                 cuartaTotal = 0,
-                dañadaMes,
+                dañadaDia,
                 dañadaTotal = 0,
                 total = 0,
                 totalmes;
         //Para cada mes se agrega una columna
-        for (int i = 0; i < 12; i++) {
+        for (int i = 1; i <= dias; i++) {
             //Sumar recoleccion de cada tipo de fresa
-            Recoleccion r = new RecoleccionControlador().sumarRegistros(null, null, DateTools.getPrimerDia(i, año), DateTools.getUltimoDia(i, año));
-            extraMes = r.getExtra() / 500;
-            extraTotal += extraMes;
-            primeraMes = r.getPrimera() / 500;
-            primeraTotal += primeraMes;
-            segundaMes = r.getSegunda() / 500;
-            segundaTotal += segundaMes;
-            terceraMes = r.getTercera() / 500;
-            terceraTotal += terceraMes;
-            cuartaMes = r.getCuarta() / 500;
-            cuartaTotal += cuartaMes;
-            dañadaMes = r.getDanada() / 500;
-            dañadaTotal += dañadaMes;
+            Recoleccion r = new RecoleccionControlador().sumarRegistros(null, null, new Date(año - 1900, mes, i), null);
+            extraDia = r.getExtra() / 500;
+            extraTotal += extraDia;
+            primeraDia = r.getPrimera() / 500;
+            primeraTotal += primeraDia;
+            segundaDia = r.getSegunda() / 500;
+            segundaTotal += segundaDia;
+            terceraDia = r.getTercera() / 500;
+            terceraTotal += terceraDia;
+            cuartaDia = r.getCuarta() / 500;
+            cuartaTotal += cuartaDia;
+            dañadaDia = r.getDanada() / 500;
+            dañadaTotal += dañadaDia;
             totalmes = r.getTotal() / 500;
             total += totalmes;
 
-            celda = new PdfPCell(new Phrase(DateTools.getMes(i), fuenteNormal));
+            celda = new PdfPCell(new Phrase("" + i, fuenteNormal));
             celda.setRowspan(2);
-            celda.setColspan(2);
             tabla.addCell(celda);
-            float[] sumas = {extraMes, primeraMes, segundaMes, terceraMes, cuartaMes, dañadaMes, totalmes};
+            float[] sumas = {extraDia, primeraDia, segundaDia, terceraDia, cuartaDia, dañadaDia, totalmes};
             //Agregar total recoleccion de cada tipo de fresa
             for (float f : sumas) {
                 celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f), fuenteNormal));
@@ -138,7 +168,6 @@ public class ReporteDeProduccionAnualPorMes {
             }
         }//Agregar fila de totales
         celda = new PdfPCell(new Phrase("Total", fuenteNormal));
-        celda.setColspan(2);
         tabla.addCell(celda);
         float[] sumas = {extraTotal, primeraTotal, segundaTotal, terceraTotal, cuartaTotal, dañadaTotal, total};
         for (float f : sumas) {

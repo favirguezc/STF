@@ -125,4 +125,16 @@ public class Recoleccion implements Serializable {
         this.recolector = recolector;
     }
 
+    public float getTotal() {
+        return extra + primera + segunda + tercera + cuarta + danada;
+    }
+
+    public void sumar(Recoleccion r) {
+        this.extra += r.extra;
+        this.primera += r.primera;
+        this.segunda += r.segunda;
+        this.tercera += r.tercera;
+        this.cuarta += r.cuarta;
+        this.danada += r.danada;
+    }
 }

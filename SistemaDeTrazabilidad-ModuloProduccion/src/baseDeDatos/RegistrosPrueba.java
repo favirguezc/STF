@@ -16,6 +16,7 @@ import modelo.administracion.Lote;
 import modelo.administracion.Persona;
 import modelo.produccion.Recoleccion;
 import pdf.ReporteDeProduccionAnualPorMes;
+import pdf.ReporteDeProduccionMensual;
 
 /**
  *
@@ -26,14 +27,15 @@ public class RegistrosPrueba {
     public static void main(String[] args) {
         //quitarRegistrosRecoleccion();
         //registrosPruebaRecoleccion();
-        new ReporteDeProduccionAnualPorMes(2014, "reporte.pdf");
+        new ReporteDeProduccionAnualPorMes(2014, "reporteAnual.pdf");
+        new ReporteDeProduccionMensual(2014,10, "reporteMensual.pdf", null, null);
     }
 
     public static void registrosPruebaRecoleccion() {
         try {
             RecoleccionControlador controlador = new RecoleccionControlador();
             Persona recolector = new PersonaControlador().buscarPorCedula(1020794235);
-            Lote lote = new LoteControlador().buscar(35);
+            Lote lote = new LoteControlador().buscar(179);
             Date fecha;
             for (int i = 0; i < 200; i++) {
                 fecha = new Date(2014 - 1900, (int) (Math.random() * 12), (int) (Math.random() * 28));

@@ -22,14 +22,17 @@ import interfacesGraficas.produccion.TrabajoIF;
 import interfacesGraficas.produccion.TrampaDeInsectosIF;
 import java.awt.Color;
 import java.beans.PropertyVetoException;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.BusinessBlueSteelSkin;
 import org.jvnet.substance.skin.BusinessSkin;
 import pdf.ReporteDeProduccionAnualPorMes;
+import util.FileTypeFilter;
 
 /**
  *
@@ -82,6 +85,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -385,6 +389,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem13);
 
+        jMenuItem18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem18.setText("Reporte Mensual De Recolección");
+        jMenu1.add(jMenuItem18);
+
+        jMenuItem17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
         jMenuItem17.setText("Reporte Semanal De Recolección");
         jMenu1.add(jMenuItem17);
@@ -393,15 +403,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/website3.png"))); // NOI18N
         jMenu3.setText("Gráficas");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
         jMenuItem14.setText("Gráfica de Producción Mensual por Lote");
         jMenu3.add(jMenuItem14);
 
+        jMenuItem15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
         jMenuItem15.setText("Gráfica de Producción Semanal");
         jMenu3.add(jMenuItem15);
 
+        jMenuItem16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
         jMenuItem16.setText("Gráfica de Producción vs Temperatura");
         jMenu3.add(jMenuItem16);
@@ -521,7 +535,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        new ReporteDeProduccionAnualPorMes(2014, "reporte.pdf");
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.addChoosableFileFilter(new FileTypeFilter(".pdf", "PDF"));
+        fileChooser.setSelectedFile(new File("reporte de recolección anual " + ".pdf"));
+        int returnVal = fileChooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            new ReporteDeProduccionAnualPorMes(2014, fileChooser.getSelectedFile().getAbsolutePath()).crearReporte();
+        }
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
@@ -561,6 +582,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

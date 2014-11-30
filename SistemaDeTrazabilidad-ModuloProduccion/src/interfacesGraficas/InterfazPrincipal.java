@@ -13,6 +13,7 @@ import interfacesGraficas.variablesClimaticas.LluviasIF;
 import dao.util.EntityManagerFactorySingleton;
 import interfacesGraficas.administracion.LoteIF;
 import interfacesGraficas.administracion.PersonaIF;
+import interfacesGraficas.graficas.RecoleccionAnualPorLoteIF;
 import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
@@ -20,19 +21,21 @@ import interfacesGraficas.produccion.InsumoFitosanitarioIF;
 import interfacesGraficas.produccion.RecoleccionIF;
 import interfacesGraficas.produccion.TrabajoIF;
 import interfacesGraficas.produccion.TrampaDeInsectosIF;
+import interfacesGraficas.reportes.ReporteAnual;
+import interfacesGraficas.reportes.ReporteMensual;
+import interfacesGraficas.reportes.ReporteSemanal;
 import java.awt.Color;
 import java.beans.PropertyVetoException;
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.DesktopPaneUI;
+import org.jfree.ui.ApplicationFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.BusinessBlueSteelSkin;
 import org.jvnet.substance.skin.BusinessSkin;
-import pdf.ReporteDeProduccionAnualPorMes;
-import util.FileTypeFilter;
 
 /**
  *
@@ -85,12 +88,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem19 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -196,6 +203,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        panelEscritorio.setBackground(new java.awt.Color(255, 255, 255));
+        panelEscritorio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelEscritorio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout panelEscritorioLayout = new javax.swing.GroupLayout(panelEscritorio);
@@ -381,7 +390,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
-        jMenuItem13.setText("Reporte Anual De Recoleccion");
+        jMenuItem13.setText("Reporte Anual De Recoleccion Por Mes");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -389,14 +398,44 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem13);
 
+        jMenuItem20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem20.setText("Reporte Anual De Recolección Por Semana");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem20);
+
+        jMenuItem21.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem21.setText("Reporte Anual De Recolección Por Día");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem21);
+
         jMenuItem18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
         jMenuItem18.setText("Reporte Mensual De Recolección");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem18);
 
         jMenuItem17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
         jMenuItem17.setText("Reporte Semanal De Recolección");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem17);
 
         jMenuBar2.add(jMenu1);
@@ -407,7 +446,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
-        jMenuItem14.setText("Gráfica de Producción Mensual por Lote");
+        jMenuItem14.setText("Gráfica de Producción Anual por Lote");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem14);
 
         jMenuItem15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -421,6 +465,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem16);
 
         jMenuBar2.add(jMenu3);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/setting.png"))); // NOI18N
+        jMenu6.setText("Opciones");
+        jMenu6.setEnabled(false);
+
+        jMenuItem19.setText("jMenuItem19");
+        jMenu6.add(jMenuItem19);
+
+        jMenuBar2.add(jMenu6);
 
         setJMenuBar(jMenuBar2);
 
@@ -535,15 +588,33 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.addChoosableFileFilter(new FileTypeFilter(".pdf", "PDF"));
-        fileChooser.setSelectedFile(new File("reporte de recolección anual " + ".pdf"));
-        int returnVal = fileChooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            new ReporteDeProduccionAnualPorMes(2014, fileChooser.getSelectedFile().getAbsolutePath()).crearReporte();
-        }
+        new ReporteAnual(this, true, ReporteAnual.POR_MES).setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        new ReporteMensual(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        // TODO add your handling code here:
+        abrirRecoleccionPorLote();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+        new ReporteSemanal(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        // TODO add your handling code here:
+        new ReporteAnual(this, true, ReporteAnual.POR_SEMANA).setVisible(true);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        // TODO add your handling code here:
+        new ReporteAnual(this, true, ReporteAnual.POR_DIA).setVisible(true);
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,9 +622,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     public static void main(String args[]) {
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
+                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
                 JFrame.setDefaultLookAndFeelDecorated(true);
                 SubstanceLookAndFeel.setSkin(new BusinessSkin());
-            } catch (Exception e) {
+                
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             }
             new InterfazPrincipal().setVisible(true);
         });
@@ -572,6 +645,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -583,7 +657,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -684,6 +761,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            javax.swing.plaf.basic.BasicInternalFrameUI ui
+//                    = new javax.swing.plaf.basic.BasicInternalFrameUI(hif);
+//            hif.setUI(ui);
         }
     }
 
@@ -774,6 +854,20 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void abrirRecoleccion() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionIF.class)) {
             RecoleccionIF hif = new RecoleccionIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setSelected(true);
+                //hif.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirRecoleccionPorLote() {
+        if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorLoteIF.class)) {
+            RecoleccionAnualPorLoteIF hif = new RecoleccionAnualPorLoteIF();
             panelEscritorio.add(hif);
             hif.setVisible(true);
             try {

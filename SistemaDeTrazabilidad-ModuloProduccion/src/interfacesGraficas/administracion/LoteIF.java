@@ -9,8 +9,11 @@ import controlador.administracion.LoteControlador;
 import controlador.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 import modelo.administracion.Lote;
 import modelo.administracion.Modulo;
 

@@ -38,17 +38,15 @@ import util.DateTools;
  *
  * @author fredy
  */
-public class ReporteDeProduccionMensual {
+public class ReporteDeProduccionSemanal {
 
-    private int año;
-    private int mes;
+    private Date fecha;
     private String nombreDelArchivo;
     private Persona recolector;
     private Lote lote;
 
-    public ReporteDeProduccionMensual(int año, int mes, String nombreDelArchivo, Persona recolector, Lote lote) {
-        this.año = año;
-        this.mes = mes;
+    public ReporteDeProduccionSemanal(Date fecha, String nombreDelArchivo, Persona recolector, Lote lote) {
+        this.fecha = fecha;
         this.nombreDelArchivo = nombreDelArchivo;
         this.recolector = recolector;
         this.lote = lote;
@@ -72,8 +70,8 @@ public class ReporteDeProduccionMensual {
     }
 
     private Element encabezado() {
-        Paragraph encabezado = new Paragraph("REPORTE MENSUAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
-        Paragraph paragraph = new Paragraph(DateTools.getMes(mes).toUpperCase() + " DE " + año, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph encabezado = new Paragraph("REPORTE SEMANAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph paragraph = new Paragraph(DateTools.getSemana(fecha).toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         encabezado.add(paragraph);
         if (recolector != null) {
@@ -99,12 +97,13 @@ public class ReporteDeProduccionMensual {
     }
 
     private Element tabla() {
-        PdfPTable tabla = new PdfPTable(8);
+        PdfPTable tabla = new PdfPTable(9);
         PdfPCell celda;
         Font fuenteBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.BLACK);
         Font fuenteNormal = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);
         //Agregar encabezados de la tabla
         celda = new PdfPCell(new Phrase("", fuenteBold));
+        celda.setColspan(2);
         celda.setRowspan(2);
         tabla.addCell(celda);
         String[] encabezados = {"Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Dañada", "Total"};
@@ -113,7 +112,6 @@ public class ReporteDeProduccionMensual {
             celda.setRowspan(2);
             tabla.addCell(celda);
         }
-        int dias = new GregorianCalendar(año, mes, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
         float extraDia,
                 extraTotal = 0,
                 primeraDia,
@@ -129,9 +127,11 @@ public class ReporteDeProduccionMensual {
                 total = 0,
                 totalmes;
         //Para cada mes se agrega una columna
-        for (int i = 1; i <= dias; i++) {
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(DateTools.getPrimerDiaDeLaSemana(fecha));
+        for (int i = 1; i <= 7; i++) {
             //Sumar recoleccion de cada tipo de fresa
-            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, lote, new Date(año - 1900, mes, i), null);
+            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, lote, cal.getTime(), null);
             extraDia = r.getExtra() / 500;
             extraTotal += extraDia;
             primeraDia = r.getPrimera() / 500;
@@ -147,7 +147,8 @@ public class ReporteDeProduccionMensual {
             totalmes = r.getTotal() / 500;
             total += totalmes;
 
-            celda = new PdfPCell(new Phrase("" + i, fuenteNormal));
+            celda = new PdfPCell(new Phrase(DateTools.getDia(i) + " " + cal.get(Calendar.DAY_OF_MONTH), fuenteNormal));
+            celda.setColspan(2);
             celda.setRowspan(2);
             tabla.addCell(celda);
             float[] sumas = {extraDia, primeraDia, segundaDia, terceraDia, cuartaDia, dañadaDia, totalmes};
@@ -168,8 +169,11 @@ public class ReporteDeProduccionMensual {
                 }
                 tabla.addCell(celda);
             }
-        }//Agregar fila de totales
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        //Agregar fila de totales
         celda = new PdfPCell(new Phrase("Total", fuenteNormal));
+        celda.setColspan(2);
         tabla.addCell(celda);
         float[] sumas = {extraTotal, primeraTotal, segundaTotal, terceraTotal, cuartaTotal, dañadaTotal, total};
         for (float f : sumas) {
@@ -193,4 +197,5 @@ public class ReporteDeProduccionMensual {
         } catch (IOException ex) {
         }
     }
+
 }

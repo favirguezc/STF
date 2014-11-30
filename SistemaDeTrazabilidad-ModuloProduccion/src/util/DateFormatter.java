@@ -15,6 +15,7 @@ import java.util.Locale;
  */
 public class DateFormatter {
 
+    private static SimpleDateFormat dateFormatExtraShort = new SimpleDateFormat("MMM dd", new Locale("es", "CO"));
     private static SimpleDateFormat dateFormatShort = new SimpleDateFormat("MMM dd yyyy", new Locale("es", "CO"));
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", new Locale("es", "CO"));
     private static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
@@ -26,8 +27,12 @@ public class DateFormatter {
     public static String formatTime(Date d) {
         return timeFormat.format(d);
     }
-    
-    public static String formatDateLong(Date d){
+
+    public static String formatDateLong(Date d) {
         return dateFormat.format(d);
+    }
+
+    public static String formatDateShort(Date d) {
+        return dateFormatExtraShort.format(d);
     }
 }

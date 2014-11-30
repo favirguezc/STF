@@ -125,6 +125,10 @@ public class Recoleccion implements Serializable {
         this.recolector = recolector;
     }
 
+    public float getBuena() {
+        return extra + primera + segunda + tercera + cuarta;
+    }
+
     public float getTotal() {
         return extra + primera + segunda + tercera + cuarta + danada;
     }

@@ -122,17 +122,17 @@ public class ReporteDeProduccionAnual {
                 r = new RecoleccionControlador().sumarRegistros(null, null, c.getTime(), null);
             }
             //Se dividen por 500 para convertirlos a libras
-            extraPeriodo = r.getExtra() / 500;
+            extraPeriodo = r.getExtraGramos() / 500;
             extraTotal += extraPeriodo;
-            primeraPeriodo = r.getPrimera() / 500;
+            primeraPeriodo = r.getPrimeraGramos() / 500;
             primeraTotal += primeraPeriodo;
-            segundaPeriodo = r.getSegunda() / 500;
+            segundaPeriodo = r.getSegundaGramos() / 500;
             segundaTotal += segundaPeriodo;
-            terceraPeriodo = r.getTercera() / 500;
+            terceraPeriodo = r.getTerceraGramos() / 500;
             terceraTotal += terceraPeriodo;
-            cuartaPeriodo = r.getCuarta() / 500;
+            cuartaPeriodo = r.getCuartaGramos() / 500;
             cuartaTotal += cuartaPeriodo;
-            dañadaPeriodo = r.getDanada() / 500;
+            dañadaPeriodo = r.getDanadaGramos() / 500;
             dañadaTotal += dañadaPeriodo;
             totalmes = r.getTotal() / 500;
             total += totalmes;

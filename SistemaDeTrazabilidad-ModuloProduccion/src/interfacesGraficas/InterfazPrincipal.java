@@ -14,6 +14,8 @@ import dao.util.EntityManagerFactorySingleton;
 import interfacesGraficas.administracion.LoteIF;
 import interfacesGraficas.administracion.PersonaIF;
 import interfacesGraficas.graficas.RecoleccionAnualPorLoteIF;
+import interfacesGraficas.graficas.RecoleccionAnualPorMesIF;
+import interfacesGraficas.graficas.RecoleccionAnualPorSemanaIF;
 import interfacesGraficas.produccion.AplicacionFitosanitariaIF;
 import interfacesGraficas.produccion.MonitoreoDeEnfermedadesIF;
 import interfacesGraficas.produccion.MonitoreoDePlagasIF;
@@ -24,16 +26,16 @@ import interfacesGraficas.produccion.TrampaDeInsectosIF;
 import interfacesGraficas.reportes.ReporteAnual;
 import interfacesGraficas.reportes.ReporteMensual;
 import interfacesGraficas.reportes.ReporteSemanal;
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.SplashScreen;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.DesktopPaneUI;
-import org.jfree.ui.ApplicationFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.BusinessSkin;
 
@@ -48,7 +50,32 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      */
     public InterfazPrincipal() {
         initComponents();
-        comenzarConexionBaseDeDatos();
+        comprobarConexion();
+    }
+
+    public static void main(String args[]) {
+        Splash splash = new Splash();
+        splash.setVisible(true);
+        splash.set("Cargando base de datos", 0, 0);
+        try {
+            EntityManagerFactorySingleton.getEntityManagerFactory();
+        } catch (Exception e) {
+        }
+        splash.set("Comprobando registros", 50, 1000);
+        new RolControlador().comprobarRegistros();
+        splash.set("Comprobando registros", 70, 350);
+        new LaborControlador().comprobarRegistros();
+        splash.set("Inicializando componentes", 90, 200);
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            try {
+                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                JFrame.setDefaultLookAndFeelDecorated(true);
+                SubstanceLookAndFeel.setSkin(new BusinessSkin());
+                new InterfazPrincipal().setVisible(true);
+            } catch (Exception e) {
+            }
+        });
+        splash.dispose();
     }
 
     /**
@@ -95,9 +122,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -456,8 +482,23 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
-        jMenuItem15.setText("Gráfica de Producción Semanal");
+        jMenuItem15.setText("Gráfica de Producción Anual por Semana");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem15);
+
+        jMenuItem19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
+        jMenuItem19.setText("Gráfica de Producción Anual por Mes");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem19);
 
         jMenuItem16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
@@ -465,15 +506,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem16);
 
         jMenuBar2.add(jMenu3);
-
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/setting.png"))); // NOI18N
-        jMenu6.setText("Opciones");
-        jMenu6.setEnabled(false);
-
-        jMenuItem19.setText("jMenuItem19");
-        jMenu6.add(jMenuItem19);
-
-        jMenuBar2.add(jMenu6);
 
         setJMenuBar(jMenuBar2);
 
@@ -598,7 +630,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionPorLote();
+        abrirRecoleccionAnualPorLote();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -616,22 +648,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         new ReporteAnual(this, true, ReporteAnual.POR_DIA).setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            try {
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                JFrame.setDefaultLookAndFeelDecorated(true);
-                SubstanceLookAndFeel.setSkin(new BusinessSkin());
-                
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            }
-            new InterfazPrincipal().setVisible(true);
-        });
-    }
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        abrirRecoleccionAnualPorSemana();
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+        abrirRecoleccionAnualPorMes();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -645,7 +670,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -680,18 +704,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         }
         return false;
-    }
-
-    private void comenzarConexionBaseDeDatos() {
-        try {
-            EntityManagerFactorySingleton.getEntityManagerFactory();
-            jCheckBox1.setSelected(true);
-        } catch (Exception ex) {
-            jCheckBox1.setSelected(false);
-            jCheckBox1.setForeground(Color.RED);
-        }
-        new RolControlador().comprobarRegistros();
-        new LaborControlador().comprobarRegistros();
     }
 
     private void abrirTemperatura() {
@@ -865,7 +877,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionPorLote() {
+    private void abrirRecoleccionAnualPorLote() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorLoteIF.class)) {
             RecoleccionAnualPorLoteIF hif = new RecoleccionAnualPorLoteIF();
             panelEscritorio.add(hif);
@@ -876,6 +888,44 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    private void abrirRecoleccionAnualPorSemana() {
+        if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorSemanaIF.class)) {
+            RecoleccionAnualPorSemanaIF hif = new RecoleccionAnualPorSemanaIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setMaximum(true);
+                hif.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void abrirRecoleccionAnualPorMes() {
+        if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesIF.class)) {
+            RecoleccionAnualPorMesIF hif = new RecoleccionAnualPorMesIF();
+            panelEscritorio.add(hif);
+            hif.setVisible(true);
+            try {
+                hif.setMaximum(true);
+                hif.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void comprobarConexion() {
+        try {
+            EntityManagerFactorySingleton.getEntityManagerFactory();
+            jCheckBox1.setSelected(true);
+        } catch (Exception ex) {
+            jCheckBox1.setSelected(false);
+            jCheckBox1.setForeground(Color.RED);
         }
     }
 }

@@ -26,6 +26,12 @@ public class DateTools {
     public static String getSemanaCorta(Date fecha) {
         return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDateShort(getUltimoDiaDeLaSemana(fecha));
     }
+    
+    public static int getNumeroDeSemana(Date fecha){
+        Calendar c = GregorianCalendar.getInstance();
+        c.setTime(fecha);
+        return c.get(Calendar.WEEK_OF_YEAR);
+    }
 
     public static Date getPrimerDiaDeLaSemana(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();

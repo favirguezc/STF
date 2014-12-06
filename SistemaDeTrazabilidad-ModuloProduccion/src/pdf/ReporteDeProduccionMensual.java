@@ -132,17 +132,17 @@ public class ReporteDeProduccionMensual {
         for (int i = 1; i <= dias; i++) {
             //Sumar recoleccion de cada tipo de fresa
             Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, lote, new Date(año - 1900, mes, i), null);
-            extraDia = r.getExtra() / 500;
+            extraDia = r.getExtraGramos() / 500;
             extraTotal += extraDia;
-            primeraDia = r.getPrimera() / 500;
+            primeraDia = r.getPrimeraGramos() / 500;
             primeraTotal += primeraDia;
-            segundaDia = r.getSegunda() / 500;
+            segundaDia = r.getSegundaGramos() / 500;
             segundaTotal += segundaDia;
-            terceraDia = r.getTercera() / 500;
+            terceraDia = r.getTerceraGramos() / 500;
             terceraTotal += terceraDia;
-            cuartaDia = r.getCuarta() / 500;
+            cuartaDia = r.getCuartaGramos() / 500;
             cuartaTotal += cuartaDia;
-            dañadaDia = r.getDanada() / 500;
+            dañadaDia = r.getDanadaGramos() / 500;
             dañadaTotal += dañadaDia;
             totalmes = r.getTotal() / 500;
             total += totalmes;

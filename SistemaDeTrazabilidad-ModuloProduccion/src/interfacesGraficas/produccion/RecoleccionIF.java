@@ -571,12 +571,12 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setFecha(fecha);
             registroSeleccionado.setLote(lote);
             registroSeleccionado.setRecolector(recolector);
-            registroSeleccionado.setExtra(extra);
-            registroSeleccionado.setPrimera(primera);
-            registroSeleccionado.setSegunda(segunda);
-            registroSeleccionado.setTercera(tercera);
-            registroSeleccionado.setCuarta(cuarta);
-            registroSeleccionado.setDanada(dañada);
+            registroSeleccionado.setExtraGramos(extra);
+            registroSeleccionado.setPrimeraGramos(primera);
+            registroSeleccionado.setSegundaGramos(segunda);
+            registroSeleccionado.setTerceraGramos(tercera);
+            registroSeleccionado.setCuartaGramos(cuarta);
+            registroSeleccionado.setDanadaGramos(dañada);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -724,12 +724,12 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             fechaDateChooserCombo.setCurrent(c);
             loteComboBox.setSelectedItem(registroSeleccionado.getLote());
             recolectorComboBox.setSelectedItem(registroSeleccionado.getRecolector());
-            extraFloatField.setFloat(registroSeleccionado.getExtra());
-            primeraFloatField.setFloat(registroSeleccionado.getPrimera());
-            segundaFloatField.setFloat(registroSeleccionado.getSegunda());
-            terceraFloatField.setFloat(registroSeleccionado.getTercera());
-            cuartaFloatField.setFloat(registroSeleccionado.getCuarta());
-            dañadaFloatField.setFloat(registroSeleccionado.getDanada());
+            extraFloatField.setFloat(registroSeleccionado.getExtraGramos());
+            primeraFloatField.setFloat(registroSeleccionado.getPrimeraGramos());
+            segundaFloatField.setFloat(registroSeleccionado.getSegundaGramos());
+            terceraFloatField.setFloat(registroSeleccionado.getTerceraGramos());
+            cuartaFloatField.setFloat(registroSeleccionado.getCuartaGramos());
+            dañadaFloatField.setFloat(registroSeleccionado.getDanadaGramos());
         }
     }
 
@@ -755,12 +755,12 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                 l.getLote(),
                 DateFormatter.formatDate(l.getFecha()),
                 l.getRecolector(),
-                l.getExtra(),
-                l.getPrimera(),
-                l.getSegunda(),
-                l.getTercera(),
-                l.getCuarta(),
-                l.getDanada()};
+                l.getExtraGramos(),
+                l.getPrimeraGramos(),
+                l.getSegundaGramos(),
+                l.getTerceraGramos(),
+                l.getCuartaGramos(),
+                l.getDanadaGramos()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }

@@ -23,12 +23,12 @@ public class Recoleccion implements Serializable {
     private Date fecha;
     @ManyToOne
     private Persona recolector;
-    private float extra;
-    private float primera;
-    private float segunda;
-    private float tercera;
-    private float cuarta;
-    private float danada;
+    private float extraGramos;
+    private float primeraGramos;
+    private float segundaGramos;
+    private float terceraGramos;
+    private float cuartaGramos;
+    private float danadaGramos;
 
     public Recoleccion() {
     }
@@ -36,12 +36,12 @@ public class Recoleccion implements Serializable {
     public Recoleccion(Lote lote, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float danada, Persona recolector) {
         this.lote = lote;
         this.fecha = fecha;
-        this.extra = extra;
-        this.primera = primera;
-        this.segunda = segunda;
-        this.tercera = tercera;
-        this.cuarta = cuarta;
-        this.danada = danada;
+        this.extraGramos = extra;
+        this.primeraGramos = primera;
+        this.segundaGramos = segunda;
+        this.terceraGramos = tercera;
+        this.cuartaGramos = cuarta;
+        this.danadaGramos = danada;
         this.recolector = recolector;
     }
 
@@ -69,52 +69,52 @@ public class Recoleccion implements Serializable {
         this.fecha = fecha;
     }
 
-    public float getExtra() {
-        return extra;
+    public float getExtraGramos() {
+        return extraGramos;
     }
 
-    public void setExtra(float extra) {
-        this.extra = extra;
+    public void setExtraGramos(float extraGramos) {
+        this.extraGramos = extraGramos;
     }
 
-    public float getPrimera() {
-        return primera;
+    public float getPrimeraGramos() {
+        return primeraGramos;
     }
 
-    public void setPrimera(float primera) {
-        this.primera = primera;
+    public void setPrimeraGramos(float primeraGramos) {
+        this.primeraGramos = primeraGramos;
     }
 
-    public float getSegunda() {
-        return segunda;
+    public float getSegundaGramos() {
+        return segundaGramos;
     }
 
-    public void setSegunda(float segunda) {
-        this.segunda = segunda;
+    public void setSegundaGramos(float segundaGramos) {
+        this.segundaGramos = segundaGramos;
     }
 
-    public float getTercera() {
-        return tercera;
+    public float getTerceraGramos() {
+        return terceraGramos;
     }
 
-    public void setTercera(float tercera) {
-        this.tercera = tercera;
+    public void setTerceraGramos(float terceraGramos) {
+        this.terceraGramos = terceraGramos;
     }
 
-    public float getCuarta() {
-        return cuarta;
+    public float getCuartaGramos() {
+        return cuartaGramos;
     }
 
-    public void setCuarta(float cuarta) {
-        this.cuarta = cuarta;
+    public void setCuartaGramos(float cuartaGramos) {
+        this.cuartaGramos = cuartaGramos;
     }
 
-    public float getDanada() {
-        return danada;
+    public float getDanadaGramos() {
+        return danadaGramos;
     }
 
-    public void setDanada(float danada) {
-        this.danada = danada;
+    public void setDanadaGramos(float danadaGramos) {
+        this.danadaGramos = danadaGramos;
     }
 
     public Persona getRecolector() {
@@ -126,19 +126,19 @@ public class Recoleccion implements Serializable {
     }
 
     public float getBuena() {
-        return extra + primera + segunda + tercera + cuarta;
+        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos;
     }
 
     public float getTotal() {
-        return extra + primera + segunda + tercera + cuarta + danada;
+        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos + danadaGramos;
     }
 
     public void sumar(Recoleccion r) {
-        this.extra += r.extra;
-        this.primera += r.primera;
-        this.segunda += r.segunda;
-        this.tercera += r.tercera;
-        this.cuarta += r.cuarta;
-        this.danada += r.danada;
+        this.extraGramos += r.extraGramos;
+        this.primeraGramos += r.primeraGramos;
+        this.segundaGramos += r.segundaGramos;
+        this.terceraGramos += r.terceraGramos;
+        this.cuartaGramos += r.cuartaGramos;
+        this.danadaGramos += r.danadaGramos;
     }
 }

@@ -25,13 +25,13 @@ public class TemperaturaControlador {
         dao = new TemperaturaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Temperatura nuevo(Date time, Date date, Date date0, float parseFloat, float parseFloat0) {
+    public Temperatura nuevo(Date fecha, Date horaMax, Date horaMin, float tempMax, float tempMin) {
         Temperatura nueva = new Temperatura();
-        nueva.setFecha(time);
-        nueva.setHoraMax(date);
-        nueva.setHoraMin(date0);
-        nueva.setTempMax(parseFloat);
-        nueva.setTempMin(parseFloat0);
+        nueva.setFecha(fecha);
+        nueva.setHoraMax(horaMax);
+        nueva.setHoraMin(horaMin);
+        nueva.setTempMax(tempMax);
+        nueva.setTempMin(tempMin);
         return nueva;
     }
 

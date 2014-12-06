@@ -360,8 +360,25 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/assets/16x16/ascending7.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gr&#xe1;fica de Producci&#xf3;n Semanal"/>
+                <Property name="text" type="java.lang.String" value="Gr&#xe1;fica de Producci&#xf3;n Anual por Semana"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem15ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/assets/16x16/ascending7.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gr&#xe1;fica de Producci&#xf3;n Anual por Mes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem19ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
               <Properties>
@@ -372,22 +389,6 @@
                   <Image iconType="3" name="/assets/16x16/ascending7.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gr&#xe1;fica de Producci&#xf3;n vs Temperatura"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu6">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/assets/16x16/setting.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Opciones"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem19"/>
               </Properties>
             </MenuItem>
           </SubComponents>

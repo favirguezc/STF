@@ -841,6 +841,11 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     }
 
     private void revisarDatosObligatorios() {
+        if(productoComboBox.getItemCount() == 0){
+            JOptionPane.showMessageDialog(null, "No hay registro de insumos fitosanitarios en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
+            deshabilitarForma();
+            return;
+        }
         if (loteComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "No hay registro de lote en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();

@@ -51,14 +51,27 @@ public class TrampaDeInsectosControlador {
     }
 
     public boolean validar(TrampaDeInsectos t) {
-        if(t.getNombre()==null){
+        if (t.getNombre() == null) {
             JOptionPane.showMessageDialog(null, "El campo nombre no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if(t.getEspecie()==null){
+        if (t.getEspecie() == null) {
             JOptionPane.showMessageDialog(null, "El campo especie no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;
+    }
+
+    public int contar(Date fecha1, Date fecha2) {
+        int suma = 0;
+        List<TrampaDeInsectos> lista = leerLista(fecha1, fecha2);
+        for (TrampaDeInsectos t : lista) {
+            suma += t.getIndividuos();
+        }
+        return suma;
+    }
+
+    private List<TrampaDeInsectos> leerLista(Date fecha1, Date fecha2) {
+        return dao.findTrampaDeInsectosEntities(fecha1, fecha2);
     }
 }

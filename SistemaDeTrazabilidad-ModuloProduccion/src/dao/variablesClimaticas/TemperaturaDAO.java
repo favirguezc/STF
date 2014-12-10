@@ -158,7 +158,6 @@ public class TemperaturaDAO implements Serializable {
 
     public List<Temperatura> findTemperaturaEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
-
         try {
             TypedQuery<Temperatura> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Temperatura.class
             );

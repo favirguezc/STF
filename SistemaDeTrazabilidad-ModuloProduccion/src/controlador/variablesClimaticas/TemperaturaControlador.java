@@ -70,4 +70,27 @@ public class TemperaturaControlador {
         return dao.findTemperaturaEntities(esteMes, siguienteMes);
     }
 
+    public float calcularPromedioMax(Date fecha1, Date fecha2) {
+        float promedio = 0;
+        List<Temperatura> buscarLista = buscarLista(fecha1, fecha2);
+        for (Temperatura t : buscarLista) {
+            promedio += t.getTempMax();
+        }
+        if (buscarLista.size() > 1) {
+            promedio = promedio / buscarLista.size();
+        }
+        return promedio;
+    }
+
+    public float calcularPromedioMin(Date fecha1, Date fecha2) {
+        float promedio = 0;
+        List<Temperatura> buscarLista = buscarLista(fecha1, fecha2);
+        for (Temperatura t : buscarLista) {
+            promedio += t.getTempMin();
+        }
+        if (buscarLista.size() > 1) {
+            promedio = promedio / buscarLista.size();
+        }
+        return promedio;
+    }
 }

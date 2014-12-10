@@ -7,14 +7,18 @@ package dao.produccion;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.TrampaDeInsectos;
+import modelo.variablesClimaticas.Temperatura;
 
 /**
  *
@@ -134,5 +138,20 @@ public class TrampaDeInsectosDAO implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<TrampaDeInsectos> findTrampaDeInsectosEntities(Date fecha1, Date fecha2) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<TrampaDeInsectos> query = em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", TrampaDeInsectos.class
+            );
+            query.setParameter(
+                    "fecha1", fecha1, TemporalType.DATE);
+            query.setParameter(
+                    "fecha2", fecha2, TemporalType.DATE);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -392,7 +392,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setNombre(nombre);
             registroSeleccionado.setEspecie(especie);
             registroSeleccionado.setIndividuos(individuos);
-            registroSeleccionado.setCambio(cambio);
+            registroSeleccionado.setCambioDePegante(cambio);
             registroSeleccionado.setObservaciones(observaciones);
             registroSeleccionado.setAsistente(asistente);
             registroSeleccionado.setProductor(productor);
@@ -466,7 +466,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             nombreNameField.setText(registroSeleccionado.getNombre());
             especieNameField.setText(registroSeleccionado.getEspecie());
             individuosLongField.setInteger(registroSeleccionado.getIndividuos());
-            cambioBooleanComboBox.setSelected(registroSeleccionado.isCambio());
+            cambioBooleanComboBox.setSelected(registroSeleccionado.isCambioDePegante());
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             asistenteComboBox.setSelectedItem(registroSeleccionado.getAsistente());
             productorComboBox.setSelectedItem(registroSeleccionado.getProductor());
@@ -483,7 +483,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                 l.getNombre(),
                 l.getEspecie(),
                 l.getIndividuos(),
-                l.isCambio(),
+                l.isCambioDePegante(),
                 l.getObservaciones(),
                 l.getAsistente(),
                 l.getProductor()};

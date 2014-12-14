@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrampadeinsectosViewDlg" widgetVar="TrampadeinsectosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrampadeinsectosTitle}">
+            <h:form id="TrampadeinsectosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trampadeinsectosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_id}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.id}" title="#{bundle.ViewTrampadeinsectosTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_cambiodepegante}"/>
+                        <p:selectBooleanCheckbox value="#{trampadeinsectosController.selected.cambiodepegante}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_especie}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.especie}" title="#{bundle.ViewTrampadeinsectosTitle_especie}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_fecha}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.fecha}" title="#{bundle.ViewTrampadeinsectosTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_individuos}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.individuos}" title="#{bundle.ViewTrampadeinsectosTitle_individuos}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_nombre}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.nombre}" title="#{bundle.ViewTrampadeinsectosTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_observaciones}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.observaciones}" title="#{bundle.ViewTrampadeinsectosTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_asistenteId}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.asistenteId}" title="#{bundle.ViewTrampadeinsectosTitle_asistenteId}"/>
+                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_productorId}"/>
+                        <h:outputText value="#{trampadeinsectosController.selected.productorId}" title="#{bundle.ViewTrampadeinsectosTitle_productorId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrampadeinsectosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

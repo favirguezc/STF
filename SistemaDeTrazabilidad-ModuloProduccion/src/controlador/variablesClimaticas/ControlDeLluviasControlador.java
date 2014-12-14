@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import modelo.variablesClimaticas.ControlDeLluvias;
+import modelo.variablesClimaticas.Lluvia;
 
 /**
  *
@@ -27,11 +27,11 @@ public class ControlDeLluviasControlador {
         dao = new ControlDeLluviasDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public ControlDeLluvias nuevo(Date date, float mm) {
-        return new ControlDeLluvias(date, mm);
+    public Lluvia nuevo(Date date, float mm) {
+        return new Lluvia(date, mm);
     }
 
-    public boolean validar(ControlDeLluvias t, Boolean nueva) {
+    public boolean validar(Lluvia t, Boolean nueva) {
         if (nueva) {
             try {
                 if (dao.findControlDeLluvias(t.getFecha()) != null) {
@@ -44,7 +44,7 @@ public class ControlDeLluviasControlador {
         return true;
     }
 
-    public ControlDeLluvias buscar(Date fecha) throws Exception{
+    public Lluvia buscar(Date fecha) throws Exception{
         return dao.findControlDeLluvias(fecha);
     }
 
@@ -52,15 +52,15 @@ public class ControlDeLluviasControlador {
         dao.destroy(id);
     }
 
-    public void guardar(ControlDeLluvias nueva) {
+    public void guardar(Lluvia nueva) {
         dao.create(nueva);
     }
 
-    public void editar(ControlDeLluvias seleccionada) throws Exception {
+    public void editar(Lluvia seleccionada) throws Exception {
         dao.edit(seleccionada);
     }
 
-    public List<ControlDeLluvias> buscarLista(Date esteMes, Date siguienteMes) {
+    public List<Lluvia> buscarLista(Date esteMes, Date siguienteMes) {
         return dao.findControlDeLluviasEntities(esteMes, siguienteMes);
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RolpersonaEditDlg" widgetVar="RolpersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRolpersonaTitle}">
+            <h:form id="RolpersonaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rolpersonaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{rolpersonaController.selected.id}" title="#{bundle.EditRolpersonaTitle_id}" required="true" requiredMessage="#{bundle.EditRolpersonaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{rolpersonaController.selected.contrasena}" title="#{bundle.EditRolpersonaTitle_contrasena}" />
+                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_personaId}" for="personaId" />
+                        <p:selectOneMenu id="personaId" value="#{rolpersonaController.selected.personaId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="personaIdItem"
+                                           itemValue="#{personaIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_rolId}" for="rolId" />
+                        <p:selectOneMenu id="rolId" value="#{rolpersonaController.selected.rolId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="rolIdItem"
+                                           itemValue="#{rolIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rolpersonaController.update}" value="#{bundle.Save}" update="display,:RolpersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolpersonaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RolpersonaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

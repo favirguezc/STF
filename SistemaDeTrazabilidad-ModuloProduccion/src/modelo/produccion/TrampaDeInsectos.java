@@ -3,6 +3,7 @@ package modelo.produccion;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,18 +18,14 @@ public class TrampaDeInsectos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Basic
+    @Column(nullable = false)
     private String nombre;
-    @Basic
+    @Column(nullable = false)
     private String especie;
-    @Basic
     private int individuos;
-    @Basic
-    private boolean cambio;
-    @Basic
+    private boolean cambioDePegante;
     private String observaciones;
     @ManyToOne
     private Persona asistente;
@@ -43,7 +40,7 @@ public class TrampaDeInsectos implements Serializable {
         this.nombre = nombre;
         this.especie = especie;
         this.individuos = individuos;
-        this.cambio = cambio;
+        this.cambioDePegante = cambio;
         this.observaciones = observaciones;
         this.asistente = asistente;
         this.productor = productor;
@@ -89,12 +86,12 @@ public class TrampaDeInsectos implements Serializable {
         this.individuos = individuos;
     }
 
-    public boolean isCambio() {
-        return cambio;
+    public boolean isCambioDePegante() {
+        return cambioDePegante;
     }
 
-    public void setCambio(boolean cambio) {
-        this.cambio = cambio;
+    public void setCambioDePegante(boolean cambioDePegante) {
+        this.cambioDePegante = cambioDePegante;
     }
 
     public String getObservaciones() {

@@ -17,37 +17,24 @@ public class MonitoreoDePlagas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @Basic
     @ManyToOne
     private Modulo modulo;
-    @Basic
     private int aranita;
-    @Basic
     private int thrips;
-    @Basic
     private boolean cyclamen;
-    @Basic
     private boolean chisas;
-    @Basic
     private boolean babosas;
-    @Basic
     private String otro;
-    @Basic
-    private boolean otrov;
-    @Basic
     private boolean flor;
-    @Basic
     private boolean fruto;
-    @Basic
     private int coronas;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
     public MonitoreoDePlagas() {
     }
 
-    public MonitoreoDePlagas(Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
+    public MonitoreoDePlagas(Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean flor, boolean fruto, int coronas, Date fecha) {
         this.modulo = modulo;
         this.aranita = aranita;
         this.thrips = thrips;
@@ -55,7 +42,6 @@ public class MonitoreoDePlagas implements Serializable {
         this.chisas = chisas;
         this.babosas = babosas;
         this.otro = otro;
-        this.otrov = otrov;
         this.flor = flor;
         this.fruto = fruto;
         this.coronas = coronas;
@@ -124,14 +110,6 @@ public class MonitoreoDePlagas implements Serializable {
 
     public void setOtro(String otro) {
         this.otro = otro;
-    }
-
-    public boolean isOtrov() {
-        return otrov;
-    }
-
-    public void setOtrov(boolean otrov) {
-        this.otrov = otrov;
     }
 
     public boolean isFlor() {

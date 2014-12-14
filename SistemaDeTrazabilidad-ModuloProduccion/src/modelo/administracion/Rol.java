@@ -1,7 +1,7 @@
 package modelo.administracion;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,17 +13,16 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
+    @Column(unique = true)
     private String nombre;
-    @Basic
-    private boolean exigeContrasena;
+    private boolean contrasenaNecesaria;
 
     public Rol() {
     }
 
     public Rol(String rol, boolean exigeContraseña) {
         this.nombre = rol;
-        this.exigeContrasena = exigeContraseña;
+        this.contrasenaNecesaria = exigeContraseña;
     }
 
     public String getNombre() {
@@ -42,12 +41,12 @@ public class Rol implements Serializable {
         this.id = id;
     }
 
-    public boolean isExigeContrasena() {
-        return exigeContrasena;
+    public boolean isContrasenaNecesaria() {
+        return contrasenaNecesaria;
     }
 
-    public void setExigeContrasena(boolean exigeContrasena) {
-        this.exigeContrasena = exigeContrasena;
+    public void setContrasenaNecesaria(boolean contrasenaNecesaria) {
+        this.contrasenaNecesaria = contrasenaNecesaria;
     }
 
     @Override

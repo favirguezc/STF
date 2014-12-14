@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MonitoreodeplagasViewDlg" widgetVar="MonitoreodeplagasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitoreodeplagasTitle}">
+            <h:form id="MonitoreodeplagasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{monitoreodeplagasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_id}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.id}" title="#{bundle.ViewMonitoreodeplagasTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_aranita}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.aranita}" title="#{bundle.ViewMonitoreodeplagasTitle_aranita}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_babosas}"/>
+                        <p:selectBooleanCheckbox value="#{monitoreodeplagasController.selected.babosas}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_chisas}"/>
+                        <p:selectBooleanCheckbox value="#{monitoreodeplagasController.selected.chisas}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_coronas}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.coronas}" title="#{bundle.ViewMonitoreodeplagasTitle_coronas}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_cyclamen}"/>
+                        <p:selectBooleanCheckbox value="#{monitoreodeplagasController.selected.cyclamen}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_fecha}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.fecha}" title="#{bundle.ViewMonitoreodeplagasTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_flor}"/>
+                        <p:selectBooleanCheckbox value="#{monitoreodeplagasController.selected.flor}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_fruto}"/>
+                        <p:selectBooleanCheckbox value="#{monitoreodeplagasController.selected.fruto}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_otro}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.otro}" title="#{bundle.ViewMonitoreodeplagasTitle_otro}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreodeplagasLabel_thrips}"/>
+                        <h:outputText value="#{monitoreodeplagasController.selected.thrips}" title="#{bundle.ViewMonitoreodeplagasTitle_thrips}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitoreodeplagasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

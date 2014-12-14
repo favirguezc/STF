@@ -189,7 +189,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
-            datos.addValue(sumarRegistros.getBuena() / 500, "Buena", (i + 1) + "");
+            datos.addValue(sumarRegistros.getBuenaGramos() / 500, "Buena", (i + 1) + "");
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datos;
@@ -206,7 +206,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             llave = "Semana "+(i + 1);
-            valor = (double)new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2).getBuena()/ 500;
+            valor = (double)new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2).getBuenaGramos()/ 500;
             datos.setValue(llave, valor);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }

@@ -10,7 +10,8 @@ import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.InsumoFitosanitario;
+import modelo.produccion.Insumo;
+import modelo.produccion.Unidades;
 import util.TableColumnAdjuster;
 
 /**
@@ -22,9 +23,9 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
     /**
      * Creates new form InsumoFitosanitarioIF
      */
-    private InsumoFitosanitario registroSeleccionado = null;
+    private Insumo registroSeleccionado = null;
     private InsumoFitosanitarioControlador controlador;
-    private List<InsumoFitosanitario> lista;
+    private List<Insumo> lista;
 
     public InsumoFitosanitarioIF() {
         initComponents();
@@ -266,7 +267,7 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No hay un registro seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             String nombre = (String) principalTable.getValueAt(principalTable.getSelectedRow(), 0);
-            for (InsumoFitosanitario pf : lista) {
+            for (Insumo pf : lista) {
                 if (pf.getNombre().equals(nombre)) {
                     registroSeleccionado = pf;
                     break;
@@ -276,7 +277,7 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
                 JOptionPane.showMessageDialog(null, "El registro ya no existe.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
-            }catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "El registro tiene datos relacionados.", "Error al eliminar", JOptionPane.INFORMATION_MESSAGE);
             }
             registroSeleccionado = null;
@@ -292,7 +293,7 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No hay un registro seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             String nombre = (String) principalTable.getValueAt(principalTable.getSelectedRow(), 0);
-            for (InsumoFitosanitario pf : lista) {
+            for (Insumo pf : lista) {
                 if (pf.getNombre().equals(nombre)) {
                     registroSeleccionado = pf;
                     break;
@@ -307,7 +308,10 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         boolean transacionRealizada = false;
         if (registroSeleccionado == null) {
-            InsumoFitosanitario nuevo = controlador.nuevo(nombreTextField.getText(), ingredienteTextField.getText(), (String) unidadesComboBox.getSelectedItem());
+            Insumo nuevo = controlador.nuevo(
+                    nombreTextField.getText(),
+                    ingredienteTextField.getText(),
+                    (Unidades) unidadesComboBox.getSelectedItem());
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;
@@ -315,7 +319,7 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         } else {
             registroSeleccionado.setNombre(nombreTextField.getText());
             registroSeleccionado.setIngredienteActivo(ingredienteTextField.getText());
-            registroSeleccionado.setUnidades((String) unidadesComboBox.getSelectedItem());
+            registroSeleccionado.setUnidades((Unidades) unidadesComboBox.getSelectedItem());
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -375,7 +379,7 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista();
-        for (InsumoFitosanitario l : lista) {
+        for (Insumo l : lista) {
             Object[] row = {l.getNombre(), l.getIngredienteActivo(), l.getUnidades()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }

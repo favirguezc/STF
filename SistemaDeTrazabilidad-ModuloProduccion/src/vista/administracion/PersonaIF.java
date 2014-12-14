@@ -13,7 +13,9 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.administracion.GrupoSanguineo;
 import modelo.administracion.Persona;
+import modelo.administracion.RH;
 import modelo.administracion.Rol;
 import modelo.administracion.RolPersona;
 import util.TableColumnAdjuster;
@@ -541,16 +543,18 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         long cedula = cedulaLongField.getLong();
         String sexo = sexoComboBox.getSelectedItem().toString();
         long telefono = telefonoLongField.getLong();
-        String sangre = gsComboBox.getSelectedItem().toString() + rhComboBox.getSelectedItem().toString();
+        GrupoSanguineo grupo = (GrupoSanguineo) gsComboBox.getSelectedItem();
+        RH rh = (RH) rhComboBox.getSelectedItem();
         if (nuevo) {
-            registroSeleccionado = new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, sangre);
+            registroSeleccionado = new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, grupo,rh);
         } else {
             registroSeleccionado.setNombre(nombre);
             registroSeleccionado.setNombre2(nombre2);
             registroSeleccionado.setApellido(apellido);
             registroSeleccionado.setApellido2(apellido2);
             registroSeleccionado.setCedula(cedula);
-            registroSeleccionado.setSangre(sangre);
+            registroSeleccionado.setGrupoSanguineo(grupo);
+            registroSeleccionado.setRh(rh);
             registroSeleccionado.setSexo(sexo);
             registroSeleccionado.setTelefono(telefono);
         }
@@ -795,25 +799,25 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             } else {
                 sexoComboBox.setSelectedIndex(1);
             }
-            String sangre = registroSeleccionado.getSangre();
-            if (sangre != null) {
-                char rh = sangre.charAt(sangre.length() - 1);
-                String gs = sangre.substring(0, sangre.length() - 1);
-                if (gs.equals("A")) {
-                    gsComboBox.setSelectedIndex(0);
-                } else if (gs.equals("B")) {
-                    gsComboBox.setSelectedIndex(1);
-                } else if (gs.equals("O")) {
-                    gsComboBox.setSelectedIndex(2);
-                } else if (gs.equals("AB")) {
-                    gsComboBox.setSelectedIndex(3);
-                }
-                if (rh == '+') {
-                    rhComboBox.setSelectedIndex(0);
-                } else {
-                    rhComboBox.setSelectedIndex(1);
-                }
-            }
+//            GrupoSanguineo sangre = registroSeleccionado.getGrupoSanguineo();
+//            if (sangre != null) {
+//                char rh = sangre.charAt(sangre.length() - 1);
+//                String gs = sangre.substring(0, sangre.length() - 1);
+//                if (gs.equals("A")) {
+//                    gsComboBox.setSelectedIndex(0);
+//                } else if (gs.equals("B")) {
+//                    gsComboBox.setSelectedIndex(1);
+//                } else if (gs.equals("O")) {
+//                    gsComboBox.setSelectedIndex(2);
+//                } else if (gs.equals("AB")) {
+//                    gsComboBox.setSelectedIndex(3);
+//                }
+//                if (rh == '+') {
+//                    rhComboBox.setSelectedIndex(0);
+//                } else {
+//                    rhComboBox.setSelectedIndex(1);
+//                }
+//            }
         }
     }
 
@@ -824,7 +828,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         lista = controlador.leerLista();
         if (lista != null) {
             for (Persona p : lista) {
-                Object[] datos = {p.getNombre(), p.getNombre2(), p.getApellido(), p.getApellido2(), p.getCedula(), p.getTelefono(), p.getSexo(), p.getSangre()};
+                Object[] datos = {p.getNombre(), p.getNombre2(), p.getApellido(), p.getApellido2(), p.getCedula(), p.getTelefono(), p.getSexo(), p.getGrupoSanguineo()};
                 ((DefaultTableModel) principalTable.getModel()).addRow(datos);
             }
         }

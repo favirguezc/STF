@@ -1,7 +1,7 @@
 package modelo.produccion;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +13,8 @@ public class Labor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
+    @Column(nullable = false, unique = true)
     private String nombre;
-    @Basic
     private String descripcion;
 
     public Labor() {

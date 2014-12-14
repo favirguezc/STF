@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AplicacionfitosanitariaListForm">
+                <p:panel header="#{bundle.ListAplicacionfitosanitariaTitle}">
+                    <p:dataTable id="datalist" value="#{aplicacionfitosanitariaController.items}" var="item"
+                                 selectionMode="single" selection="#{aplicacionfitosanitariaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_agua}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.agua}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_equipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.equipo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_jornales}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jornales}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_motivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.motivo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_pc}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.pc}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_tr}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.tr}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_aprobanteId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.aprobanteId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_asistenteId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.asistenteId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_productorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.productorId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_productoId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.productoId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionfitosanitariaTitle_responsableId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsableId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{aplicacionfitosanitariaController.prepareCreate}" update=":AplicacionfitosanitariaCreateForm" oncomplete="PF('AplicacionfitosanitariaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AplicacionfitosanitariaViewForm" oncomplete="PF('AplicacionfitosanitariaViewDialog').show()" disabled="#{empty aplicacionfitosanitariaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AplicacionfitosanitariaEditForm" oncomplete="PF('AplicacionfitosanitariaEditDialog').show()" disabled="#{empty aplicacionfitosanitariaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{aplicacionfitosanitariaController.destroy}" update=":growl,datalist" disabled="#{empty aplicacionfitosanitariaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

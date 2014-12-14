@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrampadeinsectosCreateDlg" widgetVar="TrampadeinsectosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTrampadeinsectosTitle}">
+            <h:form id="TrampadeinsectosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trampadeinsectosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{trampadeinsectosController.selected.id}" title="#{bundle.CreateTrampadeinsectosTitle_id}" required="true" requiredMessage="#{bundle.CreateTrampadeinsectosRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_cambiodepegante}" for="cambiodepegante" />
+                        <p:selectBooleanCheckbox id="cambiodepegante" value="#{trampadeinsectosController.selected.cambiodepegante}" />
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_especie}" for="especie" />
+                        <p:inputText id="especie" value="#{trampadeinsectosController.selected.especie}" title="#{bundle.CreateTrampadeinsectosTitle_especie}" required="true" requiredMessage="#{bundle.CreateTrampadeinsectosRequiredMessage_especie}"/>
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampadeinsectosController.selected.fecha}" title="#{bundle.EditTrampadeinsectosTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_individuos}" for="individuos" />
+                        <p:inputText id="individuos" value="#{trampadeinsectosController.selected.individuos}" title="#{bundle.CreateTrampadeinsectosTitle_individuos}" />
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{trampadeinsectosController.selected.nombre}" title="#{bundle.CreateTrampadeinsectosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateTrampadeinsectosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{trampadeinsectosController.selected.observaciones}" title="#{bundle.CreateTrampadeinsectosTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_asistenteId}" for="asistenteId" />
+                        <p:selectOneMenu id="asistenteId" value="#{trampadeinsectosController.selected.asistenteId}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="asistenteIdItem"
+                                           itemValue="#{asistenteIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrampadeinsectosLabel_productorId}" for="productorId" />
+                        <p:selectOneMenu id="productorId" value="#{trampadeinsectosController.selected.productorId}" >
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="productorIdItem"
+                                           itemValue="#{productorIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{trampadeinsectosController.create}" value="#{bundle.Save}" update="display,:TrampadeinsectosListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrampadeinsectosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TrampadeinsectosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,9 +1,10 @@
 package modelo.administracion;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,30 +15,25 @@ public class Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @Column(nullable = false)
     private String nombre;
-    @Basic
     private String nombre2;
-    @Basic
     @Column(nullable = false)
     private String apellido;
-    @Basic
     private String apellido2;
-    @Basic
     @Column(unique = true)
     private long cedula;
-    @Basic
     private String sexo;
-    @Basic
     private long telefono;
-    @Basic
-    private String sangre;
+    @Enumerated(EnumType.STRING)
+    private GrupoSanguineo grupoSanguineo;
+    @Enumerated(EnumType.STRING)
+    private RH rh;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, String sexo, long telefono, String sangre) {
+    public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, String sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
         this.nombre = nombre;
         this.nombre2 = nombre2;
         this.apellido = apellido;
@@ -45,7 +41,8 @@ public class Persona implements Serializable {
         this.cedula = cedula;
         this.sexo = sexo;
         this.telefono = telefono;
-        this.sangre = sangre;
+        this.grupoSanguineo = grupoSanguineo;
+        this.rh = rh;
     }
 
     public long getId() {
@@ -112,12 +109,20 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getSangre() {
-        return sangre;
+    public GrupoSanguineo getGrupoSanguineo() {
+        return grupoSanguineo;
     }
 
-    public void setSangre(String sangre) {
-        this.sangre = sangre;
+    public void setGrupoSanguineo(GrupoSanguineo grupoSanguineo) {
+        this.grupoSanguineo = grupoSanguineo;
+    }
+
+    public RH getRh() {
+        return rh;
+    }
+
+    public void setRh(RH rh) {
+        this.rh = rh;
     }
 
     @Override

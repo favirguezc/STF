@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsumoCreateDlg" widgetVar="InsumoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInsumoTitle}">
+            <h:form id="InsumoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insumoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{insumoController.selected.id}" title="#{bundle.CreateInsumoTitle_id}" required="true" requiredMessage="#{bundle.CreateInsumoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_ingredienteactivo}" for="ingredienteactivo" />
+                        <p:inputText id="ingredienteactivo" value="#{insumoController.selected.ingredienteactivo}" title="#{bundle.CreateInsumoTitle_ingredienteactivo}" required="true" requiredMessage="#{bundle.CreateInsumoRequiredMessage_ingredienteactivo}"/>
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{insumoController.selected.nombre}" title="#{bundle.CreateInsumoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateInsumoRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_unidades}" for="unidades" />
+                        <p:inputText id="unidades" value="#{insumoController.selected.unidades}" title="#{bundle.CreateInsumoTitle_unidades}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{insumoController.create}" value="#{bundle.Save}" update="display,:InsumoListForm:datalist,:growl" oncomplete="handleSubmit(args,'InsumoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InsumoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

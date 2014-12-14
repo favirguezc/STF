@@ -2,12 +2,10 @@ package modelo.produccion;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import modelo.administracion.Persona;
@@ -19,30 +17,21 @@ public class AplicacionFitosanitaria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @ManyToOne
-    private InsumoFitosanitario producto;
-    @Basic
+    private Insumo producto;
     private String motivo;
-    @Basic
     private boolean pc;
-    @Basic
     private boolean tr;
-    @Basic
     private float cantidad;
-    @Basic
     private float agua;
-    @Basic
     private String equipo;
     @ManyToOne
     private Persona responsable;
     @ManyToOne
     private Persona aprobante;
-    @Basic
     private float jornales;
-    @Basic
     private String observaciones;
     @ManyToOne
     private Lote lote;
@@ -51,7 +40,7 @@ public class AplicacionFitosanitaria implements Serializable {
     @ManyToOne
     private Persona productor;
 
-    public AplicacionFitosanitaria(Date fecha, InsumoFitosanitario producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
+    public AplicacionFitosanitaria(Date fecha, Insumo producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
         this.fecha = fecha;
         this.producto = producto;
         this.motivo = motivo;
@@ -88,11 +77,11 @@ public class AplicacionFitosanitaria implements Serializable {
         this.fecha = fecha;
     }
 
-    public InsumoFitosanitario getProducto() {
+    public Insumo getProducto() {
         return producto;
     }
 
-    public void setProducto(InsumoFitosanitario producto) {
+    public void setProducto(Insumo producto) {
         this.producto = producto;
     }
 

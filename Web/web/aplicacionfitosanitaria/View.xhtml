@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AplicacionfitosanitariaViewDlg" widgetVar="AplicacionfitosanitariaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAplicacionfitosanitariaTitle}">
+            <h:form id="AplicacionfitosanitariaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aplicacionfitosanitariaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_id}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.id}" title="#{bundle.ViewAplicacionfitosanitariaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_agua}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.agua}" title="#{bundle.ViewAplicacionfitosanitariaTitle_agua}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_cantidad}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.cantidad}" title="#{bundle.ViewAplicacionfitosanitariaTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_equipo}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.equipo}" title="#{bundle.ViewAplicacionfitosanitariaTitle_equipo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_fecha}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.fecha}" title="#{bundle.ViewAplicacionfitosanitariaTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_jornales}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.jornales}" title="#{bundle.ViewAplicacionfitosanitariaTitle_jornales}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_motivo}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.motivo}" title="#{bundle.ViewAplicacionfitosanitariaTitle_motivo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_observaciones}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.observaciones}" title="#{bundle.ViewAplicacionfitosanitariaTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_pc}"/>
+                        <p:selectBooleanCheckbox value="#{aplicacionfitosanitariaController.selected.pc}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_tr}"/>
+                        <p:selectBooleanCheckbox value="#{aplicacionfitosanitariaController.selected.tr}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_aprobanteId}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.aprobanteId}" title="#{bundle.ViewAplicacionfitosanitariaTitle_aprobanteId}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_asistenteId}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.asistenteId}" title="#{bundle.ViewAplicacionfitosanitariaTitle_asistenteId}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_productorId}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.productorId}" title="#{bundle.ViewAplicacionfitosanitariaTitle_productorId}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_productoId}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.productoId}" title="#{bundle.ViewAplicacionfitosanitariaTitle_productoId}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionfitosanitariaLabel_responsableId}"/>
+                        <h:outputText value="#{aplicacionfitosanitariaController.selected.responsableId}" title="#{bundle.ViewAplicacionfitosanitariaTitle_responsableId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AplicacionfitosanitariaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

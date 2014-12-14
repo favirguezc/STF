@@ -6,11 +6,12 @@
 package controlador.produccion;
 
 import dao.exceptions.NonexistentEntityException;
-import dao.produccion.InsumoFitosanitarioDAO;
+import dao.produccion.InsumoDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.produccion.InsumoFitosanitario;
+import modelo.produccion.Insumo;
+import modelo.produccion.Unidades;
 
 /**
  *
@@ -18,47 +19,47 @@ import modelo.produccion.InsumoFitosanitario;
  */
 public class InsumoFitosanitarioControlador {
 
-    InsumoFitosanitarioDAO dao;
+    InsumoDAO dao;
 
     public InsumoFitosanitarioControlador() {
-        dao = new InsumoFitosanitarioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        dao = new InsumoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public InsumoFitosanitario nuevo(String nombre, String ingredienteActivo, String unidades) {
-        return new InsumoFitosanitario(nombre, ingredienteActivo, unidades);
+    public Insumo nuevo(String nombre, String ingredienteActivo, Unidades unidades) {
+        return new Insumo(nombre, ingredienteActivo, unidades);
     }
 
-    public InsumoFitosanitario buscar(long id) throws Exception {
-        return dao.findProductoFitosanitario(id);
+    public Insumo buscar(long id) throws Exception {
+        return dao.findInsumo(id);
     }
 
     public void eliminar(Long id) throws NonexistentEntityException {
         dao.destroy(id);
     }
 
-    public void guardar(InsumoFitosanitario nueva) {
+    public void guardar(Insumo nueva) {
         dao.create(nueva);
     }
 
-    public void editar(InsumoFitosanitario seleccionada) throws Exception {
+    public void editar(Insumo seleccionada) throws Exception {
         dao.edit(seleccionada);
     }
 
-    public List<InsumoFitosanitario> leerLista() {
-        return dao.findProductoFitosanitarioEntities();
+    public List<Insumo> leerLista() {
+        return dao.findInsumoEntities();
     }
 
-    public InsumoFitosanitario buscar(String nombre) throws Exception {
-        return dao.findProductoFitosanitario(nombre);
+    public Insumo buscar(String nombre) throws Exception {
+        return dao.findInsumo(nombre);
     }
 
-    public boolean validar(InsumoFitosanitario pf) {
+    public boolean validar(Insumo pf) {
         if (pf.getNombre() == null || pf.getNombre().equals("")) {
             JOptionPane.showMessageDialog(null, "El campo nombre no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         try {
-            InsumoFitosanitario l = dao.findProductoFitosanitario(pf.getNombre());
+            Insumo l = dao.findInsumo(pf.getNombre());
             if (l != null && l.getId() != pf.getId()) {
                 JOptionPane.showMessageDialog(null, "El registro ya está en la base de datos.", "Registro duplicado", JOptionPane.INFORMATION_MESSAGE);
                 return false;

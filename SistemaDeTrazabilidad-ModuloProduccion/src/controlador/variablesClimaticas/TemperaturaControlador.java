@@ -25,28 +25,11 @@ public class TemperaturaControlador {
         dao = new TemperaturaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Temperatura nuevo(Date fecha, Date horaMax, Date horaMin, float tempMax, float tempMin) {
-        Temperatura nueva = new Temperatura();
-        nueva.setFecha(fecha);
-        nueva.setHoraMax(horaMax);
-        nueva.setHoraMin(horaMin);
-        nueva.setTempMax(tempMax);
-        nueva.setTempMin(tempMin);
-        return nueva;
+    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio) {
+        return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, null);
     }
 
     public boolean validar(Temperatura t, Boolean nueva) {
-        if (t.getTempMax() < t.getTempMin()) {
-            JOptionPane.showMessageDialog(null, "La temperatura mínima no puede ser mayor a la temperatura máxima.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        try {
-            if (nueva && buscar(t.getFecha()) != null) {
-                JOptionPane.showMessageDialog(null, "Ya existe un registro para la fecha.", "Registro duplicado", JOptionPane.INFORMATION_MESSAGE);
-                return false;
-            }
-        } catch (Exception e) {
-        }
         return true;
     }
 
@@ -70,23 +53,11 @@ public class TemperaturaControlador {
         return dao.findTemperaturaEntities(esteMes, siguienteMes);
     }
 
-    public float calcularPromedioMax(Date fecha1, Date fecha2) {
+    public float calcularPromedio(Date fecha1, Date fecha2) {
         float promedio = 0;
         List<Temperatura> buscarLista = buscarLista(fecha1, fecha2);
         for (Temperatura t : buscarLista) {
-            promedio += t.getTempMax();
-        }
-        if (buscarLista.size() > 1) {
-            promedio = promedio / buscarLista.size();
-        }
-        return promedio;
-    }
-
-    public float calcularPromedioMin(Date fecha1, Date fecha2) {
-        float promedio = 0;
-        List<Temperatura> buscarLista = buscarLista(fecha1, fecha2);
-        for (Temperatura t : buscarLista) {
-            promedio += t.getTempMin();
+            promedio += t.getTemperatura();
         }
         if (buscarLista.size() > 1) {
             promedio = promedio / buscarLista.size();

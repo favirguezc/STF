@@ -7,16 +7,21 @@ package vista.variablesClimaticas;
 
 import controlador.variablesClimaticas.HumedadDelSueloControlador;
 import dao.exceptions.NonexistentEntityException;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.variablesClimaticas.HumedadDelSuelo;
 import util.DateFormatter;
+import util.FileTypeFilter;
+import vista.excel.LectorDeRegistrosHumedadDelSuelo;
 
 /**
  *
@@ -62,6 +67,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         eliminarButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         edicionPanel = new javax.swing.JPanel();
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jLabel54 = new javax.swing.JLabel();
@@ -161,11 +167,13 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
         );
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -201,6 +209,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             }
         });
 
+        guardarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/database13.png"))); // NOI18N
         guardarButton.setText("Guardar");
         guardarButton.setEnabled(false);
@@ -209,6 +218,17 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/content.png"))); // NOI18N
+        jButton1.setText("Cargar");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -225,6 +245,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
                 .addComponent(editarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -232,6 +254,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addComponent(guardarButton)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(editarButton)
@@ -359,8 +382,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,8 +493,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             }
             registroSeleccionado.setFecha(fechaDateChooserCombo.getSelectedDate().getTime());
             registroSeleccionado.setHora((Date) horaSpinner.getValue());
-            registroSeleccionado.set15Cms(_15);
-            registroSeleccionado.set30Cms(_30);
+            registroSeleccionado.setValorEn15Cms(_15);
+            registroSeleccionado.setValorEn30Cms(_30);
             if (controlador.validar(registroSeleccionado, false)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -487,6 +510,20 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+            fileChooser.removeChoosableFileFilter(filter);
+        }
+        fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println(fileChooser.getSelectedFile());
+            new LectorDeRegistrosHumedadDelSuelo(fileChooser.getSelectedFile()).leer();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private util.FloatField _15cmsFloatField;
@@ -498,6 +535,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
     private javax.swing.JSpinner horaSpinner;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -528,10 +566,10 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             HumedadDelSuelo t = lista.get(i);
             Object[] row = {DateFormatter.formatDate(t.getFecha()),
                 DateFormatter.formatTime(t.getHora()),
-                t.get15Cms(),
-                t.get30Cms()};
+                t.getValorEn15Cms(),
+                t.getValorEn30Cms()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
-            
+
         }
     }
 
@@ -554,8 +592,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
             horaSpinner.setValue(registroSeleccionado.getHora());
-            _15cmsFloatField.setFloat(registroSeleccionado.get15Cms());
-            _30cmsFloatField.setFloat(registroSeleccionado.get30Cms());
+            _15cmsFloatField.setFloat(registroSeleccionado.getValorEn15Cms());
+            _30cmsFloatField.setFloat(registroSeleccionado.getValorEn30Cms());
         }
     }
 }

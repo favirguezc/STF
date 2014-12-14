@@ -1,20 +1,24 @@
 package modelo.administracion;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Lote implements Serializable {
 
-    @Basic
-    private String nombre;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
+    @Basic
+    private String nombre;
+    @OneToMany(mappedBy = "lote")
+    private List<Modulo> modulos;
 
     public Lote() {
     }
@@ -37,6 +41,14 @@ public class Lote implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Modulo> getModulos() {
+        return modulos;
+    }
+
+    public void setModulos(List<Modulo> modulos) {
+        this.modulos = modulos;
     }
 
     @Override

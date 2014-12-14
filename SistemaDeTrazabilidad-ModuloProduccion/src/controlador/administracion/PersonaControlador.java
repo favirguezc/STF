@@ -10,7 +10,9 @@ import dao.exceptions.NonexistentEntityException;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
+import modelo.administracion.GrupoSanguineo;
 import modelo.administracion.Persona;
+import modelo.administracion.RH;
 
 /**
  *
@@ -24,8 +26,8 @@ public class PersonaControlador {
         dao = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, String sexo, long telefono, String sangre) {
-        return new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, sangre);
+    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, String sexo, long telefono, GrupoSanguineo gs, RH rh) {
+        return new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, gs, rh);
     }
 
     public Persona buscar(long id) throws Exception {

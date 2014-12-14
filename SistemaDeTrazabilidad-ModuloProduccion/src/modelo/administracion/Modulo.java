@@ -23,14 +23,16 @@ public class Modulo implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     long id;
     String nombre;
+    double area;
     @ManyToOne
     Lote lote;
 
     public Modulo() {
     }
 
-    public Modulo(String name, Lote lote) {
-        this.nombre = name;
+    public Modulo(String nombre, double area, Lote lote) {
+        this.nombre = nombre;
+        this.area = area;
         this.lote = lote;
     }
 
@@ -48,6 +50,14 @@ public class Modulo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
     }
 
     public Lote getLote() {

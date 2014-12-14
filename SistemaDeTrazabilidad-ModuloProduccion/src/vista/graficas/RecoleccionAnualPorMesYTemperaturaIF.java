@@ -143,7 +143,7 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
                 crearGrafica(
                         crearDatosRecoleccion(),
                         crearDatosTemperaturaMax(),
-                        crearDatosTemperaturaMin()));
+                        crearDatosTemperaturaMax()));
         chartPanel.setDomainZoomable(false);
         chartPanel.setRangeZoomable(false);
         chartPanel.setSize(jPanel2.getSize());
@@ -221,28 +221,28 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
-            float promedioTemp = new TemperaturaControlador().calcularPromedioMax(fecha1, fecha2);
+            float promedioTemp = new TemperaturaControlador().calcularPromedio(fecha1, fecha2);
             datos.addValue(promedioTemp, "Temperatura Máxima", DateTools.getMes(i));
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datos;
     }
 
-    private CategoryDataset crearDatosTemperaturaMin() {
-        DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
-        for (int i = 0; i < 12; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.MONTH, 1);
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            Date fecha2 = cal.getTime();
-            float promedioTemp = new TemperaturaControlador().calcularPromedioMin(fecha1, fecha2);
-            datos.addValue(promedioTemp, "Temperatura Mínima", DateTools.getMes(i));
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        return datos;
-    }
+//    private CategoryDataset crearDatosTemperaturaMin() {
+//        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+//        Calendar cal = GregorianCalendar.getInstance();
+//        cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
+//        for (int i = 0; i < 12; i++) {
+//            Date fecha1 = cal.getTime();
+//            cal.add(Calendar.MONTH, 1);
+//            cal.add(Calendar.DAY_OF_MONTH, -1);
+//            Date fecha2 = cal.getTime();
+//            float promedioTemp = new TemperaturaControlador().calcularPromedioMin(fecha1, fecha2);
+//            datos.addValue(promedioTemp, "Temperatura Mínima", DateTools.getMes(i));
+//            cal.add(Calendar.DAY_OF_MONTH, 1);
+//        }
+//        return datos;
+//    }
 
     private void pintarGrafico() {
         jPanel2.removeAll();

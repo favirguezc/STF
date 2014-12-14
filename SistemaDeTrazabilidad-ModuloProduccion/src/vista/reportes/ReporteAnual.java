@@ -7,10 +7,7 @@ package vista.reportes;
 
 import java.awt.Frame;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.UnsupportedLookAndFeelException;
 import vista.pdf.ReporteDeProduccionAnual;
 import util.FileTypeFilter;
 

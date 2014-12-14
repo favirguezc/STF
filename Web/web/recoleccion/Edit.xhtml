@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecoleccionEditDlg" widgetVar="RecoleccionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRecoleccionTitle}">
+            <h:form id="RecoleccionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recoleccionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{recoleccionController.selected.id}" title="#{bundle.EditRecoleccionTitle_id}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_cuartagramos}" for="cuartagramos" />
+                        <p:inputText id="cuartagramos" value="#{recoleccionController.selected.cuartagramos}" title="#{bundle.EditRecoleccionTitle_cuartagramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_danadagramos}" for="danadagramos" />
+                        <p:inputText id="danadagramos" value="#{recoleccionController.selected.danadagramos}" title="#{bundle.EditRecoleccionTitle_danadagramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_extragramos}" for="extragramos" />
+                        <p:inputText id="extragramos" value="#{recoleccionController.selected.extragramos}" title="#{bundle.EditRecoleccionTitle_extragramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_primeragramos}" for="primeragramos" />
+                        <p:inputText id="primeragramos" value="#{recoleccionController.selected.primeragramos}" title="#{bundle.EditRecoleccionTitle_primeragramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_quintagramos}" for="quintagramos" />
+                        <p:inputText id="quintagramos" value="#{recoleccionController.selected.quintagramos}" title="#{bundle.EditRecoleccionTitle_quintagramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_segundagramos}" for="segundagramos" />
+                        <p:inputText id="segundagramos" value="#{recoleccionController.selected.segundagramos}" title="#{bundle.EditRecoleccionTitle_segundagramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_terceragramos}" for="terceragramos" />
+                        <p:inputText id="terceragramos" value="#{recoleccionController.selected.terceragramos}" title="#{bundle.EditRecoleccionTitle_terceragramos}" />
+                        <p:outputLabel value="#{bundle.EditRecoleccionLabel_recolectorId}" for="recolectorId" />
+                        <p:selectOneMenu id="recolectorId" value="#{recoleccionController.selected.recolectorId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="recolectorIdItem"
+                                           itemValue="#{recolectorIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{recoleccionController.update}" value="#{bundle.Save}" update="display,:RecoleccionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RecoleccionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RecoleccionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

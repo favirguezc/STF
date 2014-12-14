@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="WebPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modelo.Modulo</class>
+    <class>modelo.Lote</class>
+    <class>modelo.Rolpersona</class>
+    <class>modelo.Insumo</class>
+    <class>modelo.Lluvia</class>
+    <class>modelo.Aplicacionfitosanitaria</class>
+    <class>modelo.Persona</class>
+    <class>modelo.Monitoreodeplagas</class>
+    <class>modelo.Labor</class>
+    <class>modelo.Monitoreodeenfermedades</class>
+    <class>modelo.Trabajo</class>
+    <class>modelo.Trampadeinsectos</class>
+    <class>modelo.Rol</class>
+    <class>modelo.Humedaddelsuelo</class>
+    <class>modelo.Recoleccion</class>
+    <class>modelo.Temperatura</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>
+    </properties>
+  </persistence-unit>
+</persistence>

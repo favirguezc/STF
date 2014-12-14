@@ -40,11 +40,11 @@ public class LaborControlador {
     }
 
     public Labor buscar(String nombre) throws Exception {
-        return dao.findLaborCultural(nombre);
+        return dao.findLabor(nombre);
     }
 
     public List<Labor> leerLista() {
-        return dao.findLaborCulturalEntities();
+        return dao.findLaborEntities();
     }
 
     public void comprobarRegistros() {
@@ -84,6 +84,7 @@ public class LaborControlador {
                     guardar(nuevo(roles[i], null));
                 }
             } catch (Exception ex) {
+                System.out.println(ex.getMessage());
                 guardar(nuevo(roles[i], null));
             }
         }

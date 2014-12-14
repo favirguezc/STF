@@ -27,8 +27,8 @@ public class MonitoreoDePlagasControlador {
         dao = new MonitoreoDePlagasDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public MonitoreoDePlagas nuevo( Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean otrov, boolean flor, boolean fruto, int coronas, Date fecha) {
-        return new MonitoreoDePlagas(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
+    public MonitoreoDePlagas nuevo(Modulo modulo, int aranita, int thrips, boolean cyclamen, boolean chisas, boolean babosas, String otro, boolean flor, boolean fruto, int coronas, Date fecha) {
+        return new MonitoreoDePlagas(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, flor, fruto, coronas, fecha);
     }
 
     public MonitoreoDePlagas buscar(long id) throws Exception {
@@ -52,15 +52,15 @@ public class MonitoreoDePlagasControlador {
     }
 
     public boolean validar(MonitoreoDePlagas monitoreo) {
-        if(monitoreo.getAranita()>2){
+        if (monitoreo.getAranita() > 2) {
             JOptionPane.showMessageDialog(null, "El campo arañita no puede ser mayor a 2.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if(monitoreo.getCoronas()<0){
+        if (monitoreo.getCoronas() < 0) {
             JOptionPane.showMessageDialog(null, "El campo número de coronas no puede ser negativo.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if(monitoreo.getThrips()>2){
+        if (monitoreo.getThrips() > 2) {
             JOptionPane.showMessageDialog(null, "El campo thrips no puede ser mayor a 2.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }

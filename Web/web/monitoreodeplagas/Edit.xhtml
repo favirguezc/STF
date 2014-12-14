@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MonitoreodeplagasEditDlg" widgetVar="MonitoreodeplagasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMonitoreodeplagasTitle}">
+            <h:form id="MonitoreodeplagasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{monitoreodeplagasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{monitoreodeplagasController.selected.id}" title="#{bundle.EditMonitoreodeplagasTitle_id}" required="true" requiredMessage="#{bundle.EditMonitoreodeplagasRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_aranita}" for="aranita" />
+                        <p:inputText id="aranita" value="#{monitoreodeplagasController.selected.aranita}" title="#{bundle.EditMonitoreodeplagasTitle_aranita}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_babosas}" for="babosas" />
+                        <p:selectBooleanCheckbox id="babosas" value="#{monitoreodeplagasController.selected.babosas}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_chisas}" for="chisas" />
+                        <p:selectBooleanCheckbox id="chisas" value="#{monitoreodeplagasController.selected.chisas}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_coronas}" for="coronas" />
+                        <p:inputText id="coronas" value="#{monitoreodeplagasController.selected.coronas}" title="#{bundle.EditMonitoreodeplagasTitle_coronas}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_cyclamen}" for="cyclamen" />
+                        <p:selectBooleanCheckbox id="cyclamen" value="#{monitoreodeplagasController.selected.cyclamen}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreodeplagasController.selected.fecha}" title="#{bundle.EditMonitoreodeplagasTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_flor}" for="flor" />
+                        <p:selectBooleanCheckbox id="flor" value="#{monitoreodeplagasController.selected.flor}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_fruto}" for="fruto" />
+                        <p:selectBooleanCheckbox id="fruto" value="#{monitoreodeplagasController.selected.fruto}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_otro}" for="otro" />
+                        <p:inputText id="otro" value="#{monitoreodeplagasController.selected.otro}" title="#{bundle.EditMonitoreodeplagasTitle_otro}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_thrips}" for="thrips" />
+                        <p:inputText id="thrips" value="#{monitoreodeplagasController.selected.thrips}" title="#{bundle.EditMonitoreodeplagasTitle_thrips}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{monitoreodeplagasController.update}" value="#{bundle.Save}" update="display,:MonitoreodeplagasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoreodeplagasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreodeplagasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

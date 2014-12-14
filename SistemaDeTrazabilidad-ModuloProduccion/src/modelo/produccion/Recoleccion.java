@@ -28,21 +28,23 @@ public class Recoleccion implements Serializable {
     private float segundaGramos;
     private float terceraGramos;
     private float cuartaGramos;
+    private float quintaGramos;
     private float danadaGramos;
 
     public Recoleccion() {
     }
 
-    public Recoleccion(Lote lote, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float danada, Persona recolector) {
+    public Recoleccion(Lote lote, Date fecha, Persona recolector, float extraGramos, float primeraGramos, float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, float danadaGramos) {
         this.lote = lote;
         this.fecha = fecha;
-        this.extraGramos = extra;
-        this.primeraGramos = primera;
-        this.segundaGramos = segunda;
-        this.terceraGramos = tercera;
-        this.cuartaGramos = cuarta;
-        this.danadaGramos = danada;
         this.recolector = recolector;
+        this.extraGramos = extraGramos;
+        this.primeraGramos = primeraGramos;
+        this.segundaGramos = segundaGramos;
+        this.terceraGramos = terceraGramos;
+        this.cuartaGramos = cuartaGramos;
+        this.quintaGramos = quintaGramos;
+        this.danadaGramos = danadaGramos;
     }
 
     public long getId() {
@@ -67,6 +69,14 @@ public class Recoleccion implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Persona getRecolector() {
+        return recolector;
+    }
+
+    public void setRecolector(Persona recolector) {
+        this.recolector = recolector;
     }
 
     public float getExtraGramos() {
@@ -109,6 +119,14 @@ public class Recoleccion implements Serializable {
         this.cuartaGramos = cuartaGramos;
     }
 
+    public float getQuintaGramos() {
+        return quintaGramos;
+    }
+
+    public void setQuintaGramos(float quintaGramos) {
+        this.quintaGramos = quintaGramos;
+    }
+
     public float getDanadaGramos() {
         return danadaGramos;
     }
@@ -117,20 +135,12 @@ public class Recoleccion implements Serializable {
         this.danadaGramos = danadaGramos;
     }
 
-    public Persona getRecolector() {
-        return recolector;
+    public float getBuenaGramos() {
+        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos + quintaGramos;
     }
 
-    public void setRecolector(Persona recolector) {
-        this.recolector = recolector;
-    }
-
-    public float getBuena() {
-        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos;
-    }
-
-    public float getTotal() {
-        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos + danadaGramos;
+    public float getTotalGramos() {
+        return getBuenaGramos() + danadaGramos;
     }
 
     public void sumar(Recoleccion r) {
@@ -139,6 +149,7 @@ public class Recoleccion implements Serializable {
         this.segundaGramos += r.segundaGramos;
         this.terceraGramos += r.terceraGramos;
         this.cuartaGramos += r.cuartaGramos;
+        this.quintaGramos += r.quintaGramos;
         this.danadaGramos += r.danadaGramos;
     }
 }

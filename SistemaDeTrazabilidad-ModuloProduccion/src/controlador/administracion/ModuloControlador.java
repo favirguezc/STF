@@ -25,8 +25,8 @@ public class ModuloControlador {
         dao = new ModuloDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Modulo nuevo(String nombre, Lote lote) {
-        return new Modulo(nombre, lote);
+    public Modulo nuevo(String nombre, double area, Lote lote) {
+        return new Modulo(nombre, area, lote);
     }
 
     public Modulo buscar(long id) throws Exception {

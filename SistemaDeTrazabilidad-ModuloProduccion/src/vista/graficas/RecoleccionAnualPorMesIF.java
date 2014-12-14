@@ -196,7 +196,7 @@ public class RecoleccionAnualPorMesIF extends javax.swing.JInternalFrame {
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
             String mes = DateTools.getMes(i);
-            datos.addValue(sumarRegistros.getBuena() / 500, "Buena", mes);
+            datos.addValue(sumarRegistros.getBuenaGramos() / 500, "Buena", mes);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datos;

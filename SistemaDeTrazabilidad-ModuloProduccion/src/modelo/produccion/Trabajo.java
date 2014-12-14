@@ -18,7 +18,6 @@ public class Trabajo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @ManyToOne
@@ -27,9 +26,7 @@ public class Trabajo implements Serializable {
     private Labor labor;
     @ManyToOne
     private Persona operario;
-    @Basic
     private float jornales;
-    @Basic
     private String observaciones;
     @ManyToOne
     private Persona asistente;

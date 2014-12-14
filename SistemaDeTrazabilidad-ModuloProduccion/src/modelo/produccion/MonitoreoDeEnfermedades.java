@@ -19,20 +19,13 @@ public class MonitoreoDeEnfermedades implements Serializable {
     private long id;
     @ManyToOne
     private Modulo modulo;
-    @Basic
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Basic
     private int botrytis;
-    @Basic
     private boolean antracnosis;
-    @Basic
     private int mycospharella;
-    @Basic
     private boolean mildeoPolvoso;
-    @Basic
     private boolean phytophtora;
-    @Basic
     private boolean bacteriosis;
 
     public MonitoreoDeEnfermedades() {

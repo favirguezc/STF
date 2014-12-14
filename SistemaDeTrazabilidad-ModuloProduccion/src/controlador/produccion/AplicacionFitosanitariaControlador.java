@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import modelo.administracion.Lote;
 import modelo.administracion.Persona;
 import modelo.produccion.AplicacionFitosanitaria;
-import modelo.produccion.InsumoFitosanitario;
+import modelo.produccion.Insumo;
 
 /**
  *
@@ -28,7 +28,7 @@ public class AplicacionFitosanitariaControlador {
         dao = new AplicacionFitosanitariaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public AplicacionFitosanitaria nuevo(Date fecha, InsumoFitosanitario producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
+    public AplicacionFitosanitaria nuevo(Date fecha, Insumo producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
         return new AplicacionFitosanitaria(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
     }
 

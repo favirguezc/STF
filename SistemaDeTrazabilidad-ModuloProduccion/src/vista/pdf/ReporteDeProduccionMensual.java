@@ -144,7 +144,7 @@ public class ReporteDeProduccionMensual {
             cuartaTotal += cuartaDia;
             dañadaDia = r.getDanadaGramos() / 500;
             dañadaTotal += dañadaDia;
-            totalmes = r.getTotal() / 500;
+            totalmes = r.getTotalGramos() / 500;
             total += totalmes;
 
             celda = new PdfPCell(new Phrase("" + i, fuenteNormal));

@@ -98,7 +98,7 @@ public class RolPersonaControlador {
                 return false;
             }
         }
-        if (rp.getRol().isExigeContrasena()) {
+        if (rp.getRol().isContrasenaNecesaria()) {
             switch (Validador.validarContraseña(rp.getContrasena(), 4, 8, true, true, true)) {
                 case Validador.CONTRASEÑA_MUY_CORTA:
                     JOptionPane.showMessageDialog(null, "La contraseña es muy corta. La longitud mínima es " + 4 + ".", "Error de datos", JOptionPane.INFORMATION_MESSAGE);

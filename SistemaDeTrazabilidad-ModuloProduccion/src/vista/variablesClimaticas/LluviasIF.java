@@ -15,7 +15,7 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import modelo.variablesClimaticas.ControlDeLluvias;
+import modelo.variablesClimaticas.Lluvia;
 import util.TableColumnAdjuster;
 
 /**
@@ -27,9 +27,9 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     /**
      * Creates new form LluviasIF
      */
-    private ControlDeLluvias registroSeleccionado = null;
+    private Lluvia registroSeleccionado = null;
     private ControlDeLluviasControlador controlador;
-    private List<ControlDeLluvias> lista;
+    private List<Lluvia> lista;
 
     public LluviasIF() {
         initComponents();
@@ -363,7 +363,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No hay un registro válido seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Calendar cal = GregorianCalendar.getInstance();
-            for (ControlDeLluvias c : lista) {
+            for (Lluvia c : lista) {
                 cal.setTime(c.getFecha());
                 if (cal.get(Calendar.MONTH) == principalTable.getSelectedRow()
                         && cal.get(Calendar.DAY_OF_MONTH) == principalTable.getSelectedColumn()) {
@@ -393,7 +393,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No hay un registro válido seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Calendar cal = GregorianCalendar.getInstance();
-            for (ControlDeLluvias c : lista) {
+            for (Lluvia c : lista) {
                 cal.setTime(c.getFecha());
                 if (cal.get(Calendar.MONTH) == principalTable.getSelectedRow()
                         && cal.get(Calendar.DAY_OF_MONTH) == principalTable.getSelectedColumn()) {
@@ -411,14 +411,14 @@ public class LluviasIF extends javax.swing.JInternalFrame {
         boolean transacionRealizada = false;
         float mms = mmsFloatField.getFloat();
         if (registroSeleccionado == null) {
-            ControlDeLluvias nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), mms);
+            Lluvia nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), mms);
             if (controlador.validar(nueva, true)) {
                 controlador.guardar(nueva);
                 transacionRealizada = true;
             }
         } else {
             registroSeleccionado.setFecha(fechaDateChooserCombo.getSelectedDate().getTime());
-            registroSeleccionado.setMmDeLluvia(mms);
+            registroSeleccionado.setMm(mms);
             if (controlador.validar(registroSeleccionado, false)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -468,9 +468,9 @@ public class LluviasIF extends javax.swing.JInternalFrame {
         Date siguienteMes = c.getTime();
         lista = controlador.buscarLista(esteMes, siguienteMes);
         for (int i = 0; i < lista.size(); i++) {
-            ControlDeLluvias t = lista.get(i);
+            Lluvia t = lista.get(i);
             c.setTime(t.getFecha());
-            principalTable.getModel().setValueAt(t.getMmDeLluvia(), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+            principalTable.getModel().setValueAt(t.getMm(), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
         }
         float suma = 0;
         for (int i = 0; i < 12; i++) {
@@ -500,7 +500,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
-            mmsFloatField.setFloat(registroSeleccionado.getMmDeLluvia());
+            mmsFloatField.setFloat(registroSeleccionado.getMm());
         }
     }
 }

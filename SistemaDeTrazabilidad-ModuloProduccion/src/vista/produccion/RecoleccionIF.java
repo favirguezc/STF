@@ -562,7 +562,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         float cuarta = cuartaFloatField.getFloat();
         float dañada = dañadaFloatField.getFloat();
         if (registroSeleccionado == null) {
-            Recoleccion nuevo = controlador.nuevo(lote, fecha, extra, primera, segunda, tercera, cuarta, dañada, recolector);
+            Recoleccion nuevo = controlador.nuevo(lote, fecha, extra, primera, segunda, tercera, cuarta,0, dañada, recolector);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;

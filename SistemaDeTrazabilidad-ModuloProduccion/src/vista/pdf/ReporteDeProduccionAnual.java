@@ -208,7 +208,7 @@ public class ReporteDeProduccionAnual {
             cuartaTotal += cuartaPeriodo;
             dañadaPeriodo = r.getDanadaGramos() / 500;
             dañadaTotal += dañadaPeriodo;
-            totalmes = r.getTotal() / 500;
+            totalmes = r.getTotalGramos() / 500;
             total += totalmes;
             String contador = "";
             if (tipo == ReporteAnual.POR_MES) {

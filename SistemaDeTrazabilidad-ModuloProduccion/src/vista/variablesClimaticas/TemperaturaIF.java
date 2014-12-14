@@ -562,41 +562,41 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        boolean transacionRealizada = false;
-        if (registroSeleccionado == null) {
-            float t1 = minTempFloatField.getFloat(), t2 = maxTempFloatField.getFloat();
-            Temperatura nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), (Date) horaSpinner2.getValue(), (Date) horaSpinner1.getValue(), t1, t2);
-            if (controlador.validar(nueva, true)) {
-                try {
-                    controlador.guardar(nueva);
-                    transacionRealizada = true;
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Ya existe un registro para la fecha.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        } else {
-            registroSeleccionado.setFecha(fechaDateChooserCombo.getSelectedDate().getTime());
-            registroSeleccionado.setHoraMax((Date) horaSpinner2.getValue());
-            registroSeleccionado.setHoraMin((Date) horaSpinner1.getValue());
-            try {
-                registroSeleccionado.setTempMax(maxTempFloatField.getFloat());
-                registroSeleccionado.setTempMin(minTempFloatField.getFloat());
-            } catch (Exception e) {
-            }
-            if (controlador.validar(registroSeleccionado, false)) {
-                try {
-                    controlador.editar(registroSeleccionado);
-                    transacionRealizada = true;
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "El registro ya no existe en la base de datos.", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }
-        if (transacionRealizada) {
-            guardar(false);
-            cargarTablaPrincipal();
-            cargarTablaDePromedios();
-        }
+//        boolean transacionRealizada = false;
+//        if (registroSeleccionado == null) {
+//            float t1 = minTempFloatField.getFloat(), t2 = maxTempFloatField.getFloat();
+//            Temperatura nueva = controlador.nuevo(fechaDateChooserCombo.getSelectedDate().getTime(), (Date) horaSpinner2.getValue(), (Date) horaSpinner1.getValue(), t1, t2);
+//            if (controlador.validar(nueva, true)) {
+//                try {
+//                    controlador.guardar(nueva);
+//                    transacionRealizada = true;
+//                } catch (Exception ex) {
+//                    JOptionPane.showMessageDialog(null, "Ya existe un registro para la fecha.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+//                }
+//            }
+//        } else {
+//            registroSeleccionado.setFecha(fechaDateChooserCombo.getSelectedDate().getTime());
+//            registroSeleccionado.setHora((Date) horaSpinner2.getValue());
+//            registroSeleccionado.setHoraMin((Date) horaSpinner1.getValue());
+//            try {
+//                registroSeleccionado.setTemperatura(maxTempFloatField.getFloat());
+//                registroSeleccionado.setTempMin(minTempFloatField.getFloat());
+//            } catch (Exception e) {
+//            }
+//            if (controlador.validar(registroSeleccionado, false)) {
+//                try {
+//                    controlador.editar(registroSeleccionado);
+//                    transacionRealizada = true;
+//                } catch (Exception ex) {
+//                    JOptionPane.showMessageDialog(null, "El registro ya no existe en la base de datos.", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
+//                }
+//            }
+//        }
+//        if (transacionRealizada) {
+//            guardar(false);
+//            cargarTablaPrincipal();
+//            cargarTablaDePromedios();
+//        }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
     private void mesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mesComboBoxItemStateChanged
@@ -648,44 +648,44 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatosRegistroSeleccionado() {
-        if (registroSeleccionado == null) {
-            fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
-            horaSpinner1.setValue(new Date());
-            horaSpinner2.setValue(new Date());
-            minTempFloatField.setText("0.0");
-            maxTempFloatField.setText("0.0");
-        } else {
-            Calendar c = GregorianCalendar.getInstance();
-            c.setTime(registroSeleccionado.getFecha());
-            fechaDateChooserCombo.setSelectedDate(c);
-            horaSpinner1.setValue(registroSeleccionado.getHoraMin());
-            horaSpinner2.setValue(registroSeleccionado.getHoraMax());
-            minTempFloatField.setText(registroSeleccionado.getTempMin() + "");
-            maxTempFloatField.setText(registroSeleccionado.getTempMax() + "");
-        }
+//        if (registroSeleccionado == null) {
+//            fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
+//            horaSpinner1.setValue(new Date());
+//            horaSpinner2.setValue(new Date());
+//            minTempFloatField.setText("0.0");
+//            maxTempFloatField.setText("0.0");
+//        } else {
+//            Calendar c = GregorianCalendar.getInstance();
+//            c.setTime(registroSeleccionado.getFecha());
+//            fechaDateChooserCombo.setSelectedDate(c);
+//            horaSpinner1.setValue(registroSeleccionado.getHoraMin());
+//            horaSpinner2.setValue(registroSeleccionado.getHora());
+//            minTempFloatField.setText(registroSeleccionado.getTempMin() + "");
+//            maxTempFloatField.setText(registroSeleccionado.getTemperatura() + "");
+//        }
     }
 
     private void cargarTablaPrincipal() {
-        for (int i = 0; i < principalTable.getRowCount(); i++) {
-            for (int j = 0; j < principalTable.getColumnCount(); j++) {
-                principalTable.getModel().setValueAt(null, i, j);
-            }
-        }
-        Date esteMes = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
-        Calendar c = GregorianCalendar.getInstance();
-        c.setTime(esteMes);
-        c.add(Calendar.MONTH, 1);
-        c.add(Calendar.DAY_OF_MONTH, -1);
-        Date siguienteMes = c.getTime();
-        lista = controlador.buscarLista(esteMes, siguienteMes);
-        for (int i = 0; i < lista.size(); i++) {
-            Temperatura t = lista.get(i);
-            principalTable.getModel().setValueAt(DateFormatter.formatDate(t.getFecha()), i, 0);
-            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHoraMax()), i, 1);
-            principalTable.getModel().setValueAt(t.getTempMax(), i, 2);
-            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHoraMin()), i, 3);
-            principalTable.getModel().setValueAt(t.getTempMin(), i, 4);
-        }
+//        for (int i = 0; i < principalTable.getRowCount(); i++) {
+//            for (int j = 0; j < principalTable.getColumnCount(); j++) {
+//                principalTable.getModel().setValueAt(null, i, j);
+//            }
+//        }
+//        Date esteMes = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
+//        Calendar c = GregorianCalendar.getInstance();
+//        c.setTime(esteMes);
+//        c.add(Calendar.MONTH, 1);
+//        c.add(Calendar.DAY_OF_MONTH, -1);
+//        Date siguienteMes = c.getTime();
+//        lista = controlador.buscarLista(esteMes, siguienteMes);
+//        for (int i = 0; i < lista.size(); i++) {
+//            Temperatura t = lista.get(i);
+//            principalTable.getModel().setValueAt(DateFormatter.formatDate(t.getFecha()), i, 0);
+//            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHora()), i, 1);
+//            principalTable.getModel().setValueAt(t.getTemperatura(), i, 2);
+//            principalTable.getModel().setValueAt(DateFormatter.formatTime(t.getHoraMin()), i, 3);
+//            principalTable.getModel().setValueAt(t.getTempMin(), i, 4);
+//        }
     }
 
     private void guardar(boolean b) {
@@ -703,26 +703,26 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     }
 
     private void calcularPromedioMes(int i) {
-        Date fecha1 = new Date((int) añoSpinner.getValue() - 1900, i, 1);
-        Calendar c = GregorianCalendar.getInstance();
-        c.setTime(fecha1);
-        c.add(Calendar.MONTH, 1);
-        c.add(Calendar.DAY_OF_MONTH, -1);
-        Date fecha2 = c.getTime();
-        List<Temperatura> listaMes = controlador.buscarLista(fecha1, fecha2);
-        if (listaMes.size() > 0) {
-            float p1 = 0, p2 = 0;
-            for (Temperatura t : listaMes) {
-                p1 += t.getTempMax();
-                p2 += t.getTempMin();
-            }
-            p1 = p1 / listaMes.size();
-            p2 = p2 / listaMes.size();
-            promediosMesTable.getModel().setValueAt(p1, i, 1);
-            promediosMesTable.getModel().setValueAt(p2, i, 2);
-        } else {
-            promediosMesTable.getModel().setValueAt("-", i, 1);
-            promediosMesTable.getModel().setValueAt("-", i, 2);
-        }
+//        Date fecha1 = new Date((int) añoSpinner.getValue() - 1900, i, 1);
+//        Calendar c = GregorianCalendar.getInstance();
+//        c.setTime(fecha1);
+//        c.add(Calendar.MONTH, 1);
+//        c.add(Calendar.DAY_OF_MONTH, -1);
+//        Date fecha2 = c.getTime();
+//        List<Temperatura> listaMes = controlador.buscarLista(fecha1, fecha2);
+//        if (listaMes.size() > 0) {
+//            float p1 = 0, p2 = 0;
+//            for (Temperatura t : listaMes) {
+//                p1 += t.getTemperatura();
+//                p2 += t.getTempMin();
+//            }
+//            p1 = p1 / listaMes.size();
+//            p2 = p2 / listaMes.size();
+//            promediosMesTable.getModel().setValueAt(p1, i, 1);
+//            promediosMesTable.getModel().setValueAt(p2, i, 2);
+//        } else {
+//            promediosMesTable.getModel().setValueAt("-", i, 1);
+//            promediosMesTable.getModel().setValueAt("-", i, 2);
+//        }
     }
 }

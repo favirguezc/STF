@@ -21,7 +21,7 @@ import modelo.administracion.Lote;
 import modelo.administracion.Persona;
 import modelo.administracion.Rol;
 import modelo.produccion.AplicacionFitosanitaria;
-import modelo.produccion.InsumoFitosanitario;
+import modelo.produccion.Insumo;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 
@@ -545,7 +545,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Lote lote = (Lote) loteComboBox.getSelectedItem();
         Date fecha = fechaChooserCombo.getCurrent().getTime();
-        InsumoFitosanitario producto = (InsumoFitosanitario) productoComboBox.getSelectedItem();
+        Insumo producto = (Insumo) productoComboBox.getSelectedItem();
         String motivo = motivoTextField.getText();
         float cantidad = cantidadFloatField.getFloat();
         float agua = aguaFloatField.getFloat();
@@ -778,7 +778,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
     private void cargarListaProductos() {
         productoComboBox.removeAllItems();
-        for (InsumoFitosanitario p : new InsumoFitosanitarioControlador().leerLista()) {
+        for (Insumo p : new InsumoFitosanitarioControlador().leerLista()) {
             productoComboBox.addItem(p);
         }
         if (productoComboBox.getItemCount() > 0) {

@@ -9,11 +9,8 @@ import controlador.administracion.LoteControlador;
 import controlador.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.UnsupportedLookAndFeelException;
 import modelo.administracion.Lote;
 import modelo.administracion.Modulo;
 
@@ -499,8 +496,9 @@ public class LoteIF extends javax.swing.JInternalFrame {
 
     private void guardarRolPersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarRolPersonaButtonActionPerformed
         // TODO add your handling code here:
+        //falta el área
         if (registroModuloSeleccionado == null) {
-            Modulo nuevo = controladorModulo.nuevo(nombreModuloTextField.getText(), registroSeleccionado);
+            Modulo nuevo = controladorModulo.nuevo(nombreModuloTextField.getText(),0, registroSeleccionado);
             if (controladorModulo.validar(nuevo)) {
                 controladorModulo.guardar(nuevo);
                 nombreModuloTextField.setText(null);

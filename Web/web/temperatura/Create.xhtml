@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemperaturaCreateDlg" widgetVar="TemperaturaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTemperaturaTitle}">
+            <h:form id="TemperaturaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{temperaturaController.selected.id}" title="#{bundle.CreateTemperaturaTitle_id}" required="true" requiredMessage="#{bundle.CreateTemperaturaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.EditTemperaturaTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.EditTemperaturaTitle_hora}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_humedad}" for="humedad" />
+                        <p:inputText id="humedad" value="#{temperaturaController.selected.humedad}" title="#{bundle.CreateTemperaturaTitle_humedad}" />
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_puntoderocio}" for="puntoderocio" />
+                        <p:inputText id="puntoderocio" value="#{temperaturaController.selected.puntoderocio}" title="#{bundle.CreateTemperaturaTitle_puntoderocio}" />
+                        <p:outputLabel value="#{bundle.CreateTemperaturaLabel_temperatura}" for="temperatura" />
+                        <p:inputText id="temperatura" value="#{temperaturaController.selected.temperatura}" title="#{bundle.CreateTemperaturaTitle_temperatura}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temperaturaController.create}" value="#{bundle.Save}" update="display,:TemperaturaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TemperaturaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemperaturaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

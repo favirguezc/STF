@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsumoViewDlg" widgetVar="InsumoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInsumoTitle}">
+            <h:form id="InsumoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insumoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInsumoLabel_id}"/>
+                        <h:outputText value="#{insumoController.selected.id}" title="#{bundle.ViewInsumoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInsumoLabel_ingredienteactivo}"/>
+                        <h:outputText value="#{insumoController.selected.ingredienteactivo}" title="#{bundle.ViewInsumoTitle_ingredienteactivo}"/>
+                        <h:outputText value="#{bundle.ViewInsumoLabel_nombre}"/>
+                        <h:outputText value="#{insumoController.selected.nombre}" title="#{bundle.ViewInsumoTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewInsumoLabel_unidades}"/>
+                        <h:outputText value="#{insumoController.selected.unidades}" title="#{bundle.ViewInsumoTitle_unidades}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InsumoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

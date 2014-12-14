@@ -469,13 +469,12 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
         boolean chisas = chisasBooleanComboBox.isSelected();
         boolean babosas = babosasBooleanComboBox.isSelected();
         String otro = otroTextField.getText();
-        boolean otrov = otroBooleanComboBox.isSelected();
         boolean flor = florBooleanComboBox.isSelected();
         boolean fruto = frutoBooleanComboBox.isSelected();
         int coronas = coronasIntegerField.getInteger();
         Date fecha = fechaChooserCombo.getSelectedDate().getTime();
         if (registroSeleccionado == null) {
-            MonitoreoDePlagas nuevo = controlador.nuevo(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, otrov, flor, fruto, coronas, fecha);
+            MonitoreoDePlagas nuevo = controlador.nuevo(modulo, aranita, thrips, cyclamen, chisas, babosas, otro, flor, fruto, coronas, fecha);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -492,7 +491,6 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setFruto(fruto);
             registroSeleccionado.setModulo(modulo);
             registroSeleccionado.setOtro(otro);
-            registroSeleccionado.setOtrov(otrov);
             registroSeleccionado.setThrips(thrips);
             if (controlador.validar(registroSeleccionado)) {
                 try {
@@ -577,7 +575,7 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
                 mp.isChisas(),
                 mp.isBabosas(),
                 mp.getOtro(),
-                mp.isOtrov(),
+                false,
                 mp.isFlor(),
                 mp.isFruto(),
                 mp.getCoronas()};
@@ -614,7 +612,6 @@ public class MonitoreoDePlagasIF extends javax.swing.JInternalFrame {
             chisasBooleanComboBox.setSelected(registroSeleccionado.isChisas());
             babosasBooleanComboBox.setSelected(registroSeleccionado.isBabosas());
             otroTextField.setText(registroSeleccionado.getOtro());
-            otroBooleanComboBox.setSelected(registroSeleccionado.isOtrov());
             florBooleanComboBox.setSelected(registroSeleccionado.isFlor());
             frutoBooleanComboBox.setSelected(registroSeleccionado.isFruto());
             coronasIntegerField.setInteger(registroSeleccionado.getCoronas());

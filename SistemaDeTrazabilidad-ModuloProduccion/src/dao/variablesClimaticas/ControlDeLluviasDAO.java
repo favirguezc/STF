@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.variablesClimaticas.ControlDeLluvias;
+import modelo.variablesClimaticas.Lluvia;
 
 /**
  *
@@ -34,7 +34,7 @@ public class ControlDeLluviasDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(ControlDeLluvias controlDeLluvias) {
+    public void create(Lluvia controlDeLluvias) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,7 +48,7 @@ public class ControlDeLluviasDAO implements Serializable {
         }
     }
 
-    public void edit(ControlDeLluvias controlDeLluvias) throws NonexistentEntityException, Exception {
+    public void edit(Lluvia controlDeLluvias) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -76,9 +76,9 @@ public class ControlDeLluviasDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ControlDeLluvias controlDeLluvias;
+            Lluvia controlDeLluvias;
             try {
-                controlDeLluvias = em.getReference(ControlDeLluvias.class, id);
+                controlDeLluvias = em.getReference(Lluvia.class, id);
                 controlDeLluvias.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The controlDeLluvias with id " + id + " no longer exists.", enfe);
@@ -92,19 +92,19 @@ public class ControlDeLluviasDAO implements Serializable {
         }
     }
 
-    public List<ControlDeLluvias> findControlDeLluviasEntities() {
+    public List<Lluvia> findControlDeLluviasEntities() {
         return findControlDeLluviasEntities(true, -1, -1);
     }
 
-    public List<ControlDeLluvias> findControlDeLluviasEntities(int maxResults, int firstResult) {
+    public List<Lluvia> findControlDeLluviasEntities(int maxResults, int firstResult) {
         return findControlDeLluviasEntities(false, maxResults, firstResult);
     }
 
-    private List<ControlDeLluvias> findControlDeLluviasEntities(boolean all, int maxResults, int firstResult) {
+    private List<Lluvia> findControlDeLluviasEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(ControlDeLluvias.class));
+            cq.select(cq.from(Lluvia.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -116,19 +116,19 @@ public class ControlDeLluviasDAO implements Serializable {
         }
     }
 
-    public ControlDeLluvias findControlDeLluvias(long id) {
+    public Lluvia findControlDeLluvias(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(ControlDeLluvias.class, id);
+            return em.find(Lluvia.class, id);
         } finally {
             em.close();
         }
     }
     
-    public ControlDeLluvias findControlDeLluvias(Date d) throws Exception{
+    public Lluvia findControlDeLluvias(Date d) throws Exception{
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<ControlDeLluvias> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha = :fecha", ControlDeLluvias.class);
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha = :fecha", Lluvia.class);
             query.setParameter("fecha", d, TemporalType.DATE);
             return query.getSingleResult();
         } finally {
@@ -136,10 +136,10 @@ public class ControlDeLluviasDAO implements Serializable {
         }
     }
     
-    public List<ControlDeLluvias> findControlDeLluviasEntities(Date esteMes, Date siguienteMes) {
+    public List<Lluvia> findControlDeLluviasEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<ControlDeLluvias> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", ControlDeLluvias.class);
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Lluvia.class);
             query.setParameter("fecha1", esteMes, TemporalType.DATE);
             query.setParameter("fecha2", siguienteMes, TemporalType.DATE);
             return query.getResultList();
@@ -152,7 +152,7 @@ public class ControlDeLluviasDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<ControlDeLluvias> rt = cq.from(ControlDeLluvias.class);
+            Root<Lluvia> rt = cq.from(Lluvia.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

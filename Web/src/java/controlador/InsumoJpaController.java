@@ -6,18 +6,15 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Aplicacionfitosanitaria;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import modelo.Insumo;
+import modelo.produccion.Insumo;
 
 /**
  *
@@ -34,36 +31,13 @@ public class InsumoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Insumo insumo) throws PreexistingEntityException, Exception {
-        if (insumo.getAplicacionfitosanitariaList() == null) {
-            insumo.setAplicacionfitosanitariaList(new ArrayList<Aplicacionfitosanitaria>());
-        }
+    public void create(Insumo insumo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Aplicacionfitosanitaria> attachedAplicacionfitosanitariaList = new ArrayList<Aplicacionfitosanitaria>();
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListAplicacionfitosanitariaToAttach : insumo.getAplicacionfitosanitariaList()) {
-                aplicacionfitosanitariaListAplicacionfitosanitariaToAttach = em.getReference(aplicacionfitosanitariaListAplicacionfitosanitariaToAttach.getClass(), aplicacionfitosanitariaListAplicacionfitosanitariaToAttach.getId());
-                attachedAplicacionfitosanitariaList.add(aplicacionfitosanitariaListAplicacionfitosanitariaToAttach);
-            }
-            insumo.setAplicacionfitosanitariaList(attachedAplicacionfitosanitariaList);
             em.persist(insumo);
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListAplicacionfitosanitaria : insumo.getAplicacionfitosanitariaList()) {
-                Insumo oldProductoIdOfAplicacionfitosanitariaListAplicacionfitosanitaria = aplicacionfitosanitariaListAplicacionfitosanitaria.getProductoId();
-                aplicacionfitosanitariaListAplicacionfitosanitaria.setProductoId(insumo);
-                aplicacionfitosanitariaListAplicacionfitosanitaria = em.merge(aplicacionfitosanitariaListAplicacionfitosanitaria);
-                if (oldProductoIdOfAplicacionfitosanitariaListAplicacionfitosanitaria != null) {
-                    oldProductoIdOfAplicacionfitosanitariaListAplicacionfitosanitaria.getAplicacionfitosanitariaList().remove(aplicacionfitosanitariaListAplicacionfitosanitaria);
-                    oldProductoIdOfAplicacionfitosanitariaListAplicacionfitosanitaria = em.merge(oldProductoIdOfAplicacionfitosanitariaListAplicacionfitosanitaria);
-                }
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findInsumo(insumo.getId()) != null) {
-                throw new PreexistingEntityException("Insumo " + insumo + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -76,39 +50,12 @@ public class InsumoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Insumo persistentInsumo = em.find(Insumo.class, insumo.getId());
-            List<Aplicacionfitosanitaria> aplicacionfitosanitariaListOld = persistentInsumo.getAplicacionfitosanitariaList();
-            List<Aplicacionfitosanitaria> aplicacionfitosanitariaListNew = insumo.getAplicacionfitosanitariaList();
-            List<Aplicacionfitosanitaria> attachedAplicacionfitosanitariaListNew = new ArrayList<Aplicacionfitosanitaria>();
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListNewAplicacionfitosanitariaToAttach : aplicacionfitosanitariaListNew) {
-                aplicacionfitosanitariaListNewAplicacionfitosanitariaToAttach = em.getReference(aplicacionfitosanitariaListNewAplicacionfitosanitariaToAttach.getClass(), aplicacionfitosanitariaListNewAplicacionfitosanitariaToAttach.getId());
-                attachedAplicacionfitosanitariaListNew.add(aplicacionfitosanitariaListNewAplicacionfitosanitariaToAttach);
-            }
-            aplicacionfitosanitariaListNew = attachedAplicacionfitosanitariaListNew;
-            insumo.setAplicacionfitosanitariaList(aplicacionfitosanitariaListNew);
             insumo = em.merge(insumo);
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListOldAplicacionfitosanitaria : aplicacionfitosanitariaListOld) {
-                if (!aplicacionfitosanitariaListNew.contains(aplicacionfitosanitariaListOldAplicacionfitosanitaria)) {
-                    aplicacionfitosanitariaListOldAplicacionfitosanitaria.setProductoId(null);
-                    aplicacionfitosanitariaListOldAplicacionfitosanitaria = em.merge(aplicacionfitosanitariaListOldAplicacionfitosanitaria);
-                }
-            }
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListNewAplicacionfitosanitaria : aplicacionfitosanitariaListNew) {
-                if (!aplicacionfitosanitariaListOld.contains(aplicacionfitosanitariaListNewAplicacionfitosanitaria)) {
-                    Insumo oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria = aplicacionfitosanitariaListNewAplicacionfitosanitaria.getProductoId();
-                    aplicacionfitosanitariaListNewAplicacionfitosanitaria.setProductoId(insumo);
-                    aplicacionfitosanitariaListNewAplicacionfitosanitaria = em.merge(aplicacionfitosanitariaListNewAplicacionfitosanitaria);
-                    if (oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria != null && !oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria.equals(insumo)) {
-                        oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria.getAplicacionfitosanitariaList().remove(aplicacionfitosanitariaListNewAplicacionfitosanitaria);
-                        oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria = em.merge(oldProductoIdOfAplicacionfitosanitariaListNewAplicacionfitosanitaria);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = insumo.getId();
+                long id = insumo.getId();
                 if (findInsumo(id) == null) {
                     throw new NonexistentEntityException("The insumo with id " + id + " no longer exists.");
                 }
@@ -121,7 +68,7 @@ public class InsumoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -132,11 +79,6 @@ public class InsumoJpaController implements Serializable {
                 insumo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The insumo with id " + id + " no longer exists.", enfe);
-            }
-            List<Aplicacionfitosanitaria> aplicacionfitosanitariaList = insumo.getAplicacionfitosanitariaList();
-            for (Aplicacionfitosanitaria aplicacionfitosanitariaListAplicacionfitosanitaria : aplicacionfitosanitariaList) {
-                aplicacionfitosanitariaListAplicacionfitosanitaria.setProductoId(null);
-                aplicacionfitosanitariaListAplicacionfitosanitaria = em.merge(aplicacionfitosanitariaListAplicacionfitosanitaria);
             }
             em.remove(insumo);
             em.getTransaction().commit();
@@ -171,7 +113,7 @@ public class InsumoJpaController implements Serializable {
         }
     }
 
-    public Insumo findInsumo(Long id) {
+    public Insumo findInsumo(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Insumo.class, id);

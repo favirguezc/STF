@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Lluvia;
+import modelo.variablesClimaticas.Lluvia;
 
 /**
  *
@@ -32,18 +31,13 @@ public class LluviaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Lluvia lluvia) throws PreexistingEntityException, Exception {
+    public void create(Lluvia lluvia) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(lluvia);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findLluvia(lluvia.getId()) != null) {
-                throw new PreexistingEntityException("Lluvia " + lluvia + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -61,7 +55,7 @@ public class LluviaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = lluvia.getId();
+                long id = lluvia.getId();
                 if (findLluvia(id) == null) {
                     throw new NonexistentEntityException("The lluvia with id " + id + " no longer exists.");
                 }
@@ -74,7 +68,7 @@ public class LluviaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -119,7 +113,7 @@ public class LluviaJpaController implements Serializable {
         }
     }
 
-    public Lluvia findLluvia(Long id) {
+    public Lluvia findLluvia(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Lluvia.class, id);

@@ -43,6 +43,24 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajoTitle_modulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modulo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajoTitle_labor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.labor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajoTitle_operario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.operario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajoTitle_jornales}"/>
                             </f:facet>
                             <h:outputText value="#{item.jornales}"/>
@@ -55,27 +73,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_asistenteId}"/>
+                                <h:outputText value="#{bundle.ListTrabajoTitle_asistente}"/>
                             </f:facet>
-                            <h:outputText value="#{item.asistenteId}"/>
+                            <h:outputText value="#{item.asistente}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_laborId}"/>
+                                <h:outputText value="#{bundle.ListTrabajoTitle_productor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.laborId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_operarioId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.operarioId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_productorId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.productorId}"/>
+                            <h:outputText value="#{item.productor}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{trabajoController.prepareCreate}" update=":TrabajoCreateForm" oncomplete="PF('TrabajoCreateDialog').show()"/>

@@ -1,9 +1,9 @@
 package vista;
 
-import modelo.Rolpersona;
+import modelo.administracion.RolPersona;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
-import controlador.RolpersonaJpaController;
+import controlador.RolPersonaJpaController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,22 +18,22 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "rolpersonaController")
+@ManagedBean(name = "rolPersonaController")
 @SessionScoped
-public class RolpersonaController implements Serializable {
+public class RolPersonaController implements Serializable {
 
-    private RolpersonaJpaController jpaController = null;
-    private List<Rolpersona> items = null;
-    private Rolpersona selected;
+    private RolPersonaJpaController jpaController = null;
+    private List<RolPersona> items = null;
+    private RolPersona selected;
 
-    public RolpersonaController() {
+    public RolPersonaController() {
     }
 
-    public Rolpersona getSelected() {
+    public RolPersona getSelected() {
         return selected;
     }
 
-    public void setSelected(Rolpersona selected) {
+    public void setSelected(RolPersona selected) {
         this.selected = selected;
     }
 
@@ -43,41 +43,41 @@ public class RolpersonaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RolpersonaJpaController getJpaController() {
+    private RolPersonaJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new RolpersonaJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new RolPersonaJpaController(Persistence.createEntityManagerFactory("WebPU"));
         }
         return jpaController;
     }
 
-    public Rolpersona prepareCreate() {
-        selected = new Rolpersona();
+    public RolPersona prepareCreate() {
+        selected = new RolPersona();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RolpersonaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RolPersonaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RolpersonaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RolPersonaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RolpersonaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RolPersonaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Rolpersona> getItems() {
+    public List<RolPersona> getItems() {
         if (items == null) {
-            items = getJpaController().findRolpersonaEntities();
+            items = getJpaController().findRolPersonaEntities();
         }
         return items;
     }
@@ -101,34 +101,34 @@ public class RolpersonaController implements Serializable {
         }
     }
 
-    public List<Rolpersona> getItemsAvailableSelectMany() {
-        return getJpaController().findRolpersonaEntities();
+    public List<RolPersona> getItemsAvailableSelectMany() {
+        return getJpaController().findRolPersonaEntities();
     }
 
-    public List<Rolpersona> getItemsAvailableSelectOne() {
-        return getJpaController().findRolpersonaEntities();
+    public List<RolPersona> getItemsAvailableSelectOne() {
+        return getJpaController().findRolPersonaEntities();
     }
 
-    @FacesConverter(forClass = Rolpersona.class)
-    public static class RolpersonaControllerConverter implements Converter {
+    @FacesConverter(forClass = RolPersona.class)
+    public static class RolPersonaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            RolpersonaController controller = (RolpersonaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "rolpersonaController");
-            return controller.getJpaController().findRolpersona(getKey(value));
+            RolPersonaController controller = (RolPersonaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "rolPersonaController");
+            return controller.getJpaController().findRolPersona(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -139,11 +139,11 @@ public class RolpersonaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Rolpersona) {
-                Rolpersona o = (Rolpersona) object;
+            if (object instanceof RolPersona) {
+                RolPersona o = (RolPersona) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Rolpersona.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), RolPersona.class.getName()});
                 return null;
             }
         }

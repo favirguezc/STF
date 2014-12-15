@@ -22,12 +22,14 @@
                         <h:outputText value="#{temperaturaController.selected.hora}" title="#{bundle.ViewTemperaturaTitle_hora}">
                             <f:convertDateTime pattern="HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_humedad}"/>
-                        <h:outputText value="#{temperaturaController.selected.humedad}" title="#{bundle.ViewTemperaturaTitle_humedad}"/>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_puntoderocio}"/>
-                        <h:outputText value="#{temperaturaController.selected.puntoderocio}" title="#{bundle.ViewTemperaturaTitle_puntoderocio}"/>
                         <h:outputText value="#{bundle.ViewTemperaturaLabel_temperatura}"/>
                         <h:outputText value="#{temperaturaController.selected.temperatura}" title="#{bundle.ViewTemperaturaTitle_temperatura}"/>
+                        <h:outputText value="#{bundle.ViewTemperaturaLabel_humedad}"/>
+                        <h:outputText value="#{temperaturaController.selected.humedad}" title="#{bundle.ViewTemperaturaTitle_humedad}"/>
+                        <h:outputText value="#{bundle.ViewTemperaturaLabel_puntoDeRocio}"/>
+                        <h:outputText value="#{temperaturaController.selected.puntoDeRocio}" title="#{bundle.ViewTemperaturaTitle_puntoDeRocio}"/>
+                        <h:outputText value="#{bundle.ViewTemperaturaLabel_modulo}"/>
+                        <h:outputText value="#{temperaturaController.selected.modulo}" title="#{bundle.ViewTemperaturaTitle_modulo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TemperaturaViewDialog.hide()"/>
                 </h:panelGroup>

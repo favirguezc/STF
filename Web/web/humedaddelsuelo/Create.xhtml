@@ -8,23 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="HumedaddelsueloCreateDlg" widgetVar="HumedaddelsueloCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateHumedaddelsueloTitle}">
-            <h:form id="HumedaddelsueloCreateForm">
+        <p:dialog id="HumedadDelSueloCreateDlg" widgetVar="HumedadDelSueloCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateHumedadDelSueloTitle}">
+            <h:form id="HumedadDelSueloCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{humedaddelsueloController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateHumedaddelsueloLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{humedaddelsueloController.selected.id}" title="#{bundle.CreateHumedaddelsueloTitle_id}" required="true" requiredMessage="#{bundle.CreateHumedaddelsueloRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.CreateHumedaddelsueloLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{humedaddelsueloController.selected.fecha}" title="#{bundle.EditHumedaddelsueloTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateHumedaddelsueloLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{humedaddelsueloController.selected.hora}" title="#{bundle.EditHumedaddelsueloTitle_hora}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateHumedaddelsueloLabel_valoren15cms}" for="valoren15cms" />
-                        <p:inputText id="valoren15cms" value="#{humedaddelsueloController.selected.valoren15cms}" title="#{bundle.CreateHumedaddelsueloTitle_valoren15cms}" />
-                        <p:outputLabel value="#{bundle.CreateHumedaddelsueloLabel_valoren30cms}" for="valoren30cms" />
-                        <p:inputText id="valoren30cms" value="#{humedaddelsueloController.selected.valoren30cms}" title="#{bundle.CreateHumedaddelsueloTitle_valoren30cms}" />
+                    <p:panelGrid columns="2" rendered="#{humedadDelSueloController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{humedadDelSueloController.selected.fecha}" title="#{bundle.EditHumedadDelSueloTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_valorEn30Cms}" for="valorEn30Cms" />
+                        <p:inputText id="valorEn30Cms" value="#{humedadDelSueloController.selected.valorEn30Cms}" title="#{bundle.CreateHumedadDelSueloTitle_valorEn30Cms}" />
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_valorEn15Cms}" for="valorEn15Cms" />
+                        <p:inputText id="valorEn15Cms" value="#{humedadDelSueloController.selected.valorEn15Cms}" title="#{bundle.CreateHumedadDelSueloTitle_valorEn15Cms}" />
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{humedadDelSueloController.selected.hora}" title="#{bundle.EditHumedadDelSueloTitle_hora}"  showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{humedaddelsueloController.create}" value="#{bundle.Save}" update="display,:HumedaddelsueloListForm:datalist,:growl" oncomplete="handleSubmit(args,'HumedaddelsueloCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="HumedaddelsueloCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{humedadDelSueloController.create}" value="#{bundle.Save}" update="display,:HumedadDelSueloListForm:datalist,:growl" oncomplete="handleSubmit(args,'HumedadDelSueloCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HumedadDelSueloCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

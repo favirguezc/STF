@@ -8,35 +8,32 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitoreodeplagasEditDlg" widgetVar="MonitoreodeplagasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMonitoreodeplagasTitle}">
-            <h:form id="MonitoreodeplagasEditForm">
+        <p:dialog id="MonitoreoDePlagasEditDlg" widgetVar="MonitoreoDePlagasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMonitoreoDePlagasTitle}">
+            <h:form id="MonitoreoDePlagasEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{monitoreodeplagasController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{monitoreodeplagasController.selected.id}" title="#{bundle.EditMonitoreodeplagasTitle_id}" required="true" requiredMessage="#{bundle.EditMonitoreodeplagasRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_aranita}" for="aranita" />
-                        <p:inputText id="aranita" value="#{monitoreodeplagasController.selected.aranita}" title="#{bundle.EditMonitoreodeplagasTitle_aranita}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_babosas}" for="babosas" />
-                        <p:selectBooleanCheckbox id="babosas" value="#{monitoreodeplagasController.selected.babosas}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_chisas}" for="chisas" />
-                        <p:selectBooleanCheckbox id="chisas" value="#{monitoreodeplagasController.selected.chisas}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_coronas}" for="coronas" />
-                        <p:inputText id="coronas" value="#{monitoreodeplagasController.selected.coronas}" title="#{bundle.EditMonitoreodeplagasTitle_coronas}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_cyclamen}" for="cyclamen" />
-                        <p:selectBooleanCheckbox id="cyclamen" value="#{monitoreodeplagasController.selected.cyclamen}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreodeplagasController.selected.fecha}" title="#{bundle.EditMonitoreodeplagasTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_flor}" for="flor" />
-                        <p:selectBooleanCheckbox id="flor" value="#{monitoreodeplagasController.selected.flor}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_fruto}" for="fruto" />
-                        <p:selectBooleanCheckbox id="fruto" value="#{monitoreodeplagasController.selected.fruto}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_otro}" for="otro" />
-                        <p:inputText id="otro" value="#{monitoreodeplagasController.selected.otro}" title="#{bundle.EditMonitoreodeplagasTitle_otro}" />
-                        <p:outputLabel value="#{bundle.EditMonitoreodeplagasLabel_thrips}" for="thrips" />
-                        <p:inputText id="thrips" value="#{monitoreodeplagasController.selected.thrips}" title="#{bundle.EditMonitoreodeplagasTitle_thrips}" />
+                    <p:panelGrid columns="2" rendered="#{monitoreoDePlagasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{monitoreoDePlagasController.selected.id}" title="#{bundle.EditMonitoreoDePlagasTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_modulo}" for="modulo" />
+                        <p:selectOneMenu id="modulo" value="#{monitoreoDePlagasController.selected.modulo}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_aranita}" for="aranita" />
+                        <p:inputText id="aranita" value="#{monitoreoDePlagasController.selected.aranita}" title="#{bundle.EditMonitoreoDePlagasTitle_aranita}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_thrips}" for="thrips" />
+                        <p:inputText id="thrips" value="#{monitoreoDePlagasController.selected.thrips}" title="#{bundle.EditMonitoreoDePlagasTitle_thrips}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_otro}" for="otro" />
+                        <p:inputText id="otro" value="#{monitoreoDePlagasController.selected.otro}" title="#{bundle.EditMonitoreoDePlagasTitle_otro}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_coronas}" for="coronas" />
+                        <p:inputText id="coronas" value="#{monitoreoDePlagasController.selected.coronas}" title="#{bundle.EditMonitoreoDePlagasTitle_coronas}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDePlagasController.selected.fecha}" title="#{bundle.EditMonitoreoDePlagasTitle_fecha}"  showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitoreodeplagasController.update}" value="#{bundle.Save}" update="display,:MonitoreodeplagasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoreodeplagasEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreodeplagasEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitoreoDePlagasController.update}" value="#{bundle.Save}" update="display,:MonitoreoDePlagasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoreoDePlagasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoDePlagasEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

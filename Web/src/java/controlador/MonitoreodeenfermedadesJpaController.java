@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,15 +14,15 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Monitoreodeenfermedades;
+import modelo.produccion.MonitoreoDeEnfermedades;
 
 /**
  *
  * @author fredy
  */
-public class MonitoreodeenfermedadesJpaController implements Serializable {
+public class MonitoreoDeEnfermedadesJpaController implements Serializable {
 
-    public MonitoreodeenfermedadesJpaController(EntityManagerFactory emf) {
+    public MonitoreoDeEnfermedadesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,18 +31,13 @@ public class MonitoreodeenfermedadesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Monitoreodeenfermedades monitoreodeenfermedades) throws PreexistingEntityException, Exception {
+    public void create(MonitoreoDeEnfermedades monitoreoDeEnfermedades) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(monitoreodeenfermedades);
+            em.persist(monitoreoDeEnfermedades);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findMonitoreodeenfermedades(monitoreodeenfermedades.getId()) != null) {
-                throw new PreexistingEntityException("Monitoreodeenfermedades " + monitoreodeenfermedades + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -51,19 +45,19 @@ public class MonitoreodeenfermedadesJpaController implements Serializable {
         }
     }
 
-    public void edit(Monitoreodeenfermedades monitoreodeenfermedades) throws NonexistentEntityException, Exception {
+    public void edit(MonitoreoDeEnfermedades monitoreoDeEnfermedades) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            monitoreodeenfermedades = em.merge(monitoreodeenfermedades);
+            monitoreoDeEnfermedades = em.merge(monitoreoDeEnfermedades);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = monitoreodeenfermedades.getId();
-                if (findMonitoreodeenfermedades(id) == null) {
-                    throw new NonexistentEntityException("The monitoreodeenfermedades with id " + id + " no longer exists.");
+                long id = monitoreoDeEnfermedades.getId();
+                if (findMonitoreoDeEnfermedades(id) == null) {
+                    throw new NonexistentEntityException("The monitoreoDeEnfermedades with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -74,19 +68,19 @@ public class MonitoreodeenfermedadesJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Monitoreodeenfermedades monitoreodeenfermedades;
+            MonitoreoDeEnfermedades monitoreoDeEnfermedades;
             try {
-                monitoreodeenfermedades = em.getReference(Monitoreodeenfermedades.class, id);
-                monitoreodeenfermedades.getId();
+                monitoreoDeEnfermedades = em.getReference(MonitoreoDeEnfermedades.class, id);
+                monitoreoDeEnfermedades.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The monitoreodeenfermedades with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The monitoreoDeEnfermedades with id " + id + " no longer exists.", enfe);
             }
-            em.remove(monitoreodeenfermedades);
+            em.remove(monitoreoDeEnfermedades);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +89,19 @@ public class MonitoreodeenfermedadesJpaController implements Serializable {
         }
     }
 
-    public List<Monitoreodeenfermedades> findMonitoreodeenfermedadesEntities() {
-        return findMonitoreodeenfermedadesEntities(true, -1, -1);
+    public List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities() {
+        return findMonitoreoDeEnfermedadesEntities(true, -1, -1);
     }
 
-    public List<Monitoreodeenfermedades> findMonitoreodeenfermedadesEntities(int maxResults, int firstResult) {
-        return findMonitoreodeenfermedadesEntities(false, maxResults, firstResult);
+    public List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities(int maxResults, int firstResult) {
+        return findMonitoreoDeEnfermedadesEntities(false, maxResults, firstResult);
     }
 
-    private List<Monitoreodeenfermedades> findMonitoreodeenfermedadesEntities(boolean all, int maxResults, int firstResult) {
+    private List<MonitoreoDeEnfermedades> findMonitoreoDeEnfermedadesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Monitoreodeenfermedades.class));
+            cq.select(cq.from(MonitoreoDeEnfermedades.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +113,20 @@ public class MonitoreodeenfermedadesJpaController implements Serializable {
         }
     }
 
-    public Monitoreodeenfermedades findMonitoreodeenfermedades(Long id) {
+    public MonitoreoDeEnfermedades findMonitoreoDeEnfermedades(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Monitoreodeenfermedades.class, id);
+            return em.find(MonitoreoDeEnfermedades.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getMonitoreodeenfermedadesCount() {
+    public int getMonitoreoDeEnfermedadesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Monitoreodeenfermedades> rt = cq.from(Monitoreodeenfermedades.class);
+            Root<MonitoreoDeEnfermedades> rt = cq.from(MonitoreoDeEnfermedades.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

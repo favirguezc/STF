@@ -1,9 +1,9 @@
 package vista;
 
-import modelo.Aplicacionfitosanitaria;
+import modelo.produccion.AplicacionFitosanitaria;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
-import controlador.AplicacionfitosanitariaJpaController;
+import controlador.AplicacionFitosanitariaJpaController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,22 +18,22 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "aplicacionfitosanitariaController")
+@ManagedBean(name = "aplicacionFitosanitariaController")
 @SessionScoped
-public class AplicacionfitosanitariaController implements Serializable {
+public class AplicacionFitosanitariaController implements Serializable {
 
-    private AplicacionfitosanitariaJpaController jpaController = null;
-    private List<Aplicacionfitosanitaria> items = null;
-    private Aplicacionfitosanitaria selected;
+    private AplicacionFitosanitariaJpaController jpaController = null;
+    private List<AplicacionFitosanitaria> items = null;
+    private AplicacionFitosanitaria selected;
 
-    public AplicacionfitosanitariaController() {
+    public AplicacionFitosanitariaController() {
     }
 
-    public Aplicacionfitosanitaria getSelected() {
+    public AplicacionFitosanitaria getSelected() {
         return selected;
     }
 
-    public void setSelected(Aplicacionfitosanitaria selected) {
+    public void setSelected(AplicacionFitosanitaria selected) {
         this.selected = selected;
     }
 
@@ -43,41 +43,41 @@ public class AplicacionfitosanitariaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private AplicacionfitosanitariaJpaController getJpaController() {
+    private AplicacionFitosanitariaJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new AplicacionfitosanitariaJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new AplicacionFitosanitariaJpaController(Persistence.createEntityManagerFactory("WebPU"));
         }
         return jpaController;
     }
 
-    public Aplicacionfitosanitaria prepareCreate() {
-        selected = new Aplicacionfitosanitaria();
+    public AplicacionFitosanitaria prepareCreate() {
+        selected = new AplicacionFitosanitaria();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AplicacionfitosanitariaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AplicacionFitosanitariaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AplicacionfitosanitariaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AplicacionFitosanitariaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AplicacionfitosanitariaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AplicacionFitosanitariaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Aplicacionfitosanitaria> getItems() {
+    public List<AplicacionFitosanitaria> getItems() {
         if (items == null) {
-            items = getJpaController().findAplicacionfitosanitariaEntities();
+            items = getJpaController().findAplicacionFitosanitariaEntities();
         }
         return items;
     }
@@ -101,34 +101,34 @@ public class AplicacionfitosanitariaController implements Serializable {
         }
     }
 
-    public List<Aplicacionfitosanitaria> getItemsAvailableSelectMany() {
-        return getJpaController().findAplicacionfitosanitariaEntities();
+    public List<AplicacionFitosanitaria> getItemsAvailableSelectMany() {
+        return getJpaController().findAplicacionFitosanitariaEntities();
     }
 
-    public List<Aplicacionfitosanitaria> getItemsAvailableSelectOne() {
-        return getJpaController().findAplicacionfitosanitariaEntities();
+    public List<AplicacionFitosanitaria> getItemsAvailableSelectOne() {
+        return getJpaController().findAplicacionFitosanitariaEntities();
     }
 
-    @FacesConverter(forClass = Aplicacionfitosanitaria.class)
-    public static class AplicacionfitosanitariaControllerConverter implements Converter {
+    @FacesConverter(forClass = AplicacionFitosanitaria.class)
+    public static class AplicacionFitosanitariaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AplicacionfitosanitariaController controller = (AplicacionfitosanitariaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "aplicacionfitosanitariaController");
-            return controller.getJpaController().findAplicacionfitosanitaria(getKey(value));
+            AplicacionFitosanitariaController controller = (AplicacionFitosanitariaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "aplicacionFitosanitariaController");
+            return controller.getJpaController().findAplicacionFitosanitaria(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -139,11 +139,11 @@ public class AplicacionfitosanitariaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Aplicacionfitosanitaria) {
-                Aplicacionfitosanitaria o = (Aplicacionfitosanitaria) object;
+            if (object instanceof AplicacionFitosanitaria) {
+                AplicacionFitosanitaria o = (AplicacionFitosanitaria) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Aplicacionfitosanitaria.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), AplicacionFitosanitaria.class.getName()});
                 return null;
             }
         }

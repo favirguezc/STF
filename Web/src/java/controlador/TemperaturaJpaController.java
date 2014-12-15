@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Temperatura;
+import modelo.variablesClimaticas.Temperatura;
 
 /**
  *
@@ -32,18 +31,13 @@ public class TemperaturaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Temperatura temperatura) throws PreexistingEntityException, Exception {
+    public void create(Temperatura temperatura) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(temperatura);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findTemperatura(temperatura.getId()) != null) {
-                throw new PreexistingEntityException("Temperatura " + temperatura + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();

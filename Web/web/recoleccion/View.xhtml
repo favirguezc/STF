@@ -14,26 +14,32 @@
                     <p:panelGrid columns="2" rendered="#{recoleccionController.selected != null}">
                         <h:outputText value="#{bundle.ViewRecoleccionLabel_id}"/>
                         <h:outputText value="#{recoleccionController.selected.id}" title="#{bundle.ViewRecoleccionTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_cuartagramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.cuartagramos}" title="#{bundle.ViewRecoleccionTitle_cuartagramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_danadagramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.danadagramos}" title="#{bundle.ViewRecoleccionTitle_danadagramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_extragramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.extragramos}" title="#{bundle.ViewRecoleccionTitle_extragramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_lote}"/>
+                        <h:outputText value="#{recoleccionController.selected.lote}" title="#{bundle.ViewRecoleccionTitle_lote}"/>
                         <h:outputText value="#{bundle.ViewRecoleccionLabel_fecha}"/>
                         <h:outputText value="#{recoleccionController.selected.fecha}" title="#{bundle.ViewRecoleccionTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_primeragramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.primeragramos}" title="#{bundle.ViewRecoleccionTitle_primeragramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_quintagramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.quintagramos}" title="#{bundle.ViewRecoleccionTitle_quintagramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_segundagramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.segundagramos}" title="#{bundle.ViewRecoleccionTitle_segundagramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_terceragramos}"/>
-                        <h:outputText value="#{recoleccionController.selected.terceragramos}" title="#{bundle.ViewRecoleccionTitle_terceragramos}"/>
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_recolectorId}"/>
-                        <h:outputText value="#{recoleccionController.selected.recolectorId}" title="#{bundle.ViewRecoleccionTitle_recolectorId}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_recolector}"/>
+                        <h:outputText value="#{recoleccionController.selected.recolector}" title="#{bundle.ViewRecoleccionTitle_recolector}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_extraGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.extraGramos}" title="#{bundle.ViewRecoleccionTitle_extraGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_primeraGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.primeraGramos}" title="#{bundle.ViewRecoleccionTitle_primeraGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_segundaGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.segundaGramos}" title="#{bundle.ViewRecoleccionTitle_segundaGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_terceraGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.terceraGramos}" title="#{bundle.ViewRecoleccionTitle_terceraGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_cuartaGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.cuartaGramos}" title="#{bundle.ViewRecoleccionTitle_cuartaGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_quintaGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.quintaGramos}" title="#{bundle.ViewRecoleccionTitle_quintaGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_danadaGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.danadaGramos}" title="#{bundle.ViewRecoleccionTitle_danadaGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_buenaGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.buenaGramos}" title="#{bundle.ViewRecoleccionTitle_buenaGramos}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_totalGramos}"/>
+                        <h:outputText value="#{recoleccionController.selected.totalGramos}" title="#{bundle.ViewRecoleccionTitle_totalGramos}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RecoleccionViewDialog.hide()"/>
                 </h:panelGroup>

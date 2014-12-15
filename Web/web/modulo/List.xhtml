@@ -22,23 +22,12 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 widgetVar="modulosTable"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListModuloTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListModuloTitle_area}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.area}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListModuloTitle_nombre}"/>
@@ -47,9 +36,17 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListModuloTitle_loteId}"/>
+                                <h:outputText value="#{bundle.ListModuloTitle_area}"/>
                             </f:facet>
-                            <h:outputText value="#{item.loteId}"/>
+                            <h:outputText value="#{item.area}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.lote}" headerText="#{bundle.ListModuloTitle_lote}" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('modulosTable').filter()">
+                                    <f:selectItems value="#{loteController.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.lote}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{moduloController.prepareCreate}" update=":ModuloCreateForm" oncomplete="PF('ModuloCreateDialog').show()"/>

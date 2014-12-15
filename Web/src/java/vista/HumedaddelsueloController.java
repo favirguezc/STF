@@ -1,9 +1,9 @@
 package vista;
 
-import modelo.Humedaddelsuelo;
+import modelo.variablesClimaticas.HumedadDelSuelo;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
-import controlador.HumedaddelsueloJpaController;
+import controlador.HumedadDelSueloJpaController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,22 +18,22 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "humedaddelsueloController")
+@ManagedBean(name = "humedadDelSueloController")
 @SessionScoped
-public class HumedaddelsueloController implements Serializable {
+public class HumedadDelSueloController implements Serializable {
 
-    private HumedaddelsueloJpaController jpaController = null;
-    private List<Humedaddelsuelo> items = null;
-    private Humedaddelsuelo selected;
+    private HumedadDelSueloJpaController jpaController = null;
+    private List<HumedadDelSuelo> items = null;
+    private HumedadDelSuelo selected;
 
-    public HumedaddelsueloController() {
+    public HumedadDelSueloController() {
     }
 
-    public Humedaddelsuelo getSelected() {
+    public HumedadDelSuelo getSelected() {
         return selected;
     }
 
-    public void setSelected(Humedaddelsuelo selected) {
+    public void setSelected(HumedadDelSuelo selected) {
         this.selected = selected;
     }
 
@@ -43,41 +43,41 @@ public class HumedaddelsueloController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private HumedaddelsueloJpaController getJpaController() {
+    private HumedadDelSueloJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new HumedaddelsueloJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new HumedadDelSueloJpaController(Persistence.createEntityManagerFactory("WebPU"));
         }
         return jpaController;
     }
 
-    public Humedaddelsuelo prepareCreate() {
-        selected = new Humedaddelsuelo();
+    public HumedadDelSuelo prepareCreate() {
+        selected = new HumedadDelSuelo();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("HumedaddelsueloCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("HumedadDelSueloCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("HumedaddelsueloUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("HumedadDelSueloUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("HumedaddelsueloDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("HumedadDelSueloDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Humedaddelsuelo> getItems() {
+    public List<HumedadDelSuelo> getItems() {
         if (items == null) {
-            items = getJpaController().findHumedaddelsueloEntities();
+            items = getJpaController().findHumedadDelSueloEntities();
         }
         return items;
     }
@@ -101,25 +101,25 @@ public class HumedaddelsueloController implements Serializable {
         }
     }
 
-    public List<Humedaddelsuelo> getItemsAvailableSelectMany() {
-        return getJpaController().findHumedaddelsueloEntities();
+    public List<HumedadDelSuelo> getItemsAvailableSelectMany() {
+        return getJpaController().findHumedadDelSueloEntities();
     }
 
-    public List<Humedaddelsuelo> getItemsAvailableSelectOne() {
-        return getJpaController().findHumedaddelsueloEntities();
+    public List<HumedadDelSuelo> getItemsAvailableSelectOne() {
+        return getJpaController().findHumedadDelSueloEntities();
     }
 
-    @FacesConverter(forClass = Humedaddelsuelo.class)
-    public static class HumedaddelsueloControllerConverter implements Converter {
+    @FacesConverter(forClass = HumedadDelSuelo.class)
+    public static class HumedadDelSueloControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            HumedaddelsueloController controller = (HumedaddelsueloController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "humedaddelsueloController");
-            return controller.getJpaController().findHumedaddelsuelo(getKey(value));
+            HumedadDelSueloController controller = (HumedadDelSueloController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "humedadDelSueloController");
+            return controller.getJpaController().findHumedadDelSuelo(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -139,11 +139,11 @@ public class HumedaddelsueloController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Humedaddelsuelo) {
-                Humedaddelsuelo o = (Humedaddelsuelo) object;
+            if (object instanceof HumedadDelSuelo) {
+                HumedadDelSuelo o = (HumedadDelSuelo) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Humedaddelsuelo.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), HumedadDelSuelo.class.getName()});
                 return null;
             }
         }

@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,8 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Persona;
-import modelo.Recoleccion;
+import modelo.produccion.Recoleccion;
 
 /**
  *
@@ -33,27 +31,13 @@ public class RecoleccionJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Recoleccion recoleccion) throws PreexistingEntityException, Exception {
+    public void create(Recoleccion recoleccion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Persona recolectorId = recoleccion.getRecolectorId();
-            if (recolectorId != null) {
-                recolectorId = em.getReference(recolectorId.getClass(), recolectorId.getId());
-                recoleccion.setRecolectorId(recolectorId);
-            }
             em.persist(recoleccion);
-            if (recolectorId != null) {
-                recolectorId.getRecoleccionList().add(recoleccion);
-                recolectorId = em.merge(recolectorId);
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findRecoleccion(recoleccion.getId()) != null) {
-                throw new PreexistingEntityException("Recoleccion " + recoleccion + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -66,27 +50,12 @@ public class RecoleccionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Recoleccion persistentRecoleccion = em.find(Recoleccion.class, recoleccion.getId());
-            Persona recolectorIdOld = persistentRecoleccion.getRecolectorId();
-            Persona recolectorIdNew = recoleccion.getRecolectorId();
-            if (recolectorIdNew != null) {
-                recolectorIdNew = em.getReference(recolectorIdNew.getClass(), recolectorIdNew.getId());
-                recoleccion.setRecolectorId(recolectorIdNew);
-            }
             recoleccion = em.merge(recoleccion);
-            if (recolectorIdOld != null && !recolectorIdOld.equals(recolectorIdNew)) {
-                recolectorIdOld.getRecoleccionList().remove(recoleccion);
-                recolectorIdOld = em.merge(recolectorIdOld);
-            }
-            if (recolectorIdNew != null && !recolectorIdNew.equals(recolectorIdOld)) {
-                recolectorIdNew.getRecoleccionList().add(recoleccion);
-                recolectorIdNew = em.merge(recolectorIdNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = recoleccion.getId();
+                long id = recoleccion.getId();
                 if (findRecoleccion(id) == null) {
                     throw new NonexistentEntityException("The recoleccion with id " + id + " no longer exists.");
                 }
@@ -99,7 +68,7 @@ public class RecoleccionJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -110,11 +79,6 @@ public class RecoleccionJpaController implements Serializable {
                 recoleccion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The recoleccion with id " + id + " no longer exists.", enfe);
-            }
-            Persona recolectorId = recoleccion.getRecolectorId();
-            if (recolectorId != null) {
-                recolectorId.getRecoleccionList().remove(recoleccion);
-                recolectorId = em.merge(recolectorId);
             }
             em.remove(recoleccion);
             em.getTransaction().commit();
@@ -149,7 +113,7 @@ public class RecoleccionJpaController implements Serializable {
         }
     }
 
-    public Recoleccion findRecoleccion(Long id) {
+    public Recoleccion findRecoleccion(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Recoleccion.class, id);

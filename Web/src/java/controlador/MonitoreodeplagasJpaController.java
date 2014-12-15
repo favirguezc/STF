@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,15 +14,15 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Monitoreodeplagas;
+import modelo.produccion.MonitoreoDePlagas;
 
 /**
  *
  * @author fredy
  */
-public class MonitoreodeplagasJpaController implements Serializable {
+public class MonitoreoDePlagasJpaController implements Serializable {
 
-    public MonitoreodeplagasJpaController(EntityManagerFactory emf) {
+    public MonitoreoDePlagasJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,18 +31,13 @@ public class MonitoreodeplagasJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Monitoreodeplagas monitoreodeplagas) throws PreexistingEntityException, Exception {
+    public void create(MonitoreoDePlagas monitoreoDePlagas) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(monitoreodeplagas);
+            em.persist(monitoreoDePlagas);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findMonitoreodeplagas(monitoreodeplagas.getId()) != null) {
-                throw new PreexistingEntityException("Monitoreodeplagas " + monitoreodeplagas + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -51,19 +45,19 @@ public class MonitoreodeplagasJpaController implements Serializable {
         }
     }
 
-    public void edit(Monitoreodeplagas monitoreodeplagas) throws NonexistentEntityException, Exception {
+    public void edit(MonitoreoDePlagas monitoreoDePlagas) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            monitoreodeplagas = em.merge(monitoreodeplagas);
+            monitoreoDePlagas = em.merge(monitoreoDePlagas);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = monitoreodeplagas.getId();
-                if (findMonitoreodeplagas(id) == null) {
-                    throw new NonexistentEntityException("The monitoreodeplagas with id " + id + " no longer exists.");
+                Long id = monitoreoDePlagas.getId();
+                if (findMonitoreoDePlagas(id) == null) {
+                    throw new NonexistentEntityException("The monitoreoDePlagas with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +73,14 @@ public class MonitoreodeplagasJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Monitoreodeplagas monitoreodeplagas;
+            MonitoreoDePlagas monitoreoDePlagas;
             try {
-                monitoreodeplagas = em.getReference(Monitoreodeplagas.class, id);
-                monitoreodeplagas.getId();
+                monitoreoDePlagas = em.getReference(MonitoreoDePlagas.class, id);
+                monitoreoDePlagas.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The monitoreodeplagas with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The monitoreoDePlagas with id " + id + " no longer exists.", enfe);
             }
-            em.remove(monitoreodeplagas);
+            em.remove(monitoreoDePlagas);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +89,19 @@ public class MonitoreodeplagasJpaController implements Serializable {
         }
     }
 
-    public List<Monitoreodeplagas> findMonitoreodeplagasEntities() {
-        return findMonitoreodeplagasEntities(true, -1, -1);
+    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities() {
+        return findMonitoreoDePlagasEntities(true, -1, -1);
     }
 
-    public List<Monitoreodeplagas> findMonitoreodeplagasEntities(int maxResults, int firstResult) {
-        return findMonitoreodeplagasEntities(false, maxResults, firstResult);
+    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(int maxResults, int firstResult) {
+        return findMonitoreoDePlagasEntities(false, maxResults, firstResult);
     }
 
-    private List<Monitoreodeplagas> findMonitoreodeplagasEntities(boolean all, int maxResults, int firstResult) {
+    private List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Monitoreodeplagas.class));
+            cq.select(cq.from(MonitoreoDePlagas.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +113,20 @@ public class MonitoreodeplagasJpaController implements Serializable {
         }
     }
 
-    public Monitoreodeplagas findMonitoreodeplagas(Long id) {
+    public MonitoreoDePlagas findMonitoreoDePlagas(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Monitoreodeplagas.class, id);
+            return em.find(MonitoreoDePlagas.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getMonitoreodeplagasCount() {
+    public int getMonitoreoDePlagasCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Monitoreodeplagas> rt = cq.from(Monitoreodeplagas.class);
+            Root<MonitoreoDePlagas> rt = cq.from(MonitoreoDePlagas.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Rol;
+import modelo.administracion.Rol;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
 import controlador.RolJpaController;
@@ -122,13 +122,13 @@ public class RolController implements Serializable {
             return controller.getJpaController().findRol(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

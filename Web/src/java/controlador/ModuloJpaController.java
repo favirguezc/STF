@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,8 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Lote;
-import modelo.Modulo;
+import modelo.administracion.Modulo;
 
 /**
  *
@@ -33,27 +31,13 @@ public class ModuloJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Modulo modulo) throws PreexistingEntityException, Exception {
+    public void create(Modulo modulo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Lote loteId = modulo.getLoteId();
-            if (loteId != null) {
-                loteId = em.getReference(loteId.getClass(), loteId.getId());
-                modulo.setLoteId(loteId);
-            }
             em.persist(modulo);
-            if (loteId != null) {
-                loteId.getModuloList().add(modulo);
-                loteId = em.merge(loteId);
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findModulo(modulo.getId()) != null) {
-                throw new PreexistingEntityException("Modulo " + modulo + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -66,27 +50,12 @@ public class ModuloJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Modulo persistentModulo = em.find(Modulo.class, modulo.getId());
-            Lote loteIdOld = persistentModulo.getLoteId();
-            Lote loteIdNew = modulo.getLoteId();
-            if (loteIdNew != null) {
-                loteIdNew = em.getReference(loteIdNew.getClass(), loteIdNew.getId());
-                modulo.setLoteId(loteIdNew);
-            }
             modulo = em.merge(modulo);
-            if (loteIdOld != null && !loteIdOld.equals(loteIdNew)) {
-                loteIdOld.getModuloList().remove(modulo);
-                loteIdOld = em.merge(loteIdOld);
-            }
-            if (loteIdNew != null && !loteIdNew.equals(loteIdOld)) {
-                loteIdNew.getModuloList().add(modulo);
-                loteIdNew = em.merge(loteIdNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = modulo.getId();
+                long id = modulo.getId();
                 if (findModulo(id) == null) {
                     throw new NonexistentEntityException("The modulo with id " + id + " no longer exists.");
                 }
@@ -99,7 +68,7 @@ public class ModuloJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -110,11 +79,6 @@ public class ModuloJpaController implements Serializable {
                 modulo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The modulo with id " + id + " no longer exists.", enfe);
-            }
-            Lote loteId = modulo.getLoteId();
-            if (loteId != null) {
-                loteId.getModuloList().remove(modulo);
-                loteId = em.merge(loteId);
             }
             em.remove(modulo);
             em.getTransaction().commit();
@@ -149,7 +113,7 @@ public class ModuloJpaController implements Serializable {
         }
     }
 
-    public Modulo findModulo(Long id) {
+    public Modulo findModulo(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Modulo.class, id);

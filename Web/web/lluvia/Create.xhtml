@@ -12,8 +12,6 @@
             <h:form id="LluviaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lluviaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLluviaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{lluviaController.selected.id}" title="#{bundle.CreateLluviaTitle_id}" required="true" requiredMessage="#{bundle.CreateLluviaRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateLluviaLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{lluviaController.selected.fecha}" title="#{bundle.EditLluviaTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateLluviaLabel_mm}" for="mm" />

@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Modulo;
+import modelo.administracion.Modulo;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
 import controlador.ModuloJpaController;
@@ -122,13 +122,13 @@ public class ModuloController implements Serializable {
             return controller.getJpaController().findModulo(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

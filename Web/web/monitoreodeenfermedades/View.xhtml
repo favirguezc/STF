@@ -8,30 +8,24 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitoreodeenfermedadesViewDlg" widgetVar="MonitoreodeenfermedadesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitoreodeenfermedadesTitle}">
-            <h:form id="MonitoreodeenfermedadesViewForm">
+        <p:dialog id="MonitoreoDeEnfermedadesViewDlg" widgetVar="MonitoreoDeEnfermedadesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitoreoDeEnfermedadesTitle}">
+            <h:form id="MonitoreoDeEnfermedadesViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{monitoreodeenfermedadesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_id}"/>
-                        <h:outputText value="#{monitoreodeenfermedadesController.selected.id}" title="#{bundle.ViewMonitoreodeenfermedadesTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_antracnosis}"/>
-                        <p:selectBooleanCheckbox value="#{monitoreodeenfermedadesController.selected.antracnosis}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_bacteriosis}"/>
-                        <p:selectBooleanCheckbox value="#{monitoreodeenfermedadesController.selected.bacteriosis}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_botrytis}"/>
-                        <h:outputText value="#{monitoreodeenfermedadesController.selected.botrytis}" title="#{bundle.ViewMonitoreodeenfermedadesTitle_botrytis}"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_fecha}"/>
-                        <h:outputText value="#{monitoreodeenfermedadesController.selected.fecha}" title="#{bundle.ViewMonitoreodeenfermedadesTitle_fecha}">
+                    <p:panelGrid columns="2" rendered="#{monitoreoDeEnfermedadesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_id}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.id}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_modulo}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.modulo}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_modulo}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_fecha}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.fecha}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_mildeopolvoso}"/>
-                        <p:selectBooleanCheckbox value="#{monitoreodeenfermedadesController.selected.mildeopolvoso}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_mycospharella}"/>
-                        <h:outputText value="#{monitoreodeenfermedadesController.selected.mycospharella}" title="#{bundle.ViewMonitoreodeenfermedadesTitle_mycospharella}"/>
-                        <h:outputText value="#{bundle.ViewMonitoreodeenfermedadesLabel_phytophtora}"/>
-                        <p:selectBooleanCheckbox value="#{monitoreodeenfermedadesController.selected.phytophtora}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_botrytis}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.botrytis}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_botrytis}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_mycospharella}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.mycospharella}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_mycospharella}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="MonitoreodeenfermedadesViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitoreoDeEnfermedadesViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -12,14 +12,12 @@
             <h:form id="ModuloViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduloController.selected != null}">
-                        <h:outputText value="#{bundle.ViewModuloLabel_id}"/>
-                        <h:outputText value="#{moduloController.selected.id}" title="#{bundle.ViewModuloTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewModuloLabel_area}"/>
-                        <h:outputText value="#{moduloController.selected.area}" title="#{bundle.ViewModuloTitle_area}"/>
                         <h:outputText value="#{bundle.ViewModuloLabel_nombre}"/>
                         <h:outputText value="#{moduloController.selected.nombre}" title="#{bundle.ViewModuloTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewModuloLabel_loteId}"/>
-                        <h:outputText value="#{moduloController.selected.loteId}" title="#{bundle.ViewModuloTitle_loteId}"/>
+                        <h:outputText value="#{bundle.ViewModuloLabel_area}"/>
+                        <h:outputText value="#{moduloController.selected.area}" title="#{bundle.ViewModuloTitle_area}"/>
+                        <h:outputText value="#{bundle.ViewModuloLabel_lote}"/>
+                        <h:outputText value="#{moduloController.selected.lote}" title="#{bundle.ViewModuloTitle_lote}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ModuloViewDialog.hide()"/>
                 </h:panelGroup>

@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,17 +14,15 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Persona;
-import modelo.Rol;
-import modelo.Rolpersona;
+import modelo.administracion.RolPersona;
 
 /**
  *
  * @author fredy
  */
-public class RolpersonaJpaController implements Serializable {
+public class RolPersonaJpaController implements Serializable {
 
-    public RolpersonaJpaController(EntityManagerFactory emf) {
+    public RolPersonaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -34,36 +31,13 @@ public class RolpersonaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Rolpersona rolpersona) throws PreexistingEntityException, Exception {
+    public void create(RolPersona rolPersona) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Persona personaId = rolpersona.getPersonaId();
-            if (personaId != null) {
-                personaId = em.getReference(personaId.getClass(), personaId.getId());
-                rolpersona.setPersonaId(personaId);
-            }
-            Rol rolId = rolpersona.getRolId();
-            if (rolId != null) {
-                rolId = em.getReference(rolId.getClass(), rolId.getId());
-                rolpersona.setRolId(rolId);
-            }
-            em.persist(rolpersona);
-            if (personaId != null) {
-                personaId.getRolpersonaList().add(rolpersona);
-                personaId = em.merge(personaId);
-            }
-            if (rolId != null) {
-                rolId.getRolpersonaList().add(rolpersona);
-                rolId = em.merge(rolId);
-            }
+            em.persist(rolPersona);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findRolpersona(rolpersona.getId()) != null) {
-                throw new PreexistingEntityException("Rolpersona " + rolpersona + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -71,48 +45,19 @@ public class RolpersonaJpaController implements Serializable {
         }
     }
 
-    public void edit(Rolpersona rolpersona) throws NonexistentEntityException, Exception {
+    public void edit(RolPersona rolPersona) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Rolpersona persistentRolpersona = em.find(Rolpersona.class, rolpersona.getId());
-            Persona personaIdOld = persistentRolpersona.getPersonaId();
-            Persona personaIdNew = rolpersona.getPersonaId();
-            Rol rolIdOld = persistentRolpersona.getRolId();
-            Rol rolIdNew = rolpersona.getRolId();
-            if (personaIdNew != null) {
-                personaIdNew = em.getReference(personaIdNew.getClass(), personaIdNew.getId());
-                rolpersona.setPersonaId(personaIdNew);
-            }
-            if (rolIdNew != null) {
-                rolIdNew = em.getReference(rolIdNew.getClass(), rolIdNew.getId());
-                rolpersona.setRolId(rolIdNew);
-            }
-            rolpersona = em.merge(rolpersona);
-            if (personaIdOld != null && !personaIdOld.equals(personaIdNew)) {
-                personaIdOld.getRolpersonaList().remove(rolpersona);
-                personaIdOld = em.merge(personaIdOld);
-            }
-            if (personaIdNew != null && !personaIdNew.equals(personaIdOld)) {
-                personaIdNew.getRolpersonaList().add(rolpersona);
-                personaIdNew = em.merge(personaIdNew);
-            }
-            if (rolIdOld != null && !rolIdOld.equals(rolIdNew)) {
-                rolIdOld.getRolpersonaList().remove(rolpersona);
-                rolIdOld = em.merge(rolIdOld);
-            }
-            if (rolIdNew != null && !rolIdNew.equals(rolIdOld)) {
-                rolIdNew.getRolpersonaList().add(rolpersona);
-                rolIdNew = em.merge(rolIdNew);
-            }
+            rolPersona = em.merge(rolPersona);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = rolpersona.getId();
-                if (findRolpersona(id) == null) {
-                    throw new NonexistentEntityException("The rolpersona with id " + id + " no longer exists.");
+                long id = rolPersona.getId();
+                if (findRolPersona(id) == null) {
+                    throw new NonexistentEntityException("The rolPersona with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -123,29 +68,19 @@ public class RolpersonaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Rolpersona rolpersona;
+            RolPersona rolPersona;
             try {
-                rolpersona = em.getReference(Rolpersona.class, id);
-                rolpersona.getId();
+                rolPersona = em.getReference(RolPersona.class, id);
+                rolPersona.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The rolpersona with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The rolPersona with id " + id + " no longer exists.", enfe);
             }
-            Persona personaId = rolpersona.getPersonaId();
-            if (personaId != null) {
-                personaId.getRolpersonaList().remove(rolpersona);
-                personaId = em.merge(personaId);
-            }
-            Rol rolId = rolpersona.getRolId();
-            if (rolId != null) {
-                rolId.getRolpersonaList().remove(rolpersona);
-                rolId = em.merge(rolId);
-            }
-            em.remove(rolpersona);
+            em.remove(rolPersona);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -154,19 +89,19 @@ public class RolpersonaJpaController implements Serializable {
         }
     }
 
-    public List<Rolpersona> findRolpersonaEntities() {
-        return findRolpersonaEntities(true, -1, -1);
+    public List<RolPersona> findRolPersonaEntities() {
+        return findRolPersonaEntities(true, -1, -1);
     }
 
-    public List<Rolpersona> findRolpersonaEntities(int maxResults, int firstResult) {
-        return findRolpersonaEntities(false, maxResults, firstResult);
+    public List<RolPersona> findRolPersonaEntities(int maxResults, int firstResult) {
+        return findRolPersonaEntities(false, maxResults, firstResult);
     }
 
-    private List<Rolpersona> findRolpersonaEntities(boolean all, int maxResults, int firstResult) {
+    private List<RolPersona> findRolPersonaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Rolpersona.class));
+            cq.select(cq.from(RolPersona.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -178,20 +113,20 @@ public class RolpersonaJpaController implements Serializable {
         }
     }
 
-    public Rolpersona findRolpersona(Long id) {
+    public RolPersona findRolPersona(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Rolpersona.class, id);
+            return em.find(RolPersona.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getRolpersonaCount() {
+    public int getRolPersonaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Rolpersona> rt = cq.from(Rolpersona.class);
+            Root<RolPersona> rt = cq.from(RolPersona.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

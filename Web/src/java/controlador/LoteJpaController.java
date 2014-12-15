@@ -6,18 +6,15 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Modulo;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import modelo.Lote;
+import modelo.administracion.Lote;
 
 /**
  *
@@ -34,36 +31,13 @@ public class LoteJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Lote lote) throws PreexistingEntityException, Exception {
-        if (lote.getModuloList() == null) {
-            lote.setModuloList(new ArrayList<Modulo>());
-        }
+    public void create(Lote lote) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Modulo> attachedModuloList = new ArrayList<Modulo>();
-            for (Modulo moduloListModuloToAttach : lote.getModuloList()) {
-                moduloListModuloToAttach = em.getReference(moduloListModuloToAttach.getClass(), moduloListModuloToAttach.getId());
-                attachedModuloList.add(moduloListModuloToAttach);
-            }
-            lote.setModuloList(attachedModuloList);
             em.persist(lote);
-            for (Modulo moduloListModulo : lote.getModuloList()) {
-                Lote oldLoteIdOfModuloListModulo = moduloListModulo.getLoteId();
-                moduloListModulo.setLoteId(lote);
-                moduloListModulo = em.merge(moduloListModulo);
-                if (oldLoteIdOfModuloListModulo != null) {
-                    oldLoteIdOfModuloListModulo.getModuloList().remove(moduloListModulo);
-                    oldLoteIdOfModuloListModulo = em.merge(oldLoteIdOfModuloListModulo);
-                }
-            }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findLote(lote.getId()) != null) {
-                throw new PreexistingEntityException("Lote " + lote + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -76,39 +50,12 @@ public class LoteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Lote persistentLote = em.find(Lote.class, lote.getId());
-            List<Modulo> moduloListOld = persistentLote.getModuloList();
-            List<Modulo> moduloListNew = lote.getModuloList();
-            List<Modulo> attachedModuloListNew = new ArrayList<Modulo>();
-            for (Modulo moduloListNewModuloToAttach : moduloListNew) {
-                moduloListNewModuloToAttach = em.getReference(moduloListNewModuloToAttach.getClass(), moduloListNewModuloToAttach.getId());
-                attachedModuloListNew.add(moduloListNewModuloToAttach);
-            }
-            moduloListNew = attachedModuloListNew;
-            lote.setModuloList(moduloListNew);
             lote = em.merge(lote);
-            for (Modulo moduloListOldModulo : moduloListOld) {
-                if (!moduloListNew.contains(moduloListOldModulo)) {
-                    moduloListOldModulo.setLoteId(null);
-                    moduloListOldModulo = em.merge(moduloListOldModulo);
-                }
-            }
-            for (Modulo moduloListNewModulo : moduloListNew) {
-                if (!moduloListOld.contains(moduloListNewModulo)) {
-                    Lote oldLoteIdOfModuloListNewModulo = moduloListNewModulo.getLoteId();
-                    moduloListNewModulo.setLoteId(lote);
-                    moduloListNewModulo = em.merge(moduloListNewModulo);
-                    if (oldLoteIdOfModuloListNewModulo != null && !oldLoteIdOfModuloListNewModulo.equals(lote)) {
-                        oldLoteIdOfModuloListNewModulo.getModuloList().remove(moduloListNewModulo);
-                        oldLoteIdOfModuloListNewModulo = em.merge(oldLoteIdOfModuloListNewModulo);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = lote.getId();
+                long id = lote.getId();
                 if (findLote(id) == null) {
                     throw new NonexistentEntityException("The lote with id " + id + " no longer exists.");
                 }
@@ -121,7 +68,7 @@ public class LoteJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -132,11 +79,6 @@ public class LoteJpaController implements Serializable {
                 lote.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The lote with id " + id + " no longer exists.", enfe);
-            }
-            List<Modulo> moduloList = lote.getModuloList();
-            for (Modulo moduloListModulo : moduloList) {
-                moduloListModulo.setLoteId(null);
-                moduloListModulo = em.merge(moduloListModulo);
             }
             em.remove(lote);
             em.getTransaction().commit();
@@ -171,7 +113,7 @@ public class LoteJpaController implements Serializable {
         }
     }
 
-    public Lote findLote(Long id) {
+    public Lote findLote(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Lote.class, id);

@@ -12,8 +12,6 @@
             <h:form id="LoteEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{loteController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditLoteLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{loteController.selected.id}" title="#{bundle.EditLoteTitle_id}" required="true" requiredMessage="#{bundle.EditLoteRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditLoteLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{loteController.selected.nombre}" title="#{bundle.EditLoteTitle_nombre}" />
                     </p:panelGrid>

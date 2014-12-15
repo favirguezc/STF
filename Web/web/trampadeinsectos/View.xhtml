@@ -8,32 +8,30 @@
 
     <ui:composition>
 
-        <p:dialog id="TrampadeinsectosViewDlg" widgetVar="TrampadeinsectosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrampadeinsectosTitle}">
-            <h:form id="TrampadeinsectosViewForm">
+        <p:dialog id="TrampaDeInsectosViewDlg" widgetVar="TrampaDeInsectosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrampaDeInsectosTitle}">
+            <h:form id="TrampaDeInsectosViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{trampadeinsectosController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_id}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.id}" title="#{bundle.ViewTrampadeinsectosTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_cambiodepegante}"/>
-                        <p:selectBooleanCheckbox value="#{trampadeinsectosController.selected.cambiodepegante}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_especie}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.especie}" title="#{bundle.ViewTrampadeinsectosTitle_especie}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_fecha}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.fecha}" title="#{bundle.ViewTrampadeinsectosTitle_fecha}">
+                    <p:panelGrid columns="2" rendered="#{trampaDeInsectosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_id}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.id}" title="#{bundle.ViewTrampaDeInsectosTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_fecha}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.ViewTrampaDeInsectosTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_individuos}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.individuos}" title="#{bundle.ViewTrampadeinsectosTitle_individuos}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_nombre}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.nombre}" title="#{bundle.ViewTrampadeinsectosTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_observaciones}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.observaciones}" title="#{bundle.ViewTrampadeinsectosTitle_observaciones}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_asistenteId}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.asistenteId}" title="#{bundle.ViewTrampadeinsectosTitle_asistenteId}"/>
-                        <h:outputText value="#{bundle.ViewTrampadeinsectosLabel_productorId}"/>
-                        <h:outputText value="#{trampadeinsectosController.selected.productorId}" title="#{bundle.ViewTrampadeinsectosTitle_productorId}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_nombre}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.nombre}" title="#{bundle.ViewTrampaDeInsectosTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_especie}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.especie}" title="#{bundle.ViewTrampaDeInsectosTitle_especie}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_individuos}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.individuos}" title="#{bundle.ViewTrampaDeInsectosTitle_individuos}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_observaciones}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.ViewTrampaDeInsectosTitle_observaciones}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_asistente}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.asistente}" title="#{bundle.ViewTrampaDeInsectosTitle_asistente}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_productor}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.productor}" title="#{bundle.ViewTrampaDeInsectosTitle_productor}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="TrampadeinsectosViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrampaDeInsectosViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

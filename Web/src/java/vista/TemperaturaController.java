@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Temperatura;
+import modelo.variablesClimaticas.Temperatura;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
 import controlador.TemperaturaJpaController;

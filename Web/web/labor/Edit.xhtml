@@ -12,12 +12,10 @@
             <h:form id="LaborEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{laborController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditLaborLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{laborController.selected.id}" title="#{bundle.EditLaborTitle_id}" required="true" requiredMessage="#{bundle.EditLaborRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditLaborLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{laborController.selected.descripcion}" title="#{bundle.EditLaborTitle_descripcion}" />
                         <p:outputLabel value="#{bundle.EditLaborLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{laborController.selected.nombre}" title="#{bundle.EditLaborTitle_nombre}" required="true" requiredMessage="#{bundle.EditLaborRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditLaborLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{laborController.selected.descripcion}" title="#{bundle.EditLaborTitle_descripcion}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{laborController.update}" value="#{bundle.Save}" update="display,:LaborListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LaborEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LaborEditDialog.hide()"/>

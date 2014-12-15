@@ -1,9 +1,9 @@
 package vista;
 
-import modelo.Monitoreodeplagas;
+import modelo.produccion.MonitoreoDePlagas;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
-import controlador.MonitoreodeplagasJpaController;
+import controlador.MonitoreoDePlagasJpaController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,22 +18,22 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "monitoreodeplagasController")
+@ManagedBean(name = "monitoreoDePlagasController")
 @SessionScoped
-public class MonitoreodeplagasController implements Serializable {
+public class MonitoreoDePlagasController implements Serializable {
 
-    private MonitoreodeplagasJpaController jpaController = null;
-    private List<Monitoreodeplagas> items = null;
-    private Monitoreodeplagas selected;
+    private MonitoreoDePlagasJpaController jpaController = null;
+    private List<MonitoreoDePlagas> items = null;
+    private MonitoreoDePlagas selected;
 
-    public MonitoreodeplagasController() {
+    public MonitoreoDePlagasController() {
     }
 
-    public Monitoreodeplagas getSelected() {
+    public MonitoreoDePlagas getSelected() {
         return selected;
     }
 
-    public void setSelected(Monitoreodeplagas selected) {
+    public void setSelected(MonitoreoDePlagas selected) {
         this.selected = selected;
     }
 
@@ -43,41 +43,41 @@ public class MonitoreodeplagasController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private MonitoreodeplagasJpaController getJpaController() {
+    private MonitoreoDePlagasJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new MonitoreodeplagasJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new MonitoreoDePlagasJpaController(Persistence.createEntityManagerFactory("WebPU"));
         }
         return jpaController;
     }
 
-    public Monitoreodeplagas prepareCreate() {
-        selected = new Monitoreodeplagas();
+    public MonitoreoDePlagas prepareCreate() {
+        selected = new MonitoreoDePlagas();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MonitoreodeplagasCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MonitoreoDePlagasCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("MonitoreodeplagasUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("MonitoreoDePlagasUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MonitoreodeplagasDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MonitoreoDePlagasDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Monitoreodeplagas> getItems() {
+    public List<MonitoreoDePlagas> getItems() {
         if (items == null) {
-            items = getJpaController().findMonitoreodeplagasEntities();
+            items = getJpaController().findMonitoreoDePlagasEntities();
         }
         return items;
     }
@@ -101,25 +101,25 @@ public class MonitoreodeplagasController implements Serializable {
         }
     }
 
-    public List<Monitoreodeplagas> getItemsAvailableSelectMany() {
-        return getJpaController().findMonitoreodeplagasEntities();
+    public List<MonitoreoDePlagas> getItemsAvailableSelectMany() {
+        return getJpaController().findMonitoreoDePlagasEntities();
     }
 
-    public List<Monitoreodeplagas> getItemsAvailableSelectOne() {
-        return getJpaController().findMonitoreodeplagasEntities();
+    public List<MonitoreoDePlagas> getItemsAvailableSelectOne() {
+        return getJpaController().findMonitoreoDePlagasEntities();
     }
 
-    @FacesConverter(forClass = Monitoreodeplagas.class)
-    public static class MonitoreodeplagasControllerConverter implements Converter {
+    @FacesConverter(forClass = MonitoreoDePlagas.class)
+    public static class MonitoreoDePlagasControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            MonitoreodeplagasController controller = (MonitoreodeplagasController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "monitoreodeplagasController");
-            return controller.getJpaController().findMonitoreodeplagas(getKey(value));
+            MonitoreoDePlagasController controller = (MonitoreoDePlagasController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "monitoreoDePlagasController");
+            return controller.getJpaController().findMonitoreoDePlagas(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -139,11 +139,11 @@ public class MonitoreodeplagasController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Monitoreodeplagas) {
-                Monitoreodeplagas o = (Monitoreodeplagas) object;
+            if (object instanceof MonitoreoDePlagas) {
+                MonitoreoDePlagas o = (MonitoreoDePlagas) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Monitoreodeplagas.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), MonitoreoDePlagas.class.getName()});
                 return null;
             }
         }

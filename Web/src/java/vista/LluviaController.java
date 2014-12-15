@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Lluvia;
+import modelo.variablesClimaticas.Lluvia;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
 import controlador.LluviaJpaController;
@@ -122,13 +122,13 @@ public class LluviaController implements Serializable {
             return controller.getJpaController().findLluvia(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

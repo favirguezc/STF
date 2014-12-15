@@ -51,21 +51,27 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTemperaturaTitle_temperatura}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.temperatura}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTemperaturaTitle_humedad}"/>
                             </f:facet>
                             <h:outputText value="#{item.humedad}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTemperaturaTitle_puntoderocio}"/>
+                                <h:outputText value="#{bundle.ListTemperaturaTitle_puntoDeRocio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.puntoderocio}"/>
+                            <h:outputText value="#{item.puntoDeRocio}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTemperaturaTitle_temperatura}"/>
+                                <h:outputText value="#{bundle.ListTemperaturaTitle_modulo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.temperatura}"/>
+                            <h:outputText value="#{item.modulo}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{temperaturaController.prepareCreate}" update=":TemperaturaCreateForm" oncomplete="PF('TemperaturaCreateDialog').show()"/>

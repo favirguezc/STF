@@ -12,18 +12,16 @@
             <h:form id="ModuloEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduloController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditModuloLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{moduloController.selected.id}" title="#{bundle.EditModuloTitle_id}" required="true" requiredMessage="#{bundle.EditModuloRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditModuloLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduloController.selected.area}" title="#{bundle.EditModuloTitle_area}" />
                         <p:outputLabel value="#{bundle.EditModuloLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{moduloController.selected.nombre}" title="#{bundle.EditModuloTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.EditModuloLabel_loteId}" for="loteId" />
-                        <p:selectOneMenu id="loteId" value="#{moduloController.selected.loteId}" >
+                        <p:outputLabel value="#{bundle.EditModuloLabel_area}" for="area" />
+                        <p:inputText id="area" value="#{moduloController.selected.area}" title="#{bundle.EditModuloTitle_area}" />
+                        <p:outputLabel value="#{bundle.EditModuloLabel_lote}" for="lote" />
+                        <p:selectOneMenu id="lote" value="#{moduloController.selected.lote}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
-                                           var="loteIdItem"
-                                           itemValue="#{loteIdItem}"/>
+                                           var="loteItem"
+                                           itemValue="#{loteItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{moduloController.update}" value="#{bundle.Save}" update="display,:ModuloListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModuloEditDialog');"/>

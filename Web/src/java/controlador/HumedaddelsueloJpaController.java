@@ -6,7 +6,6 @@
 package controlador;
 
 import controlador.exceptions.NonexistentEntityException;
-import controlador.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,15 +14,15 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Humedaddelsuelo;
+import modelo.variablesClimaticas.HumedadDelSuelo;
 
 /**
  *
  * @author fredy
  */
-public class HumedaddelsueloJpaController implements Serializable {
+public class HumedadDelSueloJpaController implements Serializable {
 
-    public HumedaddelsueloJpaController(EntityManagerFactory emf) {
+    public HumedadDelSueloJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,18 +31,13 @@ public class HumedaddelsueloJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Humedaddelsuelo humedaddelsuelo) throws PreexistingEntityException, Exception {
+    public void create(HumedadDelSuelo humedadDelSuelo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(humedaddelsuelo);
+            em.persist(humedadDelSuelo);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findHumedaddelsuelo(humedaddelsuelo.getId()) != null) {
-                throw new PreexistingEntityException("Humedaddelsuelo " + humedaddelsuelo + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -51,19 +45,19 @@ public class HumedaddelsueloJpaController implements Serializable {
         }
     }
 
-    public void edit(Humedaddelsuelo humedaddelsuelo) throws NonexistentEntityException, Exception {
+    public void edit(HumedadDelSuelo humedadDelSuelo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            humedaddelsuelo = em.merge(humedaddelsuelo);
+            humedadDelSuelo = em.merge(humedadDelSuelo);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = humedaddelsuelo.getId();
-                if (findHumedaddelsuelo(id) == null) {
-                    throw new NonexistentEntityException("The humedaddelsuelo with id " + id + " no longer exists.");
+                Long id = humedadDelSuelo.getId();
+                if (findHumedadDelSuelo(id) == null) {
+                    throw new NonexistentEntityException("The humedadDelSuelo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +73,14 @@ public class HumedaddelsueloJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Humedaddelsuelo humedaddelsuelo;
+            HumedadDelSuelo humedadDelSuelo;
             try {
-                humedaddelsuelo = em.getReference(Humedaddelsuelo.class, id);
-                humedaddelsuelo.getId();
+                humedadDelSuelo = em.getReference(HumedadDelSuelo.class, id);
+                humedadDelSuelo.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The humedaddelsuelo with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The humedadDelSuelo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(humedaddelsuelo);
+            em.remove(humedadDelSuelo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +89,19 @@ public class HumedaddelsueloJpaController implements Serializable {
         }
     }
 
-    public List<Humedaddelsuelo> findHumedaddelsueloEntities() {
-        return findHumedaddelsueloEntities(true, -1, -1);
+    public List<HumedadDelSuelo> findHumedadDelSueloEntities() {
+        return findHumedadDelSueloEntities(true, -1, -1);
     }
 
-    public List<Humedaddelsuelo> findHumedaddelsueloEntities(int maxResults, int firstResult) {
-        return findHumedaddelsueloEntities(false, maxResults, firstResult);
+    public List<HumedadDelSuelo> findHumedadDelSueloEntities(int maxResults, int firstResult) {
+        return findHumedadDelSueloEntities(false, maxResults, firstResult);
     }
 
-    private List<Humedaddelsuelo> findHumedaddelsueloEntities(boolean all, int maxResults, int firstResult) {
+    private List<HumedadDelSuelo> findHumedadDelSueloEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Humedaddelsuelo.class));
+            cq.select(cq.from(HumedadDelSuelo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +113,20 @@ public class HumedaddelsueloJpaController implements Serializable {
         }
     }
 
-    public Humedaddelsuelo findHumedaddelsuelo(Long id) {
+    public HumedadDelSuelo findHumedadDelSuelo(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Humedaddelsuelo.class, id);
+            return em.find(HumedadDelSuelo.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getHumedaddelsueloCount() {
+    public int getHumedadDelSueloCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Humedaddelsuelo> rt = cq.from(Humedaddelsuelo.class);
+            Root<HumedadDelSuelo> rt = cq.from(HumedadDelSuelo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

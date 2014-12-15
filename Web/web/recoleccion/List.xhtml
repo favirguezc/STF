@@ -35,21 +35,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_cuartagramos}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_lote}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cuartagramos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_danadagramos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.danadagramos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_extragramos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.extragramos}"/>
+                            <h:outputText value="#{item.lote}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -61,33 +49,63 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_primeragramos}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_recolector}"/>
                             </f:facet>
-                            <h:outputText value="#{item.primeragramos}"/>
+                            <h:outputText value="#{item.recolector}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_quintagramos}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_extraGramos}"/>
                             </f:facet>
-                            <h:outputText value="#{item.quintagramos}"/>
+                            <h:outputText value="#{item.extraGramos}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_segundagramos}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_primeraGramos}"/>
                             </f:facet>
-                            <h:outputText value="#{item.segundagramos}"/>
+                            <h:outputText value="#{item.primeraGramos}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_terceragramos}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_segundaGramos}"/>
                             </f:facet>
-                            <h:outputText value="#{item.terceragramos}"/>
+                            <h:outputText value="#{item.segundaGramos}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRecoleccionTitle_recolectorId}"/>
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_terceraGramos}"/>
                             </f:facet>
-                            <h:outputText value="#{item.recolectorId}"/>
+                            <h:outputText value="#{item.terceraGramos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_cuartaGramos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cuartaGramos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_quintaGramos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quintaGramos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_danadaGramos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.danadaGramos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_buenaGramos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.buenaGramos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRecoleccionTitle_totalGramos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalGramos}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{recoleccionController.prepareCreate}" update=":RecoleccionCreateForm" oncomplete="PF('RecoleccionCreateDialog').show()"/>

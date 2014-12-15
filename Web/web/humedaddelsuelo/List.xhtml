@@ -10,14 +10,14 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListHumedaddelsueloTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListHumedadDelSueloTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="HumedaddelsueloListForm">
-                <p:panel header="#{bundle.ListHumedaddelsueloTitle}">
-                    <p:dataTable id="datalist" value="#{humedaddelsueloController.items}" var="item"
-                                 selectionMode="single" selection="#{humedaddelsueloController.selected}"
+            <h:form id="HumedadDelSueloListForm">
+                <p:panel header="#{bundle.ListHumedadDelSueloTitle}">
+                    <p:dataTable id="datalist" value="#{humedadDelSueloController.items}" var="item"
+                                 selectionMode="single" selection="#{humedadDelSueloController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -29,13 +29,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHumedaddelsueloTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHumedaddelsueloTitle_fecha}"/>
+                                <h:outputText value="#{bundle.ListHumedadDelSueloTitle_fecha}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -43,29 +37,29 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHumedaddelsueloTitle_hora}"/>
+                                <h:outputText value="#{bundle.ListHumedadDelSueloTitle_valorEn30Cms}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorEn30Cms}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHumedadDelSueloTitle_valorEn15Cms}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valorEn15Cms}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListHumedadDelSueloTitle_hora}"/>
                             </f:facet>
                             <h:outputText value="#{item.hora}">
                                 <f:convertDateTime pattern="HH:mm:ss" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHumedaddelsueloTitle_valoren15cms}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.valoren15cms}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListHumedaddelsueloTitle_valoren30cms}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.valoren30cms}"/>
-                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{humedaddelsueloController.prepareCreate}" update=":HumedaddelsueloCreateForm" oncomplete="PF('HumedaddelsueloCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":HumedaddelsueloViewForm" oncomplete="PF('HumedaddelsueloViewDialog').show()" disabled="#{empty humedaddelsueloController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":HumedaddelsueloEditForm" oncomplete="PF('HumedaddelsueloEditDialog').show()" disabled="#{empty humedaddelsueloController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{humedaddelsueloController.destroy}" update=":growl,datalist" disabled="#{empty humedaddelsueloController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{humedadDelSueloController.prepareCreate}" update=":HumedadDelSueloCreateForm" oncomplete="PF('HumedadDelSueloCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":HumedadDelSueloViewForm" oncomplete="PF('HumedadDelSueloViewDialog').show()" disabled="#{empty humedadDelSueloController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":HumedadDelSueloEditForm" oncomplete="PF('HumedadDelSueloEditDialog').show()" disabled="#{empty humedadDelSueloController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{humedadDelSueloController.destroy}" update=":growl,datalist" disabled="#{empty humedadDelSueloController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

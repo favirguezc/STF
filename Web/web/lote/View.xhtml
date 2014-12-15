@@ -12,8 +12,6 @@
             <h:form id="LoteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{loteController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLoteLabel_id}"/>
-                        <h:outputText value="#{loteController.selected.id}" title="#{bundle.ViewLoteTitle_id}"/>
                         <h:outputText value="#{bundle.ViewLoteLabel_nombre}"/>
                         <h:outputText value="#{loteController.selected.nombre}" title="#{bundle.ViewLoteTitle_nombre}"/>
                     </p:panelGrid>

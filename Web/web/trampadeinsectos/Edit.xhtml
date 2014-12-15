@@ -8,41 +8,39 @@
 
     <ui:composition>
 
-        <p:dialog id="TrampadeinsectosEditDlg" widgetVar="TrampadeinsectosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTrampadeinsectosTitle}">
-            <h:form id="TrampadeinsectosEditForm">
+        <p:dialog id="TrampaDeInsectosEditDlg" widgetVar="TrampaDeInsectosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTrampaDeInsectosTitle}">
+            <h:form id="TrampaDeInsectosEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{trampadeinsectosController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{trampadeinsectosController.selected.id}" title="#{bundle.EditTrampadeinsectosTitle_id}" required="true" requiredMessage="#{bundle.EditTrampadeinsectosRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_cambiodepegante}" for="cambiodepegante" />
-                        <p:selectBooleanCheckbox id="cambiodepegante" value="#{trampadeinsectosController.selected.cambiodepegante}" />
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_especie}" for="especie" />
-                        <p:inputText id="especie" value="#{trampadeinsectosController.selected.especie}" title="#{bundle.EditTrampadeinsectosTitle_especie}" required="true" requiredMessage="#{bundle.EditTrampadeinsectosRequiredMessage_especie}"/>
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampadeinsectosController.selected.fecha}" title="#{bundle.EditTrampadeinsectosTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_individuos}" for="individuos" />
-                        <p:inputText id="individuos" value="#{trampadeinsectosController.selected.individuos}" title="#{bundle.EditTrampadeinsectosTitle_individuos}" />
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{trampadeinsectosController.selected.nombre}" title="#{bundle.EditTrampadeinsectosTitle_nombre}" required="true" requiredMessage="#{bundle.EditTrampadeinsectosRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{trampadeinsectosController.selected.observaciones}" title="#{bundle.EditTrampadeinsectosTitle_observaciones}" />
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_asistenteId}" for="asistenteId" />
-                        <p:selectOneMenu id="asistenteId" value="#{trampadeinsectosController.selected.asistenteId}" >
+                    <p:panelGrid columns="2" rendered="#{trampaDeInsectosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{trampaDeInsectosController.selected.id}" title="#{bundle.EditTrampaDeInsectosTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.EditTrampaDeInsectosTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{trampaDeInsectosController.selected.nombre}" title="#{bundle.EditTrampaDeInsectosTitle_nombre}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_especie}" for="especie" />
+                        <p:inputText id="especie" value="#{trampaDeInsectosController.selected.especie}" title="#{bundle.EditTrampaDeInsectosTitle_especie}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_especie}"/>
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_individuos}" for="individuos" />
+                        <p:inputText id="individuos" value="#{trampaDeInsectosController.selected.individuos}" title="#{bundle.EditTrampaDeInsectosTitle_individuos}" />
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.EditTrampaDeInsectosTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_asistente}" for="asistente" />
+                        <p:selectOneMenu id="asistente" value="#{trampaDeInsectosController.selected.asistente}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="asistenteIdItem"
-                                           itemValue="#{asistenteIdItem}"/>
+                                           var="asistenteItem"
+                                           itemValue="#{asistenteItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditTrampadeinsectosLabel_productorId}" for="productorId" />
-                        <p:selectOneMenu id="productorId" value="#{trampadeinsectosController.selected.productorId}" >
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_productor}" for="productor" />
+                        <p:selectOneMenu id="productor" value="#{trampaDeInsectosController.selected.productor}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="productorIdItem"
-                                           itemValue="#{productorIdItem}"/>
+                                           var="productorItem"
+                                           itemValue="#{productorItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{trampadeinsectosController.update}" value="#{bundle.Save}" update="display,:TrampadeinsectosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TrampadeinsectosEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="TrampadeinsectosEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{trampaDeInsectosController.update}" value="#{bundle.Save}" update="display,:TrampaDeInsectosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TrampaDeInsectosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TrampaDeInsectosEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

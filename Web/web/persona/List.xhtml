@@ -35,6 +35,18 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_nombre2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPersonaTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
@@ -53,30 +65,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_gruposanguineo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.gruposanguineo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_nombre2}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre2}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_rh}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.rh}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPersonaTitle_sexo}"/>
                             </f:facet>
                             <h:outputText value="#{item.sexo}"/>
@@ -86,6 +74,18 @@
                                 <h:outputText value="#{bundle.ListPersonaTitle_telefono}"/>
                             </f:facet>
                             <h:outputText value="#{item.telefono}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_grupoSanguineo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grupoSanguineo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_rh}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rh}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>

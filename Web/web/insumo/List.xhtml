@@ -20,7 +20,7 @@
                                  selectionMode="single" selection="#{insumoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
-                                 rows="10"
+                                 rows="30"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
@@ -29,21 +29,15 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListInsumoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListInsumoTitle_ingredienteactivo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.ingredienteactivo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInsumoTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInsumoTitle_ingredienteActivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ingredienteActivo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

@@ -8,31 +8,31 @@
 
     <ui:composition>
 
-        <p:dialog id="RolpersonaEditDlg" widgetVar="RolpersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRolpersonaTitle}">
-            <h:form id="RolpersonaEditForm">
+        <p:dialog id="RolPersonaEditDlg" widgetVar="RolPersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRolPersonaTitle}">
+            <h:form id="RolPersonaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{rolpersonaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{rolpersonaController.selected.id}" title="#{bundle.EditRolpersonaTitle_id}" required="true" requiredMessage="#{bundle.EditRolpersonaRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_contrasena}" for="contrasena" />
-                        <p:inputText id="contrasena" value="#{rolpersonaController.selected.contrasena}" title="#{bundle.EditRolpersonaTitle_contrasena}" />
-                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_personaId}" for="personaId" />
-                        <p:selectOneMenu id="personaId" value="#{rolpersonaController.selected.personaId}" >
+                    <p:panelGrid columns="2" rendered="#{rolPersonaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{rolPersonaController.selected.id}" title="#{bundle.EditRolPersonaTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_persona}" for="persona" />
+                        <p:selectOneMenu id="persona" value="#{rolPersonaController.selected.persona}" required="true" requiredMessage="#{bundle.EditRolPersonaRequiredMessage_persona}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="personaIdItem"
-                                           itemValue="#{personaIdItem}"/>
+                                           var="personaItem"
+                                           itemValue="#{personaItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditRolpersonaLabel_rolId}" for="rolId" />
-                        <p:selectOneMenu id="rolId" value="#{rolpersonaController.selected.rolId}" >
+                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_rol}" for="rol" />
+                        <p:selectOneMenu id="rol" value="#{rolPersonaController.selected.rol}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
-                                           var="rolIdItem"
-                                           itemValue="#{rolIdItem}"/>
+                                           var="rolItem"
+                                           itemValue="#{rolItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{rolPersonaController.selected.contrasena}" title="#{bundle.EditRolPersonaTitle_contrasena}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{rolpersonaController.update}" value="#{bundle.Save}" update="display,:RolpersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolpersonaEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="RolpersonaEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{rolPersonaController.update}" value="#{bundle.Save}" update="display,:RolPersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolPersonaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RolPersonaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

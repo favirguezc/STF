@@ -8,29 +8,29 @@
 
     <ui:composition>
 
-        <p:dialog id="RolpersonaCreateDlg" widgetVar="RolpersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRolpersonaTitle}">
-            <h:form id="RolpersonaCreateForm">
+        <p:dialog id="RolPersonaCreateDlg" widgetVar="RolPersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRolPersonaTitle}">
+            <h:form id="RolPersonaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{rolpersonaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRolpersonaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{rolpersonaController.selected.id}" title="#{bundle.CreateRolpersonaTitle_id}" required="true" requiredMessage="#{bundle.CreateRolpersonaRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.CreateRolpersonaLabel_contrasena}" for="contrasena" />
-                        <p:inputText id="contrasena" value="#{rolpersonaController.selected.contrasena}" title="#{bundle.CreateRolpersonaTitle_contrasena}" />
-                        <p:outputLabel value="#{bundle.CreateRolpersonaLabel_personaId}" for="personaId" />
-                        <p:selectOneMenu id="personaId" value="#{rolpersonaController.selected.personaId}" >
+                    <p:panelGrid columns="2" rendered="#{rolPersonaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRolPersonaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{rolPersonaController.selected.id}" title="#{bundle.CreateRolPersonaTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateRolPersonaLabel_persona}" for="persona" />
+                        <p:selectOneMenu id="persona" value="#{rolPersonaController.selected.persona}" required="true" requiredMessage="#{bundle.EditRolPersonaRequiredMessage_persona}">
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="personaIdItem"
-                                           itemValue="#{personaIdItem}"/>
+                                           var="personaItem"
+                                           itemValue="#{personaItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateRolpersonaLabel_rolId}" for="rolId" />
-                        <p:selectOneMenu id="rolId" value="#{rolpersonaController.selected.rolId}" >
+                        <p:outputLabel value="#{bundle.CreateRolPersonaLabel_rol}" for="rol" />
+                        <p:selectOneMenu id="rol" value="#{rolPersonaController.selected.rol}" >
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
-                                           var="rolIdItem"
-                                           itemValue="#{rolIdItem}"/>
+                                           var="rolItem"
+                                           itemValue="#{rolItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateRolPersonaLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{rolPersonaController.selected.contrasena}" title="#{bundle.CreateRolPersonaTitle_contrasena}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{rolpersonaController.create}" value="#{bundle.Save}" update="display,:RolpersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolpersonaCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="RolpersonaCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{rolPersonaController.create}" value="#{bundle.Save}" update="display,:RolPersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolPersonaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RolPersonaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

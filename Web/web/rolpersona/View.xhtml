@@ -8,20 +8,20 @@
 
     <ui:composition>
 
-        <p:dialog id="RolpersonaViewDlg" widgetVar="RolpersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRolpersonaTitle}">
-            <h:form id="RolpersonaViewForm">
+        <p:dialog id="RolPersonaViewDlg" widgetVar="RolPersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRolPersonaTitle}">
+            <h:form id="RolPersonaViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{rolpersonaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRolpersonaLabel_id}"/>
-                        <h:outputText value="#{rolpersonaController.selected.id}" title="#{bundle.ViewRolpersonaTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewRolpersonaLabel_contrasena}"/>
-                        <h:outputText value="#{rolpersonaController.selected.contrasena}" title="#{bundle.ViewRolpersonaTitle_contrasena}"/>
-                        <h:outputText value="#{bundle.ViewRolpersonaLabel_personaId}"/>
-                        <h:outputText value="#{rolpersonaController.selected.personaId}" title="#{bundle.ViewRolpersonaTitle_personaId}"/>
-                        <h:outputText value="#{bundle.ViewRolpersonaLabel_rolId}"/>
-                        <h:outputText value="#{rolpersonaController.selected.rolId}" title="#{bundle.ViewRolpersonaTitle_rolId}"/>
+                    <p:panelGrid columns="2" rendered="#{rolPersonaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRolPersonaLabel_id}"/>
+                        <h:outputText value="#{rolPersonaController.selected.id}" title="#{bundle.ViewRolPersonaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewRolPersonaLabel_persona}"/>
+                        <h:outputText value="#{rolPersonaController.selected.persona}" title="#{bundle.ViewRolPersonaTitle_persona}"/>
+                        <h:outputText value="#{bundle.ViewRolPersonaLabel_rol}"/>
+                        <h:outputText value="#{rolPersonaController.selected.rol}" title="#{bundle.ViewRolPersonaTitle_rol}"/>
+                        <h:outputText value="#{bundle.ViewRolPersonaLabel_contrasena}"/>
+                        <h:outputText value="#{rolPersonaController.selected.contrasena}" title="#{bundle.ViewRolPersonaTitle_contrasena}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="RolpersonaViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="RolPersonaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

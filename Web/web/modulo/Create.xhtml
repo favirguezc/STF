@@ -12,17 +12,15 @@
             <h:form id="ModuloCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduloController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateModuloLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{moduloController.selected.id}" title="#{bundle.CreateModuloTitle_id}" required="true" requiredMessage="#{bundle.CreateModuloRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.CreateModuloLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduloController.selected.area}" title="#{bundle.CreateModuloTitle_area}" />
                         <p:outputLabel value="#{bundle.CreateModuloLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{moduloController.selected.nombre}" title="#{bundle.CreateModuloTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.CreateModuloLabel_loteId}" for="loteId" />
-                        <p:selectOneMenu id="loteId" value="#{moduloController.selected.loteId}" >
+                        <p:outputLabel value="#{bundle.CreateModuloLabel_area}" for="area" />
+                        <p:inputText id="area" value="#{moduloController.selected.area}" title="#{bundle.CreateModuloTitle_area}" />
+                        <p:outputLabel value="#{bundle.CreateModuloLabel_lote}" for="lote" />
+                        <p:selectOneMenu id="lote" value="#{moduloController.selected.lote}" >
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
-                                           var="loteIdItem"
-                                           itemValue="#{loteIdItem}"/>
+                                           var="loteItem"
+                                           itemValue="#{loteItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{moduloController.create}" value="#{bundle.Save}" update="display,:ModuloListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuloCreateDialog');"/>

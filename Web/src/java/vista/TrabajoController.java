@@ -1,6 +1,6 @@
 package vista;
 
-import modelo.Trabajo;
+import modelo.produccion.Trabajo;
 import vista.util.JsfUtil;
 import vista.util.JsfUtil.PersistAction;
 import controlador.TrabajoJpaController;
@@ -94,7 +94,7 @@ public class TrabajoController implements Serializable {
                     getJpaController().destroy(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
-            }  catch (Exception ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
@@ -122,13 +122,13 @@ public class TrabajoController implements Serializable {
             return controller.getJpaController().findTrabajo(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

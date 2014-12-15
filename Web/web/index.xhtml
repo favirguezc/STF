@@ -1,47 +1,36 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>STF - Web</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        Bienvenido a STF Web        
-        <br />
-        <h:link outcome="/lote/List" value="Ver Registros Lote"/>
-        <br />
-        <h:link outcome="/modulo/List" value="Ver Registros Modulo"/>
-        <br />
-        <h:link outcome="/persona/List" value="Ver Registros Persona"/>
-        <br />
-        <h:link outcome="/rol/List" value="Ver Registros Rol"/>
-        <br />
-        <h:link outcome="/rolPersona/List" value="Ver Registros RolPersona"/>
-        <br />
-        <h:link outcome="/aplicacionFitosanitaria/List" value="Ver Registros AplicacionFitosanitaria"/>
-        <br />
-        <h:link outcome="/insumo/List" value="Ver Registros Insumo"/>
-        <br />
-        <h:link outcome="/labor/List" value="Ver Registros Labor"/>
-        <br />
-        <h:link outcome="/monitoreoDeEnfermedades/List" value="Ver Registros MonitoreoDeEnfermedades"/>
-        <br />
-        <h:link outcome="/monitoreoDePlagas/List" value="Ver Registros MonitoreoDePlagas"/>
-        <br />
-        <h:link outcome="/recoleccion/List" value="Ver Registros Recoleccion"/>
-        <br />
-        <h:link outcome="/trabajo/List" value="Ver Registros Trabajo"/>
-        <br />
-        <h:link outcome="/trampaDeInsectos/List" value="Ver Registros TrampaDeInsectos"/>
-        <br />
-        <h:link outcome="/humedadDelSuelo/List" value="Ver Registros HumedadDelSuelo"/>
-        <br />
-        <h:link outcome="/lluvia/List" value="Ver Registros Lluvia"/>
-        <br />
-        <h:link outcome="/temperatura/List" value="Ver Registros Temperatura"/>
-    </h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="STF - Web"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+            <h:form>
+                <h:link outcome="/aplicacionFitosanitaria/List" value="Ver Registros AplicacionFitosanitaria"/>
+                <br />
+                <h:link outcome="/insumo/List" value="Ver Registros Insumo"/>
+                <br />
+                <h:link outcome="/labor/List" value="Ver Registros Labor"/>
+                <br />
+                <h:link outcome="/monitoreoDeEnfermedades/List" value="Ver Registros MonitoreoDeEnfermedades"/>
+                <br />
+                <h:link outcome="/monitoreoDePlagas/List" value="Ver Registros MonitoreoDePlagas"/>
+                <br />
+                <h:link outcome="/recoleccion/List" value="Ver Registros Recoleccion"/>
+                <br />
+                <h:link outcome="/trabajo/List" value="Ver Registros Trabajo"/>
+                <br />
+                <h:link outcome="/trampaDeInsectos/List" value="Ver Registros TrampaDeInsectos"/>                
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
 
 

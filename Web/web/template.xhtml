@@ -20,11 +20,28 @@
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
+                        <p:submenu label="#{bundle.Management}">
                             <p:menuitem value="Lote" outcome="/lote/List.xhtml" />
                             <p:menuitem value="Modulo" outcome="/modulo/List.xhtml" />
+                            <p:menuitem value="Persona" outcome="/persona/List.xhtml" />
+                            <p:menuitem value="Rol - Persona" outcome="/rolPersona/List.xhtml" />
                         </p:submenu>
-                    </p:menubar>
+                        <p:submenu label="#{bundle.Weather}">
+                            <p:menuitem value="Temperatura" outcome="/temperatura/List.xhtml"/>
+                            <p:menuitem value="Lluvia" outcome="/lluvia/List.xhtml"/>
+                            <p:menuitem value="Humedad Del Suelo" outcome="/humedadDelSuelo/List.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Production}">
+                            <p:menuitem outcome="/aplicacionFitosanitaria/List.xhtml" value="AplicacionFitosanitaria"/>
+                            <p:menuitem outcome="/insumo/List.xhtml" value="Insumo"/>
+                            <p:menuitem outcome="/labor/List.xhtml" value="Labor"/>
+                            <p:menuitem outcome="/monitoreoDeEnfermedades/List.xhtml" value="MonitoreoDeEnfermedades"/>
+                            <p:menuitem outcome="/monitoreoDePlagas/List.xhtml" value="MonitoreoDePlagas"/>
+                            <p:menuitem outcome="/recoleccion/List.xhtml" value="Recoleccion"/>
+                            <p:menuitem outcome="/trabajo/List.xhtml" value="Trabajo"/>
+                            <p:menuitem outcome="/trampaDeInsectos/List.xhtml" value="TrampaDeInsectos"/>                
+                        </p:submenu>
+                    </p:menubar>>
                 </h:form>
             </p:layoutUnit>
 

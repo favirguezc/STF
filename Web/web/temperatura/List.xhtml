@@ -14,14 +14,38 @@
 
         <ui:define name="body">
             <h:form>
-                <p:outputLabel value="Año" for="ano"/>
-                <p:spacer width="10"/>
-                <p:spinner id="ano" value="#{temperaturaChart.ano}" title="Año" min="2012" max="2030"/>
-                <p:spacer width="10"/>
-                <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart()"/>
-
+                <h:panelGrid columns="5" cellpadding="10">
+                    <p:outputLabel value="Año" for="ano1"/>
+                    <p:spinner id="ano1" value="#{temperaturaChart.ano1}" title="Año" min="2012" max="2030"/>
+                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
+                </h:panelGrid>
                 <p:chart id="chart1" type="line" model="#{temperaturaChart.modelo1}"/>
-                <p:remoteCommand name="updateChart" update="chart1" actionListener="#{temperaturaChart.createModel}"/>
+                <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{temperaturaChart.createModel1}"/>
+
+            </h:form>
+            <h:form>
+                <h:panelGrid columns="5" cellpadding="10">
+                    <p:outputLabel value="Año" for="ano2"/>
+                    <p:spinner id="ano2" value="#{temperaturaChart.ano2}" title="Año" min="2012" max="2030"/>
+                    <p:outputLabel value="Mes" for="mes"/>
+                    <p:selectOneMenu id="mes" value="#{temperaturaChart.mes}">
+                        <f:selectItem itemLabel="Enero" itemValue="0"/>
+                        <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                        <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                        <f:selectItem itemLabel="Abril" itemValue="3"/>
+                        <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                        <f:selectItem itemLabel="Junio" itemValue="5"/>
+                        <f:selectItem itemLabel="Julio" itemValue="6"/>
+                        <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                        <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                        <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                        <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                        <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                    </p:selectOneMenu>                    
+                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart2()"/>
+                </h:panelGrid>
+                <p:chart id="chart2" type="line" model="#{temperaturaChart.modelo2}"/>
+                <p:remoteCommand name="updateChart2" update="chart2" actionListener="#{temperaturaChart.createModel2}"/>
 
             </h:form>
             <h:form id="TemperaturaListForm">

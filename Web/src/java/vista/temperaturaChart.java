@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.swing.JOptionPane;
+import modelo.variablesClimaticas.Temperatura;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
@@ -52,7 +52,11 @@ public class temperaturaChart implements Serializable {
     public void createModel() {
         modelo1 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
+        LineChartSeries series2 = new LineChartSeries();
+        LineChartSeries series3 = new LineChartSeries();
         series1.setLabel("Temperatura");
+        series2.setLabel("Humedad");
+        series3.setLabel("Punto De Rocío");
         TemperaturaController controlador = new TemperaturaController();
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(new Date(ano - 1900, 0, 1));
@@ -61,18 +65,22 @@ public class temperaturaChart implements Serializable {
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
-            float promedioTemp;
+            Temperatura promedioTemp;
             promedioTemp = controlador.calcularPromedio(fecha1, fecha2);
-//            promedioTemp = (float) (Math.random()*20+10);
             cal.add(Calendar.DAY_OF_MONTH, 1);
 
-            series1.set(DateTools.getMes(i), promedioTemp);
+            series1.set(DateTools.getMes(i), promedioTemp.getTemperatura());
+            series2.set(DateTools.getMes(i), promedioTemp.getHumedad());
+            series3.set(DateTools.getMes(i), promedioTemp.getPuntoDeRocio());
         }
 
         modelo1.addSeries(series1);
+        modelo1.addSeries(series2);
+        modelo1.addSeries(series3);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        modelo1.setTitle("Temperatura por Mes Año "+ano);
+        modelo1.setTitle("Temperatura por Mes Año " + ano);
+        modelo1.setLegendPosition("e");
         Axis yAxis = modelo1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(40);

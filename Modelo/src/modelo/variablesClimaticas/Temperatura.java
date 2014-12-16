@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import modelo.administracion.Modulo;
 
 @Entity
-public  class Temperatura implements Serializable {
+public class Temperatura implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -27,8 +27,8 @@ public  class Temperatura implements Serializable {
     private float puntoDeRocio;
     @ManyToOne
     private Modulo modulo;
-    
-    public Temperatura(){
+
+    public Temperatura() {
     }
 
     public Temperatura(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, Modulo modulo) {
@@ -38,7 +38,7 @@ public  class Temperatura implements Serializable {
         this.humedad = humedad;
         this.puntoDeRocio = puntoDeRocio;
         this.modulo = modulo;
-    }    
+    }
 
     public Long getId() {
         return id;
@@ -141,6 +141,17 @@ public  class Temperatura implements Serializable {
         }
         return true;
     }
-    
-}
 
+    public void sumar(Temperatura t) {
+        this.temperatura += t.temperatura;
+        this.humedad += t.humedad;
+        this.puntoDeRocio += t.puntoDeRocio;
+    }
+
+    public void dividir(int size) {
+        this.temperatura = this.temperatura / size;
+        this.humedad = this.humedad / size;
+        this.puntoDeRocio = this.puntoDeRocio / size;
+    }
+
+}

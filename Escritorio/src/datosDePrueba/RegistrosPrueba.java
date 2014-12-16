@@ -37,8 +37,8 @@ import util.DateTools;
 public class RegistrosPrueba {
 
     public static void main(String[] args) {
-//        quitarRegistrosRecoleccion();
-//        registrosPruebaRecoleccion();
+        quitarRegistrosRecoleccion();
+        registrosPruebaRecoleccion();
 //        quitarRegistrosTemperaturaHumedadYLluvias();
 //        registrosPruebaTemperaturaHumedadYLluvias();
 //        new ReporteMensual(null, true).setVisible(true);
@@ -101,20 +101,27 @@ public class RegistrosPrueba {
             RecoleccionControlador controlador = new RecoleccionControlador();
             List<Persona> recolectores = new PersonaControlador().leerLista();
             List<Lote> lotes = new LoteControlador().leerLista();
-            Date fecha;
-            for (int i = 0; i < 2000; i++) {
-                fecha = new Date(2014 - 1900, (int) (Math.random() * 12), (int) (Math.random() * 28));
-                controlador.guardar(controlador.nuevo(
-                        lotes.get((int) (Math.random() * (lotes.size()))),
-                        fecha,
-                        (float) Math.random() * 2000,
-                        (float) Math.random() * 4000,
-                        (float) Math.random() * 5000,
-                        (float) Math.random() * 5000,
-                        (float) Math.random() * 5000,
-                        (float) Math.random() * 5000,
-                        (float) Math.random() * 500,
-                        recolectores.get((int) (Math.random() * (recolectores.size())))));
+            Calendar c = GregorianCalendar.getInstance();
+            for (int y = 2012; y < 2015; y++) {
+                System.out.println("año " + y);
+                c.setTime(new Date(2014 - 1900, 0, 1));
+                for (int i = 0; i < 365; i++) {
+                    System.out.print((i + 1) + " ");
+                    for (int r = 0; r < 15; r++) {
+                        controlador.guardar(controlador.nuevo(
+                                lotes.get((int) (Math.random() * (lotes.size()))),
+                                c.getTime(),
+                                (float) Math.random() * 900,
+                                (float) Math.random() * 1500,
+                                (float) Math.random() * 1500,
+                                (float) Math.random() * 1500,
+                                (float) Math.random() * 1500,
+                                (float) Math.random() * 1500,
+                                (float) Math.random() * 150,
+                                recolectores.get((int) (Math.random() * (recolectores.size())))));
+                    }
+                    c.add(Calendar.DAY_OF_MONTH, 1);
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,6 +138,7 @@ public class RegistrosPrueba {
             }
 
         }
+        System.out.println("registros recoleccion eliminados");
     }
 
     public static void quitarRegistrosTemperaturaHumedadYLluvias() {

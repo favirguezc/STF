@@ -8,12 +8,22 @@
 
     <ui:composition template="/template.xhtml">
 
-
         <ui:define name="title">
             <h:outputText value="#{bundle.ListTemperaturaTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
+            <h:form>
+                <p:outputLabel value="Año" for="ano"/>
+                <p:spacer width="10"/>
+                <p:spinner id="ano" value="#{temperaturaChart.ano}" title="Año" min="2012" max="2030"/>
+                <p:spacer width="10"/>
+                <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart()"/>
+
+                <p:chart id="chart1" type="line" model="#{temperaturaChart.modelo1}"/>
+                <p:remoteCommand name="updateChart" update="chart1" actionListener="#{temperaturaChart.createModel}"/>
+
+            </h:form>
             <h:form id="TemperaturaListForm">
                 <p:panel header="#{bundle.ListTemperaturaTitle}">
                     <p:dataTable id="datalist" value="#{temperaturaController.items}" var="item"

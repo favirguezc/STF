@@ -37,7 +37,7 @@ import util.DateTools;
 public class RegistrosPrueba {
 
     public static void main(String[] args) {
-        quitarRegistrosRecoleccion();
+//        quitarRegistrosRecoleccion();
 //        registrosPruebaRecoleccion();
 //        quitarRegistrosTemperaturaHumedadYLluvias();
 //        registrosPruebaTemperaturaHumedadYLluvias();
@@ -51,45 +51,46 @@ public class RegistrosPrueba {
     public static void registrosPruebaTemperaturaHumedadYLluvias() {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(new Date(2014 - 1900, 0, 1));
-
+        TemperaturaControlador controlador = new TemperaturaControlador();
         for (int i = 0; i < 365; i++) {
-//            TemperaturaControlador controlador = new TemperaturaControlador();
+            for (int j = 0; j < 10; j++) {
+                try {
+                    controlador.guardar(
+                            controlador.nuevo(
+                                    c.getTime(),
+                                    new Date(0, 0, 0, (int) (Math.random() * 10 + 7), (int) (Math.random() * 59)),
+                                    (float) (Math.random() * 30),
+                                    (float) (Math.random() * 15 + 15),
+                                    (float) (Math.random() * 15)));
+                } catch (Exception ex) {
+                    Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//            HumedadDelSueloControlador controlador2 = new HumedadDelSueloControlador();
 //            try {
-//                controlador.guardar(
-//                        controlador.nuevo(
+//                controlador2.guardar(
+//                        controlador2.nuevo(
 //                                c.getTime(),
-//                                new Date(0, 0, 0, (int) (Math.random() * 10 + 7), (int) (Math.random() * 59)),
-//                                new Date(0, 0, 0, (int) (Math.random() * 10 + 7), (int) (Math.random() * 59)),
-//                                (float) (Math.random() * 15 + 15),
-//                                (float) (Math.random() * 15)));
+//                                (float) (Math.random() * 15),
+//                                (float) (Math.random() * 20 + 10),
+//                                new Date(0, 0, 0, 7, 30)));
+//                controlador2.guardar(
+//                        controlador2.nuevo(
+//                                c.getTime(),
+//                                (float) (Math.random() * 15),
+//                                (float) (Math.random() * 20 + 10),
+//                                new Date(0, 0, 0, 12, 30)));
 //            } catch (Exception ex) {
 //                Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-            HumedadDelSueloControlador controlador2 = new HumedadDelSueloControlador();
-            try {
-                controlador2.guardar(
-                        controlador2.nuevo(
-                                c.getTime(),
-                                (float) (Math.random() * 15),
-                                (float) (Math.random() * 20 + 10),
-                                new Date(0, 0, 0, 7, 30)));
-                controlador2.guardar(
-                        controlador2.nuevo(
-                                c.getTime(),
-                                (float) (Math.random() * 15),
-                                (float) (Math.random() * 20 + 10),
-                                new Date(0, 0, 0, 12, 30)));
-            } catch (Exception ex) {
-                Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            ControlDeLluviasControlador controlador3 = new ControlDeLluviasControlador();
-            try {
-                controlador3.guardar(
-                        controlador3.nuevo(
-                                c.getTime(),
-                                (int) (Math.random() * 25)));
-            } catch (Exception ex) {
-                Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+//            ControlDeLluviasControlador controlador3 = new ControlDeLluviasControlador();
+//            try {
+//                controlador3.guardar(
+//                        controlador3.nuevo(
+//                                c.getTime(),
+//                                (int) (Math.random() * 25)));
+//            } catch (Exception ex) {
+//                Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             }
             c.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -101,7 +102,7 @@ public class RegistrosPrueba {
             List<Persona> recolectores = new PersonaControlador().leerLista();
             List<Lote> lotes = new LoteControlador().leerLista();
             Date fecha;
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 2000; i++) {
                 fecha = new Date(2014 - 1900, (int) (Math.random() * 12), (int) (Math.random() * 28));
                 controlador.guardar(controlador.nuevo(
                         lotes.get((int) (Math.random() * (lotes.size()))),

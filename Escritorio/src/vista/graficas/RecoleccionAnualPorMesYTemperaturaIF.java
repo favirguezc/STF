@@ -189,6 +189,7 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
         final String s = "Segunda";
         final String t = "Tercera";
         final String c = "Cuarta";
+        final String q = "Quinta";
         final String d = "Dañada";
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
@@ -205,6 +206,7 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
             datos.addValue(sumarRegistros.getSegundaGramos() / 500, s, mes);
             datos.addValue(sumarRegistros.getTerceraGramos() / 500, t, mes);
             datos.addValue(sumarRegistros.getCuartaGramos() / 500, c, mes);
+            datos.addValue(sumarRegistros.getQuintaGramos()/ 500, q, mes);
             datos.addValue(sumarRegistros.getDanadaGramos() / 500, d, mes);
 
             cal.add(Calendar.DAY_OF_MONTH, 1);

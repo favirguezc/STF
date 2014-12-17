@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import modelo.administracion.GrupoSanguineo;
 import modelo.administracion.Persona;
 import modelo.administracion.RH;
+import modelo.administracion.Sexo;
 
 /**
  *
@@ -26,7 +27,7 @@ public class PersonaControlador {
         dao = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, String sexo, long telefono, GrupoSanguineo gs, RH rh) {
+    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, Sexo sexo, long telefono, GrupoSanguineo gs, RH rh) {
         return new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, gs, rh);
     }
 

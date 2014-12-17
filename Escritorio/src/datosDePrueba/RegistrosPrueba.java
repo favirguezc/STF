@@ -12,6 +12,7 @@ import controlador.variablesClimaticas.ControlDeLluviasControlador;
 import controlador.variablesClimaticas.HumedadDelSueloControlador;
 import controlador.variablesClimaticas.TemperaturaControlador;
 import dao.exceptions.NonexistentEntityException;
+import dao.util.EntityManagerFactorySingleton;
 import vista.graficas.RecoleccionAnualPorLoteIF;
 import vista.reportes.ReporteAnual;
 import vista.reportes.ReporteMensual;
@@ -37,34 +38,39 @@ import util.DateTools;
 public class RegistrosPrueba {
 
     public static void main(String[] args) {
-        quitarRegistrosRecoleccion();
-        registrosPruebaRecoleccion();
+//        quitarRegistrosRecoleccion();
+//        registrosPruebaRecoleccion();
 //        quitarRegistrosTemperaturaHumedadYLluvias();
 //        registrosPruebaTemperaturaHumedadYLluvias();
 //        new ReporteMensual(null, true).setVisible(true);
 //        new ReporteAnual(null, true, ReporteAnual.POR_DIA).setVisible(true);
 //        new ReporteAnual(null, true, ReporteAnual.POR_MES).setVisible(true);
 //        new ReporteAnual(null, true, ReporteAnual.POR_SEMANA).setVisible(true);
-        //new ReporteSemanal(null, true).setVisible(true);
+//        new ReporteSemanal(null, true).setVisible(true);
+//        registrosPruebaNotas();
     }
 
     public static void registrosPruebaTemperaturaHumedadYLluvias() {
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(2014 - 1900, 0, 1));
         TemperaturaControlador controlador = new TemperaturaControlador();
-        for (int i = 0; i < 365; i++) {
-            for (int j = 0; j < 10; j++) {
-                try {
-                    controlador.guardar(
-                            controlador.nuevo(
-                                    c.getTime(),
-                                    new Date(0, 0, 0, (int) (Math.random() * 10 + 7), (int) (Math.random() * 59)),
-                                    (float) (Math.random() * 30),
-                                    (float) (Math.random() * 15 + 15),
-                                    (float) (Math.random() * 15)));
-                } catch (Exception ex) {
-                    Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        for (int y = 2014; y < 2015; y++) {
+            System.out.println("Año " + y);
+            c.setTime(new Date(y - 1900, 0, 1));            
+            for (int i = 364; i < 365; i++) {
+                System.out.println(i + 1);
+                for (int j = 0; j < 24; j++) {
+                    for (int h = 0; h < 6; h++) {
+                        try {
+                            controlador.guardar(
+                                    controlador.nuevo(
+                                            c.getTime(),
+                                            new Date(0, 0, 0, j, h * 10),
+                                            (float) (Math.random() * 30),
+                                            (float) (Math.random() * 30),
+                                            (float) (Math.random() * 20)));
+                        } catch (Exception ex) {
+                            Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 //            HumedadDelSueloControlador controlador2 = new HumedadDelSueloControlador();
 //            try {
 //                controlador2.guardar(
@@ -91,8 +97,10 @@ public class RegistrosPrueba {
 //            } catch (Exception ex) {
 //                Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
 //            }
+                    }
+                }
+                c.add(Calendar.DAY_OF_MONTH, 1);
             }
-            c.add(Calendar.DAY_OF_MONTH, 1);
         }
     }
 
@@ -142,6 +150,7 @@ public class RegistrosPrueba {
     }
 
     public static void quitarRegistrosTemperaturaHumedadYLluvias() {
+        System.out.println("Eliminando registros de temperatura");
         TemperaturaControlador controlador = new TemperaturaControlador();
         for (Temperatura t : controlador.buscarLista(new Date(0, 0, 1), new Date(2000, 0, 1))) {
             try {
@@ -168,5 +177,10 @@ public class RegistrosPrueba {
                 Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        System.out.println("Registros de temperatura eliminados");
+    }
+
+    private static void registrosPruebaNotas() {
+        EntityManagerFactorySingleton.getEntityManagerFactory();
     }
 }

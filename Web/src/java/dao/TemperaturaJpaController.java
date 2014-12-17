@@ -153,4 +153,16 @@ public class TemperaturaJpaController implements Serializable {
         }
     }
 
+    public List<Temperatura> findTemperaturaEntities(Date fecha1, int hora) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Temperatura> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha = :fecha1 AND FUNC('HOUR',t.hora) = :hora", Temperatura.class);
+            query.setParameter("fecha1", fecha1, TemporalType.DATE);
+            query.setParameter("hora", hora);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -12,8 +12,6 @@
             <h:form id="TemperaturaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{temperaturaController.selected.id}" title="#{bundle.EditTemperaturaTitle_id}" />
                         <p:outputLabel value="#{bundle.EditTemperaturaLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.EditTemperaturaTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTemperaturaLabel_hora}" for="hora" />
@@ -32,7 +30,7 @@
                                            itemValue="#{moduloItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{temperaturaController.update}" value="#{bundle.Save}" update="display,:TemperaturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperaturaEditDialog');"/>
+                    <p:commandButton actionListener="#{temperaturaController.update}" value="#{bundle.Save}" update="display,:TemperaturaListPanel:TemperaturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperaturaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TemperaturaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

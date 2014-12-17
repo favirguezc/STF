@@ -12,8 +12,6 @@
             <h:form id="TemperaturaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_id}"/>
-                        <h:outputText value="#{temperaturaController.selected.id}" title="#{bundle.ViewTemperaturaTitle_id}"/>
                         <h:outputText value="#{bundle.ViewTemperaturaLabel_fecha}"/>
                         <h:outputText value="#{temperaturaController.selected.fecha}" title="#{bundle.ViewTemperaturaTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />

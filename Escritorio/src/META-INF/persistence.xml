@@ -2,22 +2,23 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>modelo.variablesClimaticas.Temperatura</class>
-    <class>modelo.variablesClimaticas.HumedadDelSuelo</class>
-    <class>modelo.administracion.Lote</class>
+    <class>modelo.utilidades.Nota</class>
     <class>modelo.administracion.Persona</class>
+    <class>modelo.administracion.Lote</class>
+    <class>modelo.administracion.Modulo</class>
     <class>modelo.administracion.Rol</class>
+    <class>modelo.administracion.RolPersona</class>
+    <class>modelo.produccion.AplicacionFitosanitaria</class>
+    <class>modelo.produccion.Insumo</class>
+    <class>modelo.produccion.Labor</class>
     <class>modelo.produccion.MonitoreoDeEnfermedades</class>
     <class>modelo.produccion.MonitoreoDePlagas</class>
-    <class>modelo.produccion.AplicacionFitosanitaria</class>
-    <class>modelo.produccion.TrampaDeInsectos</class>
     <class>modelo.produccion.Recoleccion</class>
     <class>modelo.produccion.Trabajo</class>
-    <class>modelo.administracion.RolPersona</class>
-    <class>modelo.administracion.Modulo</class>
-    <class>modelo.produccion.Labor</class>
+    <class>modelo.produccion.TrampaDeInsectos</class>
+    <class>modelo.variablesClimaticas.HumedadDelSuelo</class>
     <class>modelo.variablesClimaticas.Lluvia</class>
-    <class>modelo.produccion.Insumo</class>
+    <class>modelo.variablesClimaticas.Temperatura</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>

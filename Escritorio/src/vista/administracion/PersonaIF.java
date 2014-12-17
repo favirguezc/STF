@@ -19,6 +19,7 @@ import modelo.administracion.Persona;
 import modelo.administracion.RH;
 import modelo.administracion.Rol;
 import modelo.administracion.RolPersona;
+import modelo.administracion.Sexo;
 import util.TableColumnAdjuster;
 
 /**
@@ -261,7 +262,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         rhComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         sexoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sexoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
 
         cedulaLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -542,7 +542,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         String apellido = apellido1TextField.getText();
         String apellido2 = apellido2TextField.getText();
         long cedula = cedulaLongField.getLong();
-        String sexo = sexoComboBox.getSelectedItem().toString();
+        Sexo sexo = (Sexo) sexoComboBox.getSelectedItem();
         long telefono = telefonoLongField.getLong();
         GrupoSanguineo grupo = (GrupoSanguineo) gsComboBox.getSelectedItem();
         RH rh = (RH) rhComboBox.getSelectedItem();
@@ -864,4 +864,11 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             rhComboBox.addItem(rh);
         }
     }
+    
+    private void cargarListaSexo(){
+        for(Sexo s:Sexo.values()){
+            sexoComboBox.addItem(s);
+        }
+    }
+    
 }

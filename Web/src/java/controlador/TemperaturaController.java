@@ -87,9 +87,25 @@ public class TemperaturaController implements Serializable {
         return getJpaController().findTemperaturaEntities(fecha1, fecha2);
     }
 
+    public List<Temperatura> getItems(Date fecha1, int hora) {
+        return getJpaController().findTemperaturaEntities(fecha1, hora);
+    }
+
     public Temperatura calcularPromedio(Date fecha1, Date fecha2) {
         Temperatura promedio = new Temperatura(null, null, 0, 0, 0, null);
         List<Temperatura> buscarLista = getItems(fecha1, fecha2);
+        for (Temperatura t : buscarLista) {
+            promedio.sumar(t);
+        }
+        if (buscarLista.size() > 1) {
+            promedio.dividir(buscarLista.size());
+        }
+        return promedio;
+    }
+
+    public Temperatura calcularPromedio(Date fechaDia, int hora) {
+        Temperatura promedio = new Temperatura(null, null, 0, 0, 0, null);
+        List<Temperatura> buscarLista = getItems(fechaDia, hora);
         for (Temperatura t : buscarLista) {
             promedio.sumar(t);
         }

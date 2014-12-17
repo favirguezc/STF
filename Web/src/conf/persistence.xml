@@ -18,6 +18,7 @@
     <class>modelo.variablesClimaticas.HumedadDelSuelo</class>
     <class>modelo.variablesClimaticas.Lluvia</class>
     <class>modelo.variablesClimaticas.Temperatura</class>
+    <class>modelo.utilidades.Nota</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>

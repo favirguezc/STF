@@ -141,7 +141,7 @@ public class LoteController implements Serializable {
             }
             if (object instanceof Lote) {
                 Lote o = (Lote) object;
-                return getStringKey(o.getId());
+                return o.toString();
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Lote.class.getName()});
                 return null;

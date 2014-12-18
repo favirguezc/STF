@@ -15,13 +15,13 @@
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_id}" for="id" />
                         <p:inputText id="id" value="#{monitoreoDeEnfermedadesController.selected.id}" title="#{bundle.CreateMonitoreoDeEnfermedadesTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_modulo}" for="modulo" />
-                        <p:selectOneMenu id="modulo" value="#{monitoreoDeEnfermedadesController.selected.modulo}" >
+                        <p:selectOneMenu id="modulo" value="#{monitoreoDeEnfermedadesController.selected.modulo}" required="true" requiredMessage="#{bundle.EditMonitoreoDeEnfermedadesRequiredMessage_modulo}">
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
                                            itemValue="#{moduloItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDeEnfermedadesController.selected.fecha}" title="#{bundle.EditMonitoreoDeEnfermedadesTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDeEnfermedadesController.selected.fecha}" title="#{bundle.EditMonitoreoDeEnfermedadesTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoDeEnfermedadesRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_botrytis}" for="botrytis" />
                         <p:inputText id="botrytis" value="#{monitoreoDeEnfermedadesController.selected.botrytis}" title="#{bundle.CreateMonitoreoDeEnfermedadesTitle_botrytis}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_mycospharella}" for="mycospharella" />

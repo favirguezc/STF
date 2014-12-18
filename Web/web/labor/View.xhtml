@@ -12,6 +12,8 @@
             <h:form id="LaborViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{laborController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLaborLabel_id}"/>
+                        <h:outputText value="#{laborController.selected.id}" title="#{bundle.ViewLaborTitle_id}"/>
                         <h:outputText value="#{bundle.ViewLaborLabel_nombre}"/>
                         <h:outputText value="#{laborController.selected.nombre}" title="#{bundle.ViewLaborTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewLaborLabel_descripcion}"/>

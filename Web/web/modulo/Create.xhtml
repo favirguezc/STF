@@ -20,7 +20,8 @@
                         <p:selectOneMenu id="lote" value="#{moduloController.selected.lote}" >
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
                                            var="loteItem"
-                                           itemValue="#{loteItem}"/>
+                                           itemValue="#{loteItem}"
+                                           itemLabel="#{loteItem.nombre}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{moduloController.create}" value="#{bundle.Save}" update="display,:ModuloListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuloCreateDialog');"/>

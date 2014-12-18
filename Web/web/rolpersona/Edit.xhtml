@@ -12,8 +12,6 @@
             <h:form id="RolPersonaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolPersonaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{rolPersonaController.selected.id}" title="#{bundle.EditRolPersonaTitle_id}" />
                         <p:outputLabel value="#{bundle.EditRolPersonaLabel_persona}" for="persona" />
                         <p:selectOneMenu id="persona" value="#{rolPersonaController.selected.persona}" required="true" requiredMessage="#{bundle.EditRolPersonaRequiredMessage_persona}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -22,7 +20,7 @@
                                            itemValue="#{personaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRolPersonaLabel_rol}" for="rol" />
-                        <p:selectOneMenu id="rol" value="#{rolPersonaController.selected.rol}" >
+                        <p:selectOneMenu id="rol" value="#{rolPersonaController.selected.rol}" required="true" requiredMessage="#{bundle.EditRolPersonaRequiredMessage_rol}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
                                            var="rolItem"

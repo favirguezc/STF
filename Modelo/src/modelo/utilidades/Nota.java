@@ -26,8 +26,7 @@ public class Nota implements Serializable {
     private String titulo;
     @Column(nullable = false)
     private String nota;
-    @ManyToOne
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
     private Persona creador;    
 
     public Long getId() {

@@ -12,17 +12,19 @@
             <h:form id="AplicacionFitosanitariaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aplicacionFitosanitariaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{aplicacionFitosanitariaController.selected.id}" title="#{bundle.EditAplicacionFitosanitariaTitle_id}" />
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{aplicacionFitosanitariaController.selected.fecha}" title="#{bundle.EditAplicacionFitosanitariaTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{aplicacionFitosanitariaController.selected.fecha}" title="#{bundle.EditAplicacionFitosanitariaTitle_fecha}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_producto}" for="producto" />
-                        <p:selectOneMenu id="producto" value="#{aplicacionFitosanitariaController.selected.producto}" >
+                        <p:selectOneMenu id="producto" value="#{aplicacionFitosanitariaController.selected.producto}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_producto}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{insumoController.itemsAvailableSelectOne}"
                                            var="productoItem"
                                            itemValue="#{productoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_motivo}" for="motivo" />
-                        <p:inputText id="motivo" value="#{aplicacionFitosanitariaController.selected.motivo}" title="#{bundle.EditAplicacionFitosanitariaTitle_motivo}" />
+                        <p:inputText id="motivo" value="#{aplicacionFitosanitariaController.selected.motivo}" title="#{bundle.EditAplicacionFitosanitariaTitle_motivo}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_motivo}"/>
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{aplicacionFitosanitariaController.selected.cantidad}" title="#{bundle.EditAplicacionFitosanitariaTitle_cantidad}" />
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_agua}" for="agua" />
@@ -30,14 +32,14 @@
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_equipo}" for="equipo" />
                         <p:inputText id="equipo" value="#{aplicacionFitosanitariaController.selected.equipo}" title="#{bundle.EditAplicacionFitosanitariaTitle_equipo}" />
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_responsable}" for="responsable" />
-                        <p:selectOneMenu id="responsable" value="#{aplicacionFitosanitariaController.selected.responsable}" >
+                        <p:selectOneMenu id="responsable" value="#{aplicacionFitosanitariaController.selected.responsable}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_responsable}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="responsableItem"
                                            itemValue="#{responsableItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_aprobante}" for="aprobante" />
-                        <p:selectOneMenu id="aprobante" value="#{aplicacionFitosanitariaController.selected.aprobante}" >
+                        <p:selectOneMenu id="aprobante" value="#{aplicacionFitosanitariaController.selected.aprobante}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_aprobante}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="aprobanteItem"
@@ -48,7 +50,7 @@
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_observaciones}" for="observaciones" />
                         <p:inputText id="observaciones" value="#{aplicacionFitosanitariaController.selected.observaciones}" title="#{bundle.EditAplicacionFitosanitariaTitle_observaciones}" />
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_lote}" for="lote" />
-                        <p:selectOneMenu id="lote" value="#{aplicacionFitosanitariaController.selected.lote}" >
+                        <p:selectOneMenu id="lote" value="#{aplicacionFitosanitariaController.selected.lote}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_lote}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
                                            var="loteItem"

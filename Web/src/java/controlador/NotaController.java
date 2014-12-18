@@ -1,9 +1,9 @@
 package controlador;
 
-import modelo.administracion.Lote;
+import modelo.utilidades.Nota;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.LoteJpaController;
+import dao.NotaJpaController;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,22 +18,22 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "loteController")
+@ManagedBean(name = "notaController")
 @SessionScoped
-public class LoteController implements Serializable {
+public class NotaController implements Serializable {
 
-    private LoteJpaController jpaController = null;
-    private List<Lote> items = null;
-    private Lote selected;
+    private NotaJpaController jpaController = null;
+    private List<Nota> items = null;
+    private Nota selected;
 
-    public LoteController() {
+    public NotaController() {
     }
 
-    public Lote getSelected() {
+    public Nota getSelected() {
         return selected;
     }
 
-    public void setSelected(Lote selected) {
+    public void setSelected(Nota selected) {
         this.selected = selected;
     }
 
@@ -43,41 +43,41 @@ public class LoteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private LoteJpaController getJpaController() {
+    private NotaJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new LoteJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new NotaJpaController(Persistence.createEntityManagerFactory("WebPU"));
         }
         return jpaController;
     }
 
-    public Lote prepareCreate() {
-        selected = new Lote();
+    public Nota prepareCreate() {
+        selected = new Nota();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("LoteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("NotaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("LoteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("NotaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("LoteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("NotaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Lote> getItems() {
+    public List<Nota> getItems() {
         if (items == null) {
-            items = getJpaController().findLoteEntities();
+            items = getJpaController().findNotaEntities();
         }
         return items;
     }
@@ -101,34 +101,34 @@ public class LoteController implements Serializable {
         }
     }
 
-    public List<Lote> getItemsAvailableSelectMany() {
-        return getJpaController().findLoteEntities();
+    public List<Nota> getItemsAvailableSelectMany() {
+        return getJpaController().findNotaEntities();
     }
 
-    public List<Lote> getItemsAvailableSelectOne() {
-        return getJpaController().findLoteEntities();
+    public List<Nota> getItemsAvailableSelectOne() {
+        return getJpaController().findNotaEntities();
     }
 
-    @FacesConverter(forClass = Lote.class)
-    public static class LoteControllerConverter implements Converter {
+    @FacesConverter(forClass = Nota.class)
+    public static class NotaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            LoteController controller = (LoteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "loteController");
-            return controller.getJpaController().findLote(getKey(value));
+            NotaController controller = (NotaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "notaController");
+            return controller.getJpaController().findNota(getKey(value));
         }
 
-        long getKey(String value) {
-            long key;
-            key = Long.parseLong(value);
+        java.lang.Long getKey(String value) {
+            java.lang.Long key;
+            key = Long.valueOf(value);
             return key;
         }
 
-        String getStringKey(long value) {
+        String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -139,11 +139,11 @@ public class LoteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Lote) {
-                Lote o = (Lote) object;
+            if (object instanceof Nota) {
+                Nota o = (Nota) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Lote.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Nota.class.getName()});
                 return null;
             }
         }

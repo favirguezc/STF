@@ -31,8 +31,7 @@ public class Temperatura implements Serializable {
     private float humedad;
     @Column(nullable = false)
     private float puntoDeRocio;
-    @ManyToOne
-    @Column(nullable = false)
+    @ManyToOne(optional = false)
     private Modulo modulo;
 
     public Temperatura() {

@@ -15,16 +15,16 @@
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_id}" for="id" />
                         <p:inputText id="id" value="#{recoleccionController.selected.id}" title="#{bundle.EditRecoleccionTitle_id}" />
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_lote}" for="lote" />
-                        <p:selectOneMenu id="lote" value="#{recoleccionController.selected.lote}" >
+                        <p:selectOneMenu id="lote" value="#{recoleccionController.selected.lote}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_lote}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
                                            var="loteItem"
                                            itemValue="#{loteItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_recolector}" for="recolector" />
-                        <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" >
+                        <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="recolectorItem"

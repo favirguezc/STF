@@ -12,6 +12,8 @@
             <h:form id="LaborCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{laborController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLaborLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{laborController.selected.id}" title="#{bundle.CreateLaborTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateLaborLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{laborController.selected.nombre}" title="#{bundle.CreateLaborTitle_nombre}" required="true" requiredMessage="#{bundle.CreateLaborRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateLaborLabel_descripcion}" for="descripcion" />

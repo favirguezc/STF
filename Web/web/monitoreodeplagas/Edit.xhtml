@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_id}" for="id" />
                         <p:inputText id="id" value="#{monitoreoDePlagasController.selected.id}" title="#{bundle.EditMonitoreoDePlagasTitle_id}" />
                         <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_modulo}" for="modulo" />
-                        <p:selectOneMenu id="modulo" value="#{monitoreoDePlagasController.selected.modulo}" >
+                        <p:selectOneMenu id="modulo" value="#{monitoreoDePlagasController.selected.modulo}" required="true" requiredMessage="#{bundle.EditMonitoreoDePlagasRequiredMessage_modulo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
@@ -30,7 +30,7 @@
                         <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_coronas}" for="coronas" />
                         <p:inputText id="coronas" value="#{monitoreoDePlagasController.selected.coronas}" title="#{bundle.EditMonitoreoDePlagasTitle_coronas}" />
                         <p:outputLabel value="#{bundle.EditMonitoreoDePlagasLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDePlagasController.selected.fecha}" title="#{bundle.EditMonitoreoDePlagasTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDePlagasController.selected.fecha}" title="#{bundle.EditMonitoreoDePlagasTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoDePlagasRequiredMessage_fecha}" showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitoreoDePlagasController.update}" value="#{bundle.Save}" update="display,:MonitoreoDePlagasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoreoDePlagasEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoDePlagasEditDialog.hide()"/>

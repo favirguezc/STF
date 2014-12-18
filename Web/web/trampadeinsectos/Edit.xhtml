@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_id}" for="id" />
                         <p:inputText id="id" value="#{trampaDeInsectosController.selected.id}" title="#{bundle.EditTrampaDeInsectosTitle_id}" />
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.EditTrampaDeInsectosTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.EditTrampaDeInsectosTitle_fecha}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{trampaDeInsectosController.selected.nombre}" title="#{bundle.EditTrampaDeInsectosTitle_nombre}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_especie}" for="especie" />

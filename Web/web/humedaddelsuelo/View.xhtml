@@ -24,6 +24,8 @@
                         <h:outputText value="#{humedadDelSueloController.selected.hora}" title="#{bundle.ViewHumedadDelSueloTitle_hora}">
                             <f:convertDateTime pattern="HH:mm:ss" />
                         </h:outputText>
+                        <h:outputText value="#{bundle.ViewHumedadDelSueloLabel_id}"/>
+                        <h:outputText value="#{humedadDelSueloController.selected.id}" title="#{bundle.ViewHumedadDelSueloTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="HumedadDelSueloViewDialog.hide()"/>
                 </h:panelGroup>

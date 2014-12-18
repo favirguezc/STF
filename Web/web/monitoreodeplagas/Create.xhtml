@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.CreateMonitoreoDePlagasLabel_id}" for="id" />
                         <p:inputText id="id" value="#{monitoreoDePlagasController.selected.id}" title="#{bundle.CreateMonitoreoDePlagasTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoDePlagasLabel_modulo}" for="modulo" />
-                        <p:selectOneMenu id="modulo" value="#{monitoreoDePlagasController.selected.modulo}" >
+                        <p:selectOneMenu id="modulo" value="#{monitoreoDePlagasController.selected.modulo}" required="true" requiredMessage="#{bundle.EditMonitoreoDePlagasRequiredMessage_modulo}">
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
                                            itemValue="#{moduloItem}"/>
@@ -29,7 +29,7 @@
                         <p:outputLabel value="#{bundle.CreateMonitoreoDePlagasLabel_coronas}" for="coronas" />
                         <p:inputText id="coronas" value="#{monitoreoDePlagasController.selected.coronas}" title="#{bundle.CreateMonitoreoDePlagasTitle_coronas}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoDePlagasLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDePlagasController.selected.fecha}" title="#{bundle.EditMonitoreoDePlagasTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDePlagasController.selected.fecha}" title="#{bundle.EditMonitoreoDePlagasTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoDePlagasRequiredMessage_fecha}" showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitoreoDePlagasController.create}" value="#{bundle.Save}" update="display,:MonitoreoDePlagasListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitoreoDePlagasCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoDePlagasCreateDialog.hide()"/>

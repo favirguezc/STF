@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NotaCreateDlg" widgetVar="NotaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNotaTitle}">
+            <h:form id="NotaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{notaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNotaLabel_titulo}" for="titulo" />
+                        <p:inputText id="titulo" value="#{notaController.selected.titulo}" title="#{bundle.CreateNotaTitle_titulo}" />
+                        <p:outputLabel value="#{bundle.CreateNotaLabel_nota}" for="nota" />
+                        <p:inputText id="nota" value="#{notaController.selected.nota}" title="#{bundle.CreateNotaTitle_nota}" required="true" requiredMessage="#{bundle.CreateNotaRequiredMessage_nota}"/>
+                        <p:outputLabel value="#{bundle.CreateNotaLabel_creador}" for="creador" />
+                        <p:selectOneMenu id="creador" value="#{notaController.selected.creador}" required="true" requiredMessage="#{bundle.EditNotaRequiredMessage_creador}">
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="creadorItem"
+                                           itemValue="#{creadorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{notaController.create}" value="#{bundle.Save}" update="display,:NotaListForm:datalist,:growl" oncomplete="handleSubmit(args,'NotaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NotaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

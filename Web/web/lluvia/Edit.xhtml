@@ -13,9 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lluviaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditLluviaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{lluviaController.selected.fecha}" title="#{bundle.EditLluviaTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{lluviaController.selected.fecha}" title="#{bundle.EditLluviaTitle_fecha}" required="true" requiredMessage="#{bundle.EditLluviaRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditLluviaLabel_mm}" for="mm" />
-                        <p:inputText id="mm" value="#{lluviaController.selected.mm}" title="#{bundle.EditLluviaTitle_mm}" />
+                        <p:inputText id="mm" value="#{lluviaController.selected.mm}" title="#{bundle.EditLluviaTitle_mm}" required="true" requiredMessage="#{bundle.EditLluviaRequiredMessage_mm}"/>
+                        <p:outputLabel value="#{bundle.EditLluviaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{lluviaController.selected.id}" title="#{bundle.EditLluviaTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{lluviaController.update}" value="#{bundle.Save}" update="display,:LluviaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LluviaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LluviaEditDialog.hide()"/>

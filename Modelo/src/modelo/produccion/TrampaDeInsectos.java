@@ -20,6 +20,7 @@ public class TrampaDeInsectos implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
     @Column(nullable = false)
     private String nombre;
@@ -28,9 +29,9 @@ public class TrampaDeInsectos implements Serializable {
     private int individuos;
     private boolean cambioDePegante;
     private String observaciones;
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Persona asistente;
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Persona productor;
 
     public TrampaDeInsectos() {

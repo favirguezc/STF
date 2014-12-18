@@ -3,6 +3,7 @@ package modelo.produccion;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +19,12 @@ public class Recoleccion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Lote lote;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Persona recolector;
     private float extraGramos;
     private float primeraGramos;

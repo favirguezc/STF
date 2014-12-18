@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class MonitoreoDePlagas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Modulo modulo;
     private int aranita;
     private int thrips;
@@ -30,6 +31,7 @@ public class MonitoreoDePlagas implements Serializable {
     private boolean fruto;
     private int coronas;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
 
     public MonitoreoDePlagas() {

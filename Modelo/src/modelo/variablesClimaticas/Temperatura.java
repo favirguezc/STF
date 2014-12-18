@@ -3,6 +3,7 @@ package modelo.variablesClimaticas;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,19 @@ public class Temperatura implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
     @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
     private Date hora;
+    @Column(nullable = false)
     private float temperatura;
+    @Column(nullable = false)
     private float humedad;
+    @Column(nullable = false)
     private float puntoDeRocio;
     @ManyToOne
+    @Column(nullable = false)
     private Modulo modulo;
 
     public Temperatura() {

@@ -3,6 +3,7 @@ package modelo.variablesClimaticas;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,11 +18,15 @@ public class HumedadDelSuelo implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
-    private float valorEn30Cms;
-    private float valorEn15Cms;
+    @Column(nullable = false)
     @Temporal(TemporalType.TIME)
     private Date hora;
+    @Column(nullable = false)
+    private float valorEn30Cms;
+    @Column(nullable = false)
+    private float valorEn15Cms;
 
     public HumedadDelSuelo() {
     }

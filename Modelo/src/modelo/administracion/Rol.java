@@ -14,7 +14,7 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String nombre;
     private boolean contrasenaNecesaria;
 

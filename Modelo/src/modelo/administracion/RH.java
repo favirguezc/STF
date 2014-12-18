@@ -10,7 +10,6 @@ package modelo.administracion;
  * @author fredy
  */
 public enum RH {
-
     POSITIVO,
     NEGATIVO;
 }

@@ -3,6 +3,7 @@ package modelo.produccion;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,26 +20,28 @@ public class AplicacionFitosanitaria implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Insumo producto;
+    @Column(nullable = false)
     private String motivo;
     private boolean pc;
     private boolean tr;
     private float cantidad;
     private float agua;
     private String equipo;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Persona responsable;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Persona aprobante;
     private float jornales;
     private String observaciones;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Lote lote;
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Persona asistente;
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Persona productor;
 
     public AplicacionFitosanitaria(Date fecha, Insumo producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {

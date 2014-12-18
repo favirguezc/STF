@@ -7,6 +7,7 @@ package modelo.administracion;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,11 +23,13 @@ public class Modulo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    long id;
-    String nombre;
-    double area;
-    @ManyToOne
-    Lote lote;
+    private long id;
+    @Column(nullable = false)
+    private String nombre;
+    @Column(nullable = false)
+    private double area;
+    @ManyToOne(optional = false)
+    private Lote lote;
 
     public Modulo() {
     }

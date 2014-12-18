@@ -22,11 +22,12 @@ public class Persona implements Serializable {
     @Column(nullable = false)
     private String apellido;
     private String apellido2;
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private long cedula;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
+    @Column(nullable = false)
     private long telefono;
     @Enumerated(EnumType.STRING)
     private GrupoSanguineo grupoSanguineo;

@@ -6,6 +6,7 @@
 package modelo.utilidades;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,12 @@ import modelo.administracion.Persona;
 public class Nota implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;    
     private String titulo;
+    @Column(nullable = false)
     private String nota;
     @ManyToOne
+    @Column(nullable = false)
     private Persona creador;    
 
     public Long getId() {

@@ -21,9 +21,9 @@ public class RolPersona implements Serializable {
     private long id;
     @ManyToOne(optional = false)
     private Persona persona;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Rol rol;
-    @Basic
+    
     private String contrasena;
 
     public RolPersona() {

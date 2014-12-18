@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +19,10 @@ public class MonitoreoDeEnfermedades implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Modulo modulo;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false)
     private Date fecha;
     private int botrytis;
     private boolean antracnosis;

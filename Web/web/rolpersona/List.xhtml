@@ -31,19 +31,19 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolPersonaTitle_persona}"/>
                             </f:facet>
-                            <h:outputText value="#{item.persona}"/>
+                            <h:outputText value="#{item.persona.nombre} #{item.persona.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolPersonaTitle_rol}"/>
                             </f:facet>
-                            <h:outputText value="#{item.rol}"/>
+                            <h:outputText value="#{item.rol.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolPersonaTitle_contrasena}"/>
                             </f:facet>
-                            <h:outputText value="#{item.contrasena}"/>
+                            <p:selectBooleanButton value="#{item.contrasena!=''}" disabled="true" onLabel="Si" offLabel="No"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolPersonaController.prepareCreate}" update=":RolPersonaCreateForm" oncomplete="PF('RolPersonaCreateDialog').show()"/>

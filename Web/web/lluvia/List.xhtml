@@ -14,52 +14,73 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="LluviaListForm">
-                <p:panel header="#{bundle.ListLluviaTitle}">
-                    <p:dataTable id="datalist" value="#{lluviaController.items}" var="item"
-                                 selectionMode="single" selection="#{lluviaController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+            <p:accordionPanel dynamic="true" id="LluviaListPanel">
+                <p:tab title="Gráfica">
+                    <h:form>
+                        <h:panelGrid columns="5" cellpadding="10">
+                            <p:outputLabel value="Año" for="ano1"/>
+                            <p:spinner id="ano1" value="#{lluviaChart.ano1}" title="Año" min="2012" max="2030"/>
+                            <p:outputLabel value="Mes" for="mes1"/>
+                            <p:selectOneMenu id="mes1" value="#{lluviaChart.mes1}">
+                                        <f:selectItem itemLabel="Enero" itemValue="0"/>
+                                        <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                                        <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                                        <f:selectItem itemLabel="Abril" itemValue="3"/>
+                                        <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                                        <f:selectItem itemLabel="Junio" itemValue="5"/>
+                                        <f:selectItem itemLabel="Julio" itemValue="6"/>
+                                        <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                                        <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                                        <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                                        <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                                        <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                                    </p:selectOneMenu>
+                            <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
+                        </h:panelGrid>
+                        <p:chart id="chart1" type="line" model="#{lluviaChart.modelo1}"/>
+                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{lluviaChart.createModel1}"/>
+                    </h:form>
+                </p:tab>
+                <p:tab title="Datos">
+                    <h:form id="LluviaListForm">
+                        <p:dataTable id="datalist" value="#{lluviaController.items}" var="item"
+                                     selectionMode="single" selection="#{lluviaController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLluviaTitle_fecha}"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListLluviaTitle_fecha}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListLluviaTitle_mm}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.mm}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{lluviaController.prepareCreate}" update=":LluviaListPanel:LluviaCreateForm" oncomplete="PF('LluviaCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LluviaListPanel:LluviaViewForm" oncomplete="PF('LluviaViewDialog').show()" disabled="#{empty lluviaController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LluviaListPanel:LluviaEditForm" oncomplete="PF('LluviaEditDialog').show()" disabled="#{empty lluviaController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{lluviaController.destroy}" update=":growl,datalist" disabled="#{empty lluviaController.selected}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLluviaTitle_mm}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mm}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLluviaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{lluviaController.prepareCreate}" update=":LluviaCreateForm" oncomplete="PF('LluviaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LluviaViewForm" oncomplete="PF('LluviaViewDialog').show()" disabled="#{empty lluviaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LluviaEditForm" oncomplete="PF('LluviaEditDialog').show()" disabled="#{empty lluviaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{lluviaController.destroy}" update=":growl,datalist" disabled="#{empty lluviaController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
-
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+                        </p:dataTable>
+                    </h:form>
+                    <ui:include src="Create.xhtml"/>
+                    <ui:include src="Edit.xhtml"/>
+                    <ui:include src="View.xhtml"/>
+                </p:tab>
+            </p:accordionPanel>
         </ui:define>
     </ui:composition>
 

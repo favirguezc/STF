@@ -8,26 +8,27 @@
 
     <ui:composition>
 
-        <p:dialog id="TemperaturaEditDlg" widgetVar="TemperaturaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTemperaturaTitle}">
+        <p:dialog id="TemperaturaEditDlg" widgetVar="TemperaturaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.TemperaturaLabel}">
             <h:form id="TemperaturaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.EditTemperaturaTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.EditTemperaturaTitle_hora}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_temperatura}" for="temperatura" />
-                        <p:inputText id="temperatura" value="#{temperaturaController.selected.temperatura}" title="#{bundle.EditTemperaturaTitle_temperatura}" />
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_humedad}" for="humedad" />
-                        <p:inputText id="humedad" value="#{temperaturaController.selected.humedad}" title="#{bundle.EditTemperaturaTitle_humedad}" />
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_puntoDeRocio}" for="puntoDeRocio" />
-                        <p:inputText id="puntoDeRocio" value="#{temperaturaController.selected.puntoDeRocio}" title="#{bundle.EditTemperaturaTitle_puntoDeRocio}" />
-                        <p:outputLabel value="#{bundle.EditTemperaturaLabel_modulo}" for="modulo" />
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.TemperaturaLabel_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.TemperaturaLabel_hora}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_temperatura}" for="temperatura" />
+                        <p:inputText id="temperatura" value="#{temperaturaController.selected.temperatura}" title="#{bundle.TemperaturaLabel_temperatura}" />
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_humedad}" for="humedad" />
+                        <p:inputText id="humedad" value="#{temperaturaController.selected.humedad}" title="#{bundle.TemperaturaLabel_humedad}" />
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_puntoDeRocio}" for="puntoDeRocio" />
+                        <p:inputText id="puntoDeRocio" value="#{temperaturaController.selected.puntoDeRocio}" title="#{bundle.TemperaturaLabel_puntoDeRocio}" />
+                        <p:outputLabel value="#{bundle.TemperaturaLabel_modulo}" for="modulo" />
                         <p:selectOneMenu id="modulo" value="#{temperaturaController.selected.modulo}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
-                                           itemValue="#{moduloItem}"/>
+                                           itemValue="#{moduloItem}"
+                                           itemLabel="#{moduloItem.lote.nombre} #{moduloItem.nombre}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{temperaturaController.update}" value="#{bundle.Save}" update="display,:TemperaturaListPanel:TemperaturaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperaturaEditDialog');"/>

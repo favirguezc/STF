@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import dao.LluviaJpaController;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -82,6 +83,14 @@ public class LluviaController implements Serializable {
         return items;
     }
 
+    public List<Lluvia> getItems(Date fecha1,Date fecha2) {
+        return getJpaController().findLluviaEntities(fecha1,fecha2);
+    }
+    
+    public List<Lluvia> getItems(Date fecha1) {
+        return getJpaController().findLluviaEntities(fecha1);
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -107,6 +116,30 @@ public class LluviaController implements Serializable {
 
     public List<Lluvia> getItemsAvailableSelectOne() {
         return getJpaController().findLluviaEntities();
+    }
+
+    public float calcularPromedio(Date fecha1,Date fecha2) {
+        float promedio = 0;
+        List<Lluvia> lista = getItems(fecha1,fecha2);
+        for (Lluvia l : lista) {
+            promedio += l.getMm();
+        }
+        if (lista.size() > 1) {
+            promedio = promedio / lista.size();
+        }
+        return promedio;
+    }
+    
+    public float calcularPromedio(Date fecha1) {
+        float promedio = 0;
+        List<Lluvia> lista = getItems(fecha1);
+        for (Lluvia l : lista) {
+            promedio += l.getMm();
+        }
+        if (lista.size() > 1) {
+            promedio = promedio / lista.size();
+        }
+        return promedio;
     }
 
     @FacesConverter(forClass = Lluvia.class)

@@ -13,11 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolPersonaController.selected != null}">
                         <h:outputText value="#{bundle.ViewRolPersonaLabel_persona}"/>
-                        <h:outputText value="#{rolPersonaController.selected.persona}" title="#{bundle.ViewRolPersonaTitle_persona}"/>
+                        <h:outputText value="#{rolPersonaController.selected.persona.nombre} #{rolPersonaController.selected.persona.apellido}" title="#{bundle.ViewRolPersonaTitle_persona}"/>
                         <h:outputText value="#{bundle.ViewRolPersonaLabel_rol}"/>
-                        <h:outputText value="#{rolPersonaController.selected.rol}" title="#{bundle.ViewRolPersonaTitle_rol}"/>
+                        <h:outputText value="#{rolPersonaController.selected.rol.nombre}" title="#{bundle.ViewRolPersonaTitle_rol}"/>
                         <h:outputText value="#{bundle.ViewRolPersonaLabel_contrasena}"/>
-                        <h:outputText value="#{rolPersonaController.selected.contrasena}" title="#{bundle.ViewRolPersonaTitle_contrasena}"/>
+                        <h:outputText value="#{rolPersonaController.selected.contrasena}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RolPersonaViewDialog.hide()"/>
                 </h:panelGroup>

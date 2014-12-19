@@ -8,26 +8,26 @@
 
     <ui:composition>
 
-        <p:dialog id="TemperaturaViewDlg" widgetVar="TemperaturaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTemperaturaTitle}">
+        <p:dialog id="TemperaturaViewDlg" widgetVar="TemperaturaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.TemperaturaLabel}">
             <h:form id="TemperaturaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_fecha}"/>
-                        <h:outputText value="#{temperaturaController.selected.fecha}" title="#{bundle.ViewTemperaturaTitle_fecha}">
+                        <h:outputText value="#{bundle.TemperaturaLabel_fecha}"/>
+                        <h:outputText value="#{temperaturaController.selected.fecha}" title="#{bundle.TemperaturaLabel_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_hora}"/>
-                        <h:outputText value="#{temperaturaController.selected.hora}" title="#{bundle.ViewTemperaturaTitle_hora}">
+                        <h:outputText value="#{bundle.TemperaturaLabel_hora}"/>
+                        <h:outputText value="#{temperaturaController.selected.hora}" title="#{bundle.TemperaturaLabel_hora}">
                             <f:convertDateTime pattern="HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_temperatura}"/>
-                        <h:outputText value="#{temperaturaController.selected.temperatura}" title="#{bundle.ViewTemperaturaTitle_temperatura}"/>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_humedad}"/>
-                        <h:outputText value="#{temperaturaController.selected.humedad}" title="#{bundle.ViewTemperaturaTitle_humedad}"/>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_puntoDeRocio}"/>
-                        <h:outputText value="#{temperaturaController.selected.puntoDeRocio}" title="#{bundle.ViewTemperaturaTitle_puntoDeRocio}"/>
-                        <h:outputText value="#{bundle.ViewTemperaturaLabel_modulo}"/>
-                        <h:outputText value="#{temperaturaController.selected.modulo}" title="#{bundle.ViewTemperaturaTitle_modulo}"/>
+                        <h:outputText value="#{bundle.TemperaturaLabel_temperatura}"/>
+                        <h:outputText value="#{temperaturaController.selected.temperatura}" title="#{bundle.TemperaturaLabel_temperatura}"/>
+                        <h:outputText value="#{bundle.TemperaturaLabel_humedad}"/>
+                        <h:outputText value="#{temperaturaController.selected.humedad}" title="#{bundle.TemperaturaLabel_humedad}"/>
+                        <h:outputText value="#{bundle.TemperaturaLabel_puntoDeRocio}"/>
+                        <h:outputText value="#{temperaturaController.selected.puntoDeRocio}" title="#{bundle.TemperaturaLabel_puntoDeRocio}"/>
+                        <h:outputText value="#{bundle.TemperaturaLabel_modulo}"/>
+                        <h:outputText value="#{temperaturaController.selected.modulo.lote.nombre} #{temperaturaController.selected.modulo.nombre}" title="#{bundle.TemperaturaLabel_modulo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TemperaturaViewDialog.hide()"/>
                 </h:panelGroup>

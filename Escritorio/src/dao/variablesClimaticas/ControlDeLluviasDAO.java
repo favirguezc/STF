@@ -128,7 +128,7 @@ public class ControlDeLluviasDAO implements Serializable {
     public Lluvia findControlDeLluvias(Date d) throws Exception{
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha = :fecha", Lluvia.class);
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha = :fecha", Lluvia.class);
             query.setParameter("fecha", d, TemporalType.DATE);
             return query.getSingleResult();
         } finally {
@@ -139,7 +139,7 @@ public class ControlDeLluviasDAO implements Serializable {
     public List<Lluvia> findControlDeLluviasEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM ControlDeLluvias t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Lluvia.class);
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Lluvia.class);
             query.setParameter("fecha1", esteMes, TemporalType.DATE);
             query.setParameter("fecha2", siguienteMes, TemporalType.DATE);
             return query.getResultList();

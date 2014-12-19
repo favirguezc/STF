@@ -27,7 +27,7 @@
                                            itemValue="#{rolItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRolPersonaLabel_contrasena}" for="contrasena" />
-                        <p:inputText id="contrasena" value="#{rolPersonaController.selected.contrasena}" title="#{bundle.EditRolPersonaTitle_contrasena}" />
+                        <p:password id="contrasena" value="#{rolPersonaController.selected.contrasena}" feedback="true"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{rolPersonaController.update}" value="#{bundle.Save}" update="display,:RolPersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolPersonaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RolPersonaEditDialog.hide()"/>

@@ -7,11 +7,14 @@ package dao;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.variablesClimaticas.Lluvia;
@@ -113,6 +116,29 @@ public class LluviaJpaController implements Serializable {
         }
     }
 
+    public List<Lluvia> findLluviaEntities(Date fecha1, Date fecha2) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Lluvia.class);
+            query.setParameter("fecha1", fecha1, TemporalType.DATE);
+            query.setParameter("fecha2", fecha2, TemporalType.DATE);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Lluvia> findLluviaEntities(Date fecha1) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha = :fecha1", Lluvia.class);
+            query.setParameter("fecha1", fecha1, TemporalType.DATE);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public Lluvia findLluvia(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -134,5 +160,5 @@ public class LluviaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

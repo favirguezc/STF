@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.EditNotaLabel_titulo}" for="titulo" />
                         <p:inputText id="titulo" value="#{notaController.selected.titulo}" title="#{bundle.EditNotaTitle_titulo}" />
                         <p:outputLabel value="#{bundle.EditNotaLabel_nota}" for="nota" />
-                        <p:inputText id="nota" value="#{notaController.selected.nota}" title="#{bundle.EditNotaTitle_nota}" required="true" requiredMessage="#{bundle.EditNotaRequiredMessage_nota}"/>
+                        <p:inputTextarea id="nota" value="#{notaController.selected.nota}" title="#{bundle.EditNotaTitle_nota}" required="true" requiredMessage="#{bundle.EditNotaRequiredMessage_nota}"/>
                         <p:outputLabel value="#{bundle.EditNotaLabel_creador}" for="creador" />
                         <p:selectOneMenu id="creador" value="#{notaController.selected.creador}" required="true" requiredMessage="#{bundle.EditNotaRequiredMessage_creador}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

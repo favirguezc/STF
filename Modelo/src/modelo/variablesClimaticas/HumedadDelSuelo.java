@@ -78,6 +78,16 @@ public class HumedadDelSuelo implements Serializable {
         this.id = id;
     }
 
+    public void sumar(HumedadDelSuelo h) {
+        this.valorEn15Cms += h.valorEn15Cms;
+        this.valorEn30Cms += h.valorEn30Cms;
+    }
+
+    public void dividir(int n) {
+        this.valorEn15Cms = this.valorEn15Cms / n;
+        this.valorEn30Cms = this.valorEn30Cms / n;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

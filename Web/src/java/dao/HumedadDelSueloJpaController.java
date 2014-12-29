@@ -7,13 +7,17 @@ package dao;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.variablesClimaticas.HumedadDelSuelo;
 import modelo.variablesClimaticas.HumedadDelSuelo;
 
 /**
@@ -108,6 +112,17 @@ public class HumedadDelSueloJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<HumedadDelSuelo> findHumedadDelSueloEntities(Date fecha) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<HumedadDelSuelo> query = em.createQuery("SELECT t FROM HumedadDelSuelo t WHERE t.fecha = :fecha1", HumedadDelSuelo.class);
+            query.setParameter("fecha1", fecha, TemporalType.DATE);
+            return query.getResultList();
         } finally {
             em.close();
         }

@@ -14,16 +14,14 @@
                     <p:panelGrid columns="2" rendered="#{humedadDelSueloController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{humedadDelSueloController.selected.fecha}" title="#{bundle.EditHumedadDelSueloTitle_fecha}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_fecha}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_valorEn30Cms}" for="valorEn30Cms" />
-                        <p:inputText id="valorEn30Cms" value="#{humedadDelSueloController.selected.valorEn30Cms}" title="#{bundle.CreateHumedadDelSueloTitle_valorEn30Cms}" required="true" requiredMessage="#{bundle.CreateHumedadDelSueloRequiredMessage_valorEn30Cms}"/>
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{humedadDelSueloController.selected.hora}" title="#{bundle.EditHumedadDelSueloTitle_hora}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_hora}" showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_valorEn15Cms}" for="valorEn15Cms" />
                         <p:inputText id="valorEn15Cms" value="#{humedadDelSueloController.selected.valorEn15Cms}" title="#{bundle.CreateHumedadDelSueloTitle_valorEn15Cms}" required="true" requiredMessage="#{bundle.CreateHumedadDelSueloRequiredMessage_valorEn15Cms}"/>
-                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{humedadDelSueloController.selected.hora}" title="#{bundle.EditHumedadDelSueloTitle_hora}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_hora}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{humedadDelSueloController.selected.id}" title="#{bundle.CreateHumedadDelSueloTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateHumedadDelSueloLabel_valorEn30Cms}" for="valorEn30Cms" />
+                        <p:inputText id="valorEn30Cms" value="#{humedadDelSueloController.selected.valorEn30Cms}" title="#{bundle.CreateHumedadDelSueloTitle_valorEn30Cms}" required="true" requiredMessage="#{bundle.CreateHumedadDelSueloRequiredMessage_valorEn30Cms}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{humedadDelSueloController.create}" value="#{bundle.Save}" update="display,:HumedadDelSueloListForm:datalist,:growl" oncomplete="handleSubmit(args,'HumedadDelSueloCreateDialog');"/>
+                    <p:commandButton actionListener="#{humedadDelSueloController.create}" value="#{bundle.Save}" update="display,:HumedadListPanel:HumedadDelSueloListForm:datalist,:growl" oncomplete="handleSubmit(args,'HumedadDelSueloCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="HumedadDelSueloCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

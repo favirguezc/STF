@@ -115,7 +115,7 @@ public class MonitoreoDeEnfermedades implements Serializable {
 
     public void setBacteriosis(boolean bacteriosis) {
         this.bacteriosis = bacteriosis;
-    }    
+    } 
 
     @Override
     public int hashCode() {

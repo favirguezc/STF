@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.TemperaturaLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.TemperaturaLabel_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.TemperaturaLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.TemperaturaLabel_hora}"  showOn="button"/>
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.TemperaturaLabel_hora}"  showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundle.TemperaturaLabel_temperatura}" for="temperatura" />
                         <p:inputText id="temperatura" value="#{temperaturaController.selected.temperatura}" title="#{bundle.TemperaturaLabel_temperatura}" />
                         <p:outputLabel value="#{bundle.TemperaturaLabel_humedad}" for="humedad" />

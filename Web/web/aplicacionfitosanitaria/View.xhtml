@@ -12,8 +12,6 @@
             <h:form id="AplicacionFitosanitariaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aplicacionFitosanitariaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_id}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.id}" title="#{bundle.ViewAplicacionFitosanitariaTitle_id}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_fecha}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.fecha}" title="#{bundle.ViewAplicacionFitosanitariaTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />

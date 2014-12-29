@@ -10,6 +10,6 @@ package modelo.produccion;
  * @author fredy
  */
 public enum Unidades {
-    cc,
-    gr
+    CC,
+    GR
 }

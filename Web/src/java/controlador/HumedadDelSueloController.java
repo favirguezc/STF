@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import dao.HumedadDelSueloJpaController;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -82,6 +83,10 @@ public class HumedadDelSueloController implements Serializable {
         return items;
     }
 
+    public List<HumedadDelSuelo> getItems(Date fecha) {
+        return getJpaController().findHumedadDelSueloEntities(fecha);
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -107,6 +112,18 @@ public class HumedadDelSueloController implements Serializable {
 
     public List<HumedadDelSuelo> getItemsAvailableSelectOne() {
         return getJpaController().findHumedadDelSueloEntities();
+    }
+
+    public HumedadDelSuelo calcularPromedio(Date time) {
+        HumedadDelSuelo promedio = new HumedadDelSuelo(time, 0, 0, null);
+        List<HumedadDelSuelo> lista = getItems(time);
+        for (HumedadDelSuelo h : lista) {
+            promedio.sumar(h);
+        }
+        if(lista.size()>1){
+            promedio.dividir(lista.size());
+        }
+        return promedio;
     }
 
     @FacesConverter(forClass = HumedadDelSuelo.class)

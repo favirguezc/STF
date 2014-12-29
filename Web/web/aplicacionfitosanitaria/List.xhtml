@@ -15,7 +15,6 @@
 
         <ui:define name="body">
             <h:form id="AplicacionFitosanitariaListForm">
-                <p:panel header="#{bundle.ListAplicacionFitosanitariaTitle}">
                     <p:dataTable id="datalist" value="#{aplicacionFitosanitariaController.items}" var="item"
                                  selectionMode="single" selection="#{aplicacionFitosanitariaController.selected}"
                                  paginator="true"
@@ -29,12 +28,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_fecha}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha}">
@@ -45,7 +38,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_producto}"/>
                             </f:facet>
-                            <h:outputText value="#{item.producto}"/>
+                            <h:outputText value="#{item.producto} #{item.producto.ingredienteActivo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -120,7 +113,6 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{aplicacionFitosanitariaController.destroy}" update=":growl,datalist" disabled="#{empty aplicacionFitosanitariaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

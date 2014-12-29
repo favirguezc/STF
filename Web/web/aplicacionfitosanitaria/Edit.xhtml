@@ -12,8 +12,6 @@
             <h:form id="AplicacionFitosanitariaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aplicacionFitosanitariaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{aplicacionFitosanitariaController.selected.id}" title="#{bundle.EditAplicacionFitosanitariaTitle_id}" />
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{aplicacionFitosanitariaController.selected.fecha}" title="#{bundle.EditAplicacionFitosanitariaTitle_fecha}" required="true" requiredMessage="#{bundle.EditAplicacionFitosanitariaRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditAplicacionFitosanitariaLabel_producto}" for="producto" />

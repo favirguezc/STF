@@ -18,19 +18,22 @@
                         <p:selectOneMenu id="modulo" value="#{trabajoController.selected.modulo}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_modulo}">
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
-                                           itemValue="#{moduloItem}"/>
+                                           itemValue="#{moduloItem}"
+                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTrabajoLabel_labor}" for="labor" />
                         <p:selectOneMenu id="labor" value="#{trabajoController.selected.labor}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_labor}">
                             <f:selectItems value="#{laborController.itemsAvailableSelectOne}"
                                            var="laborItem"
-                                           itemValue="#{laborItem}"/>
+                                           itemValue="#{laborItem}"
+                                           itemLabel="#{laborItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTrabajoLabel_operario}" for="operario" />
                         <p:selectOneMenu id="operario" value="#{trabajoController.selected.operario}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_operario}">
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="operarioItem"
-                                           itemValue="#{operarioItem}"/>
+                                           itemValue="#{operarioItem}"
+                                           itemLabel="#{operarioItem.nombre} #{operarioItem.apellido}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTrabajoLabel_jornales}" for="jornales" />
                         <p:inputText id="jornales" value="#{trabajoController.selected.jornales}" title="#{bundle.CreateTrabajoTitle_jornales}" />
@@ -40,13 +43,15 @@
                         <p:selectOneMenu id="asistente" value="#{trabajoController.selected.asistente}" >
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="asistenteItem"
-                                           itemValue="#{asistenteItem}"/>
+                                           itemValue="#{asistenteItem}"
+                                           itemLabel="#{asistenteItem.nombre} #{asistenteItem.apellido}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTrabajoLabel_productor}" for="productor" />
                         <p:selectOneMenu id="productor" value="#{trabajoController.selected.productor}" >
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="productorItem"
-                                           itemValue="#{productorItem}"/>
+                                           itemValue="#{productorItem}"
+                                           itemLabel="#{productorItem.nombre} #{productorItem.apellido}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{trabajoController.create}" value="#{bundle.Save}" update="display,:TrabajoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrabajoCreateDialog');"/>

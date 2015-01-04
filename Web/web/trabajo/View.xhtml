@@ -12,26 +12,24 @@
             <h:form id="TrabajoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{trabajoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTrabajoLabel_id}"/>
-                        <h:outputText value="#{trabajoController.selected.id}" title="#{bundle.ViewTrabajoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_fecha}"/>
                         <h:outputText value="#{trabajoController.selected.fecha}" title="#{bundle.ViewTrabajoTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_modulo}"/>
-                        <h:outputText value="#{trabajoController.selected.modulo}" title="#{bundle.ViewTrabajoTitle_modulo}"/>
+                        <h:outputText value="#{trabajoController.selected.modulo.lote.nombre} - #{trabajoController.selected.modulo.nombre}" title="#{bundle.ViewTrabajoTitle_modulo}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_labor}"/>
-                        <h:outputText value="#{trabajoController.selected.labor}" title="#{bundle.ViewTrabajoTitle_labor}"/>
+                        <h:outputText value="#{trabajoController.selected.labor.nombre}" title="#{bundle.ViewTrabajoTitle_labor}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_operario}"/>
-                        <h:outputText value="#{trabajoController.selected.operario}" title="#{bundle.ViewTrabajoTitle_operario}"/>
+                        <h:outputText value="#{trabajoController.selected.operario.nombre} #{trabajoController.selected.operario.apellido}" title="#{bundle.ViewTrabajoTitle_operario}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_jornales}"/>
                         <h:outputText value="#{trabajoController.selected.jornales}" title="#{bundle.ViewTrabajoTitle_jornales}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_observaciones}"/>
                         <h:outputText value="#{trabajoController.selected.observaciones}" title="#{bundle.ViewTrabajoTitle_observaciones}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_asistente}"/>
-                        <h:outputText value="#{trabajoController.selected.asistente}" title="#{bundle.ViewTrabajoTitle_asistente}"/>
+                        <h:outputText value="#{trabajoController.selected.asistente.nombre} #{trabajoController.selected.asistente.apellido}" title="#{bundle.ViewTrabajoTitle_asistente}"/>
                         <h:outputText value="#{bundle.ViewTrabajoLabel_productor}"/>
-                        <h:outputText value="#{trabajoController.selected.productor}" title="#{bundle.ViewTrabajoTitle_productor}"/>
+                        <h:outputText value="#{trabajoController.selected.productor.nombre} #{trabajoController.selected.productor.apellido}" title="#{bundle.ViewTrabajoTitle_productor}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TrabajoViewDialog.hide()"/>
                 </h:panelGroup>

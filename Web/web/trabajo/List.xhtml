@@ -15,82 +15,74 @@
 
         <ui:define name="body">
             <h:form id="TrabajoListForm">
-                <p:panel header="#{bundle.ListTrabajoTitle}">
-                    <p:dataTable id="datalist" value="#{trabajoController.items}" var="item"
-                                 selectionMode="single" selection="#{trabajoController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <p:dataTable id="datalist" value="#{trabajoController.items}" var="item"
+                             selectionMode="single" selection="#{trabajoController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_fecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_modulo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.modulo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_labor}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.labor}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_operario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.operario}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_jornales}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.jornales}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_observaciones}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.observaciones}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_asistente}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.asistente}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajoTitle_productor}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.productor}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{trabajoController.prepareCreate}" update=":TrabajoCreateForm" oncomplete="PF('TrabajoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TrabajoViewForm" oncomplete="PF('TrabajoViewDialog').show()" disabled="#{empty trabajoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TrabajoEditForm" oncomplete="PF('TrabajoEditDialog').show()" disabled="#{empty trabajoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{trabajoController.destroy}" update=":growl,datalist" disabled="#{empty trabajoController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_fecha}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="#{item.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_modulo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_labor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.labor.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_operario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.operario.nombre} #{item.operario.apellido}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_jornales}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.jornales}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_observaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.observaciones}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_asistente}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.asistente.nombre} #{item.asistente.apellido}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListTrabajoTitle_productor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.productor.nombre} #{item.productor.apellido}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{trabajoController.prepareCreate}" update=":TrabajoCreateForm" oncomplete="PF('TrabajoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TrabajoViewForm" oncomplete="PF('TrabajoViewDialog').show()" disabled="#{empty trabajoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TrabajoEditForm" oncomplete="PF('TrabajoEditDialog').show()" disabled="#{empty trabajoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{trabajoController.destroy}" update=":growl,datalist" disabled="#{empty trabajoController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

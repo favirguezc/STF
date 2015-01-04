@@ -12,8 +12,6 @@
             <h:form id="TrampaDeInsectosViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{trampaDeInsectosController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_id}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.id}" title="#{bundle.ViewTrampaDeInsectosTitle_id}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_fecha}"/>
                         <h:outputText value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.ViewTrampaDeInsectosTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -24,12 +22,14 @@
                         <h:outputText value="#{trampaDeInsectosController.selected.especie}" title="#{bundle.ViewTrampaDeInsectosTitle_especie}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_individuos}"/>
                         <h:outputText value="#{trampaDeInsectosController.selected.individuos}" title="#{bundle.ViewTrampaDeInsectosTitle_individuos}"/>
+                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_cambioDePegante}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.cambioDePegante}" title="#{bundle.ViewTrampaDeInsectosTitle_cambioDePegante}" converter="#{SiNoConverter}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_observaciones}"/>
                         <h:outputText value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.ViewTrampaDeInsectosTitle_observaciones}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_asistente}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.asistente}" title="#{bundle.ViewTrampaDeInsectosTitle_asistente}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.asistente.nombre} #{trampaDeInsectosController.selected.asistente.apellido}" title="#{bundle.ViewTrampaDeInsectosTitle_asistente}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_productor}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.productor}" title="#{bundle.ViewTrampaDeInsectosTitle_productor}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.productor.nombre} #{trampaDeInsectosController.selected.productor.apellido}" title="#{bundle.ViewTrampaDeInsectosTitle_productor}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TrampaDeInsectosViewDialog.hide()"/>
                 </h:panelGroup>

@@ -12,8 +12,6 @@
             <h:form id="TrampaDeInsectosEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{trampaDeInsectosController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{trampaDeInsectosController.selected.id}" title="#{bundle.EditTrampaDeInsectosTitle_id}" />
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trampaDeInsectosController.selected.fecha}" title="#{bundle.EditTrampaDeInsectosTitle_fecha}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_nombre}" for="nombre" />
@@ -22,6 +20,8 @@
                         <p:inputText id="especie" value="#{trampaDeInsectosController.selected.especie}" title="#{bundle.EditTrampaDeInsectosTitle_especie}" required="true" requiredMessage="#{bundle.EditTrampaDeInsectosRequiredMessage_especie}"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_individuos}" for="individuos" />
                         <p:inputText id="individuos" value="#{trampaDeInsectosController.selected.individuos}" title="#{bundle.EditTrampaDeInsectosTitle_individuos}" />
+                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_cambioDePegante}" for="cambioDePegante"/>
+                        <p:selectBooleanButton id="cambioDePegante" value="#{trampaDeInsectosController.selected.cambioDePegante}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_observaciones}" for="observaciones" />
                         <p:inputText id="observaciones" value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.EditTrampaDeInsectosTitle_observaciones}" />
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_asistente}" for="asistente" />

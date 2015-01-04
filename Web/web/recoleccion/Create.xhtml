@@ -12,13 +12,12 @@
             <h:form id="RecoleccionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{recoleccionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{recoleccionController.selected.id}" title="#{bundle.CreateRecoleccionTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_lote}" for="lote" />
                         <p:selectOneMenu id="lote" value="#{recoleccionController.selected.lote}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_lote}">
                             <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
                                            var="loteItem"
-                                           itemValue="#{loteItem}"/>
+                                           itemValue="#{loteItem}"
+                                           itemLabel="#{loteItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
@@ -26,7 +25,8 @@
                         <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
                                            var="recolectorItem"
-                                           itemValue="#{recolectorItem}"/>
+                                           itemValue="#{recolectorItem}"
+                                           itemLabel="#{recolectorItem.nombre} #{recolectorItem.apellido}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_extraGramos}" for="extraGramos" />
                         <p:inputText id="extraGramos" value="#{recoleccionController.selected.extraGramos}" title="#{bundle.CreateRecoleccionTitle_extraGramos}" />
@@ -41,11 +41,7 @@
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_quintaGramos}" for="quintaGramos" />
                         <p:inputText id="quintaGramos" value="#{recoleccionController.selected.quintaGramos}" title="#{bundle.CreateRecoleccionTitle_quintaGramos}" />
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_danadaGramos}" for="danadaGramos" />
-                        <p:inputText id="danadaGramos" value="#{recoleccionController.selected.danadaGramos}" title="#{bundle.CreateRecoleccionTitle_danadaGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_buenaGramos}" for="buenaGramos" />
-                        <p:inputText id="buenaGramos" value="#{recoleccionController.selected.buenaGramos}" title="#{bundle.CreateRecoleccionTitle_buenaGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_totalGramos}" for="totalGramos" />
-                        <p:inputText id="totalGramos" value="#{recoleccionController.selected.totalGramos}" title="#{bundle.CreateRecoleccionTitle_totalGramos}" />
+                        <p:inputText id="danadaGramos" value="#{recoleccionController.selected.danadaGramos}" title="#{bundle.CreateRecoleccionTitle_danadaGramos}" />                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{recoleccionController.create}" value="#{bundle.Save}" update="display,:RecoleccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecoleccionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RecoleccionCreateDialog.hide()"/>

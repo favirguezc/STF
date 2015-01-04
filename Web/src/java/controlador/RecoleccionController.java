@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import dao.RecoleccionJpaController;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,6 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
+import modelo.administracion.Lote;
+import modelo.administracion.Persona;
 
 @ManagedBean(name = "recoleccionController")
 @SessionScoped
@@ -107,6 +110,19 @@ public class RecoleccionController implements Serializable {
 
     public List<Recoleccion> getItemsAvailableSelectOne() {
         return getJpaController().findRecoleccionEntities();
+    }
+
+    public List<Recoleccion> leerLista(Persona recolector, Lote lote, Date inicio, Date fin) {
+        return getJpaController().findRecoleccionEntities(recolector, lote, inicio, fin);
+    }
+
+    public Recoleccion sumarRegistros(Persona recolector, Lote lote, Date inicio, Date fin) {
+        List<Recoleccion> leerLista = leerLista(recolector, lote, inicio, fin);
+        Recoleccion suma = new Recoleccion(lote, null, recolector, 0, 0, 0, 0, 0, 0, 0);
+        for (Recoleccion r : leerLista) {
+            suma.sumar(r);
+        }
+        return suma;
     }
 
     @FacesConverter(forClass = Recoleccion.class)

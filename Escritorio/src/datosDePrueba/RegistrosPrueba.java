@@ -39,13 +39,13 @@ public class RegistrosPrueba {
 
     public static void main(String[] args) {
 //        quitarRegistrosRecoleccion();
-//        registrosPruebaRecoleccion();
+        registrosPruebaRecoleccion();
 //        quitarRegistrosTemperatura();
 //        registrosPruebaTemperatura();
 //        quitarRegistrosLluvia();
 //        registrosPruebaLluvia();
-        quitarRegistrosHumedad();
-        registrosPruebaHumedad();
+//        quitarRegistrosHumedad();
+//        registrosPruebaHumedad();
 //        new ReporteMensual(null, true).setVisible(true);
 //        new ReporteAnual(null, true, ReporteAnual.POR_DIA).setVisible(true);
 //        new ReporteAnual(null, true, ReporteAnual.POR_MES).setVisible(true);
@@ -87,9 +87,9 @@ public class RegistrosPrueba {
             List<Persona> recolectores = new PersonaControlador().leerLista();
             List<Lote> lotes = new LoteControlador().leerLista();
             Calendar c = GregorianCalendar.getInstance();
-            for (int y = 2012; y < 2015; y++) {
+            for (int y = 2014; y < 2015; y++) {
                 System.out.println("año " + y);
-                c.setTime(new Date(2014 - 1900, 0, 1));
+                c.setTime(new Date(y - 1900, 0, 1));
                 for (int i = 0; i < 365; i++) {
                     System.out.print((i + 1) + " ");
                     for (int r = 0; r < 15; r++) {

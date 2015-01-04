@@ -7,13 +7,18 @@ package dao;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.administracion.Lote;
+import modelo.administracion.Persona;
 import modelo.produccion.Recoleccion;
 
 /**
@@ -108,6 +113,58 @@ public class RecoleccionJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Lote lote, Date inicio, Date fin) {
+        EntityManager em = getEntityManager();
+        boolean a, b, c, d;
+        a = b = c = d = false;
+        String queryString = "SELECT t FROM Recoleccion t";
+        if (recolector != null || lote != null || inicio != null || fin != null) {
+            queryString += " WHERE";
+        }
+        if (recolector != null) {
+            queryString += " t.recolector = :recolector";
+            a = true;
+        }
+        if (lote != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " t.lote = :lote ";
+            b = true;
+        }
+        if (fin != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.fecha BETWEEN :fecha1 AND :fecha2";
+            c = d = true;
+        } else if (inicio != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.fecha = :fecha1";
+            c = true;
+        }
+        try {
+            TypedQuery<Recoleccion> query = em.createQuery(queryString, Recoleccion.class);
+            if (c) {
+                query.setParameter("fecha1", inicio, TemporalType.DATE);
+            }
+            if (d) {
+                query.setParameter("fecha2", fin, TemporalType.DATE);
+            }
+            if (a) {
+                query.setParameter("recolector", recolector);
+            }
+            if (b) {
+                query.setParameter("lote", lote);
+            }
+            return query.getResultList();
         } finally {
             em.close();
         }

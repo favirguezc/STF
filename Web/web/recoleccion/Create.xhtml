@@ -43,7 +43,7 @@
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_danadaGramos}" for="danadaGramos" />
                         <p:inputText id="danadaGramos" value="#{recoleccionController.selected.danadaGramos}" title="#{bundle.CreateRecoleccionTitle_danadaGramos}" />                      
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{recoleccionController.create}" value="#{bundle.Save}" update="display,:RecoleccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecoleccionCreateDialog');"/>
+                    <p:commandButton actionListener="#{recoleccionController.create}" value="#{bundle.Save}" update="display,:RecoleccionListPanel:RecoleccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecoleccionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RecoleccionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

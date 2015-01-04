@@ -41,6 +41,7 @@
                     <p:column filterBy="#{item.lote}" headerText="#{bundle.ListModuloTitle_lote}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('modulosTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{loteController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                         </f:facet>

@@ -15,76 +15,74 @@
 
         <ui:define name="body">
             <h:form id="MonitoreoDeEnfermedadesListForm">
-                <p:panel header="#{bundle.ListMonitoreoDeEnfermedadesTitle}">
-                    <p:dataTable id="datalist" value="#{monitoreoDeEnfermedadesController.items}" var="item"
-                                 selectionMode="single" selection="#{monitoreoDeEnfermedadesController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <p:dataTable id="datalist" value="#{monitoreoDeEnfermedadesController.items}" var="item"
+                             selectionMode="single" selection="#{monitoreoDeEnfermedadesController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_modulo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_fecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_botrytis}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.botrytis}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_antracnosis}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.antracnosis}" converter="#{SiNoConverter}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mycospharella}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mycospharella}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mildeoPolvoso}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mildeoPolvoso}" converter="#{SiNoConverter}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_phytophtora}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.phytophtora}" converter="#{SiNoConverter}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_bacteriosis}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.bacteriosis}" converter="#{SiNoConverter}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoreoDeEnfermedadesController.prepareCreate}" update=":MonitoreoDeEnfermedadesCreateForm" oncomplete="PF('MonitoreoDeEnfermedadesCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoreoDeEnfermedadesViewForm" oncomplete="PF('MonitoreoDeEnfermedadesViewDialog').show()" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitoreoDeEnfermedadesEditForm" oncomplete="PF('MonitoreoDeEnfermedadesEditDialog').show()" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitoreoDeEnfermedadesController.destroy}" update=":growl,datalist" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_modulo}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_fecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_botrytis}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.botrytis}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_antracnosis}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.antracnosis}" converter="#{SiNoConverter}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mycospharella}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mycospharella}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mildeoPolvoso}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.mildeoPolvoso}" converter="#{SiNoConverter}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_phytophtora}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.phytophtora}" converter="#{SiNoConverter}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_bacteriosis}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bacteriosis}" converter="#{SiNoConverter}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoreoDeEnfermedadesController.prepareCreate}" update=":MonitoreoDeEnfermedadesCreateForm" oncomplete="PF('MonitoreoDeEnfermedadesCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoreoDeEnfermedadesViewForm" oncomplete="PF('MonitoreoDeEnfermedadesViewDialog').show()" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitoreoDeEnfermedadesEditForm" oncomplete="PF('MonitoreoDeEnfermedadesEditDialog').show()" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitoreoDeEnfermedadesController.destroy}" update=":growl,datalist" disabled="#{empty monitoreoDeEnfermedadesController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

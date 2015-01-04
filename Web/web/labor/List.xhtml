@@ -15,44 +15,36 @@
 
         <ui:define name="body">
             <h:form id="LaborListForm">
-                <p:panel header="#{bundle.ListLaborTitle}">
-                    <p:dataTable id="datalist" value="#{laborController.items}" var="item"
-                                 selectionMode="single" selection="#{laborController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <p:dataTable id="datalist" value="#{laborController.items}" var="item"
+                             selectionMode="single" selection="#{laborController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="15"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLaborTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLaborTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLaborTitle_descripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{laborController.prepareCreate}" update=":LaborCreateForm" oncomplete="PF('LaborCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LaborViewForm" oncomplete="PF('LaborViewDialog').show()" disabled="#{empty laborController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LaborEditForm" oncomplete="PF('LaborEditDialog').show()" disabled="#{empty laborController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{laborController.destroy}" update=":growl,datalist" disabled="#{empty laborController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListLaborTitle_nombre}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListLaborTitle_descripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{laborController.prepareCreate}" update=":LaborCreateForm" oncomplete="PF('LaborCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LaborViewForm" oncomplete="PF('LaborViewDialog').show()" disabled="#{empty laborController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LaborEditForm" oncomplete="PF('LaborEditDialog').show()" disabled="#{empty laborController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{laborController.destroy}" update=":growl,datalist" disabled="#{empty laborController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

@@ -29,15 +29,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_modulo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.modulo}"/>
+                            <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -55,9 +49,33 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_antracnosis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.antracnosis}" converter="#{SiNoConverter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mycospharella}"/>
                             </f:facet>
                             <h:outputText value="#{item.mycospharella}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_mildeoPolvoso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mildeoPolvoso}" converter="#{SiNoConverter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_phytophtora}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.phytophtora}" converter="#{SiNoConverter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMonitoreoDeEnfermedadesTitle_bacteriosis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bacteriosis}" converter="#{SiNoConverter}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoreoDeEnfermedadesController.prepareCreate}" update=":MonitoreoDeEnfermedadesCreateForm" oncomplete="PF('MonitoreoDeEnfermedadesCreateDialog').show()"/>

@@ -12,20 +12,27 @@
             <h:form id="MonitoreoDeEnfermedadesCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoDeEnfermedadesController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{monitoreoDeEnfermedadesController.selected.id}" title="#{bundle.CreateMonitoreoDeEnfermedadesTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_modulo}" for="modulo" />
                         <p:selectOneMenu id="modulo" value="#{monitoreoDeEnfermedadesController.selected.modulo}" required="true" requiredMessage="#{bundle.EditMonitoreoDeEnfermedadesRequiredMessage_modulo}">
                             <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
                                            var="moduloItem"
+                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"
                                            itemValue="#{moduloItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoDeEnfermedadesController.selected.fecha}" title="#{bundle.EditMonitoreoDeEnfermedadesTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoDeEnfermedadesRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_botrytis}" for="botrytis" />
                         <p:inputText id="botrytis" value="#{monitoreoDeEnfermedadesController.selected.botrytis}" title="#{bundle.CreateMonitoreoDeEnfermedadesTitle_botrytis}" />
+                        <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_antracnosis}" for="antracnosis"/>
+                        <p:selectBooleanButton id="antracnosis" value="#{monitoreoDeEnfermedadesController.selected.antracnosis}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_mycospharella}" for="mycospharella" />
                         <p:inputText id="mycospharella" value="#{monitoreoDeEnfermedadesController.selected.mycospharella}" title="#{bundle.CreateMonitoreoDeEnfermedadesTitle_mycospharella}" />
+                        <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_mildeoPolvoso}" for="mildeoPolvoso"/>
+                        <p:selectBooleanButton id="mildeoPolvoso" value="#{monitoreoDeEnfermedadesController.selected.mildeoPolvoso}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+                        <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_phytophtora}" for="phytophtora"/>
+                        <p:selectBooleanButton id="phytophtora" value="#{monitoreoDeEnfermedadesController.selected.phytophtora}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+                        <p:outputLabel value="#{bundle.CreateMonitoreoDeEnfermedadesLabel_bacteriosis}" for="bacteriosis"/>
+                        <p:selectBooleanButton id="bacteriosis" value="#{monitoreoDeEnfermedadesController.selected.bacteriosis}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitoreoDeEnfermedadesController.create}" value="#{bundle.Save}" update="display,:MonitoreoDeEnfermedadesListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitoreoDeEnfermedadesCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoDeEnfermedadesCreateDialog.hide()"/>

@@ -12,18 +12,24 @@
             <h:form id="MonitoreoDeEnfermedadesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoDeEnfermedadesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_id}"/>
-                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.id}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_modulo}"/>
-                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.modulo}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_modulo}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.modulo.lote.nombre} - #{monitoreoDeEnfermedadesController.selected.modulo.nombre}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_modulo}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_fecha}"/>
                         <h:outputText value="#{monitoreoDeEnfermedadesController.selected.fecha}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_fecha}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_botrytis}"/>
                         <h:outputText value="#{monitoreoDeEnfermedadesController.selected.botrytis}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_botrytis}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_antracnosis}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.antracnosis}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_antracnosis}" converter="#{SiNoConverter}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_mycospharella}"/>
                         <h:outputText value="#{monitoreoDeEnfermedadesController.selected.mycospharella}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_mycospharella}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_mildeoPolvoso}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.mildeoPolvoso}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_mildeoPolvoso}" converter="#{SiNoConverter}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_phytophtora}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.phytophtora}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_phytophtora}" converter="#{SiNoConverter}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeEnfermedadesLabel_bacteriosis}"/>
+                        <h:outputText value="#{monitoreoDeEnfermedadesController.selected.bacteriosis}" title="#{bundle.ViewMonitoreoDeEnfermedadesTitle_bacteriosis}" converter="#{SiNoConverter}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MonitoreoDeEnfermedadesViewDialog.hide()"/>
                 </h:panelGroup>

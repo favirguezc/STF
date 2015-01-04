@@ -38,13 +38,31 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_producto}"/>
                             </f:facet>
-                            <h:outputText value="#{item.producto} #{item.producto.ingredienteActivo}"/>
+                            <h:outputText value="#{item.producto.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_ingredienteActivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.producto.ingredienteActivo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_motivo}"/>
                             </f:facet>
                             <h:outputText value="#{item.motivo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_pc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pc}" converter="#{SiNoConverter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_tr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tr}" converter="#{SiNoConverter}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -68,13 +86,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_responsable}"/>
                             </f:facet>
-                            <h:outputText value="#{item.responsable}"/>
+                            <h:outputText value="#{item.responsable.nombre} #{item.responsable.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_aprobante}"/>
                             </f:facet>
-                            <h:outputText value="#{item.aprobante}"/>
+                            <h:outputText value="#{item.aprobante.nombre} #{item.aprobante.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -92,19 +110,19 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_lote}"/>
                             </f:facet>
-                            <h:outputText value="#{item.lote}"/>
+                            <h:outputText value="#{item.lote.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_asistente}"/>
                             </f:facet>
-                            <h:outputText value="#{item.asistente}"/>
+                            <h:outputText value="#{item.asistente.nombre} #{item.asistente.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAplicacionFitosanitariaTitle_productor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.productor}"/>
+                            <h:outputText value="#{item.productor.nombre} #{item.productor.apellido}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{aplicacionFitosanitariaController.prepareCreate}" update=":AplicacionFitosanitariaCreateForm" oncomplete="PF('AplicacionFitosanitariaCreateDialog').show()"/>

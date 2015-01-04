@@ -22,6 +22,10 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionFitosanitariaLabel_motivo}" for="motivo" />
                         <p:inputText id="motivo" value="#{aplicacionFitosanitariaController.selected.motivo}" title="#{bundle.CreateAplicacionFitosanitariaTitle_motivo}" required="true" requiredMessage="#{bundle.CreateAplicacionFitosanitariaRequiredMessage_motivo}"/>
+                        <p:outputLabel value="#{bundle.CreateAplicacionFitosanitariaLabel_pc}" for="pc"/>
+                        <p:selectBooleanButton id="pc" value="#{aplicacionFitosanitariaController.selected.pc}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+                        <p:outputLabel value="#{bundle.CreateAplicacionFitosanitariaLabel_tr}" for="tr"/>
+                        <p:selectBooleanButton id="tr" value="#{aplicacionFitosanitariaController.selected.tr}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundle.CreateAplicacionFitosanitariaLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{aplicacionFitosanitariaController.selected.cantidad}" title="#{bundle.CreateAplicacionFitosanitariaTitle_cantidad}" />
                         <p:outputLabel value="#{bundle.CreateAplicacionFitosanitariaLabel_agua}" for="agua" />

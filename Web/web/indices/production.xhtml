@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.Management}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <center>
+                <p:button outcome="/aplicacionFitosanitaria/List.xhtml" value="AplicacionFitosanitaria" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/insumo/List.xhtml" value="Insumo" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/labor/List.xhtml" value="Labor" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/monitoreoDeEnfermedades/List.xhtml" value="MonitoreoDeEnfermedades" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/monitoreoDePlagas/List.xhtml" value="MonitoreoDePlagas" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/recoleccion/List.xhtml" value="Recoleccion" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/trabajo/List.xhtml" value="Trabajo" style="width: auto; height: 50px;font-size:100%;"/>
+                <br/>
+                <p:button outcome="/trampaDeInsectos/List.xhtml" value="TrampaDeInsectos" style="width: auto; height: 50px;font-size:100%;"/>
+            </center>
+        </ui:define>
+    </ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+

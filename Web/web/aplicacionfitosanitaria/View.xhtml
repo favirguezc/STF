@@ -17,9 +17,15 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_producto}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.producto}" title="#{bundle.ViewAplicacionFitosanitariaTitle_producto}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.producto.nombre}" title="#{bundle.ViewAplicacionFitosanitariaTitle_producto}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_ingredienteActivo}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.producto.ingredienteActivo}" title="#{bundle.ViewAplicacionFitosanitariaTitle_ingredienteActivo}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_motivo}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.motivo}" title="#{bundle.ViewAplicacionFitosanitariaTitle_motivo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_pc}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.pc}" title="#{bundle.ViewAplicacionFitosanitariaTitle_pc}" converter="#{SiNoConverter}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_tr}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.tr}" title="#{bundle.ViewAplicacionFitosanitariaTitle_tr}" converter="#{SiNoConverter}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_cantidad}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.cantidad}" title="#{bundle.ViewAplicacionFitosanitariaTitle_cantidad}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_agua}"/>
@@ -27,19 +33,19 @@
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_equipo}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.equipo}" title="#{bundle.ViewAplicacionFitosanitariaTitle_equipo}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_responsable}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.responsable}" title="#{bundle.ViewAplicacionFitosanitariaTitle_responsable}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.responsable.nombre} #{aplicacionFitosanitariaController.selected.responsable.apellido}" title="#{bundle.ViewAplicacionFitosanitariaTitle_responsable}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_aprobante}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.aprobante}" title="#{bundle.ViewAplicacionFitosanitariaTitle_aprobante}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.aprobante.nombre} #{aplicacionFitosanitariaController.selected.aprobante.apellido}" title="#{bundle.ViewAplicacionFitosanitariaTitle_aprobante}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_jornales}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.jornales}" title="#{bundle.ViewAplicacionFitosanitariaTitle_jornales}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_observaciones}"/>
                         <h:outputText value="#{aplicacionFitosanitariaController.selected.observaciones}" title="#{bundle.ViewAplicacionFitosanitariaTitle_observaciones}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_lote}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.lote}" title="#{bundle.ViewAplicacionFitosanitariaTitle_lote}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.lote.nombre}" title="#{bundle.ViewAplicacionFitosanitariaTitle_lote}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_asistente}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.asistente}" title="#{bundle.ViewAplicacionFitosanitariaTitle_asistente}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.asistente.nombre} #{aplicacionFitosanitariaController.selected.asistente.apellido}" title="#{bundle.ViewAplicacionFitosanitariaTitle_asistente}"/>
                         <h:outputText value="#{bundle.ViewAplicacionFitosanitariaLabel_productor}"/>
-                        <h:outputText value="#{aplicacionFitosanitariaController.selected.productor}" title="#{bundle.ViewAplicacionFitosanitariaTitle_productor}"/>
+                        <h:outputText value="#{aplicacionFitosanitariaController.selected.productor.nombre} #{aplicacionFitosanitariaController.selected.productor.apellido}" title="#{bundle.ViewAplicacionFitosanitariaTitle_productor}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AplicacionFitosanitariaViewDialog.hide()"/>
                 </h:panelGroup>

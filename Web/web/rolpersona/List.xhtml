@@ -15,44 +15,42 @@
 
         <ui:define name="body">
             <h:form id="RolPersonaListForm">
-                <p:panel header="#{bundle.ListRolPersonaTitle}">
-                    <p:dataTable id="datalist" value="#{rolPersonaController.items}" var="item"
-                                 selectionMode="single" selection="#{rolPersonaController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                <p:dataTable id="datalist" value="#{rolPersonaController.items}" var="item"
+                             selectionMode="single" selection="#{rolPersonaController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolPersonaTitle_persona}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.persona.nombre} #{item.persona.apellido}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolPersonaTitle_rol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.rol.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolPersonaTitle_contrasena}"/>
-                            </f:facet>
-                            <p:selectBooleanButton value="#{item.contrasena!=''}" disabled="true" onLabel="Si" offLabel="No"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolPersonaController.prepareCreate}" update=":RolPersonaCreateForm" oncomplete="PF('RolPersonaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RolPersonaViewForm" oncomplete="PF('RolPersonaViewDialog').show()" disabled="#{empty rolPersonaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RolPersonaEditForm" oncomplete="PF('RolPersonaEditDialog').show()" disabled="#{empty rolPersonaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolPersonaController.destroy}" update=":growl,datalist" disabled="#{empty rolPersonaController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRolPersonaTitle_persona}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="#{item.persona.nombre} #{item.persona.apellido}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRolPersonaTitle_rol}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.rol.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRolPersonaTitle_contrasena}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.contrasena==''}" converter="#{SiNoConverter}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolPersonaController.prepareCreate}" update=":RolPersonaCreateForm" oncomplete="PF('RolPersonaCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RolPersonaViewForm" oncomplete="PF('RolPersonaViewDialog').show()" disabled="#{empty rolPersonaController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RolPersonaEditForm" oncomplete="PF('RolPersonaEditDialog').show()" disabled="#{empty rolPersonaController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolPersonaController.destroy}" update=":growl,datalist" disabled="#{empty rolPersonaController.selected}"/>
+                    </f:facet>
+                </p:dataTable>                
             </h:form>
 
             <ui:include src="Create.xhtml"/>

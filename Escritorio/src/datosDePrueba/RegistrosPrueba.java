@@ -70,7 +70,8 @@ public class RegistrosPrueba {
                                             new Date(0, 0, 0, j, h * 10),
                                             (float) (Math.random() * 30),
                                             (float) (Math.random() * 30),
-                                            (float) (Math.random() * 20)));
+                                            (float) (Math.random() * 20),
+                                            null));
                         } catch (Exception ex) {
                             Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
                         }

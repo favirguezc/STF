@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TermometroEditDlg" widgetVar="TermometroEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTermometroTitle}">
+            <h:form id="TermometroEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{termometroController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTermometroLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{termometroController.selected.nombre}" title="#{bundle.EditTermometroTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditTermometroLabel_numeroDeSerie}" for="numeroDeSerie" />
+                        <p:inputText id="numeroDeSerie" value="#{termometroController.selected.numeroDeSerie}" title="#{bundle.EditTermometroTitle_numeroDeSerie}" />
+                        <p:outputLabel value="#{bundle.EditTermometroLabel_modulo}" for="modulo" />
+                        <p:selectOneMenu id="modulo" value="#{termometroController.selected.modulo}" required="true" requiredMessage="#{bundle.EditTermometroRequiredMessage_modulo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"
+                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{termometroController.update}" value="#{bundle.Save}" update="display,:TermometroListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TermometroEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TermometroEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

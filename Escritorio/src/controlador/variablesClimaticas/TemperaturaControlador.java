@@ -10,7 +10,7 @@ import dao.variablesClimaticas.TemperaturaDAO;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
+import modelo.administracion.Modulo;
 import modelo.variablesClimaticas.Temperatura;
 
 /**
@@ -25,8 +25,8 @@ public class TemperaturaControlador {
         dao = new TemperaturaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio) {
-        return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, null);
+    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio,Modulo modulo) {
+        return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, modulo);
     }
 
     public boolean validar(Temperatura t, Boolean nueva) {

@@ -31,8 +31,14 @@ import dao.util.EntityManagerFactorySingleton;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import util.FileTypeFilter;
+import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
+import vista.archivos.LectorDeRegistrosTemperatura;
 
 /**
  *
@@ -119,6 +125,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -517,6 +529,44 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/file94.png"))); // NOI18N
+        jMenu6.setText("Cargar Datos");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/table7.png"))); // NOI18N
+        jMenuItem23.setText("Humedad Del Suelo");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem23);
+
+        jMenuItem24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/documents11.png"))); // NOI18N
+        jMenuItem24.setText("Temperatura");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem24);
+
+        jMenuItem25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem25.setText("jMenuItem25");
+        jMenu6.add(jMenuItem25);
+
+        jMenuItem26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem26.setText("jMenuItem26");
+        jMenu6.add(jMenuItem26);
+
+        jMenuItem27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem27.setText("jMenuItem27");
+        jMenu6.add(jMenuItem27);
+
+        jMenuBar2.add(jMenu6);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -678,6 +728,46 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         abrirRecoleccionAnualPorMesYTrampaDeInsectos();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        // TODO add your handling code here:
+        new Thread() {
+
+            @Override
+            public void run() {
+                JFileChooser fileChooser = new JFileChooser();
+
+                for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+                    fileChooser.removeChoosableFileFilter(filter);
+                }
+                fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
+                int returnVal = fileChooser.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    int g = LectorDeRegistrosHumedadDelSuelo.leer(fileChooser.getSelectedFile());
+                    JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }.start();
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        new Thread() {
+
+            @Override
+            public void run() {
+                JFileChooser fileChooser = new JFileChooser();
+                for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+                    fileChooser.removeChoosableFileFilter(filter);
+                }
+                fileChooser.addChoosableFileFilter(new FileTypeFilter(".txt", "Archivo de Texto Plano"));
+                int returnVal = fileChooser.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    int g = LectorDeRegistrosTemperatura.leer(fileChooser.getSelectedFile());
+                    JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }.start();
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -691,6 +781,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -707,6 +798,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.variablesClimaticas.HumedadDelSuelo;
 import util.DateFormatter;
 import util.FileTypeFilter;
-import vista.excel.LectorDeRegistrosHumedadDelSuelo;
+import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
 
 /**
  *
@@ -67,7 +67,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         eliminarButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         edicionPanel = new javax.swing.JPanel();
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jLabel54 = new javax.swing.JLabel();
@@ -173,7 +172,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -221,17 +220,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/content.png"))); // NOI18N
-        jButton1.setText("Cargar");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -245,8 +233,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
                 .addComponent(editarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -254,7 +240,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
                     .addComponent(guardarButton)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(editarButton)
@@ -383,7 +368,7 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,20 +495,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
-        for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
-            fileChooser.removeChoosableFileFilter(filter);
-        }
-        fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
-        int returnVal = fileChooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println(fileChooser.getSelectedFile());
-            new LectorDeRegistrosHumedadDelSuelo(fileChooser.getSelectedFile()).leer();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private util.FloatField _15cmsFloatField;
@@ -535,7 +506,6 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
     private javax.swing.JSpinner horaSpinner;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

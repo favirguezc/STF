@@ -26,8 +26,8 @@ public class DateTools {
     public static String getSemanaCorta(Date fecha) {
         return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDateShort(getUltimoDiaDeLaSemana(fecha));
     }
-    
-    public static int getNumeroDeSemana(Date fecha){
+
+    public static int getNumeroDeSemana(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
         return c.get(Calendar.WEEK_OF_YEAR);
@@ -82,6 +82,47 @@ public class DateTools {
                 return "Error";
             }
         }
+    }
+
+    public static int getMes(String mes) {
+        mes = mes.toLowerCase();
+        if (mes.equals("enero")) {
+            return 0;
+        }
+        if (mes.equals("febrero")) {
+            return 1;
+        }
+        if (mes.equals("marzo")) {
+            return 2;
+        }
+        if (mes.equals("abril")) {
+            return 3;
+        }
+        if (mes.equals("mayo")) {
+            return 4;
+        }
+        if (mes.equals("junio")) {
+            return 5;
+        }
+        if (mes.equals("julio")) {
+            return 6;
+        }
+        if (mes.equals("agosto")) {
+            return 7;
+        }
+        if (mes.equals("septiembre")) {
+            return 8;
+        }
+        if (mes.equals("octubre")) {
+            return 9;
+        }
+        if (mes.equals("noviembre")) {
+            return 10;
+        }
+        if (mes.equals("diciembre")) {
+            return 11;
+        }
+        return -1;
     }
 
     public static String getMes(int mes) {

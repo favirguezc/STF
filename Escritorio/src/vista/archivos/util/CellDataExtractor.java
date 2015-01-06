@@ -32,10 +32,10 @@ public class CellDataExtractor {
 
     public static double leerNumero(Cell cell) {
         if (cell.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-            return Double.MIN_VALUE;
+            return 0;
         }
         if (DateUtil.isCellDateFormatted(cell)) {
-            return Double.MIN_VALUE;
+            return 0;
         }
         return cell.getNumericCellValue();
     }

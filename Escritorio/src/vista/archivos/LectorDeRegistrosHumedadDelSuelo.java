@@ -24,14 +24,8 @@ public class LectorDeRegistrosHumedadDelSuelo {
     public static int leer(File archivo) {
         try {
             FileInputStream file = new FileInputStream(archivo);
-
-            //Create Workbook instance holding reference to .xlsx file
             XSSFWorkbook workbook = new XSSFWorkbook(file);
-
-            //Get first/desired sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-
-            //Iterate through each rows one by one
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
             rowIterator.next();
@@ -44,7 +38,7 @@ public class LectorDeRegistrosHumedadDelSuelo {
                 double celda15 = CellDataExtractor.leerNumero(row.getCell(1));
                 double celda30 = CellDataExtractor.leerNumero(row.getCell(2));
                 Date hora = CellDataExtractor.leerHora(row.getCell(3));
-                if (fecha != null && celda15 != Double.MIN_VALUE && celda30 != Double.MIN_VALUE && hora != null) {
+                if (fecha != null && hora != null) {
                     try {
                         controlador.guardar(controlador.nuevo(fecha, (float) celda15, (float) celda30, hora));
                         guardados++;

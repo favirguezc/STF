@@ -5,16 +5,14 @@
  */
 package vista.archivos;
 
-import controlador.administracion.ModuloControlador;
 import controlador.variablesClimaticas.TemperaturaControlador;
 import controlador.variablesClimaticas.TermometroControlador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.administracion.Modulo;
+import modelo.variablesClimaticas.Termometro;
 import vista.archivos.util.DateParser;
 
 /**
@@ -26,7 +24,7 @@ public class LectorDeRegistrosTemperatura {
     private static final int saltos = 15;
 
     public static int leer(File archivo) {
-        
+
         int guardados = 0;
         FileReader fr = null;
         BufferedReader br = null;
@@ -40,7 +38,12 @@ public class LectorDeRegistrosTemperatura {
             linea = br.readLine();
             linea = br.readLine();
             long nds = Long.parseLong(linea.split(",")[5]);
-            modulo = new TermometroControlador().buscar(nds).getModulo();
+            try {
+                Termometro buscar = new TermometroControlador().buscar(nds);
+                modulo = buscar.getModulo();
+            } catch (Exception e) {
+                return -1;
+            }
             TemperaturaControlador controlador = new TemperaturaControlador();
             linea = br.readLine();
             while (linea != null) {

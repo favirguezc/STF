@@ -762,7 +762,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 int returnVal = fileChooser.showOpenDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     int g = LectorDeRegistrosTemperatura.leer(fileChooser.getSelectedFile());
-                    JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+                    if (g == -1) {
+                        JOptionPane.showMessageDialog(null, "El termómetro no se encuentra registrado, por favor regístrelo e intente de nuevo.", "Error en la Carga de Datos", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         }.start();

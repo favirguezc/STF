@@ -179,9 +179,6 @@ public class TemperaturaChart implements Serializable {
         modelo2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo2.setTitle("Promedio de Temperatura por Día " + DateTools.getMes(mes) + " de " + anoMes);
         modelo2.setLegendPosition("e");
-        Axis yAxis = modelo1.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-        yAxis.setMax(40);
     }
 
     public void createModel3() {
@@ -218,9 +215,6 @@ public class TemperaturaChart implements Serializable {
         modelo3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo3.setTitle("Promedio de Temperatura " + DateTools.getSemana(fechaSemana));
         modelo3.setLegendPosition("e");
-        Axis yAxis = modelo3.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-        yAxis.setMax(40);
     }
 
     public void createModel4() {
@@ -252,9 +246,6 @@ public class TemperaturaChart implements Serializable {
         modelo4.getAxes().put(AxisType.X, new CategoryAxis("Hora"));
         modelo4.setTitle("Promedio de Temperatura " + DateFormatter.formatDate(fechaDia));
         modelo4.setLegendPosition("e");
-        Axis yAxis = modelo4.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-        yAxis.setMax(40);
     }
 
 }

@@ -74,7 +74,7 @@ public class Modulo implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return lote.getNombre()+" - "+nombre;
     }
 
     @Override

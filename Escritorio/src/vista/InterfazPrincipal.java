@@ -730,46 +730,35 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         // TODO add your handling code here:
-        new Thread() {
+        JFileChooser fileChooser = new JFileChooser();
 
-            @Override
-            public void run() {
-                JFileChooser fileChooser = new JFileChooser();
-
-                for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
-                    fileChooser.removeChoosableFileFilter(filter);
-                }
-                fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
-                int returnVal = fileChooser.showOpenDialog(null);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    int g = LectorDeRegistrosHumedadDelSuelo.leer(fileChooser.getSelectedFile());
-                    JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }.start();
+        for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+            fileChooser.removeChoosableFileFilter(filter);
+        }
+        fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            int g = LectorDeRegistrosHumedadDelSuelo.leer(fileChooser.getSelectedFile());
+            JOptionPane.showMessageDialog(this, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        new Thread() {
 
-            @Override
-            public void run() {
-                JFileChooser fileChooser = new JFileChooser();
-                for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
-                    fileChooser.removeChoosableFileFilter(filter);
-                }
-                fileChooser.addChoosableFileFilter(new FileTypeFilter(".txt", "Archivo de Texto Plano"));
-                int returnVal = fileChooser.showOpenDialog(null);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    int g = LectorDeRegistrosTemperatura.leer(fileChooser.getSelectedFile());
-                    if (g == -1) {
-                        JOptionPane.showMessageDialog(null, "El termómetro no se encuentra registrado, por favor regístrelo e intente de nuevo.", "Error en la Carga de Datos", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }
+        JFileChooser fileChooser = new JFileChooser();
+        for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+            fileChooser.removeChoosableFileFilter(filter);
+        }
+        fileChooser.addChoosableFileFilter(new FileTypeFilter(".txt", "Archivo de Texto Plano"));
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            int g = LectorDeRegistrosTemperatura.leer(fileChooser.getSelectedFile());
+            if (g == -1) {
+                JOptionPane.showMessageDialog(this, "El termómetro no se encuentra registrado, por favor regístrelo e intente de nuevo.", "Error en la Carga de Datos", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
             }
-        }.start();
+        }
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

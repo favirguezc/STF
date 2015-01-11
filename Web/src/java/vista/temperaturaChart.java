@@ -6,7 +6,6 @@
 package vista;
 
 import controlador.TemperaturaController;
-import controlador.util.JsfUtil;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;

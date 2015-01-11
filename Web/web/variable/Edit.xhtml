@@ -12,8 +12,6 @@
             <h:form id="VariableEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{variableController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditVariableLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{variableController.selected.id}" title="#{bundle.EditVariableTitle_id}" />
                         <p:outputLabel value="#{bundle.EditVariableLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{variableController.selected.nombre}" title="#{bundle.EditVariableTitle_nombre}" required="true" requiredMessage="#{bundle.EditVariableRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditVariableLabel_abreviacion}" for="abreviacion" />

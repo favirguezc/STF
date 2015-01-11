@@ -12,8 +12,6 @@
             <h:form id="MonitoreoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMonitoreoLabel_id}"/>
-                        <h:outputText value="#{monitoreoController.selected.id}" title="#{bundle.ViewMonitoreoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoLabel_numeroDeMonitoreo}"/>
                         <h:outputText value="#{monitoreoController.selected.numeroDeMonitoreo}" title="#{bundle.ViewMonitoreoTitle_numeroDeMonitoreo}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoLabel_fecha}"/>

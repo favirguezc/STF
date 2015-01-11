@@ -12,8 +12,6 @@
             <h:form id="VariableViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{variableController.selected != null}">
-                        <h:outputText value="#{bundle.ViewVariableLabel_id}"/>
-                        <h:outputText value="#{variableController.selected.id}" title="#{bundle.ViewVariableTitle_id}"/>
                         <h:outputText value="#{bundle.ViewVariableLabel_nombre}"/>
                         <h:outputText value="#{variableController.selected.nombre}" title="#{bundle.ViewVariableTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewVariableLabel_abreviacion}"/>

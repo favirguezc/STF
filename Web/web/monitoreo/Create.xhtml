@@ -12,8 +12,6 @@
             <h:form id="MonitoreoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMonitoreoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{monitoreoController.selected.id}" title="#{bundle.CreateMonitoreoTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoLabel_numeroDeMonitoreo}" for="numeroDeMonitoreo" />
                         <p:inputText id="numeroDeMonitoreo" value="#{monitoreoController.selected.numeroDeMonitoreo}" title="#{bundle.CreateMonitoreoTitle_numeroDeMonitoreo}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoLabel_fecha}" for="fecha" />

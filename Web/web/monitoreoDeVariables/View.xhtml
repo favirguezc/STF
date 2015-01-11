@@ -12,8 +12,6 @@
             <h:form id="MonitoreoDeVariablesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoDeVariablesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_id}"/>
-                        <h:outputText value="#{monitoreoDeVariablesController.selected.id}" title="#{bundle.ViewMonitoreoDeVariablesTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_monitoreo}"/>
                         <h:outputText value="#{monitoreoDeVariablesController.selected.monitoreo}" title="#{bundle.ViewMonitoreoDeVariablesTitle_monitoreo}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_modulo}"/>

@@ -12,8 +12,6 @@
             <h:form id="InsumoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{insumoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditInsumoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{insumoController.selected.id}" title="#{bundle.EditInsumoTitle_id}" />
                         <p:outputLabel value="#{bundle.EditInsumoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{insumoController.selected.nombre}" title="#{bundle.EditInsumoTitle_nombre}" required="true" requiredMessage="#{bundle.EditInsumoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditInsumoLabel_ingredienteActivo}" for="ingredienteActivo" />

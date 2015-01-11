@@ -12,8 +12,6 @@
             <h:form id="MonitoreoDeVariablesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoreoDeVariablesController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{monitoreoDeVariablesController.selected.id}" title="#{bundle.EditMonitoreoDeVariablesTitle_id}" />
                         <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_monitoreo}" for="monitoreo" />
                         <p:selectOneMenu id="monitoreo" value="#{monitoreoDeVariablesController.selected.monitoreo}" required="true" requiredMessage="#{bundle.EditMonitoreoDeVariablesRequiredMessage_monitoreo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

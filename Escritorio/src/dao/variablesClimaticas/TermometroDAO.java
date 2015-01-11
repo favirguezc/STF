@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.variablesClimaticas.Termometro;
+import modelo.produccion.variablesClimaticas.Termometro;
 
 /**
  *

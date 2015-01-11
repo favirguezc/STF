@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.HumedadDelSueloJpaController;

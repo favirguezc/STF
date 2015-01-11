@@ -6,8 +6,8 @@
 package controlador;
 
 import javax.faces.bean.ManagedBean;
-import modelo.administracion.GrupoSanguineo;
-import modelo.administracion.RH;
+import modelo.produccion.administracion.GrupoSanguineo;
+import modelo.produccion.administracion.RH;
 
 /**
  *

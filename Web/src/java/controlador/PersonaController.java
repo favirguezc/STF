@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.administracion.Persona;
+import modelo.produccion.administracion.Persona;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.PersonaJpaController;

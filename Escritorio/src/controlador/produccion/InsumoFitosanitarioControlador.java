@@ -10,8 +10,8 @@ import dao.produccion.InsumoDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.produccion.Insumo;
-import modelo.produccion.Unidades;
+import modelo.produccion.aplicaciones.Insumo;
+import modelo.produccion.aplicaciones.Unidades;
 
 /**
  *

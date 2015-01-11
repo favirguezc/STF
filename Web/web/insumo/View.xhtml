@@ -12,12 +12,18 @@
             <h:form id="InsumoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{insumoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInsumoLabel_id}"/>
+                        <h:outputText value="#{insumoController.selected.id}" title="#{bundle.ViewInsumoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewInsumoLabel_nombre}"/>
                         <h:outputText value="#{insumoController.selected.nombre}" title="#{bundle.ViewInsumoTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewInsumoLabel_ingredienteActivo}"/>
                         <h:outputText value="#{insumoController.selected.ingredienteActivo}" title="#{bundle.ViewInsumoTitle_ingredienteActivo}"/>
                         <h:outputText value="#{bundle.ViewInsumoLabel_unidades}"/>
                         <h:outputText value="#{insumoController.selected.unidades}" title="#{bundle.ViewInsumoTitle_unidades}"/>
+                        <h:outputText value="#{bundle.ViewInsumoLabel_pc}"/>
+                        <h:outputText value="#{insumoController.selected.pc}" title="#{bundle.ViewInsumoTitle_pc}"/>
+                        <h:outputText value="#{bundle.ViewInsumoLabel_tr}"/>
+                        <h:outputText value="#{insumoController.selected.tr}" title="#{bundle.ViewInsumoTitle_tr}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="InsumoViewDialog.hide()"/>
                 </h:panelGroup>

@@ -23,12 +23,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.produccion.Recoleccion;
-import modelo.variablesClimaticas.Lluvia;
-import modelo.variablesClimaticas.HumedadDelSuelo;
-import modelo.variablesClimaticas.Temperatura;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.variablesClimaticas.Lluvia;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.Temperatura;
 import util.DateTools;
 
 /**
@@ -39,9 +39,9 @@ public class RegistrosPrueba {
 
     public static void main(String[] args) {
 //        quitarRegistrosRecoleccion();
-        registrosPruebaRecoleccion();
-//        quitarRegistrosTemperatura();
-//        registrosPruebaTemperatura();
+//        registrosPruebaRecoleccion();
+        quitarRegistrosTemperatura();
+        registrosPruebaTemperatura();
 //        quitarRegistrosLluvia();
 //        registrosPruebaLluvia();
 //        quitarRegistrosHumedad();
@@ -56,13 +56,13 @@ public class RegistrosPrueba {
     public static void registrosPruebaTemperatura() {
         Calendar c = GregorianCalendar.getInstance();
         TemperaturaControlador controlador = new TemperaturaControlador();
-        for (int y = 2014; y < 2015; y++) {
+        for (int y = 2015; y < 2016; y++) {
             System.out.println("Año " + y);
             c.setTime(new Date(y - 1900, 0, 1));
-            for (int i = 0; i < 365; i++) {
+            for (int i = 0; i < 31; i++) {
                 System.out.println(i + 1);
                 for (int j = 0; j < 24; j++) {
-                    for (int h = 0; h < 6; h++) {
+                    for (int h = 0; h < 2; h++) {
                         try {
                             controlador.guardar(
                                     controlador.nuevo(

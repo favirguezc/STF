@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MonitoreoDeVariablesViewDlg" widgetVar="MonitoreoDeVariablesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitoreoDeVariablesTitle}">
+            <h:form id="MonitoreoDeVariablesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{monitoreoDeVariablesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_id}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.id}" title="#{bundle.ViewMonitoreoDeVariablesTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_monitoreo}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.monitoreo}" title="#{bundle.ViewMonitoreoDeVariablesTitle_monitoreo}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_modulo}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.modulo}" title="#{bundle.ViewMonitoreoDeVariablesTitle_modulo}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_variable}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.variable}" title="#{bundle.ViewMonitoreoDeVariablesTitle_variable}"/>
+                        <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_valor}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.valor}" title="#{bundle.ViewMonitoreoDeVariablesTitle_valor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitoreoDeVariablesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

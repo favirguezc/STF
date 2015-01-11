@@ -10,8 +10,8 @@ import dao.exceptions.NonexistentEntityException;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 
 /**
  *

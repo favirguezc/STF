@@ -10,10 +10,10 @@ import dao.exceptions.NonexistentEntityException;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.GrupoSanguineo;
-import modelo.administracion.Persona;
-import modelo.administracion.RH;
-import modelo.administracion.Sexo;
+import modelo.produccion.administracion.GrupoSanguineo;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.RH;
+import modelo.produccion.administracion.Sexo;
 
 /**
  *

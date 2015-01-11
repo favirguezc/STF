@@ -11,9 +11,9 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
-import modelo.produccion.MonitoreoDePlagas;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.monitoreo.MonitoreoDePlagas;
 
 /**
  *

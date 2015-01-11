@@ -10,8 +10,8 @@ import dao.variablesClimaticas.TemperaturaDAO;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
-import modelo.administracion.Modulo;
-import modelo.variablesClimaticas.Temperatura;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.variablesClimaticas.Temperatura;
 
 /**
  *

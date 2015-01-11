@@ -10,9 +10,9 @@ import dao.produccion.RecoleccionDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.produccion.Recoleccion;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.recoleccion.Recoleccion;
 
 /**
  *

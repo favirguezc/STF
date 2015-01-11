@@ -15,7 +15,7 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import modelo.variablesClimaticas.Lluvia;
+import modelo.produccion.variablesClimaticas.Lluvia;
 import util.TableColumnAdjuster;
 
 /**

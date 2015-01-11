@@ -15,9 +15,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.Persona;
-import modelo.administracion.Rol;
-import modelo.produccion.TrampaDeInsectos;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.monitoreo.TrampaDeInsectos;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 

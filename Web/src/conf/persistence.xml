@@ -2,30 +2,32 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="WebPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>modelo.administracion.Lote</class>
-    <class>modelo.administracion.Modulo</class>
-    <class>modelo.administracion.Persona</class>
-    <class>modelo.administracion.Rol</class>
-    <class>modelo.administracion.RolPersona</class>
-    <class>modelo.produccion.AplicacionFitosanitaria</class>
-    <class>modelo.produccion.Insumo</class>
-    <class>modelo.produccion.Labor</class>
-    <class>modelo.produccion.MonitoreoDeEnfermedades</class>
-    <class>modelo.produccion.MonitoreoDePlagas</class>
-    <class>modelo.produccion.Recoleccion</class>
-    <class>modelo.produccion.Trabajo</class>
-    <class>modelo.produccion.TrampaDeInsectos</class>
-    <class>modelo.variablesClimaticas.HumedadDelSuelo</class>
-    <class>modelo.variablesClimaticas.Lluvia</class>
-    <class>modelo.variablesClimaticas.Temperatura</class>
-    <class>modelo.utilidades.Nota</class>
-    <class>modelo.variablesClimaticas.Termometro</class>
+    <class>modelo.produccion.administracion.Lote</class>
+    <class>modelo.produccion.administracion.Modulo</class>
+    <class>modelo.produccion.administracion.Persona</class>
+    <class>modelo.produccion.administracion.Rol</class>
+    <class>modelo.produccion.administracion.RolPersona</class>
+    <class>modelo.produccion.aplicaciones.Aplicacion</class>
+    <class>modelo.produccion.aplicaciones.Insumo</class>
+    <class>modelo.produccion.labores.Labor</class>
+    <class>modelo.produccion.labores.Trabajo</class>
+    <class>modelo.produccion.monitoreo.Monitoreo</class>
+    <class>modelo.produccion.monitoreo.MonitoreoDeVariables</class>
+    <class>modelo.produccion.monitoreo.TrampaDeInsectos</class>
+    <class>modelo.produccion.monitoreo.Variable</class>
+    <class>modelo.produccion.recoleccion.Recoleccion</class>
+    <class>modelo.produccion.utilidades.Nota</class>
+    <class>modelo.produccion.variablesClimaticas.HumedadDelSuelo</class>
+    <class>modelo.produccion.variablesClimaticas.Lluvia</class>
+    <class>modelo.produccion.variablesClimaticas.Temperatura</class>
+    <class>modelo.produccion.variablesClimaticas.Termometro</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

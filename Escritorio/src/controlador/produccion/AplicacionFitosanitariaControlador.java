@@ -11,10 +11,10 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.produccion.AplicacionFitosanitaria;
-import modelo.produccion.Insumo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.aplicaciones.Aplicacion;
+import modelo.produccion.aplicaciones.Insumo;
 
 /**
  *
@@ -28,11 +28,11 @@ public class AplicacionFitosanitariaControlador {
         dao = new AplicacionFitosanitariaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public AplicacionFitosanitaria nuevo(Date fecha, Insumo producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
-        return new AplicacionFitosanitaria(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
+    public Aplicacion nuevo(Date fecha, Insumo producto, String motivo, boolean pc, boolean tr, float cantidad, float agua, String equipo, Persona responsable, Persona aprobante, float jornales, String observaciones, Lote lote, Persona asistente, Persona productor) {
+        return new Aplicacion(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
     }
 
-    public AplicacionFitosanitaria buscar(long id) {
+    public Aplicacion buscar(long id) {
         return dao.findAplicacionFitosanitaria(id);
     }
 
@@ -40,19 +40,19 @@ public class AplicacionFitosanitariaControlador {
         dao.destroy(id);
     }
 
-    public void guardar(AplicacionFitosanitaria af) {
+    public void guardar(Aplicacion af) {
         dao.create(af);
     }
 
-    public void editar(AplicacionFitosanitaria af) throws Exception {
+    public void editar(Aplicacion af) throws Exception {
         dao.edit(af);
     }
 
-    public List<AplicacionFitosanitaria> leerLista(Lote lote, Date fecha1, Date fecha2) {
+    public List<Aplicacion> leerLista(Lote lote, Date fecha1, Date fecha2) {
         return dao.findAplicacionFitosanitariaEntities(lote, fecha1, fecha2);
     }
 
-    public boolean validar(AplicacionFitosanitaria af) {
+    public boolean validar(Aplicacion af) {
         if (af.getProducto() == null) {
             JOptionPane.showMessageDialog(null, "El campo producto no puede estar vacío.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
             return false;

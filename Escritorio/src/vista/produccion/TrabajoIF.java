@@ -18,12 +18,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
-import modelo.administracion.Persona;
-import modelo.administracion.Rol;
-import modelo.produccion.Labor;
-import modelo.produccion.Trabajo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.labores.Labor;
+import modelo.produccion.labores.Trabajo;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 
@@ -477,7 +477,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setModulo(modulo);
             registroSeleccionado.setLabor(labor);
             registroSeleccionado.setOperario(operario);
-            registroSeleccionado.setJornales(jornales);
+            registroSeleccionado.setHoras(jornales);
             registroSeleccionado.setObservaciones(observaciones);
             registroSeleccionado.setAsistente(asistente);
             registroSeleccionado.setProductor(productor);
@@ -571,7 +571,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
                 mp.getModulo(),
                 mp.getLabor(),
                 mp.getOperario(),
-                mp.getJornales(),
+                mp.getHoras(),
                 mp.getObservaciones(),
                 mp.getAsistente(),
                 mp.getProductor()};

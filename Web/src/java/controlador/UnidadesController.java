@@ -6,7 +6,7 @@
 package controlador;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.Unidades;
+import modelo.produccion.aplicaciones.Unidades;
 
 /**
  *

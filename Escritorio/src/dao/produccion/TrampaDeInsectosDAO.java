@@ -17,8 +17,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.TrampaDeInsectos;
-import modelo.variablesClimaticas.Temperatura;
+import modelo.produccion.monitoreo.TrampaDeInsectos;
+import modelo.produccion.variablesClimaticas.Temperatura;
 
 /**
  *

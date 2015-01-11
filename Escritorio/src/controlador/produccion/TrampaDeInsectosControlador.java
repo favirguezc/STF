@@ -11,8 +11,8 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.Persona;
-import modelo.produccion.TrampaDeInsectos;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.monitoreo.TrampaDeInsectos;
 
 /**
  *

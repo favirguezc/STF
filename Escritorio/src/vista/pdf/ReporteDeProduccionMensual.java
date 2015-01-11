@@ -28,9 +28,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.produccion.Recoleccion;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.recoleccion.Recoleccion;
 import util.DateFormatter;
 import util.DateTools;
 

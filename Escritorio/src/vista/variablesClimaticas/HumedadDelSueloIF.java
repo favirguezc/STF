@@ -18,7 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
-import modelo.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import util.DateFormatter;
 import util.FileTypeFilter;
 import vista.archivos.LectorDeRegistrosHumedadDelSuelo;

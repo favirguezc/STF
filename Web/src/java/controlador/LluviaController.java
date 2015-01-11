@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.variablesClimaticas.Lluvia;
+import modelo.produccion.variablesClimaticas.Lluvia;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.LluviaJpaController;

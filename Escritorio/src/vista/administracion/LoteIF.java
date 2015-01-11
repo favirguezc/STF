@@ -11,8 +11,8 @@ import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 
 /**
  *

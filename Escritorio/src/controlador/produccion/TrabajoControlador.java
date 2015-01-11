@@ -10,11 +10,11 @@ import dao.produccion.TrabajoDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
-import modelo.administracion.Persona;
-import modelo.produccion.Labor;
-import modelo.produccion.Trabajo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.labores.Labor;
+import modelo.produccion.labores.Trabajo;
 
 /**
  *

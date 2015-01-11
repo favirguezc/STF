@@ -15,7 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.administracion.Persona;
+import modelo.produccion.administracion.Persona;
 
 /**
  *

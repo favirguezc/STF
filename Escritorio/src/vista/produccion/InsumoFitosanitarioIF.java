@@ -10,8 +10,8 @@ import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.Insumo;
-import modelo.produccion.Unidades;
+import modelo.produccion.aplicaciones.Insumo;
+import modelo.produccion.aplicaciones.Unidades;
 import util.TableColumnAdjuster;
 
 /**

@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.produccion.Recoleccion;
+import modelo.produccion.recoleccion.Recoleccion;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import util.DateFormatter;

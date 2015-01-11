@@ -10,7 +10,7 @@ import controlador.produccion.RecoleccionControlador;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JPanel;
-import modelo.administracion.Lote;
+import modelo.produccion.administracion.Lote;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;

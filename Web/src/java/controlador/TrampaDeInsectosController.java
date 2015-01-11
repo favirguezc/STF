@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.produccion.TrampaDeInsectos;
+import modelo.produccion.monitoreo.TrampaDeInsectos;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.TrampaDeInsectosJpaController;

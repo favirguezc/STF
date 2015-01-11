@@ -10,9 +10,9 @@ import dao.produccion.MonitoreoDeEnfermedadesDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
-import modelo.produccion.MonitoreoDeEnfermedades;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.monitoreo.MonitoreoDeEnfermedades;
 
 /**
  *

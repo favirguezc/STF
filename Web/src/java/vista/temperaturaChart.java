@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import modelo.variablesClimaticas.Temperatura;
+import modelo.produccion.variablesClimaticas.Temperatura;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;

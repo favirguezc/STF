@@ -6,7 +6,7 @@
 package controlador;
 
 import javax.faces.bean.ManagedBean;
-import modelo.administracion.Sexo;
+import modelo.produccion.administracion.Sexo;
 
 /**
  *

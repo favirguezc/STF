@@ -9,7 +9,7 @@ import dao.exceptions.NonexistentEntityException;
 import dao.produccion.LaborDAO;
 import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
-import modelo.produccion.Labor;
+import modelo.produccion.labores.Labor;
 
 /**
  *

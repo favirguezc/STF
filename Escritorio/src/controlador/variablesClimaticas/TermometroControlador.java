@@ -9,8 +9,8 @@ import dao.util.EntityManagerFactorySingleton;
 import dao.variablesClimaticas.TermometroDAO;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
-import modelo.administracion.Modulo;
-import modelo.variablesClimaticas.Termometro;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.variablesClimaticas.Termometro;
 
 /**
  *

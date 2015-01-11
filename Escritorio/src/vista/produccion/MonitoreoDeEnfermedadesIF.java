@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.Lote;
-import modelo.administracion.Modulo;
-import modelo.produccion.MonitoreoDeEnfermedades;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.monitoreo.MonitoreoDeEnfermedades;
 import util.TableColumnAdjuster;
 
 /**

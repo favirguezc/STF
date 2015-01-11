@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AplicacionViewDlg" widgetVar="AplicacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAplicacionTitle}">
+            <h:form id="AplicacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aplicacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_id}"/>
+                        <h:outputText value="#{aplicacionController.selected.id}" title="#{bundle.ViewAplicacionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_tipo}"/>
+                        <h:outputText value="#{aplicacionController.selected.tipo}" title="#{bundle.ViewAplicacionTitle_tipo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_modulo}"/>
+                        <h:outputText value="#{aplicacionController.selected.modulo}" title="#{bundle.ViewAplicacionTitle_modulo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_fechaDeAutorizacion}"/>
+                        <h:outputText value="#{aplicacionController.selected.fechaDeAutorizacion}" title="#{bundle.ViewAplicacionTitle_fechaDeAutorizacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_fechaDeAplicacion}"/>
+                        <h:outputText value="#{aplicacionController.selected.fechaDeAplicacion}" title="#{bundle.ViewAplicacionTitle_fechaDeAplicacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_producto}"/>
+                        <h:outputText value="#{aplicacionController.selected.producto}" title="#{bundle.ViewAplicacionTitle_producto}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_motivo1}"/>
+                        <h:outputText value="#{aplicacionController.selected.motivo1}" title="#{bundle.ViewAplicacionTitle_motivo1}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_motivo2}"/>
+                        <h:outputText value="#{aplicacionController.selected.motivo2}" title="#{bundle.ViewAplicacionTitle_motivo2}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_motivo3}"/>
+                        <h:outputText value="#{aplicacionController.selected.motivo3}" title="#{bundle.ViewAplicacionTitle_motivo3}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_cantidad}"/>
+                        <h:outputText value="#{aplicacionController.selected.cantidad}" title="#{bundle.ViewAplicacionTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_litrosDeAgua}"/>
+                        <h:outputText value="#{aplicacionController.selected.litrosDeAgua}" title="#{bundle.ViewAplicacionTitle_litrosDeAgua}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_metodo}"/>
+                        <h:outputText value="#{aplicacionController.selected.metodo}" title="#{bundle.ViewAplicacionTitle_metodo}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_responsable}"/>
+                        <h:outputText value="#{aplicacionController.selected.responsable}" title="#{bundle.ViewAplicacionTitle_responsable}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_autoriza}"/>
+                        <h:outputText value="#{aplicacionController.selected.autoriza}" title="#{bundle.ViewAplicacionTitle_autoriza}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_jornales}"/>
+                        <h:outputText value="#{aplicacionController.selected.jornales}" title="#{bundle.ViewAplicacionTitle_jornales}"/>
+                        <h:outputText value="#{bundle.ViewAplicacionLabel_observaciones}"/>
+                        <h:outputText value="#{aplicacionController.selected.observaciones}" title="#{bundle.ViewAplicacionTitle_observaciones}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AplicacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

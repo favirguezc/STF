@@ -14,12 +14,12 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.GrupoSanguineo;
-import modelo.administracion.Persona;
-import modelo.administracion.RH;
-import modelo.administracion.Rol;
-import modelo.administracion.RolPersona;
-import modelo.administracion.Sexo;
+import modelo.produccion.administracion.GrupoSanguineo;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.RH;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.administracion.RolPersona;
+import modelo.produccion.administracion.Sexo;
 import util.TableColumnAdjuster;
 
 /**

@@ -17,11 +17,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.administracion.Rol;
-import modelo.produccion.AplicacionFitosanitaria;
-import modelo.produccion.Insumo;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.aplicaciones.Aplicacion;
+import modelo.produccion.aplicaciones.Insumo;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 
@@ -35,8 +35,8 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
      * Creates new form AplicacionFitosanitariaIF
      */
     private AplicacionFitosanitariaControlador controlador;
-    private AplicacionFitosanitaria registroSeleccionado;
-    private List<AplicacionFitosanitaria> lista;
+    private Aplicacion registroSeleccionado;
+    private List<Aplicacion> lista;
     private boolean habilitado = false;
 
     public AplicacionFitosanitariaIF() {
@@ -558,7 +558,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         Persona productor = (Persona) productorComboBox.getSelectedItem();
         boolean pc = pcBooleanComboBox.isSelected(), tr = trBooleanComboBox.isSelected();
         if (registroSeleccionado == null) {
-            AplicacionFitosanitaria nuevo = controlador.nuevo(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
+            Aplicacion nuevo = controlador.nuevo(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -571,10 +571,10 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setPc(pc);
             registroSeleccionado.setTr(tr);
             registroSeleccionado.setCantidad(cantidad);
-            registroSeleccionado.setAgua(agua);
+            registroSeleccionado.setLitrosDeAgua(agua);
             registroSeleccionado.setEquipo(equipo);
             registroSeleccionado.setResponsable(responsable);
-            registroSeleccionado.setAprobante(aprobante);
+            registroSeleccionado.setAutoriza(aprobante);
             registroSeleccionado.setJornales(jornales);
             registroSeleccionado.setObservaciones(observaciones);
             registroSeleccionado.setProductor(productor);
@@ -666,19 +666,19 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista((Lote) loteComboBox.getSelectedItem(), fechaInicioChooserCombo.getSelectedDate().getTime(), fechaFinChooserCombo.getSelectedDate().getTime());
-        for (AplicacionFitosanitaria mp : lista) {
+        for (Aplicacion mp : lista) {
             Object[] row = {
-                DateFormatter.formatDate(mp.getFecha()),
+                DateFormatter.formatDate(mp.getFechaDeAplicacion()),
                 mp.getProducto(),
                 mp.getProducto().getIngredienteActivo(),
                 mp.getMotivo(),
                 mp.isPc(),
                 mp.isTr(),
                 mp.getCantidad(),
-                mp.getAgua(),
+                mp.getLitrosDeAgua(),
                 mp.getEquipo(),
                 mp.getResponsable(),
-                mp.getAprobante(),
+                mp.getAutoriza(),
                 mp.getJornales(),
                 mp.getObservaciones(),
                 mp.getAsistente(),
@@ -721,17 +721,17 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             productorComboBox.setSelectedIndex(0);
         } else {
             Calendar c = GregorianCalendar.getInstance();
-            c.setTime(registroSeleccionado.getFecha());
+            c.setTime(registroSeleccionado.getFechaDeAplicacion());
             fechaChooserCombo.setCurrent(c);
             productoComboBox.setSelectedItem(registroSeleccionado.getProducto());
             motivoTextField.setText(registroSeleccionado.getMotivo());
             pcBooleanComboBox.setSelected(registroSeleccionado.isPc());
             trBooleanComboBox.setSelected(registroSeleccionado.isTr());
             cantidadFloatField.setText(registroSeleccionado.getCantidad() + "");
-            aguaFloatField.setText(registroSeleccionado.getAgua() + "");
+            aguaFloatField.setText(registroSeleccionado.getLitrosDeAgua() + "");
             equipoTextField.setText(registroSeleccionado.getEquipo());
             responsableComboBox.setSelectedItem(registroSeleccionado.getResponsable());
-            autorizadoComboBox.setSelectedItem(registroSeleccionado.getAprobante());
+            autorizadoComboBox.setSelectedItem(registroSeleccionado.getAutoriza());
             jornalesFloatField.setText(registroSeleccionado.getJornales() + "");
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             if (registroSeleccionado.getAsistente() != null) {

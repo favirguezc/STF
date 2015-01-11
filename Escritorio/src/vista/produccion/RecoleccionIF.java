@@ -16,10 +16,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
-import modelo.administracion.Rol;
-import modelo.produccion.Recoleccion;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.recoleccion.Recoleccion;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 

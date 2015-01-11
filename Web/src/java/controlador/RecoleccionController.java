@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.produccion.Recoleccion;
+import modelo.produccion.recoleccion.Recoleccion;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.RecoleccionJpaController;
@@ -18,8 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
-import modelo.administracion.Lote;
-import modelo.administracion.Persona;
+import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
 
 @ManagedBean(name = "recoleccionController")
 @SessionScoped

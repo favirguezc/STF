@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
-import modelo.produccion.Recoleccion;
+import modelo.produccion.recoleccion.Recoleccion;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.CategoryDataset;

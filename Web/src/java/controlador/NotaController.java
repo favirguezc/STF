@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.utilidades.Nota;
+import modelo.produccion.utilidades.Nota;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.NotaJpaController;

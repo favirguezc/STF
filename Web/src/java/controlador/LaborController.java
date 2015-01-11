@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.produccion.Labor;
+import modelo.produccion.labores.Labor;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.LaborJpaController;

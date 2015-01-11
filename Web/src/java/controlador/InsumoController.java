@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.produccion.Insumo;
+import modelo.produccion.aplicaciones.Insumo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.InsumoJpaController;

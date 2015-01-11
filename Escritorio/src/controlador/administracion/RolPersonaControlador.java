@@ -11,9 +11,9 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.administracion.Persona;
-import modelo.administracion.Rol;
-import modelo.administracion.RolPersona;
+import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
+import modelo.produccion.administracion.RolPersona;
 import util.Validador;
 
 /**

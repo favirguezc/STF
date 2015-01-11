@@ -17,8 +17,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.variablesClimaticas.HumedadDelSuelo;
-import modelo.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 
 /**
  *

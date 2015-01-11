@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.variablesClimaticas.Temperatura;
+import modelo.produccion.variablesClimaticas.Temperatura;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.TemperaturaJpaController;

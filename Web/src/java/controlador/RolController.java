@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.administracion.Rol;
+import modelo.produccion.administracion.Rol;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.RolJpaController;

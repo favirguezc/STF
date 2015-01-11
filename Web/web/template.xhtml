@@ -28,24 +28,28 @@
                             <p:menuitem value="Modulo" outcome="/modulo/List.xhtml" />
                             <p:menuitem value="Persona" outcome="/persona/List.xhtml" />
                             <p:menuitem value="Rol - Persona" outcome="/rolPersona/List.xhtml" />
-                        </p:submenu>                         
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Application}">
+                            <p:menuitem value="Aplicación" outcome="/aplicacion/List.xhtml"/>
+                            <p:menuitem value="Insumo" outcome="/insumo/List.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Work}">
+                            <p:menuitem value="Trabajo" outcome="/trabajo/List.xhtml"/>
+                            <p:menuitem value="Labor" outcome="/labor/List.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Monitoring}">
+                            <p:menuitem value="Monitoreo" outcome="/monitoreo/List.xhtml"/>
+                            <p:menuitem value="Monitoreo de Variables" outcome="/monitoreoDeVariables/List.xhtml"/>
+                            <p:menuitem value="Variable" outcome="/variable/List.xhtml"/>
+                            <p:menuitem value="Trampa de Insectos" outcome="/trampaDeInsectos/List.xhtml"/>
+                        </p:submenu>
                         <p:submenu label="#{bundle.Weather}">
                             <p:menuitem value="Temperatura" outcome="/temperatura/List.xhtml"/>
                             <p:menuitem value="Lluvia" outcome="/lluvia/List.xhtml"/>
                             <p:menuitem value="Humedad Del Suelo" outcome="/humedadDelSuelo/List.xhtml"/>
                             <p:menuitem value="Termómetro" outcome="/termometro/List.xhtml"/>
                         </p:submenu>
-                        <p:submenu label="#{bundle.Production}">
-                            <p:menuitem outcome="/aplicacionFitosanitaria/List.xhtml" value="Aplicación Fitosanitaria"/>
-                            <p:menuitem outcome="/insumo/List.xhtml" value="Insumo"/>
-                            <p:menuitem outcome="/labor/List.xhtml" value="Labor"/>
-                            <p:menuitem outcome="/monitoreoDeEnfermedades/List.xhtml" value="Monitoreo De Enfermedades"/>
-                            <p:menuitem outcome="/monitoreoDePlagas/List.xhtml" value="Monitoreo De Plagas"/>
-                            <p:menuitem outcome="/recoleccion/List.xhtml" value="Recolección"/>
-                            <p:menuitem outcome="/trabajo/List.xhtml" value="Trabajo"/>
-                            <p:menuitem outcome="/trampaDeInsectos/List.xhtml" value="Trampa De Insectos"/>
-
-                        </p:submenu>
+                        <p:menuitem value="Recolección" outcome="/recoleccion/List.xhtml"/>
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>

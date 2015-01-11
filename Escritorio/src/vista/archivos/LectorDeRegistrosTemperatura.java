@@ -11,8 +11,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Date;
-import modelo.administracion.Modulo;
-import modelo.variablesClimaticas.Termometro;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.variablesClimaticas.Termometro;
 import vista.archivos.util.DateParser;
 
 /**

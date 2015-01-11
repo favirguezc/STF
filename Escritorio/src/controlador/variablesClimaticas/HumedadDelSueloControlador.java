@@ -11,7 +11,7 @@ import dao.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.variablesClimaticas.HumedadDelSuelo;
+import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 
 /**
  *

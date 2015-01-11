@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.administracion.Lote;
+import modelo.produccion.administracion.Lote;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import dao.LoteJpaController;

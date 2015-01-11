@@ -5,11 +5,14 @@
  */
 package propertiesgenerator;
 
+import modelo.produccion.variablesClimaticas.*;
+import modelo.produccion.utilidades.*;
+import modelo.produccion.administracion.*;
+import modelo.produccion.labores.*;
+import modelo.produccion.recoleccion.*;
+import modelo.produccion.monitoreo.*;
+import modelo.produccion.aplicaciones.*;
 import java.lang.reflect.Field;
-import modelo.administracion.*;
-import modelo.produccion.*;
-import modelo.utilidades.*;
-import modelo.variablesClimaticas.*;
 
 /**
  *
@@ -27,18 +30,20 @@ public class PropertiesGenerator {
         generarPropiedades(Persona.class);
         generarPropiedades(Rol.class);
         generarPropiedades(RolPersona.class);
-        generarPropiedades(AplicacionFitosanitaria.class);
+        generarPropiedades(Aplicacion.class);
         generarPropiedades(Insumo.class);
         generarPropiedades(Labor.class);
-        generarPropiedades(MonitoreoDeEnfermedades.class);
-        generarPropiedades(MonitoreoDePlagas.class);
-        generarPropiedades(Recoleccion.class);
         generarPropiedades(Trabajo.class);
+        generarPropiedades(Monitoreo.class);
+        generarPropiedades(MonitoreoDeVariables.class);
         generarPropiedades(TrampaDeInsectos.class);
+        generarPropiedades(Variable.class);
+        generarPropiedades(Recoleccion.class);
         generarPropiedades(Nota.class);
         generarPropiedades(HumedadDelSuelo.class);
         generarPropiedades(Lluvia.class);
         generarPropiedades(Temperatura.class);
+        generarPropiedades(Termometro.class);
     }
 
     private static String g(String campo) {

@@ -39,6 +39,7 @@ import javax.swing.filechooser.FileFilter;
 import util.FileTypeFilter;
 import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
 import vista.archivos.LectorDeRegistrosTemperatura;
+import vista.finanzas.VentaIF;
 
 /**
  *
@@ -131,6 +132,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem28 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -567,6 +570,22 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu6);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman229.png"))); // NOI18N
+        jMenu7.setText("Finanzas");
+        jMenu7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jMenuItem28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/affiliate.png"))); // NOI18N
+        jMenuItem28.setText("Ventas");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem28);
+
+        jMenuBar2.add(jMenu7);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -761,6 +780,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        abrirRegistroVentas();
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -775,6 +798,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -796,6 +820,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -1062,6 +1087,20 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             try {
                 hif.setMaximum(true);
                 hif.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void abrirRegistroVentas(){
+        if (!ventanaActivaEnPanelEscritorio(VentaIF.class)) {
+            VentaIF v = new VentaIF();
+            panelEscritorio.add(v);
+            v.setVisible(true);
+            try {
+                v.setMaximum(true);
+                v.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

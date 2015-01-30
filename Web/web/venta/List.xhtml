@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVentaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:accordionPanel dynamic="true" id="VentaListPanel">
+                <p:tab title="Gráficas">
+                    <p>.....En construccion........</p>
+                </p:tab>
+                <p:tab title="Datos">
+                    <h:form id="VentaListForm">
+                            <p:dataTable id="datalist" value="#{ventaController.items}" var="item" 
+                                         selectionMode="single" selection="#{ventaController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50">
+                                
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="FechaVenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaVenta}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cliente"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cliente.nombre} #{item.cliente.apellido}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ExtraGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.extraGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PrimeraGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.primeraGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="SegundaGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.segundaGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TerceraGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.terceraGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CuartaGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cuartaGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="QuintaGramos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quintaGramos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ExtraPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.extraPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PrimeraPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.primeraPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="SegundaPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.segundaPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TerceraPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.terceraPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CuartaPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cuartaPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="QuintaPrecioUnid"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quintaPrecioUnid}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ExtraPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.extraPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PrimeraPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.primeraPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="SegundaPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.segundaPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TerceraPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.terceraPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CuartaPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cuartaPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="QuintaPrecioTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quintaPrecioTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="VentaTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.ventaTotal}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ventaController.prepareCreate}" update=":VentaListPanel:VentaCreateForm" oncomplete="PF('VentaCreateDialog').show()"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VentaListPanel:VentaViewForm" oncomplete="PF('VentaViewDialog').show()" disabled="#{empty ventaController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VentaListPanel:VentaEditForm" oncomplete="PF('VentaEditDialog').show()" disabled="#{empty ventaController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ventaController.destroy}" update=":growl,datalist" disabled="#{empty ventaController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                    </h:form>
+
+                    <ui:include src="Create.xhtml"/>
+                    <ui:include src="Edit.xhtml"/>
+                    <ui:include src="View.xhtml"/>
+                </p:tab>
+            </p:accordionPanel>
+        </ui:define>
+    </ui:composition>
+</html>

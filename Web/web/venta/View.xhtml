@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition>
+
+        <p:dialog id="VentaViewDlg" widgetVar="VentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVentaTitle}">
+            <h:form id="VentaViewForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{ventaController.selected != null}">
+                    <h:outputText value="FechaVenta:"/>
+                    <h:outputText value="#{ventaController.selected.fechaVenta}" title="FechaVenta" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="Cliente:"/>
+                    <h:outputText value="#{ventaController.selected.cliente.nombre} #{ventaController.selected.cliente.apellido}" title="Cliente"/>
+                    <h:outputText value="ExtraGramos:"/>
+                    <h:outputText value="#{ventaController.selected.extraGramos}" title="ExtraGramos" />
+                    <h:outputText value="PrimeraGramos:"/>
+                    <h:outputText value="#{ventaController.selected.primeraGramos}" title="PrimeraGramos" />
+                    <h:outputText value="SegundaGramos:"/>
+                    <h:outputText value="#{ventaController.selected.segundaGramos}" title="SegundaGramos" />
+                    <h:outputText value="TerceraGramos:"/>
+                    <h:outputText value="#{ventaController.selected.terceraGramos}" title="TerceraGramos" />
+                    <h:outputText value="CuartaGramos:"/>
+                    <h:outputText value="#{ventaController.selected.cuartaGramos}" title="CuartaGramos" />
+                    <h:outputText value="QuintaGramos:"/>
+                    <h:outputText value="#{ventaController.selected.quintaGramos}" title="QuintaGramos" />
+                    <h:outputText value="ExtraPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.extraPrecioUnid}" title="ExtraPrecioUnid" />
+                    <h:outputText value="PrimeraPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.primeraPrecioUnid}" title="PrimeraPrecioUnid" />
+                    <h:outputText value="SegundaPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.segundaPrecioUnid}" title="SegundaPrecioUnid" />
+                    <h:outputText value="TerceraPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.terceraPrecioUnid}" title="TerceraPrecioUnid" />
+                    <h:outputText value="CuartaPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.cuartaPrecioUnid}" title="CuartaPrecioUnid" />
+                    <h:outputText value="QuintaPrecioUnid:"/>
+                    <h:outputText value="#{ventaController.selected.quintaPrecioUnid}" title="QuintaPrecioUnid" />
+                    <h:outputText value="ExtraPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.extraPrecioTotal}" title="ExtraPrecioTotal" />
+                    <h:outputText value="PrimeraPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.primeraPrecioTotal}" title="PrimeraPrecioTotal" />
+                    <h:outputText value="SegundaPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.segundaPrecioTotal}" title="SegundaPrecioTotal" />
+                    <h:outputText value="TerceraPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.terceraPrecioTotal}" title="TerceraPrecioTotal" />
+                    <h:outputText value="CuartaPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.cuartaPrecioTotal}" title="CuartaPrecioTotal" />
+                    <h:outputText value="QuintaPrecioTotal:"/>
+                    <h:outputText value="#{ventaController.selected.quintaPrecioTotal}" title="QuintaPrecioTotal" />
+                    <h:outputText value="VentaTotal:"/>
+                    <h:outputText value="#{ventaController.selected.ventaTotal}" title="VentaTotal" />
+                </h:panelGrid>
+                <p:commandButton value="#{bundle.Close}" onclick="VentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

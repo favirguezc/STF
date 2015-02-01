@@ -29,6 +29,7 @@ public class Variable implements Serializable {
     private String nombre;
     @Column(nullable = false, unique = true)
     private String abreviacion;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoDeValoracion tipoDeValoracion;
 
@@ -109,7 +110,7 @@ public class Variable implements Serializable {
 
     @Override
     public String toString() {
-        return nombre + ": " + abreviacion + " " + tipoDeValoracion;
+        return nombre;
     }
 
 }

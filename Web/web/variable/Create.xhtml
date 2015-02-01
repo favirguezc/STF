@@ -17,7 +17,9 @@
                         <p:outputLabel value="#{bundle.CreateVariableLabel_abreviacion}" for="abreviacion" />
                         <p:inputText id="abreviacion" value="#{variableController.selected.abreviacion}" title="#{bundle.CreateVariableTitle_abreviacion}" required="true" requiredMessage="#{bundle.CreateVariableRequiredMessage_abreviacion}"/>
                         <p:outputLabel value="#{bundle.CreateVariableLabel_tipoDeValoracion}" for="tipoDeValoracion" />
-                        <p:inputText id="tipoDeValoracion" value="#{variableController.selected.tipoDeValoracion}" title="#{bundle.CreateVariableTitle_tipoDeValoracion}" />
+                        <p:selectOneMenu id="tipoDeValoracion" value="#{variableController.selected.tipoDeValoracion}" required="true" requiredMessage="#{bundle.CreateVariableRequiredMessage_tipoDeValoracion}">
+                            <f:selectItems value="#{tipoDeValoracionController.tipoDeValoracionValues}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{variableController.create}" value="#{bundle.Save}" update="display,:VariableListForm:datalist,:growl" oncomplete="handleSubmit(args,'VariableCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VariableCreateDialog.hide()"/>

@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInsumoTitle_tipoDeAplicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoDeAplicacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInsumoTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>

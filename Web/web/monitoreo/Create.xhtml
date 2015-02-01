@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.CreateMonitoreoLabel_numeroDeMonitoreo}" for="numeroDeMonitoreo" />
                         <p:inputText id="numeroDeMonitoreo" value="#{monitoreoController.selected.numeroDeMonitoreo}" title="#{bundle.CreateMonitoreoTitle_numeroDeMonitoreo}" />
                         <p:outputLabel value="#{bundle.CreateMonitoreoLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{monitoreoController.selected.fecha}" title="#{bundle.EditMonitoreoTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{monitoreoController.selected.fecha}" title="#{bundle.EditMonitoreoTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoreoRequiredMessage_fecha}" showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitoreoController.create}" value="#{bundle.Save}" update="display,:MonitoreoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitoreoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoCreateDialog.hide()"/>

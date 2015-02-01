@@ -25,25 +25,25 @@ public class PropertiesGenerator {
      */
     public static void main(String[] args) {
 
-        generarPropiedades(Lote.class);
-        generarPropiedades(Modulo.class);
-        generarPropiedades(Persona.class);
-        generarPropiedades(Rol.class);
-        generarPropiedades(RolPersona.class);
-        generarPropiedades(Aplicacion.class);
+//        generarPropiedades(Lote.class);
+//        generarPropiedades(Modulo.class);
+//        generarPropiedades(Persona.class);
+//        generarPropiedades(Rol.class);
+//        generarPropiedades(RolPersona.class);
+//        generarPropiedades(Aplicacion.class);
         generarPropiedades(Insumo.class);
-        generarPropiedades(Labor.class);
-        generarPropiedades(Trabajo.class);
-        generarPropiedades(Monitoreo.class);
-        generarPropiedades(MonitoreoDeVariables.class);
-        generarPropiedades(TrampaDeInsectos.class);
-        generarPropiedades(Variable.class);
-        generarPropiedades(Recoleccion.class);
-        generarPropiedades(Nota.class);
-        generarPropiedades(HumedadDelSuelo.class);
-        generarPropiedades(Lluvia.class);
-        generarPropiedades(Temperatura.class);
-        generarPropiedades(Termometro.class);
+//        generarPropiedades(Labor.class);
+//        generarPropiedades(Trabajo.class);
+//        generarPropiedades(Monitoreo.class);
+//        generarPropiedades(MonitoreoDeVariables.class);
+//        generarPropiedades(TrampaDeInsectos.class);
+//        generarPropiedades(Variable.class);
+//        generarPropiedades(Recoleccion.class);
+//        generarPropiedades(Nota.class);
+//        generarPropiedades(HumedadDelSuelo.class);
+//        generarPropiedades(Lluvia.class);
+//        generarPropiedades(Temperatura.class);
+//        generarPropiedades(Termometro.class);
     }
 
     private static String g(String campo) {

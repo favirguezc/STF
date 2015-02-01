@@ -16,7 +16,7 @@
                         <h:outputText value="#{monitoreoController.selected.numeroDeMonitoreo}" title="#{bundle.ViewMonitoreoTitle_numeroDeMonitoreo}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoLabel_fecha}"/>
                         <h:outputText value="#{monitoreoController.selected.fecha}" title="#{bundle.ViewMonitoreoTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MonitoreoViewDialog.hide()"/>

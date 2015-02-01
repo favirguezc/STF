@@ -7,7 +7,6 @@ package modelo.produccion.monitoreo;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +20,7 @@ import modelo.produccion.administracion.Modulo;
  */
 @Entity
 public class MonitoreoDeVariables implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
@@ -30,17 +30,20 @@ public class MonitoreoDeVariables implements Serializable {
     private Modulo modulo;
     @ManyToOne(optional = false)
     private Variable variable;
-    @Embedded
-    private Valoracion valor;
+    private int conteo;
+    private String relacion;
+    private Riesgo riesgo;    
 
-    public MonitoreoDeVariables() {
+    public MonitoreoDeVariables() {        
     }
 
-    public MonitoreoDeVariables(Monitoreo monitoreo, Modulo modulo, Variable variable, Valoracion valor) {
+    public MonitoreoDeVariables(Monitoreo monitoreo, Modulo modulo, Variable variable, int conteo, String relacion, Riesgo riesgo) {
         this.monitoreo = monitoreo;
         this.modulo = modulo;
         this.variable = variable;
-        this.valor = valor;
+        this.conteo = conteo;
+        this.relacion = relacion;
+        this.riesgo = riesgo;
     }
 
     public long getId() {
@@ -75,22 +78,40 @@ public class MonitoreoDeVariables implements Serializable {
         this.variable = variable;
     }
 
-    public Valoracion getValor() {
-        return valor;
+    public int getConteo() {
+        return conteo;
     }
 
-    public void setValor(Valoracion valor) {
-        this.valor = valor;
+    public void setConteo(int conteo) {
+        this.conteo = conteo;
+    }
+
+    public String getRelacion() {
+        return relacion;
+    }
+
+    public void setRelacion(String relacion) {
+        this.relacion = relacion;
+    }
+
+    public Riesgo getRiesgo() {
+        return riesgo;
+    }
+
+    public void setRiesgo(Riesgo riesgo) {
+        this.riesgo = riesgo;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.monitoreo);
-        hash = 79 * hash + Objects.hashCode(this.modulo);
-        hash = 79 * hash + Objects.hashCode(this.variable);
-        hash = 79 * hash + Objects.hashCode(this.valor);
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.monitoreo);
+        hash = 97 * hash + Objects.hashCode(this.modulo);
+        hash = 97 * hash + Objects.hashCode(this.variable);
+        hash = 97 * hash + this.conteo;
+        hash = 97 * hash + Objects.hashCode(this.relacion);
+        hash = 97 * hash + Objects.hashCode(this.riesgo);
         return hash;
     }
 
@@ -115,10 +136,16 @@ public class MonitoreoDeVariables implements Serializable {
         if (!Objects.equals(this.variable, other.variable)) {
             return false;
         }
-        if (!Objects.equals(this.valor, other.valor)) {
+        if (this.conteo != other.conteo) {
+            return false;
+        }
+        if (!Objects.equals(this.relacion, other.relacion)) {
+            return false;
+        }
+        if (this.riesgo != other.riesgo) {
             return false;
         }
         return true;
     }
-    
+
 }

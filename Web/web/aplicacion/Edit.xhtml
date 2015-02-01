@@ -12,8 +12,6 @@
             <h:form id="AplicacionEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aplicacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditAplicacionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{aplicacionController.selected.id}" title="#{bundle.EditAplicacionTitle_id}" />
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_tipo}" for="tipo" />
                         <p:inputText id="tipo" value="#{aplicacionController.selected.tipo}" title="#{bundle.EditAplicacionTitle_tipo}" />
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_modulo}" for="modulo" />
@@ -24,9 +22,9 @@
                                            itemValue="#{moduloItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_fechaDeAutorizacion}" for="fechaDeAutorizacion" />
-                        <p:calendar id="fechaDeAutorizacion" pattern="MM/dd/yyyy" value="#{aplicacionController.selected.fechaDeAutorizacion}" title="#{bundle.EditAplicacionTitle_fechaDeAutorizacion}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_fechaDeAutorizacion}" showOn="button"/>
+                        <p:calendar id="fechaDeAutorizacion" pattern="dd/MM/yyyy" value="#{aplicacionController.selected.fechaDeAutorizacion}" title="#{bundle.EditAplicacionTitle_fechaDeAutorizacion}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_fechaDeAutorizacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_fechaDeAplicacion}" for="fechaDeAplicacion" />
-                        <p:calendar id="fechaDeAplicacion" pattern="MM/dd/yyyy" value="#{aplicacionController.selected.fechaDeAplicacion}" title="#{bundle.EditAplicacionTitle_fechaDeAplicacion}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_fechaDeAplicacion}" showOn="button"/>
+                        <p:calendar id="fechaDeAplicacion" pattern="dd/MM/yyyy" value="#{aplicacionController.selected.fechaDeAplicacion}" title="#{bundle.EditAplicacionTitle_fechaDeAplicacion}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_fechaDeAplicacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_producto}" for="producto" />
                         <p:selectOneMenu id="producto" value="#{aplicacionController.selected.producto}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_producto}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -36,7 +34,6 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_motivo1}" for="motivo1" />
                         <p:selectOneMenu id="motivo1" value="#{aplicacionController.selected.motivo1}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_motivo1}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{variableController.itemsAvailableSelectOne}"
                                            var="motivo1Item"
                                            itemValue="#{motivo1Item}"/>
@@ -60,7 +57,9 @@
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_litrosDeAgua}" for="litrosDeAgua" />
                         <p:inputText id="litrosDeAgua" value="#{aplicacionController.selected.litrosDeAgua}" title="#{bundle.EditAplicacionTitle_litrosDeAgua}" />
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_metodo}" for="metodo" />
-                        <p:inputText id="metodo" value="#{aplicacionController.selected.metodo}" title="#{bundle.EditAplicacionTitle_metodo}" />
+                        <p:selectOneMenu id="metodo" value="#{aplicacionController.selected.metodo}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_metodo}">
+                            <f:selectItems value="#{metodoDeAplicacionController.metodoDeAplicacionValues}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAplicacionLabel_responsable}" for="responsable" />
                         <p:selectOneMenu id="responsable" value="#{aplicacionController.selected.responsable}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_responsable}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

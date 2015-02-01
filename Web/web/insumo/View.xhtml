@@ -12,6 +12,8 @@
             <h:form id="InsumoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{insumoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInsumoLabel_tipoDeAplicacion}"/>
+                        <h:outputText value="#{insumoController.selected.tipoDeAplicacion}" title="#{bundle.ViewInsumoTitle_tipoDeAplicacion}"/>
                         <h:outputText value="#{bundle.ViewInsumoLabel_nombre}"/>
                         <h:outputText value="#{insumoController.selected.nombre}" title="#{bundle.ViewInsumoTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewInsumoLabel_ingredienteActivo}"/>

@@ -12,19 +12,17 @@
             <h:form id="AplicacionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aplicacionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewAplicacionLabel_id}"/>
-                        <h:outputText value="#{aplicacionController.selected.id}" title="#{bundle.ViewAplicacionTitle_id}"/>
                         <h:outputText value="#{bundle.ViewAplicacionLabel_tipo}"/>
                         <h:outputText value="#{aplicacionController.selected.tipo}" title="#{bundle.ViewAplicacionTitle_tipo}"/>
                         <h:outputText value="#{bundle.ViewAplicacionLabel_modulo}"/>
                         <h:outputText value="#{aplicacionController.selected.modulo}" title="#{bundle.ViewAplicacionTitle_modulo}"/>
                         <h:outputText value="#{bundle.ViewAplicacionLabel_fechaDeAutorizacion}"/>
                         <h:outputText value="#{aplicacionController.selected.fechaDeAutorizacion}" title="#{bundle.ViewAplicacionTitle_fechaDeAutorizacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewAplicacionLabel_fechaDeAplicacion}"/>
                         <h:outputText value="#{aplicacionController.selected.fechaDeAplicacion}" title="#{bundle.ViewAplicacionTitle_fechaDeAplicacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewAplicacionLabel_producto}"/>
                         <h:outputText value="#{aplicacionController.selected.producto}" title="#{bundle.ViewAplicacionTitle_producto}"/>

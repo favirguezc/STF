@@ -17,7 +17,8 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{monitoreoController.itemsAvailableSelectOne}"
                                            var="monitoreoItem"
-                                           itemValue="#{monitoreoItem}"/>
+                                           itemValue="#{monitoreoItem}"
+                                           itemLabel="#{monitoreoItem.numeroDeMonitoreo}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_modulo}" for="modulo" />
                         <p:selectOneMenu id="modulo" value="#{monitoreoDeVariablesController.selected.modulo}" required="true" requiredMessage="#{bundle.EditMonitoreoDeVariablesRequiredMessage_modulo}">

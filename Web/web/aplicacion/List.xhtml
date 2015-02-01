@@ -36,14 +36,14 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_modulo}"/>
                         </f:facet>
-                        <h:outputText value="#{item.modulo}"/>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_fechaDeAutorizacion}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaDeAutorizacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
@@ -51,32 +51,50 @@
                             <h:outputText value="#{bundle.ListAplicacionTitle_fechaDeAplicacion}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaDeAplicacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_producto}"/>
                         </f:facet>
-                        <h:outputText value="#{item.producto}"/>
+                        <h:outputText value="#{item.producto.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListInsumoTitle_ingredienteActivo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.producto.ingredienteActivo}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_motivo1}"/>
                         </f:facet>
-                        <h:outputText value="#{item.motivo1}"/>
+                        <h:outputText value="#{item.motivo1.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_motivo2}"/>
                         </f:facet>
-                        <h:outputText value="#{item.motivo2}"/>
+                        <h:outputText value="#{item.motivo2.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_motivo3}"/>
                         </f:facet>
-                        <h:outputText value="#{item.motivo3}"/>
+                        <h:outputText value="#{item.motivo3.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListInsumoTitle_pc}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.producto.pc}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListInsumoTitle_tr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.producto.tr}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -100,13 +118,13 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_responsable}"/>
                         </f:facet>
-                        <h:outputText value="#{item.responsable}"/>
+                        <h:outputText value="#{item.responsable.nombre} #{item.responsable.apellido}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListAplicacionTitle_autoriza}"/>
                         </f:facet>
-                        <h:outputText value="#{item.autoriza}"/>
+                        <h:outputText value="#{item.autoriza.nombre} #{item.autoriza.apellido}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

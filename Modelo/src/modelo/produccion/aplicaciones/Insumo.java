@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ public class Insumo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
+    @Enumerated(EnumType.STRING)
+    private TipoDeAplicacion tipoDeAplicacion;
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
@@ -25,7 +29,8 @@ public class Insumo implements Serializable {
     public Insumo() {
     }
 
-    public Insumo(String nombre, String ingredienteActivo, Unidades unidades, float pc, float tr) {
+    public Insumo(TipoDeAplicacion tipoDeAplicacion, String nombre, String ingredienteActivo, Unidades unidades, float pc, float tr) {
+        this.tipoDeAplicacion = tipoDeAplicacion;
         this.nombre = nombre;
         this.ingredienteActivo = ingredienteActivo;
         this.unidades = unidades;
@@ -39,6 +44,14 @@ public class Insumo implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public TipoDeAplicacion getTipoDeAplicacion() {
+        return tipoDeAplicacion;
+    }
+
+    public void setTipoDeAplicacion(TipoDeAplicacion tipoDeAplicacion) {
+        this.tipoDeAplicacion = tipoDeAplicacion;
     }
 
     public String getNombre() {

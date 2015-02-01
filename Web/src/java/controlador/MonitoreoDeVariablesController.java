@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
+import modelo.produccion.monitoreo.TipoDeValoracion;
 
 @ManagedBean(name = "monitoreoDeVariablesController")
 @SessionScoped
@@ -25,8 +26,28 @@ public class MonitoreoDeVariablesController implements Serializable {
     private MonitoreoDeVariablesJpaController jpaController = null;
     private List<MonitoreoDeVariables> items = null;
     private MonitoreoDeVariables selected;
+    public boolean b1, b2, b3;
 
     public MonitoreoDeVariablesController() {
+        b1 = b2 = b3 = true;
+    }
+
+    public boolean isB1() {
+        return b1;
+    }
+
+    public boolean isB2() {
+        return b2;
+    }
+
+    public boolean isB3() {
+        return b3;
+    }
+
+    public void valor() {
+        b1 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.RELACION;
+        b2 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.CONTEO;
+        b3 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.RIESGO;
     }
 
     public MonitoreoDeVariables getSelected() {

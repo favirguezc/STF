@@ -17,7 +17,9 @@
                         <p:outputLabel value="#{bundle.EditVariableLabel_abreviacion}" for="abreviacion" />
                         <p:inputText id="abreviacion" value="#{variableController.selected.abreviacion}" title="#{bundle.EditVariableTitle_abreviacion}" required="true" requiredMessage="#{bundle.EditVariableRequiredMessage_abreviacion}"/>
                         <p:outputLabel value="#{bundle.EditVariableLabel_tipoDeValoracion}" for="tipoDeValoracion" />
-                        <p:inputText id="tipoDeValoracion" value="#{variableController.selected.tipoDeValoracion}" title="#{bundle.EditVariableTitle_tipoDeValoracion}" />
+                        <p:selectOneMenu id="tipoDeValoracion" value="#{variableController.selected.tipoDeValoracion}" required="true" requiredMessage="#{bundle.EditVariableRequiredMessage_tipoDeValoracion}">
+                            <f:selectItems value="#{tipoDeValoracionController.tipoDeValoracionValues}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{variableController.update}" value="#{bundle.Save}" update="display,:VariableListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VariableEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VariableEditDialog.hide()"/>

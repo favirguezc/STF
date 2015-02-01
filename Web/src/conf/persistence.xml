@@ -21,6 +21,7 @@
     <class>modelo.produccion.variablesClimaticas.Lluvia</class>
     <class>modelo.produccion.variablesClimaticas.Temperatura</class>
     <class>modelo.produccion.variablesClimaticas.Termometro</class>
+    <class>modelo.finanzas.ventas.Venta</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>

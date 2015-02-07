@@ -133,10 +133,10 @@ public class RolPersonaDAO implements Serializable {
         }
     }
 
-    public List<RolPersona> findPersonaEntities(Rol rol) {
+    public List<Persona> findPersonaEntities(Rol rol) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<RolPersona> query = em.createQuery("SELECT t FROM RolPersona t WHERE t.rol = :r", RolPersona.class);
+            TypedQuery<Persona> query = em.createQuery("SELECT t.persona FROM RolPersona t WHERE t.rol = :r", Persona.class);
             query.setParameter("r", rol);
             return query.getResultList();
         } finally {
@@ -144,10 +144,10 @@ public class RolPersonaDAO implements Serializable {
         }
     }
 
-    public List<RolPersona> findRolEntities(Persona persona) {
+    public List<Rol> findRolEntities(Persona persona) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<RolPersona> query = em.createQuery("SELECT t FROM RolPersona t WHERE t.persona = :p", RolPersona.class);
+            TypedQuery<Rol> query = em.createQuery("SELECT t.rol FROM RolPersona t WHERE t.persona = :p", Rol.class);
             query.setParameter("p", persona);
             return query.getResultList();
         } finally {

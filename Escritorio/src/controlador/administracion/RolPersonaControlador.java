@@ -8,7 +8,6 @@ package controlador.administracion;
 import dao.administracion.RolPersonaDAO;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.EntityManagerFactorySingleton;
-import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.administracion.Persona;
@@ -32,10 +31,6 @@ public class RolPersonaControlador {
         return new RolPersona(persona, rol);
     }
 
-    public RolPersona nuevo(Persona persona, Rol rol, String contraseña) {
-        return new RolPersona(persona, rol, contraseña);
-    }
-
     public void guardar(RolPersona rolpersona) {
         dao.create(rolpersona);
     }
@@ -49,21 +44,11 @@ public class RolPersonaControlador {
     }
 
     public List<Persona> leerLista(Rol rol) {
-        List<RolPersona> findPersonaEntities = dao.findPersonaEntities(rol);
-        List<Persona> lista = new LinkedList<>();
-        for (RolPersona rp : findPersonaEntities) {
-            lista.add(rp.getPersona());
-        }
-        return lista;
+        return dao.findPersonaEntities(rol);
     }
 
     public List<Rol> leerLista(Persona persona) {
-        List<RolPersona> findRolEntities = dao.findRolEntities(persona);
-        List<Rol> lista = new LinkedList<>();
-        for (RolPersona rp : findRolEntities) {
-            lista.add(rp.getRol());
-        }
-        return lista;
+        return dao.findRolEntities(persona);
     }
 
     public void eliminar(long id) throws NonexistentEntityException {
@@ -96,28 +81,6 @@ public class RolPersonaControlador {
             if (rp2 != null) {
                 JOptionPane.showMessageDialog(null, "El registro ya está en la base de datos.", "Registro duplicado", JOptionPane.INFORMATION_MESSAGE);
                 return false;
-            }
-        }
-        if (rp.getRol().isContrasenaNecesaria()) {
-            switch (Validador.validarContraseña(rp.getContrasena(), 4, 8, true, true, true)) {
-                case Validador.CONTRASEÑA_MUY_CORTA:
-                    JOptionPane.showMessageDialog(null, "La contraseña es muy corta. La longitud mínima es " + 4 + ".", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
-                case Validador.CONTRASEÑA_MUY_LARGA:
-                    JOptionPane.showMessageDialog(null, "La contraseña es muy larga. La longitud máxima es " + 8 + ".", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
-                case Validador.CONTRASEÑA_SIN_MAYUSCULAS:
-                    JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos una letra mayúscula.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
-                case Validador.CONTRASEÑA_SIN_MINUSCULAS:
-                    JOptionPane.showMessageDialog(null, "La contraseña debe contener la menos una letra minúscula.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
-                case Validador.CONTRASEÑA_SIN_NUMERO:
-                    JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un número.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
-                case Validador.CONTRASEÑA_VACIA:
-                    JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
-                    return false;
             }
         }
         return true;

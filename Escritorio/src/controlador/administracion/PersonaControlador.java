@@ -14,6 +14,7 @@ import modelo.produccion.administracion.GrupoSanguineo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.RH;
 import modelo.produccion.administracion.Sexo;
+import util.Validador;
 
 /**
  *
@@ -27,8 +28,8 @@ public class PersonaControlador {
         dao = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, Sexo sexo, long telefono, GrupoSanguineo gs, RH rh) {
-        return new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, gs, rh);
+    public Persona nuevo(String nombre, String nombre2, String apellido, String apellido2, long cedula, String contrasena, Sexo sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
+        return new Persona(nombre, nombre2, apellido, apellido2, cedula, contrasena, sexo, telefono, grupoSanguineo, rh);
     }
 
     public Persona buscar(long id) throws Exception {
@@ -81,7 +82,26 @@ public class PersonaControlador {
             }
         } catch (Exception e) {
         }
-
+        switch (Validador.validarContraseña(nuevo.getContrasena(), 4, 8, true, true, true)) {
+                case Validador.CONTRASEÑA_MUY_CORTA:
+                    JOptionPane.showMessageDialog(null, "La contraseña es muy corta. La longitud mínima es " + 4 + ".", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+                case Validador.CONTRASEÑA_MUY_LARGA:
+                    JOptionPane.showMessageDialog(null, "La contraseña es muy larga. La longitud máxima es " + 8 + ".", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+                case Validador.CONTRASEÑA_SIN_MAYUSCULAS:
+                    JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos una letra mayúscula.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+                case Validador.CONTRASEÑA_SIN_MINUSCULAS:
+                    JOptionPane.showMessageDialog(null, "La contraseña debe contener la menos una letra minúscula.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+                case Validador.CONTRASEÑA_SIN_NUMERO:
+                    JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un número.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+                case Validador.CONTRASEÑA_VACIA:
+                    JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                    return false;
+            }
         return true;
     }
 }

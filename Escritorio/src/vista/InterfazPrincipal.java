@@ -25,7 +25,6 @@ import vista.graficas.RecoleccionAnualPorMesIF;
 import vista.graficas.RecoleccionAnualPorLoteIF;
 import vista.administracion.PersonaIF;
 import vista.administracion.LoteIF;
-import controlador.administracion.RolControlador;
 import controlador.produccion.LaborControlador;
 import dao.util.EntityManagerFactorySingleton;
 import java.beans.PropertyVetoException;
@@ -70,11 +69,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         splash.set("Comprobando registros", 50, 100);
-        new RolControlador().comprobarRegistros();
-        splash.set("Comprobando registros", 70, 100);
         new LaborControlador().comprobarRegistros();
-        splash.set("Inicializando componentes", 100, 100);
+        splash.set("Inicializando componentes", 70, 100);
         InterfazPrincipal interfazPrincipal = new InterfazPrincipal();
+        splash.set("Terminado", 100, 100);
         splash.dispose();
         interfazPrincipal.setVisible(true);
     }

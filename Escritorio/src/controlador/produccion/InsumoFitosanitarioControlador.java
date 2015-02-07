@@ -11,6 +11,7 @@ import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.aplicaciones.Insumo;
+import modelo.produccion.aplicaciones.TipoDeAplicacion;
 import modelo.produccion.aplicaciones.Unidades;
 
 /**
@@ -25,8 +26,8 @@ public class InsumoFitosanitarioControlador {
         dao = new InsumoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Insumo nuevo(String nombre, String ingredienteActivo, Unidades unidades) {
-        return new Insumo(nombre, ingredienteActivo, unidades);
+    public Insumo nuevo(TipoDeAplicacion tipoDeAplicacion, String nombre, String ingredienteActivo, Unidades unidades, float pc, float tr) {
+        return new Insumo(tipoDeAplicacion, nombre, ingredienteActivo, unidades, pc, tr);
     }
 
     public Insumo buscar(long id) throws Exception {

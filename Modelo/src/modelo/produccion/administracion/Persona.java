@@ -22,8 +22,10 @@ public class Persona implements Serializable {
     @Column(nullable = false)
     private String apellido;
     private String apellido2;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private long cedula;
+    @Column(nullable = false)
+    private String contrasena;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
@@ -37,12 +39,13 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, Sexo sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
+    public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, String contrasena, Sexo sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
         this.nombre = nombre;
         this.nombre2 = nombre2;
         this.apellido = apellido;
         this.apellido2 = apellido2;
         this.cedula = cedula;
+        this.contrasena = contrasena;
         this.sexo = sexo;
         this.telefono = telefono;
         this.grupoSanguineo = grupoSanguineo;
@@ -95,6 +98,14 @@ public class Persona implements Serializable {
 
     public void setCedula(long cedula) {
         this.cedula = cedula;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public Sexo getSexo() {
@@ -173,6 +184,9 @@ public class Persona implements Serializable {
         if (this.cedula != other.cedula) {
             return false;
         }
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
         if (this.sexo != other.sexo) {
             return false;
         }
@@ -187,5 +201,5 @@ public class Persona implements Serializable {
         }
         return true;
     }
-    
+
 }

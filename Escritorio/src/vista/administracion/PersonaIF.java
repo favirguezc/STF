@@ -6,7 +6,6 @@
 package vista.administracion;
 
 import controlador.administracion.PersonaControlador;
-import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -36,13 +35,11 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private Persona registroSeleccionado = null;
     private RolPersona rolPersonaSeleccionado = null;
     private DefaultListModel listModel;
-    private RolControlador controladorRol;
     private RolPersonaControlador controladorRolPersona;
 
     public PersonaIF() {
         initComponents();
         controlador = new PersonaControlador();
-        controladorRol = new RolControlador();
         controladorRolPersona = new RolPersonaControlador();
         listModel = new DefaultListModel();
         rolesList.setModel(listModel);
@@ -98,8 +95,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         guardarRolPersonaButton = new javax.swing.JButton();
         eliminarRolPersonaButton = new javax.swing.JButton();
         rolesComboBox = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
-        contraseñaTextField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         editarRolPersonaButton = new javax.swing.JButton();
         nuevoRolPersonaButton = new javax.swing.JButton();
@@ -376,8 +371,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
         rolesComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel10.setText("Contraseña");
-
         jLabel11.setText("Rol");
 
         editarRolPersonaButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -410,13 +403,9 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(rolPanelLayout.createSequentialGroup()
-                        .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10))
-                        .addGap(34, 34, 34)
-                        .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel11)
+                        .addGap(75, 75, 75)
+                        .addComponent(rolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -431,17 +420,12 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             .addGroup(rolPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nuevoRolPersonaButton)
                     .addGroup(rolPanelLayout.createSequentialGroup()
-                        .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nuevoRolPersonaButton)
-                            .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11)))
-                        .addGap(18, 18, 18)
                         .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(contraseñaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                            .addComponent(rolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(rolPanelLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
@@ -450,7 +434,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                         .addComponent(eliminarRolPersonaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(guardarRolPersonaButton)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Roles", rolPanel);
@@ -542,12 +526,13 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         String apellido = apellido1TextField.getText();
         String apellido2 = apellido2TextField.getText();
         long cedula = cedulaLongField.getLong();
+        String contraseña = contraseñaTextField.getText();
         Sexo sexo = (Sexo) sexoComboBox.getSelectedItem();
         long telefono = telefonoLongField.getLong();
         GrupoSanguineo grupo = (GrupoSanguineo) gsComboBox.getSelectedItem();
         RH rh = (RH) rhComboBox.getSelectedItem();
         if (nuevo) {
-            registroSeleccionado = new Persona(nombre, nombre2, apellido, apellido2, cedula, sexo, telefono, grupo, rh);
+            registroSeleccionado = new Persona(nombre, nombre2, apellido, apellido2, cedula,contraseña, sexo, telefono, grupo, rh);
         } else {
             registroSeleccionado.setNombre(nombre);
             registroSeleccionado.setNombre2(nombre2);
@@ -586,7 +571,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             RolPersona nuevo = controladorRolPersona.nuevo(registroSeleccionado, rol, contraseñaTextField.getText());
             if (controladorRolPersona.validar(nuevo, true)) {
                 controladorRolPersona.guardar(nuevo);
-                contraseñaTextField.setText(null);
                 rolesComboBox.setSelectedIndex(0);
                 guardarRolPersonaButton.setEnabled(false);
             }
@@ -690,7 +674,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private util.NameField apellido1TextField;
     private util.NameField apellido2TextField;
     private util.LongField cedulaLongField;
-    private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton editarRolPersonaButton;
@@ -700,7 +683,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JButton guardarButton;
     private javax.swing.JButton guardarRolPersonaButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

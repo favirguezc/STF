@@ -48,7 +48,7 @@ public class LaborControlador {
     }
 
     public void comprobarRegistros() {
-        String[] roles = {
+        String[] labores = {
             "Aplicación Agroquímicos",
             "Aplicación de herbicidas pre-siembra",
             "Arrancada de plantas",
@@ -78,14 +78,14 @@ public class LaborControlador {
             "Subida plástico",
             "Sunchar"
         };
-        for (int i = 0; i < roles.length; i++) {
+        for (String labor : labores) {
             try {
-                if (buscar(roles[i]) == null) {
-                    guardar(nuevo(roles[i], null));
+                if (buscar(labor) == null) {
+                    guardar(nuevo(labor, null));
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                guardar(nuevo(roles[i], null));
+                guardar(nuevo(labor, null));
             }
         }
     }

@@ -3,6 +3,8 @@ package modelo.produccion.administracion;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +22,8 @@ public class RolPersona implements Serializable {
     private long id;
     @ManyToOne(optional = false)
     private Persona persona;
-    @ManyToOne(optional = false)
+    @Enumerated(EnumType.STRING)
     private Rol rol;
-    
-    private String contrasena;
 
     public RolPersona() {
     }
@@ -31,13 +31,6 @@ public class RolPersona implements Serializable {
     public RolPersona(Persona persona, Rol rol) {
         this.persona = persona;
         this.rol = rol;
-        this.contrasena = null;
-    }
-
-    public RolPersona(Persona persona, Rol rol, String contraseña) {
-        this.persona = persona;
-        this.rol = rol;
-        this.contrasena = contraseña;
     }
 
     public long getId() {
@@ -64,21 +57,12 @@ public class RolPersona implements Serializable {
         this.rol = rol;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 97 * hash + Objects.hashCode(this.persona);
         hash = 97 * hash + Objects.hashCode(this.rol);
-        hash = 97 * hash + Objects.hashCode(this.contrasena);
         return hash;
     }
 
@@ -98,9 +82,6 @@ public class RolPersona implements Serializable {
             return false;
         }
         if (!Objects.equals(this.rol, other.rol)) {
-            return false;
-        }
-        if (!Objects.equals(this.contrasena, other.contrasena)) {
             return false;
         }
         return true;

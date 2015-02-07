@@ -2,10 +2,10 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="WebPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modelo.finanzas.ventas.Venta</class>
     <class>modelo.produccion.administracion.Lote</class>
     <class>modelo.produccion.administracion.Modulo</class>
     <class>modelo.produccion.administracion.Persona</class>
-    <class>modelo.produccion.administracion.Rol</class>
     <class>modelo.produccion.administracion.RolPersona</class>
     <class>modelo.produccion.aplicaciones.Aplicacion</class>
     <class>modelo.produccion.aplicaciones.Insumo</class>
@@ -21,7 +21,6 @@
     <class>modelo.produccion.variablesClimaticas.Lluvia</class>
     <class>modelo.produccion.variablesClimaticas.Temperatura</class>
     <class>modelo.produccion.variablesClimaticas.Termometro</class>
-    <class>modelo.finanzas.ventas.Venta</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>

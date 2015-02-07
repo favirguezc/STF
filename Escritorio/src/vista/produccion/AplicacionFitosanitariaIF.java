@@ -8,7 +8,7 @@ package vista.produccion;
 import controlador.administracion.LoteControlador;
 import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
-import controlador.produccion.AplicacionFitosanitariaControlador;
+import controlador.produccion.AplicacionControlador;
 import controlador.produccion.InsumoFitosanitarioControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Calendar;
@@ -34,14 +34,14 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     /**
      * Creates new form AplicacionFitosanitariaIF
      */
-    private AplicacionFitosanitariaControlador controlador;
+    private AplicacionControlador controlador;
     private Aplicacion registroSeleccionado;
     private List<Aplicacion> lista;
     private boolean habilitado = false;
 
     public AplicacionFitosanitariaIF() {
         initComponents();
-        controlador = new AplicacionFitosanitariaControlador();
+        controlador = new AplicacionControlador();
         registroSeleccionado = null;
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(new Date());

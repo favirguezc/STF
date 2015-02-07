@@ -36,13 +36,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRolPersonaTitle_rol}"/>
                         </f:facet>
-                        <h:outputText value="#{item.rol.nombre}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListRolPersonaTitle_contrasena}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.contrasena==''}" converter="#{SiNoConverter}"/>
+                        <h:outputText value="#{item.rol}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolPersonaController.prepareCreate}" update=":RolPersonaCreateForm" oncomplete="PF('RolPersonaCreateDialog').show()"/>

@@ -22,12 +22,10 @@
                         <p:outputLabel value="#{bundle.EditRolPersonaLabel_rol}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{rolPersonaController.selected.rol}" required="true" requiredMessage="#{bundle.EditRolPersonaRequiredMessage_rol}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{rolController.rolValues}"
                                            var="rolItem"
                                            itemValue="#{rolItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditRolPersonaLabel_contrasena}" for="contrasena" />
-                        <p:password id="contrasena" value="#{rolPersonaController.selected.contrasena}" feedback="true"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{rolPersonaController.update}" value="#{bundle.Save}" update="display,:RolPersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolPersonaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RolPersonaEditDialog.hide()"/>

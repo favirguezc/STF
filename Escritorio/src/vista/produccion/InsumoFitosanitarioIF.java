@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.produccion.aplicaciones.Insumo;
+import modelo.produccion.aplicaciones.TipoDeAplicacion;
 import modelo.produccion.aplicaciones.Unidades;
 import util.TableColumnAdjuster;
 
@@ -31,6 +32,8 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         initComponents();
         controlador = new InsumoFitosanitarioControlador();
         guardar(false);
+        cargarListaUnidades();
+        cargarListaTipos();
         cargarLista();
     }
 
@@ -50,6 +53,12 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         unidadesComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        tipoComboBox = new javax.swing.JComboBox();
+        pcFloatField = new util.FloatField();
+        trFloatField = new util.FloatField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
@@ -82,6 +91,21 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Unidades");
 
+        tipoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        pcFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        trFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Periodo De Carencia");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Tiempo de Reentrada");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Tipo");
+
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
         edicionPanelLayout.setHorizontalGroup(
@@ -91,12 +115,18 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(unidadesComboBox, 0, 150, Short.MAX_VALUE)
                     .addComponent(ingredienteTextField)
-                    .addComponent(nombreTextField))
+                    .addComponent(nombreTextField)
+                    .addComponent(pcFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tipoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -114,7 +144,19 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(unidadesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pcFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(trFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -194,14 +236,14 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Ingrediente Activo", "Unidades"
+                "Tipo", "Nombre", "Ingrediente Activo", "Unidades", "P C", "T R"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -221,13 +263,15 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,17 +353,23 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         boolean transacionRealizada = false;
         if (registroSeleccionado == null) {
             Insumo nuevo = controlador.nuevo(
+                    (TipoDeAplicacion) tipoComboBox.getSelectedItem(),
                     nombreTextField.getText(),
                     ingredienteTextField.getText(),
-                    (Unidades) unidadesComboBox.getSelectedItem());
+                    (Unidades) unidadesComboBox.getSelectedItem(),
+                    pcFloatField.getFloat(),
+                    trFloatField.getFloat());
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;
             }
         } else {
+            registroSeleccionado.setTipoDeAplicacion((TipoDeAplicacion) tipoComboBox.getSelectedItem());
             registroSeleccionado.setNombre(nombreTextField.getText());
             registroSeleccionado.setIngredienteActivo(ingredienteTextField.getText());
             registroSeleccionado.setUnidades((Unidades) unidadesComboBox.getSelectedItem());
+            registroSeleccionado.setPeriodoDeCarencia(pcFloatField.getFloat());
+            registroSeleccionado.setTiempoDeReentrada(trFloatField.getFloat());
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -342,15 +392,21 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
     private javax.swing.JButton eliminarButton;
     private javax.swing.JButton guardarButton;
     private javax.swing.JTextField ingredienteTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JButton nuevoButton;
+    private util.FloatField pcFloatField;
     private javax.swing.JTable principalTable;
+    private javax.swing.JComboBox tipoComboBox;
+    private util.FloatField trFloatField;
     private javax.swing.JComboBox unidadesComboBox;
     // End of variables declaration//GEN-END:variables
 
@@ -380,8 +436,20 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         }
         lista = controlador.leerLista();
         for (Insumo l : lista) {
-            Object[] row = {l.getNombre(), l.getIngredienteActivo(), l.getUnidades()};
+            Object[] row = {l.getTipoDeAplicacion(), l.getNombre(), l.getIngredienteActivo(), l.getUnidades(), l.getPeriodoDeCarencia(), l.getTiempoDeReentrada()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
+    }
+
+    private void cargarListaUnidades() {
+        unidadesComboBox.removeAllItems();
+        unidadesComboBox.addItem(Unidades.CC);
+        unidadesComboBox.addItem(Unidades.GR);
+    }
+
+    private void cargarListaTipos() {
+        tipoComboBox.removeAllItems();
+        tipoComboBox.addItem(TipoDeAplicacion.FERTILIZACION);
+        tipoComboBox.addItem(TipoDeAplicacion.FITOSANITARIA);
     }
 }

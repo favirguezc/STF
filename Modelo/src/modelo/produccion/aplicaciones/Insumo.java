@@ -23,8 +23,8 @@ public class Insumo implements Serializable {
     @Column(nullable = false)
     private String ingredienteActivo;
     private Unidades unidades;
-    private float pc;
-    private float tr;
+    private float periodoDeCarencia;
+    private float tiempoDeReentrada;
 
     public Insumo() {
     }
@@ -34,8 +34,8 @@ public class Insumo implements Serializable {
         this.nombre = nombre;
         this.ingredienteActivo = ingredienteActivo;
         this.unidades = unidades;
-        this.pc = pc;
-        this.tr = tr;
+        this.periodoDeCarencia = pc;
+        this.tiempoDeReentrada = tr;
     }
 
     public long getId() {
@@ -78,20 +78,20 @@ public class Insumo implements Serializable {
         this.unidades = unidades;
     }
 
-    public float getPc() {
-        return pc;
+    public float getPeriodoDeCarencia() {
+        return periodoDeCarencia;
     }
 
-    public void setPc(float pc) {
-        this.pc = pc;
+    public void setPeriodoDeCarencia(float periodoDeCarencia) {
+        this.periodoDeCarencia = periodoDeCarencia;
     }
 
-    public float getTr() {
-        return tr;
+    public float getTiempoDeReentrada() {
+        return tiempoDeReentrada;
     }
 
-    public void setTr(float tr) {
-        this.tr = tr;
+    public void setTiempoDeReentrada(float tiempoDeReentrada) {
+        this.tiempoDeReentrada = tiempoDeReentrada;
     }
 
     @Override
@@ -101,8 +101,8 @@ public class Insumo implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.nombre);
         hash = 83 * hash + Objects.hashCode(this.ingredienteActivo);
         hash = 83 * hash + Objects.hashCode(this.unidades);
-        hash = 83 * hash + Float.floatToIntBits(this.pc);
-        hash = 83 * hash + Float.floatToIntBits(this.tr);
+        hash = 83 * hash + Float.floatToIntBits(this.periodoDeCarencia);
+        hash = 83 * hash + Float.floatToIntBits(this.tiempoDeReentrada);
         return hash;
     }
 
@@ -127,10 +127,10 @@ public class Insumo implements Serializable {
         if (this.unidades != other.unidades) {
             return false;
         }
-        if (Float.floatToIntBits(this.pc) != Float.floatToIntBits(other.pc)) {
+        if (Float.floatToIntBits(this.periodoDeCarencia) != Float.floatToIntBits(other.periodoDeCarencia)) {
             return false;
         }
-        if (Float.floatToIntBits(this.tr) != Float.floatToIntBits(other.tr)) {
+        if (Float.floatToIntBits(this.tiempoDeReentrada) != Float.floatToIntBits(other.tiempoDeReentrada)) {
             return false;
         }
         return true;

@@ -6,7 +6,6 @@
 package vista.produccion;
 
 import controlador.administracion.LoteControlador;
-import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import controlador.produccion.RecoleccionControlador;
 import dao.exceptions.NonexistentEntityException;
@@ -774,12 +773,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         recolectorComboBox.removeAllItems();
         recolectorFiltroComboBox.removeAllItems();
         recolectorFiltroComboBox.addItem(null);
-        Rol rol = null;
-        try {
-            rol = new RolControlador().buscar("Recolector(a)");
-        } catch (Exception ex) {
-        }
-        for (Persona p : new RolPersonaControlador().leerLista(rol)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
             recolectorComboBox.addItem(p);
             recolectorFiltroComboBox.addItem(p);
         }

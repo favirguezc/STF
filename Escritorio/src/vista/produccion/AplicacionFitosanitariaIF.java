@@ -6,7 +6,6 @@
 package vista.produccion;
 
 import controlador.administracion.LoteControlador;
-import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import controlador.produccion.AplicacionControlador;
 import controlador.produccion.InsumoFitosanitarioControlador;
@@ -18,10 +17,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.aplicaciones.Aplicacion;
 import modelo.produccion.aplicaciones.Insumo;
+import modelo.produccion.aplicaciones.MetodoDeAplicacion;
+import modelo.produccion.aplicaciones.TipoDeAplicacion;
+import modelo.produccion.monitoreo.Variable;
 import util.DateFormatter;
 import util.TableColumnAdjuster;
 
@@ -67,6 +70,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
@@ -83,14 +87,9 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
         edicionPanel = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        fechaChooserCombo = new datechooser.beans.DateChooserCombo();
         productoComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        motivoTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         equipoTextField = new javax.swing.JTextField();
@@ -102,15 +101,9 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         observacionesTextField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        asistenteComboBox = new javax.swing.JComboBox();
-        productorComboBox = new javax.swing.JComboBox();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         cantidadFloatField = new util.FloatField();
         aguaFloatField = new util.FloatField();
         jornalesFloatField = new util.FloatField();
-        pcBooleanComboBox = new util.BooleanComboBox();
-        trBooleanComboBox = new util.BooleanComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -254,14 +247,14 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Fecha", "Producto", "Ingrediente Activo", "Motivo", "PC", "TR", "Cantidad", "L de agua", "Equipo", "Responsable", "Autorizado", "Jornales", "Observaciones", "Asistente", "Productor"
+                "Tipo", "Autorización", "Aplicación", "Producto", "Motivo 1", "Motivo 2", "Motivo 3", "Cantidad", "L de agua", "Método", "Responsable", "Autoriza", "Horas", "Observaciones", "Asistente", "Productor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Float.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -287,47 +280,69 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel14.setText("Fecha");
-
-        fechaChooserCombo.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 12));
-        fechaChooserCombo.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
-            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
-                fechaChooserComboOnSelectionChange(evt);
-            }
-        });
+        edicionPanel.setLayout(new java.awt.GridBagLayout());
 
         productoComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(42, 45, 0, 16);
+        edicionPanel.add(productoComboBox, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Producto");
-
-        motivoTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        edicionPanel.add(jLabel3, new java.awt.GridBagConstraints());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Motivo");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("PC");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("TR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel4, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Cantidad");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel7, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("L. de agua");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel8, gridBagConstraints);
 
         equipoTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 45, 0, 16);
+        edicionPanel.add(equipoTextField, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Equipo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel9, gridBagConstraints);
 
         responsableComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         responsableComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -335,145 +350,100 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 responsableComboBoxActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 45, 0, 16);
+        edicionPanel.add(responsableComboBox, gridBagConstraints);
 
         autorizadoComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 45, 0, 16);
+        edicionPanel.add(autorizadoComboBox, gridBagConstraints);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Responsable");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel10, gridBagConstraints);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Autorizado");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel11, gridBagConstraints);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Jornales");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel12, gridBagConstraints);
 
         observacionesTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 45, 18, 16);
+        edicionPanel.add(observacionesTextField, gridBagConstraints);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("Observaciones");
-
-        asistenteComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        productorComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel16.setText("Asistente Técnico");
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel17.setText("Productor");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        edicionPanel.add(jLabel15, gridBagConstraints);
 
         cantidadFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(63, 45, 0, 16);
+        edicionPanel.add(cantidadFloatField, gridBagConstraints);
 
         aguaFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 45, 0, 16);
+        edicionPanel.add(aguaFloatField, gridBagConstraints);
 
         jornalesFloatField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        pcBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        trBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
-        edicionPanel.setLayout(edicionPanelLayout);
-        edicionPanelLayout.setHorizontalGroup(
-            edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(edicionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel17))
-                .addGap(25, 25, 25)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productorComboBox, 0, 55, Short.MAX_VALUE)
-                    .addComponent(cantidadFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(aguaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(equipoTextField)
-                    .addComponent(responsableComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(autorizadoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jornalesFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(observacionesTextField)
-                    .addComponent(asistenteComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(motivoTextField)
-                    .addComponent(productoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addGroup(edicionPanelLayout.createSequentialGroup()
-                        .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pcBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(trBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        edicionPanelLayout.setVerticalGroup(
-            edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(edicionPanelLayout.createSequentialGroup()
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(motivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(pcBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(trBooleanComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cantidadFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(aguaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(equipoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(responsableComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(autorizadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(8, 8, 8)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jornalesFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(observacionesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(asistenteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(8, 45, 0, 16);
+        edicionPanel.add(jornalesFloatField, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,7 +453,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +461,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -543,22 +513,23 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        Lote lote = (Lote) loteComboBox.getSelectedItem();
-        Date fecha = fechaChooserCombo.getCurrent().getTime();
+        TipoDeAplicacion tipo = tipoComboBox.getSelectedItem();
+        Modulo modulo = moduloComboBox.getSelectedItem();
+        Date fechaAutorizacion = fechaAutorizacionChooserCombo.getCurrent().getTime();
+        Date fechaAplicacion = fechaAplicacionChooserCombo.getCurrent().getTime();
         Insumo producto = (Insumo) productoComboBox.getSelectedItem();
-        String motivo = motivoTextField.getText();
+        Variable motivo1 = motivo1TextField.getText();
+        Variable motivo2 = motivo2TextField.getText();
+        Variable motivo3 = motivo3TextField.getText();
         float cantidad = cantidadFloatField.getFloat();
         float agua = aguaFloatField.getFloat();
-        String equipo = equipoTextField.getText();
+        MetodoDeAplicacion metodo = metodoComboBox.getSelectedItem();
         Persona responsable = (Persona) responsableComboBox.getSelectedItem();
-        Persona aprobante = (Persona) autorizadoComboBox.getSelectedItem();
-        float jornales = jornalesFloatField.getFloat();
+        Persona autoriza = (Persona) autorizadoComboBox.getSelectedItem();
+        float horas = jornalesFloatField.getFloat();
         String observaciones = observacionesTextField.getText();
-        Persona asistente = (Persona) asistenteComboBox.getSelectedItem();
-        Persona productor = (Persona) productorComboBox.getSelectedItem();
-        boolean pc = pcBooleanComboBox.isSelected(), tr = trBooleanComboBox.isSelected();
         if (registroSeleccionado == null) {
-            Aplicacion nuevo = controlador.nuevo(fecha, producto, motivo, pc, tr, cantidad, agua, equipo, responsable, aprobante, jornales, observaciones, lote, asistente, productor);
+            Aplicacion nuevo = controlador.nuevo(tipo, modulo, fechaAutorizacion, fechaAplicacion, producto, motivo1, motivo2, motivo3, cantidad, agua, metodo, responsable, autoriza, horas, observaciones);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -566,19 +537,21 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
                 cargarTablaPrincipal();
             }
         } else {
+            registroSeleccionado.setTipo(tipo);
+            registroSeleccionado.setModulo(modulo);
+            registroSeleccionado.setFechaDeAplicacion(fechaAplicacion);
+            registroSeleccionado.setFechaDeAutorizacion(fechaAutorizacion);
             registroSeleccionado.setProducto(producto);
-            registroSeleccionado.setMotivo(motivo);
-            registroSeleccionado.setPc(pc);
-            registroSeleccionado.setTr(tr);
+            registroSeleccionado.setMotivo1(motivo1);
+            registroSeleccionado.setMotivo2(motivo2);
+            registroSeleccionado.setMotivo3(motivo3);
             registroSeleccionado.setCantidad(cantidad);
             registroSeleccionado.setLitrosDeAgua(agua);
-            registroSeleccionado.setEquipo(equipo);
+            registroSeleccionado.setMetodo(metodo);
             registroSeleccionado.setResponsable(responsable);
-            registroSeleccionado.setAutoriza(aprobante);
-            registroSeleccionado.setJornales(jornales);
+            registroSeleccionado.setAutoriza(autoriza);
+            registroSeleccionado.setHoras(horas);
             registroSeleccionado.setObservaciones(observaciones);
-            registroSeleccionado.setProductor(productor);
-            registroSeleccionado.setAsistente(asistente);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -606,10 +579,6 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaFinChooserComboOnSelectionChange
 
-    private void fechaChooserComboOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_fechaChooserComboOnSelectionChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechaChooserComboOnSelectionChange
-
     private void responsableComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsableComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_responsableComboBoxActionPerformed
@@ -617,14 +586,12 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private util.FloatField aguaFloatField;
-    private javax.swing.JComboBox asistenteComboBox;
     private javax.swing.JComboBox autorizadoComboBox;
     private util.FloatField cantidadFloatField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private javax.swing.JTextField equipoTextField;
-    private datechooser.beans.DateChooserCombo fechaChooserCombo;
     private datechooser.beans.DateChooserCombo fechaFinChooserCombo;
     private datechooser.beans.DateChooserCombo fechaInicioChooserCombo;
     private javax.swing.JButton guardarButton;
@@ -633,15 +600,10 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -650,15 +612,11 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private util.FloatField jornalesFloatField;
     private javax.swing.JComboBox loteComboBox;
-    private javax.swing.JTextField motivoTextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTextField observacionesTextField;
-    private util.BooleanComboBox pcBooleanComboBox;
     private javax.swing.JTable principalTable;
     private javax.swing.JComboBox productoComboBox;
-    private javax.swing.JComboBox productorComboBox;
     private javax.swing.JComboBox responsableComboBox;
-    private util.BooleanComboBox trBooleanComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTablaPrincipal() {
@@ -666,23 +624,23 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista((Lote) loteComboBox.getSelectedItem(), fechaInicioChooserCombo.getSelectedDate().getTime(), fechaFinChooserCombo.getSelectedDate().getTime());
-        for (Aplicacion mp : lista) {
+        for (Aplicacion ap : lista) {
             Object[] row = {
-                DateFormatter.formatDate(mp.getFechaDeAplicacion()),
-                mp.getProducto(),
-                mp.getProducto().getIngredienteActivo(),
-                mp.getMotivo(),
-                mp.isPc(),
-                mp.isTr(),
-                mp.getCantidad(),
-                mp.getLitrosDeAgua(),
-                mp.getEquipo(),
-                mp.getResponsable(),
-                mp.getAutoriza(),
-                mp.getJornales(),
-                mp.getObservaciones(),
-                mp.getAsistente(),
-                mp.getProductor()};
+                ap.getTipo(),
+                ap.getModulo(),
+                DateFormatter.formatDate(ap.getFechaDeAutorizacion()),
+                DateFormatter.formatDate(ap.getFechaDeAplicacion()),
+                ap.getProducto(),
+                ap.getMotivo1(),
+                ap.getMotivo2(),
+                ap.getMotivo3(),
+                ap.getCantidad(),
+                ap.getLitrosDeAgua(),
+                ap.getMetodo(),
+                ap.getResponsable(),
+                ap.getAutoriza(),
+                ap.getHoras(),
+                ap.getObservaciones()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
@@ -732,7 +690,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
             equipoTextField.setText(registroSeleccionado.getEquipo());
             responsableComboBox.setSelectedItem(registroSeleccionado.getResponsable());
             autorizadoComboBox.setSelectedItem(registroSeleccionado.getAutoriza());
-            jornalesFloatField.setText(registroSeleccionado.getJornales() + "");
+            jornalesFloatField.setText(registroSeleccionado.getHoras() + "");
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             if (registroSeleccionado.getAsistente() != null) {
                 for (int i = 0; i < asistenteComboBox.getItemCount(); i++) {
@@ -841,7 +799,7 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
     }
 
     private void revisarDatosObligatorios() {
-        if(productoComboBox.getItemCount() == 0){
+        if (productoComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "No hay registro de insumos fitosanitarios en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;

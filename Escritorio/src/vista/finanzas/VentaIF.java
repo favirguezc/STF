@@ -5,7 +5,6 @@
  */
 package vista.finanzas;
 
-import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import controlador.finanzas.VentaControlador;
 import dao.exceptions.NonexistentEntityException;
@@ -840,12 +839,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
         clienteComboBox.removeAllItems();
         filtroClienteComboBox.removeAllItems();
         filtroClienteComboBox.addItem(null);
-        Rol rol = null;
-        try {
-            rol = new RolControlador().buscar("Cliente");
-        } catch (Exception ex) {
-        }
-        for (Persona p : new RolPersonaControlador().leerLista(rol)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.CLIENTE)) {
             clienteComboBox.addItem(p);
             filtroClienteComboBox.addItem(p);
         }

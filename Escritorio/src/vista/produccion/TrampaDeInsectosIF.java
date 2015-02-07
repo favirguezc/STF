@@ -5,7 +5,6 @@
  */
 package vista.produccion;
 
-import controlador.administracion.RolControlador;
 import controlador.administracion.RolPersonaControlador;
 import controlador.produccion.TrampaDeInsectosControlador;
 import dao.exceptions.NonexistentEntityException;
@@ -58,7 +57,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         especieNameField = new util.NameField();
         observacionesTextField = new javax.swing.JTextField();
         asistenteComboBox = new javax.swing.JComboBox();
-        productorComboBox = new javax.swing.JComboBox();
         individuosLongField = new util.LongField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,7 +64,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         cambioBooleanComboBox = new util.BooleanComboBox();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
@@ -99,8 +96,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
 
         asistenteComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        productorComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         individuosLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -121,9 +116,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Asistente Técnico");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Productor");
-
         cambioBooleanComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
@@ -140,8 +132,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17))
+                            .addComponent(jLabel16))
                         .addGap(90, 90, 90)
                         .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombreNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,8 +140,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                             .addComponent(especieNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(individuosLongField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(observacionesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(asistenteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(productorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(asistenteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -188,10 +178,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(asistenteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(productorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -273,14 +259,14 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Fecha", "Nombre", "Especie", "Individuos", "Cambio de hormona", "Observaciones", "Asistente", "Productor"
+                "Fecha", "Nombre", "Especie", "Individuos", "Cambio de hormona", "Observaciones", "Asistente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -306,7 +292,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -380,9 +366,8 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         boolean cambio = cambioBooleanComboBox.isSelected();
         String observaciones = observacionesTextField.getText();
         Persona asistente = (Persona) asistenteComboBox.getSelectedItem();
-        Persona productor = (Persona) productorComboBox.getSelectedItem();
         if (registroSeleccionado == null) {
-            TrampaDeInsectos nuevo = controlador.nuevo(fecha, nombre, especie, individuos, cambio, observaciones, asistente, productor);
+            TrampaDeInsectos nuevo = controlador.nuevo(fecha, nombre, especie, individuos, cambio, observaciones, asistente);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;
@@ -395,7 +380,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setCambioDePegante(cambio);
             registroSeleccionado.setObservaciones(observaciones);
             registroSeleccionado.setAsistente(asistente);
-            registroSeleccionado.setProductor(productor);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -424,7 +408,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
     private util.LongField individuosLongField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -437,7 +420,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTextField observacionesTextField;
     private javax.swing.JTable principalTable;
-    private javax.swing.JComboBox productorComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void guardar(boolean b) {
@@ -457,7 +439,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             cambioBooleanComboBox.setSelected(true);
             observacionesTextField.setText(null);
             asistenteComboBox.setSelectedIndex(0);
-            productorComboBox.setSelectedIndex(0);
             
         } else {
             Calendar c = GregorianCalendar.getInstance();
@@ -469,7 +450,6 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
             cambioBooleanComboBox.setSelected(registroSeleccionado.isCambioDePegante());
             observacionesTextField.setText(registroSeleccionado.getObservaciones());
             asistenteComboBox.setSelectedItem(registroSeleccionado.getAsistente());
-            productorComboBox.setSelectedItem(registroSeleccionado.getProductor());
         }
     }
     
@@ -485,40 +465,21 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
                 l.getIndividuos(),
                 l.isCambioDePegante(),
                 l.getObservaciones(),
-                l.getAsistente(),
-                l.getProductor()};
+                l.getAsistente()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
     
     private void cargarListas() {
         cargarListaAsistentes();
-        cargarListaProductores();
     }
     
     private void cargarListaAsistentes() {
         asistenteComboBox.removeAllItems();
         asistenteComboBox.addItem(null);
-        Rol rol = null;
-        try {
-            rol = new RolControlador().buscar("Asistente Técnico(a)");
-        } catch (Exception ex) {
-        }
-        for (Persona p : new RolPersonaControlador().leerLista(rol)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.ASISTENTE_TECNICO)) {
             asistenteComboBox.addItem(p);
         }
     }
     
-    private void cargarListaProductores() {
-        productorComboBox.removeAllItems();
-        productorComboBox.addItem(null);
-        Rol rol = null;
-        try {
-            rol = new RolControlador().buscar("Productor(a)");
-        } catch (Exception ex) {
-        }
-        for (Persona p : new RolPersonaControlador().leerLista(rol)) {
-            productorComboBox.addItem(p);
-        }
-    }
 }

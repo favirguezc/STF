@@ -48,7 +48,7 @@ public class Aplicacion implements Serializable {
     private Persona responsable;
     @ManyToOne(optional = false)
     private Persona autoriza;
-    private float jornales;
+    private float horas;
     private String observaciones;
 
     public Aplicacion() {
@@ -68,7 +68,7 @@ public class Aplicacion implements Serializable {
         this.metodo = metodo;
         this.responsable = responsable;
         this.autoriza = autoriza;
-        this.jornales = jornales;
+        this.horas = jornales;
         this.observaciones = observaciones;
     }
 
@@ -184,12 +184,12 @@ public class Aplicacion implements Serializable {
         this.autoriza = autoriza;
     }
 
-    public float getJornales() {
-        return jornales;
+    public float getHoras() {
+        return horas;
     }
 
-    public void setJornales(float jornales) {
-        this.jornales = jornales;
+    public void setHoras(float horas) {
+        this.horas = horas;
     }
 
     public String getObservaciones() {
@@ -217,7 +217,7 @@ public class Aplicacion implements Serializable {
         hash = 43 * hash + Objects.hashCode(this.metodo);
         hash = 43 * hash + Objects.hashCode(this.responsable);
         hash = 43 * hash + Objects.hashCode(this.autoriza);
-        hash = 43 * hash + Float.floatToIntBits(this.jornales);
+        hash = 43 * hash + Float.floatToIntBits(this.horas);
         hash = 43 * hash + Objects.hashCode(this.observaciones);
         return hash;
     }
@@ -273,7 +273,7 @@ public class Aplicacion implements Serializable {
         if (!Objects.equals(this.autoriza, other.autoriza)) {
             return false;
         }
-        if (Float.floatToIntBits(this.jornales) != Float.floatToIntBits(other.jornales)) {
+        if (Float.floatToIntBits(this.horas) != Float.floatToIntBits(other.horas)) {
             return false;
         }
         if (!Objects.equals(this.observaciones, other.observaciones)) {

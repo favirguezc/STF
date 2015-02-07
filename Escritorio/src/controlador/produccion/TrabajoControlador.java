@@ -28,8 +28,8 @@ public class TrabajoControlador {
         dao = new TrabajoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Trabajo nuevo(Date fecha, Modulo modulo, Labor labor, Persona operario, float jornales, String observaciones, Persona asistente, Persona productor) {
-        return new Trabajo(fecha, modulo, labor, operario, jornales, observaciones, asistente, productor);
+    public Trabajo nuevo(Date fecha, Modulo modulo, Labor labor, Persona operario, float jornales, String observaciones, Persona asistente) {
+        return new Trabajo(fecha, modulo, labor, operario, jornales, observaciones, asistente);
     }
 
     public Trabajo buscar(long id) throws Exception {

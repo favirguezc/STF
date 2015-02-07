@@ -30,13 +30,11 @@ public class TrampaDeInsectos implements Serializable {
     private String observaciones;
     @ManyToOne(optional = true)
     private Persona asistente;
-    @ManyToOne(optional = true)
-    private Persona productor;
 
     public TrampaDeInsectos() {
     }
 
-    public TrampaDeInsectos(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones, Persona asistente, Persona productor) {
+    public TrampaDeInsectos(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones, Persona asistente) {
         this.fecha = fecha;
         this.nombre = nombre;
         this.especie = especie;
@@ -44,7 +42,6 @@ public class TrampaDeInsectos implements Serializable {
         this.cambioDePegante = cambio;
         this.observaciones = observaciones;
         this.asistente = asistente;
-        this.productor = productor;
     }
 
     public long getId() {
@@ -111,14 +108,6 @@ public class TrampaDeInsectos implements Serializable {
         this.asistente = asistente;
     }
 
-    public Persona getProductor() {
-        return productor;
-    }
-
-    public void setProductor(Persona productor) {
-        this.productor = productor;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -130,7 +119,6 @@ public class TrampaDeInsectos implements Serializable {
         hash = 29 * hash + (this.cambioDePegante ? 1 : 0);
         hash = 29 * hash + Objects.hashCode(this.observaciones);
         hash = 29 * hash + Objects.hashCode(this.asistente);
-        hash = 29 * hash + Objects.hashCode(this.productor);
         return hash;
     }
 
@@ -165,9 +153,6 @@ public class TrampaDeInsectos implements Serializable {
             return false;
         }
         if (!Objects.equals(this.asistente, other.asistente)) {
-            return false;
-        }
-        if (!Objects.equals(this.productor, other.productor)) {
             return false;
         }
         return true;

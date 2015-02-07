@@ -26,8 +26,8 @@ public class TrampaDeInsectosControlador {
         dao = new TrampaDeInsectosDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public TrampaDeInsectos nuevo(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones, Persona asistente, Persona productor) {
-        return new TrampaDeInsectos(fecha, nombre, especie, individuos, cambio, observaciones, asistente, productor);
+    public TrampaDeInsectos nuevo(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones, Persona asistente) {
+        return new TrampaDeInsectos(fecha, nombre, especie, individuos, cambio, observaciones, asistente);
     }
 
     public TrampaDeInsectos buscar(long id) {

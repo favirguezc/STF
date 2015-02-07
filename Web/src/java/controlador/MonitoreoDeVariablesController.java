@@ -26,28 +26,9 @@ public class MonitoreoDeVariablesController implements Serializable {
     private MonitoreoDeVariablesJpaController jpaController = null;
     private List<MonitoreoDeVariables> items = null;
     private MonitoreoDeVariables selected;
-    public boolean b1, b2, b3;
+    private int habilitado;
 
     public MonitoreoDeVariablesController() {
-        b1 = b2 = b3 = true;
-    }
-
-    public boolean isB1() {
-        return b1;
-    }
-
-    public boolean isB2() {
-        return b2;
-    }
-
-    public boolean isB3() {
-        return b3;
-    }
-
-    public void valor() {
-        b1 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.RELACION;
-        b2 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.CONTEO;
-        b3 = selected.getVariable().getTipoDeValoracion() != TipoDeValoracion.RIESGO;
     }
 
     public MonitoreoDeVariables getSelected() {
@@ -56,6 +37,14 @@ public class MonitoreoDeVariablesController implements Serializable {
 
     public void setSelected(MonitoreoDeVariables selected) {
         this.selected = selected;
+    }
+
+    public int getHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(int habilitado) {
+        this.habilitado = habilitado;
     }
 
     protected void setEmbeddableKeys() {
@@ -128,6 +117,20 @@ public class MonitoreoDeVariablesController implements Serializable {
 
     public List<MonitoreoDeVariables> getItemsAvailableSelectOne() {
         return getJpaController().findMonitoreoDeVariablesEntities();
+    }
+
+    public void valor() {
+        if (selected.getVariable() != null) {
+            if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.CONTEO) {
+                habilitado = 2;
+            } else if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.RELACION) {
+                habilitado = 1;
+            } else if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.RIESGO){
+                habilitado = 3;
+            }
+        } else {
+            habilitado = 0;
+        }
     }
 
     @FacesConverter(forClass = MonitoreoDeVariables.class)

@@ -138,10 +138,16 @@ public class TemperaturaJpaController implements Serializable {
         }
     }
 
-    public List<Temperatura> findTemperaturaEntities(Date fecha1, Date fecha2) {
+    public List<Temperatura> findTemperaturaEntities(Date fecha1, Date fecha2, int tipo) {
         EntityManager em = getEntityManager();
+        String stringQuery = "SELECT t FROM Temperatura t WHERE t.fecha BETWEEN :fecha1 AND :fecha2";
+        if (tipo == 1) {
+            stringQuery += " AND FUNC('HOUR',t.hora) IN (0,1,2,3,4,5,18,19,20,21,22,23)";
+        }else if (tipo == 2) {
+            stringQuery += " AND FUNC('HOUR',t.hora) NOT IN (0,1,2,3,4,5,18,19,20,21,22,23)";
+        }
         try {
-            TypedQuery<Temperatura> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Temperatura.class
+            TypedQuery<Temperatura> query = em.createQuery(stringQuery, Temperatura.class
             );
             query.setParameter(
                     "fecha1", fecha1, TemporalType.DATE);

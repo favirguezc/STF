@@ -112,9 +112,15 @@ public class TemperaturaChart implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
         LineChartSeries series3 = new LineChartSeries();
-        series1.setLabel("Temperatura");
-        series2.setLabel("Humedad");
-        series3.setLabel("Punto De Rocío");
+        LineChartSeries series4 = new LineChartSeries();
+        LineChartSeries series5 = new LineChartSeries();
+        LineChartSeries series6 = new LineChartSeries();
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad - Día");
+        series3.setLabel("Punto De Rocío - Día");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad - Noche");
+        series6.setLabel("Punto De Rocío - Noche");
         TemperaturaController controlador = new TemperaturaController();
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(new Date(ano1 - 1900, 0, 1));
@@ -124,24 +130,29 @@ public class TemperaturaChart implements Serializable {
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
             Temperatura promedioTemp;
-            promedioTemp = controlador.calcularPromedio(fecha1, fecha2);
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha2, 2);
             series1.set(DateTools.getMes(i), promedioTemp.getTemperatura());
             series2.set(DateTools.getMes(i), promedioTemp.getHumedad());
             series3.set(DateTools.getMes(i), promedioTemp.getPuntoDeRocio());
+
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha2, 1);
+            series4.set(DateTools.getMes(i), promedioTemp.getTemperatura());
+            series5.set(DateTools.getMes(i), promedioTemp.getHumedad());
+            series6.set(DateTools.getMes(i), promedioTemp.getPuntoDeRocio());
+
+            cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         modelo1.addSeries(series1);
         modelo1.addSeries(series2);
         modelo1.addSeries(series3);
+        modelo1.addSeries(series4);
+        modelo1.addSeries(series5);
+        modelo1.addSeries(series6);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        modelo1.setTitle("Promedio de Temperatura por Mes Año " + ano1);
+        modelo1.setTitle("Promedio de Temperatura por Mes - Año " + ano1);
         modelo1.setLegendPosition("e");
-        Axis yAxis = modelo1.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-        yAxis.setMax(40);
     }
 
     public void createModel2() {
@@ -150,10 +161,15 @@ public class TemperaturaChart implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
         LineChartSeries series3 = new LineChartSeries();
-
-        series1.setLabel("Temperatura");
-        series2.setLabel("Humedad");
-        series3.setLabel("Punto De Rocío");
+        LineChartSeries series4 = new LineChartSeries();
+        LineChartSeries series5 = new LineChartSeries();
+        LineChartSeries series6 = new LineChartSeries();
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad - Día");
+        series3.setLabel("Punto De Rocío - Día");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad - Noche");
+        series6.setLabel("Punto De Rocío - Noche");
 
         TemperaturaController controlador = new TemperaturaController();
         Calendar cal = GregorianCalendar.getInstance();
@@ -162,18 +178,26 @@ public class TemperaturaChart implements Serializable {
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Date fecha2 = cal.getTime();
             Temperatura promedioTemp;
-            promedioTemp = controlador.calcularPromedio(fecha1, fecha2);
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 2);
 
             series1.set(i + 1, promedioTemp.getTemperatura());
             series2.set(i + 1, promedioTemp.getHumedad());
             series3.set(i + 1, promedioTemp.getPuntoDeRocio());
+
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 1);
+
+            series4.set(i + 1, promedioTemp.getTemperatura());
+            series5.set(i + 1, promedioTemp.getHumedad());
+            series6.set(i + 1, promedioTemp.getPuntoDeRocio());
         }
 
         modelo2.addSeries(series1);
         modelo2.addSeries(series2);
         modelo2.addSeries(series3);
+        modelo2.addSeries(series4);
+        modelo2.addSeries(series5);
+        modelo2.addSeries(series6);
         modelo2.setShowPointLabels(true);
         modelo2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo2.setTitle("Promedio de Temperatura por Día " + DateTools.getMes(mes) + " de " + anoMes);
@@ -186,10 +210,15 @@ public class TemperaturaChart implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
         LineChartSeries series3 = new LineChartSeries();
-
-        series1.setLabel("Temperatura");
-        series2.setLabel("Humedad");
-        series3.setLabel("Punto De Rocío");
+        LineChartSeries series4 = new LineChartSeries();
+        LineChartSeries series5 = new LineChartSeries();
+        LineChartSeries series6 = new LineChartSeries();
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad - Día");
+        series3.setLabel("Punto De Rocío - Día");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad - Noche");
+        series6.setLabel("Punto De Rocío - Noche");
 
         TemperaturaController controlador = new TemperaturaController();
         Calendar cal = GregorianCalendar.getInstance();
@@ -198,18 +227,26 @@ public class TemperaturaChart implements Serializable {
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Date fecha2 = cal.getTime();
             Temperatura promedioTemp;
-            promedioTemp = controlador.calcularPromedio(fecha1, fecha2);
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 2);
 
             series1.set(DateTools.getDia(i + 1), promedioTemp.getTemperatura());
             series2.set(DateTools.getDia(i + 1), promedioTemp.getHumedad());
             series3.set(DateTools.getDia(i + 1), promedioTemp.getPuntoDeRocio());
+
+            promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 1);
+
+            series4.set(DateTools.getDia(i + 1), promedioTemp.getTemperatura());
+            series5.set(DateTools.getDia(i + 1), promedioTemp.getHumedad());
+            series6.set(DateTools.getDia(i + 1), promedioTemp.getPuntoDeRocio());
         }
 
         modelo3.addSeries(series1);
         modelo3.addSeries(series2);
         modelo3.addSeries(series3);
+        modelo3.addSeries(series4);
+        modelo3.addSeries(series5);
+        modelo3.addSeries(series6);
         modelo3.setShowPointLabels(true);
         modelo3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo3.setTitle("Promedio de Temperatura " + DateTools.getSemana(fechaSemana));

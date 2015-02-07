@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import dao.AplicacionJpaController;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
+import modelo.produccion.aplicaciones.Insumo;
 
 @ManagedBean(name = "aplicacionController")
 @SessionScoped
@@ -25,6 +27,7 @@ public class AplicacionController implements Serializable {
     private AplicacionJpaController jpaController = null;
     private List<Aplicacion> items = null;
     private Aplicacion selected;
+    private List<Insumo> insumos;
 
     public AplicacionController() {
     }
@@ -82,6 +85,16 @@ public class AplicacionController implements Serializable {
         return items;
     }
 
+    public List<Insumo> getInsumos() {
+        insumos = new ArrayList<Insumo>();
+        for (Insumo i : new InsumoController().getItems()) {
+            if (i.getTipoDeAplicacion() == selected.getTipo()) {
+                insumos.add(i);
+            }
+        }
+        return insumos;
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -107,6 +120,10 @@ public class AplicacionController implements Serializable {
 
     public List<Aplicacion> getItemsAvailableSelectOne() {
         return getJpaController().findAplicacionEntities();
+    }
+
+    public void tipo() {
+
     }
 
     @FacesConverter(forClass = Aplicacion.class)

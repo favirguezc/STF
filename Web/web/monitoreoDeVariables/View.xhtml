@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_variable}"/>
                         <h:outputText value="#{monitoreoDeVariablesController.selected.variable}" title="#{bundle.ViewMonitoreoDeVariablesTitle_variable}"/>
                         <h:outputText value="#{bundle.ViewMonitoreoDeVariablesLabel_valor}"/>
-                        <h:outputText value="#{monitoreoDeVariablesController.selected.valor}" title="#{bundle.ViewMonitoreoDeVariablesTitle_valor}"/>
+                        <h:outputText value="#{monitoreoDeVariablesController.selected.riesgo} #{monitoreoDeVariablesController.selected.conteo!=0 ? monitoreoDeVariablesController.selected.conteo : ''} #{monitoreoDeVariablesController.selected.relacion}" title="#{bundle.ViewMonitoreoDeVariablesTitle_valor}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MonitoreoDeVariablesViewDialog.hide()"/>
                 </h:panelGroup>

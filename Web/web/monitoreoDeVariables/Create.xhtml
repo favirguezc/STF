@@ -27,17 +27,18 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeVariablesLabel_variable}" for="variable" />
                         <p:selectOneMenu id="variable" value="#{monitoreoDeVariablesController.selected.variable}" required="true" requiredMessage="#{bundle.EditMonitoreoDeVariablesRequiredMessage_variable}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{variableController.itemsAvailableSelectOne}"
                                            var="variableItem"
                                            itemValue="#{variableItem}"/>
-                            <p:ajax listener="#{monitoreoDeVariablesController.valor}" update="valor1"/>
+                            <p:ajax update="valor1 valor2 valor3" listener="#{monitoreoDeVariablesController.valor}"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeVariablesLabel_valor} Relación" for="valor1"/>
-                        <p:inputText id="valor1" value="#{monitoreoDeVariablesController.selected.relacion}" title="#{bundle.CreateMonitoreoDeVariablesTitle_valor}" disabled="#{monitoreoDeVariablesController.b1}"/>
+                        <p:inputText id="valor1" disabled="#{monitoreoDeVariablesController.habilitado!=1}" value="#{monitoreoDeVariablesController.selected.relacion}" title="#{bundle.CreateMonitoreoDeVariablesTitle_valor}"/>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeVariablesLabel_valor} Conteo" for="valor2" />
-                        <p:inputText id="valor2" value="#{monitoreoDeVariablesController.selected.conteo}" title="#{bundle.CreateMonitoreoDeVariablesTitle_valor}" disabled="#{monitoreoDeVariablesController.b2}"/>
+                        <p:inputText id="valor2" disabled="#{monitoreoDeVariablesController.habilitado!=2}" value="#{monitoreoDeVariablesController.selected.conteo}" title="#{bundle.CreateMonitoreoDeVariablesTitle_valor}"/>
                         <p:outputLabel value="#{bundle.CreateMonitoreoDeVariablesLabel_valor} Riesgo" for="valor3"/>
-                        <p:selectOneMenu id="valor3" value="#{monitoreoDeVariablesController.selected.riesgo}"  disabled="#{monitoreoDeVariablesController.b3}">
+                        <p:selectOneMenu id="valor3" disabled="#{monitoreoDeVariablesController.habilitado!=3}" value="#{monitoreoDeVariablesController.selected.riesgo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{riesgoController.riesgoValues}"/>                            
                         </p:selectOneMenu>                        

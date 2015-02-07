@@ -34,8 +34,15 @@
                                            var="variableItem"
                                            itemValue="#{variableItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_valor}" for="valor" />
-                        <p:inputText id="valor" value="#{monitoreoDeVariablesController.selected.valor}" title="#{bundle.EditMonitoreoDeVariablesTitle_valor}" />
+                        <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_valor} Relación" for="valor1"/>
+                        <p:inputText id="valor1" value="#{monitoreoDeVariablesController.selected.relacion}" title="#{bundle.EditMonitoreoDeVariablesTitle_valor}"/>
+                        <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_valor} Conteo" for="valor2" />
+                        <p:inputText id="valor2" value="#{monitoreoDeVariablesController.selected.conteo}" title="#{bundle.EditMonitoreoDeVariablesTitle_valor}"/>
+                        <p:outputLabel value="#{bundle.EditMonitoreoDeVariablesLabel_valor} Riesgo" for="valor3"/>
+                        <p:selectOneMenu id="valor3" value="#{monitoreoDeVariablesController.selected.riesgo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{riesgoController.riesgoValues}"/>                            
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitoreoDeVariablesController.update}" value="#{bundle.Save}" update="display,:MonitoreoDeVariablesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoreoDeVariablesEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoreoDeVariablesEditDialog.hide()"/>

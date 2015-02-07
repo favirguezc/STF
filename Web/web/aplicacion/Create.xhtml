@@ -14,7 +14,9 @@
                     <p:panelGrid columns="2" rendered="#{aplicacionController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_tipo}" for="tipo" />
                         <p:selectOneMenu id="tipo" value="#{aplicacionController.selected.tipo}" required="true" requiredMessage="#{bundle.CreateAplicacionRequiredMessage_tipo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>  
                             <f:selectItems value="#{tipoDeAplicacionController.tipoDeAplicacionValues}"/>
+                            <p:ajax listener="#{aplicacionController.tipo}" update="producto"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_modulo}" for="modulo" />
                         <p:selectOneMenu id="modulo" value="#{aplicacionController.selected.modulo}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_modulo}">
@@ -28,7 +30,7 @@
                         <p:calendar id="fechaDeAplicacion" pattern="dd/MM/yyyy" value="#{aplicacionController.selected.fechaDeAplicacion}" title="#{bundle.EditAplicacionTitle_fechaDeAplicacion}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_fechaDeAplicacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_producto}" for="producto" />
                         <p:selectOneMenu id="producto" value="#{aplicacionController.selected.producto}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_producto}">
-                            <f:selectItems value="#{insumoController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{aplicacionController.insumos}"
                                            var="productoItem"
                                            itemValue="#{productoItem}"/>
                         </p:selectOneMenu>

@@ -5,7 +5,7 @@
  */
 package vista.variablesClimaticas;
 
-import controlador.variablesClimaticas.ControlDeLluviasControlador;
+import controlador.produccion.variablesClimaticas.LluviaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,12 +28,12 @@ public class LluviasIF extends javax.swing.JInternalFrame {
      * Creates new form LluviasIF
      */
     private Lluvia registroSeleccionado = null;
-    private ControlDeLluviasControlador controlador;
+    private LluviaControlador controlador;
     private List<Lluvia> lista;
 
     public LluviasIF() {
         initComponents();
-        controlador = new ControlDeLluviasControlador();
+        controlador = new LluviaControlador();
         añoSpinner.setValue(new Date().getYear() + 1900);
         cargarTablaPrincipal();
         guardar(false);

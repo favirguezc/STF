@@ -5,8 +5,8 @@
  */
 package vista.archivos;
 
-import controlador.variablesClimaticas.TemperaturaControlador;
-import controlador.variablesClimaticas.TermometroControlador;
+import controlador.produccion.variablesClimaticas.TemperaturaControlador;
+import controlador.produccion.variablesClimaticas.TermometroControlador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

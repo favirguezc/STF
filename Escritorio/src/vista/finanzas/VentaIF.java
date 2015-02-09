@@ -5,7 +5,7 @@
  */
 package vista.finanzas;
 
-import controlador.administracion.RolPersonaControlador;
+import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.finanzas.VentaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Calendar;

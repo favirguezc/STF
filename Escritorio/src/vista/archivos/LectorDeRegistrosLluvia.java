@@ -5,7 +5,7 @@
  */
 package vista.archivos;
 
-import controlador.variablesClimaticas.ControlDeLluviasControlador;
+import controlador.produccion.variablesClimaticas.LluviaControlador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,7 +41,7 @@ public class LectorDeRegistrosLluvia {
             file = new FileInputStream(archivo);
             XSSFWorkbook workbook = new XSSFWorkbook(file);
             Iterator<XSSFSheet> sheetIterator = workbook.iterator();
-            ControlDeLluviasControlador controlador = new ControlDeLluviasControlador();
+            LluviaControlador controlador = new LluviaControlador();
             while (sheetIterator.hasNext()) {
                 XSSFSheet sheet = sheetIterator.next();
                 int año = Integer.parseInt(sheet.getSheetName());

@@ -1,6 +1,6 @@
 package vista.variablesClimaticas;
 
-import controlador.variablesClimaticas.TemperaturaControlador;
+import controlador.produccion.variablesClimaticas.TemperaturaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

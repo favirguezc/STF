@@ -5,8 +5,8 @@
  */
 package vista.administracion;
 
-import controlador.administracion.LoteControlador;
-import controlador.administracion.ModuloControlador;
+import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.DefaultListModel;

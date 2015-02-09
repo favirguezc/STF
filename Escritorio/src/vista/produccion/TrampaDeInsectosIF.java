@@ -5,8 +5,8 @@
  */
 package vista.produccion;
 
-import controlador.administracion.RolPersonaControlador;
-import controlador.produccion.TrampaDeInsectosControlador;
+import controlador.produccion.administracion.RolPersonaControlador;
+import controlador.produccion.monitoreo.TrampaDeInsectosControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;

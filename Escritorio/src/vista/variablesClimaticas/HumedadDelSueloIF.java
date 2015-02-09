@@ -5,7 +5,7 @@
  */
 package vista.variablesClimaticas;
 
-import controlador.variablesClimaticas.HumedadDelSueloControlador;
+import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.io.File;
 import java.text.SimpleDateFormat;

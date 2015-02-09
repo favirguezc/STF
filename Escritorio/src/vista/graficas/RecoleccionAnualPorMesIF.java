@@ -5,7 +5,7 @@
  */
 package vista.graficas;
 
-import controlador.produccion.RecoleccionControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

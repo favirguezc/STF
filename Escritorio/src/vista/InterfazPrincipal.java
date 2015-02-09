@@ -14,10 +14,9 @@ import vista.reportes.ReporteAnual;
 import vista.produccion.TrabajoIF;
 import vista.produccion.AplicacionFitosanitariaIF;
 import vista.produccion.InsumoFitosanitarioIF;
-import vista.produccion.MonitoreoDePlagasIF;
 import vista.produccion.RecoleccionIF;
 import vista.produccion.TrampaDeInsectosIF;
-import vista.produccion.MonitoreoDeEnfermedadesIF;
+import vista.produccion.MonitoreoDeVariablesIF;
 import vista.graficas.RecoleccionAnualPorMesYTrampaDeInsectosIF;
 import vista.graficas.RecoleccionAnualPorMesYTemperaturaIF;
 import vista.graficas.RecoleccionAnualPorSemanaIF;
@@ -25,7 +24,7 @@ import vista.graficas.RecoleccionAnualPorMesIF;
 import vista.graficas.RecoleccionAnualPorLoteIF;
 import vista.administracion.PersonaIF;
 import vista.administracion.LoteIF;
-import controlador.produccion.LaborControlador;
+import controlador.produccion.labores.LaborControlador;
 import dao.util.EntityManagerFactorySingleton;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -88,7 +87,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -104,7 +102,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -146,17 +143,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/poison2.png"))); // NOI18N
-        jButton2.setText("Plagas");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -216,12 +202,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +215,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -332,17 +315,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/poison2.png"))); // NOI18N
-        jMenuItem4.setText("Monitoreo de Plagas");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem4);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -640,16 +612,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         abrirPersona();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        abrirMonitoreoDePlagas();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        abrirMonitoreoDePlagas();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         abrirMonitoreoDeEnfermedades();
@@ -784,7 +746,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -820,7 +781,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -855,8 +815,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     private void abrirMonitoreoDeEnfermedades() {
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeEnfermedadesIF.class)) {
-            MonitoreoDeEnfermedadesIF tif = new MonitoreoDeEnfermedadesIF();
+        if (!ventanaActivaEnPanelEscritorio(MonitoreoDeVariablesIF.class)) {
+            MonitoreoDeVariablesIF tif = new MonitoreoDeVariablesIF();
             panelEscritorio.add(tif);
             tif.setVisible(true);
             try {
@@ -916,20 +876,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void abrirPersona() {
         if (!ventanaActivaEnPanelEscritorio(PersonaIF.class)) {
             PersonaIF hif = new PersonaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
-            try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    private void abrirMonitoreoDePlagas() {
-        if (!ventanaActivaEnPanelEscritorio(MonitoreoDePlagasIF.class)) {
-            MonitoreoDePlagasIF hif = new MonitoreoDePlagasIF();
             panelEscritorio.add(hif);
             hif.setVisible(true);
             try {

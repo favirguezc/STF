@@ -5,8 +5,8 @@
  */
 package vista.graficas;
 
-import controlador.administracion.LoteControlador;
-import controlador.produccion.RecoleccionControlador;
+import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JPanel;

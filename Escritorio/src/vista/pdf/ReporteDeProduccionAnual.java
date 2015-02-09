@@ -22,7 +22,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
-import controlador.produccion.RecoleccionControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
 import vista.reportes.ReporteAnual;
 import java.awt.Desktop;
 import java.awt.Graphics2D;

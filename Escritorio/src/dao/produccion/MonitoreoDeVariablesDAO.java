@@ -5,7 +5,7 @@
  */
 package dao.produccion;
 
-import controlador.administracion.ModuloControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,17 +19,18 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.MonitoreoDePlagas;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
+import modelo.produccion.monitoreo.Monitoreo;
+import modelo.produccion.monitoreo.MonitoreoDeVariables;
 
 /**
  *
  * @author fredy
  */
-public class MonitoreoDePlagasDAO implements Serializable {
+public class MonitoreoDeVariablesDAO implements Serializable {
 
-    public MonitoreoDePlagasDAO(EntityManagerFactory emf) {
+    public MonitoreoDeVariablesDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -38,12 +39,12 @@ public class MonitoreoDePlagasDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(MonitoreoDePlagas monitoreoDePlagas) {
+    public void create(MonitoreoDeVariables monitoreoDeVariables) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(monitoreoDePlagas);
+            em.persist(monitoreoDeVariables);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -52,19 +53,19 @@ public class MonitoreoDePlagasDAO implements Serializable {
         }
     }
 
-    public void edit(MonitoreoDePlagas monitoreoDePlagas) throws NonexistentEntityException, Exception {
+    public void edit(MonitoreoDeVariables monitoreoDeVariables) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            monitoreoDePlagas = em.merge(monitoreoDePlagas);
+            monitoreoDeVariables = em.merge(monitoreoDeVariables);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = monitoreoDePlagas.getId();
-                if (findMonitoreoDePlagas(id) == null) {
-                    throw new NonexistentEntityException("The monitoreoDePlagas with id " + id + " no longer exists.");
+                long id = monitoreoDeVariables.getId();
+                if (findMonitoreoDeVariables(id) == null) {
+                    throw new NonexistentEntityException("The monitoreoDeVariables with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -75,19 +76,19 @@ public class MonitoreoDePlagasDAO implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            MonitoreoDePlagas monitoreoDePlagas;
+            MonitoreoDeVariables monitoreoDeVariables;
             try {
-                monitoreoDePlagas = em.getReference(MonitoreoDePlagas.class, id);
-                monitoreoDePlagas.getId();
+                monitoreoDeVariables = em.getReference(MonitoreoDeVariables.class, id);
+                monitoreoDeVariables.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The monitoreoDePlagas with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The monitoreoDeVariables with id " + id + " no longer exists.", enfe);
             }
-            em.remove(monitoreoDePlagas);
+            em.remove(monitoreoDeVariables);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -96,36 +97,30 @@ public class MonitoreoDePlagasDAO implements Serializable {
         }
     }
 
-    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities() {
-        return findMonitoreoDePlagasEntities(true, -1, -1);
-    }
-
-    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(Lote lote, Date fecha) {
+    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(Monitoreo monitoreo) {
         EntityManager em = getEntityManager();
-        List<Modulo> listaModulos = new ModuloControlador().leerLista(lote);
-        List<MonitoreoDePlagas> lista = new ArrayList<>();
-        for (Modulo m : listaModulos) {
-            try {
-                TypedQuery<MonitoreoDePlagas> query = em.createQuery("SELECT t FROM MonitoreoDePlagas t WHERE t.fecha = :fecha AND t.modulo = :modulo", MonitoreoDePlagas.class);
-                query.setParameter("fecha", fecha, TemporalType.DATE);
-                query.setParameter("modulo", m);
-                lista.addAll(query.getResultList());
-            } catch (Exception e) {
-            }
+        try {
+            TypedQuery<MonitoreoDeVariables> query = em.createQuery("SELECT t FROM MonitoreoDeVariables t WHERE t.monitoreo = :monitoreo", MonitoreoDeVariables.class);
+            query.setParameter("monitoreo", monitoreo);
+            return query.getResultList();
+        } finally {
+            em.close();
         }
-        em.close();
-        return lista;
     }
 
-    public List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(int maxResults, int firstResult) {
-        return findMonitoreoDePlagasEntities(false, maxResults, firstResult);
+    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities() {
+        return findMonitoreoDeVariablesEntities(true, -1, -1);
     }
 
-    private List<MonitoreoDePlagas> findMonitoreoDePlagasEntities(boolean all, int maxResults, int firstResult) {
+    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(int maxResults, int firstResult) {
+        return findMonitoreoDeVariablesEntities(false, maxResults, firstResult);
+    }
+
+    private List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(MonitoreoDePlagas.class));
+            cq.select(cq.from(MonitoreoDeVariables.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -137,20 +132,20 @@ public class MonitoreoDePlagasDAO implements Serializable {
         }
     }
 
-    public MonitoreoDePlagas findMonitoreoDePlagas(Long id) {
+    public MonitoreoDeVariables findMonitoreoDeVariables(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(MonitoreoDePlagas.class, id);
+            return em.find(MonitoreoDeVariables.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getMonitoreoDePlagasCount() {
+    public int getMonitoreoDeVariablesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<MonitoreoDePlagas> rt = cq.from(MonitoreoDePlagas.class);
+            Root<MonitoreoDeVariables> rt = cq.from(MonitoreoDeVariables.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

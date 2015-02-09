@@ -5,9 +5,9 @@
  */
 package vista.reportes;
 
-import controlador.administracion.LoteControlador;
+import controlador.produccion.administracion.LoteControlador;
 import controlador.administracion.RolControlador;
-import controlador.administracion.RolPersonaControlador;
+import controlador.produccion.administracion.RolPersonaControlador;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;

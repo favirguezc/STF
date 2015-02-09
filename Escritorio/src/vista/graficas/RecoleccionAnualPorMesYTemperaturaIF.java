@@ -5,8 +5,8 @@
  */
 package vista.graficas;
 
-import controlador.produccion.RecoleccionControlador;
-import controlador.variablesClimaticas.TemperaturaControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.variablesClimaticas.TemperaturaControlador;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Date;

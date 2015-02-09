@@ -16,7 +16,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import controlador.produccion.RecoleccionControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;

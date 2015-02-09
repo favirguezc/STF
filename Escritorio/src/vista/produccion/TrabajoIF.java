@@ -5,11 +5,11 @@
  */
 package vista.produccion;
 
-import controlador.administracion.LoteControlador;
-import controlador.administracion.ModuloControlador;
-import controlador.administracion.RolPersonaControlador;
-import controlador.produccion.LaborControlador;
-import controlador.produccion.TrabajoControlador;
+import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
+import controlador.produccion.administracion.RolPersonaControlador;
+import controlador.produccion.labores.LaborControlador;
+import controlador.produccion.labores.TrabajoControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;

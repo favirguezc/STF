@@ -5,8 +5,8 @@
  */
 package vista.administracion;
 
-import controlador.administracion.PersonaControlador;
-import controlador.administracion.RolPersonaControlador;
+import controlador.produccion.administracion.PersonaControlador;
+import controlador.produccion.administracion.RolPersonaControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;

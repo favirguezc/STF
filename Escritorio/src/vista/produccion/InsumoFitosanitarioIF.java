@@ -5,7 +5,7 @@
  */
 package vista.produccion;
 
-import controlador.produccion.InsumoFitosanitarioControlador;
+import controlador.produccion.aplicaciones.InsumoControlador;
 import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,12 +25,12 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
      * Creates new form InsumoFitosanitarioIF
      */
     private Insumo registroSeleccionado = null;
-    private InsumoFitosanitarioControlador controlador;
+    private InsumoControlador controlador;
     private List<Insumo> lista;
 
     public InsumoFitosanitarioIF() {
         initComponents();
-        controlador = new InsumoFitosanitarioControlador();
+        controlador = new InsumoControlador();
         guardar(false);
         cargarListaUnidades();
         cargarListaTipos();

@@ -5,8 +5,8 @@
  */
 package vista.graficas;
 
-import controlador.produccion.RecoleccionControlador;
-import controlador.produccion.TrampaDeInsectosControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.monitoreo.TrampaDeInsectosControlador;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Date;

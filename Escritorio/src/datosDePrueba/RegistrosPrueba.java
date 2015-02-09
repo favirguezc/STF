@@ -5,12 +5,12 @@
  */
 package datosDePrueba;
 
-import controlador.administracion.LoteControlador;
-import controlador.administracion.PersonaControlador;
-import controlador.produccion.RecoleccionControlador;
-import controlador.variablesClimaticas.ControlDeLluviasControlador;
-import controlador.variablesClimaticas.HumedadDelSueloControlador;
-import controlador.variablesClimaticas.TemperaturaControlador;
+import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.PersonaControlador;
+import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.variablesClimaticas.LluviaControlador;
+import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
+import controlador.produccion.variablesClimaticas.TemperaturaControlador;
 import dao.exceptions.NonexistentEntityException;
 import dao.util.EntityManagerFactorySingleton;
 import vista.graficas.RecoleccionAnualPorLoteIF;
@@ -142,7 +142,7 @@ public class RegistrosPrueba {
     }
 
     private static void registrosPruebaLluvia() {
-        ControlDeLluviasControlador controlador3 = new ControlDeLluviasControlador();
+        LluviaControlador controlador3 = new LluviaControlador();
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(new Date(2014 - 1900, 0, 1));
         for (int i = 0; i < 365; i++) {
@@ -159,7 +159,7 @@ public class RegistrosPrueba {
     }
 
     private static void quitarRegistrosLluvia() {
-        ControlDeLluviasControlador controlador3 = new ControlDeLluviasControlador();
+        LluviaControlador controlador3 = new LluviaControlador();
         for (Lluvia c : controlador3.buscarLista(new Date(0, 0, 1), new Date(2000, 0, 1))) {
             try {
                 controlador3.eliminar(c.getId());

@@ -5,7 +5,7 @@
  */
 package vista.archivos;
 
-import controlador.variablesClimaticas.HumedadDelSueloControlador;
+import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;

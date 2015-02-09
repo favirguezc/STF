@@ -8,7 +8,6 @@ package controlador.produccion.monitoreo;
 import dao.exceptions.NonexistentEntityException;
 import dao.produccion.MonitoreoDeVariablesDAO;
 import dao.util.EntityManagerFactorySingleton;
-import java.util.Date;
 import java.util.List;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.monitoreo.Monitoreo;

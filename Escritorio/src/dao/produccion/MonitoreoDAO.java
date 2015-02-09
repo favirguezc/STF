@@ -7,25 +7,22 @@ package dao.produccion;
 
 import dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.TemporalType;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.TrampaDeInsectos;
+import modelo.produccion.monitoreo.Monitoreo;
 
 /**
  *
  * @author fredy
  */
-public class TrampaDeInsectosDAO implements Serializable {
+public class MonitoreoDAO implements Serializable {
 
-    public TrampaDeInsectosDAO(EntityManagerFactory emf) {
+    public MonitoreoDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -34,12 +31,12 @@ public class TrampaDeInsectosDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(TrampaDeInsectos trampaDeInsectos) {
+    public void create(Monitoreo monitoreo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(trampaDeInsectos);
+            em.persist(monitoreo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -48,19 +45,19 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
-    public void edit(TrampaDeInsectos trampaDeInsectos) throws NonexistentEntityException, Exception {
+    public void edit(Monitoreo monitoreo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            trampaDeInsectos = em.merge(trampaDeInsectos);
+            monitoreo = em.merge(monitoreo);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = trampaDeInsectos.getId();
-                if (findTrampaDeInsectos(id) == null) {
-                    throw new NonexistentEntityException("The trampaDeInsectos with id " + id + " no longer exists.");
+                Long id = monitoreo.getId();
+                if (findMonitoreo(id) == null) {
+                    throw new NonexistentEntityException("The monitoreo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -71,19 +68,19 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
-    public void destroy(long id) throws NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            TrampaDeInsectos trampaDeInsectos;
+            Monitoreo monitoreo;
             try {
-                trampaDeInsectos = em.getReference(TrampaDeInsectos.class, id);
-                trampaDeInsectos.getId();
+                monitoreo = em.getReference(Monitoreo.class, id);
+                monitoreo.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The trampaDeInsectos with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The monitoreo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(trampaDeInsectos);
+            em.remove(monitoreo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -92,19 +89,19 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities() {
-        return findTrampaDeInsectosEntities(true, -1, -1);
+    public List<Monitoreo> findMonitoreoEntities() {
+        return findMonitoreoEntities(true, -1, -1);
     }
 
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities(int maxResults, int firstResult) {
-        return findTrampaDeInsectosEntities(false, maxResults, firstResult);
+    public List<Monitoreo> findMonitoreoEntities(int maxResults, int firstResult) {
+        return findMonitoreoEntities(false, maxResults, firstResult);
     }
 
-    private List<TrampaDeInsectos> findTrampaDeInsectosEntities(boolean all, int maxResults, int firstResult) {
+    private List<Monitoreo> findMonitoreoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(TrampaDeInsectos.class));
+            cq.select(cq.from(Monitoreo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -116,20 +113,20 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
-    public TrampaDeInsectos findTrampaDeInsectos(long id) {
+    public Monitoreo findMonitoreo(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(TrampaDeInsectos.class, id);
+            return em.find(Monitoreo.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getTrampaDeInsectosCount() {
+    public int getMonitoreoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<TrampaDeInsectos> rt = cq.from(TrampaDeInsectos.class);
+            Root<Monitoreo> rt = cq.from(Monitoreo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -137,20 +134,5 @@ public class TrampaDeInsectosDAO implements Serializable {
             em.close();
         }
     }
-
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities(Date fecha1, Date fecha2) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<TrampaDeInsectos> query = em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", TrampaDeInsectos.class
-            );
-            query.setParameter(
-                    "fecha1", fecha1, TemporalType.DATE);
-            query.setParameter(
-                    "fecha2", fecha2, TemporalType.DATE);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-
+    
 }

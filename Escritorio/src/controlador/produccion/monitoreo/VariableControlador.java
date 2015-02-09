@@ -5,7 +5,11 @@
  */
 package controlador.produccion.monitoreo;
 
+import dao.exceptions.NonexistentEntityException;
+import dao.produccion.VariableDAO;
+import dao.util.EntityManagerFactorySingleton;
 import java.util.List;
+import modelo.produccion.monitoreo.TipoDeValoracion;
 import modelo.produccion.monitoreo.Variable;
 
 /**
@@ -14,8 +18,34 @@ import modelo.produccion.monitoreo.Variable;
  */
 public class VariableControlador {
 
+    private VariableDAO dao;
+    
+    public VariableControlador() {
+        dao = new VariableDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+    }
+
+    public Variable nuevo(String nombre, String abreviacion, TipoDeValoracion tipoDeValoracion) {
+        return new Variable(nombre, abreviacion, tipoDeValoracion);
+    }
+
+    public Variable buscar(long id) {
+        return dao.findVariable(id);
+    }
+
+    public void eliminar(long id) throws NonexistentEntityException {
+        dao.destroy(id);
+    }
+
+    public void guardar(Variable t) {
+        dao.create(t);
+    }
+
+    public void editar(Variable t) throws Exception {
+        dao.edit(t);
+    }
+
     public List<Variable> leerLista() {
-        return null;
+        return dao.findVariableEntities();
     }
     
 }

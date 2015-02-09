@@ -5,6 +5,10 @@
  */
 package controlador.produccion.monitoreo;
 
+import dao.exceptions.NonexistentEntityException;
+import dao.produccion.MonitoreoDAO;
+import dao.util.EntityManagerFactorySingleton;
+import java.util.Date;
 import java.util.List;
 import modelo.produccion.monitoreo.Monitoreo;
 
@@ -14,8 +18,34 @@ import modelo.produccion.monitoreo.Monitoreo;
  */
 public class MonitoreoControlador {
 
-    public List<Monitoreo> leerlista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private MonitoreoDAO dao;
+    
+    public MonitoreoControlador() {
+        dao = new MonitoreoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+    }
+
+    public Monitoreo nuevo(long numeroDeMonitoreo, Date fecha) {
+        return new Monitoreo(numeroDeMonitoreo, fecha);
+    }
+
+    public Monitoreo buscar(long id) {
+        return dao.findMonitoreo(id);
+    }
+
+    public void eliminar(long id) throws NonexistentEntityException {
+        dao.destroy(id);
+    }
+
+    public void guardar(Monitoreo t) {
+        dao.create(t);
+    }
+
+    public void editar(Monitoreo t) throws Exception {
+        dao.edit(t);
+    }
+
+    public List<Monitoreo> leerLista() {
+        return dao.findMonitoreoEntities();
     }
     
 }

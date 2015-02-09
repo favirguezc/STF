@@ -569,7 +569,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
     private void cargarListaMonitoreos() {
         monitoreoComboBox.removeAllItems();
         monitoreoFiltroComboBox.removeAllItems();
-        List<Monitoreo> leerLista = new MonitoreoControlador().leerlista();
+        List<Monitoreo> leerLista = new MonitoreoControlador().leerLista();
         for (Monitoreo m : leerLista) {
             monitoreoComboBox.addItem(m);
             monitoreoFiltroComboBox.addItem(m);

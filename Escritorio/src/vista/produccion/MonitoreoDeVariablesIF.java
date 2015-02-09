@@ -5,15 +5,14 @@
  */
 package vista.produccion;
 
-import controlador.produccion.administracion.LoteControlador;
 import controlador.produccion.administracion.ModuloControlador;
+import controlador.produccion.monitoreo.MonitoreoControlador;
 import controlador.produccion.monitoreo.MonitoreoDeVariablesControlador;
+import controlador.produccion.monitoreo.VariableControlador;
 import dao.exceptions.NonexistentEntityException;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.monitoreo.Monitoreo;
 import modelo.produccion.monitoreo.MonitoreoDeVariables;
@@ -57,8 +56,6 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         eliminarButton = new javax.swing.JButton();
         editarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
-        fechaChooserCombo = new datechooser.beans.DateChooserCombo();
-        jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         monitoreoFiltroComboBox = new javax.swing.JComboBox();
@@ -130,16 +127,6 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
             }
         });
 
-        fechaChooserCombo.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
-        fechaChooserCombo.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
-            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
-                fechaChooserComboOnSelectionChange(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Fecha");
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Monitoreo");
 
@@ -161,15 +148,11 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
                 .addComponent(editarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarButton)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(fechaChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(monitoreoFiltroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(232, 232, 232))
+                .addGap(490, 490, 490))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -189,12 +172,9 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
                 .addGap(315, 315, 315))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(monitoreoFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(fechaChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(monitoreoFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -248,6 +228,11 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         monitoreoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         variableComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        variableComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                variableComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Monitoreo");
@@ -430,14 +415,38 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void fechaChooserComboOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_fechaChooserComboOnSelectionChange
-        // TODO add your handling code here:
-        cargarTablaPrincipal();
-    }//GEN-LAST:event_fechaChooserComboOnSelectionChange
-
     private void relacionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_relacionTextFieldActionPerformed
+
+    private void variableComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variableComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (variableComboBox.getSelectedItem() != null) {
+            switch (((Variable) variableComboBox.getSelectedItem()).getTipoDeValoracion()) {
+                case CONTEO:
+                    conteoLongField.setEnabled(true);
+                    relacionTextField.setEnabled(false);
+                    relacionTextField.setText(null);
+                    riesgoComboBox.setEnabled(false);
+                    riesgoComboBox.setSelectedIndex(0);
+                    break;
+                case RELACION:
+                    conteoLongField.setEnabled(false);
+                    conteoLongField.setInteger(0);
+                    relacionTextField.setEnabled(true);
+                    riesgoComboBox.setEnabled(false);
+                    riesgoComboBox.setSelectedIndex(0);
+                    break;
+                case RIESGO:
+                    conteoLongField.setEnabled(false);
+                    conteoLongField.setInteger(0);
+                    relacionTextField.setEnabled(false);
+                    relacionTextField.setText(null);
+                    riesgoComboBox.setEnabled(true);
+                    break;
+            }
+        }
+    }//GEN-LAST:event_variableComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -445,9 +454,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
-    private datechooser.beans.DateChooserCombo fechaChooserCombo;
     private javax.swing.JButton guardarButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
@@ -473,15 +480,21 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
-        lista = controlador.leerLista((Modulo) moduloComboBox.getSelectedIndex());
-        for (MonitoreoDeVariables mp : lista) {
-            Object[] row = {mp.getModulo(),
-                mp.getBotrytis(),
-                mp.isAntracnosis(),
-                mp.getMycospharella(),
-                mp.isMildeoPolvoso(),
-                mp.isPhytophtora(),
-                mp.isBacteriosis()};
+        lista = controlador.leerLista((Monitoreo) moduloComboBox.getSelectedItem());
+        Object valor = null;
+        for (MonitoreoDeVariables mv : lista) {
+            switch (mv.getVariable().getTipoDeValoracion()) {
+                case CONTEO:
+                    valor = mv.getConteo();
+                    break;
+                case RELACION:
+                    valor = mv.getRelacion();
+                    break;
+                case RIESGO:
+                    valor = mv.getRiesgo();
+                    break;
+            }
+            Object[] row = {mv.getMonitoreo(), mv.getModulo(), mv.getVariable(), valor};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
@@ -496,38 +509,55 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
 
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
-            moduloComboBox.setSelectedIndex(0);
-            botrytisSpinner.setValue(0);
-            mycospharellaSpinner.setValue(0);
-            antracnosisBooleanComboBox.setSelected(false);
-            mildeoBooleanComboBox.setSelected(false);
-            phytophthoraBooleanComboBox.setSelected(false);
-            bacteriosisBooleanComboBox.setSelected(false);
+            if (monitoreoComboBox.getItemCount() > 0) {
+                monitoreoComboBox.setSelectedIndex(0);
+            }
+            if (moduloComboBox.getItemCount() > 0) {
+                moduloComboBox.setSelectedIndex(0);
+            }
+            if (variableComboBox.getItemCount() > 0) {
+                variableComboBox.setSelectedIndex(0);
+            }
+            conteoLongField.setEnabled(false);
+            conteoLongField.setInteger(0);
+            relacionTextField.setEnabled(false);
+            relacionTextField.setText(null);
+            riesgoComboBox.setEnabled(false);
+            riesgoComboBox.setSelectedIndex(0);
         } else {
+            monitoreoComboBox.setSelectedItem(registroSeleccionado.getMonitoreo());
             moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
-            botrytisSpinner.setValue(registroSeleccionado.getBotrytis());
-            mycospharellaSpinner.setValue(registroSeleccionado.getMycospharella());
-            antracnosisBooleanComboBox.setSelected(registroSeleccionado.isAntracnosis());
-            mildeoBooleanComboBox.setSelected(registroSeleccionado.isBacteriosis());
-            phytophthoraBooleanComboBox.setSelected(registroSeleccionado.isPhytophtora());
-            bacteriosisBooleanComboBox.setSelected(registroSeleccionado.isBacteriosis());
+            variableComboBox.setSelectedItem(registroSeleccionado.getVariable());
+            conteoLongField.setEnabled(false);
+            relacionTextField.setEnabled(false);
+            riesgoComboBox.setEnabled(false);
+            switch (registroSeleccionado.getVariable().getTipoDeValoracion()) {
+                case CONTEO:
+                    conteoLongField.setEnabled(true);
+                    conteoLongField.setInteger(registroSeleccionado.getConteo());
+                    break;
+                case RELACION:
+                    relacionTextField.setEnabled(true);
+                    relacionTextField.setText(registroSeleccionado.getRelacion());
+                    break;
+                case RIESGO:
+                    riesgoComboBox.setEnabled(true);
+                    riesgoComboBox.setSelectedItem(registroSeleccionado.getRiesgo());
+                    break;
+            }
         }
     }
 
-    private void cargarListaLotes() {
-        loteComboBox.removeAllItems();
-        List<Lote> leerLista = new LoteControlador().leerLista();
-        for (Lote l : leerLista) {
-            loteComboBox.addItem(l);
-        }
-        if (leerLista.size() > 0) {
-            loteComboBox.setSelectedIndex(0);
-        }
+    private void cargarListas() {
+        cargarListaMonitoreos();
+        cargarListaModulos();
+        cargarListaVariables();
+        cargarListaRiesgos();
     }
 
     private void cargarListaModulos() {
         moduloComboBox.removeAllItems();
-        List<Modulo> leerLista = new ModuloControlador().leerLista((Lote) loteComboBox.getSelectedItem());
+        List<Modulo> leerLista = new ModuloControlador().leerLista();
         for (Modulo m : leerLista) {
             moduloComboBox.addItem(m);
         }
@@ -536,7 +566,36 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         }
     }
 
-    private void cargarListas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void cargarListaMonitoreos() {
+        monitoreoComboBox.removeAllItems();
+        monitoreoFiltroComboBox.removeAllItems();
+        List<Monitoreo> leerLista = new MonitoreoControlador().leerlista();
+        for (Monitoreo m : leerLista) {
+            monitoreoComboBox.addItem(m);
+            monitoreoFiltroComboBox.addItem(m);
+        }
+        if (leerLista.size() > 0) {
+            monitoreoComboBox.setSelectedIndex(0);
+            monitoreoFiltroComboBox.setSelectedIndex(0);
+        }
     }
+
+    private void cargarListaVariables() {
+        variableComboBox.removeAllItems();
+        List<Variable> leerLista = new VariableControlador().leerLista();
+        for (Variable v : leerLista) {
+            variableComboBox.addItem(v);
+        }
+        if (leerLista.size() > 0) {
+            variableComboBox.setSelectedIndex(0);
+        }
+    }
+
+    private void cargarListaRiesgos() {
+        riesgoComboBox.removeAllItems();
+        for (Riesgo r : Riesgo.values()) {
+            riesgoComboBox.addItem(r);
+        }
+    }
+
 }

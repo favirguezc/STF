@@ -52,8 +52,8 @@ public class MonitoreoDeVariablesControlador {
         return dao.findMonitoreoDeVariablesEntities();
     }
     
-    public List<MonitoreoDeVariables> leerLista(Modulo modulo) {
-        return dao.findMonitoreoDeVariablesEntities(modulo);
+    public List<MonitoreoDeVariables> leerLista(Monitoreo monitoreo) {
+        return dao.findMonitoreoDeVariablesEntities(monitoreo);
     }
     
     public boolean validar(MonitoreoDeVariables mv){

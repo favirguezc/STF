@@ -41,23 +41,7 @@
                         <p:outputLabel value="#{bundle.EditTrabajoLabel_horas}" for="horas" />
                         <p:inputText id="horas" value="#{trabajoController.selected.horas}" title="#{bundle.EditTrabajoTitle_horas}" />
                         <p:outputLabel value="#{bundle.EditTrabajoLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{trabajoController.selected.observaciones}" title="#{bundle.EditTrabajoTitle_observaciones}" />
-                        <p:outputLabel value="#{bundle.EditTrabajoLabel_asistente}" for="asistente" />
-                        <p:selectOneMenu id="asistente" value="#{trabajoController.selected.asistente}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="asistenteItem"
-                                           itemValue="#{asistenteItem}"
-                                           itemLabel="#{asistenteItem.nombre} #{asistenteItem.apellido}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditTrabajoLabel_productor}" for="productor" />
-                        <p:selectOneMenu id="productor" value="#{trabajoController.selected.productor}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="productorItem"
-                                           itemValue="#{productorItem}"
-                                           itemLabel="#{productorItem.nombre} #{productorItem.apellido}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="observaciones" value="#{trabajoController.selected.observaciones}" title="#{bundle.EditTrabajoTitle_observaciones}" />                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{trabajoController.update}" value="#{bundle.Save}" update="display,:TrabajoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TrabajoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TrabajoEditDialog.hide()"/>

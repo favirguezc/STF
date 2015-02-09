@@ -6,7 +6,6 @@
 package vista.reportes;
 
 import controlador.produccion.administracion.LoteControlador;
-import controlador.administracion.RolControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
 import java.io.File;
 import java.util.List;
@@ -212,12 +211,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
     private void cargarListaRecolectores() {
         recolectorComboBox.removeAllItems();
         recolectorComboBox.addItem(null);
-        Rol rol = null;
-        try {
-            rol = new RolControlador().buscar("Recolector(a)");
-        } catch (Exception ex) {
-        }
-        for (Persona p : new RolPersonaControlador().leerLista(rol)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
             recolectorComboBox.addItem(p);
         }
     }

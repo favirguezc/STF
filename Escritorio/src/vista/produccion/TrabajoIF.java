@@ -85,8 +85,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        asistenteComboBox = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -237,14 +235,14 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Fecha", "Modulo", "Labor", "Operario", "Jornales", "Observaciones", "Asistente Técnico"
+                "Fecha", "Modulo", "Labor", "Operario", "Jornales", "Observaciones"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -270,7 +268,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
@@ -305,11 +303,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Observaciones");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Asistente Técnico");
-
-        asistenteComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
         edicionPanelLayout.setHorizontalGroup(
@@ -322,17 +315,15 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(31, 31, 31)
+                    .addComponent(jLabel8))
+                .addGap(42, 42, 42)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(laborComboBox, 0, 225, Short.MAX_VALUE)
                     .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(moduloComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(operarioComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jornalesFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(observacionesTextField)
-                    .addComponent(asistenteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(observacionesTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -367,10 +358,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(observacionesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(asistenteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -448,9 +435,8 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         Persona operario = (Persona) operarioComboBox.getSelectedItem();
         float jornales = jornalesFloatField.getFloat();
         String observaciones = observacionesTextField.getText();
-        Persona asistente = (Persona) asistenteComboBox.getSelectedItem();
         if (registroSeleccionado == null) {
-            Trabajo nuevo = controlador.nuevo(fecha, modulo, labor, operario, jornales, observaciones, asistente);
+            Trabajo nuevo = controlador.nuevo(fecha, modulo, labor, operario, jornales, observaciones);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 guardar(false);
@@ -464,7 +450,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setOperario(operario);
             registroSeleccionado.setHoras(jornales);
             registroSeleccionado.setObservaciones(observaciones);
-            registroSeleccionado.setAsistente(asistente);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -506,7 +491,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox asistenteComboBox;
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -522,7 +506,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -554,8 +537,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
                 mp.getLabor(),
                 mp.getOperario(),
                 mp.getHoras(),
-                mp.getObservaciones(),
-                mp.getAsistente()};
+                mp.getObservaciones()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
@@ -609,14 +591,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargarListaAsistentes() {
-        asistenteComboBox.removeAllItems();
-        asistenteComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.ASISTENTE_TECNICO)) {
-            asistenteComboBox.addItem(p);
-        }
-    }
-    
     private void cargarListaOperarios() {
         operarioComboBox.removeAllItems();
         for (Persona p : new RolPersonaControlador().leerLista(Rol.TRABAJADOR)) {
@@ -625,7 +599,6 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     }
 
     private void cargarListas() {
-        cargarListaAsistentes();
         cargarListaLabores();
         cargarListaLotes();
         cargarListaModulos();

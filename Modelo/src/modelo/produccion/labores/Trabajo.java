@@ -30,20 +30,17 @@ public class Trabajo implements Serializable {
     private Persona operario;
     private float horas;
     private String observaciones;
-    @ManyToOne(optional = true)
-    private Persona asistente;
 
     public Trabajo() {
     }
 
-    public Trabajo(Date fecha, Modulo modulo, Labor labor, Persona operario, float jornales, String observaciones, Persona asistente) {
+    public Trabajo(Date fecha, Modulo modulo, Labor labor, Persona operario, float jornales, String observaciones) {
         this.fecha = fecha;
         this.modulo = modulo;
         this.labor = labor;
         this.operario = operario;
         this.horas = jornales;
         this.observaciones = observaciones;
-        this.asistente = asistente;
     }
 
     public long getId() {
@@ -102,14 +99,6 @@ public class Trabajo implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Persona getAsistente() {
-        return asistente;
-    }
-
-    public void setAsistente(Persona asistente) {
-        this.asistente = asistente;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -120,7 +109,6 @@ public class Trabajo implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.operario);
         hash = 29 * hash + Float.floatToIntBits(this.horas);
         hash = 29 * hash + Objects.hashCode(this.observaciones);
-        hash = 29 * hash + Objects.hashCode(this.asistente);
         return hash;
     }
 
@@ -152,9 +140,6 @@ public class Trabajo implements Serializable {
             return false;
         }
         if (!Objects.equals(this.observaciones, other.observaciones)) {
-            return false;
-        }
-        if (!Objects.equals(this.asistente, other.asistente)) {
             return false;
         }
         return true;

@@ -5,10 +5,17 @@
  */
 package controlador.produccion.monitoreo;
 
+import java.util.List;
+import modelo.produccion.monitoreo.Monitoreo;
+
 /**
  *
  * @author fredy
  */
 public class MonitoreoControlador {
+
+    public List<Monitoreo> leerlista() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

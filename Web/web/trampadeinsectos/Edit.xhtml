@@ -23,21 +23,7 @@
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_cambioDePegante}" for="cambioDePegante"/>
                         <p:selectBooleanButton id="cambioDePegante" value="#{trampaDeInsectosController.selected.cambioDePegante}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.EditTrampaDeInsectosTitle_observaciones}" />
-                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_asistente}" for="asistente" />
-                        <p:selectOneMenu id="asistente" value="#{trampaDeInsectosController.selected.asistente}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="asistenteItem"
-                                           itemValue="#{asistenteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditTrampaDeInsectosLabel_productor}" for="productor" />
-                        <p:selectOneMenu id="productor" value="#{trampaDeInsectosController.selected.productor}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="productorItem"
-                                           itemValue="#{productorItem}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="observaciones" value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.EditTrampaDeInsectosTitle_observaciones}" />                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{trampaDeInsectosController.update}" value="#{bundle.Save}" update="display,:TrampaDeInsectosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TrampaDeInsectosEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TrampaDeInsectosEditDialog.hide()"/>

@@ -64,18 +64,6 @@
                         </f:facet>
                         <h:outputText value="#{item.observaciones}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListTrabajoTitle_asistente}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.asistente.nombre} #{item.asistente.apellido}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListTrabajoTitle_productor}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.productor.nombre} #{item.productor.apellido}"/>
-                    </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{trabajoController.prepareCreate}" update=":TrabajoCreateForm" oncomplete="PF('TrabajoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TrabajoViewForm" oncomplete="PF('TrabajoViewDialog').show()" disabled="#{empty trabajoController.selected}"/>

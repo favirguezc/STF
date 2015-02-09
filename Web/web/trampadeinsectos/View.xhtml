@@ -25,11 +25,7 @@
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_cambioDePegante}"/>
                         <h:outputText value="#{trampaDeInsectosController.selected.cambioDePegante}" title="#{bundle.ViewTrampaDeInsectosTitle_cambioDePegante}" converter="#{SiNoConverter}"/>
                         <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_observaciones}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.ViewTrampaDeInsectosTitle_observaciones}"/>
-                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_asistente}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.asistente.nombre} #{trampaDeInsectosController.selected.asistente.apellido}" title="#{bundle.ViewTrampaDeInsectosTitle_asistente}"/>
-                        <h:outputText value="#{bundle.ViewTrampaDeInsectosLabel_productor}"/>
-                        <h:outputText value="#{trampaDeInsectosController.selected.productor.nombre} #{trampaDeInsectosController.selected.productor.apellido}" title="#{bundle.ViewTrampaDeInsectosTitle_productor}"/>
+                        <h:outputText value="#{trampaDeInsectosController.selected.observaciones}" title="#{bundle.ViewTrampaDeInsectosTitle_observaciones}"/>                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TrampaDeInsectosViewDialog.hide()"/>
                 </h:panelGroup>

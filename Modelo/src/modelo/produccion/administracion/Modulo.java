@@ -71,10 +71,10 @@ public class Modulo implements Serializable {
     public void setLote(Lote lote) {
         this.lote = lote;
     }
-    
+
     @Override
     public String toString() {
-        return lote.getNombre()+" - "+nombre;
+        return lote.getNombre() + " - " + nombre;
     }
 
     @Override

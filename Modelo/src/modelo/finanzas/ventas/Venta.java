@@ -64,9 +64,29 @@ public class Venta implements Serializable {
     private float quintaPrecioTotal;
     */
 
+    /**
+     *
+     */
     public Venta() {
     }
     
+    /**
+     *
+     * @param fechaVenta
+     * @param cliente
+     * @param extraGramos
+     * @param primeraGramos
+     * @param segundaGramos
+     * @param terceraGramos
+     * @param cuartaGramos
+     * @param quintaGramos
+     * @param extraPrecioUnid
+     * @param primeraPrecioUnid
+     * @param segundaPrecioUnid
+     * @param terceraPrecioUnid
+     * @param cuartaPrecioUnid
+     * @param quintaPrecioUnid
+     */
     public Venta(Date fechaVenta, Persona cliente, float extraGramos, float primeraGramos,
             float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, 
             float extraPrecioUnid, float primeraPrecioUnid, float segundaPrecioUnid,
@@ -87,6 +107,17 @@ public class Venta implements Serializable {
         this.quintaPrecioUnid = quintaPrecioUnid;
     }
 
+    /**
+     *
+     * @param fechaVenta
+     * @param cliente
+     * @param extraGramos
+     * @param primeraGramos
+     * @param segundaGramos
+     * @param terceraGramos
+     * @param cuartaGramos
+     * @param quintaGramos
+     */
     public Venta(Date fechaVenta, Persona cliente, float extraGramos, float primeraGramos,
             float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos) {
         this.fechaVenta = fechaVenta;
@@ -99,156 +130,308 @@ public class Venta implements Serializable {
         this.quintaGramos = quintaGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
     
+    /**
+     *
+     * @return
+     */
     public Date getFechaVenta() {
         return fechaVenta;
     }
 
+    /**
+     *
+     * @param fechaVenta
+     */
     public void setFechaVenta(Date fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
 
+    /**
+     *
+     * @return
+     */
     public Persona getCliente() {
         return cliente;
     }
 
+    /**
+     *
+     * @param cliente
+     */
     public void setCliente(Persona cliente) {
         this.cliente = cliente;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getExtraGramos() {
         return extraGramos;
     }
 
+    /**
+     *
+     * @param extraGramos
+     */
     public void setExtraGramos(float extraGramos) {
         this.extraGramos = extraGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPrimeraGramos() {
         return primeraGramos;
     }
 
+    /**
+     *
+     * @param primeraGramos
+     */
     public void setPrimeraGramos(float primeraGramos) {
         this.primeraGramos = primeraGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getSegundaGramos() {
         return segundaGramos;
     }
 
+    /**
+     *
+     * @param segundaGramos
+     */
     public void setSegundaGramos(float segundaGramos) {
         this.segundaGramos = segundaGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getTerceraGramos() {
         return terceraGramos;
     }
 
+    /**
+     *
+     * @param terceraGramos
+     */
     public void setTerceraGramos(float terceraGramos) {
         this.terceraGramos = terceraGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getCuartaGramos() {
         return cuartaGramos;
     }
 
+    /**
+     *
+     * @param cuartaGramos
+     */
     public void setCuartaGramos(float cuartaGramos) {
         this.cuartaGramos = cuartaGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getQuintaGramos() {
         return quintaGramos;
     }
 
+    /**
+     *
+     * @param quintaGramos
+     */
     public void setQuintaGramos(float quintaGramos) {
         this.quintaGramos = quintaGramos;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getExtraPrecioUnid() {
         return extraPrecioUnid;
     }
 
+    /**
+     *
+     * @param extraPrecioUnid
+     */
     public void setExtraPrecioUnid(float extraPrecioUnid) {
         this.extraPrecioUnid = extraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPrimeraPrecioUnid() {
         return primeraPrecioUnid;
     }
 
+    /**
+     *
+     * @param primeraPrecioUnid
+     */
     public void setPrimeraPrecioUnid(float primeraPrecioUnid) {
         this.primeraPrecioUnid = primeraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getSegundaPrecioUnid() {
         return segundaPrecioUnid;
     }
 
+    /**
+     *
+     * @param segundaPrecioUnid
+     */
     public void setSegundaPrecioUnid(float segundaPrecioUnid) {
         this.segundaPrecioUnid = segundaPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getTerceraPrecioUnid() {
         return terceraPrecioUnid;
     }
 
+    /**
+     *
+     * @param terceraPrecioUnid
+     */
     public void setTerceraPrecioUnid(float terceraPrecioUnid) {
         this.terceraPrecioUnid = terceraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getCuartaPrecioUnid() {
         return cuartaPrecioUnid;
     }
 
+    /**
+     *
+     * @param cuartaPrecioUnid
+     */
     public void setCuartaPrecioUnid(float cuartaPrecioUnid) {
         this.cuartaPrecioUnid = cuartaPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getQuintaPrecioUnid() {
         return quintaPrecioUnid;
     }
 
+    /**
+     *
+     * @param quintaPrecioUnid
+     */
     public void setQuintaPrecioUnid(float quintaPrecioUnid) {
         this.quintaPrecioUnid = quintaPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getExtraPrecioTotal() {
         return extraGramos * extraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPrimeraPrecioTotal() {
         return primeraGramos * primeraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getSegundaPrecioTotal() {
         return segundaGramos * segundaPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getTerceraPrecioTotal() {
         return terceraGramos * terceraPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getCuartaPrecioTotal() {
         return cuartaGramos * cuartaPrecioUnid;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getQuintaPrecioTotal() {
         return quintaGramos * quintaPrecioUnid;
     }
     
+    /**
+     *
+     * @return
+     */
     public float getVentaTotal (){
         return getExtraPrecioTotal() + getPrimeraPrecioTotal() + 
                getSegundaPrecioTotal() + getTerceraPrecioTotal() + 
                 getCuartaPrecioTotal() + getQuintaPrecioTotal();
     }
     
+    /**
+     *
+     * @param v
+     */
     public void sumar(Venta v) {
         this.extraGramos += v.extraGramos;
         this.primeraGramos += v.primeraGramos;

@@ -29,34 +29,66 @@ public class Nota implements Serializable {
     @ManyToOne(optional = false)
     private Persona creador;    
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     *
+     * @param titulo
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNota() {
         return nota;
     }
 
+    /**
+     *
+     * @param nota
+     */
     public void setNota(String nota) {
         this.nota = nota;
     }
 
+    /**
+     *
+     * @return
+     */
     public Persona getCreador() {
         return creador;
     }
 
+    /**
+     *
+     * @param creador
+     */
     public void setCreador(Persona creador) {
         this.creador = creador;
     }

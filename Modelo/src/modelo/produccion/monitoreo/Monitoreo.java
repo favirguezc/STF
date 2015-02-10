@@ -31,34 +31,66 @@ public class Monitoreo implements Serializable {
     @Column(nullable = false)
     private Date fecha;
 
+    /**
+     *
+     */
     public Monitoreo() {
     }
 
+    /**
+     *
+     * @param numeroDeMonitoreo
+     * @param fecha
+     */
     public Monitoreo(long numeroDeMonitoreo, Date fecha) {
         this.numeroDeMonitoreo = numeroDeMonitoreo;
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getNumeroDeMonitoreo() {
         return numeroDeMonitoreo;
     }
 
+    /**
+     *
+     * @param numeroDeMonitoreo
+     */
     public void setNumeroDeMonitoreo(long numeroDeMonitoreo) {
         this.numeroDeMonitoreo = numeroDeMonitoreo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }

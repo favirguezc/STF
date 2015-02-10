@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Lluvia implements Serializable {
 
@@ -22,34 +26,66 @@ public class Lluvia implements Serializable {
     @Column(nullable = false)
     private float mm;
     
+    /**
+     *
+     */
     public Lluvia() {
     }
 
+    /**
+     *
+     * @param fecha
+     * @param mmDeLluvia
+     */
     public Lluvia(Date fecha, float mmDeLluvia) {
         this.fecha = fecha;
         this.mm = mmDeLluvia;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getMm() {
         return mm;
     }
 
+    /**
+     *
+     * @param mm
+     */
     public void setMm(float mm) {
         this.mm = mm;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }

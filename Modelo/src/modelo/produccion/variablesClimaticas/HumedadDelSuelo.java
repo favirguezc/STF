@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class HumedadDelSuelo implements Serializable {
 
@@ -28,9 +32,19 @@ public class HumedadDelSuelo implements Serializable {
     @Column(nullable = false)
     private float valorEn15Cms;
 
+    /**
+     *
+     */
     public HumedadDelSuelo() {
     }
 
+    /**
+     *
+     * @param fecha
+     * @param _30Cms
+     * @param _15Cms
+     * @param hora
+     */
     public HumedadDelSuelo(Date fecha, float _30Cms, float _15Cms, Date hora) {
         this.fecha = fecha;
         this.valorEn30Cms = _30Cms;
@@ -38,51 +52,99 @@ public class HumedadDelSuelo implements Serializable {
         this.hora = hora;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getValorEn30Cms() {
         return valorEn30Cms;
     }
 
+    /**
+     *
+     * @param valorEn30Cms
+     */
     public void setValorEn30Cms(float valorEn30Cms) {
         this.valorEn30Cms = valorEn30Cms;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getValorEn15Cms() {
         return valorEn15Cms;
     }
 
+    /**
+     *
+     * @param valorEn15Cms
+     */
     public void setValorEn15Cms(float valorEn15Cms) {
         this.valorEn15Cms = valorEn15Cms;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHora() {
         return hora;
     }
 
+    /**
+     *
+     * @param hora
+     */
     public void setHora(Date hora) {
         this.hora = hora;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param h
+     */
     public void sumar(HumedadDelSuelo h) {
         this.valorEn15Cms += h.valorEn15Cms;
         this.valorEn30Cms += h.valorEn30Cms;
     }
 
+    /**
+     *
+     * @param n
+     */
     public void dividir(int n) {
         this.valorEn15Cms = this.valorEn15Cms / n;
         this.valorEn30Cms = this.valorEn30Cms / n;

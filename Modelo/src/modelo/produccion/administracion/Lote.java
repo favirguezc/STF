@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Lote implements Serializable {
 
@@ -17,25 +21,48 @@ public class Lote implements Serializable {
     @Column(nullable = false,unique = true)
     private String nombre;
 
+    /**
+     *
+     */
     public Lote() {
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public Lote(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }

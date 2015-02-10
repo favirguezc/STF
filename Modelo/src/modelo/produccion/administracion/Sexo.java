@@ -10,6 +10,14 @@ package modelo.produccion.administracion;
  * @author fredy
  */
 public enum Sexo {
+
+    /**
+     *
+     */
     MASCULINO,
+
+    /**
+     *
+     */
     FEMENINO
 }

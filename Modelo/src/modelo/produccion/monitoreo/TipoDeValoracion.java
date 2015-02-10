@@ -10,8 +10,20 @@ package modelo.produccion.monitoreo;
  * @author fredy
  */
 public enum TipoDeValoracion {
+
+    /**
+     *
+     */
     CONTEO,
+
+    /**
+     *
+     */
     RIESGO,
+
+    /**
+     *
+     */
     RELACION;
 
     @Override

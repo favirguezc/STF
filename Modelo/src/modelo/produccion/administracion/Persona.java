@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Persona implements Serializable {
 
@@ -36,9 +40,25 @@ public class Persona implements Serializable {
     @Enumerated(EnumType.STRING)
     private RH rh;
 
+    /**
+     *
+     */
     public Persona() {
     }
 
+    /**
+     *
+     * @param nombre
+     * @param nombre2
+     * @param apellido
+     * @param apellido2
+     * @param cedula
+     * @param contrasena
+     * @param sexo
+     * @param telefono
+     * @param grupoSanguineo
+     * @param rh
+     */
     public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, String contrasena, Sexo sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
         this.nombre = nombre;
         this.nombre2 = nombre2;
@@ -52,90 +72,178 @@ public class Persona implements Serializable {
         this.rh = rh;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre2() {
         return nombre2;
     }
 
+    /**
+     *
+     * @param nombre2
+     */
     public void setNombre2(String nombre2) {
         this.nombre2 = nombre2;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getApellido() {
         return apellido;
     }
 
+    /**
+     *
+     * @param apellido
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getApellido2() {
         return apellido2;
     }
 
+    /**
+     *
+     * @param apellido2
+     */
     public void setApellido2(String apellido2) {
         this.apellido2 = apellido2;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getCedula() {
         return cedula;
     }
 
+    /**
+     *
+     * @param cedula
+     */
     public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getContrasena() {
         return contrasena;
     }
 
+    /**
+     *
+     * @param contrasena
+     */
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
+    /**
+     *
+     * @return
+     */
     public Sexo getSexo() {
         return sexo;
     }
 
+    /**
+     *
+     * @param sexo
+     */
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getTelefono() {
         return telefono;
     }
 
+    /**
+     *
+     * @param telefono
+     */
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
+    /**
+     *
+     * @return
+     */
     public GrupoSanguineo getGrupoSanguineo() {
         return grupoSanguineo;
     }
 
+    /**
+     *
+     * @param grupoSanguineo
+     */
     public void setGrupoSanguineo(GrupoSanguineo grupoSanguineo) {
         this.grupoSanguineo = grupoSanguineo;
     }
 
+    /**
+     *
+     * @return
+     */
     public RH getRh() {
         return rh;
     }
 
+    /**
+     *
+     * @param rh
+     */
     public void setRh(RH rh) {
         this.rh = rh;
     }

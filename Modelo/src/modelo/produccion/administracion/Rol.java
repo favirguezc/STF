@@ -1,12 +1,44 @@
 package modelo.produccion.administracion;
 
+/**
+ *
+ * @author fredy
+ */
 public enum Rol {
+
+    /**
+     *
+     */
     RECOLECTOR,
+
+    /**
+     *
+     */
     TRABAJADOR,
+
+    /**
+     *
+     */
     ADMINISTRADOR,
+
+    /**
+     *
+     */
     GERENTE,
+
+    /**
+     *
+     */
     ASISTENTE_TECNICO,
+
+    /**
+     *
+     */
     SECRETARIO,
+
+    /**
+     *
+     */
     CLIENTE;
 
     @Override

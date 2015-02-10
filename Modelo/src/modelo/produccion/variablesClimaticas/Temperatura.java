@@ -13,6 +13,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import modelo.produccion.administracion.Modulo;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Temperatura implements Serializable {
 
@@ -34,9 +38,21 @@ public class Temperatura implements Serializable {
     @ManyToOne(optional = false)
     private Modulo modulo;
 
+    /**
+     *
+     */
     public Temperatura() {
     }
 
+    /**
+     *
+     * @param fecha
+     * @param hora
+     * @param temperatura
+     * @param humedad
+     * @param puntoDeRocio
+     * @param modulo
+     */
     public Temperatura(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, Modulo modulo) {
         this.fecha = fecha;
         this.hora = hora;
@@ -46,58 +62,114 @@ public class Temperatura implements Serializable {
         this.modulo = modulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHora() {
         return hora;
     }
 
+    /**
+     *
+     * @param hora
+     */
     public void setHora(Date hora) {
         this.hora = hora;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getTemperatura() {
         return temperatura;
     }
 
+    /**
+     *
+     * @param temperatura
+     */
     public void setTemperatura(float temperatura) {
         this.temperatura = temperatura;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getHumedad() {
         return humedad;
     }
 
+    /**
+     *
+     * @param humedad
+     */
     public void setHumedad(float humedad) {
         this.humedad = humedad;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPuntoDeRocio() {
         return puntoDeRocio;
     }
 
+    /**
+     *
+     * @param puntoDeRocio
+     */
     public void setPuntoDeRocio(float puntoDeRocio) {
         this.puntoDeRocio = puntoDeRocio;
     }
 
+    /**
+     *
+     * @return
+     */
     public Modulo getModulo() {
         return modulo;
     }
 
+    /**
+     *
+     * @param modulo
+     */
     public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
@@ -148,12 +220,20 @@ public class Temperatura implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @param t
+     */
     public void sumar(Temperatura t) {
         this.temperatura += t.temperatura;
         this.humedad += t.humedad;
         this.puntoDeRocio += t.puntoDeRocio;
     }
 
+    /**
+     *
+     * @param size
+     */
     public void dividir(int size) {
         this.temperatura = this.temperatura / size;
         this.humedad = this.humedad / size;

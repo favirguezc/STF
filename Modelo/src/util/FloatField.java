@@ -21,10 +21,17 @@ public class FloatField extends JTextField {
         return new FloatTextDocument();
     }
 
+    /**
+     *
+     */
     public FloatField() {
         super();
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getFloat() {
         if (getText() == null || getText().equals("")) {
             return (float) 0;
@@ -32,6 +39,10 @@ public class FloatField extends JTextField {
         return Float.parseFloat(getText());
     }
 
+    /**
+     *
+     * @param v
+     */
     public void setFloat(Float v) {
         setText(v + "");
     }

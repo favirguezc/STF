@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Insumo implements Serializable {
 
@@ -26,9 +30,21 @@ public class Insumo implements Serializable {
     private float periodoDeCarencia;
     private float tiempoDeReentrada;
 
+    /**
+     *
+     */
     public Insumo() {
     }
 
+    /**
+     *
+     * @param tipoDeAplicacion
+     * @param nombre
+     * @param ingredienteActivo
+     * @param unidades
+     * @param pc
+     * @param tr
+     */
     public Insumo(TipoDeAplicacion tipoDeAplicacion, String nombre, String ingredienteActivo, Unidades unidades, float pc, float tr) {
         this.tipoDeAplicacion = tipoDeAplicacion;
         this.nombre = nombre;
@@ -38,58 +54,114 @@ public class Insumo implements Serializable {
         this.tiempoDeReentrada = tr;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public TipoDeAplicacion getTipoDeAplicacion() {
         return tipoDeAplicacion;
     }
 
+    /**
+     *
+     * @param tipoDeAplicacion
+     */
     public void setTipoDeAplicacion(TipoDeAplicacion tipoDeAplicacion) {
         this.tipoDeAplicacion = tipoDeAplicacion;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIngredienteActivo() {
         return ingredienteActivo;
     }
 
+    /**
+     *
+     * @param ingredienteActivo
+     */
     public void setIngredienteActivo(String ingredienteActivo) {
         this.ingredienteActivo = ingredienteActivo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Unidades getUnidades() {
         return unidades;
     }
 
+    /**
+     *
+     * @param unidades
+     */
     public void setUnidades(Unidades unidades) {
         this.unidades = unidades;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getPeriodoDeCarencia() {
         return periodoDeCarencia;
     }
 
+    /**
+     *
+     * @param periodoDeCarencia
+     */
     public void setPeriodoDeCarencia(float periodoDeCarencia) {
         this.periodoDeCarencia = periodoDeCarencia;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getTiempoDeReentrada() {
         return tiempoDeReentrada;
     }
 
+    /**
+     *
+     * @param tiempoDeReentrada
+     */
     public void setTiempoDeReentrada(float tiempoDeReentrada) {
         this.tiempoDeReentrada = tiempoDeReentrada;
     }

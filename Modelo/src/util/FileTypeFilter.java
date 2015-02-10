@@ -17,6 +17,11 @@ public class FileTypeFilter extends FileFilter {
     private String extension;
     private String description;
 
+    /**
+     *
+     * @param extension
+     * @param description
+     */
     public FileTypeFilter(String extension, String description) {
         this.extension = extension;
         this.description = description;

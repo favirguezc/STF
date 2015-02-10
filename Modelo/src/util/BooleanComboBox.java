@@ -15,6 +15,9 @@ public class BooleanComboBox extends JComboBox<String> {
     
     private final String no="No",si="Si";
     
+    /**
+     *
+     */
     public BooleanComboBox() {
         super();
         super.removeAllItems();
@@ -22,10 +25,18 @@ public class BooleanComboBox extends JComboBox<String> {
         addItem(no);
     }
     
+    /**
+     *
+     * @return
+     */
     public Boolean isSelected() {
         return super.getSelectedItem().equals("Si");
     }
     
+    /**
+     *
+     * @param b
+     */
     public void setSelected(boolean b) {
         if (b) {
             setSelectedItem(si);

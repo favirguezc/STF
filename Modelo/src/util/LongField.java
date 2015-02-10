@@ -21,10 +21,17 @@ public class LongField extends JTextField {
         return new LongTextDocument();
     }
 
+    /**
+     *
+     */
     public LongField() {
         super();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getInteger() {
         if (getText() == null || getText().equals("")) {
             return 0;
@@ -32,10 +39,18 @@ public class LongField extends JTextField {
         return Integer.parseInt(getText());
     }
 
+    /**
+     *
+     * @param v
+     */
     public void setInteger(int v) {
         setText(v + "");
     }
 
+    /**
+     *
+     * @return
+     */
     public long getLong() {
         if (getText() == null || getText().equals("")) {
             return 0;
@@ -43,6 +58,10 @@ public class LongField extends JTextField {
         return Long.parseLong(getText());
     }
 
+    /**
+     *
+     * @param v
+     */
     public void setLong(long v) {
         setText(v + "");
     }

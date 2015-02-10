@@ -13,6 +13,10 @@ import javax.persistence.Temporal;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class Trabajo implements Serializable {
 
@@ -31,9 +35,21 @@ public class Trabajo implements Serializable {
     private float horas;
     private String observaciones;
 
+    /**
+     *
+     */
     public Trabajo() {
     }
 
+    /**
+     *
+     * @param fecha
+     * @param modulo
+     * @param labor
+     * @param operario
+     * @param jornales
+     * @param observaciones
+     */
     public Trabajo(Date fecha, Modulo modulo, Labor labor, Persona operario, float jornales, String observaciones) {
         this.fecha = fecha;
         this.modulo = modulo;
@@ -43,58 +59,114 @@ public class Trabajo implements Serializable {
         this.observaciones = observaciones;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public Modulo getModulo() {
         return modulo;
     }
 
+    /**
+     *
+     * @param modulo
+     */
     public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Labor getLabor() {
         return labor;
     }
 
+    /**
+     *
+     * @param labor
+     */
     public void setLabor(Labor labor) {
         this.labor = labor;
     }
 
+    /**
+     *
+     * @return
+     */
     public Persona getOperario() {
         return operario;
     }
 
+    /**
+     *
+     * @param operario
+     */
     public void setOperario(Persona operario) {
         this.operario = operario;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getHoras() {
         return horas;
     }
 
+    /**
+     *
+     * @param horas
+     */
     public void setHoras(float horas) {
         this.horas = horas;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getObservaciones() {
         return observaciones;
     }
 
+    /**
+     *
+     * @param observaciones
+     */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }

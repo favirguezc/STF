@@ -25,34 +25,66 @@ public class RolPersona implements Serializable {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    /**
+     *
+     */
     public RolPersona() {
     }
 
+    /**
+     *
+     * @param persona
+     * @param rol
+     */
     public RolPersona(Persona persona, Rol rol) {
         this.persona = persona;
         this.rol = rol;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Persona getPersona() {
         return persona;
     }
 
+    /**
+     *
+     * @param persona
+     */
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
+    /**
+     *
+     * @return
+     */
     public Rol getRol() {
         return rol;
     }
 
+    /**
+     *
+     * @param rol
+     */
     public void setRol(Rol rol) {
         this.rol = rol;
     }

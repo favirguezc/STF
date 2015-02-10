@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import modelo.produccion.administracion.Persona;
 
+/**
+ *
+ * @author fredy
+ */
 @Entity
 public class TrampaDeInsectos implements Serializable {
 
@@ -29,9 +33,21 @@ public class TrampaDeInsectos implements Serializable {
     private boolean cambioDePegante;
     private String observaciones;
 
+    /**
+     *
+     */
     public TrampaDeInsectos() {
     }
 
+    /**
+     *
+     * @param fecha
+     * @param nombre
+     * @param especie
+     * @param individuos
+     * @param cambio
+     * @param observaciones
+     */
     public TrampaDeInsectos(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones) {
         this.fecha = fecha;
         this.nombre = nombre;
@@ -41,58 +57,114 @@ public class TrampaDeInsectos implements Serializable {
         this.observaciones = observaciones;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEspecie() {
         return especie;
     }
 
+    /**
+     *
+     * @param especie
+     */
     public void setEspecie(String especie) {
         this.especie = especie;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIndividuos() {
         return individuos;
     }
 
+    /**
+     *
+     * @param individuos
+     */
     public void setIndividuos(int individuos) {
         this.individuos = individuos;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isCambioDePegante() {
         return cambioDePegante;
     }
 
+    /**
+     *
+     * @param cambioDePegante
+     */
     public void setCambioDePegante(boolean cambioDePegante) {
         this.cambioDePegante = cambioDePegante;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getObservaciones() {
         return observaciones;
     }
 
+    /**
+     *
+     * @param observaciones
+     */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }

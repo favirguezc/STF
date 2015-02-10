@@ -15,24 +15,50 @@ import java.util.GregorianCalendar;
  */
 public class DateTools {
 
+    /**
+     *
+     * @param mes
+     * @param año
+     * @return
+     */
     public static Date getPrimerDiaDelMes(int mes, int año) {
         return new Date(año - 1900, mes, 1);
     }
 
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public static String getSemana(Date fecha) {
         return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDate(getUltimoDiaDeLaSemana(fecha));
     }
 
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public static String getSemanaCorta(Date fecha) {
         return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDateShort(getUltimoDiaDeLaSemana(fecha));
     }
 
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public static int getNumeroDeSemana(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
         return c.get(Calendar.WEEK_OF_YEAR);
     }
 
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public static Date getPrimerDiaDeLaSemana(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
@@ -40,6 +66,11 @@ public class DateTools {
         return c.getTime();
     }
 
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public static Date getUltimoDiaDeLaSemana(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
@@ -47,6 +78,12 @@ public class DateTools {
         return c.getTime();
     }
 
+    /**
+     *
+     * @param mes
+     * @param año
+     * @return
+     */
     public static Date getUltimoDiaDelMes(int mes, int año) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(getPrimerDiaDelMes(mes, año));
@@ -55,6 +92,11 @@ public class DateTools {
         return c.getTime();
     }
 
+    /**
+     *
+     * @param dia
+     * @return
+     */
     public static String getDia(int dia) {
         switch (dia) {
             case 1: {
@@ -84,6 +126,11 @@ public class DateTools {
         }
     }
 
+    /**
+     *
+     * @param mes
+     * @return
+     */
     public static int getMes(String mes) {
         mes = mes.toLowerCase();
         if (mes.equals("enero")) {
@@ -125,6 +172,11 @@ public class DateTools {
         return -1;
     }
 
+    /**
+     *
+     * @param mes
+     * @return
+     */
     public static String getMes(int mes) {
         switch (mes) {
             case 0: {
@@ -169,12 +221,22 @@ public class DateTools {
         }
     }
 
+    /**
+     *
+     * @param año
+     * @return
+     */
     public static int getDiasDelAño(int año) {
         Calendar instance = GregorianCalendar.getInstance();
         instance.setTime(new Date(año - 1900, 11, 31));
         return instance.get(Calendar.DAY_OF_YEAR);
     }
 
+    /**
+     *
+     * @param año
+     * @return
+     */
     public static int getSemanasDelAño(int año) {
         Calendar instance = GregorianCalendar.getInstance();
         instance.setTime(new Date(año - 1900, 11, 31));

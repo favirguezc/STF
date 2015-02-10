@@ -12,12 +12,47 @@ package util;
 public class Validador {
 
     public static final int CONTRASEÑA_SIN_NUMERO = 3,
-            CONTRASEÑA_MUY_CORTA = 1,
-            CONTRASEÑA_MUY_LARGA = 2,
-            OK = 0, CONTRASEÑA_VACIA = 4,
-            CONTRASEÑA_SIN_MINUSCULAS = 5,
-            CONTRASEÑA_SIN_MAYUSCULAS = 6;
 
+    /**
+     *
+     */
+    CONTRASEÑA_MUY_CORTA = 1,
+
+    /**
+     *
+     */
+    CONTRASEÑA_MUY_LARGA = 2,
+
+    /**
+     *
+     */
+    OK = 0,
+
+    /**
+     *
+     */
+    CONTRASEÑA_VACIA = 4,
+
+    /**
+     *
+     */
+    CONTRASEÑA_SIN_MINUSCULAS = 5,
+
+    /**
+     *
+     */
+    CONTRASEÑA_SIN_MAYUSCULAS = 6;
+
+    /**
+     *
+     * @param c
+     * @param longitudmin
+     * @param longitudmax
+     * @param numero
+     * @param letraM
+     * @param letram
+     * @return
+     */
     public static int validarContraseña(String c, int longitudmin, int longitudmax, boolean numero, boolean letraM, boolean letram) {
         if (c == null || c.length() == 0) {
             return CONTRASEÑA_VACIA;

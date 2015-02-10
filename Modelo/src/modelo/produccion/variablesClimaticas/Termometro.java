@@ -27,43 +27,84 @@ public class Termometro implements Serializable{
     @ManyToOne(optional = false)
     private Modulo modulo;
 
+    /**
+     *
+     */
     public Termometro() {
     }
 
+    /**
+     *
+     * @param nombre
+     * @param numeroDeSerie
+     * @param modulo
+     */
     public Termometro(String nombre, long numeroDeSerie, Modulo modulo) {
         this.nombre = nombre;
         this.numeroDeSerie = numeroDeSerie;
         this.modulo = modulo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }    
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getNumeroDeSerie() {
         return numeroDeSerie;
     }
 
+    /**
+     *
+     * @param numeroDeSerie
+     */
     public void setNumeroDeSerie(long numeroDeSerie) {
         this.numeroDeSerie = numeroDeSerie;
     }
 
+    /**
+     *
+     * @return
+     */
     public Modulo getModulo() {
         return modulo;
     }
 
+    /**
+     *
+     * @param modulo
+     */
     public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }

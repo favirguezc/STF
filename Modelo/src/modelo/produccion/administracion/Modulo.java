@@ -31,43 +31,84 @@ public class Modulo implements Serializable {
     @ManyToOne(optional = false)
     private Lote lote;
 
+    /**
+     *
+     */
     public Modulo() {
     }
 
+    /**
+     *
+     * @param nombre
+     * @param area
+     * @param lote
+     */
     public Modulo(String nombre, double area, Lote lote) {
         this.nombre = nombre;
         this.area = area;
         this.lote = lote;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getArea() {
         return area;
     }
 
+    /**
+     *
+     * @param area
+     */
     public void setArea(double area) {
         this.area = area;
     }
 
+    /**
+     *
+     * @return
+     */
     public Lote getLote() {
         return lote;
     }
 
+    /**
+     *
+     * @param lote
+     */
     public void setLote(Lote lote) {
         this.lote = lote;
     }

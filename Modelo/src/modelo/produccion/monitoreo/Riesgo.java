@@ -11,9 +11,24 @@ package modelo.produccion.monitoreo;
  */
 public enum Riesgo {
 
+    /**
+     *
+     */
     NO,
+
+    /**
+     *
+     */
     BAJO,
+
+    /**
+     *
+     */
     MEDIO,
+
+    /**
+     *
+     */
     ALTO;
 
     @Override

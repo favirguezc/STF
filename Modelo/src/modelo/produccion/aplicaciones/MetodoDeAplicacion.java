@@ -10,7 +10,19 @@ package modelo.produccion.aplicaciones;
  * @author fredy
  */
 public enum MetodoDeAplicacion {
+
+    /**
+     *
+     */
     Inyectado,
+
+    /**
+     *
+     */
     Riego,
+
+    /**
+     *
+     */
     Foliar
 }

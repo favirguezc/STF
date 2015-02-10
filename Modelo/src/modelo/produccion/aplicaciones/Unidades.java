@@ -10,7 +10,15 @@ package modelo.produccion.aplicaciones;
  * @author fredy
  */
 public enum Unidades {
+
+    /**
+     *
+     */
     CC,
+
+    /**
+     *
+     */
     GR;
 
     @Override

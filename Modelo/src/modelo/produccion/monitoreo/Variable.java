@@ -33,43 +33,84 @@ public class Variable implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoDeValoracion tipoDeValoracion;
 
+    /**
+     *
+     */
     public Variable() {
     }
 
+    /**
+     *
+     * @param nombre
+     * @param abreviacion
+     * @param tipoDeValoracion
+     */
     public Variable(String nombre, String abreviacion, TipoDeValoracion tipoDeValoracion) {
         this.nombre = nombre;
         this.abreviacion = abreviacion;
         this.tipoDeValoracion = tipoDeValoracion;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAbreviacion() {
         return abreviacion;
     }
 
+    /**
+     *
+     * @param abreviacion
+     */
     public void setAbreviacion(String abreviacion) {
         this.abreviacion = abreviacion;
     }
 
+    /**
+     *
+     * @return
+     */
     public TipoDeValoracion getTipoDeValoracion() {
         return tipoDeValoracion;
     }
 
+    /**
+     *
+     * @param tipoDeValoracion
+     */
     public void setTipoDeValoracion(TipoDeValoracion tipoDeValoracion) {
         this.tipoDeValoracion = tipoDeValoracion;
     }

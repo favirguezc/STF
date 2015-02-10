@@ -10,8 +10,24 @@ package modelo.produccion.administracion;
  * @author fredy
  */
 public enum GrupoSanguineo {
+
+    /**
+     *
+     */
     A,
+
+    /**
+     *
+     */
     B,
+
+    /**
+     *
+     */
     O,
+
+    /**
+     *
+     */
     AB
 }

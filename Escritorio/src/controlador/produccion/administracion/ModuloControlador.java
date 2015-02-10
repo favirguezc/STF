@@ -5,9 +5,9 @@
  */
 package controlador.produccion.administracion;
 
-import dao.administracion.ModuloDAO;
-import dao.exceptions.NonexistentEntityException;
-import dao.util.EntityManagerFactorySingleton;
+import datos.produccion.administracion.ModuloDAO;
+import datos.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.administracion.Lote;

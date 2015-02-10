@@ -9,7 +9,7 @@ import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.monitoreo.MonitoreoControlador;
 import controlador.produccion.monitoreo.MonitoreoDeVariablesControlador;
 import controlador.produccion.monitoreo.VariableControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +18,7 @@ import modelo.produccion.monitoreo.Monitoreo;
 import modelo.produccion.monitoreo.MonitoreoDeVariables;
 import modelo.produccion.monitoreo.Riesgo;
 import modelo.produccion.monitoreo.Variable;
-import util.TableColumnAdjuster;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -69,7 +69,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         variableComboBox = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        conteoLongField = new util.LongField();
+        conteoLongField = new modelo.util.LongField();
         relacionTextField = new javax.swing.JTextField();
         riesgoComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
@@ -450,7 +450,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.LongField conteoLongField;
+    private modelo.util.LongField conteoLongField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;

@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.monitoreo.Variable;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.VariableJpaController;
-
+import datos.produccion.monitoreo.VariableDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "variableController")
 @SessionScoped
 public class VariableController implements Serializable {
 
-    private VariableJpaController jpaController = null;
+    private VariableDAO jpaController = null;
     private List<Variable> items = null;
     private Variable selected;
 
@@ -43,9 +42,9 @@ public class VariableController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private VariableJpaController getJpaController() {
+    private VariableDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new VariableJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new VariableDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

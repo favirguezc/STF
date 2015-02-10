@@ -438,7 +438,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="util.FloatField" name="jornalesFloatField">
+        <Component class="modelo.util.FloatField" name="jornalesFloatField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>

@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.HumedadDelSueloJpaController;
-
+import datos.produccion.variablesClimaticas.HumedadDelSueloDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -17,13 +17,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "humedadDelSueloController")
 @SessionScoped
 public class HumedadDelSueloController implements Serializable {
 
-    private HumedadDelSueloJpaController jpaController = null;
+    private HumedadDelSueloDAO jpaController = null;
     private List<HumedadDelSuelo> items = null;
     private HumedadDelSuelo selected;
 
@@ -44,9 +43,9 @@ public class HumedadDelSueloController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private HumedadDelSueloJpaController getJpaController() {
+    private HumedadDelSueloDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new HumedadDelSueloJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new HumedadDelSueloDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

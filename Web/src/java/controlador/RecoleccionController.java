@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.recoleccion.Recoleccion;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.RecoleccionJpaController;
-
+import datos.produccion.recoleccion.RecoleccionDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +17,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Persona;
 
@@ -25,7 +24,7 @@ import modelo.produccion.administracion.Persona;
 @SessionScoped
 public class RecoleccionController implements Serializable {
 
-    private RecoleccionJpaController jpaController = null;
+    private RecoleccionDAO jpaController = null;
     private List<Recoleccion> items = null;
     private Recoleccion selected;
 
@@ -46,9 +45,9 @@ public class RecoleccionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RecoleccionJpaController getJpaController() {
+    private RecoleccionDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new RecoleccionJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new RecoleccionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

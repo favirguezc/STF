@@ -5,9 +5,9 @@
  */
 package controlador.produccion.variablesClimaticas;
 
-import dao.util.EntityManagerFactorySingleton;
-import dao.variablesClimaticas.HumedadDelSueloDAO;
-import dao.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.variablesClimaticas.HumedadDelSueloDAO;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;

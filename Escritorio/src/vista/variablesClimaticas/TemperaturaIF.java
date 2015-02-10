@@ -1,7 +1,7 @@
 package vista.variablesClimaticas;
 
 import controlador.produccion.variablesClimaticas.TemperaturaControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelo.produccion.variablesClimaticas.Temperatura;
-import util.DateFormatter;
+import modelo.util.DateFormatter;
 
 /**
  *
@@ -64,12 +64,12 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         jLabel55 = new javax.swing.JLabel();
         horaSpinner1 = new javax.swing.JSpinner();
         jLabel56 = new javax.swing.JLabel();
-        minTempFloatField = new util.FloatField();
+        minTempFloatField = new modelo.util.FloatField();
         jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         horaSpinner2 = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
-        maxTempFloatField = new util.FloatField();
+        maxTempFloatField = new modelo.util.FloatField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
@@ -639,9 +639,9 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel43;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private util.FloatField maxTempFloatField;
+    private modelo.util.FloatField maxTempFloatField;
     private javax.swing.JComboBox mesComboBox;
-    private util.FloatField minTempFloatField;
+    private modelo.util.FloatField minTempFloatField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     private javax.swing.JTable promediosMesTable;

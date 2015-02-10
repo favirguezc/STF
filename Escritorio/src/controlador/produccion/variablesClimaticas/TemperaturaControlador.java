@@ -5,9 +5,9 @@
  */
 package controlador.produccion.variablesClimaticas;
 
-import dao.util.EntityManagerFactorySingleton;
-import dao.variablesClimaticas.TemperaturaDAO;
-import dao.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.variablesClimaticas.TemperaturaDAO;
 import java.util.Date;
 import java.util.List;
 import modelo.produccion.administracion.Modulo;
@@ -25,7 +25,7 @@ public class TemperaturaControlador {
         dao = new TemperaturaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio,Modulo modulo) {
+    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, Modulo modulo) {
         return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, modulo);
     }
 
@@ -50,7 +50,7 @@ public class TemperaturaControlador {
     }
 
     public List<Temperatura> buscarLista(Date esteMes, Date siguienteMes) {
-        return dao.findTemperaturaEntities(esteMes, siguienteMes);
+        return dao.findTemperaturaEntities(esteMes, siguienteMes, 0);
     }
 
     public float calcularPromedio(Date fecha1, Date fecha2) {

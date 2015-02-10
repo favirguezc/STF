@@ -7,7 +7,8 @@ package controlador;
 
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.VentaJpaController;
+import datos.fnanzas.VentaDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,14 +33,14 @@ public class VentaController {
 
     private Venta selected;
     private List<Venta> items = null;
-    private VentaJpaController jpaController = null;
+    private VentaDAO jpaController = null;
     
     public VentaController() {
     }
 
-    private VentaJpaController getJpaController() {
+    private VentaDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new VentaJpaController(javax.persistence.Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new VentaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

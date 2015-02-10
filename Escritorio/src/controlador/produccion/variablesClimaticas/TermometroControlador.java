@@ -5,9 +5,9 @@
  */
 package controlador.produccion.variablesClimaticas;
 
-import dao.util.EntityManagerFactorySingleton;
-import dao.variablesClimaticas.TermometroDAO;
-import dao.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.variablesClimaticas.TermometroDAO;
 import java.util.List;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.variablesClimaticas.Termometro;

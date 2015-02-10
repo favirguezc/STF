@@ -5,9 +5,9 @@
  */
 package controlador.produccion.labores;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.produccion.TrabajoDAO;
-import dao.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.labores.TrabajoDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import modelo.produccion.administracion.Lote;

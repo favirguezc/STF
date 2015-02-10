@@ -8,7 +8,7 @@ package vista.produccion;
 import controlador.produccion.administracion.LoteControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.produccion.recoleccion.RecoleccionControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -19,8 +19,8 @@ import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.recoleccion.Recoleccion;
-import util.DateFormatter;
-import util.TableColumnAdjuster;
+import modelo.util.DateFormatter;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -60,12 +60,12 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         loteComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         recolectorComboBox = new javax.swing.JComboBox();
-        extraFloatField = new util.FloatField();
-        primeraFloatField = new util.FloatField();
-        segundaFloatField = new util.FloatField();
-        terceraFloatField = new util.FloatField();
-        cuartaFloatField = new util.FloatField();
-        dañadaFloatField = new util.FloatField();
+        extraFloatField = new modelo.util.FloatField();
+        primeraFloatField = new modelo.util.FloatField();
+        segundaFloatField = new modelo.util.FloatField();
+        terceraFloatField = new modelo.util.FloatField();
+        cuartaFloatField = new modelo.util.FloatField();
+        dañadaFloatField = new modelo.util.FloatField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -654,14 +654,14 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.ButtonGroup buttonGroup1;
-    private util.FloatField cuartaFloatField;
-    private util.FloatField dañadaFloatField;
+    private modelo.util.FloatField cuartaFloatField;
+    private modelo.util.FloatField dañadaFloatField;
     private datechooser.beans.DateChooserCombo diaDateChooserCombo;
     private javax.swing.JRadioButton diarioRadioButton;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
-    private util.FloatField extraFloatField;
+    private modelo.util.FloatField extraFloatField;
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
@@ -687,12 +687,12 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton mensualRadioButton2;
     private javax.swing.JComboBox mesComboBox;
     private javax.swing.JButton nuevoButton;
-    private util.FloatField primeraFloatField;
+    private modelo.util.FloatField primeraFloatField;
     private javax.swing.JTable principalTable;
     private javax.swing.JComboBox recolectorComboBox;
     private javax.swing.JComboBox recolectorFiltroComboBox;
-    private util.FloatField segundaFloatField;
-    private util.FloatField terceraFloatField;
+    private modelo.util.FloatField segundaFloatField;
+    private modelo.util.FloatField terceraFloatField;
     // End of variables declaration//GEN-END:variables
 
     private void guardar(boolean b) {

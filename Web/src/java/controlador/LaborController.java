@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.labores.Labor;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.LaborJpaController;
-
+import datos.produccion.labores.LaborDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "laborController")
 @SessionScoped
 public class LaborController implements Serializable {
 
-    private LaborJpaController jpaController = null;
+    private LaborDAO jpaController = null;
     private List<Labor> items = null;
     private Labor selected;
 
@@ -43,9 +42,9 @@ public class LaborController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private LaborJpaController getJpaController() {
+    private LaborDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new LaborJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new LaborDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

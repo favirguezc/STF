@@ -10,7 +10,7 @@ import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.produccion.labores.LaborControlador;
 import controlador.produccion.labores.TrabajoControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,8 +23,8 @@ import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.labores.Labor;
 import modelo.produccion.labores.Trabajo;
-import util.DateFormatter;
-import util.TableColumnAdjuster;
+import modelo.util.DateFormatter;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -79,7 +79,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         laborComboBox = new javax.swing.JComboBox();
         operarioComboBox = new javax.swing.JComboBox();
-        jornalesFloatField = new util.FloatField();
+        jornalesFloatField = new modelo.util.FloatField();
         observacionesTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -509,7 +509,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private util.FloatField jornalesFloatField;
+    private modelo.util.FloatField jornalesFloatField;
     private javax.swing.JComboBox laborComboBox;
     private javax.swing.JComboBox loteComboBox;
     private javax.swing.JComboBox mesComboBox;

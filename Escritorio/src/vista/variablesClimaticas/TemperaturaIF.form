@@ -362,7 +362,7 @@
                         <Property name="text" type="java.lang.String" value="Temperatura"/>
                       </Properties>
                     </Component>
-                    <Component class="util.FloatField" name="minTempFloatField">
+                    <Component class="modelo.util.FloatField" name="minTempFloatField">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -440,7 +440,7 @@
                         <Property name="text" type="java.lang.String" value="Temperatura"/>
                       </Properties>
                     </Component>
-                    <Component class="util.FloatField" name="maxTempFloatField">
+                    <Component class="modelo.util.FloatField" name="maxTempFloatField">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>

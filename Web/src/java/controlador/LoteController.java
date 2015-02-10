@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.administracion.Lote;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.LoteJpaController;
-
+import datos.produccion.administracion.LoteDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "loteController")
 @SessionScoped
 public class LoteController implements Serializable {
 
-    private LoteJpaController jpaController = null;
+    private LoteDAO jpaController = null;
     private List<Lote> items = null;
     private Lote selected;
 
@@ -43,9 +42,9 @@ public class LoteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private LoteJpaController getJpaController() {
+    private LoteDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new LoteJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new LoteDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

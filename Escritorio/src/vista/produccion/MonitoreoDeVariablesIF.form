@@ -382,7 +382,7 @@
             <Property name="text" type="java.lang.String" value="Variable"/>
           </Properties>
         </Component>
-        <Component class="util.LongField" name="conteoLongField">
+        <Component class="modelo.util.LongField" name="conteoLongField">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>

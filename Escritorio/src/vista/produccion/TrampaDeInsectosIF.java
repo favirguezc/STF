@@ -7,7 +7,7 @@ package vista.produccion;
 
 import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.produccion.monitoreo.TrampaDeInsectosControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.monitoreo.TrampaDeInsectos;
-import util.DateFormatter;
-import util.TableColumnAdjuster;
+import modelo.util.DateFormatter;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -52,16 +52,16 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
         edicionPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
-        nombreNameField = new util.NameField();
-        especieNameField = new util.NameField();
+        nombreNameField = new modelo.util.NameField();
+        especieNameField = new modelo.util.NameField();
         observacionesTextField = new javax.swing.JTextField();
-        individuosLongField = new util.LongField();
+        individuosLongField = new modelo.util.LongField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cambioBooleanComboBox = new util.BooleanComboBox();
+        cambioBooleanComboBox = new modelo.util.BooleanComboBox();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
@@ -382,14 +382,14 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.BooleanComboBox cambioBooleanComboBox;
+    private modelo.util.BooleanComboBox cambioBooleanComboBox;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
-    private util.NameField especieNameField;
+    private modelo.util.NameField especieNameField;
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
-    private util.LongField individuosLongField;
+    private modelo.util.LongField individuosLongField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -399,7 +399,7 @@ public class TrampaDeInsectosIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private util.NameField nombreNameField;
+    private modelo.util.NameField nombreNameField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTextField observacionesTextField;
     private javax.swing.JTable principalTable;

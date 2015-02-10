@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.monitoreo.TrampaDeInsectos;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.TrampaDeInsectosJpaController;
-
+import datos.produccion.monitoreo.TrampaDeInsectosDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "trampaDeInsectosController")
 @SessionScoped
 public class TrampaDeInsectosController implements Serializable {
 
-    private TrampaDeInsectosJpaController jpaController = null;
+    private TrampaDeInsectosDAO jpaController = null;
     private List<TrampaDeInsectos> items = null;
     private TrampaDeInsectos selected;
 
@@ -43,9 +42,9 @@ public class TrampaDeInsectosController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TrampaDeInsectosJpaController getJpaController() {
+    private TrampaDeInsectosDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new TrampaDeInsectosJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new TrampaDeInsectosDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

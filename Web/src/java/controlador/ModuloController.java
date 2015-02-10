@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.administracion.Modulo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.ModuloJpaController;
-
+import datos.produccion.administracion.ModuloDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "moduloController")
 @SessionScoped
 public class ModuloController implements Serializable {
 
-    private ModuloJpaController jpaController = null;
+    private ModuloDAO jpaController = null;
     private List<Modulo> items = null;
     private Modulo selected;
 
@@ -43,9 +42,9 @@ public class ModuloController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ModuloJpaController getJpaController() {
+    private ModuloDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new ModuloJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new ModuloDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

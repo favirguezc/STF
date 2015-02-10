@@ -406,7 +406,7 @@
                     <Property name="text" type="java.lang.String" value="Extra"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="extraFloatField">
+                <Component class="modelo.util.FloatField" name="extraFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -421,7 +421,7 @@
                     <Property name="text" type="java.lang.String" value="Primera"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="primeraFloatField">
+                <Component class="modelo.util.FloatField" name="primeraFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -436,7 +436,7 @@
                     <Property name="text" type="java.lang.String" value="Segunda"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="segundaFloatField">
+                <Component class="modelo.util.FloatField" name="segundaFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -451,7 +451,7 @@
                     <Property name="text" type="java.lang.String" value="Tercera"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="terceraFloatField">
+                <Component class="modelo.util.FloatField" name="terceraFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -466,7 +466,7 @@
                     <Property name="text" type="java.lang.String" value="Cuarta"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="cuartaFloatField">
+                <Component class="modelo.util.FloatField" name="cuartaFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -481,7 +481,7 @@
                     <Property name="text" type="java.lang.String" value="Qunta"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="quintaFloatField">
+                <Component class="modelo.util.FloatField" name="quintaFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -616,7 +616,7 @@
                     <Property name="text" type="java.lang.String" value="Extra"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="extraPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="extraPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -631,7 +631,7 @@
                     <Property name="text" type="java.lang.String" value="Primera"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="primeraPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="primeraPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -646,7 +646,7 @@
                     <Property name="text" type="java.lang.String" value="Segunda"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="segundaPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="segundaPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -661,7 +661,7 @@
                     <Property name="text" type="java.lang.String" value="Tercera"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="terceraPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="terceraPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -676,7 +676,7 @@
                     <Property name="text" type="java.lang.String" value="Cuarta"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="cuartaPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="cuartaPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>
@@ -691,7 +691,7 @@
                     <Property name="text" type="java.lang.String" value="Qunta"/>
                   </Properties>
                 </Component>
-                <Component class="util.FloatField" name="quintaPrecioFloatField">
+                <Component class="modelo.util.FloatField" name="quintaPrecioFloatField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="0"/>

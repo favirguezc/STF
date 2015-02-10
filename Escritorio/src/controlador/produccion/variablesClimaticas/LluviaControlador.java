@@ -5,13 +5,11 @@
  */
 package controlador.produccion.variablesClimaticas;
 
-import dao.variablesClimaticas.ControlDeLluviasDAO;
-import dao.util.EntityManagerFactorySingleton;
-import dao.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.variablesClimaticas.LluviaDAO;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.produccion.variablesClimaticas.Lluvia;
 
@@ -21,10 +19,10 @@ import modelo.produccion.variablesClimaticas.Lluvia;
  */
 public class LluviaControlador {
 
-    private ControlDeLluviasDAO dao;
+    private LluviaDAO dao;
 
     public LluviaControlador() {
-        dao = new ControlDeLluviasDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        dao = new LluviaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
     public Lluvia nuevo(Date date, float mm) {
@@ -34,18 +32,18 @@ public class LluviaControlador {
     public boolean validar(Lluvia t, Boolean nueva) {
         if (nueva) {
             try {
-                if (dao.findControlDeLluvias(t.getFecha()) != null) {
+                if (dao.findLluviaEntities(t.getFecha()) != null && dao.findLluviaEntities(t.getFecha()).size() > 0) {
                     JOptionPane.showMessageDialog(null, "Ya existe un registro para la fecha.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-            } catch (Exception ex) {                
+            } catch (Exception ex) {
             }
         }
         return true;
     }
 
-    public Lluvia buscar(Date fecha) throws Exception{
-        return dao.findControlDeLluvias(fecha);
+    public Lluvia buscar(Date fecha) {
+        return dao.findLluviaEntities(fecha).get(0);
     }
 
     public void eliminar(Long id) throws NonexistentEntityException {
@@ -61,6 +59,6 @@ public class LluviaControlador {
     }
 
     public List<Lluvia> buscarLista(Date esteMes, Date siguienteMes) {
-        return dao.findControlDeLluviasEntities(esteMes, siguienteMes);
+        return dao.findLluviaEntities(esteMes, siguienteMes);
     }
 }

@@ -6,14 +6,14 @@
 package vista.produccion;
 
 import controlador.produccion.aplicaciones.InsumoControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.produccion.aplicaciones.Insumo;
 import modelo.produccion.aplicaciones.TipoDeAplicacion;
 import modelo.produccion.aplicaciones.Unidades;
-import util.TableColumnAdjuster;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -54,8 +54,8 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tipoComboBox = new javax.swing.JComboBox();
-        pcFloatField = new util.FloatField();
-        trFloatField = new util.FloatField();
+        pcFloatField = new modelo.util.FloatField();
+        trFloatField = new modelo.util.FloatField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -403,10 +403,10 @@ public class InsumoFitosanitarioIF extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JButton nuevoButton;
-    private util.FloatField pcFloatField;
+    private modelo.util.FloatField pcFloatField;
     private javax.swing.JTable principalTable;
     private javax.swing.JComboBox tipoComboBox;
-    private util.FloatField trFloatField;
+    private modelo.util.FloatField trFloatField;
     private javax.swing.JComboBox unidadesComboBox;
     // End of variables declaration//GEN-END:variables
 

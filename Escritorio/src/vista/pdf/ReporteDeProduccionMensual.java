@@ -31,8 +31,8 @@ import java.util.logging.Logger;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
-import util.DateFormatter;
-import util.DateTools;
+import modelo.util.DateFormatter;
+import modelo.util.DateTools;
 
 /**
  *

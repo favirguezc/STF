@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.aplicaciones.Insumo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.InsumoJpaController;
-
+import datos.produccion.aplicaciones.InsumoDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "insumoController")
 @SessionScoped
 public class InsumoController implements Serializable {
 
-    private InsumoJpaController jpaController = null;
+    private InsumoDAO jpaController = null;
     private List<Insumo> items = null;
     private Insumo selected;
 
@@ -43,9 +42,9 @@ public class InsumoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private InsumoJpaController getJpaController() {
+    private InsumoDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new InsumoJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new InsumoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

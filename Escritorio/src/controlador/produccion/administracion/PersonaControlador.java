@@ -5,16 +5,16 @@
  */
 package controlador.produccion.administracion;
 
-import dao.administracion.PersonaDAO;
-import dao.exceptions.NonexistentEntityException;
-import dao.util.EntityManagerFactorySingleton;
+import datos.produccion.administracion.PersonaDAO;
+import datos.exceptions.NonexistentEntityException;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.administracion.GrupoSanguineo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.RH;
 import modelo.produccion.administracion.Sexo;
-import util.Validador;
+import modelo.util.Validador;
 
 /**
  *

@@ -6,7 +6,7 @@
 package vista.variablesClimaticas;
 
 import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
-import util.DateFormatter;
-import util.FileTypeFilter;
+import modelo.util.DateFormatter;
+import modelo.util.FileTypeFilter;
 import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
 
 /**
@@ -74,8 +74,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        _15cmsFloatField = new util.FloatField();
-        _30cmsFloatField = new util.FloatField();
+        _15cmsFloatField = new modelo.util.FloatField();
+        _30cmsFloatField = new modelo.util.FloatField();
 
         setClosable(true);
         setIconifiable(true);
@@ -497,8 +497,8 @@ public class HumedadDelSueloIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.FloatField _15cmsFloatField;
-    private util.FloatField _30cmsFloatField;
+    private modelo.util.FloatField _15cmsFloatField;
+    private modelo.util.FloatField _30cmsFloatField;
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;

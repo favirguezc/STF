@@ -5,9 +5,9 @@
  */
 package controlador.produccion.aplicaciones;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.produccion.InsumoDAO;
-import dao.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.aplicaciones.InsumoDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.produccion.aplicaciones.Insumo;

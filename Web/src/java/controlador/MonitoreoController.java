@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.monitoreo.Monitoreo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.MonitoreoJpaController;
-
+import datos.produccion.monitoreo.MonitoreoDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "monitoreoController")
 @SessionScoped
 public class MonitoreoController implements Serializable {
 
-    private MonitoreoJpaController jpaController = null;
+    private MonitoreoDAO jpaController = null;
     private List<Monitoreo> items = null;
     private Monitoreo selected;
 
@@ -43,9 +42,9 @@ public class MonitoreoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private MonitoreoJpaController getJpaController() {
+    private MonitoreoDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new MonitoreoJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new MonitoreoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

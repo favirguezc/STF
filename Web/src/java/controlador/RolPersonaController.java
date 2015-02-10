@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.administracion.RolPersona;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.RolPersonaJpaController;
-
+import datos.produccion.administracion.RolPersonaDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "rolPersonaController")
 @SessionScoped
 public class RolPersonaController implements Serializable {
 
-    private RolPersonaJpaController jpaController = null;
+    private RolPersonaDAO jpaController = null;
     private List<RolPersona> items = null;
     private RolPersona selected;
 
@@ -43,9 +42,9 @@ public class RolPersonaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RolPersonaJpaController getJpaController() {
+    private RolPersonaDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new RolPersonaJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

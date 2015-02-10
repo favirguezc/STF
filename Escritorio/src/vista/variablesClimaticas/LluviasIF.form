@@ -287,7 +287,7 @@
                 <Property name="text" type="java.lang.String" value="Mil&#xed;metros De Lluvia"/>
               </Properties>
             </Component>
-            <Component class="util.FloatField" name="mmsFloatField">
+            <Component class="modelo.util.FloatField" name="mmsFloatField">
             </Component>
           </SubComponents>
         </Container>

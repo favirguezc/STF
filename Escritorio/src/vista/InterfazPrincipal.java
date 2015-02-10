@@ -25,7 +25,6 @@ import vista.graficas.RecoleccionAnualPorLoteIF;
 import vista.administracion.PersonaIF;
 import vista.administracion.LoteIF;
 import controlador.produccion.labores.LaborControlador;
-import dao.util.EntityManagerFactorySingleton;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,10 +33,11 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
-import util.FileTypeFilter;
+import modelo.util.FileTypeFilter;
 import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
 import vista.archivos.LectorDeRegistrosTemperatura;
 import vista.finanzas.VentaIF;
+import datos.util.EntityManagerFactorySingleton;
 
 /**
  *
@@ -129,6 +129,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem27 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem28 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -556,6 +558,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu7);
 
+        jMenu8.setText("Back Up");
+
+        jMenuItem4.setText("Back Up");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem4);
+
+        jMenuBar2.add(jMenu8);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -744,6 +758,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         abrirRegistroVentas();
     }//GEN-LAST:event_jMenuItem28ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -758,6 +776,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -781,6 +800,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -1036,8 +1056,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void abrirRegistroVentas(){
+
+    private void abrirRegistroVentas() {
         if (!ventanaActivaEnPanelEscritorio(VentaIF.class)) {
             VentaIF v = new VentaIF();
             panelEscritorio.add(v);

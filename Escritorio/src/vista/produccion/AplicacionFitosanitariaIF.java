@@ -10,7 +10,7 @@ import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.produccion.monitoreo.VariableControlador;
 import controlador.produccion.aplicaciones.AplicacionControlador;
 import controlador.produccion.aplicaciones.InsumoControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -26,8 +26,8 @@ import modelo.produccion.aplicaciones.Insumo;
 import modelo.produccion.aplicaciones.MetodoDeAplicacion;
 import modelo.produccion.aplicaciones.TipoDeAplicacion;
 import modelo.produccion.monitoreo.Variable;
-import util.DateFormatter;
-import util.TableColumnAdjuster;
+import modelo.util.DateFormatter;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -93,9 +93,9 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         observacionesTextField = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        cantidadFloatField = new util.FloatField();
-        aguaFloatField = new util.FloatField();
-        horasFloatField = new util.FloatField();
+        cantidadFloatField = new modelo.util.FloatField();
+        aguaFloatField = new modelo.util.FloatField();
+        horasFloatField = new modelo.util.FloatField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -673,18 +673,18 @@ public class AplicacionFitosanitariaIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.FloatField aguaFloatField;
+    private modelo.util.FloatField aguaFloatField;
     private datechooser.beans.DateChooserCombo aplicacionDateChooserCombo;
     private javax.swing.JComboBox autorizaComboBox;
     private datechooser.beans.DateChooserCombo autorizacionDateChooserCombo;
-    private util.FloatField cantidadFloatField;
+    private modelo.util.FloatField cantidadFloatField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private datechooser.beans.DateChooserCombo fechaFinChooserCombo;
     private datechooser.beans.DateChooserCombo fechaInicioChooserCombo;
     private javax.swing.JButton guardarButton;
-    private util.FloatField horasFloatField;
+    private modelo.util.FloatField horasFloatField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

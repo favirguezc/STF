@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.utilidades.Nota;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.NotaJpaController;
-
+import datos.produccion.utilidades.NotaDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "notaController")
 @SessionScoped
 public class NotaController implements Serializable {
 
-    private NotaJpaController jpaController = null;
+    private NotaDAO jpaController = null;
     private List<Nota> items = null;
     private Nota selected;
 
@@ -43,9 +42,9 @@ public class NotaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private NotaJpaController getJpaController() {
+    private NotaDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new NotaJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new NotaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

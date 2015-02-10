@@ -5,9 +5,9 @@
  */
 package controlador.finanzas;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.fnanzas.VentaDAO;
-import dao.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.fnanzas.VentaDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import modelo.finanzas.ventas.Venta;

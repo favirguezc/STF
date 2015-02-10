@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.variablesClimaticas.Termometro;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.TermometroJpaController;
-
+import datos.produccion.variablesClimaticas.TermometroDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "termometroController")
 @SessionScoped
 public class TermometroController implements Serializable {
 
-    private TermometroJpaController jpaController = null;
+    private TermometroDAO jpaController = null;
     private List<Termometro> items = null;
     private Termometro selected;
 
@@ -43,9 +42,9 @@ public class TermometroController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TermometroJpaController getJpaController() {
+    private TermometroDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new TermometroJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new TermometroDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

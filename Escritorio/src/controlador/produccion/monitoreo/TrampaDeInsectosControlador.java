@@ -5,9 +5,9 @@
  */
 package controlador.produccion.monitoreo;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.produccion.TrampaDeInsectosDAO;
-import dao.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.monitoreo.TrampaDeInsectosDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;

@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.labores.Trabajo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.TrabajoJpaController;
-
+import datos.produccion.labores.TrabajoDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,13 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "trabajoController")
 @SessionScoped
 public class TrabajoController implements Serializable {
 
-    private TrabajoJpaController jpaController = null;
+    private TrabajoDAO jpaController = null;
     private List<Trabajo> items = null;
     private Trabajo selected;
 
@@ -43,9 +42,9 @@ public class TrabajoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TrabajoJpaController getJpaController() {
+    private TrabajoDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new TrabajoJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new TrabajoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

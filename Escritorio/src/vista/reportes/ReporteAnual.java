@@ -9,7 +9,7 @@ import java.awt.Frame;
 import java.io.File;
 import javax.swing.JFileChooser;
 import vista.pdf.ReporteDeProduccionAnual;
-import util.FileTypeFilter;
+import modelo.util.FileTypeFilter;
 
 /**
  *

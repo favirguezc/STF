@@ -7,7 +7,7 @@ package vista.finanzas;
 
 import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.finanzas.VentaControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.finanzas.ventas.Venta;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
-import util.DateFormatter;
+import modelo.util.DateFormatter;
 
 /**
  *
@@ -75,33 +75,33 @@ public class VentaIF extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         clienteComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        extraFloatField = new util.FloatField();
+        extraFloatField = new modelo.util.FloatField();
         jLabel5 = new javax.swing.JLabel();
-        primeraFloatField = new util.FloatField();
+        primeraFloatField = new modelo.util.FloatField();
         jLabel6 = new javax.swing.JLabel();
-        segundaFloatField = new util.FloatField();
+        segundaFloatField = new modelo.util.FloatField();
         jLabel7 = new javax.swing.JLabel();
-        terceraFloatField = new util.FloatField();
+        terceraFloatField = new modelo.util.FloatField();
         jLabel8 = new javax.swing.JLabel();
-        cuartaFloatField = new util.FloatField();
+        cuartaFloatField = new modelo.util.FloatField();
         jLabel9 = new javax.swing.JLabel();
-        quintaFloatField = new util.FloatField();
+        quintaFloatField = new modelo.util.FloatField();
         jLabel10 = new javax.swing.JLabel();
         siguienteButton = new javax.swing.JButton();
         changePricePanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        extraPrecioFloatField = new util.FloatField();
+        extraPrecioFloatField = new modelo.util.FloatField();
         jLabel13 = new javax.swing.JLabel();
-        primeraPrecioFloatField = new util.FloatField();
+        primeraPrecioFloatField = new modelo.util.FloatField();
         jLabel14 = new javax.swing.JLabel();
-        segundaPrecioFloatField = new util.FloatField();
+        segundaPrecioFloatField = new modelo.util.FloatField();
         jLabel15 = new javax.swing.JLabel();
-        terceraPrecioFloatField = new util.FloatField();
+        terceraPrecioFloatField = new modelo.util.FloatField();
         jLabel16 = new javax.swing.JLabel();
-        cuartaPrecioFloatField = new util.FloatField();
+        cuartaPrecioFloatField = new modelo.util.FloatField();
         jLabel17 = new javax.swing.JLabel();
-        quintaPrecioFloatField = new util.FloatField();
+        quintaPrecioFloatField = new modelo.util.FloatField();
         anteriorButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -740,15 +740,15 @@ public class VentaIF extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel changePricePanel;
     private javax.swing.JComboBox clienteComboBox;
-    private util.FloatField cuartaFloatField;
-    private util.FloatField cuartaPrecioFloatField;
+    private modelo.util.FloatField cuartaFloatField;
+    private modelo.util.FloatField cuartaPrecioFloatField;
     private datechooser.beans.DateChooserCombo diaDateChooserCombo;
     private javax.swing.JRadioButton diarioRadioButton;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
-    private util.FloatField extraFloatField;
-    private util.FloatField extraPrecioFloatField;
+    private modelo.util.FloatField extraFloatField;
+    private modelo.util.FloatField extraPrecioFloatField;
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JComboBox filtroClienteComboBox;
     private javax.swing.JButton guardarButton;
@@ -777,16 +777,16 @@ public class VentaIF extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton mensualRadioButton2;
     private javax.swing.JComboBox mesComboBox;
     private javax.swing.JButton nuevoButton;
-    private util.FloatField primeraFloatField;
-    private util.FloatField primeraPrecioFloatField;
+    private modelo.util.FloatField primeraFloatField;
+    private modelo.util.FloatField primeraPrecioFloatField;
     private javax.swing.JTable principalTable;
-    private util.FloatField quintaFloatField;
-    private util.FloatField quintaPrecioFloatField;
-    private util.FloatField segundaFloatField;
-    private util.FloatField segundaPrecioFloatField;
+    private modelo.util.FloatField quintaFloatField;
+    private modelo.util.FloatField quintaPrecioFloatField;
+    private modelo.util.FloatField segundaFloatField;
+    private modelo.util.FloatField segundaPrecioFloatField;
     private javax.swing.JButton siguienteButton;
-    private util.FloatField terceraFloatField;
-    private util.FloatField terceraPrecioFloatField;
+    private modelo.util.FloatField terceraFloatField;
+    private modelo.util.FloatField terceraPrecioFloatField;
     // End of variables declaration//GEN-END:variables
     
     private void guardar(boolean b) {

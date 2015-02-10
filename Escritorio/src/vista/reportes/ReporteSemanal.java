@@ -14,8 +14,8 @@ import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import vista.pdf.ReporteDeProduccionSemanal;
-import util.DateTools;
-import util.FileTypeFilter;
+import modelo.util.DateTools;
+import modelo.util.FileTypeFilter;
 
 /**
  *

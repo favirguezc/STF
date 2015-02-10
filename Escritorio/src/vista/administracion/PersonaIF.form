@@ -405,14 +405,14 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.LongField" name="cedulaLongField">
+            <Component class="modelo.util.LongField" name="cedulaLongField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.LongField" name="telefonoLongField">
+            <Component class="modelo.util.LongField" name="telefonoLongField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -422,28 +422,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefonoLongFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="util.NameField" name="nombre1TextField">
+            <Component class="modelo.util.NameField" name="nombre1TextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.NameField" name="nombre2TextField">
+            <Component class="modelo.util.NameField" name="nombre2TextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.NameField" name="apellido1TextField">
+            <Component class="modelo.util.NameField" name="apellido1TextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="util.NameField" name="apellido2TextField">
+            <Component class="modelo.util.NameField" name="apellido2TextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>

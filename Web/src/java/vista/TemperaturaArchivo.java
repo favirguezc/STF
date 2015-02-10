@@ -9,6 +9,7 @@ import controlador.util.JsfUtil;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -26,11 +27,11 @@ public class TemperaturaArchivo {
     public void setArchivo(UploadedFile archivo) {
         this.archivo = archivo;
     }
-    
-    public void upload() {
-        if(archivo != null) {
-            JsfUtil.addSuccessMessage(archivo.getFileName() + " is uploaded.");
-            System.out.println(archivo.getFileName());
-        }
+
+    public void upload(FileUploadEvent event) {
+        JsfUtil.addSuccessMessage("kasjdh");
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        archivo=event.getFile();
     }
 }

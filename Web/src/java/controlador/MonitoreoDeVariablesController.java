@@ -3,8 +3,8 @@ package controlador;
 import modelo.produccion.monitoreo.MonitoreoDeVariables;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import dao.MonitoreoDeVariablesJpaController;
-
+import datos.produccion.monitoreo.MonitoreoDeVariablesDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,14 +16,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 import modelo.produccion.monitoreo.TipoDeValoracion;
 
 @ManagedBean(name = "monitoreoDeVariablesController")
 @SessionScoped
 public class MonitoreoDeVariablesController implements Serializable {
 
-    private MonitoreoDeVariablesJpaController jpaController = null;
+    private MonitoreoDeVariablesDAO jpaController = null;
     private List<MonitoreoDeVariables> items = null;
     private MonitoreoDeVariables selected;
     private int habilitado;
@@ -53,9 +52,9 @@ public class MonitoreoDeVariablesController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private MonitoreoDeVariablesJpaController getJpaController() {
+    private MonitoreoDeVariablesDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new MonitoreoDeVariablesJpaController(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new MonitoreoDeVariablesDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

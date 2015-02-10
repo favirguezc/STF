@@ -6,7 +6,7 @@
 package vista.variablesClimaticas;
 
 import controlador.produccion.variablesClimaticas.LluviaControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,7 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelo.produccion.variablesClimaticas.Lluvia;
-import util.TableColumnAdjuster;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -60,7 +60,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jLabel54 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        mmsFloatField = new util.FloatField();
+        mmsFloatField = new modelo.util.FloatField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
@@ -449,7 +449,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private util.FloatField mmsFloatField;
+    private modelo.util.FloatField mmsFloatField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
     // End of variables declaration//GEN-END:variables

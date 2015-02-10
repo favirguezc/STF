@@ -5,12 +5,11 @@
  */
 package controlador.produccion.aplicaciones;
 
-import dao.exceptions.NonexistentEntityException;
-import dao.produccion.AplicacionFitosanitariaDAO;
-import dao.util.EntityManagerFactorySingleton;
+import datos.exceptions.NonexistentEntityException;
+import datos.produccion.aplicaciones.AplicacionDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
@@ -26,10 +25,10 @@ import modelo.produccion.monitoreo.Variable;
  */
 public class AplicacionControlador {
 
-    AplicacionFitosanitariaDAO dao;
+    AplicacionDAO dao;
 
     public AplicacionControlador() {
-        dao = new AplicacionFitosanitariaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        dao = new AplicacionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
     public Aplicacion nuevo(TipoDeAplicacion tipo, Modulo modulo, Date fechaDeAutorizacion, Date fechaDeAplicacion, Insumo producto, Variable motivo1, Variable motivo2, Variable motivo3, float cantidad, float litrosDeAgua, MetodoDeAplicacion metodo, Persona responsable, Persona autoriza, float jornales, String observaciones) {
@@ -37,7 +36,7 @@ public class AplicacionControlador {
     }
 
     public Aplicacion buscar(long id) {
-        return dao.findAplicacionFitosanitaria(id);
+        return dao.findAplicacion(id);
     }
 
     public void eliminar(long id) throws NonexistentEntityException {
@@ -53,7 +52,7 @@ public class AplicacionControlador {
     }
 
     public List<Aplicacion> leerLista(Lote lote, Date fecha1, Date fecha2) {
-        return dao.findAplicacionFitosanitariaEntities(lote, fecha1, fecha2);
+        return dao.findAplicacionEntities(lote, fecha1, fecha2);
     }
 
     public boolean validar(Aplicacion af) {

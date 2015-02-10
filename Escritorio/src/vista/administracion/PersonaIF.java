@@ -7,7 +7,7 @@ package vista.administracion;
 
 import controlador.produccion.administracion.PersonaControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
-import dao.exceptions.NonexistentEntityException;
+import datos.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -19,7 +19,7 @@ import modelo.produccion.administracion.RH;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.administracion.RolPersona;
 import modelo.produccion.administracion.Sexo;
-import util.TableColumnAdjuster;
+import modelo.util.TableColumnAdjuster;
 
 /**
  *
@@ -84,12 +84,12 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         rhComboBox = new javax.swing.JComboBox();
         sexoComboBox = new javax.swing.JComboBox();
-        cedulaLongField = new util.LongField();
-        telefonoLongField = new util.LongField();
-        nombre1TextField = new util.NameField();
-        nombre2TextField = new util.NameField();
-        apellido1TextField = new util.NameField();
-        apellido2TextField = new util.NameField();
+        cedulaLongField = new modelo.util.LongField();
+        telefonoLongField = new modelo.util.LongField();
+        nombre1TextField = new modelo.util.NameField();
+        nombre2TextField = new modelo.util.NameField();
+        apellido1TextField = new modelo.util.NameField();
+        apellido2TextField = new modelo.util.NameField();
         jLabel10 = new javax.swing.JLabel();
         contraseñaTextField = new javax.swing.JTextField();
         rolPanel = new javax.swing.JPanel();
@@ -641,9 +641,9 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.NameField apellido1TextField;
-    private util.NameField apellido2TextField;
-    private util.LongField cedulaLongField;
+    private modelo.util.NameField apellido1TextField;
+    private modelo.util.NameField apellido2TextField;
+    private modelo.util.LongField cedulaLongField;
     private javax.swing.JTextField contraseñaTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
@@ -668,8 +668,8 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private util.NameField nombre1TextField;
-    private util.NameField nombre2TextField;
+    private modelo.util.NameField nombre1TextField;
+    private modelo.util.NameField nombre2TextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JButton nuevoRolPersonaButton;
     private javax.swing.JTable principalTable;
@@ -679,7 +679,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox rolesComboBox;
     private javax.swing.JList rolesList;
     private javax.swing.JComboBox sexoComboBox;
-    private util.LongField telefonoLongField;
+    private modelo.util.LongField telefonoLongField;
     // End of variables declaration//GEN-END:variables
 
     private void activarEdicionPanel() {

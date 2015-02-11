@@ -24,15 +24,27 @@ import modelo.produccion.monitoreo.MonitoreoDeVariables;
  */
 public class MonitoreoDeVariablesDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public MonitoreoDeVariablesDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param monitoreoDeVariables
+     */
     public void create(MonitoreoDeVariables monitoreoDeVariables) {
         EntityManager em = null;
         try {
@@ -47,6 +59,12 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param monitoreoDeVariables
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(MonitoreoDeVariables monitoreoDeVariables) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -70,6 +88,11 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -91,6 +114,11 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param monitoreo
+     * @return
+     */
     public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(Monitoreo monitoreo) {
         EntityManager em = getEntityManager();
         try {
@@ -102,10 +130,20 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities() {
         return findMonitoreoDeVariablesEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(int maxResults, int firstResult) {
         return findMonitoreoDeVariablesEntities(false, maxResults, firstResult);
     }
@@ -126,6 +164,11 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public MonitoreoDeVariables findMonitoreoDeVariables(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -135,6 +178,10 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMonitoreoDeVariablesCount() {
         EntityManager em = getEntityManager();
         try {

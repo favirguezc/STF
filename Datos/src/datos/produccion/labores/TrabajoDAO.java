@@ -26,15 +26,27 @@ import modelo.produccion.labores.Trabajo;
  */
 public class TrabajoDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public TrabajoDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param trabajo
+     */
     public void create(Trabajo trabajo) {
         EntityManager em = null;
         try {
@@ -49,6 +61,12 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param trabajo
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Trabajo trabajo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -72,6 +90,11 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -93,10 +116,20 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Trabajo> findTrabajoEntities() {
         return findTrabajoEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Trabajo> findTrabajoEntities(int maxResults, int firstResult) {
         return findTrabajoEntities(false, maxResults, firstResult);
     }
@@ -117,6 +150,11 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Trabajo findTrabajo(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -126,6 +164,10 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTrabajoCount() {
         EntityManager em = getEntityManager();
         try {
@@ -139,6 +181,13 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param lote
+     * @param inicio
+     * @param fin
+     * @return
+     */
     public List<Trabajo> findTrabajoEntities(Lote lote, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         try {

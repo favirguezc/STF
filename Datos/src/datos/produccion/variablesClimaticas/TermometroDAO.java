@@ -25,14 +25,28 @@ public class TermometroDAO {
 
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @param emf
+     */
     public TermometroDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param termometro
+     * @throws PreexistingEntityException
+     * @throws Exception
+     */
     public void create(Termometro termometro) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
@@ -52,6 +66,12 @@ public class TermometroDAO {
         }
     }
 
+    /**
+     *
+     * @param termometro
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Termometro termometro) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -75,6 +95,11 @@ public class TermometroDAO {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -96,10 +121,20 @@ public class TermometroDAO {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Termometro> findTermometroEntities() {
         return findTermometroEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Termometro> findTermometroEntities(int maxResults, int firstResult) {
         return findTermometroEntities(false, maxResults, firstResult);
     }
@@ -120,6 +155,11 @@ public class TermometroDAO {
         }
     }
 
+    /**
+     *
+     * @param nds
+     * @return
+     */
     public Termometro findTermometro(Long nds) {
         EntityManager em = getEntityManager();
         try {
@@ -131,6 +171,10 @@ public class TermometroDAO {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTermometroCount() {
         EntityManager em = getEntityManager();
         try {

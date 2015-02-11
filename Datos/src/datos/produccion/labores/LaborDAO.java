@@ -23,15 +23,27 @@ import modelo.produccion.labores.Labor;
  */
 public class LaborDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public LaborDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param labor
+     */
     public void create(Labor labor) {
         EntityManager em = null;
         try {
@@ -46,6 +58,12 @@ public class LaborDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param labor
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Labor labor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -69,6 +87,11 @@ public class LaborDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -90,10 +113,20 @@ public class LaborDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Labor> findLaborEntities() {
         return findLaborEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Labor> findLaborEntities(int maxResults, int firstResult) {
         return findLaborEntities(false, maxResults, firstResult);
     }
@@ -114,6 +147,11 @@ public class LaborDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Labor findLabor(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -123,6 +161,12 @@ public class LaborDAO implements Serializable {
         }
     }
     
+    /**
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
     public Labor findLabor(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
@@ -134,6 +178,10 @@ public class LaborDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLaborCount() {
         EntityManager em = getEntityManager();
         try {

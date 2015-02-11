@@ -22,15 +22,27 @@ import modelo.produccion.monitoreo.Variable;
  */
 public class VariableDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public VariableDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param variable
+     */
     public void create(Variable variable) {
         EntityManager em = null;
         try {
@@ -45,6 +57,12 @@ public class VariableDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param variable
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Variable variable) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -68,6 +86,11 @@ public class VariableDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -89,10 +112,20 @@ public class VariableDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Variable> findVariableEntities() {
         return findVariableEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Variable> findVariableEntities(int maxResults, int firstResult) {
         return findVariableEntities(false, maxResults, firstResult);
     }
@@ -113,6 +146,11 @@ public class VariableDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Variable findVariable(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -122,6 +160,10 @@ public class VariableDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getVariableCount() {
         EntityManager em = getEntityManager();
         try {

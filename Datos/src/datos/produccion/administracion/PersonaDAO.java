@@ -182,15 +182,15 @@ public class PersonaDAO implements Serializable {
      *
      * @param cedula
      * @return
-     * @throws Exception
      */
-    public Persona findPersonaPorCedula(long cedula) throws Exception {
+    public Persona findPersonaPorCedula(long cedula) {
         EntityManager em = getEntityManager();
         Persona r = null;
         try {
             TypedQuery<Persona> query = em.createQuery("SELECT t FROM Persona t WHERE t.cedula = :cedula", Persona.class);
             query.setParameter("cedula", cedula);
             r = query.getSingleResult();
+        } catch (Exception e) {
         } finally {
             em.close();
         }

@@ -22,15 +22,27 @@ import modelo.produccion.utilidades.Nota;
  */
 public class NotaDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public NotaDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param nota
+     */
     public void create(Nota nota) {
         EntityManager em = null;
         try {
@@ -45,6 +57,12 @@ public class NotaDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param nota
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Nota nota) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -68,6 +86,11 @@ public class NotaDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -89,10 +112,20 @@ public class NotaDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Nota> findNotaEntities() {
         return findNotaEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Nota> findNotaEntities(int maxResults, int firstResult) {
         return findNotaEntities(false, maxResults, firstResult);
     }
@@ -113,6 +146,11 @@ public class NotaDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Nota findNota(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -122,6 +160,10 @@ public class NotaDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNotaCount() {
         EntityManager em = getEntityManager();
         try {

@@ -25,15 +25,27 @@ import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
  */
 public class HumedadDelSueloDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public HumedadDelSueloDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param humedadDelSuelo
+     */
     public void create(HumedadDelSuelo humedadDelSuelo) {
         EntityManager em = null;
         try {
@@ -48,6 +60,12 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param humedadDelSuelo
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(HumedadDelSuelo humedadDelSuelo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -71,6 +89,11 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -92,10 +115,20 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<HumedadDelSuelo> findHumedadDelSueloEntities() {
         return findHumedadDelSueloEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<HumedadDelSuelo> findHumedadDelSueloEntities(int maxResults, int firstResult) {
         return findHumedadDelSueloEntities(false, maxResults, firstResult);
     }
@@ -116,6 +149,11 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
     
+    /**
+     *
+     * @param fecha
+     * @return
+     */
     public List<HumedadDelSuelo> findHumedadDelSueloEntities(Date fecha) {
         EntityManager em = getEntityManager();
         try {
@@ -127,6 +165,12 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param esteMes
+     * @param siguienteMes
+     * @return
+     */
     public List<HumedadDelSuelo> findHumedadDelSueloEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
         try {
@@ -139,6 +183,11 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public HumedadDelSuelo findHumedadDelSuelo(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -148,6 +197,11 @@ public class HumedadDelSueloDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public List<HumedadDelSuelo> findHumedadDelSuelo(Date date) {
         EntityManager em = getEntityManager();
         List<HumedadDelSuelo> lista = null;
@@ -161,6 +215,10 @@ public class HumedadDelSueloDAO implements Serializable {
         return lista;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getHumedadDelSueloCount() {
         EntityManager em = getEntityManager();
         try {

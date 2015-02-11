@@ -22,15 +22,27 @@ import modelo.produccion.monitoreo.Monitoreo;
  */
 public class MonitoreoDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public MonitoreoDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param monitoreo
+     */
     public void create(Monitoreo monitoreo) {
         EntityManager em = null;
         try {
@@ -45,6 +57,12 @@ public class MonitoreoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param monitoreo
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Monitoreo monitoreo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -68,6 +86,11 @@ public class MonitoreoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -89,10 +112,20 @@ public class MonitoreoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Monitoreo> findMonitoreoEntities() {
         return findMonitoreoEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Monitoreo> findMonitoreoEntities(int maxResults, int firstResult) {
         return findMonitoreoEntities(false, maxResults, firstResult);
     }
@@ -113,6 +146,11 @@ public class MonitoreoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Monitoreo findMonitoreo(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -122,6 +160,10 @@ public class MonitoreoDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMonitoreoCount() {
         EntityManager em = getEntityManager();
         try {

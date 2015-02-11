@@ -27,15 +27,27 @@ import modelo.produccion.recoleccion.Recoleccion;
  */
 public class RecoleccionDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public RecoleccionDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param recoleccion
+     */
     public void create(Recoleccion recoleccion) {
         EntityManager em = null;
         try {
@@ -50,6 +62,12 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param recoleccion
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Recoleccion recoleccion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -73,6 +91,11 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -94,10 +117,20 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Recoleccion> findRecoleccionEntities() {
         return findRecoleccionEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Recoleccion> findRecoleccionEntities(int maxResults, int firstResult) {
         return findRecoleccionEntities(false, maxResults, firstResult);
     }
@@ -118,6 +151,11 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Recoleccion findRecoleccion(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -127,6 +165,10 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getRecoleccionCount() {
         EntityManager em = getEntityManager();
         try {
@@ -140,6 +182,14 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param recolector
+     * @param lote
+     * @param inicio
+     * @param fin
+     * @return
+     */
     public List<Recoleccion> findRecoleccionEntities(Persona recolector, Lote lote, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;

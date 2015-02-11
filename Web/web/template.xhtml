@@ -18,8 +18,12 @@
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north">
-                <p:graphicImage width="50" height="50" value="/imagenes/logo.PNG"/>               
-                <h:outputText value="SISTEMA DE TRAZABILIDAD DE FRESA" style="font-size:50px"/>
+                <p:graphicImage width="50" height="50" value="/imagenes/logo.PNG"/>
+                <h:outputText value="SISTEMA DE TRAZABILIDAD" style="font-size:50px"/>
+                <h:form>                        
+                    <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="false" disabled="#{!loginController.loggedin}" style="float: right"/>
+                    <h:outputText value="Hola #{loginController.user}!" style="float: right"/>
+                </h:form>
                 <h:form>
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>

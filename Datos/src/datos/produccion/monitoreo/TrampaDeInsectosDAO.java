@@ -25,15 +25,27 @@ import modelo.produccion.monitoreo.TrampaDeInsectos;
  */
 public class TrampaDeInsectosDAO implements Serializable {
 
+    /**
+     *
+     * @param emf
+     */
     public TrampaDeInsectosDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @return
+     */
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    /**
+     *
+     * @param trampaDeInsectos
+     */
     public void create(TrampaDeInsectos trampaDeInsectos) {
         EntityManager em = null;
         try {
@@ -48,6 +60,12 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param trampaDeInsectos
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(TrampaDeInsectos trampaDeInsectos) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -71,6 +89,11 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     */
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -92,10 +115,20 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<TrampaDeInsectos> findTrampaDeInsectosEntities() {
         return findTrampaDeInsectosEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<TrampaDeInsectos> findTrampaDeInsectosEntities(int maxResults, int firstResult) {
         return findTrampaDeInsectosEntities(false, maxResults, firstResult);
     }
@@ -116,6 +149,11 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public TrampaDeInsectos findTrampaDeInsectos(long id) {
         EntityManager em = getEntityManager();
         try {
@@ -125,6 +163,10 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTrampaDeInsectosCount() {
         EntityManager em = getEntityManager();
         try {
@@ -138,6 +180,12 @@ public class TrampaDeInsectosDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param fecha1
+     * @param fecha2
+     * @return
+     */
     public List<TrampaDeInsectos> findTrampaDeInsectosEntities(Date fecha1, Date fecha2) {
         EntityManager em = getEntityManager();
         try {

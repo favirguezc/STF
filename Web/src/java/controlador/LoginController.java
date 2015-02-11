@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoginController implements Serializable {
 
-    private String user, pass;
+    private String user, pass, mensaje;
     private boolean loggedin;
 
     public String getUser() {
@@ -41,6 +41,14 @@ public class LoginController implements Serializable {
         this.pass = pass;
     }
 
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
     public boolean isLoggedin() {
         return loggedin;
     }
@@ -53,12 +61,13 @@ public class LoginController implements Serializable {
         loggedin = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(user, pass);
         if (loggedin) {
             // get Http Session and store username
+            mensaje = "Hola " + user + "!";
             HttpSession session = getSession();
             session.setAttribute("username", user);
-            return "faces/index.xhtml";
+            return "/index.xhtml";
         } else {
             JsfUtil.addErrorMessage("Invalid Login! Please Try Again!");
-            return "faces/login.xhtml";
+            return "/login.xhtml";
         }
     }
 
@@ -67,8 +76,9 @@ public class LoginController implements Serializable {
         session.invalidate();
         user = null;
         pass = null;
+        mensaje = null;
         loggedin = false;
-        return "faces/login.xhtml";
+        return "/login.xhtml";
     }
 
     private static HttpSession getSession() {

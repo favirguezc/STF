@@ -29,12 +29,12 @@ public enum Rol {
     /**
      *
      */
-    ASISTENTE_TECNICO,
-
+    SECRETARIO,
+    
     /**
      *
      */
-    SECRETARIO,
+    ASISTENTE_TECNICO,
 
     /**
      *
@@ -46,12 +46,12 @@ public enum Rol {
         switch (this) {
             case ADMINISTRADOR:
                 return "Administrador";
-            case ASISTENTE_TECNICO:
-                return "Asistente Técnico";
             case RECOLECTOR:
                 return "Recolector";
             case SECRETARIO:
                 return "Secretario";
+            case ASISTENTE_TECNICO:
+                return "Asistente Técnico";
             case TRABAJADOR:
                 return "Trabajador";
             case GERENTE:

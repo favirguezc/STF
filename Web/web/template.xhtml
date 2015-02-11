@@ -18,44 +18,54 @@
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north">
-                <p:graphicImage width="50" height="50" value="/imagenes/logo.PNG"/>
-                <h:outputText value="SISTEMA DE TRAZABILIDAD" style="font-size:50px"/>
-                <h:form>                        
-                    <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="false" disabled="#{!loginController.loggedin}" style="float: right"/>
-                    <h:outputText value="Hola #{loginController.user}!" style="float: right"/>
-                </h:form>
+                <table width="100%">
+                    <tr>
+                        <td align="center">
+                            <p:graphicImage width="55" height="65" value="/imagenes/logo.PNG"/>
+                        </td>
+                        <td align="center">
+                            <h:outputText value="SISTEMA DE TRAZABILIDAD" style="font-size:50px;"/>
+                        </td>
+                        <td align="right">
+                            <h:outputText value="#{loginController.mensaje}"/>
+                            <h:form>                                
+                                <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="true" rendered="#{loginController.loggedin}" />
+                            </h:form>
+                        </td>
+                    </tr>
+                </table>
                 <h:form>
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Management}">
-                            <p:menuitem value="Lote" outcome="/lote/List.xhtml"/>
-                            <p:menuitem value="Módulo" outcome="/modulo/List.xhtml" />
-                            <p:menuitem value="Persona" outcome="/persona/List.xhtml" />
-                            <p:menuitem value="Roles" outcome="/rolPersona/List.xhtml" />
+                            <p:menuitem value="Lote" outcome="/secure/lote/List.xhtml"/>
+                            <p:menuitem value="Módulo" outcome="/secure/modulo/List.xhtml" />
+                            <p:menuitem value="Persona" outcome="/secure/persona/List.xhtml" />
+                            <p:menuitem value="Roles" outcome="/secure/rolPersona/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.Application}">
-                            <p:menuitem value="Aplicación" outcome="/aplicacion/List.xhtml"/>
-                            <p:menuitem value="Insumo" outcome="/insumo/List.xhtml"/>
+                            <p:menuitem value="Aplicación" outcome="/secure/aplicacion/List.xhtml"/>
+                            <p:menuitem value="Insumo" outcome="/secure/insumo/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Work}">
-                            <p:menuitem value="Trabajo" outcome="/trabajo/List.xhtml"/>
-                            <p:menuitem value="Labor" outcome="/labor/List.xhtml"/>
+                            <p:menuitem value="Trabajo" outcome="/secure/trabajo/List.xhtml"/>
+                            <p:menuitem value="Labor" outcome="/secure/labor/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Monitoring}">
-                            <p:menuitem value="Monitoreo" outcome="/monitoreo/List.xhtml"/>
-                            <p:menuitem value="Monitoreo de Variables" outcome="/monitoreoDeVariables/List.xhtml"/>
-                            <p:menuitem value="Variable" outcome="/variable/List.xhtml"/>
-                            <p:menuitem value="Trampa de Insectos" outcome="/trampaDeInsectos/List.xhtml"/>
+                            <p:menuitem value="Monitoreo" outcome="/secure/monitoreo/List.xhtml"/>
+                            <p:menuitem value="Monitoreo de Variables" outcome="/secure/monitoreoDeVariables/List.xhtml"/>
+                            <p:menuitem value="Variable" outcome="/secure/variable/List.xhtml"/>
+                            <p:menuitem value="Trampa de Insectos" outcome="/secure/trampaDeInsectos/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Weather}">
-                            <p:menuitem value="Temperatura" outcome="/temperatura/List.xhtml"/>
-                            <p:menuitem value="Lluvia" outcome="/lluvia/List.xhtml"/>
-                            <p:menuitem value="Humedad Del Suelo" outcome="/humedadDelSuelo/List.xhtml"/>
-                            <p:menuitem value="Termómetro" outcome="/termometro/List.xhtml"/>
+                            <p:menuitem value="Temperatura" outcome="/secure/temperatura/List.xhtml"/>
+                            <p:menuitem value="Lluvia" outcome="/secure/lluvia/List.xhtml"/>
+                            <p:menuitem value="Humedad Del Suelo" outcome="/secure/humedadDelSuelo/List.xhtml"/>
+                            <p:menuitem value="Termómetro" outcome="/secure/termometro/List.xhtml"/>
                         </p:submenu>
-                        <p:menuitem value="Recolección" outcome="/recoleccion/List.xhtml"/>
+                        <p:menuitem value="Recolección" outcome="/secure/recoleccion/List.xhtml"/>
                         <p:submenu label="#{bundle.Finanzas}">
-                            <p:menuitem value="Ventas" outcome="/venta/List.xhtml"/>
+                            <p:menuitem value="Ventas" outcome="/secure/venta/List.xhtml"/>
                         </p:submenu>
                     </p:menubar>
                 </h:form>

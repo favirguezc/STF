@@ -12,7 +12,6 @@
         <ui:define name="body">
             <center>
                 <h:form id="loginForm">          
-                    <p:growl id="msg" showDetail="true" life="3000" />
                     <p:panel header="Log in" style="width: 360px;"> 
                         <h:panelGrid id="loginPanel" columns="2"> 
                             <h:outputText value="Username" />
@@ -24,7 +23,7 @@
                             <p:spacer></p:spacer> 
                             <p:message for="password"></p:message> 
                             <p:spacer></p:spacer> 
-                            <p:commandButton action="#{loginController.login}" value="Login" update="loginForm" ajax="true"></p:commandButton> 
+                            <p:commandButton action="#{loginController.login}" value="Login" update=":growl" ajax="true"></p:commandButton> 
                         </h:panelGrid> 
                     </p:panel> 
                 </h:form>

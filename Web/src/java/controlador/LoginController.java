@@ -6,6 +6,7 @@
 package controlador;
 
 import controlador.util.JsfUtil;
+import datos.produccion.administracion.PersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import datos.util.LoginDAO;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import modelo.produccion.administracion.Persona;
 
 /**
  *
@@ -24,6 +26,7 @@ public class LoginController implements Serializable {
 
     private String user, pass, mensaje;
     private boolean loggedin;
+    private Persona userPersona;
 
     public String getUser() {
         return user;
@@ -57,28 +60,35 @@ public class LoginController implements Serializable {
         this.loggedin = loggedin;
     }
 
+    public Persona getUserPersona() {
+        return userPersona;
+    }
+
+    public void setUserPersona(Persona userPersona) {
+        this.userPersona = userPersona;
+    }
+
     public String login() {
         loggedin = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(user, pass);
         if (loggedin) {
-            // get Http Session and store username
-            mensaje = "Hola " + user + "!";
-            HttpSession session = getSession();
-            session.setAttribute("username", user);
-            return "/index.xhtml";
+            long userId = Long.parseLong(user);
+            userPersona = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
+            mensaje = "Hola " + userPersona + "!";
+            getSession().setAttribute("username", user);
+            return "/faces/secure/index.xhtml";
         } else {
-            JsfUtil.addErrorMessage("Invalid Login! Please Try Again!");
-            return "/login.xhtml";
+            JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
+            return "/faces/login.xhtml";
         }
     }
 
     public String logout() {
-        HttpSession session = getSession();
-        session.invalidate();
+        getSession().invalidate();
         user = null;
         pass = null;
         mensaje = null;
         loggedin = false;
-        return "/login.xhtml";
+        return "/faces/login.xhtml";
     }
 
     private static HttpSession getSession() {

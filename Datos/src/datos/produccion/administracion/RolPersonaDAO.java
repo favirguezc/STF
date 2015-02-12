@@ -214,7 +214,7 @@ public class RolPersonaDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public RolPersona findRolPersona(Persona p, Rol r) throws Exception{
+    public RolPersona findRolPersona(Persona p, Rol r) throws Exception {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<RolPersona> query = em.createQuery("SELECT t FROM RolPersona t WHERE t.persona = :p AND t.rol = :rol", RolPersona.class);
@@ -225,4 +225,28 @@ public class RolPersonaDAO implements Serializable {
             em.close();
         }
     }
+
+    public Rol findMostImportantRol(Persona persona) {
+        List<Rol> roles = findRolEntities(persona);
+        if (roles.contains(Rol.ADMINISTRADOR)) {
+            return Rol.ADMINISTRADOR;
+        }
+        if (roles.contains(Rol.GERENTE)) {
+            return Rol.GERENTE;
+        }
+        if (roles.contains(Rol.SECRETARIO)) {
+            return Rol.SECRETARIO;
+        }
+        if (roles.contains(Rol.ASISTENTE_TECNICO)) {
+            return Rol.ASISTENTE_TECNICO;
+        }
+        if (roles.contains(Rol.TRABAJADOR)) {
+            return Rol.TRABAJADOR;
+        }
+        if (roles.contains(Rol.RECOLECTOR)) {
+            return Rol.RECOLECTOR;
+        }
+        return Rol.CLIENTE;
+    }
+
 }

@@ -38,6 +38,14 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/faces/secure/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>AutorizacionFilter</filter-name>
+        <filter-class>controlador.AutorizacionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AutorizacionFilter</filter-name>
+        <url-pattern>/faces/secure/*</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30

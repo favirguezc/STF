@@ -17,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Modulo;
 
 @ManagedBean(name = "temperaturaController")
 @SessionScoped
@@ -147,6 +148,15 @@ public class TemperaturaController implements Serializable {
 
     public List<Temperatura> getItemsAvailableSelectOne() {
         return getJpaController().findTemperaturaEntities();
+    }
+
+    public void guardar(Temperatura temperatura) {
+        selected = temperatura;
+        persist(PersistAction.CREATE, null);
+    }
+
+    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, Modulo modulo) {
+        return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, modulo);
     }
 
     @FacesConverter(forClass = Temperatura.class)

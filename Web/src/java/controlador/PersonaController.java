@@ -4,6 +4,7 @@ import modelo.produccion.administracion.Persona;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.PersonaDAO;
+import datos.produccion.administracion.RolPersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Rol;
 
 @ManagedBean(name = "personaController")
 @SessionScoped
@@ -106,6 +108,22 @@ public class PersonaController implements Serializable {
 
     public List<Persona> getItemsAvailableSelectOne() {
         return getJpaController().findPersonaEntities();
+    }
+    
+    public List<Persona> getItemsAvailableTrabajador(){
+        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.TRABAJADOR);
+    }
+    
+    public List<Persona> getItemsAvailableAsistente(){
+        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ASISTENTE_TECNICO);
+    }
+    
+    public List<Persona> getItemsAvailableRecolector(){
+        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.RECOLECTOR);
+    }
+    
+    public List<Persona> getItemsAvailableCliente(){
+        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.CLIENTE);
     }
 
     @FacesConverter(forClass = Persona.class)

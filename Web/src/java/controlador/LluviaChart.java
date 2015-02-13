@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package controlador;
 
-import controlador.HumedadDelSueloController;
+import controlador.LluviaController;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
@@ -24,15 +23,15 @@ import modelo.util.DateTools;
  *
  * @author fredy
  */
-@ManagedBean(name = "humedadChart")
-public class HumedadChart implements Serializable {
+@ManagedBean(name = "lluviaChart")
+public class LluviaChart implements Serializable{
 
     private LineChartModel modelo1;
     private int ano1;
     private int mes1;
-
+    
     @PostConstruct
-    public void init() {
+    public void init(){
         ano1 = new Date().getYear() + 1900;
         mes1 = new Date().getMonth();
         createModel1();
@@ -57,28 +56,24 @@ public class HumedadChart implements Serializable {
     public LineChartModel getModelo1() {
         return modelo1;
     }
-
+    
     public void createModel1() {
         modelo1 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        series1.setLabel("Humedad del Suelo 15 cms");
-        series2.setLabel("Humedad del Suelo 30 cms");
-        HumedadDelSueloController controlador = new HumedadDelSueloController();
+        series1.setLabel("Lluvias");
+        LluviaController controlador = new LluviaController();
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(new Date(ano1 - 1900, mes1, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            HumedadDelSuelo promedio = controlador.calcularPromedio(cal.getTime());
-            series1.set(i + 1, promedio.getValorEn15Cms());
-            series2.set(i + 1, promedio.getValorEn30Cms());
+            Date fecha1=cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
+            series1.set(i + 1, controlador.calcularPromedio(fecha1));
         }
 
         modelo1.addSeries(series1);
-        modelo1.addSeries(series2);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo1.setTitle("Promedio de Humedad del Suelo por Mes " + DateTools.getMes(mes1) + " de " + ano1);
+        modelo1.setTitle("Promedio de Lluvias por Mes " + DateTools.getMes(mes1) + " de " + ano1);
         modelo1.setLegendPosition("e");
         Axis yAxis = modelo1.getAxis(AxisType.Y);
         yAxis.setMin(0);

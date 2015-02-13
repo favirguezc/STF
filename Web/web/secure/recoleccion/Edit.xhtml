@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_recolector}" for="recolector" />
                         <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{personaController.itemsAvailableRecolector}"
                                            var="recolectorItem"
                                            itemValue="#{recolectorItem}"
                                            itemLabel="#{recolectorItem.nombre} #{recolectorItem.apellido}"/>/>

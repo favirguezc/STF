@@ -8,7 +8,6 @@ package controlador;
 import datos.produccion.administracion.RolPersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -34,7 +33,6 @@ public class AutorizacionFilter implements Filter {
         loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
         if (loginBean != null) {
             String requestPath = ((HttpServletRequest) request).getPathInfo();
-            System.out.println(requestPath);
             Rol rol = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findMostImportantRol(loginBean.getUserPersona());
             if (PermisosPorRol.tienePermiso(rol, requestPath)) {
                 chain.doFilter(request, response);

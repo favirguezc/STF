@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos.fnanzas;
+package datos.finanzas;
 
 import datos.exceptions.NonexistentEntityException;
 import java.util.Date;

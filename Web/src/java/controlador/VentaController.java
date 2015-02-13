@@ -7,7 +7,7 @@ package controlador;
 
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.fnanzas.VentaDAO;
+import datos.finanzas.VentaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;

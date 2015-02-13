@@ -11,8 +11,8 @@
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
-                        <p:outputLabel for="fechaVenta" value="FechaVenta (MM/dd/yyyy):"/>
-                        <p:calendar id="fechaVenta" pattern="MM/dd/yyyy" value="#{ventaController.selected.fechaVenta}" title="FechaVenta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
+                        <p:outputLabel for="fechaVenta" value="FechaVenta (dd/MM/yyyy):"/>
+                        <p:calendar id="fechaVenta" pattern="dd/MM/yyyy" value="#{ventaController.selected.fechaVenta}" title="FechaVenta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
                         <p:outputLabel for="cliente" value="Cliente:"/>
                         <p:selectOneMenu id="cliente" value="#{ventaController.selected.cliente}" required="true" requiredMessage="The cliente field is required." >
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
@@ -45,7 +45,7 @@
                         <p:outputLabel for="quintaPrecioUnid" value="QuintaPrecioUnid:"/>
                         <p:inputText id="quintaPrecioUnid" value="#{ventaController.selected.quintaPrecioUnid}" title="QuintaPrecioUnid" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ventaController.create}" value="Create" update="display,:VentaListPanel:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
+                    <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListPanel:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

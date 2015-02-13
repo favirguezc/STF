@@ -25,9 +25,9 @@
                             <f:selectItems value="#{unidadesController.unidadesValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditInsumoLabel_pc}" for="pc" />
-                        <p:inputText id="pc" value="#{insumoController.selected.pc}" title="#{bundle.EditInsumoTitle_pc}" />
+                        <p:inputText id="pc" value="#{insumoController.selected.periodoDeCarencia}" title="#{bundle.EditInsumoTitle_pc}" />
                         <p:outputLabel value="#{bundle.EditInsumoLabel_tr}" for="tr" />
-                        <p:inputText id="tr" value="#{insumoController.selected.tr}" title="#{bundle.EditInsumoTitle_tr}" />
+                        <p:inputText id="tr" value="#{insumoController.selected.tiempoDeReentrada}" title="#{bundle.EditInsumoTitle_tr}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{insumoController.update}" value="#{bundle.Save}" update="display,:InsumoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InsumoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InsumoEditDialog.hide()"/>

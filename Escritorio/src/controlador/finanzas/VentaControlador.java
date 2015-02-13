@@ -6,7 +6,7 @@
 package controlador.finanzas;
 
 import datos.exceptions.NonexistentEntityException;
-import datos.fnanzas.VentaDAO;
+import datos.finanzas.VentaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;

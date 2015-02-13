@@ -15,7 +15,7 @@
                     <h:panelGrid columns="2" rendered="#{ventaController.selected != null}">
                     <h:outputText value="FechaVenta:"/>
                     <h:outputText value="#{ventaController.selected.fechaVenta}" title="FechaVenta" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                     <h:outputText value="Cliente:"/>
                     <h:outputText value="#{ventaController.selected.cliente.nombre} #{ventaController.selected.cliente.apellido}" title="Cliente"/>

@@ -11,8 +11,8 @@
             <h:form id="VentaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
-                        <p:outputLabel for="fechaVenta" value="FechaVenta (MM/dd/yyyy):"/>
-                        <p:calendar id="fechaVenta" pattern="MM/dd/yyyy" value="#{ventaController.selected.fechaVenta}" title="FechaVenta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
+                        <p:outputLabel for="fechaVenta" value="FechaVenta (dd/MM/yyyy):"/>
+                        <p:calendar id="fechaVenta" pattern="dd/MM/yyyy" value="#{ventaController.selected.fechaVenta}" title="FechaVenta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
                         <p:outputLabel for="cliente" value="Cliente:"/>
                         <p:selectOneMenu id="cliente" value="#{ventaController.selected.cliente}" required="true" requiredMessage="The cliente field is required." >
                             <f:selectItems value="#{personaController.itemsAvailableSelectOne}"

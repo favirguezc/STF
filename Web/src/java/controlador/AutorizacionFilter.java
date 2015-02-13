@@ -8,7 +8,6 @@ package controlador;
 import datos.produccion.administracion.RolPersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.IOException;
-import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

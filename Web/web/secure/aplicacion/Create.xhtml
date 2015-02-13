@@ -64,18 +64,18 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_responsable}" for="responsable" />
                         <p:selectOneMenu id="responsable" value="#{aplicacionController.selected.responsable}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_responsable}">
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{personaController.itemsAvailableTrabajador}"
                                            var="responsableItem"
                                            itemValue="#{responsableItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_autoriza}" for="autoriza" />
                         <p:selectOneMenu id="autoriza" value="#{aplicacionController.selected.autoriza}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_autoriza}">
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{personaController.itemsAvailableAsistente}"
                                            var="autorizaItem"
                                            itemValue="#{autorizaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_jornales}" for="jornales" />
-                        <p:inputText id="jornales" value="#{aplicacionController.selected.jornales}" title="#{bundle.CreateAplicacionTitle_jornales}" />
+                        <p:inputText id="jornales" value="#{aplicacionController.selected.horas}" title="#{bundle.CreateAplicacionTitle_jornales}" />
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_observaciones}" for="observaciones" />
                         <p:inputText id="observaciones" value="#{aplicacionController.selected.observaciones}" title="#{bundle.CreateAplicacionTitle_observaciones}" />
                     </p:panelGrid>

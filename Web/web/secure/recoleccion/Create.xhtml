@@ -23,7 +23,7 @@
                         <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_recolector}" for="recolector" />
                         <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{personaController.itemsAvailableRecolector}"
                                            var="recolectorItem"
                                            itemValue="#{recolectorItem}"
                                            itemLabel="#{recolectorItem.nombre} #{recolectorItem.apellido}"/>

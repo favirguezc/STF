@@ -77,13 +77,9 @@
                         </p:tab>
                     </p:tabView>
                 </p:tab>
-                <p:tab title="Cargar Archivo" disabled="true">
+                <p:tab title="Cargar Archivo">
                     <h:form enctype="multipart/form-data">
-                        <p:growl id="messages" showDetail="true" />
-
-                        <p:fileUpload value="#{temperaturaArchivo.archivo}"/>
-
-                        <p:commandButton value="Submit" ajax="false" actionListener="#{temperaturaArchivo.upload}"/>
+                        <p:fileUpload fileUploadListener="#{temperaturaArchivo.upload}" update=":growl" dragDropSupport="true"/>
                     </h:form>                  
                 </p:tab>
                 <p:tab title="Datos">

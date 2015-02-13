@@ -48,8 +48,10 @@ public class JsfUtil {
     }
 
     public static void addSuccessMessage(String msg) {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
-        FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+        if (msg != null) {
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
+            FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+        }
     }
 
     public static String getRequestParameter(String key) {

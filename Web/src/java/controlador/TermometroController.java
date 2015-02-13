@@ -73,6 +73,10 @@ public class TermometroController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    
+    public Termometro find(long nds) throws Exception {
+        return getJpaController().findTermometro(nds);
+    }
 
     public List<Termometro> getItems() {
         if (items == null) {

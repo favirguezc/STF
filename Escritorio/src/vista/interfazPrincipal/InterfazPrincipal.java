@@ -41,6 +41,7 @@ import datos.util.EntityManagerFactorySingleton;
 import vista.finanzas.CompraIF;
 import vista.herramientas.Password;
 import vista.produccion.cargarRegistros.LectorDeRegistrosLluvia;
+import vista.produccion.labores.LaborIF;
 
 /**
  *
@@ -116,12 +117,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -307,12 +310,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Producción");
         jMenu2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/delivery35.png"))); // NOI18N
-        jMenuItem2.setText("Trabajos");
-        jMenu2.add(jMenuItem2);
-
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/chemistry11.png"))); // NOI18N
@@ -369,6 +366,26 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem12);
 
         jMenuBar2.add(jMenu2);
+
+        jMenu9.setText("Labores");
+        jMenu9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem27.setText("Labor");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem27);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/delivery35.png"))); // NOI18N
+        jMenuItem2.setText("Trabajos");
+        jMenu9.add(jMenuItem2);
+
+        jMenuBar2.add(jMenu9);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/thermometer14.png"))); // NOI18N
         jMenu5.setText("Variables Climáticas");
@@ -824,6 +841,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         new Password(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        // TODO add your handling code here:
+        abrirLaborIF();
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -839,6 +861,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -859,6 +882,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
@@ -912,12 +936,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirHumedadDelSueloIF() {
         if (!ventanaActivaEnPanelEscritorio(HumedadDelSueloIF.class)) {
-            HumedadDelSueloIF hif = new HumedadDelSueloIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            HumedadDelSueloIF nuevaIF = new HumedadDelSueloIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -926,12 +950,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirLluviaIF() {
         if (!ventanaActivaEnPanelEscritorio(LluviasIF.class)) {
-            LluviasIF hif = new LluviasIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            LluviasIF nuevaIF = new LluviasIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -940,29 +964,29 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirLoteIF() {
         if (!ventanaActivaEnPanelEscritorio(LoteIF.class)) {
-            LoteIF hif = new LoteIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            LoteIF nuevaIF = new LoteIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 //            javax.swing.plaf.basic.BasicInternalFrameUI ui
-//                    = new javax.swing.plaf.basic.BasicInternalFrameUI(hif);
-//            hif.setUI(ui);
+//                    = new javax.swing.plaf.basic.BasicInternalFrameUI(nuevaIF);
+//            nuevaIF.setUI(ui);
         }
     }
 
     private void abrirPersonaIF() {
         if (!ventanaActivaEnPanelEscritorio(PersonaIF.class)) {
-            PersonaIF hif = new PersonaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            PersonaIF nuevaIF = new PersonaIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -971,12 +995,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirInsumoIF() {
         if (!ventanaActivaEnPanelEscritorio(InsumoIF.class)) {
-            InsumoIF hif = new InsumoIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            InsumoIF nuevaIF = new InsumoIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -985,12 +1009,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirAplicacionIF() {
         if (!ventanaActivaEnPanelEscritorio(AplicacionIF.class)) {
-            AplicacionIF hif = new AplicacionIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            AplicacionIF nuevaIF = new AplicacionIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -999,12 +1023,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirTrampaDeInsectosIF() {
         if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
-            TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            TrampaDeInsectosIF nuevaIF = new TrampaDeInsectosIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1013,12 +1037,26 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirTrabajoIF() {
         if (!ventanaActivaEnPanelEscritorio(TrabajoIF.class)) {
-            TrabajoIF hif = new TrabajoIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            TrabajoIF nuevaIF = new TrabajoIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                nuevaIF.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void abrirLaborIF() {
+        if (!ventanaActivaEnPanelEscritorio(LaborIF.class)) {
+            LaborIF nuevaIF = new LaborIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
+            try {
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1027,12 +1065,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionIF.class)) {
-            RecoleccionIF hif = new RecoleccionIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionIF nuevaIF = new RecoleccionIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1041,12 +1079,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionAnualPorLoteIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorLoteIF.class)) {
-            RecoleccionAnualPorLoteIF hif = new RecoleccionAnualPorLoteIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionAnualPorLoteIF nuevaIF = new RecoleccionAnualPorLoteIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setSelected(true);
-                //hif.setMaximum(true);
+                nuevaIF.setSelected(true);
+                //nuevaIF.setMaximum(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1055,12 +1093,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionAnualPorSemanaIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorSemanaIF.class)) {
-            RecoleccionAnualPorSemanaIF hif = new RecoleccionAnualPorSemanaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionAnualPorSemanaIF nuevaIF = new RecoleccionAnualPorSemanaIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setMaximum(true);
-                hif.setSelected(true);
+                nuevaIF.setMaximum(true);
+                nuevaIF.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1069,12 +1107,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionAnualPorMesIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesIF.class)) {
-            RecoleccionAnualPorMesIF hif = new RecoleccionAnualPorMesIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionAnualPorMesIF nuevaIF = new RecoleccionAnualPorMesIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setMaximum(true);
-                hif.setSelected(true);
+                nuevaIF.setMaximum(true);
+                nuevaIF.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1093,12 +1131,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionAnualPorMesYTemperaturaIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesYTemperaturaIF.class)) {
-            RecoleccionAnualPorMesYTemperaturaIF hif = new RecoleccionAnualPorMesYTemperaturaIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionAnualPorMesYTemperaturaIF nuevaIF = new RecoleccionAnualPorMesYTemperaturaIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setMaximum(true);
-                hif.setSelected(true);
+                nuevaIF.setMaximum(true);
+                nuevaIF.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1107,12 +1145,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void abrirRecoleccionAnualPorMesYTrampaDeInsectosIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesYTrampaDeInsectosIF.class)) {
-            RecoleccionAnualPorMesYTrampaDeInsectosIF hif = new RecoleccionAnualPorMesYTrampaDeInsectosIF();
-            panelEscritorio.add(hif);
-            hif.setVisible(true);
+            RecoleccionAnualPorMesYTrampaDeInsectosIF nuevaIF = new RecoleccionAnualPorMesYTrampaDeInsectosIF();
+            panelEscritorio.add(nuevaIF);
+            nuevaIF.setVisible(true);
             try {
-                hif.setMaximum(true);
-                hif.setSelected(true);
+                nuevaIF.setMaximum(true);
+                nuevaIF.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

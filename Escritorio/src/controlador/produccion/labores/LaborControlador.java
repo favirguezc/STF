@@ -89,4 +89,8 @@ public class LaborControlador {
             }
         }
     }
+
+    public boolean validar(Labor registroSeleccionado) {
+        return !(registroSeleccionado.getNombre() == null || registroSeleccionado.getNombre().equals(""));
+    }
 }

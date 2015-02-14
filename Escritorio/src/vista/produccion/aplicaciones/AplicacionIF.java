@@ -49,9 +49,9 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
         selected = null;
         asignarFechas();
         cargarListas();
-        cargarDatosRegistroSeleccionado();
         if (habilitado) {
             cargarTablaPrincipal();
+            cargarDatosRegistroSeleccionado();
             guardar(false);
         }
     }

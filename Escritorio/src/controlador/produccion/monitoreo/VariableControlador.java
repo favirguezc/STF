@@ -19,7 +19,7 @@ import modelo.produccion.monitoreo.Variable;
 public class VariableControlador {
 
     private VariableDAO dao;
-    
+
     public VariableControlador() {
         dao = new VariableDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
@@ -47,5 +47,10 @@ public class VariableControlador {
     public List<Variable> leerLista() {
         return dao.findVariableEntities();
     }
-    
+
+    public boolean validar(Variable registroSeleccionado) {
+        return registroSeleccionado.getNombre() != null
+                && registroSeleccionado.getAbreviacion() != null;
+    }
+
 }

@@ -3,31 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.produccion.labores;
+package vista.produccion.monitoreo;
 
-import controlador.produccion.labores.LaborControlador;
+import controlador.produccion.monitoreo.MonitoreoControlador;
 import datos.exceptions.NonexistentEntityException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.labores.Labor;
+import modelo.produccion.monitoreo.Monitoreo;
+import modelo.util.DateFormatter;
 
 /**
  *
  * @author fredy
  */
-public class LaborIF extends javax.swing.JInternalFrame {
+public class MonitoreoIF extends javax.swing.JInternalFrame {
 
-    private LaborControlador controlador;
-    private Labor registroSeleccionado;
-    private List<Labor> lista;
+    private MonitoreoControlador controlador;
+    private Monitoreo registroSeleccionado;
+    private List<Monitoreo> lista;
 
     /**
-     * Creates new form LaborIF
+     * Creates new form MonitoreoIF
      */
-    public LaborIF() {
+    public MonitoreoIF() {
         initComponents();
-        controlador = new LaborControlador();
+        controlador = new MonitoreoControlador();
         cargarTablaPrincipal();
         guardar(false);
     }
@@ -41,6 +45,7 @@ public class LaborIF extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nameField1 = new modelo.util.NameField();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
@@ -48,11 +53,13 @@ public class LaborIF extends javax.swing.JInternalFrame {
         guardarButton = new javax.swing.JButton();
         edicionPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nombreTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        descripcionTextField = new javax.swing.JTextField();
+        numeroLongField = new modelo.util.LongField();
+        fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
+
+        nameField1.setText("nameField1");
 
         setClosable(true);
         setIconifiable(true);
@@ -135,19 +142,14 @@ public class LaborIF extends javax.swing.JInternalFrame {
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición Panel"));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Nombre");
-
-        nombreTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nombreTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreTextFieldActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Número");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Descripción");
+        jLabel2.setText("Fecha");
 
-        descripcionTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        numeroLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        fechaDateChooserCombo.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -156,25 +158,24 @@ public class LaborIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(numeroLongField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(descripcionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(edicionPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, edicionPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(descripcionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(numeroLongField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         principalTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -209,7 +210,7 @@ public class LaborIF extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +219,7 @@ public class LaborIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -266,17 +267,17 @@ public class LaborIF extends javax.swing.JInternalFrame {
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         boolean transacionRealizada = false;
-        String nombre = nombreTextField.getText();
-        String descripcion = descripcionTextField.getText();
+        long numero = numeroLongField.getLong();
+        Date fecha = fechaDateChooserCombo.getCurrent().getTime();
         if (registroSeleccionado == null) {
-            registroSeleccionado = controlador.nuevo(nombre, descripcion);
+            registroSeleccionado = controlador.nuevo(numero, fecha);
             if (controlador.validar(registroSeleccionado)) {
                 controlador.guardar(registroSeleccionado);
                 transacionRealizada = true;
             }
         } else {
-            registroSeleccionado.setNombre(nombre);
-            registroSeleccionado.setDescripcion(descripcion);
+            registroSeleccionado.setNumeroDeMonitoreo(numero);
+            registroSeleccionado.setFecha(fecha);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -292,23 +293,20 @@ public class LaborIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void nombreTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreTextFieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField descripcionTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
+    private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nombreTextField;
+    private modelo.util.NameField nameField1;
     private javax.swing.JButton nuevoButton;
+    private modelo.util.LongField numeroLongField;
     private javax.swing.JTable principalTable;
     // End of variables declaration//GEN-END:variables
 
@@ -322,11 +320,13 @@ public class LaborIF extends javax.swing.JInternalFrame {
 
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
-            nombreTextField.setText(null);
-            descripcionTextField.setText(null);
+            numeroLongField.setLong(0);
+            fechaDateChooserCombo.setCurrent(GregorianCalendar.getInstance());
         } else {
-            nombreTextField.setText(registroSeleccionado.getNombre());
-            descripcionTextField.setText(registroSeleccionado.getDescripcion());
+            numeroLongField.setLong(registroSeleccionado.getNumeroDeMonitoreo());
+            Calendar c = GregorianCalendar.getInstance();
+            c.setTime(registroSeleccionado.getFecha());
+            fechaDateChooserCombo.setCurrent(c);
         }
     }
 
@@ -335,8 +335,8 @@ public class LaborIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista();
-        for (Labor l : lista) {
-            Object[] row = {l.getNombre(), l.getDescripcion()};
+        for (Monitoreo l : lista) {
+            Object[] row = {l.getNumeroDeMonitoreo(), DateFormatter.formatDate(l.getFecha())};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }

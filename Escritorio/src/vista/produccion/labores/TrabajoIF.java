@@ -44,6 +44,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         initComponents();
         controlador = new TrabajoControlador();
         mesComboBox.setSelectedIndex(new Date().getMonth());
+        añoSpinner.setValue(new Date().getYear() + 1900);
         registroSeleccionado = null;
         cargarListas();
         if (habilitado) {
@@ -209,7 +210,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(loteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,9 +268,10 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,11 +372,11 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, Short.MAX_VALUE))
+                .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,9 +443,9 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         float jornales = horasFloatField.getFloat();
         String observaciones = observacionesTextField.getText();
         if (registroSeleccionado == null) {
-            Trabajo nuevo = controlador.nuevo(fecha, modulo, labor, operario, jornales, observaciones);
-            if (controlador.validar(nuevo)) {
-                controlador.guardar(nuevo);
+            registroSeleccionado = controlador.nuevo(fecha, modulo, labor, operario, jornales, observaciones);
+            if (controlador.validar(registroSeleccionado)) {
+                controlador.guardar(registroSeleccionado);
                 guardar(false);
                 cargarDatosRegistroSeleccionado();
                 cargarTablaPrincipal();
@@ -590,7 +592,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
 
     private void cargarListaModulos() {
         moduloComboBox.removeAllItems();
-        List<Modulo> leerLista = new ModuloControlador().leerLista((Lote) loteComboBox.getSelectedItem());
+        List<Modulo> leerLista = new ModuloControlador().leerLista();
         for (Modulo m : leerLista) {
             moduloComboBox.addItem(m);
         }
@@ -626,22 +628,22 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     }
 
     private void revisarDatosObligatorios() {
-        if(moduloComboBox.getItemCount()==0){
+        if (moduloComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "No hay registro de módulos en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
-        if(laborComboBox.getItemCount()==0){
+        if (laborComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "No hay registro de labores en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
-        if(operarioComboBox.getItemCount()==0){
+        if (operarioComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(null, "No hay registro de personas con rol de trabajador en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
-        habilitado = true;                
+        habilitado = true;
     }
 
     private void deshabilitarForma() {

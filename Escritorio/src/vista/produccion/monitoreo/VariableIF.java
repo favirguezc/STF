@@ -3,32 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.produccion.labores;
+package vista.produccion.monitoreo;
 
-import controlador.produccion.labores.LaborControlador;
+import controlador.produccion.monitoreo.VariableControlador;
 import datos.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.labores.Labor;
+import modelo.produccion.monitoreo.TipoDeValoracion;
+import modelo.produccion.monitoreo.Variable;
 
 /**
  *
  * @author fredy
  */
-public class LaborIF extends javax.swing.JInternalFrame {
+public class VariableIF extends javax.swing.JInternalFrame {
 
-    private LaborControlador controlador;
-    private Labor registroSeleccionado;
-    private List<Labor> lista;
+    private VariableControlador controlador;
+    private Variable registroSeleccionado;
+    private List<Variable> lista;
 
     /**
-     * Creates new form LaborIF
+     * Creates new form VariableIF
      */
-    public LaborIF() {
+    public VariableIF() {
         initComponents();
-        controlador = new LaborControlador();
+        controlador = new VariableControlador();
         cargarTablaPrincipal();
+        cargarListas();
         guardar(false);
     }
 
@@ -50,7 +52,9 @@ public class LaborIF extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         nombreTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        descripcionTextField = new javax.swing.JTextField();
+        abreviacionTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tipoComboBox = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
 
@@ -145,9 +149,14 @@ public class LaborIF extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Descripción");
+        jLabel2.setText("Abreviacion");
 
-        descripcionTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        abreviacionTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Tipo");
+
+        tipoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -161,7 +170,11 @@ public class LaborIF extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(descripcionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abreviacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -171,7 +184,9 @@ public class LaborIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(descripcionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(abreviacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -183,14 +198,14 @@ public class LaborIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Descripción"
+                "Nombre", "Abreviación", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -267,16 +282,18 @@ public class LaborIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         boolean transacionRealizada = false;
         String nombre = nombreTextField.getText();
-        String descripcion = descripcionTextField.getText();
+        String abreviacion = abreviacionTextField.getText();
+        TipoDeValoracion tipo = (TipoDeValoracion) tipoComboBox.getSelectedItem();
         if (registroSeleccionado == null) {
-            registroSeleccionado = controlador.nuevo(nombre, descripcion);
+            registroSeleccionado = controlador.nuevo(nombre, abreviacion, tipo);
             if (controlador.validar(registroSeleccionado)) {
                 controlador.guardar(registroSeleccionado);
                 transacionRealizada = true;
             }
         } else {
             registroSeleccionado.setNombre(nombre);
-            registroSeleccionado.setDescripcion(descripcion);
+            registroSeleccionado.setAbreviacion(abreviacion);
+            registroSeleccionado.setTipoDeValoracion(tipo);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -298,18 +315,20 @@ public class LaborIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField descripcionTextField;
+    private javax.swing.JTextField abreviacionTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
+    private javax.swing.JComboBox tipoComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void guardar(boolean b) {
@@ -323,10 +342,12 @@ public class LaborIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             nombreTextField.setText(null);
-            descripcionTextField.setText(null);
+            abreviacionTextField.setText(null);
+            tipoComboBox.setSelectedIndex(0);
         } else {
             nombreTextField.setText(registroSeleccionado.getNombre());
-            descripcionTextField.setText(registroSeleccionado.getDescripcion());
+            abreviacionTextField.setText(registroSeleccionado.getAbreviacion());
+            tipoComboBox.setSelectedItem(registroSeleccionado.getTipoDeValoracion());
         }
     }
 
@@ -335,9 +356,16 @@ public class LaborIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         lista = controlador.leerLista();
-        for (Labor l : lista) {
-            Object[] row = {l.getNombre(), l.getDescripcion()};
+        for (Variable l : lista) {
+            Object[] row = {l.getNombre(), l.getAbreviacion(), l.getTipoDeValoracion()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
+    }
+
+    private void cargarListas() {
+        tipoComboBox.removeAllItems();
+        tipoComboBox.addItem(TipoDeValoracion.CONTEO);
+        tipoComboBox.addItem(TipoDeValoracion.RELACION);
+        tipoComboBox.addItem(TipoDeValoracion.RIESGO);
     }
 }

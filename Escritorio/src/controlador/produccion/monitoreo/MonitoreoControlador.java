@@ -19,7 +19,7 @@ import modelo.produccion.monitoreo.Monitoreo;
 public class MonitoreoControlador {
 
     private MonitoreoDAO dao;
-    
+
     public MonitoreoControlador() {
         dao = new MonitoreoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
@@ -47,5 +47,9 @@ public class MonitoreoControlador {
     public List<Monitoreo> leerLista() {
         return dao.findMonitoreoEntities();
     }
-    
+
+    public boolean validar(Monitoreo registroSeleccionado) {
+        return registroSeleccionado.getNumeroDeMonitoreo() > 0;
+    }
+
 }

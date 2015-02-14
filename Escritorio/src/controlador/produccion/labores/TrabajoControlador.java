@@ -40,8 +40,8 @@ public class TrabajoControlador {
         dao.destroy(id);
     }
 
-    public void guardar(Trabajo nueva) {
-        dao.create(nueva);
+    public void guardar(Trabajo trabajo) {
+        dao.create(trabajo);
     }
 
     public void editar(Trabajo seleccionada) throws Exception {
@@ -53,7 +53,7 @@ public class TrabajoControlador {
     }
 
     public boolean validar(Trabajo t) {
-
+        
         return true;
     }
 }

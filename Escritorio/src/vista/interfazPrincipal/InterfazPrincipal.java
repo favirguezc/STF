@@ -39,6 +39,8 @@ import vista.produccion.cargarRegistros.LectorDeRegistrosTemperatura;
 import vista.finanzas.VentaIF;
 import datos.util.EntityManagerFactorySingleton;
 import vista.finanzas.CompraIF;
+import vista.herramientas.Password;
+import vista.produccion.cargarRegistros.LectorDeRegistrosLluvia;
 
 /**
  *
@@ -49,9 +51,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form InterfazPrincipal
      */
+    private boolean ok;
+
     public InterfazPrincipal() {
         initComponents();
-        comprobarConexion();
+        comprobarContraseña();
+        if (ok) {
+            comprobarConexion();
+        }
+    }
+
+    public boolean isOk() {
+        return ok;
     }
 
     public static void main(String args[]) {
@@ -72,9 +83,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         new LaborControlador().comprobarRegistros();
         splash.set("Inicializando componentes", 70, 100);
         InterfazPrincipal interfazPrincipal = new InterfazPrincipal();
-        splash.set("Terminado", 100, 100);
+        if (interfazPrincipal.isOk()) {
+            splash.set("Terminado", 100, 100);
+            interfazPrincipal.setVisible(true);
+        } else {
+            interfazPrincipal.dispose();
+            JOptionPane.showMessageDialog(null, "Error, contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         splash.dispose();
-        interfazPrincipal.setVisible(true);
     }
 
     /**
@@ -126,13 +142,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
-        jMenuItem26 = new javax.swing.JMenuItem();
-        jMenuItem27 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenuItem29 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Trazabilidad - Módulo de Producción");
@@ -323,7 +338,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/heart254.png"))); // NOI18N
-        jMenuItem5.setText("Monitoreo de Enfermedades");
+        jMenuItem5.setText("Monitoreo de Variables");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -362,7 +377,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/drop28.png"))); // NOI18N
-        jMenuItem7.setText("Monitoreo de Lluvias");
+        jMenuItem7.setText("Lluvia");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -372,8 +387,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/thermometer31.png"))); // NOI18N
-        jMenuItem8.setText("Monitoreo de Temperatura");
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/weather15.png"))); // NOI18N
+        jMenuItem8.setText("Temperatura");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -384,7 +399,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/water60.png"))); // NOI18N
-        jMenuItem9.setText("Monitoreo de Humedad del Suelo");
+        jMenuItem9.setText("Humedad del Suelo");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -452,7 +467,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/website3.png"))); // NOI18N
         jMenu3.setText("Gráficas");
-        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenu3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/ascending7.png"))); // NOI18N
@@ -508,10 +523,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/file94.png"))); // NOI18N
         jMenu6.setText("Cargar Datos");
-        jMenu6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenu6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/table7.png"))); // NOI18N
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/water60.png"))); // NOI18N
         jMenuItem23.setText("Humedad Del Suelo");
         jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -521,7 +536,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem23);
 
         jMenuItem24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/documents11.png"))); // NOI18N
+        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/weather15.png"))); // NOI18N
         jMenuItem24.setText("Temperatura");
         jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,16 +546,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem24);
 
         jMenuItem25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem25.setText("jMenuItem25");
+        jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/drop28.png"))); // NOI18N
+        jMenuItem25.setText("Lluvia");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem25);
-
-        jMenuItem26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem26.setText("jMenuItem26");
-        jMenu6.add(jMenuItem26);
-
-        jMenuItem27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem27.setText("jMenuItem27");
-        jMenu6.add(jMenuItem27);
 
         jMenuBar2.add(jMenu6);
 
@@ -570,8 +583,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu7);
 
-        jMenu8.setText("Back Up");
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/gear26.png"))); // NOI18N
+        jMenu8.setText("Herramientas");
+        jMenu8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem4.setText("Back Up");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -579,6 +595,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem4);
+
+        jMenuItem26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem26.setText("Cambiar Contraseña");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem26);
 
         jMenuBar2.add(jMenu8);
 
@@ -610,77 +635,77 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        abrirTemperatura();
+        abrirTemperaturaIF();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        abrirMonitoreoDeEnfermedades();
+        abrirMonitoreoDeVariablesIF();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        abrirHumedadDelSuelo();
+        abrirHumedadDelSueloIF();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        abrirLluvias();
+        abrirLluviaIF();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        abrirLote();
+        abrirLoteIF();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        abrirPersona();
+        abrirPersonaIF();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        abrirMonitoreoDeEnfermedades();
+        abrirMonitoreoDeVariablesIF();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        abrirProductoFitosanitario();
+        abrirInsumoIF();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        abrirAplicacionFitosanitaria();
+        abrirAplicacionIF();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        abrirAplicacionFitosanitaria();
+        abrirAplicacionIF();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        abrirTrampaDeInsectos();
+        abrirTrampaDeInsectosIF();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-        abrirTrampaDeInsectos();
+        abrirTrampaDeInsectosIF();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        abrirTrabajo();
+        abrirTrabajoIF();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccion();
+        abrirRecoleccionIF();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccion();
+        abrirRecoleccionIF();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
@@ -695,7 +720,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionAnualPorLote();
+        abrirRecoleccionAnualPorLoteIF();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -715,22 +740,22 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionAnualPorSemana();
+        abrirRecoleccionAnualPorSemanaIF();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionAnualPorMes();
+        abrirRecoleccionAnualPorMesIF();
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionAnualPorMesYTemperatura();
+        abrirRecoleccionAnualPorMesYTemperaturaIF();
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
-        abrirRecoleccionAnualPorMesYTrampaDeInsectos();
+        abrirRecoleccionAnualPorMesYTrampaDeInsectosIF();
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
@@ -771,13 +796,33 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem28ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        
+        //backup
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
         // TODO add your handling code here:
         abrirRegistroCompras();
     }//GEN-LAST:event_jMenuItem29ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+        for (FileFilter filter : fileChooser.getChoosableFileFilters()) {
+            fileChooser.removeChoosableFileFilter(filter);
+        }
+        fileChooser.addChoosableFileFilter(new FileTypeFilter(".xlsx", "Libro de Excel"));
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            int g = LectorDeRegistrosLluvia.leer(fileChooser.getSelectedFile());
+            JOptionPane.showMessageDialog(this, g + " registros guardados", "Carga de Datos Finalizada", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        // TODO add your handling code here:
+        new Password(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -814,7 +859,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
-    private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
@@ -838,7 +882,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         return false;
     }
 
-    private void abrirTemperatura() {
+    private void abrirTemperaturaIF() {
         if (!ventanaActivaEnPanelEscritorio(TemperaturaIF.class)) {
             TemperaturaIF tif = new TemperaturaIF();
             panelEscritorio.add(tif);
@@ -852,7 +896,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirMonitoreoDeEnfermedades() {
+    private void abrirMonitoreoDeVariablesIF() {
         if (!ventanaActivaEnPanelEscritorio(MonitoreoDeVariablesIF.class)) {
             MonitoreoDeVariablesIF tif = new MonitoreoDeVariablesIF();
             panelEscritorio.add(tif);
@@ -866,7 +910,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirHumedadDelSuelo() {
+    private void abrirHumedadDelSueloIF() {
         if (!ventanaActivaEnPanelEscritorio(HumedadDelSueloIF.class)) {
             HumedadDelSueloIF hif = new HumedadDelSueloIF();
             panelEscritorio.add(hif);
@@ -880,7 +924,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirLluvias() {
+    private void abrirLluviaIF() {
         if (!ventanaActivaEnPanelEscritorio(LluviasIF.class)) {
             LluviasIF hif = new LluviasIF();
             panelEscritorio.add(hif);
@@ -894,7 +938,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirLote() {
+    private void abrirLoteIF() {
         if (!ventanaActivaEnPanelEscritorio(LoteIF.class)) {
             LoteIF hif = new LoteIF();
             panelEscritorio.add(hif);
@@ -911,7 +955,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirPersona() {
+    private void abrirPersonaIF() {
         if (!ventanaActivaEnPanelEscritorio(PersonaIF.class)) {
             PersonaIF hif = new PersonaIF();
             panelEscritorio.add(hif);
@@ -925,7 +969,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirProductoFitosanitario() {
+    private void abrirInsumoIF() {
         if (!ventanaActivaEnPanelEscritorio(InsumoIF.class)) {
             InsumoIF hif = new InsumoIF();
             panelEscritorio.add(hif);
@@ -939,7 +983,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirAplicacionFitosanitaria() {
+    private void abrirAplicacionIF() {
         if (!ventanaActivaEnPanelEscritorio(AplicacionIF.class)) {
             AplicacionIF hif = new AplicacionIF();
             panelEscritorio.add(hif);
@@ -953,7 +997,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirTrampaDeInsectos() {
+    private void abrirTrampaDeInsectosIF() {
         if (!ventanaActivaEnPanelEscritorio(TrampaDeInsectosIF.class)) {
             TrampaDeInsectosIF hif = new TrampaDeInsectosIF();
             panelEscritorio.add(hif);
@@ -967,7 +1011,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirTrabajo() {
+    private void abrirTrabajoIF() {
         if (!ventanaActivaEnPanelEscritorio(TrabajoIF.class)) {
             TrabajoIF hif = new TrabajoIF();
             panelEscritorio.add(hif);
@@ -981,7 +1025,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccion() {
+    private void abrirRecoleccionIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionIF.class)) {
             RecoleccionIF hif = new RecoleccionIF();
             panelEscritorio.add(hif);
@@ -995,7 +1039,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionAnualPorLote() {
+    private void abrirRecoleccionAnualPorLoteIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorLoteIF.class)) {
             RecoleccionAnualPorLoteIF hif = new RecoleccionAnualPorLoteIF();
             panelEscritorio.add(hif);
@@ -1009,7 +1053,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionAnualPorSemana() {
+    private void abrirRecoleccionAnualPorSemanaIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorSemanaIF.class)) {
             RecoleccionAnualPorSemanaIF hif = new RecoleccionAnualPorSemanaIF();
             panelEscritorio.add(hif);
@@ -1023,7 +1067,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionAnualPorMes() {
+    private void abrirRecoleccionAnualPorMesIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesIF.class)) {
             RecoleccionAnualPorMesIF hif = new RecoleccionAnualPorMesIF();
             panelEscritorio.add(hif);
@@ -1047,7 +1091,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionAnualPorMesYTemperatura() {
+    private void abrirRecoleccionAnualPorMesYTemperaturaIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesYTemperaturaIF.class)) {
             RecoleccionAnualPorMesYTemperaturaIF hif = new RecoleccionAnualPorMesYTemperaturaIF();
             panelEscritorio.add(hif);
@@ -1061,7 +1105,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void abrirRecoleccionAnualPorMesYTrampaDeInsectos() {
+    private void abrirRecoleccionAnualPorMesYTrampaDeInsectosIF() {
         if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorMesYTrampaDeInsectosIF.class)) {
             RecoleccionAnualPorMesYTrampaDeInsectosIF hif = new RecoleccionAnualPorMesYTrampaDeInsectosIF();
             panelEscritorio.add(hif);
@@ -1087,7 +1131,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void abrirRegistroCompras() {
         if (!ventanaActivaEnPanelEscritorio(CompraIF.class)) {
             CompraIF co = new CompraIF();
@@ -1099,5 +1143,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private void comprobarContraseña() {
+        String pass = JOptionPane.showInputDialog(this, "Por favor ingrese la contraseña","Contraseña", JOptionPane.INFORMATION_MESSAGE);
+        ok = pass.equals(Password.leerArchivoContraseña());
     }
 }

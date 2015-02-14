@@ -64,7 +64,7 @@ public class LaborControlador {
             "Levantada de camas",
             "Mantenimiento de macrotúneles",
             "Marcado y perforación del plástico",
-            "Poda fitosanitaria",
+            "Poda Fitosanitaria",
             "Postura de ganchos",
             "Postura plásticos macros",
             "Preparación de camas",

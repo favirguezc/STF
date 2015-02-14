@@ -115,7 +115,7 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Aplicaciones Fitosanitarias");
+        setTitle("Registro  de Aplicaciones");
         setMinimumSize(new java.awt.Dimension(1269, 568));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1269, 568));
@@ -153,6 +153,7 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
             }
         });
 
+        guardarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/database13.png"))); // NOI18N
         guardarButton.setText("Guardar");
         guardarButton.setEnabled(false);
@@ -225,7 +226,7 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(moduloFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -866,8 +867,8 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
         motivo2ComboBox.setSelectedIndex(0);
         motivo3ComboBox.setSelectedIndex(0);
     }
-    
-    private void cargarListaMetodos(){
+
+    private void cargarListaMetodos() {
         metodoComboBox.removeAllItems();
         metodoComboBox.addItem(MetodoDeAplicacion.Foliar);
         metodoComboBox.addItem(MetodoDeAplicacion.Inyectado);
@@ -890,12 +891,12 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
 
     private void revisarDatosObligatorios() {
         if (productoComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(null, "No hay registro de insumos fitosanitarios en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No hay registro de insumos en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
         if (moduloFiltroComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(null, "No hay registro de lote en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No hay registro de módulos en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
@@ -910,7 +911,7 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
             return;
         }
         if (motivo1ComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(null, "No hay registro de motivos en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No hay registro de Variables en la base de datos, por favor cree uno y vuelva a intentar.", "Registros no encontrados", JOptionPane.INFORMATION_MESSAGE);
             deshabilitarForma();
             return;
         }
@@ -930,15 +931,18 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
     }
 
     private void asignarFechas() {
-        //corregir
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(new Date());
-        fechaInicioChooserCombo.setCurrent(c);
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        fechaFinChooserCombo.setMinDate(c);
-        c.add(Calendar.MONTH, 1);
-        c.add(Calendar.DAY_OF_MONTH, -1);
-        fechaFinChooserCombo.setCurrent(c);
-        fechaFinChooserCombo.setSelectedDate(c);
+        if (fechaInicioChooserCombo.getCurrent() == null) {
+            fechaInicioChooserCombo.setCurrent(c);
+        } else {
+            c.setTime(fechaInicioChooserCombo.getCurrent().getTime());
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            fechaFinChooserCombo.setMinDate(c);
+            c.add(Calendar.MONTH, 1);
+            c.add(Calendar.DAY_OF_MONTH, -1);
+            fechaFinChooserCombo.setCurrent(c);
+            fechaFinChooserCombo.setSelectedDate(c);
+        }
     }
 }

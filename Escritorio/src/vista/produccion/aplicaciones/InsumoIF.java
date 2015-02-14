@@ -70,7 +70,7 @@ public class InsumoIF extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Administración de Productos Fitosanitarios");
+        setTitle("Administración de Insumos");
         setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         edicionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edición"));
@@ -192,6 +192,7 @@ public class InsumoIF extends javax.swing.JInternalFrame {
             }
         });
 
+        guardarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/database13.png"))); // NOI18N
         guardarButton.setText("Guardar");
         guardarButton.setEnabled(false);
@@ -231,6 +232,7 @@ public class InsumoIF extends javax.swing.JInternalFrame {
                 .addGap(315, 315, 315))
         );
 
+        principalTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         principalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -310,13 +312,7 @@ public class InsumoIF extends javax.swing.JInternalFrame {
         if (principalTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "No hay un registro seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            String nombre = (String) principalTable.getValueAt(principalTable.getSelectedRow(), 0);
-            for (Insumo pf : lista) {
-                if (pf.getNombre().equals(nombre)) {
-                    registroSeleccionado = pf;
-                    break;
-                }
-            }
+            registroSeleccionado = lista.get(principalTable.getSelectedRow());
             try {
                 controlador.eliminar(registroSeleccionado.getId());
             } catch (NonexistentEntityException ex) {
@@ -336,13 +332,7 @@ public class InsumoIF extends javax.swing.JInternalFrame {
         if (principalTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "No hay un registro seleccionado, por favor seleccione uno.", "Registro no seleccionado", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            String nombre = (String) principalTable.getValueAt(principalTable.getSelectedRow(), 0);
-            for (Insumo pf : lista) {
-                if (pf.getNombre().equals(nombre)) {
-                    registroSeleccionado = pf;
-                    break;
-                }
-            }
+            registroSeleccionado = lista.get(principalTable.getSelectedRow());
             guardar(true);
         }
         cargarDatosRegistroSeleccionado();
@@ -352,15 +342,15 @@ public class InsumoIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         boolean transacionRealizada = false;
         if (registroSeleccionado == null) {
-            Insumo nuevo = controlador.nuevo(
+            registroSeleccionado = controlador.nuevo(
                     (TipoDeAplicacion) tipoComboBox.getSelectedItem(),
                     nombreTextField.getText(),
                     ingredienteTextField.getText(),
                     (Unidades) unidadesComboBox.getSelectedItem(),
                     pcFloatField.getFloat(),
                     trFloatField.getFloat());
-            if (controlador.validar(nuevo)) {
-                controlador.guardar(nuevo);
+            if (controlador.validar(registroSeleccionado)) {
+                controlador.guardar(registroSeleccionado);
                 transacionRealizada = true;
             }
         } else {
@@ -423,10 +413,16 @@ public class InsumoIF extends javax.swing.JInternalFrame {
             nombreTextField.setText(null);
             ingredienteTextField.setText(null);
             unidadesComboBox.setSelectedIndex(0);
+            tipoComboBox.setSelectedIndex(0);
+            pcFloatField.setFloat((float) 0.0);
+            trFloatField.setFloat((float) 0.0);
         } else {
             nombreTextField.setText(registroSeleccionado.getNombre());
             ingredienteTextField.setText(registroSeleccionado.getIngredienteActivo());
             unidadesComboBox.setSelectedItem(registroSeleccionado.getUnidades());
+            tipoComboBox.setSelectedItem(registroSeleccionado.getTipoDeAplicacion());
+            pcFloatField.setFloat(registroSeleccionado.getPeriodoDeCarencia());
+            trFloatField.setFloat(registroSeleccionado.getTiempoDeReentrada());
         }
     }
 
@@ -436,7 +432,13 @@ public class InsumoIF extends javax.swing.JInternalFrame {
         }
         lista = controlador.leerLista();
         for (Insumo l : lista) {
-            Object[] row = {l.getTipoDeAplicacion(), l.getNombre(), l.getIngredienteActivo(), l.getUnidades(), l.getPeriodoDeCarencia(), l.getTiempoDeReentrada()};
+            Object[] row = {
+                l.getTipoDeAplicacion(), 
+                l.getNombre(), 
+                l.getIngredienteActivo(), 
+                l.getUnidades(), 
+                l.getPeriodoDeCarencia(), 
+                l.getTiempoDeReentrada()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }

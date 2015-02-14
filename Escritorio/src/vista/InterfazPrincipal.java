@@ -38,6 +38,7 @@ import vista.archivos.LectorDeRegistrosHumedadDelSuelo;
 import vista.archivos.LectorDeRegistrosTemperatura;
 import vista.finanzas.VentaIF;
 import datos.util.EntityManagerFactorySingleton;
+import vista.finanzas.CompraIF;
 
 /**
  *
@@ -129,6 +130,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem27 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -556,6 +558,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem28);
 
+        jMenuItem29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman228.png"))); // NOI18N
+        jMenuItem29.setText("Compras");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem29);
+
         jMenuBar2.add(jMenu7);
 
         jMenu8.setText("Back Up");
@@ -762,6 +774,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        // TODO add your handling code here:
+        abrirRegistroCompras();
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -799,6 +816,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -1063,8 +1081,20 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             panelEscritorio.add(v);
             v.setVisible(true);
             try {
-                v.setMaximum(true);
                 v.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void abrirRegistroCompras() {
+        if (!ventanaActivaEnPanelEscritorio(CompraIF.class)) {
+            CompraIF co = new CompraIF();
+            panelEscritorio.add(co);
+            co.setVisible(true);
+            try {
+                co.setSelected(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

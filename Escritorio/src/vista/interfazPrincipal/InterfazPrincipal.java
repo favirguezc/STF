@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import modelo.util.FileTypeFilter;
 import vista.finanzas.*;
+import vista.herramientas.BackUp;
 import vista.herramientas.Password;
 import vista.produccion.administracion.*;
 import vista.produccion.aplicaciones.*;
@@ -100,11 +101,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem27 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -112,10 +111,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu12 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
@@ -293,9 +296,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu4);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/mountain6.png"))); // NOI18N
-        jMenu2.setText("Producción");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/chemistry10.png"))); // NOI18N
+        jMenu11.setText("Aplicaciones");
+        jMenu11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -306,7 +309,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem10);
+        jMenu11.add(jMenuItem10);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -317,36 +320,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu11.add(jMenuItem3);
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/container6.png"))); // NOI18N
-        jMenuItem6.setText("Recolección");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem6);
+        jMenuBar2.add(jMenu11);
 
-        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/bug3.png"))); // NOI18N
-        jMenuItem12.setText("Trampa de Insectos");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem12);
-
-        jMenuBar2.add(jMenu2);
-
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/project.png"))); // NOI18N
         jMenu9.setText("Labores");
         jMenu9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem27.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/delivery35.png"))); // NOI18N
         jMenuItem27.setText("Labor");
         jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,7 +340,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/delivery35.png"))); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/under3.png"))); // NOI18N
         jMenuItem2.setText("Trabajos");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,10 +351,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu9);
 
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/checklist1.png"))); // NOI18N
         jMenu10.setText("Monitoreo");
         jMenu10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem30.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/opened14.png"))); // NOI18N
         jMenuItem30.setText("Monitoreo");
         jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,6 +377,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu10.add(jMenuItem5);
 
         jMenuItem31.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/target5.png"))); // NOI18N
         jMenuItem31.setText("Variable");
         jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,7 +386,35 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu10.add(jMenuItem31);
 
+        jMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/bug3.png"))); // NOI18N
+        jMenuItem12.setText("Trampa de Insectos");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem12);
+
         jMenuBar2.add(jMenu10);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/weight10.png"))); // NOI18N
+        jMenu2.setText("Recolección");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/weight10.png"))); // NOI18N
+        jMenuItem6.setText("Recolección");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuBar2.add(jMenu2);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/thermometer14.png"))); // NOI18N
         jMenu5.setText("Variables Climáticas");
@@ -440,6 +454,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem9);
 
         jMenuBar2.add(jMenu5);
+
+        jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/attach3.png"))); // NOI18N
+        jMenu12.setText("Extras");
+        jMenu12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/documents11.png"))); // NOI18N
         jMenu1.setText("Reportes");
@@ -495,7 +513,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem17);
 
-        jMenuBar2.add(jMenu1);
+        jMenu12.add(jMenu1);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/website3.png"))); // NOI18N
         jMenu3.setText("Gráficas");
@@ -551,7 +569,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem22);
 
-        jMenuBar2.add(jMenu3);
+        jMenu12.add(jMenu3);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/file94.png"))); // NOI18N
         jMenu6.setText("Cargar Datos");
@@ -587,7 +605,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem25);
 
-        jMenuBar2.add(jMenu6);
+        jMenu12.add(jMenu6);
+
+        jMenuBar2.add(jMenu12);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman229.png"))); // NOI18N
         jMenu7.setText("Finanzas");
@@ -615,11 +635,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu7);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/gear26.png"))); // NOI18N
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/settings48.png"))); // NOI18N
         jMenu8.setText("Herramientas");
         jMenu8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/database11.png"))); // NOI18N
         jMenuItem4.setText("Back Up");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -629,6 +650,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu8.add(jMenuItem4);
 
         jMenuItem26.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/login1.png"))); // NOI18N
         jMenuItem26.setText("Cambiar Contraseña");
         jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -828,7 +850,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem28ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        //backup
+        BackUp.backUp(this);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
@@ -885,6 +907,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

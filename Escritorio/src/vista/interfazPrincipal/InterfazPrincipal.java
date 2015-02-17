@@ -135,6 +135,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
@@ -593,7 +595,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu7.setText("Finanzas");
         jMenu7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jMenuItem28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenuItem28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/affiliate.png"))); // NOI18N
         jMenuItem28.setText("Ventas");
         jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
@@ -603,7 +605,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem28);
 
-        jMenuItem29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jMenuItem29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman228.png"))); // NOI18N
         jMenuItem29.setText("Compras");
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
@@ -612,6 +614,26 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu7.add(jMenuItem29);
+
+        jMenuItem32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus14.png"))); // NOI18N
+        jMenuItem32.setText("Administrar Cajas");
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem32);
+
+        jMenuItem33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus6.png"))); // NOI18N
+        jMenuItem33.setText("Registrar en Cajas");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem33);
 
         jMenuBar2.add(jMenu7);
 
@@ -876,6 +898,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         abrirVariableIF();
     }//GEN-LAST:event_jMenuItem31ActionPerformed
 
+    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+        // TODO add your handling code here:
+        abrirAdmonCajas();
+    }//GEN-LAST:event_jMenuItem32ActionPerformed
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        // TODO add your handling code here:
+        abrirRegistrarConceptos();
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -919,6 +951,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
+    private javax.swing.JMenuItem jMenuItem32;
+    private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -1249,4 +1283,28 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         ok = Password.leerArchivoContraseña().equals(pass);
     }
 
+    private void abrirAdmonCajas(){
+        if (!ventanaActivaEnPanelEscritorio(CajaIF.class)) {
+            CajaIF tif = new CajaIF();
+            panelEscritorio.add(tif);
+            tif.setVisible(true);
+            try {
+                tif.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    private void abrirRegistrarConceptos(){
+        if (!ventanaActivaEnPanelEscritorio(RegistroCajasIF.class)) {
+            RegistroCajasIF tif = new RegistroCajasIF();
+            panelEscritorio.add(tif);
+            tif.setVisible(true);
+            try {
+                tif.setSelected(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

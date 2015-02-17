@@ -105,6 +105,7 @@ public class CompraDAO {
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Compra.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Compra.class).get("fechaCompra")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -163,6 +164,7 @@ public class CompraDAO {
             queryString += " t.fechaCompra = :fecha1";
             b = true;
         }
+        queryString += " ORDER BY t.fechaCompra ASC";
         try {
             TypedQuery<Compra> query = em.createQuery(queryString, Compra.class);
             if (b) {

@@ -9,6 +9,7 @@ import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.finanzas.VentaDAO;
 import datos.util.EntityManagerFactorySingleton;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,7 +30,7 @@ import modelo.produccion.administracion.Persona;
  */
 @ManagedBean(name = "ventaController")
 @SessionScoped
-public class VentaController {
+public class VentaController implements Serializable{
 
     private Venta selected;
     private List<Venta> items = null;

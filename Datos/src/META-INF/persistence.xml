@@ -3,6 +3,8 @@
   <persistence-unit name="DatosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.finanzas.Precio</class>
+    <class>modelo.finanzas.caja.Caja</class>
+    <class>modelo.finanzas.caja.ConceptoCaja</class>
     <class>modelo.finanzas.compra.Compra</class>
     <class>modelo.finanzas.ventas.Venta</class>
     <class>modelo.produccion.administracion.Lote</class>

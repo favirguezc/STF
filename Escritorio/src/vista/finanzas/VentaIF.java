@@ -834,6 +834,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
 
     private void cargarListaClientes() {
         clienteComboBox.removeAllItems();
+        clienteComboBox.addItem(null);
         filtroClienteComboBox.removeAllItems();
         filtroClienteComboBox.addItem(null);
         for (Persona p : new RolPersonaControlador().leerLista(Rol.CLIENTE)) {

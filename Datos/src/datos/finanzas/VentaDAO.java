@@ -106,6 +106,7 @@ public class VentaDAO {
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Venta.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Venta.class).get("fechaVenta")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -164,6 +165,7 @@ public class VentaDAO {
             queryString += " t.fechaVenta = :fecha1";
             b = true;
         }
+        queryString += " ORDER BY t.fechaVenta ASC";
         try {
             TypedQuery<Venta> query = em.createQuery(queryString, Venta.class);
             if (b) {

@@ -7,6 +7,7 @@ package modelo.finanzas.compra;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -104,5 +105,47 @@ public class Compra implements Serializable{
     
     public void sumar(Compra c) {
         //Please insert code here.
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 61 * hash + Objects.hashCode(this.fechaCompra);
+        hash = 61 * hash + Objects.hashCode(this.lote);
+        hash = 61 * hash + Objects.hashCode(this.insumo);
+        hash = 61 * hash + Float.floatToIntBits(this.precio);
+        hash = 61 * hash + Float.floatToIntBits(this.cantidad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Compra other = (Compra) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaCompra, other.fechaCompra)) {
+            return false;
+        }
+        if (!Objects.equals(this.lote, other.lote)) {
+            return false;
+        }
+        if (!Objects.equals(this.insumo, other.insumo)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.precio) != Float.floatToIntBits(other.precio)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.cantidad) != Float.floatToIntBits(other.cantidad)) {
+            return false;
+        }
+        return true;
     }
 }

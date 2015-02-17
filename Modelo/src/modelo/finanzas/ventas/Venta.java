@@ -7,6 +7,7 @@ package modelo.finanzas.ventas;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -445,5 +446,83 @@ public class Venta implements Serializable {
         this.terceraPrecioUnid += v.terceraPrecioUnid;
         this.cuartaPrecioUnid += v.cuartaPrecioUnid;
         this.quintaPrecioUnid += v.quintaPrecioUnid;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.fechaVenta);
+        hash = 89 * hash + Objects.hashCode(this.cliente);
+        hash = 89 * hash + Float.floatToIntBits(this.extraGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.primeraGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.segundaGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.terceraGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.cuartaGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.quintaGramos);
+        hash = 89 * hash + Float.floatToIntBits(this.extraPrecioUnid);
+        hash = 89 * hash + Float.floatToIntBits(this.primeraPrecioUnid);
+        hash = 89 * hash + Float.floatToIntBits(this.segundaPrecioUnid);
+        hash = 89 * hash + Float.floatToIntBits(this.terceraPrecioUnid);
+        hash = 89 * hash + Float.floatToIntBits(this.cuartaPrecioUnid);
+        hash = 89 * hash + Float.floatToIntBits(this.quintaPrecioUnid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Venta other = (Venta) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaVenta, other.fechaVenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.extraGramos) != Float.floatToIntBits(other.extraGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.primeraGramos) != Float.floatToIntBits(other.primeraGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.segundaGramos) != Float.floatToIntBits(other.segundaGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.terceraGramos) != Float.floatToIntBits(other.terceraGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.cuartaGramos) != Float.floatToIntBits(other.cuartaGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.quintaGramos) != Float.floatToIntBits(other.quintaGramos)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.extraPrecioUnid) != Float.floatToIntBits(other.extraPrecioUnid)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.primeraPrecioUnid) != Float.floatToIntBits(other.primeraPrecioUnid)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.segundaPrecioUnid) != Float.floatToIntBits(other.segundaPrecioUnid)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.terceraPrecioUnid) != Float.floatToIntBits(other.terceraPrecioUnid)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.cuartaPrecioUnid) != Float.floatToIntBits(other.cuartaPrecioUnid)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.quintaPrecioUnid) != Float.floatToIntBits(other.quintaPrecioUnid)) {
+            return false;
+        }
+        return true;
     }
 }

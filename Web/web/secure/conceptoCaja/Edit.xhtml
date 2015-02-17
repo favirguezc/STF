@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ConceptoCajaEditDlg" widgetVar="ConceptoCajaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConceptoCajaTitle}">
+            <h:form id="ConceptoCajaEditForm">
+                <h:panelGroup id="display">
+                    <h:panelGrid columns="2" rendered="#{conceptoCajaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConceptoCajaLabel_caja}" for="cajaE" />
+                        <p:selectOneMenu id="cajaE" value="#{conceptoCajaController.selected.caja}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cajaController.itemsAvailableSelectOne}"
+                                           var="cajaItem"
+                                           itemValue="#{cajaItem}"
+                                           itemLabel="#{cajaItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConceptoCajaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{conceptoCajaController.selected.fecha}" title="#{bundle.EditConceptoCajaTitle_fecha}" required="true" requiredMessage="#{CreateConceptoCajaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConceptoCajaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{conceptoCajaController.selected.descripcion}" title="#{bundle.EditConceptoCajaTitle_descripcion}" />
+                        <p:outputLabel for="entrada" value="#{bundle.EditConceptoCajaLabel_eos}" />
+                        <p:selectOneRadio id="entrada" value="#{conceptoCajaController.entrada}">
+                            <f:selectItems value="#{conceptoCajaController.itemsEntrada}"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="#{bundle.EditConceptoCajaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{conceptoCajaController.selected.valor}" title="#{bundle.EditConceptoCajaTitle_valor}" />
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{conceptoCajaController.update}" value="#{bundle.Save}" update="display,:ConceptoCajaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConceptoCajaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConceptoCajaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>       
+    </ui:composition>
+
+</html>

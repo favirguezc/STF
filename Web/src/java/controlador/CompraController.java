@@ -14,6 +14,7 @@ import javax.faces.convert.Converter;
 import datos.finanzas.CompraDAO;
 import datos.finanzas.PrecioDAO;
 import datos.util.EntityManagerFactorySingleton;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ import modelo.produccion.administracion.Lote;
  */
 @ManagedBean(name = "compraController")
 @SessionScoped
-public class CompraController {
+public class CompraController implements Serializable{
 
     private Compra selected = null;
     private List<Compra> items = null;

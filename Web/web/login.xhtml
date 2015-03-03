@@ -28,8 +28,8 @@
                                 <f:selectItems value="#{loginController.roles}"/>
                             </p:selectOneMenu>
                             <p:spacer></p:spacer>
-                            <p:commandButton action="#{loginController.login}" value="Login" update=":growl,loginPanel" ajax="false" rendered="#{!loginController.loggedin}"></p:commandButton>
-                            <p:commandButton action="#{loginController.login2}" value="Login" update=":growl" ajax="true" rendered="#{loginController.loggedin}"></p:commandButton> 
+                            <p:commandButton action="#{loginController.login}" value="Iniciar Sesión" update=":growl,loginPanel" ajax="false" rendered="#{!loginController.loggedin}"></p:commandButton>
+                            <p:commandButton action="#{loginController.login2}" value="Iniciar Sesión" update=":growl" ajax="true" rendered="#{loginController.loggedin}"></p:commandButton> 
                         </h:panelGrid> 
                     </p:panel> 
                 </h:form>

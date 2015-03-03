@@ -30,12 +30,12 @@ import modelo.produccion.administracion.Persona;
  */
 @ManagedBean(name = "ventaController")
 @SessionScoped
-public class VentaController implements Serializable{
+public class VentaController implements Serializable {
 
     private Venta selected;
     private List<Venta> items = null;
     private VentaDAO jpaController = null;
-    
+
     public VentaController() {
     }
 
@@ -53,7 +53,7 @@ public class VentaController implements Serializable{
     public void setSelected(Venta selected) {
         this.selected = selected;
     }
-    
+
     protected void setEmbeddableKeys() {
     }
 
@@ -65,7 +65,7 @@ public class VentaController implements Serializable{
         initializeEmbeddableKey();
         return selected;
     }
-     
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -84,14 +84,14 @@ public class VentaController implements Serializable{
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public List<Venta> getItems() {
         if (items == null) {
             items = getJpaController().findVentaEntities();
         }
         return items;
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -110,7 +110,7 @@ public class VentaController implements Serializable{
             }
         }
     }
-    
+
     public List<Venta> getItemsAvailableSelectMany() {
         return getJpaController().findVentaEntities();
     }
@@ -122,7 +122,7 @@ public class VentaController implements Serializable{
     public List<Venta> leerLista(Persona cliente, Date inicio, Date fin) {
         return getJpaController().findVentaEntities(cliente, inicio, fin);
     }
-    
+
     public Venta sumarRegistros(Persona cliente, Date inicio, Date fin) {
         List<Venta> leerLista = leerLista(cliente, inicio, fin);
         Venta suma = new Venta(null, cliente, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -131,8 +131,7 @@ public class VentaController implements Serializable{
         }
         return suma;
     }
-    
-    
+
     @FacesConverter(forClass = Venta.class)
     public static class VentaConverter implements Converter {
 

@@ -33,8 +33,8 @@ public class AutorizacionFilter implements Filter {
         loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
         if (loginBean != null) {
             String requestPath = ((HttpServletRequest) request).getPathInfo();
-            Rol rol = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findMostImportantRol(loginBean.getUserPersona());
-            if (PermisosPorRol.tienePermiso(rol, requestPath)) {
+            Rol rol = loginBean.getRol();
+            if (new PermisoController().tienePermiso(rol, requestPath)) {
                 chain.doFilter(request, response);
             } else {
                 HttpServletRequest req = (HttpServletRequest) request;

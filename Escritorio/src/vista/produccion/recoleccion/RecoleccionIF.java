@@ -773,7 +773,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         recolectorComboBox.removeAllItems();
         recolectorFiltroComboBox.removeAllItems();
         recolectorFiltroComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.TRABAJADOR)) {
             recolectorComboBox.addItem(p);
             recolectorFiltroComboBox.addItem(p);
         }

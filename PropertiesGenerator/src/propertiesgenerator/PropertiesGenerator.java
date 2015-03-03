@@ -5,6 +5,7 @@
  */
 package propertiesgenerator;
 
+import java.lang.annotation.Annotation;
 import modelo.produccion.variablesClimaticas.*;
 import modelo.produccion.utilidades.*;
 import modelo.produccion.administracion.*;
@@ -24,26 +25,31 @@ public class PropertiesGenerator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-//        generarPropiedades(Lote.class);
-//        generarPropiedades(Modulo.class);
-//        generarPropiedades(Persona.class);
-//        generarPropiedades(Rol.class);
-//        generarPropiedades(RolPersona.class);
-//        generarPropiedades(Aplicacion.class);
-        generarPropiedades(Insumo.class);
-//        generarPropiedades(Labor.class);
-//        generarPropiedades(Trabajo.class);
-//        generarPropiedades(Monitoreo.class);
-//        generarPropiedades(MonitoreoDeVariables.class);
-//        generarPropiedades(TrampaDeInsectos.class);
-//        generarPropiedades(Variable.class);
-//        generarPropiedades(Recoleccion.class);
-//        generarPropiedades(Nota.class);
-//        generarPropiedades(HumedadDelSuelo.class);
-//        generarPropiedades(Lluvia.class);
-//        generarPropiedades(Temperatura.class);
-//        generarPropiedades(Termometro.class);
+        generarTitulos();
+        generarPropiedades(modelo.produccion.administracion.Lote.class);
+        generarPropiedades(modelo.produccion.administracion.Modulo.class);
+        generarPropiedades(modelo.produccion.administracion.Permiso.class);
+        generarPropiedades(modelo.produccion.administracion.Persona.class);
+        generarPropiedades(modelo.produccion.administracion.RolPersona.class);
+        generarPropiedades(modelo.produccion.aplicaciones.Aplicacion.class);
+        generarPropiedades(modelo.produccion.aplicaciones.Insumo.class);
+        generarPropiedades(modelo.produccion.labores.Labor.class);
+        generarPropiedades(modelo.produccion.labores.Trabajo.class);
+        generarPropiedades(modelo.produccion.monitoreo.Monitoreo.class);
+        generarPropiedades(modelo.produccion.monitoreo.MonitoreoDeVariables.class);
+        generarPropiedades(modelo.produccion.monitoreo.TrampaDeInsectos.class);
+        generarPropiedades(modelo.produccion.monitoreo.Variable.class);
+        generarPropiedades(modelo.produccion.recoleccion.Recoleccion.class);
+        generarPropiedades(modelo.produccion.utilidades.Nota.class);
+        generarPropiedades(modelo.produccion.variablesClimaticas.HumedadDelSuelo.class);
+        generarPropiedades(modelo.produccion.variablesClimaticas.Lluvia.class);
+        generarPropiedades(modelo.produccion.variablesClimaticas.Temperatura.class);
+        generarPropiedades(modelo.produccion.variablesClimaticas.Termometro.class);
+        generarPropiedades(modelo.finanzas.Precio.class);
+        generarPropiedades(modelo.finanzas.caja.Caja.class);
+        generarPropiedades(modelo.finanzas.caja.ConceptoCaja.class);
+        generarPropiedades(modelo.finanzas.compra.Compra.class);
+        generarPropiedades(modelo.finanzas.ventas.Venta.class);
     }
 
     private static String g(String campo) {
@@ -55,6 +61,29 @@ public class PropertiesGenerator {
             retorno += c;
         }
         return retorno;
+    }
+
+    private static void generarTitulos() {
+        System.out.println("PersistenceErrorOccured=Error de persistencia.");
+        System.out.println("Create=Crear");
+        System.out.println("View=Ver");
+        System.out.println("Edit=Editar");
+        System.out.println("Delete=Borrar");
+        System.out.println("Close=Cerrar");
+        System.out.println("Cancel=Cancelar");
+        System.out.println("Save=Guardar");
+        System.out.println("SelectOneMessage=Selecciona Uno...");
+        System.out.println("Home=Inicio");
+        System.out.println("Maintenance=Maintenimiento");
+        System.out.println("AppName=STF - Web");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Management=Administración");
+        System.out.println("Application=Aplicación");
+        System.out.println("Work=Trabajo");
+        System.out.println("Monitoring=Monitoreo");
+        System.out.println("Weather=Clima");
+        System.out.println("Finances=Finanzas");
     }
 
     private static void generarPropiedades(Class aClass) {

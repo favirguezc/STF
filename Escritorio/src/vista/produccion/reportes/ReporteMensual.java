@@ -265,7 +265,7 @@ public class ReporteMensual extends javax.swing.JDialog {
     private void cargarListaRecolectores() {
         recolectorComboBox.removeAllItems();
         recolectorComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.TRABAJADOR)) {
             recolectorComboBox.addItem(p);
         }
     }

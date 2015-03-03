@@ -115,11 +115,7 @@ public class PersonaController implements Serializable {
     }
     
     public List<Persona> getItemsAvailableAsistente(){
-        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ASISTENTE_TECNICO);
-    }
-    
-    public List<Persona> getItemsAvailableRecolector(){
-        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.RECOLECTOR);
+        return new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ESPECIALISTA);
     }
     
     public List<Persona> getItemsAvailableCliente(){

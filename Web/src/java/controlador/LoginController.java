@@ -7,14 +7,17 @@ package controlador;
 
 import controlador.util.JsfUtil;
 import datos.produccion.administracion.PersonaDAO;
+import datos.produccion.administracion.RolPersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import datos.util.LoginDAO;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
 
 /**
  *
@@ -24,24 +27,42 @@ import modelo.produccion.administracion.Persona;
 @SessionScoped
 public class LoginController implements Serializable {
 
-    private String user, pass, mensaje;
+    private String userString, passString, mensaje;
     private boolean loggedin;
-    private Persona userPersona;
+    private Persona user;
+    private Rol rol;
+    private List<Rol> roles;
 
-    public String getUser() {
-        return user;
+    public String getUserString() {
+        return userString;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserString(String userString) {
+        this.userString = userString;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPassString() {
+        return passString;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassString(String passString) {
+        this.passString = passString;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
     public String getMensaje() {
@@ -60,21 +81,29 @@ public class LoginController implements Serializable {
         this.loggedin = loggedin;
     }
 
-    public Persona getUserPersona() {
-        return userPersona;
+    public Persona getUser() {
+        return user;
     }
 
-    public void setUserPersona(Persona userPersona) {
-        this.userPersona = userPersona;
+    public void setUser(Persona user) {
+        this.user = user;
     }
 
-    public String login() {
-        loggedin = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(user, pass);
+    public void login() {
+        loggedin = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
         if (loggedin) {
-            long userId = Long.parseLong(user);
-            userPersona = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
-            mensaje = "Hola " + userPersona + "!";
-            getSession().setAttribute("username", user);
+            long userId = Long.parseLong(userString);
+            user = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
+            roles = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findRolEntities(user);
+        } else {
+            JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
+        }
+    }
+
+    public String login2() {
+        if (loggedin) {
+            mensaje = "Hola " + user + ", "+rol;
+            getSession().setAttribute("username", userString);
             return "/faces/secure/index.xhtml";
         } else {
             JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
@@ -84,8 +113,8 @@ public class LoginController implements Serializable {
 
     public String logout() {
         getSession().invalidate();
-        user = null;
-        pass = null;
+        userString = null;
+        passString = null;
         mensaje = null;
         loggedin = false;
         return "/faces/login.xhtml";

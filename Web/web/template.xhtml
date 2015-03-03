@@ -30,7 +30,7 @@
                             <h:outputText value="#{loginController.mensaje}"/>
                             <h:form>                                
                                 <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="true" rendered="#{loginController.loggedin}" />
-                            </h:form>
+                            </h:form>                            
                         </td>
                     </tr>
                 </table>
@@ -64,7 +64,7 @@
                             <p:menuitem value="Termómetro" outcome="/secure/termometro/List.xhtml"/>
                         </p:submenu>
                         <p:menuitem value="Recolección" outcome="/secure/recoleccion/List.xhtml"/>
-                        <p:submenu label="#{bundle.Finanzas}">
+                        <p:submenu label="#{bundle.Finances}">
                             <p:menuitem value="Ventas" outcome="/secure/venta/List.xhtml"/>
                             <p:menuitem value="Compras" outcome="/secure/compra/List.xhtml"/>
                             <p:menuitem value="Administrar Cajas" outcome="/secure/caja/List.xhtml"/>

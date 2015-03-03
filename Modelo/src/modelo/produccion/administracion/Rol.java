@@ -6,36 +6,31 @@ package modelo.produccion.administracion;
  */
 public enum Rol {
 
+    GERENTE,
     /**
      *
      */
-    RECOLECTOR,
-
+    SOCIO,
+    /**
+     *
+     */
+    JEFE_DE_CAMPO,
+    /**
+     *
+     */
+    ASISTENTE_ADMINISTRATIVO,
+    /**
+     *
+     */
+    CONTADOR,
+    /**
+     *
+     */
+    ESPECIALISTA,
     /**
      *
      */
     TRABAJADOR,
-
-    /**
-     *
-     */
-    ADMINISTRADOR,
-
-    /**
-     *
-     */
-    GERENTE,
-
-    /**
-     *
-     */
-    SECRETARIO,
-    
-    /**
-     *
-     */
-    ASISTENTE_TECNICO,
-
     /**
      *
      */
@@ -44,22 +39,25 @@ public enum Rol {
     @Override
     public String toString() {
         switch (this) {
-            case ADMINISTRADOR:
-                return "Administrador";
-            case RECOLECTOR:
-                return "Recolector";
-            case SECRETARIO:
-                return "Secretario";
-            case ASISTENTE_TECNICO:
-                return "Asistente Técnico";
-            case TRABAJADOR:
-                return "Trabajador";
-            case GERENTE:
-                return "Gerente";
+            case ASISTENTE_ADMINISTRATIVO:
+                return "Asistente Administrativo";
             case CLIENTE:
                 return "Cliente";
+            case CONTADOR:
+                return "Contador";
+            case ESPECIALISTA:
+                return "Especialista";
+            case GERENTE:
+                return "Gerente";
+            case JEFE_DE_CAMPO:
+                return "Jefe de Campo";
+            case SOCIO:
+                return "Socio";
+            case TRABAJADOR:
+                return "Trabajador";
             default:
                 return "";
         }
     }
+
 }

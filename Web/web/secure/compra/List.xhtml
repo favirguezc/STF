@@ -12,9 +12,6 @@
         </ui:define>
         <ui:define name="body">
             <p:accordionPanel dynamic="true" id="CompraListPanel">
-                <p:tab title="Gráficas">
-                    <p>.....En construccion........</p>
-                </p:tab>
                 <p:tab title="Datos">
                     <h:form id="CompraListForm">
                             <p:dataTable id="datalist" value="#{compraController.items}" var="item" 
@@ -51,19 +48,25 @@
                                     <f:facet name="header">
                                         <h:outputText value="Precio"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.precio}"/>
+                                    <h:outputText value="#{item.precio}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Cantidad"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.cantidad}"/>
+                                    <h:outputText value="#{item.cantidad}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Total"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.total}"/>
+                                    <h:outputText value="#{item.total}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <f:facet name="footer">
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{compraController.prepareCreate}" update=":CompraListPanel:CompraCreateForm" oncomplete="PF('CompraCreateDialog').show()"/>

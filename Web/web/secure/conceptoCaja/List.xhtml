@@ -50,19 +50,25 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListConceptoCajaTitle_entrada}"/>
                         </f:facet>
-                        <h:outputText value="#{item.valor}" rendered="#{item.entrada}"/>
+                        <h:outputText value="#{item.valor}" rendered="#{item.entrada}">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListConceptoCajaTitle_salida}"/>
                         </f:facet>
-                        <h:outputText value="#{item.valor}" rendered="#{!item.entrada}"/>
+                        <h:outputText value="#{item.valor}" rendered="#{!item.entrada}">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListConceptoCajaTitle_saldo}"/>
                         </f:facet>
-                        <h:outputText value="#{item.saldo}"/>
+                        <h:outputText value="#{item.saldo}">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{conceptoCajaController.prepareCreate}" update=":ConceptoCajaCreateForm" oncomplete="PF('ConceptoCajaCreateDialog').show()"/>

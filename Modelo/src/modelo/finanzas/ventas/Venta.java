@@ -423,6 +423,15 @@ public class Venta implements Serializable {
      *
      * @return
      */
+    public float getCantidadTotal (){
+        return extraGramos + primeraGramos + segundaGramos + 
+                terceraGramos + cuartaGramos + quintaGramos;
+    }
+    
+    /**
+     *
+     * @return
+     */
     public float getVentaTotal (){
         return getExtraPrecioTotal() + getPrimeraPrecioTotal() + 
                getSegundaPrecioTotal() + getTerceraPrecioTotal() + 

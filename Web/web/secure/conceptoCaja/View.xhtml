@@ -24,7 +24,9 @@
                         <h:outputText value="#{bundle.ViewConceptoCajaLabel_entrada}" rendered="#{conceptoCajaController.selected.entrada}"/>
                         <h:outputText value="#{bundle.ViewConceptoCajaLabel_salida}" rendered="#{!conceptoCajaController.selected.entrada}"/>
                         <h:outputText value="#{bundle.ViewConceptoCajaLabel_valor}"/>
-                        <h:outputText value="#{conceptoCajaController.selected.valor}" title="#{bundle.ViewConceptoCajaTitle_valor}"/>
+                        <h:outputText value="#{conceptoCajaController.selected.valor}" title="#{bundle.ViewConceptoCajaTitle_valor}">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ConceptoCajaViewDialog.hide()"/>
                 </h:panelGroup>

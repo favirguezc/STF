@@ -11,40 +11,53 @@
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
-                        <p:outputLabel for="fechaVenta" value="FechaVenta (dd/MM/yyyy):"/>
-                        <p:calendar id="fechaVenta" pattern="dd/MM/yyyy" value="#{ventaController.selected.fechaVenta}" title="FechaVenta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
+                        <p:outputLabel for="fechaVenta" value="Fecha Venta (dd/MM/yyyy):"/>
+                        <p:calendar id="fechaVenta" pattern="dd/MM/yyyy" value="#{ventaController.selected.fechaVenta}" title="Fecha de la Venta" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
                         <p:outputLabel for="cliente" value="Cliente:"/>
                         <p:selectOneMenu id="cliente" value="#{ventaController.selected.cliente}" required="true" requiredMessage="The cliente field is required." >
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{personaController.itemsAvailableCliente}"
                                            var="clienteItem"
                                            itemValue="#{clienteItem}"
                                            itemLabel="#{clienteItem.nombre} #{clienteItem.apellido}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel for="extraGramos" value="ExtraGramos:"/>
-                        <p:inputText id="extraGramos" value="#{ventaController.selected.extraGramos}" title="ExtraGramos" />
-                        <p:outputLabel for="primeraGramos" value="PrimeraGramos:"/>
-                        <p:inputText id="primeraGramos" value="#{ventaController.selected.primeraGramos}" title="PrimeraGramos" />
-                        <p:outputLabel for="segundaGramos" value="SegundaGramos:"/>
-                        <p:inputText id="segundaGramos" value="#{ventaController.selected.segundaGramos}" title="SegundaGramos" />
-                        <p:outputLabel for="terceraGramos" value="TerceraGramos:"/>
-                        <p:inputText id="terceraGramos" value="#{ventaController.selected.terceraGramos}" title="TerceraGramos" />
-                        <p:outputLabel for="cuartaGramos" value="CuartaGramos:"/>
-                        <p:inputText id="cuartaGramos" value="#{ventaController.selected.cuartaGramos}" title="CuartaGramos" />
-                        <p:outputLabel for="quintaGramos" value="QuintaGramos:"/>
-                        <p:inputText id="quintaGramos" value="#{ventaController.selected.quintaGramos}" title="QuintaGramos" />
-                        <p:outputLabel for="extraPrecioUnid" value="ExtraPrecioUnid:"/>
-                        <p:inputText id="extraPrecioUnid" value="#{ventaController.selected.extraPrecioUnid}" title="ExtraPrecioUnid" />
-                        <p:outputLabel for="primeraPrecioUnid" value="PrimeraPrecioUnid:"/>
-                        <p:inputText id="primeraPrecioUnid" value="#{ventaController.selected.primeraPrecioUnid}" title="PrimeraPrecioUnid" />
-                        <p:outputLabel for="segundaPrecioUnid" value="SegundaPrecioUnid:"/>
-                        <p:inputText id="segundaPrecioUnid" value="#{ventaController.selected.segundaPrecioUnid}" title="SegundaPrecioUnid" />
-                        <p:outputLabel for="terceraPrecioUnid" value="TerceraPrecioUnid:"/>
-                        <p:inputText id="terceraPrecioUnid" value="#{ventaController.selected.terceraPrecioUnid}" title="TerceraPrecioUnid" />
-                        <p:outputLabel for="cuartaPrecioUnid" value="CuartaPrecioUnid:"/>
-                        <p:inputText id="cuartaPrecioUnid" value="#{ventaController.selected.cuartaPrecioUnid}" title="CuartaPrecioUnid" />
-                        <p:outputLabel for="quintaPrecioUnid" value="QuintaPrecioUnid:"/>
-                        <p:inputText id="quintaPrecioUnid" value="#{ventaController.selected.quintaPrecioUnid}" title="QuintaPrecioUnid" />
+                        <p:outputLabel for="extraGramos" value="Cantidad Tipo Extra**:"/>
+                        <p:inputText id="extraGramos" value="#{ventaController.selected.extraGramos}" title="Cantidad Tipo Extra">
+                            <p:ajax update="extraPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="primeraGramos" value="Cantidad Tipo Primera**:"/>
+                        <p:inputText id="primeraGramos" value="#{ventaController.selected.primeraGramos}" title="Cantidad Tipo Primera" >
+                            <p:ajax update="primeraPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="segundaGramos" value="Cantidad Tipo Segunda**:"/>
+                        <p:inputText id="segundaGramos" value="#{ventaController.selected.segundaGramos}" title="Cantidad Tipo Segunda" >
+                            <p:ajax update="segundaPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="terceraGramos" value="Cantidad Tipo Tercera**:"/>
+                        <p:inputText id="terceraGramos" value="#{ventaController.selected.terceraGramos}" title="Cantidad Tipo Tercera" >
+                            <p:ajax update="terceraPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="cuartaGramos" value="Cantidad Tipo Cuarta**:"/>
+                        <p:inputText id="cuartaGramos" value="#{ventaController.selected.cuartaGramos}" title="Cantidad Tipo Cuarta" >
+                            <p:ajax update="cuartaPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="quintaGramos" value="Cantidad Tipo Quinta**:"/>
+                        <p:inputText id="quintaGramos" value="#{ventaController.selected.quintaGramos}" title="Cantidad Tipo Quinta" >
+                            <p:ajax update="quintaPrecioUnid"/>
+                        </p:inputText>
+                        <p:outputLabel for="extraPrecioUnid" value="Extra Precio Unidad:"/>
+                        <p:inputText id="extraPrecioUnid" value="#{ventaController.selected.extraPrecioUnid}" disabled="#{ventaController.selected.extraGramos == 0}" title="Extra Precio Unidad" />
+                        <p:outputLabel for="primeraPrecioUnid" value="Primera Precio Unidad:"/>
+                        <p:inputText id="primeraPrecioUnid" value="#{ventaController.selected.primeraPrecioUnid}" disabled="#{ventaController.selected.primeraGramos == 0}" title="Primera Precio Unidad" />
+                        <p:outputLabel for="segundaPrecioUnid" value="Segunda Precio Unidad:"/>
+                        <p:inputText id="segundaPrecioUnid" value="#{ventaController.selected.segundaPrecioUnid}" disabled="#{ventaController.selected.segundaGramos == 0}" title="Segunda Precio Unidad" />
+                        <p:outputLabel for="terceraPrecioUnid" value="Tercera Precio Unidad:"/>
+                        <p:inputText id="terceraPrecioUnid" value="#{ventaController.selected.terceraPrecioUnid}" disabled="#{ventaController.selected.terceraGramos == 0}" title="Tercera Precio Unidad" />
+                        <p:outputLabel for="cuartaPrecioUnid" value="Cuarta Precio Unidad:"/>
+                        <p:inputText id="cuartaPrecioUnid" value="#{ventaController.selected.cuartaPrecioUnid}" disabled="#{ventaController.selected.cuartaGramos == 0}" title="Cuarta Precio Unidad" />
+                        <p:outputLabel for="quintaPrecioUnid" value="Quinta Precio Unidad:"/>
+                        <p:inputText id="quintaPrecioUnid" value="#{ventaController.selected.quintaPrecioUnid}" disabled="#{ventaController.selected.quintaGramos == 0}" title="Quinta Precio Unidad" />
                     </p:panelGrid>
+                    <h:outputText value="**Ingresar los valores en Libras" style="color: red"/>
                     <p:commandButton actionListener="#{ventaController.create}" value="#{bundle.Save}" update="display,:VentaListPanel:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
                 </h:panelGroup>

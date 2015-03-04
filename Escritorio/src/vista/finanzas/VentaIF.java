@@ -87,7 +87,6 @@ public class VentaIF extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         quintaFloatField = new modelo.util.FloatField();
         jLabel10 = new javax.swing.JLabel();
-        siguienteButton = new javax.swing.JButton();
         changePricePanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -102,7 +101,6 @@ public class VentaIF extends javax.swing.JInternalFrame {
         cuartaPrecioFloatField = new modelo.util.FloatField();
         jLabel17 = new javax.swing.JLabel();
         quintaPrecioFloatField = new modelo.util.FloatField();
-        anteriorButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         filtroClienteComboBox = new javax.swing.JComboBox();
@@ -204,7 +202,16 @@ public class VentaIF extends javax.swing.JInternalFrame {
             new String [] {
                 "Fecha", "C_E", "C_P", "C_S", "C_T", "C_C", "C_Q", "V_E", "V_P", "V_S", "V_T", "V_C", "V_Q", "Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        principalTable.setEnabled(false);
         jScrollPane1.setViewportView(principalTable);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -251,14 +258,6 @@ public class VentaIF extends javax.swing.JInternalFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Cantidad de Fresa");
 
-        siguienteButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        siguienteButton.setText("Siguiente");
-        siguienteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                siguienteButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
         edicionPanelLayout.setHorizontalGroup(
@@ -296,8 +295,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
                                 .addComponent(terceraFloatField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cuartaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(quintaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(siguienteButton)))
+                            .addComponent(clienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(edicionPanelLayout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(jLabel10)))
@@ -340,9 +338,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quintaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addComponent(siguienteButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registro Venta", edicionPanel);
@@ -380,9 +376,6 @@ public class VentaIF extends javax.swing.JInternalFrame {
 
         quintaPrecioFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        anteriorButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        anteriorButton.setText("Anterior");
-
         javax.swing.GroupLayout changePricePanelLayout = new javax.swing.GroupLayout(changePricePanel);
         changePricePanel.setLayout(changePricePanelLayout);
         changePricePanelLayout.setHorizontalGroup(
@@ -392,23 +385,20 @@ public class VentaIF extends javax.swing.JInternalFrame {
                     .addGroup(changePricePanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(changePricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(changePricePanelLayout.createSequentialGroup()
-                                .addGroup(changePricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel17))
-                                .addGap(28, 28, 28)
-                                .addGroup(changePricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(extraPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(primeraPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(segundaPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(terceraPrecioFloatField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cuartaPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(quintaPrecioFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(anteriorButton)))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addGap(28, 28, 28)
+                        .addGroup(changePricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(extraPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(primeraPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(segundaPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(terceraPrecioFloatField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cuartaPrecioFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(quintaPrecioFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(changePricePanelLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jLabel11)))
@@ -443,9 +433,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
                 .addGroup(changePricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quintaPrecioFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(anteriorButton)
-                .addGap(47, 47, 47))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Establecer Precio", changePricePanel);
@@ -724,15 +712,8 @@ public class VentaIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
-        // TODO add your handling code here:
-        changePricePanel.setVisible(true);
-        habilitarCampoObligatorio();
-    }//GEN-LAST:event_siguienteButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton anteriorButton;
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel changePricePanel;
@@ -781,7 +762,6 @@ public class VentaIF extends javax.swing.JInternalFrame {
     private modelo.util.FloatField quintaPrecioFloatField;
     private modelo.util.FloatField segundaFloatField;
     private modelo.util.FloatField segundaPrecioFloatField;
-    private javax.swing.JButton siguienteButton;
     private modelo.util.FloatField terceraFloatField;
     private modelo.util.FloatField terceraPrecioFloatField;
     // End of variables declaration//GEN-END:variables

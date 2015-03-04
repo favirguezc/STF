@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import modelo.util.FileTypeFilter;
 import vista.finanzas.*;
+import vista.finanzas.reportes.ReporteVentaAnual;
 import vista.herramientas.BackUp;
 import vista.herramientas.Password;
 import vista.produccion.administracion.*;
@@ -118,6 +119,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -125,6 +131,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
+        jMenuItem35 = new javax.swing.JMenuItem();
+        jMenuItem36 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -135,11 +144,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenuItem23 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
-        jMenuItem32 = new javax.swing.JMenuItem();
-        jMenuItem33 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
@@ -457,6 +461,52 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu5);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman229.png"))); // NOI18N
+        jMenu7.setText("Finanzas");
+        jMenu7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jMenuItem28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/affiliate.png"))); // NOI18N
+        jMenuItem28.setText("Ventas");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem28);
+
+        jMenuItem29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman228.png"))); // NOI18N
+        jMenuItem29.setText("Compras");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem29);
+
+        jMenuItem32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus14.png"))); // NOI18N
+        jMenuItem32.setText("Administrar Cajas");
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem32);
+
+        jMenuItem33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus6.png"))); // NOI18N
+        jMenuItem33.setText("Registrar en Cajas");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem33);
+
+        jMenuBar2.add(jMenu7);
+
         jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/attach3.png"))); // NOI18N
         jMenu12.setText("Extras");
         jMenu12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -514,6 +564,36 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem17);
+
+        jMenuItem34.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem34.setText("Reporte Anual de Ventas Por Mes");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem34);
+
+        jMenuItem35.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem35.setText("Reporte Anual de Ventas Por Semana");
+        jMenuItem35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem35ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem35);
+
+        jMenuItem36.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenuItem36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/pdf5.png"))); // NOI18N
+        jMenuItem36.setText("Reporte Anual de Ventas Por Dia");
+        jMenuItem36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem36ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem36);
 
         jMenu12.add(jMenu1);
 
@@ -610,52 +690,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jMenu12.add(jMenu6);
 
         jMenuBar2.add(jMenu12);
-
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman229.png"))); // NOI18N
-        jMenu7.setText("Finanzas");
-        jMenu7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jMenuItem28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/affiliate.png"))); // NOI18N
-        jMenuItem28.setText("Ventas");
-        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem28ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem28);
-
-        jMenuItem29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/businessman228.png"))); // NOI18N
-        jMenuItem29.setText("Compras");
-        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem29ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem29);
-
-        jMenuItem32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus14.png"))); // NOI18N
-        jMenuItem32.setText("Administrar Cajas");
-        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem32ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem32);
-
-        jMenuItem33.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/abacus6.png"))); // NOI18N
-        jMenuItem33.setText("Registrar en Cajas");
-        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem33ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem33);
-
-        jMenuBar2.add(jMenu7);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/settings48.png"))); // NOI18N
         jMenu8.setText("Herramientas");
@@ -930,6 +964,21 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         abrirRegistrarConceptos();
     }//GEN-LAST:event_jMenuItem33ActionPerformed
 
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        // TODO add your handling code here:
+        new ReporteVentaAnual(this, true, ReporteVentaAnual.POR_MES).setVisible(true); 
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
+
+    private void jMenuItem35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem35ActionPerformed
+        // TODO add your handling code here:
+        new ReporteVentaAnual(this, true, ReporteVentaAnual.POR_SEMANA).setVisible(true); 
+    }//GEN-LAST:event_jMenuItem35ActionPerformed
+
+    private void jMenuItem36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem36ActionPerformed
+        // TODO add your handling code here:
+        new ReporteVentaAnual(this, true, ReporteVentaAnual.POR_DIA).setVisible(true); 
+    }//GEN-LAST:event_jMenuItem36ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -977,6 +1026,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
     private javax.swing.JMenuItem jMenuItem33;
+    private javax.swing.JMenuItem jMenuItem34;
+    private javax.swing.JMenuItem jMenuItem35;
+    private javax.swing.JMenuItem jMenuItem36;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

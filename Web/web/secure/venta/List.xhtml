@@ -13,7 +13,87 @@
         <ui:define name="body">
             <p:accordionPanel dynamic="true" id="VentaListPanel">
                 <p:tab title="Gráficas">
-                    <p>.....En construccion........</p>
+                    <p:tabView dynamic="true">
+                        <p:tab title="Semanal">
+                            <h:form>
+                                <h:panelGrid columns="5" cellpadding="10">
+                                    <p:outputLabel value="Cliente" for="clienteFil"/>
+                                    <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente3}">
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Fecha" for="fecha"/>
+                                    <p:calendar id="fecha" value="#{ventaChart.fecha3}" showOn="button"/>
+                                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
+                                </h:panelGrid>
+                                <p:chart id="chart3" type="line" model="#{ventaChart.modelo3}"/>
+                                <p:remoteCommand name="updateChart3" update="chart3" actionListener="#{ventaChart.createModel3}"/>
+                            </h:form>
+                        </p:tab>
+                        <p:tab title="Mensual">
+                            <h:form>
+                                <h:panelGrid columns="7" cellpadding="10">
+                                    <p:outputLabel value="Cliente" for="clienteFil"/>
+                                    <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente2}">
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Año" for="ano2"/>
+                                    <p:spinner id="ano2" value="#{ventaChart.ano2}" title="Año" min="2012" max="2030"/>
+                                    <p:outputLabel value="Mes" for="mes"/>
+                                    <p:selectOneMenu id="mes" value="#{ventaChart.mes2}">
+                                        <f:selectItem itemLabel="Enero" itemValue="0"/>
+                                        <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                                        <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                                        <f:selectItem itemLabel="Abril" itemValue="3"/>
+                                        <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                                        <f:selectItem itemLabel="Junio" itemValue="5"/>
+                                        <f:selectItem itemLabel="Julio" itemValue="6"/>
+                                        <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                                        <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                                        <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                                        <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                                        <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                                    </p:selectOneMenu>                    
+                                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart2()"/>
+                                </h:panelGrid>
+                                <p:chart id="chart2" type="line" model="#{ventaChart.modelo2}"/>
+                                <p:remoteCommand name="updateChart2" update="chart2" actionListener="#{ventaChart.createModel2}"/>
+                            </h:form>
+                        </p:tab>
+                        <p:tab title="Anual por Mes">
+                            <h:form>
+                                <h:panelGrid columns="5" cellpadding="10">
+                                    <p:outputLabel value="Cliente" for="clienteFil"/>
+                                    <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente1}">
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Año" for="ano1"/>
+                                    <p:spinner id="ano1" value="#{ventaChart.ano1}" title="Año" min="2010" max="2030"/>
+                                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
+                                </h:panelGrid>
+                                <p:chart id="chart1" type="line" model="#{ventaChart.modelo1}"/>
+                                <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{ventaChart.createModel1}"/>
+                            </h:form>
+                        </p:tab>
+                        <p:tab title="Anual por Semana">
+                            <h:form>
+                                <h:panelGrid columns="5" cellpadding="10">
+                                    <p:outputLabel value="Cliente" for="clienteFil"/>
+                                    <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente4}">
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Año" for="ano1"/>
+                                    <p:spinner id="ano1" value="#{ventaChart.ano4}" title="Año" min="2012" max="2030"/>
+                                    <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
+                                </h:panelGrid>
+                                <p:chart id="chart4" type="line" model="#{ventaChart.modelo4}"/>
+                                <p:remoteCommand name="updateChart4" update="chart4" actionListener="#{ventaChart.createModel4}"/>
+                            </h:form>
+                        </p:tab>
+                    </p:tabView>
                 </p:tab>
                 <p:tab title="Datos">
                     <h:form id="VentaListForm">
@@ -22,7 +102,8 @@
                                      paginator="true"
                                      rowKey="#{item.id}"
                                      rows="10"
-                                     rowsPerPageTemplate="10,20,30,40,50">
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     widgetVar="moduloTable">
                                 
                                 <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                                 <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
@@ -35,125 +116,118 @@
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Cliente"/>
+                                <p:column filterBy="#{item.cliente}" headerText="Cliente" filterMatchMode="exact">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('moduloTable').filter()">
+                                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                            <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{item.cliente.nombre} #{item.cliente.apellido}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="ExtraGramos"/>
+                                        <h:outputText value="Cantidad Extra"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.extraGramos}"/>
+                                    <h:outputText value="#{item.extraGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="PrimeraGramos"/>
+                                        <h:outputText value="Cantidad Primera"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.primeraGramos}"/>
+                                    <h:outputText value="#{item.primeraGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="SegundaGramos"/>
+                                        <h:outputText value="Cantidad Segunda"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.segundaGramos}"/>
+                                    <h:outputText value="#{item.segundaGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="TerceraGramos"/>
+                                        <h:outputText value="Cantidad Tercera"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.terceraGramos}"/>
+                                    <h:outputText value="#{item.terceraGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="CuartaGramos"/>
+                                        <h:outputText value="Cantidad Cuarta"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.cuartaGramos}"/>
+                                    <h:outputText value="#{item.cuartaGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="QuintaGramos"/>
+                                        <h:outputText value="Cantidad Quinta"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.quintaGramos}"/>
+                                    <h:outputText value="#{item.quintaGramos}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="ExtraPrecioUnid"/>
+                                        <h:outputText value="Extra PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.extraPrecioUnid}"/>
+                                    <h:outputText value="#{item.extraPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="PrimeraPrecioUnid"/>
+                                        <h:outputText value="Primera PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.primeraPrecioUnid}"/>
+                                    <h:outputText value="#{item.primeraPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="SegundaPrecioUnid"/>
+                                        <h:outputText value="Segunda PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.segundaPrecioUnid}"/>
+                                    <h:outputText value="#{item.segundaPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="TerceraPrecioUnid"/>
+                                        <h:outputText value="Tercera PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.terceraPrecioUnid}"/>
+                                    <h:outputText value="#{item.terceraPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="CuartaPrecioUnid"/>
+                                        <h:outputText value="Cuarta PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.cuartaPrecioUnid}"/>
+                                    <h:outputText value="#{item.cuartaPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="QuintaPrecioUnid"/>
+                                        <h:outputText value="Quinta PrecioTotal"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.quintaPrecioUnid}"/>
+                                    <h:outputText value="#{item.quintaPrecioTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="ExtraPrecioTotal"/>
+                                        <h:outputText value="Venta Total"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.extraPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="PrimeraPrecioTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.primeraPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="SegundaPrecioTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.segundaPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="TerceraPrecioTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.terceraPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="CuartaPrecioTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.cuartaPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="QuintaPrecioTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.quintaPrecioTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="VentaTotal"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.ventaTotal}"/>
+                                    <h:outputText value="#{item.ventaTotal}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
                                 </p:column>
                                 <f:facet name="footer">
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ventaController.prepareCreate}" update=":VentaListPanel:VentaCreateForm" oncomplete="PF('VentaCreateDialog').show()"/>

@@ -21,9 +21,17 @@
                         <h:outputText value="Insumo:"/>
                         <h:outputText value="#{compraController.selected.insumo.nombre}" title="Insumo"/>
                         <h:outputText value="Precio:"/>
-                        <h:outputText value="#{compraController.selected.precio}" title="Precio Unidad"/>   
+                        <h:outputText value="#{compraController.selected.precio}" title="Precio Unidad">
+                            <f:convertNumber/>
+                        </h:outputText>
                         <h:outputText value="Cantidad:"/>
-                        <h:outputText value="#{compraController.selected.cantidad}" title="Cantidad" />
+                        <h:outputText value="#{compraController.selected.cantidad}" title="Cantidad">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="Total:"/>
+                        <h:outputText value="#{compraController.selected.total}" title="Total">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CompraViewDialog.hide()"/>
                 </h:panelGroup>

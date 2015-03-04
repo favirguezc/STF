@@ -10,6 +10,7 @@ import datos.finanzas.VentaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.finanzas.ventas.Venta;
 import modelo.produccion.administracion.Persona;
 
@@ -69,6 +70,67 @@ public class VentaControlador {
     
     public boolean validar(Venta v) {
         //Insert code here
+        if(v.getExtraGramos() <= 0 && v.getPrimeraGramos() <= 0 && v.getSegundaGramos() <= 0 
+                && v.getTerceraGramos() <= 0 && v.getCuartaGramos() <= 0 && v.getQuintaGramos() <= 0){
+            JOptionPane.showMessageDialog(null, "No hay ninguna cantidad ingresada, por favor ingrese por lo menos una", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
+        if(v.getExtraGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getExtraGramos() > 0){
+            if(v.getExtraPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        if(v.getPrimeraGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getPrimeraGramos() > 0){
+            if(v.getPrimeraPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        if(v.getSegundaGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getSegundaGramos() > 0){
+            if(v.getSegundaPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        if(v.getTerceraGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getTerceraGramos() > 0){
+            if(v.getTerceraPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        if(v.getCuartaGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getCuartaGramos() > 0){
+            if(v.getCuartaPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        if(v.getQuintaGramos() < 0){
+            JOptionPane.showMessageDialog(null, "El valor del registro debe ser mayor a cero, por favor ingreselo nuevamente", "Registro mal ingresado", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }else if(v.getQuintaGramos() > 0){
+            if(v.getQuintaPrecioUnid() <= 0){
+                JOptionPane.showMessageDialog(null, "Si engreso una cantidad de un tipo de fresa, por favor ingrese su precio en la pestaña Establecer Precio", "Registro no ingresado", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+
         return true;
     }
 }

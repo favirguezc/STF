@@ -80,12 +80,10 @@ public class NotaController implements Serializable {
     }
 
     public List<Nota> getItems() {
-        if (items == null) {
-            HttpSession session = getSession();
-            LoginController loginBean = (LoginController) session.getAttribute("loginController");
-            if (loginBean != null && loginBean.isLoggedin()) {
-                items = getJpaController().findNotaEntities(loginBean.getUser());
-            }
+        HttpSession session = getSession();
+        LoginController loginBean = (LoginController) session.getAttribute("loginController");
+        if (loginBean != null && loginBean.isLoggedin()) {
+            items = getJpaController().findNotaEntities(loginBean.getUser());
         }
         return items;
     }

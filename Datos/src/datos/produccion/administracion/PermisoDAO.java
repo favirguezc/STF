@@ -12,9 +12,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.administracion.Pagina;
 import modelo.produccion.administracion.Permiso;
+import modelo.produccion.administracion.Rol;
+import modelo.util.Accion;
 
 /**
  *
@@ -134,5 +139,21 @@ public class PermisoDAO implements Serializable {
             em.close();
         }
     }
-    
+
+    public boolean findPermiso(Rol rol, Pagina pagina,Accion accion) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Modulo> query = em.createQuery("SELECT p FROM Permiso p WHERE p.pagina = :pagina AND p.rol = :rol AND p.accion = :accion", Modulo.class);
+            query.setParameter("rol", rol);
+            query.setParameter("pagina", pagina);
+            query.setParameter("accion", accion);
+            query.getSingleResult();
+            return true;
+        }catch(Exception e){
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
 }

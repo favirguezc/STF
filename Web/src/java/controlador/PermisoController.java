@@ -18,7 +18,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
+import modelo.produccion.administracion.Pagina;
 import modelo.produccion.administracion.Rol;
+import modelo.util.Accion;
 
 @ManagedBean(name = "permisoController")
 @SessionScoped
@@ -103,8 +105,16 @@ public class PermisoController implements Serializable {
         }
     }
 
-    public boolean tienePermiso(Rol rol, String requestPath) {
-        return true;
+    public boolean tienePermiso(Rol rol, Accion accion, String requestPath) {
+        if(rol==Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())){
+            return true;
+        }
+        for (Pagina pagina : Pagina.values()) {
+            if (requestPath.contains(pagina.toString().toLowerCase())) {
+                return getJpaController().findPermiso(rol, pagina, accion);
+            }
+        }
+        return false;
     }
 
     public List<Permiso> getItemsAvailableSelectMany() {

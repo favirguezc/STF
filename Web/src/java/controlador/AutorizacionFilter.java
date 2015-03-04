@@ -17,6 +17,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.produccion.administracion.Rol;
+import modelo.util.Accion;
 
 /**
  *
@@ -32,9 +33,7 @@ public class AutorizacionFilter implements Filter {
         LoginController loginBean;
         loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
         if (loginBean != null) {
-            String requestPath = ((HttpServletRequest) request).getPathInfo();
-            Rol rol = loginBean.getRol();
-            if (new PermisoController().tienePermiso(rol, requestPath)) {
+            if (new PermisoController().tienePermiso(loginBean.getRol(), Accion.Leer, ((HttpServletRequest) request).getRequestURI())) {
                 chain.doFilter(request, response);
             } else {
                 HttpServletRequest req = (HttpServletRequest) request;

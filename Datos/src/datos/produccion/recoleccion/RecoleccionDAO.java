@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
 
@@ -185,28 +185,28 @@ public class RecoleccionDAO implements Serializable {
     /**
      *
      * @param recolector
-     * @param lote
+     * @param modulo
      * @param inicio
      * @param fin
      * @return
      */
-    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Lote lote, Date inicio, Date fin) {
+    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Modulo modulo, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
         String queryString = "SELECT t FROM Recoleccion t";
-        if (recolector != null || lote != null || inicio != null || fin != null) {
+        if (recolector != null || modulo != null || inicio != null || fin != null) {
             queryString += " WHERE";
         }
         if (recolector != null) {
             queryString += " t.recolector = :recolector";
             a = true;
         }
-        if (lote != null) {
+        if (modulo != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.lote = :lote ";
+            queryString += " t.modulo = :modulo ";
             b = true;
         }
         if (fin != null) {
@@ -234,7 +234,7 @@ public class RecoleccionDAO implements Serializable {
                 query.setParameter("recolector", recolector);
             }
             if (b) {
-                query.setParameter("lote", lote);
+                query.setParameter("modulo", modulo);
             }
             return query.getResultList();
         } finally {

@@ -5,8 +5,6 @@
  */
 package controlador;
 
-import controlador.LoteController;
-import controlador.RecoleccionController;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.recoleccion.Recoleccion;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -207,8 +205,7 @@ public class RecoleccionChart implements Serializable {
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Date fecha2 = cal.getTime();
-            sumarRegistros = controlador.sumarRegistros(null, null, fecha1, fecha2);
+            sumarRegistros = controlador.sumarRegistros(null, null, fecha1, null);
 
             series1.set(i + 1, sumarRegistros.getExtraGramos() / 500);
             series2.set(i + 1, sumarRegistros.getPrimeraGramos() / 500);
@@ -267,8 +264,7 @@ public class RecoleccionChart implements Serializable {
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Date fecha2 = cal.getTime();
-            sumarRegistros = controlador.sumarRegistros(null, null, fecha1, fecha2);
+            sumarRegistros = controlador.sumarRegistros(null, null, fecha1,null);
 
             series1.set(DateTools.getDia(i + 1), sumarRegistros.getExtraGramos() / 500);
             series2.set(DateTools.getDia(i + 1), sumarRegistros.getPrimeraGramos() / 500);
@@ -362,10 +358,10 @@ public class RecoleccionChart implements Serializable {
 
     public void createModel5() {
         modelo5 = new BarChartModel();
-        List<Lote> lotes = new LoteController().getItems();
-        ChartSeries[] series = new ChartSeries[lotes.size()];
-        for (int l = 0; l < lotes.size(); l++) {
-            series[l] = new ChartSeries();
+        List<Modulo> modulos = new ModuloController().getItems();
+        ChartSeries[] series = new ChartSeries[modulos.size()];
+        for (int modulo = 0; modulo < modulos.size(); modulo++) {
+            series[modulo] = new ChartSeries();
         }
         RecoleccionController controlador = new RecoleccionController();
 
@@ -380,21 +376,21 @@ public class RecoleccionChart implements Serializable {
             c.add(Calendar.DAY_OF_MONTH, -1);
             fecha2 = c.getTime();
 
-            for (int l = 0; l < lotes.size(); l++) {
-                valor = controlador.sumarRegistros(null, lotes.get(l), fecha1, fecha2).getBuenaGramos() / 500;
-                series[l].set(i, valor);
+            for (int modulo = 0; modulo < modulos.size(); modulo++) {
+                valor = controlador.sumarRegistros(null, modulos.get(modulo), fecha1, fecha2).getBuenaGramos() / 500;
+                series[modulo].set(i, valor);
             }
         }
-        for (int l = 0; l < lotes.size(); l++) {
-            series[l].setLabel(lotes.get(l).getNombre());
+        for (int l = 0; l < modulos.size(); l++) {
+            series[l].setLabel(modulos.get(l).toString());
             modelo5.addSeries(series[l]);
         }
-        
-        modelo5.getAxes().put(AxisType.X, new CategoryAxis("Lote"));
-        modelo5.setTitle("Recolección por Lote");
+
+        modelo5.getAxes().put(AxisType.X, new CategoryAxis("Módulo"));
+        modelo5.setTitle("Recolección por Módulo");
         modelo5.setLegendPosition("e");
         Axis yAxis = modelo5.getAxis(AxisType.Y);
-        yAxis.setMin(0);        
+        yAxis.setMin(0);
     }
 
 }

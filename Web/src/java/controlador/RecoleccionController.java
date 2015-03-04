@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 
 @ManagedBean(name = "recoleccionController")
@@ -111,13 +112,13 @@ public class RecoleccionController implements Serializable {
         return getJpaController().findRecoleccionEntities();
     }
 
-    public List<Recoleccion> leerLista(Persona recolector, Lote lote, Date inicio, Date fin) {
-        return getJpaController().findRecoleccionEntities(recolector, lote, inicio, fin);
+    public List<Recoleccion> leerLista(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+        return getJpaController().findRecoleccionEntities(recolector, modulo, inicio, fin);
     }
 
-    public Recoleccion sumarRegistros(Persona recolector, Lote lote, Date inicio, Date fin) {
-        List<Recoleccion> leerLista = leerLista(recolector, lote, inicio, fin);
-        Recoleccion suma = new Recoleccion(lote, null, recolector, 0, 0, 0, 0, 0, 0, 0);
+    public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+        List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
+        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0, 0, 0, 0, 0, 0, 0);
         for (Recoleccion r : leerLista) {
             suma.sumar(r);
         }

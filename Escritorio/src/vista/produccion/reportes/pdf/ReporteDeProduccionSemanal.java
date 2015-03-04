@@ -28,7 +28,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
 import modelo.util.DateFormatter;
@@ -43,13 +44,13 @@ public class ReporteDeProduccionSemanal {
     private Date fecha;
     private String nombreDelArchivo;
     private Persona recolector;
-    private Lote lote;
+    private Modulo modulo;
 
-    public ReporteDeProduccionSemanal(Date fecha, String nombreDelArchivo, Persona recolector, Lote lote) {
+    public ReporteDeProduccionSemanal(Date fecha, String nombreDelArchivo, Persona recolector, Modulo modulo) {
         this.fecha = fecha;
         this.nombreDelArchivo = nombreDelArchivo;
         this.recolector = recolector;
-        this.lote = lote;
+        this.modulo = modulo;
     }
 
     public void crearReporte() {
@@ -83,9 +84,9 @@ public class ReporteDeProduccionSemanal {
                 Logger.getLogger(ReporteDeProduccionMensual.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (lote != null) {
+        if (modulo != null) {
             try {
-                paragraph = new Paragraph("LOTE: " + lote.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+                paragraph = new Paragraph("MÓDULO: " + modulo.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
                 paragraph.setAlignment(Element.ALIGN_CENTER);
                 encabezado.add(paragraph);
             } catch (Exception ex) {
@@ -131,7 +132,7 @@ public class ReporteDeProduccionSemanal {
         cal.setTime(DateTools.getPrimerDiaDeLaSemana(fecha));
         for (int i = 1; i <= 7; i++) {
             //Sumar recoleccion de cada tipo de fresa
-            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, lote, cal.getTime(), null);
+            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, cal.getTime(), null);
             extraDia = r.getExtraGramos() / 500;
             extraTotal += extraDia;
             primeraDia = r.getPrimeraGramos() / 500;

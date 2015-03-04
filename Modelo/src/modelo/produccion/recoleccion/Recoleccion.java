@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import modelo.produccion.administracion.Persona;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 
 /**
  *
@@ -24,7 +24,7 @@ public class Recoleccion implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @ManyToOne(optional = false)
-    private Lote lote;
+    private Modulo modulo;
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     private Date fecha;
@@ -57,8 +57,8 @@ public class Recoleccion implements Serializable {
      * @param quintaGramos
      * @param danadaGramos
      */
-    public Recoleccion(Lote lote, Date fecha, Persona recolector, float extraGramos, float primeraGramos, float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, float danadaGramos) {
-        this.lote = lote;
+    public Recoleccion(Modulo modulo, Date fecha, Persona recolector, float extraGramos, float primeraGramos, float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, float danadaGramos) {
+        this.modulo = modulo;
         this.fecha = fecha;
         this.recolector = recolector;
         this.extraGramos = extraGramos;
@@ -90,16 +90,16 @@ public class Recoleccion implements Serializable {
      *
      * @return
      */
-    public Lote getLote() {
-        return lote;
+    public Modulo getModulo() {
+        return modulo;
     }
 
     /**
      *
-     * @param lote
+     * @param modulo
      */
-    public void setLote(Lote lote) {
-        this.lote = lote;
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
     }
 
     /**
@@ -280,7 +280,7 @@ public class Recoleccion implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.lote);
+        hash = 79 * hash + Objects.hashCode(this.modulo);
         hash = 79 * hash + Objects.hashCode(this.fecha);
         hash = 79 * hash + Objects.hashCode(this.recolector);
         hash = 79 * hash + Float.floatToIntBits(this.extraGramos);
@@ -305,7 +305,7 @@ public class Recoleccion implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.lote, other.lote)) {
+        if (!Objects.equals(this.modulo, other.modulo)) {
             return false;
         }
         if (!Objects.equals(this.fecha, other.fecha)) {

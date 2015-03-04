@@ -28,7 +28,7 @@ import modelo.produccion.administracion.Rol;
 public class LoginController implements Serializable {
 
     private String userString, passString, mensaje;
-    private boolean loggedin;
+    private boolean loggedin, rolOk;
     private Persona user;
     private Rol rol;
     private List<Rol> roles;
@@ -81,6 +81,14 @@ public class LoginController implements Serializable {
         this.loggedin = loggedin;
     }
 
+    public boolean isRolOk() {
+        return rolOk;
+    }
+
+    public void setRolOk(boolean rolOk) {
+        this.rolOk = rolOk;
+    }
+
     public Persona getUser() {
         return user;
     }
@@ -102,7 +110,8 @@ public class LoginController implements Serializable {
 
     public String login2() {
         if (loggedin) {
-            mensaje = "Hola " + user + ", "+rol;
+            mensaje = "Hola " + user + ", " + rol;
+            rolOk = true;
             getSession().setAttribute("username", userString);
             return "/faces/secure/index.xhtml";
         } else {
@@ -116,7 +125,7 @@ public class LoginController implements Serializable {
         userString = null;
         passString = null;
         mensaje = null;
-        loggedin = false;
+        loggedin = rolOk = false;
         return "/faces/login.xhtml";
     }
 

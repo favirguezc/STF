@@ -24,24 +24,24 @@
                             <table>
                                 <tr>
                                     <td align="left">
-                                        <p:graphicImage width="55" height="65" value="/imagenes/STF_Logo.png"/>
+                                        <p:graphicImage width="55" height="65" value="/resources/imagenes/STF_Logo.png"/>
                                     </td>
                                     <td align="center">
-                                        <p:graphicImage height="55" value="/imagenes/Escudo_UN.png"/>
+                                        <p:graphicImage height="55" value="/resources/imagenes/Escudo_UN.png"/>
                                     </td>
                                     <td align="right">
-                                        <p:graphicImage height="55" value="/imagenes/Kabala-Logo.png"/>
+                                        <p:graphicImage height="55" value="/resources/imagenes/Kabala-Logo.png"/>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                         <td align="center">
-                            <h:outputText value="SiSAgro" style="font-size:35px;"/>
+                            <h:outputText value="Sistema de Trazabilidad para Fresa" style="font-size:30px;"/>
                         </td>
-                        <td align="right" width="35%">
+                        <td align="right" width="30%">
                             <h:outputText value="#{loginController.mensaje}"/>
                             <h:form>                                
-                                <p:commandButton action="#{loginController.logout}" value="Cerrar Sesión"  ajax="true" rendered="#{loginController.loggedin}" />
+                                <p:commandButton action="#{loginController.logout}" value="Cerrar Sesión"  ajax="true" rendered="#{loginController.rolOk}" />
                             </h:form>                            
                         </td>
                     </tr>

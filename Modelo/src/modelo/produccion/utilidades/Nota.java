@@ -20,14 +20,17 @@ import modelo.produccion.administracion.Persona;
  */
 @Entity
 public class Nota implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;    
+    private Long id;
     private String titulo;
     @Column(nullable = false)
     private String nota;
     @ManyToOne(optional = false)
-    private Persona creador;    
+    private Persona para;
+    @ManyToOne(optional = false)
+    private Persona de;
 
     /**
      *
@@ -81,16 +84,24 @@ public class Nota implements Serializable {
      *
      * @return
      */
-    public Persona getCreador() {
-        return creador;
+    public Persona getPara() {
+        return para;
     }
 
     /**
      *
-     * @param creador
+     * @param para
      */
-    public void setCreador(Persona creador) {
-        this.creador = creador;
+    public void setPara(Persona para) {
+        this.para = para;
+    }
+
+    public Persona getDe() {
+        return de;
+    }
+
+    public void setDe(Persona de) {
+        this.de = de;
     }
 
     @Override
@@ -115,7 +126,7 @@ public class Nota implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.utilidades.Nota[ id=" + id + " ]";
+        return "";
     }
-    
+
 }

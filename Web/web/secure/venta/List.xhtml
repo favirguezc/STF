@@ -16,7 +16,7 @@
                     <p:tabView dynamic="true">
                         <p:tab title="Semanal">
                             <h:form>
-                                <h:panelGrid columns="5" cellpadding="10">
+                                <h:panelGrid columns="7" cellpadding="10">
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente3}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -24,6 +24,11 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Fecha" for="fecha"/>
                                     <p:calendar id="fecha" value="#{ventaChart.fecha3}" showOn="button"/>
+                                    <p:outputLabel value="Ver:" for="eleccionFil"/>
+                                    <p:selectOneRadio id="eleccionFil" value="#{ventaChart.opcion3}">
+                                        <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>
+                                        <f:selectItem itemLabel="Por Ingresos Obtenidos" itemValue="precio"/>
+                                    </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart3" type="line" model="#{ventaChart.modelo3}"/>
@@ -32,7 +37,7 @@
                         </p:tab>
                         <p:tab title="Mensual">
                             <h:form>
-                                <h:panelGrid columns="7" cellpadding="10">
+                                <h:panelGrid columns="9" cellpadding="10">
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente2}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -54,7 +59,12 @@
                                         <f:selectItem itemLabel="Octubre" itemValue="9"/>
                                         <f:selectItem itemLabel="Noviembre" itemValue="10"/>
                                         <f:selectItem itemLabel="Diciembre" itemValue="11"/>
-                                    </p:selectOneMenu>                    
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Ver:" for="eleccionFil"/>
+                                    <p:selectOneRadio id="eleccionFil" value="#{ventaChart.opcion2}">
+                                        <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>
+                                        <f:selectItem itemLabel="Por Ingresos Obtenidos" itemValue="precio"/>
+                                    </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart2()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart2" type="line" model="#{ventaChart.modelo2}"/>
@@ -63,7 +73,7 @@
                         </p:tab>
                         <p:tab title="Anual por Mes">
                             <h:form>
-                                <h:panelGrid columns="5" cellpadding="10">
+                                <h:panelGrid columns="7" cellpadding="10">
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente1}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -71,6 +81,11 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Año" for="ano1"/>
                                     <p:spinner id="ano1" value="#{ventaChart.ano1}" title="Año" min="2010" max="2030"/>
+                                    <p:outputLabel value="Ver:" for="eleccionFil"/>
+                                    <p:selectOneRadio id="eleccionFil" value="#{ventaChart.opcion1}">
+                                        <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>
+                                        <f:selectItem itemLabel="Por Ingresos Obtenidos" itemValue="precio"/>
+                                    </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart1" type="line" model="#{ventaChart.modelo1}"/>
@@ -79,7 +94,7 @@
                         </p:tab>
                         <p:tab title="Anual por Semana">
                             <h:form>
-                                <h:panelGrid columns="5" cellpadding="10">
+                                <h:panelGrid columns="7" cellpadding="10">
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente4}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -87,6 +102,11 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Año" for="ano1"/>
                                     <p:spinner id="ano1" value="#{ventaChart.ano4}" title="Año" min="2012" max="2030"/>
+                                    <p:outputLabel value="Ver:" for="eleccionFil"/>
+                                    <p:selectOneRadio id="eleccionFil" value="#{ventaChart.opcion4}">
+                                        <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>
+                                        <f:selectItem itemLabel="Por Ingresos Obtenidos" itemValue="precio"/>
+                                    </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart4" type="line" model="#{ventaChart.modelo4}"/>

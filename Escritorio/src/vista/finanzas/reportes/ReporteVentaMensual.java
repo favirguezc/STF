@@ -220,7 +220,7 @@ public class ReporteVentaMensual extends javax.swing.JDialog {
     private void cargarListaClientes() {
         clienteComboBox.removeAllItems();
         clienteComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.CLIENTE)) {
             clienteComboBox.addItem(p);
         }
     }

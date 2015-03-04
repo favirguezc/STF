@@ -12,8 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Persona;
 import modelo.produccion.utilidades.Nota;
 
 /**
@@ -141,6 +143,17 @@ public class NotaDAO implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Nota> findNotaEntities(Persona persona) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Nota> query = em.createQuery("SELECT n FROM Nota n WHERE n.para = :persona", Nota.class);
+            query.setParameter("persona", persona);
+            return query.getResultList();
         } finally {
             em.close();
         }

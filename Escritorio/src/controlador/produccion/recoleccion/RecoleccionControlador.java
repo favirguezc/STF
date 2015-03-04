@@ -11,6 +11,7 @@ import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
 
@@ -26,8 +27,8 @@ public class RecoleccionControlador {
         dao = new RecoleccionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Recoleccion nuevo(Lote lote, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float quinta, float danada, Persona recolector) {
-        return new Recoleccion(lote, fecha, recolector, extra, primera, segunda, tercera, cuarta, quinta, danada);
+    public Recoleccion nuevo(Modulo modulo, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float quinta, float danada, Persona recolector) {
+        return new Recoleccion(modulo, fecha, recolector, extra, primera, segunda, tercera, cuarta, quinta, danada);
     }
 
     public Recoleccion buscar(long id) {
@@ -46,13 +47,13 @@ public class RecoleccionControlador {
         dao.create(r);
     }
 
-    public List<Recoleccion> leerLista(Persona recolector, Lote lote, Date inicio, Date fin) {
-        return dao.findRecoleccionEntities(recolector, lote, inicio, fin);
+    public List<Recoleccion> leerLista(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+        return dao.findRecoleccionEntities(recolector, modulo, inicio, fin);
     }
 
-    public Recoleccion sumarRegistros(Persona recolector, Lote lote, Date inicio, Date fin) {
-        List<Recoleccion> leerLista = leerLista(recolector, lote, inicio, fin);
-        Recoleccion suma = new Recoleccion(lote, null, recolector, 0, 0, 0, 0, 0, 0, 0);
+    public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+        List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
+        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0, 0, 0, 0, 0, 0, 0);
         leerLista.stream().forEach((r) -> {
             suma.sumar(r);
         });

@@ -226,27 +226,4 @@ public class RolPersonaDAO implements Serializable {
         }
     }
 
-    public Rol findMostImportantRol(Persona persona) {
-        List<Rol> roles = findRolEntities(persona);
-        if (roles.contains(Rol.ADMINISTRADOR)) {
-            return Rol.ADMINISTRADOR;
-        }
-        if (roles.contains(Rol.GERENTE)) {
-            return Rol.GERENTE;
-        }
-        if (roles.contains(Rol.SECRETARIO)) {
-            return Rol.SECRETARIO;
-        }
-        if (roles.contains(Rol.ASISTENTE_TECNICO)) {
-            return Rol.ASISTENTE_TECNICO;
-        }
-        if (roles.contains(Rol.TRABAJADOR)) {
-            return Rol.TRABAJADOR;
-        }
-        if (roles.contains(Rol.RECOLECTOR)) {
-            return Rol.RECOLECTOR;
-        }
-        return Rol.CLIENTE;
-    }
-
 }

@@ -5,31 +5,25 @@
  */
 package datosDePrueba;
 
-import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.administracion.PersonaControlador;
 import controlador.produccion.recoleccion.RecoleccionControlador;
 import controlador.produccion.variablesClimaticas.LluviaControlador;
 import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
 import controlador.produccion.variablesClimaticas.TemperaturaControlador;
 import datos.exceptions.NonexistentEntityException;
-import datos.util.EntityManagerFactorySingleton;
-import vista.produccion.graficas.RecoleccionAnualPorLoteIF;
-import vista.produccion.reportes.ReporteAnual;
-import vista.produccion.reportes.ReporteMensual;
-import vista.produccion.reportes.ReporteSemanal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
 import modelo.produccion.variablesClimaticas.Lluvia;
 import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import modelo.produccion.variablesClimaticas.Temperatura;
-import modelo.util.DateTools;
 
 /**
  *
@@ -86,7 +80,7 @@ public class RegistrosPrueba {
         try {
             RecoleccionControlador controlador = new RecoleccionControlador();
             List<Persona> recolectores = new PersonaControlador().leerLista();
-            List<Lote> lotes = new LoteControlador().leerLista();
+            List<Modulo> modulos = new ModuloControlador().leerLista();
             Calendar c = GregorianCalendar.getInstance();
             for (int y = 2014; y < 2015; y++) {
                 System.out.println("año " + y);
@@ -95,7 +89,7 @@ public class RegistrosPrueba {
                     System.out.print((i + 1) + " ");
                     for (int r = 0; r < 15; r++) {
                         controlador.guardar(controlador.nuevo(
-                                lotes.get((int) (Math.random() * (lotes.size()))),
+                                modulos.get((int) (Math.random() * (modulos.size()))),
                                 c.getTime(),
                                 (float) Math.random() * 900,
                                 (float) Math.random() * 1500,

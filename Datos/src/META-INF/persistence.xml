@@ -7,10 +7,16 @@
     <class>modelo.finanzas.caja.ConceptoCaja</class>
     <class>modelo.finanzas.compra.Compra</class>
     <class>modelo.finanzas.ventas.Venta</class>
+    <class>modelo.produccion.administracion.Contrato</class>
+    <class>modelo.produccion.administracion.Departamento</class>
+    <class>modelo.produccion.administracion.Finca</class>
     <class>modelo.produccion.administracion.Lote</class>
     <class>modelo.produccion.administracion.Modulo</class>
+    <class>modelo.produccion.administracion.Municipio</class>
+    <class>modelo.produccion.administracion.Permiso</class>
     <class>modelo.produccion.administracion.Persona</class>
     <class>modelo.produccion.administracion.RolPersona</class>
+    <class>modelo.produccion.administracion.Vereda</class>
     <class>modelo.produccion.aplicaciones.Aplicacion</class>
     <class>modelo.produccion.aplicaciones.Insumo</class>
     <class>modelo.produccion.labores.Labor</class>

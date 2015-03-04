@@ -14,6 +14,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.util.Accion;
 
 public class LoginFilter implements Filter {
 
@@ -31,8 +32,8 @@ public class LoginFilter implements Filter {
         LoginController loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
         // For the first application request there is no loginBean in the session so user needs to log in
         // For other requests loginBean is present but we need to check if user has logged in successfully
-        if (loginBean != null && loginBean.isLoggedin()) {
-            chain.doFilter(request, response);
+        if (loginBean != null && loginBean.isRolOk()) {
+                chain.doFilter(request, response);
         } else {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;

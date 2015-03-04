@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.AppName}"></h:outputText>
@@ -14,16 +15,21 @@
                 <h:form id="loginForm">          
                     <p:panel header="Log in" style="width: 360px;"> 
                         <h:panelGrid id="loginPanel" columns="2"> 
-                            <h:outputText value="Username" />
-                            <p:inputText id="username" value="#{loginController.user}" ></p:inputText> 
+                            <h:outputLabel value="Usuario" />
+                            <p:inputText id="username" value="#{loginController.userString}" ></p:inputText> 
                             <p:spacer></p:spacer> 
                             <p:message for="username" ></p:message> 
-                            <h:outputText value="Password" /> 
-                            <p:password id="password" value="#{loginController.pass}"  feedback="false"></p:password> 
+                            <h:outputLabel value="Contraseña"/>
+                            <p:password id="password" value="#{loginController.passString}"  feedback="false"></p:password> 
                             <p:spacer></p:spacer> 
                             <p:message for="password"></p:message> 
-                            <p:spacer></p:spacer> 
-                            <p:commandButton action="#{loginController.login}" value="Login" update=":growl" ajax="true"></p:commandButton> 
+                            <h:outputLabel value="Rol" rendered="#{loginController.loggedin}"/>
+                            <p:selectOneMenu id="rol" value="#{loginController.rol}" rendered="#{loginController.loggedin}">
+                                <f:selectItems value="#{loginController.roles}"/>
+                            </p:selectOneMenu>
+                            <p:spacer></p:spacer>
+                            <p:commandButton action="#{loginController.login}" value="Iniciar Sesión" update=":growl,loginPanel" ajax="false" rendered="#{!loginController.loggedin}"></p:commandButton>
+                            <p:commandButton action="#{loginController.login2}" value="Iniciar Sesión" update=":growl" ajax="true" rendered="#{loginController.loggedin}"></p:commandButton> 
                         </h:panelGrid> 
                     </p:panel> 
                 </h:form>

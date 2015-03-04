@@ -8,22 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="RecoleccionCreateDlg" widgetVar="RecoleccionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRecoleccionTitle}">
+        <p:dialog id="RecoleccionCreateDialog" widgetVar="RecoleccionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRecoleccionTitle}">
             <h:form id="RecoleccionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{recoleccionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_lote}" for="lote" />
-                        <p:selectOneMenu id="lote" value="#{recoleccionController.selected.lote}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_lote}">
-                            <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
-                                           var="loteItem"
-                                           itemValue="#{loteItem}"
-                                           itemLabel="#{loteItem.nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_modulo}" for="modulo" />
+                        <p:selectOneMenu id="modulo" value="#{recoleccionController.selected.modulo}" required="true" requiredMessage="#{bundle.CreateRecoleccionRequiredMessage_modulo}">
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"
+                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateRecoleccionLabel_recolector}" for="recolector" />
                         <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
-                            <f:selectItems value="#{personaController.itemsAvailableRecolector}"
+                            <f:selectItems value="#{personaController.itemsAvailableTrabajador}"
                                            var="recolectorItem"
                                            itemValue="#{recolectorItem}"
                                            itemLabel="#{recolectorItem.nombre} #{recolectorItem.apellido}"/>

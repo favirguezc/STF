@@ -16,6 +16,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "notaController")
 @SessionScoped
@@ -52,6 +54,9 @@ public class NotaController implements Serializable {
     public Nota prepareCreate() {
         selected = new Nota();
         initializeEmbeddableKey();
+        HttpSession session = getSession();
+        LoginController loginBean = (LoginController) session.getAttribute("loginController");
+        selected.setDe(loginBean.getUser());
         return selected;
     }
 
@@ -75,8 +80,10 @@ public class NotaController implements Serializable {
     }
 
     public List<Nota> getItems() {
-        if (items == null) {
-            items = getJpaController().findNotaEntities();
+        HttpSession session = getSession();
+        LoginController loginBean = (LoginController) session.getAttribute("loginController");
+        if (loginBean != null && loginBean.isLoggedin()) {
+            items = getJpaController().findNotaEntities(loginBean.getUser());
         }
         return items;
     }
@@ -149,4 +156,10 @@ public class NotaController implements Serializable {
 
     }
 
+    private static HttpSession getSession() {
+        return (HttpSession) FacesContext.
+                getCurrentInstance().
+                getExternalContext().
+                getSession(false);
+    }
 }

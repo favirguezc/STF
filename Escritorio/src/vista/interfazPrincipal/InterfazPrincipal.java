@@ -1235,8 +1235,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     private void abrirRecoleccionAnualPorLoteIF() {
-        if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorLoteIF.class)) {
-            RecoleccionAnualPorLoteIF nuevaIF = new RecoleccionAnualPorLoteIF();
+        if (!ventanaActivaEnPanelEscritorio(RecoleccionAnualPorModuloIF.class)) {
+            RecoleccionAnualPorModuloIF nuevaIF = new RecoleccionAnualPorModuloIF();
             panelEscritorio.add(nuevaIF);
             nuevaIF.setVisible(true);
             try {

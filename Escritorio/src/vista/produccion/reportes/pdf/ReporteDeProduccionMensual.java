@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.recoleccion.Recoleccion;
 import modelo.util.DateFormatter;
@@ -40,18 +40,18 @@ import modelo.util.DateTools;
  */
 public class ReporteDeProduccionMensual {
 
-    private int año;
-    private int mes;
-    private String nombreDelArchivo;
-    private Persona recolector;
-    private Lote lote;
+    private final int año;
+    private final int mes;
+    private final String nombreDelArchivo;
+    private final Persona recolector;
+    private final Modulo modulo;
 
-    public ReporteDeProduccionMensual(int año, int mes, String nombreDelArchivo, Persona recolector, Lote lote) {
+    public ReporteDeProduccionMensual(int año, int mes, String nombreDelArchivo, Persona recolector, Modulo modulo) {
         this.año = año;
         this.mes = mes;
         this.nombreDelArchivo = nombreDelArchivo;
         this.recolector = recolector;
-        this.lote = lote;
+        this.modulo = modulo;
     }
 
     public void crearReporte() {
@@ -85,9 +85,9 @@ public class ReporteDeProduccionMensual {
                 Logger.getLogger(ReporteDeProduccionMensual.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (lote != null) {
+        if (modulo != null) {
             try {
-                paragraph = new Paragraph("LOTE: " + lote.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+                paragraph = new Paragraph("MÓDULO: " + modulo.toString().toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
                 paragraph.setAlignment(Element.ALIGN_CENTER);
                 encabezado.add(paragraph);
             } catch (Exception ex) {
@@ -131,7 +131,7 @@ public class ReporteDeProduccionMensual {
         //Para cada mes se agrega una columna
         for (int i = 1; i <= dias; i++) {
             //Sumar recoleccion de cada tipo de fresa
-            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, lote, new Date(año - 1900, mes, i), null);
+            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, new Date(año - 1900, mes, i), null);
             extraDia = r.getExtraGramos() / 500;
             extraTotal += extraDia;
             primeraDia = r.getPrimeraGramos() / 500;

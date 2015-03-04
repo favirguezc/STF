@@ -884,7 +884,7 @@ public class AplicacionIF extends javax.swing.JInternalFrame {
 
     private void cargarListaAutorizados() {
         autorizaComboBox.removeAllItems();
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.ASISTENTE_TECNICO)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.ESPECIALISTA)) {
             autorizaComboBox.addItem(p);
         }
     }

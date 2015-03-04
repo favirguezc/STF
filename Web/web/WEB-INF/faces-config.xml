@@ -7,7 +7,7 @@
         <resource-bundle>
             <base-name>/Bundle</base-name>
             <var>bundle</var>
-        </resource-bundle>
+        </resource-bundle>        
     </application>
     <managed-bean>
         <managed-bean-name>SiNoConverter</managed-bean-name>

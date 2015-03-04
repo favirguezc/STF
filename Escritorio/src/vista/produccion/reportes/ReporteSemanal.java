@@ -5,12 +5,12 @@
  */
 package vista.produccion.reportes;
 
-import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import vista.produccion.reportes.pdf.ReporteDeProduccionSemanal;
@@ -25,12 +25,15 @@ public class ReporteSemanal extends javax.swing.JDialog {
 
     /**
      * Creates new form ReporteSemanal
+     *
+     * @param parent
+     * @param modal
      */
     public ReporteSemanal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        cargarListaLotes();
+        cargarListaModulos();
         cargarListaRecolectores();
     }
 
@@ -43,7 +46,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        loteComboBox = new javax.swing.JComboBox();
+        moduloComboBox = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         recolectorComboBox = new javax.swing.JComboBox();
@@ -54,20 +57,20 @@ public class ReporteSemanal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        loteComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        loteComboBox.addItemListener(new java.awt.event.ItemListener() {
+        moduloComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        moduloComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                loteComboBoxItemStateChanged(evt);
+                moduloComboBoxItemStateChanged(evt);
             }
         });
-        loteComboBox.addActionListener(new java.awt.event.ActionListener() {
+        moduloComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loteComboBoxActionPerformed(evt);
+                moduloComboBoxActionPerformed(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Lote");
+        jLabel14.setText("Módulo");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Recolector");
@@ -117,7 +120,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(loteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(moduloComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
@@ -140,7 +143,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(loteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -155,13 +158,13 @@ public class ReporteSemanal extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loteComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_loteComboBoxItemStateChanged
+    private void moduloComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_moduloComboBoxItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_loteComboBoxItemStateChanged
+    }//GEN-LAST:event_moduloComboBoxItemStateChanged
 
-    private void loteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteComboBoxActionPerformed
+    private void moduloComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduloComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loteComboBoxActionPerformed
+    }//GEN-LAST:event_moduloComboBoxActionPerformed
 
     private void recolectorComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_recolectorComboBoxItemStateChanged
         // TODO add your handling code here:
@@ -177,8 +180,8 @@ public class ReporteSemanal extends javax.swing.JDialog {
         fileChooser.addChoosableFileFilter(new FileTypeFilter(".pdf", "PDF"));
         String ruta = "reporte de recolección semanal ";
         ruta += DateTools.getSemana(fechaDateChooserCombo.getCurrent().getTime());
-        if ((Lote) loteComboBox.getSelectedItem() != null) {
-            ruta += " " + ((Lote) loteComboBox.getSelectedItem()).toString();
+        if ((Modulo) moduloComboBox.getSelectedItem() != null) {
+            ruta += " " + ((Modulo) moduloComboBox.getSelectedItem()).toString();
         }
         if ((Persona) recolectorComboBox.getSelectedItem() != null) {
             ruta += " " + ((Persona) recolectorComboBox.getSelectedItem()).toString();
@@ -187,7 +190,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
         fileChooser.setSelectedFile(new File(ruta));
         int returnVal = fileChooser.showSaveDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            new ReporteDeProduccionSemanal(fechaDateChooserCombo.getCurrent().getTime(), fileChooser.getSelectedFile().getAbsolutePath(), (Persona) recolectorComboBox.getSelectedItem(), (Lote) loteComboBox.getSelectedItem()).crearReporte();
+            new ReporteDeProduccionSemanal(fechaDateChooserCombo.getCurrent().getTime(), fileChooser.getSelectedFile().getAbsolutePath(), (Persona) recolectorComboBox.getSelectedItem(), (Modulo) moduloComboBox.getSelectedItem()).crearReporte();
         }
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -204,24 +207,24 @@ public class ReporteSemanal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JComboBox loteComboBox;
+    private javax.swing.JComboBox moduloComboBox;
     private javax.swing.JComboBox recolectorComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void cargarListaRecolectores() {
         recolectorComboBox.removeAllItems();
         recolectorComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.TRABAJADOR)) {
             recolectorComboBox.addItem(p);
         }
     }
 
-    private void cargarListaLotes() {
-        loteComboBox.removeAllItems();
-        loteComboBox.addItem(null);
-        List<Lote> leerLista = new LoteControlador().leerLista();
-        for (Lote l : leerLista) {
-            loteComboBox.addItem(l);
+    private void cargarListaModulos() {
+        moduloComboBox.removeAllItems();
+        moduloComboBox.addItem(null);
+        List<Modulo> leerLista = new ModuloControlador().leerLista();
+        for (Modulo l : leerLista) {
+            moduloComboBox.addItem(l);
         }
     }
 }

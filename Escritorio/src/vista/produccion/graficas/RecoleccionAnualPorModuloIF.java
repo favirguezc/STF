@@ -6,11 +6,13 @@
 package vista.produccion.graficas;
 
 import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.recoleccion.RecoleccionControlador;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JPanel;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -23,12 +25,12 @@ import org.jfree.data.general.PieDataset;
  *
  * @author fredy
  */
-public class RecoleccionAnualPorLoteIF extends javax.swing.JInternalFrame {
+public class RecoleccionAnualPorModuloIF extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form GraficaDeRecoleccionPorLote
      */
-    public RecoleccionAnualPorLoteIF() {
+    public RecoleccionAnualPorModuloIF() {
         initComponents();
         jPanel2.removeAll();
         jPanel2.add(crearPanel());
@@ -136,7 +138,7 @@ public class RecoleccionAnualPorLoteIF extends javax.swing.JInternalFrame {
     }
 
     private JFreeChart crearGrafica(PieDataset datos) {
-        JFreeChart createPieChart = ChartFactory.createPieChart("Recolección Por Lote " + (int) añoSpinner.getValue(), datos, true, true, true);
+        JFreeChart createPieChart = ChartFactory.createPieChart("Recolección Por Módulo " + (int) añoSpinner.getValue(), datos, true, true, true);
         Plot plot = createPieChart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);
         return createPieChart;
@@ -146,9 +148,9 @@ public class RecoleccionAnualPorLoteIF extends javax.swing.JInternalFrame {
         DefaultPieDataset datos = new DefaultPieDataset();
         String llave;
         double valor;
-        for (Lote l : new LoteControlador().leerLista()) {
-            llave = l.toString();
-            valor = new RecoleccionControlador().sumarRegistros(null, l, new Date((int) añoSpinner.getValue() - 1900, 0, 1), new Date((int) añoSpinner.getValue() - 1900, 11, 31)).getBuenaGramos() / 500;
+        for (Modulo modulo : new ModuloControlador().leerLista()) {
+            llave = modulo.toString();
+            valor = new RecoleccionControlador().sumarRegistros(null, modulo, new Date((int) añoSpinner.getValue() - 1900, 0, 1), new Date((int) añoSpinner.getValue() - 1900, 11, 31)).getBuenaGramos() / 500;
             datos.setValue(llave, valor);
         }
         return datos;

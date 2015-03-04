@@ -12,11 +12,11 @@
             <h:form id="RecoleccionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{recoleccionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRecoleccionLabel_lote}"/>
-                        <h:outputText value="#{recoleccionController.selected.lote.nombre}" title="#{bundle.ViewRecoleccionTitle_lote}"/>
+                        <h:outputText value="#{bundle.ViewRecoleccionLabel_modulo}"/>
+                        <h:outputText value="#{recoleccionController.selected.modulo.lote.nombre} - #{recoleccionController.selected.modulo.nombre}" title="#{bundle.ViewRecoleccionTitle_modulo}"/>
                         <h:outputText value="#{bundle.ViewRecoleccionLabel_fecha}"/>
                         <h:outputText value="#{recoleccionController.selected.fecha}" title="#{bundle.ViewRecoleccionTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewRecoleccionLabel_recolector}"/>
                         <h:outputText value="#{recoleccionController.selected.recolector.nombre} #{recoleccionController.selected.recolector.apellido}" title="#{bundle.ViewRecoleccionTitle_recolector}"/>

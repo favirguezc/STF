@@ -96,9 +96,9 @@
 
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_lote}"/>
+                                    <h:outputText value="#{bundle.ListRecoleccionTitle_modulo}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.lote.nombre}"/>
+                                <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
@@ -176,7 +176,6 @@
                             </f:facet>
                         </p:dataTable>
                     </h:form>
-
                     <ui:include src="Create.xhtml"/>
                     <ui:include src="Edit.xhtml"/>
                     <ui:include src="View.xhtml"/>

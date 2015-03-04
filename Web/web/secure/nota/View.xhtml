@@ -16,8 +16,10 @@
                         <h:outputText value="#{notaController.selected.titulo}" title="#{bundle.ViewNotaTitle_titulo}"/>
                         <h:outputText value="#{bundle.ViewNotaLabel_nota}"/>
                         <h:outputText value="#{notaController.selected.nota}" title="#{bundle.ViewNotaTitle_nota}"/>
-                        <h:outputText value="#{bundle.ViewNotaLabel_creador}"/>
-                        <h:outputText value="#{notaController.selected.creador}" title="#{bundle.ViewNotaTitle_creador}"/>
+                        <h:outputText value="#{bundle.ViewNotaLabel_de}"/>
+                        <h:outputText value="#{notaController.selected.de}" title="#{bundle.ViewNotaTitle_de}"/>
+                        <h:outputText value="#{bundle.ViewNotaLabel_para}"/>
+                        <h:outputText value="#{notaController.selected.para}" title="#{bundle.ViewNotaTitle_para}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="NotaViewDialog.hide()"/>
                 </h:panelGroup>

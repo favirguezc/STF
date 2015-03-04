@@ -5,7 +5,7 @@
  */
 package vista.produccion.recoleccion;
 
-import controlador.produccion.administracion.LoteControlador;
+import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.administracion.RolPersonaControlador;
 import controlador.produccion.recoleccion.RecoleccionControlador;
 import datos.exceptions.NonexistentEntityException;
@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.produccion.recoleccion.Recoleccion;
@@ -57,7 +57,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         edicionPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         fechaDateChooserCombo = new datechooser.beans.DateChooserCombo();
-        loteComboBox = new javax.swing.JComboBox();
+        moduloComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         recolectorComboBox = new javax.swing.JComboBox();
         extraFloatField = new modelo.util.FloatField();
@@ -89,7 +89,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         recolectorFiltroComboBox = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
-        loteFiltroComboBox = new javax.swing.JComboBox();
+        moduloFiltroComboBox = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -109,20 +109,20 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         fechaDateChooserCombo.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
         fechaDateChooserCombo.setNavigateFont(new java.awt.Font("Serif", java.awt.Font.PLAIN, 14));
 
-        loteComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        loteComboBox.addItemListener(new java.awt.event.ItemListener() {
+        moduloComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        moduloComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                loteComboBoxItemStateChanged(evt);
+                moduloComboBoxItemStateChanged(evt);
             }
         });
-        loteComboBox.addActionListener(new java.awt.event.ActionListener() {
+        moduloComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loteComboBoxActionPerformed(evt);
+                moduloComboBoxActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Lote");
+        jLabel7.setText("Módulo");
 
         recolectorComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -177,7 +177,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loteComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moduloComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(recolectorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(extraFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -193,7 +193,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -340,20 +340,20 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Recolector");
 
-        loteFiltroComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        loteFiltroComboBox.addItemListener(new java.awt.event.ItemListener() {
+        moduloFiltroComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        moduloFiltroComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                loteFiltroComboBoxItemStateChanged(evt);
+                moduloFiltroComboBoxItemStateChanged(evt);
             }
         });
-        loteFiltroComboBox.addActionListener(new java.awt.event.ActionListener() {
+        moduloFiltroComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loteFiltroComboBoxActionPerformed(evt);
+                moduloFiltroComboBoxActionPerformed(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Lote");
+        jLabel14.setText("Módulo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -384,7 +384,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loteFiltroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moduloFiltroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(recolectorFiltroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(67, 67, 67))
         );
@@ -398,7 +398,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(loteFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(moduloFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(diaDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +451,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Lote", "Fecha", "Recolector", "Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Quinta"
+                "Módulo", "Fecha", "Recolector", "Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Quinta"
             }
         ) {
             Class[] types = new Class [] {
@@ -551,7 +551,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         boolean transacionRealizada = false;
-        Lote lote = (Lote) loteComboBox.getSelectedItem();
+        Modulo modulo = (Modulo) moduloComboBox.getSelectedItem();
         Date fecha = fechaDateChooserCombo.getCurrent().getTime();
         Persona recolector = (Persona) recolectorComboBox.getSelectedItem();
         float extra = extraFloatField.getFloat();
@@ -561,14 +561,14 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         float cuarta = cuartaFloatField.getFloat();
         float dañada = dañadaFloatField.getFloat();
         if (registroSeleccionado == null) {
-            Recoleccion nuevo = controlador.nuevo(lote, fecha, extra, primera, segunda, tercera, cuarta,0, dañada, recolector);
+            Recoleccion nuevo = controlador.nuevo(modulo, fecha, extra, primera, segunda, tercera, cuarta, 0, dañada, recolector);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;
             }
         } else {
             registroSeleccionado.setFecha(fecha);
-            registroSeleccionado.setLote(lote);
+            registroSeleccionado.setModulo(modulo);
             registroSeleccionado.setRecolector(recolector);
             registroSeleccionado.setExtraGramos(extra);
             registroSeleccionado.setPrimeraGramos(primera);
@@ -591,13 +591,13 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void loteComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_loteComboBoxItemStateChanged
+    private void moduloComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_moduloComboBoxItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_loteComboBoxItemStateChanged
+    }//GEN-LAST:event_moduloComboBoxItemStateChanged
 
-    private void loteComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteComboBoxActionPerformed
+    private void moduloComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduloComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loteComboBoxActionPerformed
+    }//GEN-LAST:event_moduloComboBoxActionPerformed
 
     private void diarioRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diarioRadioButtonActionPerformed
         // TODO add your handling code here:
@@ -630,15 +630,15 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         cargarTablaPrincipal();
     }//GEN-LAST:event_mesComboBoxActionPerformed
 
-    private void loteFiltroComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_loteFiltroComboBoxItemStateChanged
+    private void moduloFiltroComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_moduloFiltroComboBoxItemStateChanged
         // TODO add your handling code here:
         cargarTablaPrincipal();
-    }//GEN-LAST:event_loteFiltroComboBoxItemStateChanged
+    }//GEN-LAST:event_moduloFiltroComboBoxItemStateChanged
 
-    private void loteFiltroComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loteFiltroComboBoxActionPerformed
+    private void moduloFiltroComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moduloFiltroComboBoxActionPerformed
         // TODO add your handling code here:
         cargarTablaPrincipal();
-    }//GEN-LAST:event_loteFiltroComboBoxActionPerformed
+    }//GEN-LAST:event_moduloFiltroComboBoxActionPerformed
 
     private void recolectorFiltroComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recolectorFiltroComboBoxActionPerformed
         // TODO add your handling code here:
@@ -682,10 +682,10 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox loteComboBox;
-    private javax.swing.JComboBox loteFiltroComboBox;
     private javax.swing.JRadioButton mensualRadioButton2;
     private javax.swing.JComboBox mesComboBox;
+    private javax.swing.JComboBox moduloComboBox;
+    private javax.swing.JComboBox moduloFiltroComboBox;
     private javax.swing.JButton nuevoButton;
     private modelo.util.FloatField primeraFloatField;
     private javax.swing.JTable principalTable;
@@ -707,7 +707,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         if (registroSeleccionado == null) {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
             fechaDateChooserCombo.setCurrent(GregorianCalendar.getInstance());
-            loteComboBox.setSelectedIndex(0);
+            moduloComboBox.setSelectedIndex(0);
             recolectorComboBox.setSelectedIndex(0);
             extraFloatField.setFloat(null);
             primeraFloatField.setFloat(null);
@@ -721,7 +721,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             c.setTime(registroSeleccionado.getFecha());
             fechaDateChooserCombo.setSelectedDate(c);
             fechaDateChooserCombo.setCurrent(c);
-            loteComboBox.setSelectedItem(registroSeleccionado.getLote());
+            moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
             recolectorComboBox.setSelectedItem(registroSeleccionado.getRecolector());
             extraFloatField.setFloat(registroSeleccionado.getExtraGramos());
             primeraFloatField.setFloat(registroSeleccionado.getPrimeraGramos());
@@ -737,9 +737,9 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
         Persona recolector = (Persona) recolectorFiltroComboBox.getSelectedItem();
-        Lote lote = (Lote) loteFiltroComboBox.getSelectedItem();
+        Modulo modulo = (Modulo) moduloFiltroComboBox.getSelectedItem();
         if (diarioRadioButton.isSelected()) {
-            lista = controlador.leerLista(recolector, lote, diaDateChooserCombo.getCurrent().getTime(), null);
+            lista = controlador.leerLista(recolector, modulo, diaDateChooserCombo.getCurrent().getTime(), null);
         } else {
             Date inicio = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
             Calendar c = GregorianCalendar.getInstance();
@@ -747,11 +747,11 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             c.add(Calendar.MONTH, 1);
             c.add(Calendar.DAY_OF_MONTH, -1);
             Date fin = c.getTime();
-            lista = controlador.leerLista(recolector, lote, inicio, fin);
+            lista = controlador.leerLista(recolector, modulo, inicio, fin);
         }
         for (Recoleccion l : lista) {
             Object[] row = {
-                l.getLote(),
+                l.getModulo(),
                 DateFormatter.formatDate(l.getFecha()),
                 l.getRecolector(),
                 l.getExtraGramos(),
@@ -766,31 +766,31 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
 
     private void cargarListas() {
         cargarListaRecolectores();
-        cargarListaLotes();
+        cargarListaModulos();
     }
 
     private void cargarListaRecolectores() {
         recolectorComboBox.removeAllItems();
         recolectorFiltroComboBox.removeAllItems();
         recolectorFiltroComboBox.addItem(null);
-        for (Persona p : new RolPersonaControlador().leerLista(Rol.RECOLECTOR)) {
+        for (Persona p : new RolPersonaControlador().leerLista(Rol.TRABAJADOR)) {
             recolectorComboBox.addItem(p);
             recolectorFiltroComboBox.addItem(p);
         }
     }
-    
-    private void cargarListaLotes() {
-        loteComboBox.removeAllItems();
-        loteFiltroComboBox.removeAllItems();
-        loteFiltroComboBox.addItem(null);
-        List<Lote> leerLista = new LoteControlador().leerLista();
-        for (Lote l : leerLista) {
-            loteComboBox.addItem(l);
-            loteFiltroComboBox.addItem(l);
+
+    private void cargarListaModulos() {
+        moduloComboBox.removeAllItems();
+        moduloFiltroComboBox.removeAllItems();
+        moduloFiltroComboBox.addItem(null);
+        List<Modulo> leerLista = new ModuloControlador().leerLista();
+        for (Modulo modulo : leerLista) {
+            moduloComboBox.addItem(modulo);
+            moduloFiltroComboBox.addItem(modulo);
         }
         if (leerLista.size() > 0) {
-            loteComboBox.setSelectedIndex(0);
-            loteFiltroComboBox.setSelectedIndex(0);
+            moduloComboBox.setSelectedIndex(0);
+            moduloFiltroComboBox.setSelectedIndex(0);
         }
     }
 }

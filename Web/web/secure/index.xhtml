@@ -38,9 +38,9 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListNotaTitle_creador}"/>
+                            <h:outputText value="#{bundle.ListNotaTitle_de}"/>
                         </f:facet>
-                        <h:outputText value="#{item.creador.nombre} #{item.creador.apellido}"/>
+                        <h:outputText value="#{item.de.nombre} #{item.de.apellido}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{notaController.prepareCreate}" update=":NotaCreateForm" oncomplete="PF('NotaCreateDialog').show()"/>

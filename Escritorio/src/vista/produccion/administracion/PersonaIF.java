@@ -36,7 +36,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private RolPersona rolPersonaSeleccionado = null;
     private DefaultListModel listModel;
     private RolPersonaControlador controladorRolPersona;
-    
+
     public PersonaIF() {
         initComponents();
         controlador = new PersonaControlador();
@@ -99,7 +99,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         eliminarRolPersonaButton = new javax.swing.JButton();
         rolesComboBox = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
-        nuevoRolPersonaButton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -388,17 +387,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Rol");
 
-        nuevoRolPersonaButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nuevoRolPersonaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/16x16/add111.png"))); // NOI18N
-        nuevoRolPersonaButton.setText("Nuevo");
-        nuevoRolPersonaButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        nuevoRolPersonaButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        nuevoRolPersonaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoRolPersonaButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout rolPanelLayout = new javax.swing.GroupLayout(rolPanel);
         rolPanel.setLayout(rolPanelLayout);
         rolPanelLayout.setHorizontalGroup(
@@ -414,8 +402,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(rolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(eliminarRolPersonaButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(guardarRolPersonaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nuevoRolPersonaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(guardarRolPersonaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         rolPanelLayout.setVerticalGroup(
@@ -430,12 +417,10 @@ public class PersonaIF extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(rolPanelLayout.createSequentialGroup()
-                        .addComponent(nuevoRolPersonaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(eliminarRolPersonaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(guardarRolPersonaButton)))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Roles", rolPanel);
@@ -568,16 +553,11 @@ public class PersonaIF extends javax.swing.JInternalFrame {
 
     private void guardarRolPersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarRolPersonaButtonActionPerformed
         // TODO add your handling code here:
-        if (rolPersonaSeleccionado == null) {
-            Rol rol = (Rol) rolesComboBox.getSelectedItem();
-            RolPersona nuevo = controladorRolPersona.nuevo(registroSeleccionado, rol);
-            if (controladorRolPersona.validar(nuevo, true)) {
-                controladorRolPersona.guardar(nuevo);
-                rolesComboBox.setSelectedIndex(0);
-                guardarRolPersonaButton.setEnabled(false);
-            }
-        } else {
-            rolPersonaSeleccionado = null;
+        Rol rol = (Rol) rolesComboBox.getSelectedItem();
+        RolPersona nuevo = controladorRolPersona.nuevo(registroSeleccionado, rol);
+        if (controladorRolPersona.validar(nuevo, true)) {
+            controladorRolPersona.guardar(nuevo);
+            rolesComboBox.setSelectedIndex(0);
         }
         cargarRolesPersona();
     }//GEN-LAST:event_guardarRolPersonaButtonActionPerformed
@@ -627,14 +607,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         rolesComboBox.setSelectedIndex(0);
     }//GEN-LAST:event_eliminarRolPersonaButtonActionPerformed
 
-    private void nuevoRolPersonaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoRolPersonaButtonActionPerformed
-        // TODO add your handling code here:
-        rolesComboBox.setEnabled(true);
-        rolesComboBox.setSelectedIndex(0);
-        rolPersonaSeleccionado = null;
-        guardarRolPersonaButton.setEnabled(true);
-    }//GEN-LAST:event_nuevoRolPersonaButtonActionPerformed
-
     private void telefonoLongFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoLongFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoLongFieldActionPerformed
@@ -671,7 +643,6 @@ public class PersonaIF extends javax.swing.JInternalFrame {
     private modelo.util.NameField nombre1TextField;
     private modelo.util.NameField nombre2TextField;
     private javax.swing.JButton nuevoButton;
-    private javax.swing.JButton nuevoRolPersonaButton;
     private javax.swing.JTable principalTable;
     private javax.swing.JComboBox rhComboBox;
     private javax.swing.JPanel rolPanel;
@@ -698,7 +669,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(0);
         jTabbedPane1.setEnabledAt(1, false);
     }
-    
+
     private void desactivarEdicionPanel() {
         guardarButton.setEnabled(false);
         nombre1TextField.setEnabled(false);
@@ -714,7 +685,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         jTabbedPane1.setEnabledAt(0, false);
         registroSeleccionado = null;
     }
-    
+
     private void activarRolesPanel() {
         guardarButton.setEnabled(false);
         rolesComboBox.setEnabled(true);
@@ -722,14 +693,14 @@ public class PersonaIF extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(1);
         jTabbedPane1.setEnabledAt(0, false);
     }
-    
+
     private void desactivarRolesPanel() {
         guardarButton.setEnabled(false);
         rolesComboBox.setEnabled(false);
         jTabbedPane1.setEnabledAt(1, false);
         registroSeleccionado = null;
     }
-    
+
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             nombre1TextField.setText(null);
@@ -755,7 +726,7 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             gsComboBox.setSelectedItem(registroSeleccionado.getGrupoSanguineo());
         }
     }
-    
+
     private void cargarTablaPrincipal() {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
@@ -768,14 +739,14 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void cargarListaDeRoles() {
         for (Rol r : Rol.values()) {
             rolesComboBox.addItem(r);
         }
         rolesComboBox.setSelectedIndex(0);
     }
-    
+
     private void cargarRolesPersona() {
         listModel.removeAllElements();
         if (registroSeleccionado != null) {
@@ -785,23 +756,23 @@ public class PersonaIF extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void cargarListaGrupos() {
         for (GrupoSanguineo gs : GrupoSanguineo.values()) {
             gsComboBox.addItem(gs);
         }
     }
-    
+
     private void cargarListaRh() {
         for (RH rh : RH.values()) {
             rhComboBox.addItem(rh);
         }
     }
-    
+
     private void cargarListaSexo() {
         for (Sexo s : Sexo.values()) {
             sexoComboBox.addItem(s);
         }
     }
-    
+
 }

@@ -9,6 +9,8 @@ import datos.util.EntityManagerFactorySingleton;
 import datos.exceptions.NonexistentEntityException;
 import datos.produccion.variablesClimaticas.TermometroDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.variablesClimaticas.Termometro;
 
@@ -24,12 +26,8 @@ public class TermometroControlador {
         dao = new TermometroDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Termometro nuevo(String nombre,long nds,Modulo modulo) {
+    public Termometro nuevo(String nombre, long nds, Modulo modulo) {
         return new Termometro(nombre, nds, modulo);
-    }
-
-    public boolean validar(Termometro t, Boolean nueva) {
-        return true;
     }
 
     public Termometro buscar(long nds) throws Exception {
@@ -50,5 +48,23 @@ public class TermometroControlador {
 
     public List<Termometro> buscarLista() {
         return dao.findTermometroEntities();
+    }
+
+    public boolean validar(Termometro registroSeleccionado) {
+        if (registroSeleccionado.getNombre() == null) {
+            return false;
+        }
+        if (registroSeleccionado.getModulo() == null) {
+            return false;
+        }
+        if (registroSeleccionado.getNumeroDeSerie() <= 0) {
+            return false;
+        }
+        try {
+            buscar(registroSeleccionado.getNumeroDeSerie());
+            return false;
+        } catch (Exception ex) {
+        }
+        return true;
     }
 }

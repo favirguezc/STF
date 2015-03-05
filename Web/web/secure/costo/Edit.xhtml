@@ -15,7 +15,9 @@
                         <p:outputLabel value="#{bundle.EditCostoLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{costoController.selected.fecha}" title="#{bundle.EditCostoTitle_fecha}" required="true" requiredMessage="#{CreateCostoRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditCostoLabel_tipo}" for="tipo" />
-                        <p:inputText id="tipo" value="#{costoController.selected.tipo}" title="#{bundle.EditCostoTitle_tipo}" />
+                        <p:selectOneMenu id="tipo" value="#{costoController.selected.tipo}">
+                            <f:selectItems value="#{tipoCostoController.tipoCostoValues}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCostoLabel_subTipo}" for="subTipo" />
                         <p:inputText id="subTipo" value="#{costoController.selected.subTipo}" title="#{bundle.EditCostoTitle_subTipo}" />
                         <p:outputLabel value="#{bundle.EditCostoLabel_nombre}" for="nombre" />

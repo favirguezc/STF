@@ -54,32 +54,42 @@
                             </f:facet>
                             <h:outputText value="#{item.item}"/>
                         </p:column>
-                        <p:column/>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCostoTitle_cantidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.cantidad}"/>
+                            <h:outputText value="#{item.cantidad}">
+                                <f:convertNumber/>
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCostoTitle_precioUnid}"/>
                             </f:facet>
-                            <h:outputText value="#{item.precioUnid}"/>
+                            <h:outputText value="#{item.precioUnid}">
+                                <f:convertNumber/>
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCostoTitle_precioTotal}"/>
                             </f:facet>
-                            <h:outputText value="#{item.precioTotal}"/>
+                            <h:outputText value="#{item.precioTotal}">
+                                <f:convertNumber/>
+                            </h:outputText>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{costoController.prepareCreate}" update=":CostoCreateForm" oncomplete="PF('CostoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CoostoViewForm" oncomplete="PF('CostoViewDialog').show()" disabled="#{empty costaController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CostoViewForm" oncomplete="PF('CostoViewDialog').show()" disabled="#{empty costoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CostoEditForm" oncomplete="PF('CostoEditDialog').show()" disabled="#{empty costoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{costoController.destroy}" update=":growl,datalist" disabled="#{empty costoController.selected}"/>
                         </f:facet>    
                     </p:dataTable>
             </h:form>
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
 

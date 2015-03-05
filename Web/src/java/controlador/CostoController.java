@@ -35,6 +35,14 @@ public class CostoController implements Serializable {
         return selected;
     }
 
+    public void setSelected(Costo selected) {
+        this.selected = selected;
+    }
+
+    public void setItems(List<Costo> items) {
+        this.items = items;
+    }
+
     private CostoDAO getJpaController() {
         if (jpaController == null) {
             jpaController = new CostoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());

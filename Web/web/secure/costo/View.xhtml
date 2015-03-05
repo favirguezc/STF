@@ -25,11 +25,17 @@
                         <h:outputText value="#{bundle.ViewCostoLabel_item}"/>
                         <h:outputText value="#{costoController.selected.item}" title="#{bundle.ViewCostoTitle_item}"/>
                         <h:outputText value="#{bundle.ViewCostoLabel_cantidad}"/>
-                        <h:outputText value="#{costoController.selected.cantidad}" title="#{bundle.ViewCostoTitle_cantidad}"/>
+                        <h:outputText value="#{costoController.selected.cantidad}" title="#{bundle.ViewCostoTitle_cantidad}">
+                            <f:convertNumber/>
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewCostoLabel_precioUnid}"/>
-                        <h:outputText value="#{costoController.selected.precioUnid}" title="#{bundle.ViewCostoTitle_precioUnid}"/>
+                        <h:outputText value="#{costoController.selected.precioUnid}" title="#{bundle.ViewCostoTitle_precioUnid}">
+                            <f:convertNumber/>
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewCostoLabel_precioTotal}"/>
-                        <h:outputText value="#{costoController.selected.precioTotal}" title="#{bundle.ViewCostoTitle_precioTotal}"/>
+                        <h:outputText value="#{costoController.selected.precioTotal}" title="#{bundle.ViewCostoTitle_precioTotal}">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CostoViewDialog.hide()"/>
                 </h:panelGroup>

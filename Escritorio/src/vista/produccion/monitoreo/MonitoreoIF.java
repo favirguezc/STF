@@ -63,7 +63,7 @@ public class MonitoreoIF extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Labor");
+        setTitle("Monitoreo");
         setMaximumSize(new java.awt.Dimension(471, 550));
         setMinimumSize(new java.awt.Dimension(471, 550));
 
@@ -184,11 +184,11 @@ public class MonitoreoIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Descripción"
+                "Número", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false

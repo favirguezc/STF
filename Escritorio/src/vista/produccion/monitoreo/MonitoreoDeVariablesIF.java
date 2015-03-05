@@ -80,8 +80,8 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Monitoreo de Enfermedades");
-        setMinimumSize(new java.awt.Dimension(1141, 592));
+        setTitle("Monitoreo de Variables");
+        setMinimumSize(new java.awt.Dimension(1062, 624));
 
         nuevoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nuevoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/32x32/add42.png"))); // NOI18N
@@ -151,8 +151,8 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addComponent(monitoreoFiltroComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(490, 490, 490))
+                .addComponent(monitoreoFiltroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -320,8 +320,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +479,7 @@ public class MonitoreoDeVariablesIF extends javax.swing.JInternalFrame {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
-        lista = controlador.leerLista((Monitoreo) moduloComboBox.getSelectedItem());
+        lista = controlador.leerLista((Monitoreo) monitoreoFiltroComboBox.getSelectedItem());
         Object valor = null;
         for (MonitoreoDeVariables mv : lista) {
             switch (mv.getVariable().getTipoDeValoracion()) {

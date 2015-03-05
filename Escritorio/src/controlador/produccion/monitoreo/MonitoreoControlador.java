@@ -10,6 +10,8 @@ import datos.produccion.monitoreo.MonitoreoDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.monitoreo.Monitoreo;
 
 /**
@@ -49,7 +51,16 @@ public class MonitoreoControlador {
     }
 
     public boolean validar(Monitoreo registroSeleccionado) {
-        return registroSeleccionado.getNumeroDeMonitoreo() > 0;
+        if (registroSeleccionado.getNumeroDeMonitoreo() <= 0) {
+            return false;
+        }
+        for (Monitoreo m : dao.findMonitoreoEntities()) {
+            if (m.getNumeroDeMonitoreo() == registroSeleccionado.getNumeroDeMonitoreo()) {
+                JOptionPane.showMessageDialog(null, "El registro ya está en la base de datos.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+        return true;
     }
 
 }

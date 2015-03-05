@@ -6,9 +6,9 @@
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Monitoreo de Enfermedades"/>
+    <Property name="title" type="java.lang.String" value="Monitoreo de Variables"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1141, 592]"/>
+      <Dimension value="[1062, 624]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -34,7 +34,6 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="edicionPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,8 +68,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="monitoreoFiltroComboBox" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="490" max="-2" attributes="0"/>
+                  <Component id="monitoreoFiltroComboBox" min="-2" pref="143" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">

@@ -3,34 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.produccion.monitoreo;
+package vista.produccion.variablesClimaticas;
 
-import controlador.produccion.monitoreo.VariableControlador;
+import controlador.produccion.administracion.ModuloControlador;
+import controlador.produccion.variablesClimaticas.TermometroControlador;
 import datos.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.produccion.monitoreo.TipoDeValoracion;
-import modelo.produccion.monitoreo.Variable;
+import modelo.produccion.administracion.Modulo;
+import modelo.produccion.variablesClimaticas.Termometro;
 
 /**
  *
  * @author fredy
  */
-public class VariableIF extends javax.swing.JInternalFrame {
+public class TermometroIF extends javax.swing.JInternalFrame {
 
-    private VariableControlador controlador;
-    private Variable registroSeleccionado;
-    private List<Variable> lista;
+    private TermometroControlador controlador;
+    private Termometro registroSeleccionado;
+    private List<Termometro> lista;
 
     /**
-     * Creates new form VariableIF
+     * Creates new form TermometroIF
      */
-    public VariableIF() {
+    public TermometroIF() {
         initComponents();
-        controlador = new VariableControlador();
+        controlador = new TermometroControlador();
         cargarTablaPrincipal();
-        cargarListas();
+        cargarListaModulos();
         guardar(false);
     }
 
@@ -52,15 +55,15 @@ public class VariableIF extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         nombreTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        abreviacionTextField = new javax.swing.JTextField();
+        serieLongField = new modelo.util.LongField();
         jLabel3 = new javax.swing.JLabel();
-        tipoComboBox = new javax.swing.JComboBox();
+        moduloComboBox = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         principalTable = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Variable");
+        setTitle("Labor");
         setMaximumSize(new java.awt.Dimension(471, 550));
         setMinimumSize(new java.awt.Dimension(471, 550));
 
@@ -149,14 +152,14 @@ public class VariableIF extends javax.swing.JInternalFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Abreviacion");
+        jLabel2.setText("N° Serie");
 
-        abreviacionTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        serieLongField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Tipo");
+        jLabel3.setText("Módulo");
 
-        tipoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        moduloComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -165,31 +168,29 @@ public class VariableIF extends javax.swing.JInternalFrame {
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(abreviacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(serieLongField, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
             edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(edicionPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(abreviacionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
-                        .addComponent(tipoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(serieLongField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(moduloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         principalTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -198,11 +199,11 @@ public class VariableIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Abreviación", "Tipo"
+                "Nombre", "N° Serie", "Módulo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Long.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -223,8 +224,8 @@ public class VariableIF extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
+            .addComponent(edicionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +234,7 @@ public class VariableIF extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(edicionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -282,18 +283,22 @@ public class VariableIF extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         boolean transacionRealizada = false;
         String nombre = nombreTextField.getText();
-        String abreviacion = abreviacionTextField.getText();
-        TipoDeValoracion tipo = (TipoDeValoracion) tipoComboBox.getSelectedItem();
+        long serie = serieLongField.getLong();
+        Modulo modulo = (Modulo) moduloComboBox.getSelectedItem();
         if (registroSeleccionado == null) {
-            registroSeleccionado = controlador.nuevo(nombre, abreviacion, tipo);
+            registroSeleccionado = controlador.nuevo(nombre, serie, modulo);
             if (controlador.validar(registroSeleccionado)) {
-                controlador.guardar(registroSeleccionado);
-                transacionRealizada = true;
+                try {
+                    controlador.guardar(registroSeleccionado);
+                    transacionRealizada = true;
+                } catch (Exception ex) {
+                    Logger.getLogger(TermometroIF.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             registroSeleccionado.setNombre(nombre);
-            registroSeleccionado.setAbreviacion(abreviacion);
-            registroSeleccionado.setTipoDeValoracion(tipo);
+            registroSeleccionado.setNumeroDeSerie(serie);
+            registroSeleccionado.setModulo(modulo);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -315,7 +320,6 @@ public class VariableIF extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField abreviacionTextField;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
@@ -325,10 +329,11 @@ public class VariableIF extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox moduloComboBox;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JButton nuevoButton;
     private javax.swing.JTable principalTable;
-    private javax.swing.JComboBox tipoComboBox;
+    private modelo.util.LongField serieLongField;
     // End of variables declaration//GEN-END:variables
 
     private void guardar(boolean b) {
@@ -342,12 +347,16 @@ public class VariableIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             nombreTextField.setText(null);
-            abreviacionTextField.setText(null);
-            tipoComboBox.setSelectedIndex(0);
+            serieLongField.setLong(0l);
+            if (moduloComboBox.getItemCount() > 0) {
+                moduloComboBox.setSelectedIndex(0);
+            }
         } else {
             nombreTextField.setText(registroSeleccionado.getNombre());
-            abreviacionTextField.setText(registroSeleccionado.getAbreviacion());
-            tipoComboBox.setSelectedItem(registroSeleccionado.getTipoDeValoracion());
+            serieLongField.setLong(registroSeleccionado.getNumeroDeSerie());
+            if (moduloComboBox.getItemCount() > 0) {
+                moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
+            }
         }
     }
 
@@ -355,17 +364,20 @@ public class VariableIF extends javax.swing.JInternalFrame {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
-        lista = controlador.leerLista();
-        for (Variable l : lista) {
-            Object[] row = {l.getNombre(), l.getAbreviacion(), l.getTipoDeValoracion()};
+        lista = controlador.buscarLista();
+        for (Termometro l : lista) {
+            Object[] row = {l.getNombre(), l.getNumeroDeSerie(), l.getModulo()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }
 
-    private void cargarListas() {
-        tipoComboBox.removeAllItems();
-        tipoComboBox.addItem(TipoDeValoracion.CONTEO);
-        tipoComboBox.addItem(TipoDeValoracion.RELACION);
-        tipoComboBox.addItem(TipoDeValoracion.RIESGO);
+    private void cargarListaModulos() {
+        moduloComboBox.removeAllItems();
+        for (Modulo m : new ModuloControlador().leerLista()) {
+            moduloComboBox.addItem(m);
+        }
+        if (moduloComboBox.getItemCount() > 0) {
+            moduloComboBox.setSelectedIndex(0);
+        }
     }
 }

@@ -5,7 +5,6 @@ import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.PermisoDAO;
 import datos.util.EntityManagerFactorySingleton;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,7 +16,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 import modelo.produccion.administracion.Pagina;
 import modelo.produccion.administracion.Rol;
 import modelo.util.Accion;
@@ -106,7 +104,9 @@ public class PermisoController implements Serializable {
     }
 
     public boolean tienePermiso(Rol rol, Accion accion, String requestPath) {
-        if(rol==Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())){
+        requestPath = requestPath.toLowerCase();
+        System.out.println(requestPath + " :: " + rol + " :: " + accion);
+        if (rol == Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())) {
             return true;
         }
         for (Pagina pagina : Pagina.values()) {

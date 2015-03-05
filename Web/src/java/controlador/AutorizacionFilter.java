@@ -5,8 +5,6 @@
  */
 package controlador;
 
-import datos.produccion.administracion.RolPersonaDAO;
-import datos.util.EntityManagerFactorySingleton;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,7 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.produccion.administracion.Rol;
 import modelo.util.Accion;
 
 /**

@@ -33,6 +33,6 @@ public enum Pagina {
     Compra,
     Caja,
     ConceptoCaja,
-    Precio,
+    Costo,
     Permiso
 }

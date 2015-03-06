@@ -29,6 +29,7 @@ public enum Pagina {
     HumedadDelSuelo,
     Termometro,
     Recoleccion,
+    Clasificacion,
     Venta,
     Compra,
     Caja,

@@ -150,7 +150,7 @@ public class RecoleccionAnualPorModuloIF extends javax.swing.JInternalFrame {
         double valor;
         for (Modulo modulo : new ModuloControlador().leerLista()) {
             llave = modulo.toString();
-            valor = new RecoleccionControlador().sumarRegistros(null, modulo, new Date((int) añoSpinner.getValue() - 1900, 0, 1), new Date((int) añoSpinner.getValue() - 1900, 11, 31)).getBuenaGramos() / 500;
+            valor = new RecoleccionControlador().sumarRegistros(null, modulo, new Date((int) añoSpinner.getValue() - 1900, 0, 1), new Date((int) añoSpinner.getValue() - 1900, 11, 31)).getPesadaGramos() / 500;
             datos.setValue(llave, valor);
         }
         return datos;

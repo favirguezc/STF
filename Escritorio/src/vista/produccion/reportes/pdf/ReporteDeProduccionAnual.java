@@ -5,8 +5,6 @@
  */
 package vista.produccion.reportes.pdf;
 
-import com.itextpdf.awt.PdfGraphics2D;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -17,21 +15,16 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import controlador.produccion.recoleccion.RecoleccionControlador;
 import vista.produccion.reportes.ReporteAnual;
 import java.awt.Desktop;
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +36,6 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import modelo.util.DateFormatter;
 import modelo.util.DateTools;
-import vista.produccion.graficas.GeneradorDeGraficas;
 import vista.produccion.graficas.RecoleccionAnualPorMesIF;
 import vista.produccion.graficas.RecoleccionAnualPorSemanaIF;
 
@@ -163,20 +155,7 @@ public class ReporteDeProduccionAnual {
             celda.setRowspan(2);
             tabla.addCell(celda);
         }
-        float extraPeriodo,
-                extraTotal = 0,
-                primeraPeriodo,
-                primeraTotal = 0,
-                segundaPeriodo,
-                segundaTotal = 0,
-                terceraPeriodo,
-                terceraTotal = 0,
-                cuartaPeriodo,
-                cuartaTotal = 0,
-                dañadaPeriodo,
-                dañadaTotal = 0,
-                total = 0,
-                totalmes;
+        float pesadaPeriodo, total = 0;
         int columnas = 12;
         if (tipo == ReporteAnual.POR_DIA) {
             columnas = DateTools.getDiasDelAño(año);
@@ -196,20 +175,8 @@ public class ReporteDeProduccionAnual {
                 r = new RecoleccionControlador().sumarRegistros(null, null, c.getTime(), null);
             }
             //Se dividen por 500 para convertirlos a libras
-            extraPeriodo = r.getExtraGramos() / 500;
-            extraTotal += extraPeriodo;
-            primeraPeriodo = r.getPrimeraGramos() / 500;
-            primeraTotal += primeraPeriodo;
-            segundaPeriodo = r.getSegundaGramos() / 500;
-            segundaTotal += segundaPeriodo;
-            terceraPeriodo = r.getTerceraGramos() / 500;
-            terceraTotal += terceraPeriodo;
-            cuartaPeriodo = r.getCuartaGramos() / 500;
-            cuartaTotal += cuartaPeriodo;
-            dañadaPeriodo = r.getDanadaGramos() / 500;
-            dañadaTotal += dañadaPeriodo;
-            totalmes = r.getTotalGramos() / 500;
-            total += totalmes;
+            pesadaPeriodo = r.getPesadaGramos();
+            total += pesadaPeriodo;
             String contador = "";
             if (tipo == ReporteAnual.POR_MES) {
                 contador = DateTools.getMes(i);
@@ -222,21 +189,12 @@ public class ReporteDeProduccionAnual {
             celda.setRowspan(2);
             celda.setColspan(2);
             tabla.addCell(celda);
-            float[] sumas = {extraPeriodo, primeraPeriodo, segundaPeriodo, terceraPeriodo, cuartaPeriodo, dañadaPeriodo, totalmes};
+            float[] sumas = {pesadaPeriodo};
             //Agregar total recoleccion de cada tipo de fresa
             for (float f : sumas) {
                 celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f), fuenteNormal));
                 if (f == 0) {
                     celda.setBackgroundColor(BaseColor.RED);
-                }
-                tabla.addCell(celda);
-            }
-            //Agregar porcentajes
-            for (float f : sumas) {
-                if (totalmes > 0) {
-                    celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f * 100 / totalmes) + "%", fuenteNormal));
-                } else {
-                    celda = new PdfPCell(new Phrase("100%", fuenteNormal));
                 }
                 tabla.addCell(celda);
             }
@@ -249,7 +207,7 @@ public class ReporteDeProduccionAnual {
         celda = new PdfPCell(new Phrase("Total", fuenteNormal));
         celda.setColspan(2);
         tabla.addCell(celda);
-        float[] sumas = {extraTotal, primeraTotal, segundaTotal, terceraTotal, cuartaTotal, dañadaTotal, total};
+        float[] sumas = {total};
         for (float f : sumas) {
             celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f), fuenteNormal));
             tabla.addCell(celda);

@@ -175,12 +175,6 @@ public class RecoleccionAnualPorMesYTrampaDeInsectosIF extends javax.swing.JInte
 
     private CategoryDataset crearDatosRecoleccion() {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        final String e = "Extra";
-        final String p = "Primera";
-        final String s = "Segunda";
-        final String t = "Tercera";
-        final String c = "Cuarta";
-        final String d = "Dañada";
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
@@ -191,12 +185,7 @@ public class RecoleccionAnualPorMesYTrampaDeInsectosIF extends javax.swing.JInte
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
             String mes = DateTools.getMes(i);
-            datos.addValue(sumarRegistros.getExtraGramos() / 500, e, mes);
-            datos.addValue(sumarRegistros.getPrimeraGramos() / 500, p, mes);
-            datos.addValue(sumarRegistros.getSegundaGramos() / 500, s, mes);
-            datos.addValue(sumarRegistros.getTerceraGramos() / 500, t, mes);
-            datos.addValue(sumarRegistros.getCuartaGramos() / 500, c, mes);
-            datos.addValue(sumarRegistros.getDanadaGramos() / 500, d, mes);
+            datos.addValue(sumarRegistros.getPesadaGramos() / 500, "Pesada", mes);
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }

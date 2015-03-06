@@ -116,23 +116,7 @@ public class RecoleccionChart implements Serializable {
     public void createModel1() {
         modelo1 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        LineChartSeries series7 = new LineChartSeries();
-        LineChartSeries series8 = new LineChartSeries();
-        LineChartSeries series9 = new LineChartSeries();
-        series1.setLabel("Extra");
-        series2.setLabel("Primera");
-        series3.setLabel("Segunda");
-        series4.setLabel("Tercera");
-        series5.setLabel("Cuarta");
-        series6.setLabel("Quinta");
-        series7.setLabel("Dañada");
-        series8.setLabel("Buena");
-        series9.setLabel("Total");
+        series1.setLabel("Pesada Kg");
 
         RecoleccionController controlador = new RecoleccionController();
 
@@ -146,28 +130,11 @@ public class RecoleccionChart implements Serializable {
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(null, null, fecha1, fecha2);
             String mes = DateTools.getMes(i);
-            series1.set(mes, sumarRegistros.getExtraGramos() / 500);
-            series2.set(mes, sumarRegistros.getPrimeraGramos() / 500);
-            series3.set(mes, sumarRegistros.getSegundaGramos() / 500);
-            series4.set(mes, sumarRegistros.getTerceraGramos() / 500);
-            series5.set(mes, sumarRegistros.getCuartaGramos() / 500);
-            series6.set(mes, sumarRegistros.getQuintaGramos() / 500);
-            series7.set(mes, sumarRegistros.getDanadaGramos() / 500);
-            series8.set(mes, sumarRegistros.getBuenaGramos() / 500);
-            series9.set(mes, sumarRegistros.getTotalGramos() / 500);
-
+            series1.set(mes, sumarRegistros.getPesadaGramos() / 1000);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         modelo1.addSeries(series1);
-        modelo1.addSeries(series2);
-        modelo1.addSeries(series3);
-        modelo1.addSeries(series4);
-        modelo1.addSeries(series5);
-        modelo1.addSeries(series6);
-        modelo1.addSeries(series7);
-        modelo1.addSeries(series8);
-        modelo1.addSeries(series9);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
         modelo1.setTitle("Recolección por Mes Año " + ano1);
@@ -179,23 +146,7 @@ public class RecoleccionChart implements Serializable {
     public void createModel2() {
         modelo2 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        LineChartSeries series7 = new LineChartSeries();
-        LineChartSeries series8 = new LineChartSeries();
-        LineChartSeries series9 = new LineChartSeries();
-        series1.setLabel("Extra");
-        series2.setLabel("Primera");
-        series3.setLabel("Segunda");
-        series4.setLabel("Tercera");
-        series5.setLabel("Cuarta");
-        series6.setLabel("Quinta");
-        series7.setLabel("Dañada");
-        series8.setLabel("Buena");
-        series9.setLabel("Total");
+        series1.setLabel("Pesada Kg");
 
         RecoleccionController controlador = new RecoleccionController();
 
@@ -207,26 +158,10 @@ public class RecoleccionChart implements Serializable {
             cal.add(Calendar.DAY_OF_MONTH, 1);
             sumarRegistros = controlador.sumarRegistros(null, null, fecha1, null);
 
-            series1.set(i + 1, sumarRegistros.getExtraGramos() / 500);
-            series2.set(i + 1, sumarRegistros.getPrimeraGramos() / 500);
-            series3.set(i + 1, sumarRegistros.getSegundaGramos() / 500);
-            series4.set(i + 1, sumarRegistros.getTerceraGramos() / 500);
-            series5.set(i + 1, sumarRegistros.getCuartaGramos() / 500);
-            series6.set(i + 1, sumarRegistros.getQuintaGramos() / 500);
-            series7.set(i + 1, sumarRegistros.getDanadaGramos() / 500);
-            series8.set(i + 1, sumarRegistros.getBuenaGramos() / 500);
-            series9.set(i + 1, sumarRegistros.getTotalGramos() / 500);
+            series1.set(i + 1, sumarRegistros.getPesadaGramos() / 1000);
         }
 
         modelo2.addSeries(series1);
-        modelo2.addSeries(series2);
-        modelo2.addSeries(series3);
-        modelo2.addSeries(series4);
-        modelo2.addSeries(series5);
-        modelo2.addSeries(series6);
-        modelo2.addSeries(series7);
-        modelo2.addSeries(series8);
-        modelo2.addSeries(series9);
         modelo2.setShowPointLabels(true);
         modelo2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo2.setTitle("Recolección por Día " + DateTools.getMes(mes2) + " de " + ano2);
@@ -238,23 +173,7 @@ public class RecoleccionChart implements Serializable {
     public void createModel3() {
         modelo3 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        LineChartSeries series7 = new LineChartSeries();
-        LineChartSeries series8 = new LineChartSeries();
-        LineChartSeries series9 = new LineChartSeries();
-        series1.setLabel("Extra");
-        series2.setLabel("Primera");
-        series3.setLabel("Segunda");
-        series4.setLabel("Tercera");
-        series5.setLabel("Cuarta");
-        series6.setLabel("Quinta");
-        series7.setLabel("Dañada");
-        series8.setLabel("Buena");
-        series9.setLabel("Total");
+        series1.setLabel("Pesada Kg");
 
         RecoleccionController controlador = new RecoleccionController();
 
@@ -264,28 +183,12 @@ public class RecoleccionChart implements Serializable {
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            sumarRegistros = controlador.sumarRegistros(null, null, fecha1,null);
+            sumarRegistros = controlador.sumarRegistros(null, null, fecha1, null);
 
-            series1.set(DateTools.getDia(i + 1), sumarRegistros.getExtraGramos() / 500);
-            series2.set(DateTools.getDia(i + 1), sumarRegistros.getPrimeraGramos() / 500);
-            series3.set(DateTools.getDia(i + 1), sumarRegistros.getSegundaGramos() / 500);
-            series4.set(DateTools.getDia(i + 1), sumarRegistros.getTerceraGramos() / 500);
-            series5.set(DateTools.getDia(i + 1), sumarRegistros.getCuartaGramos() / 500);
-            series6.set(DateTools.getDia(i + 1), sumarRegistros.getQuintaGramos() / 500);
-            series7.set(DateTools.getDia(i + 1), sumarRegistros.getDanadaGramos() / 500);
-            series8.set(DateTools.getDia(i + 1), sumarRegistros.getBuenaGramos() / 500);
-            series9.set(DateTools.getDia(i + 1), sumarRegistros.getTotalGramos() / 500);
+            series1.set(DateTools.getDia(i + 1), sumarRegistros.getPesadaGramos() / 1000);
         }
 
         modelo3.addSeries(series1);
-        modelo3.addSeries(series2);
-        modelo3.addSeries(series3);
-        modelo3.addSeries(series4);
-        modelo3.addSeries(series5);
-        modelo3.addSeries(series6);
-        modelo3.addSeries(series7);
-        modelo3.addSeries(series8);
-        modelo3.addSeries(series9);
         modelo3.setShowPointLabels(true);
         modelo3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
         modelo3.setTitle("Recolección por Día " + DateTools.getSemana(fecha3));
@@ -297,23 +200,7 @@ public class RecoleccionChart implements Serializable {
     public void createModel4() {
         modelo4 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        LineChartSeries series7 = new LineChartSeries();
-        LineChartSeries series8 = new LineChartSeries();
-        LineChartSeries series9 = new LineChartSeries();
-        series1.setLabel("Extra");
-        series2.setLabel("Primera");
-        series3.setLabel("Segunda");
-        series4.setLabel("Tercera");
-        series5.setLabel("Cuarta");
-        series6.setLabel("Quinta");
-        series7.setLabel("Dañada");
-        series8.setLabel("Buena");
-        series9.setLabel("Total");
+        series1.setLabel("Pesada Kg");
 
         RecoleccionController controlador = new RecoleccionController();
 
@@ -326,28 +213,12 @@ public class RecoleccionChart implements Serializable {
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(null, null, fecha1, fecha2);
 
-            series1.set(i + 1, sumarRegistros.getExtraGramos() / 500);
-            series2.set(i + 1, sumarRegistros.getPrimeraGramos() / 500);
-            series3.set(i + 1, sumarRegistros.getSegundaGramos() / 500);
-            series4.set(i + 1, sumarRegistros.getTerceraGramos() / 500);
-            series5.set(i + 1, sumarRegistros.getCuartaGramos() / 500);
-            series6.set(i + 1, sumarRegistros.getQuintaGramos() / 500);
-            series7.set(i + 1, sumarRegistros.getDanadaGramos() / 500);
-            series8.set(i + 1, sumarRegistros.getBuenaGramos() / 500);
-            series9.set(i + 1, sumarRegistros.getTotalGramos() / 500);
+            series1.set(i + 1, sumarRegistros.getPesadaGramos() / 1000);
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         modelo4.addSeries(series1);
-        modelo4.addSeries(series2);
-        modelo4.addSeries(series3);
-        modelo4.addSeries(series4);
-        modelo4.addSeries(series5);
-        modelo4.addSeries(series6);
-        modelo4.addSeries(series7);
-        modelo4.addSeries(series8);
-        modelo4.addSeries(series9);
         modelo4.setShowPointLabels(true);
         modelo4.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
         modelo4.setTitle("Recolección por Semana Año " + ano4);
@@ -377,7 +248,7 @@ public class RecoleccionChart implements Serializable {
             fecha2 = c.getTime();
 
             for (int modulo = 0; modulo < modulos.size(); modulo++) {
-                valor = controlador.sumarRegistros(null, modulos.get(modulo), fecha1, fecha2).getBuenaGramos() / 500;
+                valor = controlador.sumarRegistros(null, modulos.get(modulo), fecha1, fecha2).getPesadaGramos() / 1000;
                 series[modulo].set(i, valor);
             }
         }

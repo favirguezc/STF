@@ -97,15 +97,20 @@ public class LoginController implements Serializable {
         this.user = user;
     }
 
-    public void login() {
+    public String login() {
         loggedin = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
         if (loggedin) {
             long userId = Long.parseLong(userString);
             user = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
             roles = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findRolEntities(user);
+            if(roles != null && roles.size()==1){
+                rol = roles.get(0);
+                return login2();
+            }
         } else {
             JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
         }
+        return "";
     }
 
     public String login2() {

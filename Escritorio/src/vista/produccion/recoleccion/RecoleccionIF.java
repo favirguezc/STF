@@ -60,19 +60,9 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         moduloComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         recolectorComboBox = new javax.swing.JComboBox();
-        extraFloatField = new modelo.util.FloatField();
-        primeraFloatField = new modelo.util.FloatField();
-        segundaFloatField = new modelo.util.FloatField();
-        terceraFloatField = new modelo.util.FloatField();
-        cuartaFloatField = new modelo.util.FloatField();
-        dañadaFloatField = new modelo.util.FloatField();
+        pesadaFloatField = new modelo.util.FloatField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         nuevoButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
@@ -126,38 +116,13 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
 
         recolectorComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        extraFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        primeraFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        segundaFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        terceraFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        cuartaFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        dañadaFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pesadaFloatField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Recolector");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Extra");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Primera");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Segunda");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Tercera");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Cuarta");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Dañada");
+        jLabel3.setText("Pesada");
 
         javax.swing.GroupLayout edicionPanelLayout = new javax.swing.GroupLayout(edicionPanel);
         edicionPanel.setLayout(edicionPanelLayout);
@@ -169,23 +134,13 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel7)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(moduloComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fechaDateChooserCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(recolectorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(extraFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(primeraFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(segundaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(terceraFloatField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cuartaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dañadaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pesadaFloatField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         edicionPanelLayout.setVerticalGroup(
@@ -205,28 +160,8 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(extraFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesadaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(primeraFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(segundaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(terceraFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cuartaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(edicionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dañadaFloatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -451,14 +386,14 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Módulo", "Fecha", "Recolector", "Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Quinta"
+                "Módulo", "Fecha", "Recolector", "Pesada"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -484,7 +419,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -554,14 +489,9 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
         Modulo modulo = (Modulo) moduloComboBox.getSelectedItem();
         Date fecha = fechaDateChooserCombo.getCurrent().getTime();
         Persona recolector = (Persona) recolectorComboBox.getSelectedItem();
-        float extra = extraFloatField.getFloat();
-        float primera = primeraFloatField.getFloat();
-        float segunda = segundaFloatField.getFloat();
-        float tercera = terceraFloatField.getFloat();
-        float cuarta = cuartaFloatField.getFloat();
-        float dañada = dañadaFloatField.getFloat();
+        float pesada = pesadaFloatField.getFloat();
         if (registroSeleccionado == null) {
-            Recoleccion nuevo = controlador.nuevo(modulo, fecha, extra, primera, segunda, tercera, cuarta, 0, dañada, recolector);
+            Recoleccion nuevo = controlador.nuevo(modulo, fecha, pesada, recolector);
             if (controlador.validar(nuevo)) {
                 controlador.guardar(nuevo);
                 transacionRealizada = true;
@@ -570,12 +500,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             registroSeleccionado.setFecha(fecha);
             registroSeleccionado.setModulo(modulo);
             registroSeleccionado.setRecolector(recolector);
-            registroSeleccionado.setExtraGramos(extra);
-            registroSeleccionado.setPrimeraGramos(primera);
-            registroSeleccionado.setSegundaGramos(segunda);
-            registroSeleccionado.setTerceraGramos(tercera);
-            registroSeleccionado.setCuartaGramos(cuarta);
-            registroSeleccionado.setDanadaGramos(dañada);
+            registroSeleccionado.setPesadaGramos(pesada);
             if (controlador.validar(registroSeleccionado)) {
                 try {
                     controlador.editar(registroSeleccionado);
@@ -654,14 +579,11 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner añoSpinner;
     private javax.swing.ButtonGroup buttonGroup1;
-    private modelo.util.FloatField cuartaFloatField;
-    private modelo.util.FloatField dañadaFloatField;
     private datechooser.beans.DateChooserCombo diaDateChooserCombo;
     private javax.swing.JRadioButton diarioRadioButton;
     private javax.swing.JPanel edicionPanel;
     private javax.swing.JButton editarButton;
     private javax.swing.JButton eliminarButton;
-    private modelo.util.FloatField extraFloatField;
     private datechooser.beans.DateChooserCombo fechaDateChooserCombo;
     private javax.swing.JButton guardarButton;
     private javax.swing.JLabel jLabel1;
@@ -672,12 +594,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -687,12 +604,10 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox moduloComboBox;
     private javax.swing.JComboBox moduloFiltroComboBox;
     private javax.swing.JButton nuevoButton;
-    private modelo.util.FloatField primeraFloatField;
+    private modelo.util.FloatField pesadaFloatField;
     private javax.swing.JTable principalTable;
     private javax.swing.JComboBox recolectorComboBox;
     private javax.swing.JComboBox recolectorFiltroComboBox;
-    private modelo.util.FloatField segundaFloatField;
-    private modelo.util.FloatField terceraFloatField;
     // End of variables declaration//GEN-END:variables
 
     private void guardar(boolean b) {
@@ -709,12 +624,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             fechaDateChooserCombo.setCurrent(GregorianCalendar.getInstance());
             moduloComboBox.setSelectedIndex(0);
             recolectorComboBox.setSelectedIndex(0);
-            extraFloatField.setFloat(null);
-            primeraFloatField.setFloat(null);
-            segundaFloatField.setFloat(null);
-            terceraFloatField.setFloat(null);
-            cuartaFloatField.setFloat(null);
-            dañadaFloatField.setFloat(null);
+            pesadaFloatField.setFloat(null);
 
         } else {
             Calendar c = GregorianCalendar.getInstance();
@@ -723,12 +633,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             fechaDateChooserCombo.setCurrent(c);
             moduloComboBox.setSelectedItem(registroSeleccionado.getModulo());
             recolectorComboBox.setSelectedItem(registroSeleccionado.getRecolector());
-            extraFloatField.setFloat(registroSeleccionado.getExtraGramos());
-            primeraFloatField.setFloat(registroSeleccionado.getPrimeraGramos());
-            segundaFloatField.setFloat(registroSeleccionado.getSegundaGramos());
-            terceraFloatField.setFloat(registroSeleccionado.getTerceraGramos());
-            cuartaFloatField.setFloat(registroSeleccionado.getCuartaGramos());
-            dañadaFloatField.setFloat(registroSeleccionado.getDanadaGramos());
+            pesadaFloatField.setFloat(registroSeleccionado.getPesadaGramos());
         }
     }
 
@@ -753,13 +658,7 @@ public class RecoleccionIF extends javax.swing.JInternalFrame {
             Object[] row = {
                 l.getModulo(),
                 DateFormatter.formatDate(l.getFecha()),
-                l.getRecolector(),
-                l.getExtraGramos(),
-                l.getPrimeraGramos(),
-                l.getSegundaGramos(),
-                l.getTerceraGramos(),
-                l.getCuartaGramos(),
-                l.getDanadaGramos()};
+                l.getRecolector()};
             ((DefaultTableModel) principalTable.getModel()).addRow(row);
         }
     }

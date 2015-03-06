@@ -10,6 +10,7 @@ import datos.produccion.recoleccion.RecoleccionDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
@@ -27,8 +28,8 @@ public class RecoleccionControlador {
         dao = new RecoleccionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Recoleccion nuevo(Modulo modulo, Date fecha, float extra, float primera, float segunda, float tercera, float cuarta, float quinta, float danada, Persona recolector) {
-        return new Recoleccion(modulo, fecha, recolector, extra, primera, segunda, tercera, cuarta, quinta, danada);
+    public Recoleccion nuevo(Modulo modulo, Date fecha, float pesada, Persona recolector) {
+        return new Recoleccion(modulo, fecha, recolector, pesada);
     }
 
     public Recoleccion buscar(long id) {
@@ -53,14 +54,18 @@ public class RecoleccionControlador {
 
     public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
         List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
-        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0, 0, 0, 0, 0, 0, 0);
-        leerLista.stream().forEach((r) -> {
+        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0);
+        for (Recoleccion r : leerLista) {
             suma.sumar(r);
-        });
+        }
         return suma;
     }
 
     public boolean validar(Recoleccion r) {
+        if(r.getPesadaGramos() <= 0){
+            JOptionPane.showMessageDialog(null, "El campo Pesada debe ser mayor a 0.", "Error de datos", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         return true;
     }
 }

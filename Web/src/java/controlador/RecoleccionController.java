@@ -118,7 +118,7 @@ public class RecoleccionController implements Serializable {
 
     public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
         List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
-        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0, 0, 0, 0, 0, 0, 0);
+        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0);
         for (Recoleccion r : leerLista) {
             suma.sumar(r);
         }

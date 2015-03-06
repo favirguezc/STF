@@ -28,20 +28,8 @@
                                            itemValue="#{recolectorItem}"
                                            itemLabel="#{recolectorItem.nombre} #{recolectorItem.apellido}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_extraGramos}" for="extraGramos" />
-                        <p:inputText id="extraGramos" value="#{recoleccionController.selected.extraGramos}" title="#{bundle.CreateRecoleccionTitle_extraGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_primeraGramos}" for="primeraGramos" />
-                        <p:inputText id="primeraGramos" value="#{recoleccionController.selected.primeraGramos}" title="#{bundle.CreateRecoleccionTitle_primeraGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_segundaGramos}" for="segundaGramos" />
-                        <p:inputText id="segundaGramos" value="#{recoleccionController.selected.segundaGramos}" title="#{bundle.CreateRecoleccionTitle_segundaGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_terceraGramos}" for="terceraGramos" />
-                        <p:inputText id="terceraGramos" value="#{recoleccionController.selected.terceraGramos}" title="#{bundle.CreateRecoleccionTitle_terceraGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_cuartaGramos}" for="cuartaGramos" />
-                        <p:inputText id="cuartaGramos" value="#{recoleccionController.selected.cuartaGramos}" title="#{bundle.CreateRecoleccionTitle_cuartaGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_quintaGramos}" for="quintaGramos" />
-                        <p:inputText id="quintaGramos" value="#{recoleccionController.selected.quintaGramos}" title="#{bundle.CreateRecoleccionTitle_quintaGramos}" />
-                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_danadaGramos}" for="danadaGramos" />
-                        <p:inputText id="danadaGramos" value="#{recoleccionController.selected.danadaGramos}" title="#{bundle.CreateRecoleccionTitle_danadaGramos}" />                      
+                        <p:outputLabel value="#{bundle.CreateRecoleccionLabel_pesadaGramos}" for="pesadaGramos" />
+                        <p:inputText id="pesadaGramos" value="#{recoleccionController.selected.pesadaGramos}" title="#{bundle.CreateRecoleccionTitle_pesadaGramos}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{recoleccionController.create}" value="#{bundle.Save}" update="display,:RecoleccionListPanel:RecoleccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecoleccionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RecoleccionCreateDialog.hide()"/>

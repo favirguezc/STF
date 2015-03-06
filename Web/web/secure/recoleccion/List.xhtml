@@ -17,7 +17,7 @@
             <p:accordionPanel dynamic="true" id="RecoleccionListPanel">
                 <p:tab title="Gráficas">
                     <p:tabView dynamic="true">
-                        <p:tab title="Por Lote">
+                        <p:tab title="Por Módulo">
                             <p:chart type="bar" model="#{recoleccionChart.modelo5}"/>
                         </p:tab>
                         <p:tab title="Semanal">
@@ -116,57 +116,9 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_extraGramos}"/>
+                                    <h:outputText value="#{bundle.ListRecoleccionTitle_pesadaGramos}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.extraGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_primeraGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.primeraGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_segundaGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.segundaGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_terceraGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.terceraGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_cuartaGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.cuartaGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_quintaGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.quintaGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_danadaGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.danadaGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_buenaGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.buenaGramos}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListRecoleccionTitle_totalGramos}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.totalGramos}"/>
+                                <h:outputText value="#{item.pesadaGramos}"/>
                             </p:column>
                             <f:facet name="footer">
                                 <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{recoleccionController.prepareCreate}" update=":RecoleccionListPanel:RecoleccionCreateForm" oncomplete="PF('RecoleccionCreateDialog').show()"/>

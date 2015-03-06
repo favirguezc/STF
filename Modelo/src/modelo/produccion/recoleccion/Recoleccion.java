@@ -30,236 +30,56 @@ public class Recoleccion implements Serializable {
     private Date fecha;
     @ManyToOne(optional = false)
     private Persona recolector;
-    private float extraGramos;
-    private float primeraGramos;
-    private float segundaGramos;
-    private float terceraGramos;
-    private float cuartaGramos;
-    private float quintaGramos;
-    private float danadaGramos;
+    private float pesadaGramos;
 
-    /**
-     *
-     */
     public Recoleccion() {
     }
 
-    /**
-     *
-     * @param lote
-     * @param fecha
-     * @param recolector
-     * @param extraGramos
-     * @param primeraGramos
-     * @param segundaGramos
-     * @param terceraGramos
-     * @param cuartaGramos
-     * @param quintaGramos
-     * @param danadaGramos
-     */
-    public Recoleccion(Modulo modulo, Date fecha, Persona recolector, float extraGramos, float primeraGramos, float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, float danadaGramos) {
+    public Recoleccion(Modulo modulo, Date fecha, Persona recolector, float pesadaGramos) {
         this.modulo = modulo;
         this.fecha = fecha;
         this.recolector = recolector;
-        this.extraGramos = extraGramos;
-        this.primeraGramos = primeraGramos;
-        this.segundaGramos = segundaGramos;
-        this.terceraGramos = terceraGramos;
-        this.cuartaGramos = cuartaGramos;
-        this.quintaGramos = quintaGramos;
-        this.danadaGramos = danadaGramos;
+        this.pesadaGramos = pesadaGramos;
     }
 
-    /**
-     *
-     * @return
-     */
     public long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(long id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
     public Modulo getModulo() {
         return modulo;
     }
 
-    /**
-     *
-     * @param modulo
-     */
     public void setModulo(Modulo modulo) {
         this.modulo = modulo;
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     *
-     * @param fecha
-     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    /**
-     *
-     * @return
-     */
     public Persona getRecolector() {
         return recolector;
     }
 
-    /**
-     *
-     * @param recolector
-     */
     public void setRecolector(Persona recolector) {
         this.recolector = recolector;
     }
 
-    /**
-     *
-     * @return
-     */
-    public float getExtraGramos() {
-        return extraGramos;
+    public float getPesadaGramos() {
+        return pesadaGramos;
     }
 
-    /**
-     *
-     * @param extraGramos
-     */
-    public void setExtraGramos(float extraGramos) {
-        this.extraGramos = extraGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getPrimeraGramos() {
-        return primeraGramos;
-    }
-
-    /**
-     *
-     * @param primeraGramos
-     */
-    public void setPrimeraGramos(float primeraGramos) {
-        this.primeraGramos = primeraGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getSegundaGramos() {
-        return segundaGramos;
-    }
-
-    /**
-     *
-     * @param segundaGramos
-     */
-    public void setSegundaGramos(float segundaGramos) {
-        this.segundaGramos = segundaGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getTerceraGramos() {
-        return terceraGramos;
-    }
-
-    /**
-     *
-     * @param terceraGramos
-     */
-    public void setTerceraGramos(float terceraGramos) {
-        this.terceraGramos = terceraGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getCuartaGramos() {
-        return cuartaGramos;
-    }
-
-    /**
-     *
-     * @param cuartaGramos
-     */
-    public void setCuartaGramos(float cuartaGramos) {
-        this.cuartaGramos = cuartaGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getQuintaGramos() {
-        return quintaGramos;
-    }
-
-    /**
-     *
-     * @param quintaGramos
-     */
-    public void setQuintaGramos(float quintaGramos) {
-        this.quintaGramos = quintaGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getDanadaGramos() {
-        return danadaGramos;
-    }
-
-    /**
-     *
-     * @param danadaGramos
-     */
-    public void setDanadaGramos(float danadaGramos) {
-        this.danadaGramos = danadaGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getBuenaGramos() {
-        return extraGramos + primeraGramos + segundaGramos + terceraGramos + cuartaGramos + quintaGramos;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public float getTotalGramos() {
-        return getBuenaGramos() + danadaGramos;
+    public void setPesadaGramos(float pesadaGramos) {
+        this.pesadaGramos = pesadaGramos;
     }
 
     /**
@@ -267,29 +87,17 @@ public class Recoleccion implements Serializable {
      * @param r
      */
     public void sumar(Recoleccion r) {
-        this.extraGramos += r.extraGramos;
-        this.primeraGramos += r.primeraGramos;
-        this.segundaGramos += r.segundaGramos;
-        this.terceraGramos += r.terceraGramos;
-        this.cuartaGramos += r.cuartaGramos;
-        this.quintaGramos += r.quintaGramos;
-        this.danadaGramos += r.danadaGramos;
+        this.pesadaGramos += r.pesadaGramos;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.modulo);
-        hash = 79 * hash + Objects.hashCode(this.fecha);
-        hash = 79 * hash + Objects.hashCode(this.recolector);
-        hash = 79 * hash + Float.floatToIntBits(this.extraGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.primeraGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.segundaGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.terceraGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.cuartaGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.quintaGramos);
-        hash = 79 * hash + Float.floatToIntBits(this.danadaGramos);
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + Objects.hashCode(this.modulo);
+        hash = 59 * hash + Objects.hashCode(this.fecha);
+        hash = 59 * hash + Objects.hashCode(this.recolector);
+        hash = 59 * hash + Float.floatToIntBits(this.pesadaGramos);
         return hash;
     }
 
@@ -314,28 +122,10 @@ public class Recoleccion implements Serializable {
         if (!Objects.equals(this.recolector, other.recolector)) {
             return false;
         }
-        if (Float.floatToIntBits(this.extraGramos) != Float.floatToIntBits(other.extraGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.primeraGramos) != Float.floatToIntBits(other.primeraGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.segundaGramos) != Float.floatToIntBits(other.segundaGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.terceraGramos) != Float.floatToIntBits(other.terceraGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.cuartaGramos) != Float.floatToIntBits(other.cuartaGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.quintaGramos) != Float.floatToIntBits(other.quintaGramos)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.danadaGramos) != Float.floatToIntBits(other.danadaGramos)) {
+        if (Float.floatToIntBits(this.pesadaGramos) != Float.floatToIntBits(other.pesadaGramos)) {
             return false;
         }
         return true;
     }
-    
+
 }

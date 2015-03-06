@@ -24,10 +24,10 @@
                         <p:selectOneMenu id="unidades" value="#{insumoController.selected.unidades}" required="true" requiredMessage="#{bundle.CreateInsumoRequiredMessage_unidades}">
                             <f:selectItems value="#{unidadesController.unidadesValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateInsumoLabel_pc}" for="pc" />
-                        <p:inputText id="pc" value="#{insumoController.selected.periodoDeCarencia}" title="#{bundle.CreateInsumoTitle_pc}" />
-                        <p:outputLabel value="#{bundle.CreateInsumoLabel_tr}" for="tr" />
-                        <p:inputText id="tr" value="#{insumoController.selected.tiempoDeReentrada}" title="#{bundle.CreateInsumoTitle_tr}" />
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_periodoDeCarencia}" for="pc" />
+                        <p:inputText id="pc" value="#{insumoController.selected.periodoDeCarencia}" title="#{bundle.CreateInsumoTitle_periodoDeCarencia}" />
+                        <p:outputLabel value="#{bundle.CreateInsumoLabel_tiempoDeReentrada}" for="tr" />
+                        <p:inputText id="tr" value="#{insumoController.selected.tiempoDeReentrada}" title="#{bundle.CreateInsumoTitle_tiempoDeReentrada}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{insumoController.create}" value="#{bundle.Save}" update="display,:InsumoListForm:datalist,:growl" oncomplete="handleSubmit(args,'InsumoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InsumoCreateDialog.hide()"/>

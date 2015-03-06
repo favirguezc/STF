@@ -30,19 +30,19 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMonitoreoDeVariablesTitle_monitoreo}"/>
                         </f:facet>
-                        <h:outputText value="#{item.monitoreo}"/>
+                        <h:outputText value="#{item.monitoreo.numeroDeMonitoreo}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMonitoreoDeVariablesTitle_modulo}"/>
                         </f:facet>
-                        <h:outputText value="#{item.modulo}"/>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMonitoreoDeVariablesTitle_variable}"/>
                         </f:facet>
-                        <h:outputText value="#{item.variable}"/>
+                        <h:outputText value="#{item.variable.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

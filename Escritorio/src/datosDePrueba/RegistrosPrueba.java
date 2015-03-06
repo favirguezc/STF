@@ -91,13 +91,7 @@ public class RegistrosPrueba {
                         controlador.guardar(controlador.nuevo(
                                 modulos.get((int) (Math.random() * (modulos.size()))),
                                 c.getTime(),
-                                (float) Math.random() * 900,
-                                (float) Math.random() * 1500,
-                                (float) Math.random() * 1500,
-                                (float) Math.random() * 1500,
-                                (float) Math.random() * 1500,
-                                (float) Math.random() * 1500,
-                                (float) Math.random() * 150,
+                                (float) Math.random() * 2000,
                                 recolectores.get((int) (Math.random() * (recolectores.size())))));
                     }
                     c.add(Calendar.DAY_OF_MONTH, 1);

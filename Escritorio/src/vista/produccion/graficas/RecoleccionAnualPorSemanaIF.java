@@ -152,12 +152,6 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
 
     private static CategoryDataset crearDatos(int año) {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        final String e = "Extra";
-        final String p = "Primera";
-        final String s = "Segunda";
-        final String t = "Tercera";
-        final String c = "Cuarta";
-        final String d = "Dañada";
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(new Date(año - 1900, 0, 1));
@@ -167,12 +161,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
 
-            datos.addValue(sumarRegistros.getExtraGramos() / 500, e, (i + 1) + "");
-            datos.addValue(sumarRegistros.getPrimeraGramos() / 500, p, (i + 1) + "");
-            datos.addValue(sumarRegistros.getSegundaGramos() / 500, s, (i + 1) + "");
-            datos.addValue(sumarRegistros.getTerceraGramos() / 500, t, (i + 1) + "");
-            datos.addValue(sumarRegistros.getCuartaGramos() / 500, c, (i + 1) + "");
-            datos.addValue(sumarRegistros.getDanadaGramos() / 500, d, (i + 1) + "");
+            datos.addValue(sumarRegistros.getPesadaGramos()/ 500, "Pesada", (i + 1) + "");
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -189,7 +178,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
-            datos.addValue(sumarRegistros.getBuenaGramos() / 500, "Buena", (i + 1) + "");
+            datos.addValue(sumarRegistros.getPesadaGramos() / 500, "Buena", (i + 1) + "");
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datos;
@@ -206,7 +195,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             llave = "Semana "+(i + 1);
-            valor = (double)new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2).getBuenaGramos()/ 500;
+            valor = (double)new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2).getPesadaGramos()/ 500;
             datos.setValue(llave, valor);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }

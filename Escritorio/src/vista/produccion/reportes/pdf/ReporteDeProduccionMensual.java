@@ -107,50 +107,27 @@ public class ReporteDeProduccionMensual {
         celda = new PdfPCell(new Phrase("", fuenteBold));
         celda.setRowspan(2);
         tabla.addCell(celda);
-        String[] encabezados = {"Extra", "Primera", "Segunda", "Tercera", "Cuarta", "Dañada", "Total"};
+        String[] encabezados = {"Pesada"};
         for (int i = 0; i < encabezados.length; i++) {
             celda = new PdfPCell(new Phrase(encabezados[i], fuenteBold));
             celda.setRowspan(2);
             tabla.addCell(celda);
         }
         int dias = new GregorianCalendar(año, mes, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
-        float extraDia,
-                extraTotal = 0,
-                primeraDia,
-                primeraTotal = 0,
-                segundaDia,
-                segundaTotal = 0,
-                terceraDia,
-                terceraTotal = 0,
-                cuartaDia,
-                cuartaTotal = 0,
-                dañadaDia,
-                dañadaTotal = 0,
+        float pesadaDia,
                 total = 0,
                 totalmes;
         //Para cada mes se agrega una columna
         for (int i = 1; i <= dias; i++) {
             //Sumar recoleccion de cada tipo de fresa
             Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, new Date(año - 1900, mes, i), null);
-            extraDia = r.getExtraGramos() / 500;
-            extraTotal += extraDia;
-            primeraDia = r.getPrimeraGramos() / 500;
-            primeraTotal += primeraDia;
-            segundaDia = r.getSegundaGramos() / 500;
-            segundaTotal += segundaDia;
-            terceraDia = r.getTerceraGramos() / 500;
-            terceraTotal += terceraDia;
-            cuartaDia = r.getCuartaGramos() / 500;
-            cuartaTotal += cuartaDia;
-            dañadaDia = r.getDanadaGramos() / 500;
-            dañadaTotal += dañadaDia;
-            totalmes = r.getTotalGramos() / 500;
-            total += totalmes;
+            pesadaDia = r.getPesadaGramos() / 500;
+            total += pesadaDia;
 
             celda = new PdfPCell(new Phrase("" + i, fuenteNormal));
             celda.setRowspan(2);
             tabla.addCell(celda);
-            float[] sumas = {extraDia, primeraDia, segundaDia, terceraDia, cuartaDia, dañadaDia, totalmes};
+            float[] sumas = {pesadaDia};
             //Agregar total recoleccion de cada tipo de fresa
             for (float f : sumas) {
                 celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f), fuenteNormal));
@@ -158,20 +135,11 @@ public class ReporteDeProduccionMensual {
                     celda.setBackgroundColor(BaseColor.RED);
                 }
                 tabla.addCell(celda);
-            }
-            //Agregar porcentajes
-            for (float f : sumas) {
-                if (totalmes > 0) {
-                    celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f * 100 / totalmes) + "%", fuenteNormal));
-                } else {
-                    celda = new PdfPCell(new Phrase("100%", fuenteNormal));
-                }
-                tabla.addCell(celda);
-            }
+            }            
         }//Agregar fila de totales
         celda = new PdfPCell(new Phrase("Total", fuenteNormal));
         tabla.addCell(celda);
-        float[] sumas = {extraTotal, primeraTotal, segundaTotal, terceraTotal, cuartaTotal, dañadaTotal, total};
+        float[] sumas = {total};
         for (float f : sumas) {
             celda = new PdfPCell(new Phrase(new DecimalFormat("0.##").format(f), fuenteNormal));
             tabla.addCell(celda);

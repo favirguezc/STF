@@ -230,7 +230,7 @@ public class VentaChart {
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente1, fecha1, fecha2);
             String mes = DateTools.getMes(i);
-            if(opcion1.equals("cantidad")){
+            if(opcion1 != null && opcion1.equals("cantidad")){
                 series1.set(mes, sumarRegistros.getExtraGramos());
                 series2.set(mes, sumarRegistros.getPrimeraGramos());
                 series3.set(mes, sumarRegistros.getSegundaGramos());
@@ -293,7 +293,7 @@ public class VentaChart {
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente2, fecha1, fecha2);
             
-            if(opcion2.equals("cantidad")){
+            if(opcion2 != null && opcion2.equals("cantidad")){
                 series1.set(i + 1, sumarRegistros.getExtraGramos());
                 series2.set(i + 1, sumarRegistros.getPrimeraGramos());
                 series3.set(i + 1, sumarRegistros.getSegundaGramos());
@@ -354,7 +354,7 @@ public class VentaChart {
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente3, fecha1, fecha2);
 
-            if(opcion3.equals("cantidad")){
+            if(opcion3 != null && opcion3.equals("cantidad")){
                 series1.set(DateTools.getDia(i + 1), sumarRegistros.getExtraGramos());
                 series2.set(DateTools.getDia(i + 1), sumarRegistros.getPrimeraGramos());
                 series3.set(DateTools.getDia(i + 1), sumarRegistros.getSegundaGramos());
@@ -414,7 +414,7 @@ public class VentaChart {
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente4, fecha1, fecha2);
-            if(opcion4.equals("cantidad")){
+            if(opcion4 != null && opcion4.equals("cantidad")){
                 series1.set(i + 1, sumarRegistros.getExtraGramos());
                 series2.set(i + 1, sumarRegistros.getPrimeraGramos());
                 series3.set(i + 1, sumarRegistros.getSegundaGramos());

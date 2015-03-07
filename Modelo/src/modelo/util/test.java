@@ -5,12 +5,14 @@
  */
 package modelo.util;
 
+import modelo.produccion.administracion.Rol;
+
 /**
  *
  * @author fredy
  */
 public class test {
     public static void main(String[] args) {
-        System.out.println(DateTools.getDate());
+        System.out.println(Rol.GERENTE);
     }
 }

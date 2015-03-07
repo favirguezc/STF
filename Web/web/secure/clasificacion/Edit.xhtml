@@ -15,9 +15,17 @@
                         <p:outputLabel value="#{bundle.EditClasificacionLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{clasificacionController.selected.fecha}" title="#{bundle.EditClasificacionTitle_fecha}" required="true" requiredMessage="#{bundle.EditClasificacionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditClasificacionLabel_modulo}" for="modulo" />
-                        <p:inputText id="modulo" value="#{clasificacionController.selected.modulo}" title="#{bundle.EditClasificacionTitle_modulo}" />
+                        <p:selectOneMenu id="modulo" value="#{clasificacionController.selected.modulo}" required="true" requiredMessage="#{bundle.EditClasificacionRequiredMessage_modulo}">
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditClasificacionLabel_tipo}" for="tipo" />
-                        <p:inputText id="tipo" value="#{clasificacionController.selected.tipo}" title="#{bundle.EditClasificacionTitle_tipo}" />
+                        <p:selectOneMenu id="tipo" value="#{clasificacionController.selected.tipo}" required="true" requiredMessage="#{bundle.EditClasificacionRequiredMessage_tipo}">
+                            <f:selectItems value="#{tipoDeFresaController.tipoDeFresaValues}"
+                                           var="tipoDeFresaItem"
+                                           itemValue="#{tipoDeFresaItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditClasificacionLabel_gramos}" for="gramos" />
                         <p:inputText id="gramos" value="#{clasificacionController.selected.gramos}" title="#{bundle.EditClasificacionTitle_gramos}" />
                     </p:panelGrid>

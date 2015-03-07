@@ -21,6 +21,7 @@
                              rowKey="#{item.id}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             widgetVar="clasificacionTable"
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
@@ -34,16 +35,19 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClasificacionTitle_modulo}"/>
+                    <p:column filterBy="#{item.modulo}" headerText="#{bundle.ListClasificacionTitle_modulo}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('clasificacionTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </f:facet>
-                        <h:outputText value="#{item.modulo}"/>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClasificacionTitle_tipo}"/>
-                        </f:facet>
+                        </f:facet>                        
                         <h:outputText value="#{item.tipo}"/>
                     </p:column>
                     <p:column>

@@ -13,11 +13,19 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clasificacionController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateClasificacionLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{clasificacionController.selected.fecha}" title="#{bundle.EditClasificacionTitle_fecha}" required="true" requiredMessage="#{bundle.EditClasificacionRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{clasificacionController.selected.fecha}" title="#{bundle.CreateClasificacionTitle_fecha}" required="true" requiredMessage="#{bundle.CreateClasificacionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateClasificacionLabel_modulo}" for="modulo" />
-                        <p:inputText id="modulo" value="#{clasificacionController.selected.modulo}" title="#{bundle.CreateClasificacionTitle_modulo}" />
+                        <p:selectOneMenu id="modulo" value="#{clasificacionController.selected.modulo}" required="true" requiredMessage="#{bundle.CreateClasificacionRequiredMessage_modulo}">
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateClasificacionLabel_tipo}" for="tipo" />
-                        <p:inputText id="tipo" value="#{clasificacionController.selected.tipo}" title="#{bundle.CreateClasificacionTitle_tipo}" />
+                        <p:selectOneMenu id="tipo" value="#{clasificacionController.selected.tipo}" required="true" requiredMessage="#{bundle.CreateClasificacionRequiredMessage_tipo}">
+                            <f:selectItems value="#{tipoDeFresaController.tipoDeFresaValues}"
+                                           var="tipoDeFresaItem"
+                                           itemValue="#{tipoDeFresaItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateClasificacionLabel_gramos}" for="gramos" />
                         <p:inputText id="gramos" value="#{clasificacionController.selected.gramos}" title="#{bundle.CreateClasificacionTitle_gramos}" />
                     </p:panelGrid>

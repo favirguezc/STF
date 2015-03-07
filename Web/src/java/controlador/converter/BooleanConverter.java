@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador;
+package controlador.converter;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,18 +28,18 @@ public class BooleanConverter implements Converter {
 
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value == null) {
-                return null;
+            return null;
+        }
+        if (value instanceof Boolean) {
+            Boolean o = (Boolean) value;
+            if (o) {
+                return "Si";
             }
-            if (value instanceof Boolean) {
-                Boolean o = (Boolean) value;
-                if(o){
-                    return "Si";
-                }
-                return "No";
-            } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "value {0} is of type {1}; expected type: {2}", new Object[]{value, value.getClass().getName(), Boolean.class.getName()});
-                return null;
-            }
+            return "No";
+        } else {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "value {0} is of type {1}; expected type: {2}", new Object[]{value, value.getClass().getName(), Boolean.class.getName()});
+            return null;
+        }
     }
 
 }

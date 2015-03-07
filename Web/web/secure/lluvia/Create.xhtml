@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lluviaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateLluviaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{lluviaController.selected.fecha}" title="#{bundle.EditLluviaTitle_fecha}" required="true" requiredMessage="#{bundle.EditLluviaRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{lluviaController.selected.fecha}" title="#{bundle.EditLluviaTitle_fecha}" required="true" requiredMessage="#{bundle.EditLluviaRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateLluviaLabel_mm}" for="mm" />
                         <p:inputText id="mm" value="#{lluviaController.selected.mm}" title="#{bundle.CreateLluviaTitle_mm}" required="true" requiredMessage="#{bundle.CreateLluviaRequiredMessage_mm}"/>
                     </p:panelGrid>

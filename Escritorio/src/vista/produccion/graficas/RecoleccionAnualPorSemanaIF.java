@@ -5,12 +5,13 @@
  */
 package vista.produccion.graficas;
 
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
+import modelo.util.DateTools;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.CategoryDataset;
@@ -154,7 +155,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(año - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(año, 0, 1));
         for (int i = 0; i < 52; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 6);
@@ -172,7 +173,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(año - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(año, 0, 1));
         for (int i = 0; i < 52; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 6);
@@ -187,7 +188,7 @@ public class RecoleccionAnualPorSemanaIF extends javax.swing.JInternalFrame {
     public static PieDataset crearDatosSimple(int año) {
         DefaultPieDataset datos = new DefaultPieDataset();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(año - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(año, 0, 1));
         String llave;
         double valor;
         for (int i = 0; i < 52; i++) {

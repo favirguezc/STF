@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import modelo.produccion.variablesClimaticas.Lluvia;
+import modelo.util.DateTools;
 import modelo.util.TableColumnAdjuster;
 
 /**
@@ -34,7 +35,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
     public LluviasIF() {
         initComponents();
         controlador = new LluviaControlador();
-        añoSpinner.setValue(new Date().getYear() + 1900);
+        añoSpinner.setValue(DateTools.getYear());
         cargarTablaPrincipal();
         guardar(false);
     }
@@ -460,7 +461,7 @@ public class LluviasIF extends javax.swing.JInternalFrame {
                 principalTable.getModel().setValueAt(null, i, j);
             }
         }
-        Date esteMes = new Date((int) añoSpinner.getValue() - 1900, 0, 1);
+        Date esteMes = DateTools.getDate((int) añoSpinner.getValue(), 0, 1);
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(esteMes);
         c.add(Calendar.YEAR, 1);

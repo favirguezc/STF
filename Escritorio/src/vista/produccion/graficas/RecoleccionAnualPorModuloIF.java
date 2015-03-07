@@ -7,12 +7,13 @@ package vista.produccion.graficas;
 
 import controlador.produccion.administracion.LoteControlador;
 import controlador.produccion.administracion.ModuloControlador;
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JPanel;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
+import modelo.util.DateTools;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -150,7 +151,7 @@ public class RecoleccionAnualPorModuloIF extends javax.swing.JInternalFrame {
         double valor;
         for (Modulo modulo : new ModuloControlador().leerLista()) {
             llave = modulo.toString();
-            valor = new RecoleccionControlador().sumarRegistros(null, modulo, new Date((int) añoSpinner.getValue() - 1900, 0, 1), new Date((int) añoSpinner.getValue() - 1900, 11, 31)).getPesadaGramos() / 500;
+            valor = new RecoleccionControlador().sumarRegistros(null, modulo, DateTools.getDate((int) añoSpinner.getValue(), 0, 1), DateTools.getDate((int) añoSpinner.getValue(), 11, 31)).getPesadaGramos() / 500;
             datos.setValue(llave, valor);
         }
         return datos;

@@ -6,6 +6,7 @@
 package vista.produccion.cargarRegistros.util;
 
 import java.util.Date;
+import modelo.util.DateTools;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 
@@ -24,8 +25,7 @@ public class CellDataExtractor {
 
     public static Date leerHora(Cell cell) {
         if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC && DateUtil.isCellDateFormatted(cell)) {
-            Date hora = cell.getDateCellValue();
-            return new Date(0, 0, 0, hora.getHours(), hora.getMinutes(), hora.getSeconds());
+            return DateTools.getHour(cell.getDateCellValue());
         }
         return null;
     }

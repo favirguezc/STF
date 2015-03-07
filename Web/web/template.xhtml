@@ -75,7 +75,10 @@
                             <p:menuitem value="Humedad Del Suelo" outcome="/secure/humedadDelSuelo/List.xhtml"/>
                             <p:menuitem value="Termómetro" outcome="/secure/termometro/List.xhtml"/>
                         </p:submenu>
-                        <p:menuitem value="Recolección" outcome="/secure/recoleccion/List.xhtml"/>
+                        <p:submenu label="#{bundle.Crop}">
+                            <p:menuitem value="Recolección" outcome="/secure/recoleccion/List.xhtml"/>
+                            <p:menuitem value="Clasificación" outcome="/secure/clasificacion/List.xhtml"/>
+                        </p:submenu>                        
                         <p:submenu label="#{bundle.Finances}">
                             <p:menuitem value="Ventas" outcome="/secure/venta/List.xhtml"/>
                             <p:menuitem value="Compras" outcome="/secure/compra/List.xhtml"/>

@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{lluviaController.selected != null}">
                         <h:outputText value="#{bundle.ViewLluviaLabel_fecha}"/>
                         <h:outputText value="#{lluviaController.selected.fecha}" title="#{bundle.ViewLluviaTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewLluviaLabel_mm}"/>
                         <h:outputText value="#{lluviaController.selected.mm}" title="#{bundle.ViewLluviaTitle_mm}"/>

@@ -21,8 +21,8 @@ public class DateTools {
      * @param año
      * @return
      */
-    public static Date getPrimerDiaDelMes(int mes, int año) {
-        return new Date(año - 1900, mes, 1);
+    public static Date getFirstDayOfMonth(int mes, int año) {
+        return getDate(año, mes, 1);
     }
 
     /**
@@ -30,8 +30,8 @@ public class DateTools {
      * @param fecha
      * @return
      */
-    public static String getSemana(Date fecha) {
-        return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDate(getUltimoDiaDeLaSemana(fecha));
+    public static String getWeek(Date fecha) {
+        return DateFormatter.formatDateShort(getFirstDayOfWeek(fecha)) + " a " + DateFormatter.formatDate(getLastDayOfWeek(fecha));
     }
 
     /**
@@ -39,8 +39,8 @@ public class DateTools {
      * @param fecha
      * @return
      */
-    public static String getSemanaCorta(Date fecha) {
-        return DateFormatter.formatDateShort(getPrimerDiaDeLaSemana(fecha)) + " a " + DateFormatter.formatDateShort(getUltimoDiaDeLaSemana(fecha));
+    public static String getWeek_Short(Date fecha) {
+        return DateFormatter.formatDateShort(getFirstDayOfWeek(fecha)) + " a " + DateFormatter.formatDateShort(getLastDayOfWeek(fecha));
     }
 
     /**
@@ -48,7 +48,7 @@ public class DateTools {
      * @param fecha
      * @return
      */
-    public static int getNumeroDeSemana(Date fecha) {
+    public static int getWeekInYear(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
         return c.get(Calendar.WEEK_OF_YEAR);
@@ -59,7 +59,7 @@ public class DateTools {
      * @param fecha
      * @return
      */
-    public static Date getPrimerDiaDeLaSemana(Date fecha) {
+    public static Date getFirstDayOfWeek(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
         c.add(Calendar.DAY_OF_MONTH, -c.get(Calendar.DAY_OF_WEEK) + 2);
@@ -71,7 +71,7 @@ public class DateTools {
      * @param fecha
      * @return
      */
-    public static Date getUltimoDiaDeLaSemana(Date fecha) {
+    public static Date getLastDayOfWeek(Date fecha) {
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha);
         c.add(Calendar.DAY_OF_MONTH, -c.get(Calendar.DAY_OF_WEEK) + 8);
@@ -84,9 +84,9 @@ public class DateTools {
      * @param año
      * @return
      */
-    public static Date getUltimoDiaDelMes(int mes, int año) {
+    public static Date getLastDayOfMonth(int mes, int año) {
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(getPrimerDiaDelMes(mes, año));
+        c.setTime(getFirstDayOfMonth(mes, año));
         c.add(Calendar.MONTH, 1);
         c.add(Calendar.DAY_OF_MONTH, -1);
         return c.getTime();
@@ -97,7 +97,7 @@ public class DateTools {
      * @param dia
      * @return
      */
-    public static String getDia(int dia) {
+    public static String getDayOfWeek(int dia) {
         switch (dia) {
             case 1: {
                 return "Lunes";
@@ -131,7 +131,7 @@ public class DateTools {
      * @param mes
      * @return
      */
-    public static int getMes(String mes) {
+    public static int getMonth(String mes) {
         mes = mes.toLowerCase();
         if (mes.equals("enero")) {
             return 0;
@@ -177,7 +177,7 @@ public class DateTools {
      * @param mes
      * @return
      */
-    public static String getMes(int mes) {
+    public static String getMonth(int mes) {
         switch (mes) {
             case 0: {
                 return "Enero";
@@ -226,9 +226,9 @@ public class DateTools {
      * @param año
      * @return
      */
-    public static int getDiasDelAño(int año) {
+    public static int getDaysInYear(int año) {
         Calendar instance = GregorianCalendar.getInstance();
-        instance.setTime(new Date(año - 1900, 11, 31));
+        instance.set(año, 11, 31);
         return instance.get(Calendar.DAY_OF_YEAR);
     }
 
@@ -237,9 +237,48 @@ public class DateTools {
      * @param año
      * @return
      */
-    public static int getSemanasDelAño(int año) {
+    public static int getWeeksInYear(int año) {
         Calendar instance = GregorianCalendar.getInstance();
-        instance.setTime(new Date(año - 1900, 11, 31));
+        instance.set(año, 11, 31);
         return instance.get(Calendar.WEEK_OF_YEAR);
+    }
+
+    public static Date getDate(int año, int mes, int dia) {
+        Calendar instance = GregorianCalendar.getInstance();
+        instance.set(año, mes, dia);
+        return instance.getTime();
+    }
+
+    public static Date getDate(int año, int mes, int dia, int hora, int minutos) {
+        Calendar instance = GregorianCalendar.getInstance();
+        instance.set(año, mes, dia, hora, minutos);
+        return instance.getTime();
+    }
+
+    public static Date getDate(int año, int mes, int dia, int hora, int minutos, int segundos) {
+        Calendar instance = GregorianCalendar.getInstance();
+        instance.set(año, mes, dia, hora, minutos, segundos);
+        return instance.getTime();
+    }
+
+    public static Date getDate() {
+        Calendar instance = GregorianCalendar.getInstance();
+        return instance.getTime();
+    }
+
+    public static Date getHour(Date dateCellValue) {
+        Calendar instance = GregorianCalendar.getInstance();
+        instance.setTime(dateCellValue);
+        return getDate(0, 0, 0, instance.get(Calendar.HOUR_OF_DAY), instance.get(Calendar.MINUTE), instance.get(Calendar.SECOND));
+    }
+
+    public static int getMonth() {
+        Calendar instance = GregorianCalendar.getInstance();
+        return instance.get(Calendar.MONTH);
+    }
+
+    public static int getYear() {
+        Calendar instance = GregorianCalendar.getInstance();
+        return instance.get(Calendar.YEAR);
     }
 }

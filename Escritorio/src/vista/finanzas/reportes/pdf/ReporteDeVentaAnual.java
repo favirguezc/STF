@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import modelo.finanzas.ventas.Venta;
 import modelo.util.DateFormatter;
@@ -120,19 +119,19 @@ public class ReporteDeVentaAnual {
                 totalmes;
         int columnas = 12;
         if (tipo == ReporteAnual.POR_DIA) {
-            columnas = DateTools.getDiasDelAño(año);
+            columnas = DateTools.getDaysInYear(año);
         } else if (tipo == ReporteAnual.POR_SEMANA) {
             columnas = 53;
         }
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(año - 1900, 0, 1));
+        c.setTime(DateTools.getDate(año, 0, 1));
         for (int i = 0; i < columnas; i++) {
             //Sumar ventas de cada tipo de fresa
             Venta v = null;
             if (tipo == ReporteAnual.POR_MES) {
-                v = new VentaControlador().sumarRegistros(null, DateTools.getPrimerDiaDelMes(i, año), DateTools.getUltimoDiaDelMes(i, año));
+                v = new VentaControlador().sumarRegistros(null, DateTools.getFirstDayOfMonth(i, año), DateTools.getLastDayOfMonth(i, año));
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                v = new VentaControlador().sumarRegistros(null, DateTools.getPrimerDiaDeLaSemana(c.getTime()), DateTools.getUltimoDiaDeLaSemana(c.getTime()));
+                v = new VentaControlador().sumarRegistros(null, DateTools.getFirstDayOfWeek(c.getTime()), DateTools.getLastDayOfWeek(c.getTime()));
             } else {
                 v = new VentaControlador().sumarRegistros(null, c.getTime(), null);
             }
@@ -153,9 +152,9 @@ public class ReporteDeVentaAnual {
             total += totalmes;
             String contador = "";
             if (tipo == ReporteAnual.POR_MES) {
-                contador = DateTools.getMes(i);
+                contador = DateTools.getMonth(i);
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                contador = DateTools.getSemanaCorta(c.getTime());
+                contador = DateTools.getWeek_Short(c.getTime());
             } else {
                 contador = DateFormatter.formatDateShort(c.getTime());
             }
@@ -230,19 +229,19 @@ public class ReporteDeVentaAnual {
                 totalmes;
         int columnas = 12;
         if (tipo == ReporteAnual.POR_DIA) {
-            columnas = DateTools.getDiasDelAño(año);
+            columnas = DateTools.getDaysInYear(año);
         } else if (tipo == ReporteAnual.POR_SEMANA) {
             columnas = 53;
         }
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(año - 1900, 0, 1));
+        c.setTime(DateTools.getDate(año, 0, 1));
         for (int i = 0; i < columnas; i++) {
             //Sumar ventas de cada tipo de fresa
             Venta v = null;
             if (tipo == ReporteAnual.POR_MES) {
-                v = new VentaControlador().sumarRegistros(null, DateTools.getPrimerDiaDelMes(i, año), DateTools.getUltimoDiaDelMes(i, año));
+                v = new VentaControlador().sumarRegistros(null, DateTools.getFirstDayOfMonth(i, año), DateTools.getLastDayOfMonth(i, año));
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                v = new VentaControlador().sumarRegistros(null, DateTools.getPrimerDiaDeLaSemana(c.getTime()), DateTools.getUltimoDiaDeLaSemana(c.getTime()));
+                v = new VentaControlador().sumarRegistros(null, DateTools.getFirstDayOfWeek(c.getTime()), DateTools.getLastDayOfWeek(c.getTime()));
             } else {
                 v = new VentaControlador().sumarRegistros(null, c.getTime(), null);
             }
@@ -263,9 +262,9 @@ public class ReporteDeVentaAnual {
             total += totalmes;
             String contador = "";
             if (tipo == ReporteAnual.POR_MES) {
-                contador = DateTools.getMes(i);
+                contador = DateTools.getMonth(i);
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                contador = DateTools.getSemanaCorta(c.getTime());
+                contador = DateTools.getWeek_Short(c.getTime());
             } else {
                 contador = DateFormatter.formatDateShort(c.getTime());
             }
@@ -311,7 +310,7 @@ public class ReporteDeVentaAnual {
     private Element pieDePagina() {
         Paragraph pie = new Paragraph("*Valores en libras");
         pie.add(new Paragraph("Este reporte fue generado automáticamente"));
-        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(new Date()) + " a las " + DateFormatter.formatTime(new Date())));
+        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate())));
         return pie;
     }
 

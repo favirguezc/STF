@@ -5,7 +5,7 @@
  */
 package vista.produccion.graficas;
 
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import controlador.produccion.variablesClimaticas.TemperaturaControlador;
 import java.awt.Color;
 import java.util.Calendar;
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JPanel;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import modelo.produccion.variablesClimaticas.Temperatura;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -186,14 +186,14 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
+        cal.setTime(DateTools.getDate((int) añoSpinner.getValue(), 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
             sumarRegistros = new RecoleccionControlador().sumarRegistros(null, null, fecha1, fecha2);
-            String mes = DateTools.getMes(i);
+            String mes = DateTools.getMonth(i);
             datos.addValue(sumarRegistros.getPesadaGramos() / 500, "Pesada", mes);
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -204,14 +204,14 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
     private CategoryDataset crearDatosTemperaturaMax() {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
+        cal.setTime(DateTools.getDate((int) añoSpinner.getValue(), 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
             float promedioTemp = new TemperaturaControlador().calcularPromedio(fecha1, fecha2);
-            datos.addValue(promedioTemp, "Temperatura Máxima", DateTools.getMes(i));
+            datos.addValue(promedioTemp, "Temperatura Máxima", DateTools.getMonth(i));
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
         return datos;
@@ -220,19 +220,18 @@ public class RecoleccionAnualPorMesYTemperaturaIF extends javax.swing.JInternalF
 //    private CategoryDataset crearDatosTemperaturaMin() {
 //        DefaultCategoryDataset datos = new DefaultCategoryDataset();
 //        Calendar cal = GregorianCalendar.getInstance();
-//        cal.setTime(new Date((int) añoSpinner.getValue() - 1900, 0, 1));
+//        cal.setTime(DateTools.getDate((int) añoSpinner.getValue(), 0, 1));
 //        for (int i = 0; i < 12; i++) {
 //            Date fecha1 = cal.getTime();
 //            cal.add(Calendar.MONTH, 1);
 //            cal.add(Calendar.DAY_OF_MONTH, -1);
 //            Date fecha2 = cal.getTime();
 //            float promedioTemp = new TemperaturaControlador().calcularPromedioMin(fecha1, fecha2);
-//            datos.addValue(promedioTemp, "Temperatura Mínima", DateTools.getMes(i));
+//            datos.addValue(promedioTemp, "Temperatura Mínima", DateTools.getMonth(i));
 //            cal.add(Calendar.DAY_OF_MONTH, 1);
 //        }
 //        return datos;
 //    }
-
     private void pintarGrafico() {
         jPanel2.removeAll();
         jPanel2.add(crearPanel());

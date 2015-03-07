@@ -16,7 +16,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import modelo.util.DateFormatter;
 import modelo.util.DateTools;
 
@@ -73,7 +73,7 @@ public class ReporteDeProduccionMensual {
 
     private Element encabezado() {
         Paragraph encabezado = new Paragraph("REPORTE MENSUAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
-        Paragraph paragraph = new Paragraph(DateTools.getMes(mes).toUpperCase() + " DE " + año, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph paragraph = new Paragraph(DateTools.getMonth(mes).toUpperCase() + " DE " + año, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         encabezado.add(paragraph);
         if (recolector != null) {
@@ -115,12 +115,11 @@ public class ReporteDeProduccionMensual {
         }
         int dias = new GregorianCalendar(año, mes, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
         float pesadaDia,
-                total = 0,
-                totalmes;
+                total = 0;
         //Para cada mes se agrega una columna
         for (int i = 1; i <= dias; i++) {
             //Sumar recoleccion de cada tipo de fresa
-            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, new Date(año - 1900, mes, i), null);
+            Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, DateTools.getDate(año, mes, i), null);
             pesadaDia = r.getPesadaGramos() / 500;
             total += pesadaDia;
 
@@ -135,7 +134,7 @@ public class ReporteDeProduccionMensual {
                     celda.setBackgroundColor(BaseColor.RED);
                 }
                 tabla.addCell(celda);
-            }            
+            }
         }//Agregar fila de totales
         celda = new PdfPCell(new Phrase("Total", fuenteNormal));
         tabla.addCell(celda);
@@ -150,7 +149,7 @@ public class ReporteDeProduccionMensual {
     private Element pieDePagina() {
         Paragraph pie = new Paragraph("*Valores en libras");
         pie.add(new Paragraph("Este reporte fue generado automáticamente"));
-        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(new Date()) + " a las " + DateFormatter.formatTime(new Date())));
+        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate())));
         return pie;
     }
 

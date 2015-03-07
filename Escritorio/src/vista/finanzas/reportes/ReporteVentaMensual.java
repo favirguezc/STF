@@ -187,7 +187,7 @@ public class ReporteVentaMensual extends javax.swing.JDialog {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.addChoosableFileFilter(new FileTypeFilter(".pdf", "PDF"));
         String ruta = "reporte de recolección mensual ";
-        ruta += DateTools.getMes(mesComboBox.getSelectedIndex());
+        ruta += DateTools.getMonth(mesComboBox.getSelectedIndex());
         ruta += " de " + (int) añoSpinner.getValue();
         if ((Persona) clienteComboBox.getSelectedItem() != null) {
             ruta += " " + ((Persona) clienteComboBox.getSelectedItem()).toString();

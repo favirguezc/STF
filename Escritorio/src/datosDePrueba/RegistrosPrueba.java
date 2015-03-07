@@ -7,7 +7,7 @@ package datosDePrueba;
 
 import controlador.produccion.administracion.ModuloControlador;
 import controlador.produccion.administracion.PersonaControlador;
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import controlador.produccion.variablesClimaticas.LluviaControlador;
 import controlador.produccion.variablesClimaticas.HumedadDelSueloControlador;
 import controlador.produccion.variablesClimaticas.TemperaturaControlador;
@@ -20,10 +20,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import modelo.produccion.variablesClimaticas.Lluvia;
 import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
 import modelo.produccion.variablesClimaticas.Temperatura;
+import modelo.util.DateTools;
 
 /**
  *
@@ -52,16 +53,16 @@ public class RegistrosPrueba {
         TemperaturaControlador controlador = new TemperaturaControlador();
         for (int y = 2015; y < 2016; y++) {
             System.out.println("Año " + y);
-            c.setTime(new Date(y - 1900, 0, 1));
-            for (int i = 0; i < 31; i++) {
-                System.out.println(i + 1);
-                for (int j = 0; j < 24; j++) {
-                    for (int h = 0; h < 2; h++) {
+            c.setTime(DateTools.getDate(y, 0, 1));
+            for (int dia = 0; dia < 31; dia++) {
+                System.out.println(dia + 1);
+                for (int hora = 0; hora < 24; hora++) {
+                    for (int paso = 0; paso < 2; paso++) {
                         try {
                             controlador.guardar(
                                     controlador.nuevo(
                                             c.getTime(),
-                                            new Date(0, 0, 0, j, h * 10),
+                                            DateTools.getDate(0, 0, 0, hora, paso * 10),
                                             (float) (Math.random() * 30),
                                             (float) (Math.random() * 30),
                                             (float) (Math.random() * 20),
@@ -84,7 +85,7 @@ public class RegistrosPrueba {
             Calendar c = GregorianCalendar.getInstance();
             for (int y = 2014; y < 2015; y++) {
                 System.out.println("año " + y);
-                c.setTime(new Date(y - 1900, 0, 1));
+                c.setTime(DateTools.getDate(y, 0, 1));
                 for (int i = 0; i < 365; i++) {
                     System.out.print((i + 1) + " ");
                     for (int r = 0; r < 15; r++) {
@@ -118,7 +119,7 @@ public class RegistrosPrueba {
     public static void quitarRegistrosTemperatura() {
         System.out.println("Eliminando registros de temperatura");
         TemperaturaControlador controlador = new TemperaturaControlador();
-        for (Temperatura t : controlador.buscarLista(new Date(0, 0, 1), new Date(2000, 0, 1))) {
+        for (Temperatura t : controlador.buscarLista(DateTools.getDate(0, 0, 1), DateTools.getDate(2000, 0, 1))) {
             try {
                 controlador.eliminar(t.getId());
             } catch (NonexistentEntityException ex) {
@@ -132,7 +133,7 @@ public class RegistrosPrueba {
     private static void registrosPruebaLluvia() {
         LluviaControlador controlador3 = new LluviaControlador();
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(2014 - 1900, 0, 1));
+        c.setTime(DateTools.getDate(2014, 0, 1));
         for (int i = 0; i < 365; i++) {
             try {
                 controlador3.guardar(
@@ -148,7 +149,7 @@ public class RegistrosPrueba {
 
     private static void quitarRegistrosLluvia() {
         LluviaControlador controlador3 = new LluviaControlador();
-        for (Lluvia c : controlador3.buscarLista(new Date(0, 0, 1), new Date(2000, 0, 1))) {
+        for (Lluvia c : controlador3.buscarLista(DateTools.getDate(0, 0, 1), DateTools.getDate(2000, 0, 1))) {
             try {
                 controlador3.eliminar(c.getId());
             } catch (NonexistentEntityException ex) {
@@ -160,7 +161,7 @@ public class RegistrosPrueba {
 
     private static void quitarRegistrosHumedad() {
         HumedadDelSueloControlador controlador2 = new HumedadDelSueloControlador();
-        for (HumedadDelSuelo r : controlador2.buscarLista(new Date(0, 0, 1), new Date(2000, 0, 1))) {
+        for (HumedadDelSuelo r : controlador2.buscarLista(DateTools.getDate(0, 0, 1), DateTools.getDate(2000, 0, 1))) {
             try {
                 controlador2.eliminar(r.getId());
             } catch (NonexistentEntityException ex) {
@@ -174,7 +175,7 @@ public class RegistrosPrueba {
         Calendar c = GregorianCalendar.getInstance();
         for (int y = 2012; y < 2015; y++) {
             System.out.println("Año " + y);
-            c.setTime(new Date(y - 1900, 0, 1));
+            c.setTime(DateTools.getDate(y, 0, 1));
             for (int i = 0; i < 365; i++) {
                 System.out.println(i + 1);
                 try {
@@ -183,13 +184,13 @@ public class RegistrosPrueba {
                                     c.getTime(),
                                     (float) (Math.random() * 20),
                                     (float) (Math.random() * 20 + 10),
-                                    new Date(0, 0, 0, 7, 30)));
+                                    DateTools.getDate(0, 0, 0, 7, 30)));
                     controlador2.guardar(
                             controlador2.nuevo(
                                     c.getTime(),
                                     (float) (Math.random() * 20),
                                     (float) (Math.random() * 20 + 10),
-                                    new Date(0, 0, 0, 12, 30)));
+                                    DateTools.getDate(0, 0, 0, 12, 30)));
                 } catch (Exception ex) {
                     Logger.getLogger(RegistrosPrueba.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.produccion.variablesClimaticas.Temperatura;
 import modelo.util.DateFormatter;
+import modelo.util.DateTools;
 
 /**
  *
@@ -24,8 +25,8 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     public TemperaturaIF() {
         initComponents();
         controlador = new TemperaturaControlador();
-        añoSpinner.setValue(new Date().getYear() + 1900);
-        mesComboBox.setSelectedIndex(new Date().getMonth());
+        añoSpinner.setValue(DateTools.getYear());
+        mesComboBox.setSelectedIndex(DateTools.getMonth());
         cargarTablaPrincipal();
         cargarTablaDePromedios();
     }
@@ -245,7 +246,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
-        Date esteMes = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
+        Date esteMes = DateTools.getDate((int) añoSpinner.getValue(), (int) mesComboBox.getSelectedIndex(), 1);
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(esteMes);
         c.add(Calendar.MONTH, 1);
@@ -269,7 +270,7 @@ public class TemperaturaIF extends javax.swing.JInternalFrame {
     }
 
     private void calcularPromedioMes(int i) {
-        Date fecha1 = new Date((int) añoSpinner.getValue() - 1900, i, 1);
+        Date fecha1 = DateTools.getDate((int) añoSpinner.getValue(), i, 1);
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(fecha1);
         c.add(Calendar.MONTH, 1);

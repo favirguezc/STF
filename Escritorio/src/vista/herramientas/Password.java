@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -124,9 +125,9 @@ public class Password extends javax.swing.JDialog {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         // TODO add your handling code here:
-        if (leerArchivoContraseña().equals(actual.getText())) {
-            if (nueva.getText().equals(confirmarnueva.getText())) {
-                cambiarContraseña(nueva.getText());
+        if (Arrays.equals(leerArchivoContraseña().toCharArray(), actual.getPassword())) {
+            if (Arrays.equals(nueva.getPassword(), confirmarnueva.getPassword())) {
+                cambiarContraseña(new String(nueva.getPassword()));
                 JOptionPane.showMessageDialog(null, "Contraseña cambiada satisfactoriamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
@@ -218,9 +219,9 @@ public class Password extends javax.swing.JDialog {
                 fr.close();
             } catch (IOException ex) {
                 Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return linea;
+            }            
         }
+        return linea;
     }
 
     private void cambiarContraseña(String text) {
@@ -232,14 +233,12 @@ public class Password extends javax.swing.JDialog {
             pw.println(text);
 
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (null != fichero) {
                     fichero.close();
                 }
             } catch (Exception e2) {
-                e2.printStackTrace();
             }
         }
     }

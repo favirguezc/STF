@@ -487,7 +487,7 @@ public class RegistroCajasIF extends javax.swing.JInternalFrame {
             fechaDateChooserCombo.setSelectedDate(GregorianCalendar.getInstance());
             fechaDateChooserCombo.setCurrent(GregorianCalendar.getInstance());
             cajaComboBox.setSelectedIndex(filtroCajasComboBox.getSelectedIndex());
-            cajaComboBox.enable(false);
+            cajaComboBox.setEnabled(false);
             conceptoTextField.setText(null);
             entradaRadioButton.setSelected(false);
             salidaRadioButton.setSelected(false);

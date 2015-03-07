@@ -18,7 +18,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import vista.produccion.reportes.ReporteAnual;
 import java.awt.Desktop;
 import java.io.File;
@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import modelo.util.DateFormatter;
@@ -158,19 +158,19 @@ public class ReporteDeProduccionAnual {
         float pesadaPeriodo, total = 0;
         int columnas = 12;
         if (tipo == ReporteAnual.POR_DIA) {
-            columnas = DateTools.getDiasDelAño(año);
+            columnas = DateTools.getDaysInYear(año);
         } else if (tipo == ReporteAnual.POR_SEMANA) {
             columnas = 53;
         }
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(año - 1900, 0, 1));
+        c.setTime(DateTools.getDate(año, 0, 1));
         for (int i = 0; i < columnas; i++) {
             //Sumar recoleccion de cada tipo de fresa
             Recoleccion r = null;
             if (tipo == ReporteAnual.POR_MES) {
-                r = new RecoleccionControlador().sumarRegistros(null, null, DateTools.getPrimerDiaDelMes(i, año), DateTools.getUltimoDiaDelMes(i, año));
+                r = new RecoleccionControlador().sumarRegistros(null, null, DateTools.getFirstDayOfMonth(i, año), DateTools.getLastDayOfMonth(i, año));
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                r = new RecoleccionControlador().sumarRegistros(null, null, DateTools.getPrimerDiaDeLaSemana(c.getTime()), DateTools.getUltimoDiaDeLaSemana(c.getTime()));
+                r = new RecoleccionControlador().sumarRegistros(null, null, DateTools.getFirstDayOfWeek(c.getTime()), DateTools.getLastDayOfWeek(c.getTime()));
             } else {
                 r = new RecoleccionControlador().sumarRegistros(null, null, c.getTime(), null);
             }
@@ -179,9 +179,9 @@ public class ReporteDeProduccionAnual {
             total += pesadaPeriodo;
             String contador = "";
             if (tipo == ReporteAnual.POR_MES) {
-                contador = DateTools.getMes(i);
+                contador = DateTools.getMonth(i);
             } else if (tipo == ReporteAnual.POR_SEMANA) {
-                contador = DateTools.getSemanaCorta(c.getTime());
+                contador = DateTools.getWeek_Short(c.getTime());
             } else {
                 contador = DateFormatter.formatDateShort(c.getTime());
             }
@@ -218,7 +218,7 @@ public class ReporteDeProduccionAnual {
     private Element pieDePagina() {
         Paragraph pie = new Paragraph("*Valores en libras");
         pie.add(new Paragraph("Este reporte fue generado automáticamente"));
-        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(new Date()) + " a las " + DateFormatter.formatTime(new Date())));
+        pie.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate())));
         return pie;
     }
 

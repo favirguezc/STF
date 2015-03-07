@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{trabajoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTrabajoLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{trabajoController.selected.fecha}" title="#{bundle.EditTrabajoTitle_fecha}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{trabajoController.selected.fecha}" title="#{bundle.EditTrabajoTitle_fecha}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTrabajoLabel_modulo}" for="modulo" />
                         <p:selectOneMenu id="modulo" value="#{trabajoController.selected.modulo}" required="true" requiredMessage="#{bundle.EditTrabajoRequiredMessage_modulo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperaturaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTemperaturaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.EditTemperaturaTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{temperaturaController.selected.fecha}" title="#{bundle.EditTemperaturaTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTemperaturaLabel_hora}" for="hora" />
                         <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperaturaController.selected.hora}" title="#{bundle.EditTemperaturaTitle_hora}"  showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundle.EditTemperaturaLabel_temperatura}" for="temperatura" />

@@ -1,12 +1,11 @@
 package controlador;
 
-import modelo.produccion.cosecha.Recoleccion;
+import modelo.produccion.cosecha.Clasificacion;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.cosecha.RecoleccionDAO;
+import datos.produccion.cosecha.ClasificacionDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,25 +16,24 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Modulo;
-import modelo.produccion.administracion.Persona;
+import javax.persistence.Persistence;
 
-@ManagedBean(name = "recoleccionController")
+@ManagedBean(name = "clasificacionController")
 @SessionScoped
-public class RecoleccionController implements Serializable {
+public class ClasificacionController implements Serializable {
 
-    private RecoleccionDAO jpaController = null;
-    private List<Recoleccion> items = null;
-    private Recoleccion selected;
+    private ClasificacionDAO jpaController = null;
+    private List<Clasificacion> items = null;
+    private Clasificacion selected;
 
-    public RecoleccionController() {
+    public ClasificacionController() {
     }
 
-    public Recoleccion getSelected() {
+    public Clasificacion getSelected() {
         return selected;
     }
 
-    public void setSelected(Recoleccion selected) {
+    public void setSelected(Clasificacion selected) {
         this.selected = selected;
     }
 
@@ -45,41 +43,41 @@ public class RecoleccionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RecoleccionDAO getJpaController() {
+    private ClasificacionDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new RecoleccionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new ClasificacionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
 
-    public Recoleccion prepareCreate() {
-        selected = new Recoleccion();
+    public Clasificacion prepareCreate() {
+        selected = new Clasificacion();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RecoleccionCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle2").getString("ClasificacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RecoleccionUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle2").getString("ClasificacionUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RecoleccionDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle2").getString("ClasificacionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Recoleccion> getItems() {
+    public List<Clasificacion> getItems() {
         if (items == null) {
-            items = getJpaController().findRecoleccionEntities();
+            items = getJpaController().findClasificacionEntities();
         }
         return items;
     }
@@ -98,43 +96,30 @@ public class RecoleccionController implements Serializable {
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle2").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public List<Recoleccion> getItemsAvailableSelectMany() {
-        return getJpaController().findRecoleccionEntities();
+    public List<Clasificacion> getItemsAvailableSelectMany() {
+        return getJpaController().findClasificacionEntities();
     }
 
-    public List<Recoleccion> getItemsAvailableSelectOne() {
-        return getJpaController().findRecoleccionEntities();
+    public List<Clasificacion> getItemsAvailableSelectOne() {
+        return getJpaController().findClasificacionEntities();
     }
 
-    public List<Recoleccion> leerLista(Persona recolector, Modulo modulo, Date inicio, Date fin) {
-        return getJpaController().findRecoleccionEntities(recolector, modulo, inicio, fin);
-    }
-
-    public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
-        List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
-        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0);
-        for (Recoleccion r : leerLista) {
-            suma.sumar(r);
-        }
-        return suma;
-    }
-
-    @FacesConverter(forClass = Recoleccion.class)
-    public static class RecoleccionControllerConverter implements Converter {
+    @FacesConverter(forClass = Clasificacion.class)
+    public static class ClasificacionControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            RecoleccionController controller = (RecoleccionController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "recoleccionController");
-            return controller.getJpaController().findRecoleccion(getKey(value));
+            ClasificacionController controller = (ClasificacionController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "clasificacionController");
+            return controller.getJpaController().findClasificacion(getKey(value));
         }
 
         long getKey(String value) {
@@ -154,11 +139,11 @@ public class RecoleccionController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Recoleccion) {
-                Recoleccion o = (Recoleccion) object;
+            if (object instanceof Clasificacion) {
+                Clasificacion o = (Clasificacion) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Recoleccion.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Clasificacion.class.getName()});
                 return null;
             }
         }

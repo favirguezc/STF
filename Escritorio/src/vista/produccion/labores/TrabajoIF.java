@@ -24,6 +24,7 @@ import modelo.produccion.administracion.Rol;
 import modelo.produccion.labores.Labor;
 import modelo.produccion.labores.Trabajo;
 import modelo.util.DateFormatter;
+import modelo.util.DateTools;
 import modelo.util.TableColumnAdjuster;
 
 /**
@@ -43,8 +44,8 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     public TrabajoIF() {
         initComponents();
         controlador = new TrabajoControlador();
-        mesComboBox.setSelectedIndex(new Date().getMonth());
-        añoSpinner.setValue(new Date().getYear() + 1900);
+        mesComboBox.setSelectedIndex(DateTools.getMonth());
+        añoSpinner.setValue(DateTools.getYear());
         registroSeleccionado = null;
         cargarListas();
         if (habilitado) {
@@ -531,7 +532,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
         while (principalTable.getRowCount() > 0) {
             ((DefaultTableModel) principalTable.getModel()).removeRow(0);
         }
-        Date inicio = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
+        Date inicio = DateTools.getDate((int) añoSpinner.getValue(), (int) mesComboBox.getSelectedIndex(), 1);
         Calendar c = GregorianCalendar.getInstance();
         c.setTime(inicio);
         c.add(Calendar.MONTH, 1);
@@ -560,7 +561,7 @@ public class TrabajoIF extends javax.swing.JInternalFrame {
     private void cargarDatosRegistroSeleccionado() {
         if (registroSeleccionado == null) {
             Calendar c = GregorianCalendar.getInstance();
-            c.setTime(new Date());
+            c.setTime(DateTools.getDate());
             fechaDateChooserCombo.setCurrent(c);
             moduloComboBox.setSelectedIndex(0);
             laborComboBox.setSelectedIndex(0);

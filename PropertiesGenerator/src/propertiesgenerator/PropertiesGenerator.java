@@ -5,14 +5,6 @@
  */
 package propertiesgenerator;
 
-import java.lang.annotation.Annotation;
-import modelo.produccion.variablesClimaticas.*;
-import modelo.produccion.utilidades.*;
-import modelo.produccion.administracion.*;
-import modelo.produccion.labores.*;
-import modelo.produccion.recoleccion.*;
-import modelo.produccion.monitoreo.*;
-import modelo.produccion.aplicaciones.*;
 import java.lang.reflect.Field;
 
 /**
@@ -40,7 +32,7 @@ public class PropertiesGenerator {
 //        generarPropiedades(modelo.produccion.monitoreo.TrampaDeInsectos.class);
 //        generarPropiedades(modelo.produccion.monitoreo.Variable.class);
 //        generarPropiedades(modelo.produccion.recoleccion.Recoleccion.class);
-        generarPropiedades(modelo.produccion.utilidades.Nota.class);
+//        generarPropiedades(modelo.produccion.utilidades.Nota.class);
 //        generarPropiedades(modelo.produccion.variablesClimaticas.HumedadDelSuelo.class);
 //        generarPropiedades(modelo.produccion.variablesClimaticas.Lluvia.class);
 //        generarPropiedades(modelo.produccion.variablesClimaticas.Temperatura.class);
@@ -50,6 +42,7 @@ public class PropertiesGenerator {
 //        generarPropiedades(modelo.finanzas.caja.ConceptoCaja.class);
 //        generarPropiedades(modelo.finanzas.compra.Compra.class);
 //        generarPropiedades(modelo.finanzas.ventas.Venta.class);
+        generarPropiedades(modelo.produccion.cosecha.Clasificacion.class);
     }
 
     private static String g(String campo) {

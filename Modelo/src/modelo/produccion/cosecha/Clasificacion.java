@@ -29,10 +29,10 @@ public class Clasificacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @ManyToOne(optional = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     private Date fecha;
+    @ManyToOne(optional = false)
     private Modulo modulo;
     @Enumerated(EnumType.STRING)
     private TipoDeFresa tipo;

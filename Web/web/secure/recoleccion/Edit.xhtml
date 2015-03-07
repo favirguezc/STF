@@ -21,7 +21,7 @@
                                            itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{recoleccionController.selected.fecha}" title="#{bundle.EditRecoleccionTitle_fecha}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditRecoleccionLabel_recolector}" for="recolector" />
                         <p:selectOneMenu id="recolector" value="#{recoleccionController.selected.recolector}" required="true" requiredMessage="#{bundle.EditRecoleccionRequiredMessage_recolector}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

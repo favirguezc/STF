@@ -20,13 +20,14 @@
     <class>modelo.produccion.administracion.Vereda</class>
     <class>modelo.produccion.aplicaciones.Aplicacion</class>
     <class>modelo.produccion.aplicaciones.Insumo</class>
+    <class>modelo.produccion.cosecha.Clasificacion</class>
+    <class>modelo.produccion.cosecha.Recoleccion</class>
     <class>modelo.produccion.labores.Labor</class>
     <class>modelo.produccion.labores.Trabajo</class>
     <class>modelo.produccion.monitoreo.Monitoreo</class>
     <class>modelo.produccion.monitoreo.MonitoreoDeVariables</class>
     <class>modelo.produccion.monitoreo.TrampaDeInsectos</class>
     <class>modelo.produccion.monitoreo.Variable</class>
-    <class>modelo.produccion.recoleccion.Recoleccion</class>
     <class>modelo.produccion.utilidades.Nota</class>
     <class>modelo.produccion.variablesClimaticas.HumedadDelSuelo</class>
     <class>modelo.produccion.variablesClimaticas.Lluvia</class>

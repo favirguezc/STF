@@ -26,7 +26,7 @@ import org.primefaces.model.chart.LineChartSeries;
  */
 @ManagedBean(name = "ventaChart")
 public class VentaChart {
-    
+
     private LineChartModel modelo1;
     private LineChartModel modelo2;
     private LineChartModel modelo3;
@@ -45,12 +45,12 @@ public class VentaChart {
     private String opcion2;
     private String opcion3;
     private String opcion4;
-    
+
     @PostConstruct
     public void init() {
-        ano1 = ano2 = ano4 = new Date().getYear() + 1900;
-        mes2 = new Date().getMonth();
-        fecha3 = new Date();
+        ano1 = ano2 = ano4 = DateTools.getYear();
+        mes2 = DateTools.getMonth();
+        fecha3 = DateTools.getDate();
         createModel1();
         createModel2();
         createModel3();
@@ -200,8 +200,8 @@ public class VentaChart {
     public void setOpcion4(String opcion4) {
         this.opcion4 = opcion4;
     }
-    
-    public void createModel1(){
+
+    public void createModel1() {
         modelo1 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
@@ -217,20 +217,20 @@ public class VentaChart {
         series5.setLabel("Cuarta");
         series6.setLabel("Quinta");
         series7.setLabel("Total");
-        
+
         VentaController controlador = new VentaController();
 
         Venta sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano1 - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(ano1, 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente1, fecha1, fecha2);
-            String mes = DateTools.getMes(i);
-            if(opcion1 != null && opcion1.equals("cantidad")){
+            String mes = DateTools.getMonth(i);
+            if (opcion1 != null && opcion1.equals("cantidad")) {
                 series1.set(mes, sumarRegistros.getExtraGramos());
                 series2.set(mes, sumarRegistros.getPrimeraGramos());
                 series3.set(mes, sumarRegistros.getSegundaGramos());
@@ -238,7 +238,7 @@ public class VentaChart {
                 series5.set(mes, sumarRegistros.getCuartaGramos());
                 series6.set(mes, sumarRegistros.getQuintaGramos());
                 series7.set(mes, sumarRegistros.getCantidadTotal());
-            }else{
+            } else {
                 series1.set(mes, sumarRegistros.getExtraPrecioTotal());
                 series2.set(mes, sumarRegistros.getPrimeraPrecioTotal());
                 series3.set(mes, sumarRegistros.getSegundaPrecioTotal());
@@ -263,9 +263,10 @@ public class VentaChart {
         modelo1.setLegendPosition("e");
         Axis yAxis = modelo1.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        
+
     }
-    public void createModel2(){
+
+    public void createModel2() {
         modelo2 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
@@ -281,19 +282,19 @@ public class VentaChart {
         series5.setLabel("Cuarta");
         series6.setLabel("Quinta");
         series7.setLabel("Total");
-        
+
         VentaController controlador = new VentaController();
-        
+
         Venta sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano2 - 1900, mes2, 1));
+        cal.setTime(DateTools.getDate(ano2, mes2, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente2, fecha1, fecha2);
-            
-            if(opcion2 != null && opcion2.equals("cantidad")){
+
+            if (opcion2 != null && opcion2.equals("cantidad")) {
                 series1.set(i + 1, sumarRegistros.getExtraGramos());
                 series2.set(i + 1, sumarRegistros.getPrimeraGramos());
                 series3.set(i + 1, sumarRegistros.getSegundaGramos());
@@ -301,7 +302,7 @@ public class VentaChart {
                 series5.set(i + 1, sumarRegistros.getCuartaGramos());
                 series6.set(i + 1, sumarRegistros.getQuintaGramos());
                 series7.set(i + 1, sumarRegistros.getCantidadTotal());
-            }else{
+            } else {
                 series1.set(i + 1, sumarRegistros.getExtraPrecioTotal());
                 series2.set(i + 1, sumarRegistros.getPrimeraPrecioTotal());
                 series3.set(i + 1, sumarRegistros.getSegundaPrecioTotal());
@@ -321,12 +322,13 @@ public class VentaChart {
         modelo2.addSeries(series7);
         modelo2.setShowPointLabels(true);
         modelo2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo2.setTitle("Venta por Día " + DateTools.getMes(mes2) + " de " + ano2);
+        modelo2.setTitle("Venta por Día " + DateTools.getMonth(mes2) + " de " + ano2);
         modelo2.setLegendPosition("e");
         Axis yAxis = modelo2.getAxis(AxisType.Y);
         yAxis.setMin(0);
     }
-    public void createModel3(){
+
+    public void createModel3() {
         modelo3 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
@@ -347,29 +349,29 @@ public class VentaChart {
 
         Venta sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getPrimerDiaDeLaSemana(fecha3));
+        cal.setTime(DateTools.getFirstDayOfWeek(fecha3));
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente3, fecha1, fecha2);
 
-            if(opcion3 != null && opcion3.equals("cantidad")){
-                series1.set(DateTools.getDia(i + 1), sumarRegistros.getExtraGramos());
-                series2.set(DateTools.getDia(i + 1), sumarRegistros.getPrimeraGramos());
-                series3.set(DateTools.getDia(i + 1), sumarRegistros.getSegundaGramos());
-                series4.set(DateTools.getDia(i + 1), sumarRegistros.getTerceraGramos());
-                series5.set(DateTools.getDia(i + 1), sumarRegistros.getCuartaGramos());
-                series6.set(DateTools.getDia(i + 1), sumarRegistros.getQuintaGramos());
-                series7.set(DateTools.getDia(i + 1), sumarRegistros.getCantidadTotal());
-            }else{
-                series1.set(DateTools.getDia(i + 1), sumarRegistros.getExtraPrecioTotal());
-                series2.set(DateTools.getDia(i + 1), sumarRegistros.getPrimeraPrecioTotal());
-                series3.set(DateTools.getDia(i + 1), sumarRegistros.getSegundaPrecioTotal());
-                series4.set(DateTools.getDia(i + 1), sumarRegistros.getTerceraPrecioTotal());
-                series5.set(DateTools.getDia(i + 1), sumarRegistros.getCuartaPrecioTotal());
-                series6.set(DateTools.getDia(i + 1), sumarRegistros.getQuintaPrecioTotal());
-                series7.set(DateTools.getDia(i + 1), sumarRegistros.getVentaTotal());
+            if (opcion3 != null && opcion3.equals("cantidad")) {
+                series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getExtraGramos());
+                series2.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getPrimeraGramos());
+                series3.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getSegundaGramos());
+                series4.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getTerceraGramos());
+                series5.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getCuartaGramos());
+                series6.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getQuintaGramos());
+                series7.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getCantidadTotal());
+            } else {
+                series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getExtraPrecioTotal());
+                series2.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getPrimeraPrecioTotal());
+                series3.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getSegundaPrecioTotal());
+                series4.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getTerceraPrecioTotal());
+                series5.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getCuartaPrecioTotal());
+                series6.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getQuintaPrecioTotal());
+                series7.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getVentaTotal());
             }
         }
 
@@ -382,12 +384,13 @@ public class VentaChart {
         modelo3.addSeries(series7);
         modelo3.setShowPointLabels(true);
         modelo3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo3.setTitle("Venta por Día " + DateTools.getSemana(fecha3));
+        modelo3.setTitle("Venta por Día " + DateTools.getWeek(fecha3));
         modelo3.setLegendPosition("e");
         Axis yAxis = modelo3.getAxis(AxisType.Y);
         yAxis.setMin(0);
     }
-    public void createModel4(){
+
+    public void createModel4() {
         modelo4 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
@@ -408,13 +411,13 @@ public class VentaChart {
 
         Venta sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano4 - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(ano4, 0, 1));
         for (int i = 0; i < 52; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 6);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(cliente4, fecha1, fecha2);
-            if(opcion4 != null && opcion4.equals("cantidad")){
+            if (opcion4 != null && opcion4.equals("cantidad")) {
                 series1.set(i + 1, sumarRegistros.getExtraGramos());
                 series2.set(i + 1, sumarRegistros.getPrimeraGramos());
                 series3.set(i + 1, sumarRegistros.getSegundaGramos());
@@ -422,7 +425,7 @@ public class VentaChart {
                 series5.set(i + 1, sumarRegistros.getCuartaGramos());
                 series6.set(i + 1, sumarRegistros.getQuintaGramos());
                 series7.set(i + 1, sumarRegistros.getCantidadTotal());
-            }else{
+            } else {
                 series1.set(i + 1, sumarRegistros.getExtraPrecioTotal());
                 series2.set(i + 1, sumarRegistros.getPrimeraPrecioTotal());
                 series3.set(i + 1, sumarRegistros.getSegundaPrecioTotal());

@@ -20,6 +20,7 @@ import modelo.finanzas.ventas.Venta;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 import modelo.util.DateFormatter;
+import modelo.util.DateTools;
 
 /**
  *
@@ -782,7 +783,7 @@ public class VentaIF extends javax.swing.JInternalFrame {
         if (diarioRadioButton.isSelected()) {
             lista = controlador.leerLista(cliente,  diaDateChooserCombo.getCurrent().getTime(), null);
         } else {
-            Date inicio = new Date((int) añoSpinner.getValue() - 1900, (int) mesComboBox.getSelectedIndex(), 1);
+            Date inicio = DateTools.getDate((int) añoSpinner.getValue(), (int) mesComboBox.getSelectedIndex(), 1);
             Calendar c = GregorianCalendar.getInstance();
             c.setTime(inicio);
             c.add(Calendar.MONTH, 1);

@@ -16,7 +16,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import controlador.produccion.recoleccion.RecoleccionControlador;
+import controlador.produccion.cosecha.RecoleccionControlador;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import modelo.util.DateFormatter;
 import modelo.util.DateTools;
 
@@ -71,7 +71,7 @@ public class ReporteDeProduccionSemanal {
 
     private Element encabezado() {
         Paragraph encabezado = new Paragraph("REPORTE SEMANAL DE RECOLECCIÓN", new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
-        Paragraph paragraph = new Paragraph(DateTools.getSemana(fecha).toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
+        Paragraph paragraph = new Paragraph(DateTools.getWeek(fecha).toUpperCase(), new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD, BaseColor.BLACK));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         encabezado.add(paragraph);
         if (recolector != null) {
@@ -115,14 +115,14 @@ public class ReporteDeProduccionSemanal {
         float pesadaDia, total = 0;
         //Para cada mes se agrega una columna
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getPrimerDiaDeLaSemana(fecha));
+        cal.setTime(DateTools.getFirstDayOfWeek(fecha));
         for (int i = 1; i <= 7; i++) {
             //Sumar recoleccion de cada tipo de fresa
             Recoleccion r = new RecoleccionControlador().sumarRegistros(recolector, modulo, cal.getTime(), null);
             pesadaDia = r.getPesadaGramos() / 500;
             total += pesadaDia;
 
-            celda = new PdfPCell(new Phrase(DateTools.getDia(i) + " " + cal.get(Calendar.DAY_OF_MONTH), fuenteNormal));
+            celda = new PdfPCell(new Phrase(DateTools.getDayOfWeek(i) + " " + cal.get(Calendar.DAY_OF_MONTH), fuenteNormal));
             celda.setColspan(2);
             celda.setRowspan(2);
             tabla.addCell(celda);

@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{humedadDelSueloController.selected != null}">
                         <p:outputLabel value="#{bundle.EditHumedadDelSueloLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{humedadDelSueloController.selected.fecha}" title="#{bundle.EditHumedadDelSueloTitle_fecha}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{humedadDelSueloController.selected.fecha}" title="#{bundle.EditHumedadDelSueloTitle_fecha}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditHumedadDelSueloLabel_hora}" for="hora" />
                         <p:calendar id="hora" pattern="HH:mm:ss" value="#{humedadDelSueloController.selected.hora}" title="#{bundle.EditHumedadDelSueloTitle_hora}" required="true" requiredMessage="#{bundle.EditHumedadDelSueloRequiredMessage_hora}" showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundle.EditHumedadDelSueloLabel_valorEn15Cms}" for="valorEn15Cms" />

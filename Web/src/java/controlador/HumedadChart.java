@@ -33,8 +33,8 @@ public class HumedadChart implements Serializable {
 
     @PostConstruct
     public void init() {
-        ano1 = new Date().getYear() + 1900;
-        mes1 = new Date().getMonth();
+        ano1 = DateTools.getYear();
+        mes1 = DateTools.getMonth();
         createModel1();
     }
 
@@ -66,7 +66,7 @@ public class HumedadChart implements Serializable {
         series2.setLabel("Humedad del Suelo 30 cms");
         HumedadDelSueloController controlador = new HumedadDelSueloController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano1 - 1900, mes1, 1));
+        cal.setTime(DateTools.getDate(ano1, mes1, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             HumedadDelSuelo promedio = controlador.calcularPromedio(cal.getTime());
             series1.set(i + 1, promedio.getValorEn15Cms());
@@ -78,7 +78,7 @@ public class HumedadChart implements Serializable {
         modelo1.addSeries(series2);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo1.setTitle("Promedio de Humedad del Suelo por Mes " + DateTools.getMes(mes1) + " de " + ano1);
+        modelo1.setTitle("Promedio de Humedad del Suelo por Mes " + DateTools.getMonth(mes1) + " de " + ano1);
         modelo1.setLegendPosition("e");
         Axis yAxis = modelo1.getAxis(AxisType.Y);
         yAxis.setMin(0);

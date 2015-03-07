@@ -179,7 +179,7 @@ public class ReporteSemanal extends javax.swing.JDialog {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.addChoosableFileFilter(new FileTypeFilter(".pdf", "PDF"));
         String ruta = "reporte de recolección semanal ";
-        ruta += DateTools.getSemana(fechaDateChooserCombo.getCurrent().getTime());
+        ruta += DateTools.getWeek(fechaDateChooserCombo.getCurrent().getTime());
         if ((Modulo) moduloComboBox.getSelectedItem() != null) {
             ruta += " " + ((Modulo) moduloComboBox.getSelectedItem()).toString();
         }

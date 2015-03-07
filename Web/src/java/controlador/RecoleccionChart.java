@@ -13,7 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import modelo.produccion.administracion.Modulo;
-import modelo.produccion.recoleccion.Recoleccion;
+import modelo.produccion.cosecha.Recoleccion;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -43,9 +43,9 @@ public class RecoleccionChart implements Serializable {
 
     @PostConstruct
     public void init() {
-        ano1 = ano2 = ano4 = new Date().getYear() + 1900;
-        mes2 = new Date().getMonth();
-        fecha3 = new Date();
+        ano1 = ano2 = ano4 = DateTools.getYear();
+        mes2 = DateTools.getMonth();
+        fecha3 = DateTools.getDate();
         createModel1();
         createModel2();
         createModel3();
@@ -122,14 +122,14 @@ public class RecoleccionChart implements Serializable {
 
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano1 - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(ano1, 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
             sumarRegistros = controlador.sumarRegistros(null, null, fecha1, fecha2);
-            String mes = DateTools.getMes(i);
+            String mes = DateTools.getMonth(i);
             series1.set(mes, sumarRegistros.getPesadaGramos() / 1000);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -152,7 +152,7 @@ public class RecoleccionChart implements Serializable {
 
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano2 - 1900, mes2, 1));
+        cal.setTime(DateTools.getDate(ano2, mes2, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -164,7 +164,7 @@ public class RecoleccionChart implements Serializable {
         modelo2.addSeries(series1);
         modelo2.setShowPointLabels(true);
         modelo2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo2.setTitle("Recolección por Día " + DateTools.getMes(mes2) + " de " + ano2);
+        modelo2.setTitle("Recolección por Día " + DateTools.getMonth(mes2) + " de " + ano2);
         modelo2.setLegendPosition("e");
         Axis yAxis = modelo2.getAxis(AxisType.Y);
         yAxis.setMin(0);
@@ -179,19 +179,19 @@ public class RecoleccionChart implements Serializable {
 
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getPrimerDiaDeLaSemana(fecha3));
+        cal.setTime(DateTools.getFirstDayOfWeek(fecha3));
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
             sumarRegistros = controlador.sumarRegistros(null, null, fecha1, null);
 
-            series1.set(DateTools.getDia(i + 1), sumarRegistros.getPesadaGramos() / 1000);
+            series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getPesadaGramos() / 1000);
         }
 
         modelo3.addSeries(series1);
         modelo3.setShowPointLabels(true);
         modelo3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo3.setTitle("Recolección por Día " + DateTools.getSemana(fecha3));
+        modelo3.setTitle("Recolección por Día " + DateTools.getWeek(fecha3));
         modelo3.setLegendPosition("e");
         Axis yAxis = modelo3.getAxis(AxisType.Y);
         yAxis.setMin(0);
@@ -206,7 +206,7 @@ public class RecoleccionChart implements Serializable {
 
         Recoleccion sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano4 - 1900, 0, 1));
+        cal.setTime(DateTools.getDate(ano4, 0, 1));
         for (int i = 0; i < 52; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 6);
@@ -237,11 +237,11 @@ public class RecoleccionChart implements Serializable {
         RecoleccionController controlador = new RecoleccionController();
 
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(new Date(2012 - 1900, 0, 1));
+        c.setTime(DateTools.getDate(2012, 0, 1));
         Date fecha1;
         Date fecha2;
         double valor;
-        for (int i = 2012; i <= (new Date().getYear() + 1900); i++) {
+        for (int i = 2012; i <= DateTools.getYear(); i++) {
             fecha1 = c.getTime();
             c.add(Calendar.YEAR, 1);
             c.add(Calendar.DAY_OF_MONTH, -1);

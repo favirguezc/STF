@@ -8,24 +8,16 @@ package vista.produccion.cargarRegistros;
 import controlador.produccion.variablesClimaticas.LluviaControlador;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import modelo.produccion.variablesClimaticas.Lluvia;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import modelo.util.DateTools;
-import modelo.util.FileTypeFilter;
 import vista.produccion.cargarRegistros.util.CellDataExtractor;
 
 /**
@@ -54,14 +46,14 @@ public class LectorDeRegistrosLluvia {
                 while (rowIterator.hasNext()) {
                     Row row = rowIterator.next();
                     if (row.getCell(0) != null) {
-                        int mes = DateTools.getMes(row.getCell(0).getStringCellValue());
+                        int mes = DateTools.getMonth(row.getCell(0).getStringCellValue());
                         int diasDelMes = new GregorianCalendar(año, mes, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
                         for (int dia = 1; dia <= diasDelMes; dia++) {
                             Cell celda = row.getCell(dia);
                             double valor = CellDataExtractor.leerNumero(celda);
 //                            System.out.println("Año: " + año + " Mes: " + mes + " Dia: " + dia + " Valor: " + CellDataExtractor.leerNumero(celda));
                             if (valor > 0) {
-                                controlador.guardar(controlador.nuevo(new Date(año - 1900, mes, dia), (float) valor));
+                                controlador.guardar(controlador.nuevo(DateTools.getDate(año, mes, dia), (float) valor));
                                 guardados++;
                             }
                         }

@@ -5,6 +5,7 @@
  */
 package vista.interfazPrincipal;
 
+import vista.produccion.cosecha.RecoleccionIF;
 import datos.util.EntityManagerFactorySingleton;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -25,7 +26,6 @@ import vista.produccion.cargarRegistros.*;
 import vista.produccion.graficas.*;
 import vista.produccion.labores.*;
 import vista.produccion.monitoreo.*;
-import vista.produccion.recoleccion.*;
 import vista.produccion.reportes.*;
 import vista.produccion.variablesClimaticas.*;
 

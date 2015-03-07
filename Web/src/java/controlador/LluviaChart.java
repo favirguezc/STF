@@ -24,16 +24,16 @@ import modelo.util.DateTools;
  * @author fredy
  */
 @ManagedBean(name = "lluviaChart")
-public class LluviaChart implements Serializable{
+public class LluviaChart implements Serializable {
 
     private LineChartModel modelo1;
     private int ano1;
     private int mes1;
-    
+
     @PostConstruct
-    public void init(){
-        ano1 = new Date().getYear() + 1900;
-        mes1 = new Date().getMonth();
+    public void init() {
+        ano1 = DateTools.getYear();
+        mes1 = DateTools.getMonth();
         createModel1();
     }
 
@@ -56,16 +56,16 @@ public class LluviaChart implements Serializable{
     public LineChartModel getModelo1() {
         return modelo1;
     }
-    
+
     public void createModel1() {
         modelo1 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Lluvias");
         LluviaController controlador = new LluviaController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(new Date(ano1 - 1900, mes1, 1));
+        cal.setTime(DateTools.getDate(ano1, mes1, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            Date fecha1=cal.getTime();
+            Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
             series1.set(i + 1, controlador.calcularPromedio(fecha1));
         }
@@ -73,7 +73,7 @@ public class LluviaChart implements Serializable{
         modelo1.addSeries(series1);
         modelo1.setShowPointLabels(true);
         modelo1.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        modelo1.setTitle("Promedio de Lluvias por Mes " + DateTools.getMes(mes1) + " de " + ano1);
+        modelo1.setTitle("Promedio de Lluvias por Mes " + DateTools.getMonth(mes1) + " de " + ano1);
         modelo1.setLegendPosition("e");
         Axis yAxis = modelo1.getAxis(AxisType.Y);
         yAxis.setMin(0);

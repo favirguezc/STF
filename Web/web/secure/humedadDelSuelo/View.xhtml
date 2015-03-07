@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{humedadDelSueloController.selected != null}">
                         <h:outputText value="#{bundle.ViewHumedadDelSueloLabel_fecha}"/>
                         <h:outputText value="#{humedadDelSueloController.selected.fecha}" title="#{bundle.ViewHumedadDelSueloTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewHumedadDelSueloLabel_hora}"/>
                         <h:outputText value="#{humedadDelSueloController.selected.hora}" title="#{bundle.ViewHumedadDelSueloTitle_hora}">

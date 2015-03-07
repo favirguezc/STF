@@ -4,7 +4,6 @@ import modelo.produccion.administracion.Municipio;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.MunicipioDAO;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -85,6 +84,9 @@ public class MunicipioController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
+            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
+                return;
+            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

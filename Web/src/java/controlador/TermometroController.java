@@ -73,7 +73,7 @@ public class TermometroController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public Termometro find(long nds) throws Exception {
         return getJpaController().findTermometro(nds);
     }
@@ -88,6 +88,9 @@ public class TermometroController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
+            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
+                return;
+            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

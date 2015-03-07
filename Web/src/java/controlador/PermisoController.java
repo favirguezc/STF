@@ -105,7 +105,6 @@ public class PermisoController implements Serializable {
 
     public boolean tienePermiso(Rol rol, Accion accion, String requestPath) {
         requestPath = requestPath.toLowerCase();
-        System.out.println(requestPath + " :: " + rol + " :: " + accion);
         if (rol == Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())) {
             return true;
         }
@@ -115,6 +114,24 @@ public class PermisoController implements Serializable {
             }
         }
         return false;
+    }
+
+    public boolean tienePermiso(PersistAction persistAction, Class c) {
+        Accion accion = Accion.Leer;
+        if (persistAction == PersistAction.CREATE || persistAction == PersistAction.UPDATE) {
+            accion = Accion.Escribir;
+        }
+        if (persistAction == PersistAction.DELETE) {
+            accion = Accion.Eliminar;
+        }
+        if (tienePermiso(((LoginController) JsfUtil.getSession().getAttribute("loginController")).getRol(), accion, c.getSimpleName())) {
+            return true;
+        } else {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PermissionErrorOcurred"));
+            System.out.println("No tiene permiso");
+            return false;
+        }
+
     }
 
     public List<Permiso> getItemsAvailableSelectMany() {

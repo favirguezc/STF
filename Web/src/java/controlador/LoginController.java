@@ -14,8 +14,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Rol;
 
@@ -117,7 +115,7 @@ public class LoginController implements Serializable {
         if (loggedin) {
             mensaje = "Hola " + user + ", " + rol;
             rolOk = true;
-            getSession().setAttribute("username", userString);
+            JsfUtil.getSession().setAttribute("username", userString);
             return "/faces/secure/index.xhtml";
         } else {
             JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
@@ -126,19 +124,12 @@ public class LoginController implements Serializable {
     }
 
     public String logout() {
-        getSession().invalidate();
+        JsfUtil.getSession().invalidate();
         userString = null;
         passString = null;
         mensaje = null;
         loggedin = rolOk = false;
         return "/faces/login.xhtml";
-    }
-
-    private static HttpSession getSession() {
-        return (HttpSession) FacesContext.
-                getCurrentInstance().
-                getExternalContext().
-                getSession(false);
-    }
+    }   
 
 }

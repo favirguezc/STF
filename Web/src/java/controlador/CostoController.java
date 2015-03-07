@@ -77,6 +77,9 @@ public class CostoController implements Serializable {
     
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
+            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
+                return;
+            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

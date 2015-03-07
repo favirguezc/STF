@@ -8,10 +8,6 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
-        <resource-bundle>
-            <base-name>/Bundle</base-name>
-            <var>bundle2</var>
-        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>RiesgoConverter</managed-bean-name>

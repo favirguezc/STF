@@ -93,6 +93,9 @@ public class LluviaController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
+            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
+                return;
+            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

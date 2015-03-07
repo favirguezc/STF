@@ -5,8 +5,6 @@
  */
 package controlador;
 
-import controlador.TemperaturaController;
-import controlador.TermometroController;
 import controlador.util.DateParser;
 import controlador.util.JsfUtil;
 import java.io.BufferedReader;

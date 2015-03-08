@@ -110,7 +110,9 @@ public class PermisoController implements Serializable {
         }
         for (Pagina pagina : Pagina.values()) {
             if (requestPath.contains(pagina.toString().toLowerCase())) {
-                return getJpaController().findPermiso(rol, pagina, accion);
+                if (getJpaController().findPermiso(rol, pagina, accion)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -128,7 +130,6 @@ public class PermisoController implements Serializable {
             return true;
         } else {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PermissionErrorOcurred"));
-            System.out.println("No tiene permiso");
             return false;
         }
 

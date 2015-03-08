@@ -23,6 +23,10 @@ public class PropertiesGenerator {
 //        generarPropiedades(modelo.produccion.administracion.Permiso.class);
 //        generarPropiedades(modelo.produccion.administracion.Persona.class);
 //        generarPropiedades(modelo.produccion.administracion.RolPersona.class);
+        generarPropiedades(modelo.produccion.administracion.Departamento.class);
+        generarPropiedades(modelo.produccion.administracion.Municipio.class);
+        generarPropiedades(modelo.produccion.administracion.Vereda.class);
+        generarPropiedades(modelo.produccion.administracion.Finca.class);
 //        generarPropiedades(modelo.produccion.aplicaciones.Aplicacion.class);
 //        generarPropiedades(modelo.produccion.aplicaciones.Insumo.class);
 //        generarPropiedades(modelo.produccion.labores.Labor.class);
@@ -42,7 +46,7 @@ public class PropertiesGenerator {
 //        generarPropiedades(modelo.finanzas.caja.ConceptoCaja.class);
 //        generarPropiedades(modelo.finanzas.compra.Compra.class);
 //        generarPropiedades(modelo.finanzas.ventas.Venta.class);
-        generarPropiedades(modelo.produccion.cosecha.Clasificacion.class);
+//        generarPropiedades(modelo.produccion.cosecha.Clasificacion.class);
     }
 
     private static String g(String campo) {

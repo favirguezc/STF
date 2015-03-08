@@ -12,8 +12,6 @@
             <h:form id="VeredaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{veredaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewVeredaLabel_id}"/>
-                        <h:outputText value="#{veredaController.selected.id}" title="#{bundle.ViewVeredaTitle_id}"/>
                         <h:outputText value="#{bundle.ViewVeredaLabel_nombre}"/>
                         <h:outputText value="#{veredaController.selected.nombre}" title="#{bundle.ViewVeredaTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewVeredaLabel_municipio}"/>

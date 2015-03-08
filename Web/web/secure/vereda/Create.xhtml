@@ -12,13 +12,19 @@
             <h:form id="VeredaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{veredaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateVeredaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{veredaController.selected.id}" title="#{bundle.CreateVeredaTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateVeredaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{veredaController.selected.nombre}" title="#{bundle.CreateVeredaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateVeredaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateMunicipioLabel_departamento}" for="departamento" />
+                        <p:selectOneMenu id="departamento" value="#{veredaController.departamento}" required="true" requiredMessage="#{bundle.CreateMunicipioRequiredMessage_departamento}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="departamentoItem"
+                                           itemValue="#{departamentoItem}"/>
+                            <p:ajax update="municipio"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVeredaLabel_municipio}" for="municipio" />
-                        <p:selectOneMenu id="municipio" value="#{veredaController.selected.municipio}" required="true" requiredMessage="#{bundle.EditVeredaRequiredMessage_municipio}">
-                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                        <p:selectOneMenu id="municipio" value="#{veredaController.selected.municipio}" required="true" requiredMessage="#{bundle.CreateVeredaRequiredMessage_municipio}">
+                            <f:selectItems value="#{veredaController.municipios}"
                                            var="municipioItem"
                                            itemValue="#{municipioItem}"/>
                         </p:selectOneMenu>

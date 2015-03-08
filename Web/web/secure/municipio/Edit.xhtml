@@ -18,7 +18,6 @@
                         <p:inputText id="nombre" value="#{municipioController.selected.nombre}" title="#{bundle.EditMunicipioTitle_nombre}" required="true" requiredMessage="#{bundle.EditMunicipioRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditMunicipioLabel_departamento}" for="departamento" />
                         <p:selectOneMenu id="departamento" value="#{municipioController.selected.departamento}" required="true" requiredMessage="#{bundle.EditMunicipioRequiredMessage_departamento}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
                                            var="departamentoItem"
                                            itemValue="#{departamentoItem}"/>

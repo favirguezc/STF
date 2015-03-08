@@ -29,12 +29,7 @@ public class JsfUtil {
     }
 
     public static void addErrorMessage(Exception ex, String defaultMsg) {
-        String msg = ex.getLocalizedMessage();
-        if (msg != null && msg.length() > 0) {
-            addErrorMessage(msg);
-        } else {
-            addErrorMessage(defaultMsg);
-        }
+        addErrorMessage(defaultMsg + " " + ex.getLocalizedMessage());
     }
 
     public static void addErrorMessages(List<String> messages) {
@@ -70,7 +65,7 @@ public class JsfUtil {
         DELETE,
         UPDATE
     }
-    
+
     public static HttpSession getSession() {
         return (HttpSession) FacesContext.
                 getCurrentInstance().

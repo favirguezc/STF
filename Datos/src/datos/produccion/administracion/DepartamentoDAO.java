@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.administracion.Departamento;
@@ -122,6 +123,17 @@ public class DepartamentoDAO implements Serializable {
         }
     }
 
+    public Departamento findDepartamento(String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Departamento> query = em.createQuery("SELECT t FROM Departamento t WHERE t.nombre = :nombre", Departamento.class);
+            query.setParameter("nombre", nombre);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
     public int getDepartamentoCount() {
         EntityManager em = getEntityManager();
         try {
@@ -134,5 +146,5 @@ public class DepartamentoDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

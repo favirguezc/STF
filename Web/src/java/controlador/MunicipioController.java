@@ -4,6 +4,7 @@ import modelo.produccion.administracion.Municipio;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.MunicipioDAO;
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,7 +16,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "municipioController")
 @SessionScoped
@@ -44,7 +44,7 @@ public class MunicipioController implements Serializable {
 
     private MunicipioDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new MunicipioDAO(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new MunicipioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -84,9 +84,6 @@ public class MunicipioController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
-            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
-                return;
-            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

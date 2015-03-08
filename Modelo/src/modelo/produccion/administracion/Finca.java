@@ -31,19 +31,19 @@ public class Finca implements Serializable {
     private Vereda vereda;
     private float area;
     private float altitud;
-    private List<Coordenada> coordenadas;
+    private Coordenada coordenada;
     @ManyToOne(optional = false)
     private Persona propietario;
 
     public Finca() {
     }
 
-    public Finca(String nombre, Vereda vereda, float area, float altitud, List<Coordenada> coordenadas) {
+    public Finca(String nombre, Vereda vereda, float area, float altitud, Coordenada coordenada) {
         this.nombre = nombre;
         this.vereda = vereda;
         this.area = area;
         this.altitud = altitud;
-        this.coordenadas = coordenadas;
+        this.coordenada = coordenada;
     }
 
     public Long getId() {
@@ -86,12 +86,20 @@ public class Finca implements Serializable {
         this.altitud = altitud;
     }
 
-    public List<Coordenada> getCoordenadas() {
-        return coordenadas;
+    public Coordenada getCoordenada() {
+        return coordenada;
     }
 
-    public void setCoordenadas(List<Coordenada> coordenadas) {
-        this.coordenadas = coordenadas;
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
+    }
+
+    public Persona getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Persona propietario) {
+        this.propietario = propietario;
     }
 
     @Override

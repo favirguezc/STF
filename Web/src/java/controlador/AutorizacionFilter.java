@@ -30,6 +30,7 @@ public class AutorizacionFilter implements Filter {
         LoginController loginBean;
         loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
         if (loginBean != null) {
+            System.out.println(loginBean.getRol() + " " + Accion.Leer + " " + ((HttpServletRequest) request).getRequestURI());
             if (new PermisoController().tienePermiso(loginBean.getRol(), Accion.Leer, ((HttpServletRequest) request).getRequestURI())) {
                 chain.doFilter(request, response);
             } else {

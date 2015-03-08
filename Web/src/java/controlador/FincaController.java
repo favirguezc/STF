@@ -4,19 +4,25 @@ import modelo.produccion.administracion.Finca;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.FincaDAO;
-
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
+import modelo.produccion.administracion.Coordenada;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 @ManagedBean(name = "fincaController")
 @SessionScoped
@@ -25,6 +31,19 @@ public class FincaController implements Serializable {
     private FincaDAO jpaController = null;
     private List<Finca> items = null;
     private Finca selected;
+    private MapModel modelo;
+    private Marker marker;
+
+    @PostConstruct
+    public void init() {
+        modelo = new DefaultMapModel();
+        marker = new Marker(new LatLng(4.114974, -73.584086));
+        if (selected != null) {
+            marker = new Marker(new LatLng(selected.getCoordenada().getX(), selected.getCoordenada().getY()));
+        }
+        marker.setDraggable(true);
+        modelo.addOverlay(marker);
+    }
 
     public FincaController() {
     }
@@ -43,15 +62,31 @@ public class FincaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
+    public MapModel getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(MapModel modelo) {
+        this.modelo = modelo;
+    }
+
+    public void markerDragged(MarkerDragEvent evt) {
+        marker = evt.getMarker();
+        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+        JsfUtil.addSuccessMessage("Marker Dragged" + "Lat:" + selected.getCoordenada().getX() + ", Lng:" + selected.getCoordenada().getY());
+    }
+
     private FincaDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new FincaDAO(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new FincaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
 
     public Finca prepareCreate() {
         selected = new Finca();
+        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+        selected.setPropietario(((LoginController) JsfUtil.getSession().getAttribute("loginController")).getUser());
         initializeEmbeddableKey();
         return selected;
     }
@@ -150,7 +185,5 @@ public class FincaController implements Serializable {
                 return null;
             }
         }
-
     }
-
 }

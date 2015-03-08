@@ -4,7 +4,7 @@ import modelo.produccion.administracion.Departamento;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.DepartamentoDAO;
-
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,7 +16,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
 
 @ManagedBean(name = "departamentoController")
 @SessionScoped
@@ -45,7 +44,7 @@ public class DepartamentoController implements Serializable {
 
     private DepartamentoDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new DepartamentoDAO(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new DepartamentoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -85,9 +84,6 @@ public class DepartamentoController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
-            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
-                return;
-            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

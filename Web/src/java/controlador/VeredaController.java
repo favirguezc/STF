@@ -3,9 +3,12 @@ package controlador;
 import modelo.produccion.administracion.Vereda;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
+import datos.produccion.administracion.DepartamentoDAO;
+import datos.produccion.administracion.MunicipioDAO;
 import datos.produccion.administracion.VeredaDAO;
-
+import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,7 +19,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
+import modelo.produccion.administracion.Departamento;
+import modelo.produccion.administracion.Municipio;
 
 @ManagedBean(name = "veredaController")
 @SessionScoped
@@ -25,8 +29,11 @@ public class VeredaController implements Serializable {
     private VeredaDAO jpaController = null;
     private List<Vereda> items = null;
     private Vereda selected;
+    private Departamento departamento;
+    private List<Municipio> municipios;
 
     public VeredaController() {
+        municipios = new ArrayList();
     }
 
     public Vereda getSelected() {
@@ -43,9 +50,25 @@ public class VeredaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public List<Municipio> getMunicipios() {
+        if (departamento == null) {
+            departamento = new DepartamentoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findDepartamentoEntities().get(0);
+        }
+        municipios = new MunicipioDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findMunicipioEntities(departamento);
+        return municipios;
+    }
+
     private VeredaDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new VeredaDAO(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new VeredaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -85,9 +108,6 @@ public class VeredaController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
-            if (!new PermisoController().tienePermiso(persistAction, selected.getClass())) {
-                return;
-            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);

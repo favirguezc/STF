@@ -12,8 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Departamento;
 import modelo.produccion.administracion.Municipio;
 
 /**
@@ -113,6 +115,17 @@ public class MunicipioDAO implements Serializable {
         }
     }
 
+    public List<Municipio> findMunicipioEntities(Departamento departamento) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Municipio> query = em.createQuery("SELECT t FROM Municipio t WHERE t.departamento = :departamento", Municipio.class);
+            query.setParameter("departamento", departamento);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public Municipio findMunicipio(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -134,5 +147,5 @@ public class MunicipioDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

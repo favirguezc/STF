@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.labores.TrabajoDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Persona;
 
 @ManagedBean(name = "trabajoController")
 @SessionScoped
@@ -111,6 +113,10 @@ public class TrabajoController implements Serializable {
         return getJpaController().findTrabajoEntities();
     }
 
+    public List<Trabajo> leerLista(Persona trabajador, Date inicio, Date fin) {
+        return getJpaController().findTrabajoEntities(trabajador, inicio, fin);
+    }
+    
     @FacesConverter(forClass = Trabajo.class)
     public static class TrabajoControllerConverter implements Converter {
 

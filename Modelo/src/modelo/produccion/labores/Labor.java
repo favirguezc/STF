@@ -21,6 +21,8 @@ public class Labor implements Serializable {
     @Column(nullable = false, unique = true)
     private String nombre;
     private String descripcion;
+    @Column(nullable = false)
+    private float valor;
 
     /**
      *
@@ -32,10 +34,12 @@ public class Labor implements Serializable {
      *
      * @param nombre
      * @param descripcion
+     * @param valor
      */
-    public Labor(String nombre, String descripcion) {
+    public Labor(String nombre, String descripcion, float valor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.valor = valor;
     }
 
     /**
@@ -86,6 +90,22 @@ public class Labor implements Serializable {
         this.descripcion = descripcion;
     }
 
+    /**
+     *
+     * @return
+     */
+    public float getValor() {
+        return valor;
+    }
+
+    /**
+     *
+     * @param valor
+     */
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
     @Override
     public String toString() {
         return nombre;
@@ -97,6 +117,7 @@ public class Labor implements Serializable {
         hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 53 * hash + Objects.hashCode(this.nombre);
         hash = 53 * hash + Objects.hashCode(this.descripcion);
+        hash = 53 * hash + Float.floatToIntBits(this.valor);
         return hash;
     }
 
@@ -118,7 +139,10 @@ public class Labor implements Serializable {
         if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
         }
+        if (Float.floatToIntBits(this.valor) != Float.floatToIntBits(other.valor)) {
+            return false;
+        }
         return true;
     }
-
+    
 }

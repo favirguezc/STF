@@ -269,7 +269,7 @@ public class LaborIF extends javax.swing.JInternalFrame {
         String nombre = nombreTextField.getText();
         String descripcion = descripcionTextField.getText();
         if (registroSeleccionado == null) {
-            registroSeleccionado = controlador.nuevo(nombre, descripcion);
+            registroSeleccionado = controlador.nuevo(nombre, descripcion, 3100); //Provisional
             if (controlador.validar(registroSeleccionado)) {
                 controlador.guardar(registroSeleccionado);
                 transacionRealizada = true;

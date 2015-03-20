@@ -35,6 +35,7 @@ public enum Pagina {
     Caja,
     ConceptoCaja,
     Costo,
+    Nomina,
     Permiso,
     Departamento,
     Municipio,

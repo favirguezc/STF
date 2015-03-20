@@ -16,6 +16,8 @@
                         <p:inputText id="nombre" value="#{laborController.selected.nombre}" title="#{bundle.EditLaborTitle_nombre}" required="true" requiredMessage="#{bundle.EditLaborRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditLaborLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{laborController.selected.descripcion}" title="#{bundle.EditLaborTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditLaborLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{laborController.selected.valor}" title="#{bundle.EditLaborTitle_valor}" required="true" requiredMessage="#{bundle.EditLaborRequiredMessage_valor}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{laborController.update}" value="#{bundle.Save}" update="display,:LaborListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LaborEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LaborEditDialog.hide()"/>

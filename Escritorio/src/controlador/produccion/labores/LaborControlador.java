@@ -23,8 +23,8 @@ public class LaborControlador {
         dao = new LaborDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
     }
 
-    public Labor nuevo(String nombre, String descripcion) {
-        return new Labor(nombre, descripcion);
+    public Labor nuevo(String nombre, String descripcion,float valor) {
+        return new Labor(nombre, descripcion,valor);
     }
 
     public void guardar(Labor lc) {
@@ -81,11 +81,11 @@ public class LaborControlador {
         for (String labor : labores) {
             try {
                 if (buscar(labor) == null) {
-                    guardar(nuevo(labor, null));
+                    guardar(nuevo(labor, null, 3100)); //Provisional
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                guardar(nuevo(labor, null));
+                guardar(nuevo(labor, null, 3100)); //Provisional
             }
         }
     }

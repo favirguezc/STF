@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
 import modelo.produccion.labores.Trabajo;
 
 /**
@@ -195,6 +196,19 @@ public class TrabajoDAO implements Serializable {
             query.setParameter("inicio", inicio, TemporalType.DATE);
             query.setParameter("fin", fin, TemporalType.DATE);
             query.setParameter("lote", lote);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Trabajo> findTrabajoEntities(Persona trabajador, Date inicio, Date fin) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.operario = :operario AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
+            query.setParameter("inicio", inicio, TemporalType.DATE);
+            query.setParameter("fin", fin, TemporalType.DATE);
+            query.setParameter("operario", trabajador);
             return query.getResultList();
         } finally {
             em.close();

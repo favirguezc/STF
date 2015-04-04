@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package propertiesgenerator;
 
 import java.lang.reflect.Field;
@@ -23,10 +18,10 @@ public class PropertiesGenerator {
 //        generarPropiedades(modelo.produccion.administracion.Permiso.class);
 //        generarPropiedades(modelo.produccion.administracion.Persona.class);
 //        generarPropiedades(modelo.produccion.administracion.RolPersona.class);
-        generarPropiedades(modelo.produccion.administracion.Departamento.class);
-        generarPropiedades(modelo.produccion.administracion.Municipio.class);
-        generarPropiedades(modelo.produccion.administracion.Vereda.class);
-        generarPropiedades(modelo.produccion.administracion.Finca.class);
+//        generarPropiedades(modelo.produccion.administracion.Departamento.class);
+//        generarPropiedades(modelo.produccion.administracion.Municipio.class);
+//        generarPropiedades(modelo.produccion.administracion.Finca.class);
+        generarPropiedades(modelo.produccion.administracion.Contrato.class);
 //        generarPropiedades(modelo.produccion.aplicaciones.Aplicacion.class);
 //        generarPropiedades(modelo.produccion.aplicaciones.Insumo.class);
 //        generarPropiedades(modelo.produccion.labores.Labor.class);

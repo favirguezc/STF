@@ -54,7 +54,7 @@ public class NotaController implements Serializable {
         selected = new Nota();
         initializeEmbeddableKey();
         HttpSession session = getSession();
-        LoginController loginBean = (LoginController) session.getAttribute("loginController");
+        SignInController loginBean = (SignInController) session.getAttribute("signInController");
         selected.setDe(loginBean.getUser());
         return selected;
     }
@@ -80,8 +80,8 @@ public class NotaController implements Serializable {
 
     public List<Nota> getItems() {
         HttpSession session = getSession();
-        LoginController loginBean = (LoginController) session.getAttribute("loginController");
-        if (loginBean != null && loginBean.isLoggedin()) {
+        SignInController loginBean = (SignInController) session.getAttribute("signInController");
+        if (loginBean != null && loginBean.isCredentialsOk()) {
             items = getJpaController().findNotaEntities(loginBean.getUser());
         }
         return items;
@@ -152,7 +152,6 @@ public class NotaController implements Serializable {
                 return null;
             }
         }
-
     }
 
     private static HttpSession getSession() {

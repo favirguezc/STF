@@ -16,6 +16,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Departamento;
 
 @ManagedBean(name = "municipioController")
 @SessionScoped
@@ -106,6 +107,10 @@ public class MunicipioController implements Serializable {
 
     public List<Municipio> getItemsAvailableSelectOne() {
         return getJpaController().findMunicipioEntities();
+    }
+
+    public List<Municipio> getItems(Departamento departamento) {
+        return getJpaController().findMunicipioEntities(departamento);
     }
 
     @FacesConverter(forClass = Municipio.class)

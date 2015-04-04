@@ -36,13 +36,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListFincaTitle_vereda}"/>
                         </f:facet>
-                        <h:outputText value="#{item.vereda.nombre} - #{item.vereda.municipio.nombre} - #{item.vereda.municipio.departamento.nombre}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListFincaTitle_area}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.area}"/>
+                        <h:outputText value="#{item.vereda}, #{item.municipio.nombre}, #{item.municipio.departamento.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

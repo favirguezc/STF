@@ -52,6 +52,7 @@ public class ContratoController implements Serializable {
 
     public Contrato prepareCreate() {
         selected = new Contrato();
+        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
         initializeEmbeddableKey();
         return selected;
     }

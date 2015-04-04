@@ -6,7 +6,6 @@
 package modelo.produccion.administracion;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,23 +26,15 @@ public class Finca implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String nombre;
+    private String vereda;
     @ManyToOne(optional = false)
-    private Vereda vereda;
-    private float area;
+    private Municipio municipio;
     private float altitud;
     private Coordenada coordenada;
     @ManyToOne(optional = false)
     private Persona propietario;
 
     public Finca() {
-    }
-
-    public Finca(String nombre, Vereda vereda, float area, float altitud, Coordenada coordenada) {
-        this.nombre = nombre;
-        this.vereda = vereda;
-        this.area = area;
-        this.altitud = altitud;
-        this.coordenada = coordenada;
     }
 
     public Long getId() {
@@ -62,20 +53,20 @@ public class Finca implements Serializable {
         this.nombre = nombre;
     }
 
-    public Vereda getVereda() {
+    public String getVereda() {
         return vereda;
     }
 
-    public void setVereda(Vereda vereda) {
+    public void setVereda(String vereda) {
         this.vereda = vereda;
     }
 
-    public float getArea() {
-        return area;
+    public Municipio getMunicipio() {
+        return municipio;
     }
 
-    public void setArea(float area) {
-        this.area = area;
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
     }
 
     public float getAltitud() {
@@ -108,7 +99,6 @@ public class Finca implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.nombre);
         hash = 97 * hash + Objects.hashCode(this.vereda);
-        hash = 97 * hash + Float.floatToIntBits(this.area);
         hash = 97 * hash + Float.floatToIntBits(this.altitud);
         return hash;
     }
@@ -131,10 +121,7 @@ public class Finca implements Serializable {
         if (!Objects.equals(this.vereda, other.vereda)) {
             return false;
         }
-        if (Float.floatToIntBits(this.area) != Float.floatToIntBits(other.area)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.altitud) != Float.floatToIntBits(other.altitud)) {
+        if (this.altitud != other.altitud) {
             return false;
         }
         return true;

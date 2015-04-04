@@ -27,8 +27,8 @@ public class AutorizacionFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        LoginController loginBean;
-        loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
+        SignInController loginBean;
+        loginBean = (SignInController) ((HttpServletRequest) request).getSession().getAttribute("signInController");
         if (loginBean != null) {
             System.out.println(loginBean.getRol() + " " + Accion.Leer + " " + ((HttpServletRequest) request).getRequestURI());
             if (new PermisoController().tienePermiso(loginBean.getRol(), Accion.Leer, ((HttpServletRequest) request).getRequestURI())) {

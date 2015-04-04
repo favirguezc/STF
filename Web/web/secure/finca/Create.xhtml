@@ -15,13 +15,22 @@
                         <p:outputLabel value="#{bundle.CreateFincaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{fincaController.selected.nombre}" title="#{bundle.CreateFincaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateFincaRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateFincaLabel_vereda}" for="vereda" />
-                        <p:selectOneMenu id="vereda" value="#{fincaController.selected.vereda}" required="true" requiredMessage="#{bundle.CreateFincaRequiredMessage_vereda}">
-                            <f:selectItems value="#{veredaController.itemsAvailableSelectOne}"
-                                           var="veredaItem"
-                                           itemValue="#{veredaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateFincaLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{fincaController.selected.area}" title="#{bundle.CreateFincaTitle_area}" />
+                        <p:inputText id="vereda" value="#{fincaController.selected.vereda}" title="#{bundle.CreateFincaTitle_vereda}" />
+                        <p:outputLabel value="#{bundle.CreateFincaLabel_municipio}" for="municipio" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="departamento" value="#{fincaController.departamento}" required="true" requiredMessage="#{bundle.CreateMunicipioRequiredMessage_departamento}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                               var="departamentoItem"
+                                               itemValue="#{departamentoItem}"/>
+                                <p:ajax update="municipio"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="municipio" value="#{fincaController.selected.municipio}" required="true" requiredMessage="#{bundle.CreateFincaRequiredMessage_municipio}">
+                                <f:selectItems value="#{fincaController.municipios}"
+                                               var="municipioItem"
+                                               itemValue="#{municipioItem}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
                         <p:outputLabel value="#{bundle.CreateFincaLabel_altitud}" for="altitud" />
                         <p:inputText id="altitud" value="#{fincaController.selected.altitud}" title="#{bundle.CreateFincaTitle_altitud}" />
                         <p:outputLabel value="#{bundle.CreateFincaLabel_coordenada}" for="coordenada" />

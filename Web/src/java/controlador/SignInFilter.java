@@ -15,9 +15,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoginFilter implements Filter {
+public class SignInFilter implements Filter {
 
-    public LoginFilter() {
+    public SignInFilter() {
     }
 
     @Override
@@ -28,15 +28,15 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // Get the loginBean from session attribute
-        LoginController loginBean = (LoginController) ((HttpServletRequest) request).getSession().getAttribute("loginController");
+        SignInController loginBean = (SignInController) ((HttpServletRequest) request).getSession().getAttribute("signInController");
         // For the first application request there is no loginBean in the session so user needs to log in
         // For other requests loginBean is present but we need to check if user has logged in successfully
-        if (loginBean != null && loginBean.isRolOk()) {
+        if (loginBean != null && loginBean.isRolSelected()) {
                 chain.doFilter(request, response);
         } else {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
-            res.sendRedirect(req.getContextPath() + "/faces/login.xhtml");
+            res.sendRedirect(req.getContextPath() + "/faces/signIn.xhtml");
         }
     }
 

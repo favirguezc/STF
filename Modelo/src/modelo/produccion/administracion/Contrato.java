@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,20 +27,17 @@ public class Contrato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @ManyToOne
-    private Finca finca;
-    @ManyToOne
-    private Persona persona;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
+    @ManyToOne(optional = false)
+    private Finca finca;
+    @ManyToOne(optional = false)
+    private Persona persona;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     public Contrato() {
         fecha = new Date();
-    }
-
-    public Contrato(Finca finca, Persona persona) {
-        this.finca = finca;
-        this.persona = persona;
     }
 
     public Long getId() {
@@ -71,14 +70,24 @@ public class Contrato implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }    
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.finca);
-        hash = 29 * hash + Objects.hashCode(this.persona);
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        hash = 47 * hash + Objects.hashCode(this.fecha);
+        hash = 47 * hash + Objects.hashCode(this.finca);
+        hash = 47 * hash + Objects.hashCode(this.persona);
+        hash = 47 * hash + Objects.hashCode(this.rol);;
         return hash;
     }
 
@@ -94,13 +103,19 @@ public class Contrato implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
         if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         if (!Objects.equals(this.persona, other.persona)) {
             return false;
         }
+        if (this.rol != other.rol) {
+            return false;
+        }
         return true;
     }
-
+    
 }

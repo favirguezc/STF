@@ -18,6 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.produccion.administracion.Coordenada;
+import modelo.produccion.administracion.Departamento;
+import modelo.produccion.administracion.Municipio;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -33,6 +35,8 @@ public class FincaController implements Serializable {
     private Finca selected;
     private MapModel modelo;
     private Marker marker;
+    private Departamento departamento;
+    private List<Municipio> municipios;
 
     @PostConstruct
     public void init() {
@@ -62,12 +66,37 @@ public class FincaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
+
+    public List<Municipio> getMunicipios() {
+        municipios = new MunicipioController().getItems(departamento);
+        return municipios;
+    }
+
+    public void setMunicipios(List<Municipio> municipios) {
+        this.municipios = municipios;
+    }
+
     public MapModel getModelo() {
         return modelo;
     }
 
     public void setModelo(MapModel modelo) {
         this.modelo = modelo;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 
     public void markerDragged(MarkerDragEvent evt) {
@@ -86,7 +115,7 @@ public class FincaController implements Serializable {
     public Finca prepareCreate() {
         selected = new Finca();
         selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
-        selected.setPropietario(((LoginController) JsfUtil.getSession().getAttribute("loginController")).getUser());
+        selected.setPropietario(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getUser());
         initializeEmbeddableKey();
         return selected;
     }

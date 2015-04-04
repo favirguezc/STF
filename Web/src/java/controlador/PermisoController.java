@@ -105,6 +105,9 @@ public class PermisoController implements Serializable {
 
     public boolean tienePermiso(Rol rol, Accion accion, String requestPath) {
         requestPath = requestPath.toLowerCase();
+        if (rol == null && requestPath.toLowerCase().contains(Pagina.Persona.toString().toLowerCase())) {
+            return true;
+        }
         if (rol == Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())) {
             return true;
         }
@@ -126,7 +129,7 @@ public class PermisoController implements Serializable {
         if (persistAction == PersistAction.DELETE) {
             accion = Accion.Eliminar;
         }
-        if (tienePermiso(((LoginController) JsfUtil.getSession().getAttribute("loginController")).getRol(), accion, c.getSimpleName())) {
+        if (tienePermiso(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getRol(), accion, c.getSimpleName())) {
             return true;
         } else {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PermissionErrorOcurred"));

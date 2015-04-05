@@ -16,20 +16,26 @@
                     <p:panel header="Iniciar Sesión" style="width: 360px;">
                         <h:panelGrid id="loginPanel" columns="2">
 
-                            <h:outputLabel value="Usuario" rendered="#{!signInController.credentialsOk}"/>
-                            <h:panelGroup rendered="#{!signInController.credentialsOk}">
+                            <h:outputLabel value="Usuario" rendered="#{!signInController.paso1Completado}"/>
+                            <h:panelGroup rendered="#{!signInController.paso1Completado}">
                                 <p:inputText id="username" value="#{signInController.userString}" title="Número de Cédula"/>
                                 <p:watermark for="username" value="Ingrese su Número de Cédula"/>
                             </h:panelGroup>
-                            <p:spacer rendered="#{!signInController.credentialsOk}"/>
-                            <p:spacer rendered="#{!signInController.credentialsOk}"/>
-                            <h:outputLabel value="Contraseña" rendered="#{!signInController.credentialsOk}"/>
-                            <h:panelGroup rendered="#{!signInController.credentialsOk}">
+                            <p:spacer rendered="#{!signInController.paso1Completado}"/>
+                            <p:spacer rendered="#{!signInController.paso1Completado}"/>
+                            <h:outputLabel value="Contraseña" rendered="#{!signInController.paso1Completado}"/>
+                            <h:panelGroup rendered="#{!signInController.paso1Completado}">
                                 <p:password id="password" value="#{signInController.passString}"  feedback="false"/> 
                                 <p:watermark for="password" value="Ingrese su Contraseña"/>
                             </h:panelGroup>
-                            <h:outputLabel value="Rol" rendered="#{signInController.credentialsOk}"/>
-                            <p:selectOneMenu id="rol" value="#{signInController.rol}" rendered="#{signInController.credentialsOk}">
+                            <h:outputLabel value="Finca" rendered="#{signInController.paso1Completado}"/>
+                            <p:selectOneMenu id="finca" value="#{signInController.finca}" rendered="#{signInController.paso1Completado}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{signInController.fincas}"/>
+                                <p:ajax update="rol"/>
+                            </p:selectOneMenu>
+                            <h:outputLabel value="Rol" rendered="#{signInController.paso1Completado}"/>
+                            <p:selectOneMenu id="rol" value="#{signInController.rol}" rendered="#{signInController.paso1Completado}">
                                 <f:selectItems value="#{signInController.roles}"/>
                             </p:selectOneMenu>
                             <p:spacer/>

@@ -39,7 +39,7 @@ public class Persona implements Serializable {
     private GrupoSanguineo grupoSanguineo;
     @Enumerated(EnumType.STRING)
     private RH rh;
-
+    private boolean administrador;
     /**
      *
      */
@@ -246,6 +246,14 @@ public class Persona implements Serializable {
      */
     public void setRh(RH rh) {
         this.rh = rh;
+    }
+
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
     }
 
     @Override

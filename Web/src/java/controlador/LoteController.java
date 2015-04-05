@@ -51,6 +51,7 @@ public class LoteController implements Serializable {
 
     public Lote prepareCreate() {
         selected = new Lote();
+        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
         initializeEmbeddableKey();
         return selected;
     }

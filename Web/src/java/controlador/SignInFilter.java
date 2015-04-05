@@ -31,7 +31,7 @@ public class SignInFilter implements Filter {
         SignInController loginBean = (SignInController) ((HttpServletRequest) request).getSession().getAttribute("signInController");
         // For the first application request there is no loginBean in the session so user needs to log in
         // For other requests loginBean is present but we need to check if user has logged in successfully
-        if (loginBean != null && loginBean.isRolSelected()) {
+        if (loginBean != null && loginBean.isPaso3Completado()) {
                 chain.doFilter(request, response);
         } else {
             HttpServletRequest req = (HttpServletRequest) request;

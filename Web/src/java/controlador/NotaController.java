@@ -81,7 +81,7 @@ public class NotaController implements Serializable {
     public List<Nota> getItems() {
         HttpSession session = getSession();
         SignInController loginBean = (SignInController) session.getAttribute("signInController");
-        if (loginBean != null && loginBean.isCredentialsOk()) {
+        if (loginBean != null && loginBean.isPaso1Completado()) {
             items = getJpaController().findNotaEntities(loginBean.getUser());
         }
         return items;

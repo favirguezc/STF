@@ -17,9 +17,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Contrato;
 import modelo.produccion.administracion.Coordenada;
 import modelo.produccion.administracion.Departamento;
 import modelo.produccion.administracion.Municipio;
+import modelo.produccion.administracion.Persona;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -174,6 +176,16 @@ public class FincaController implements Serializable {
 
     public List<Finca> getItemsAvailableSelectOne() {
         return getJpaController().findFincaEntities();
+    }
+
+    List<Finca> getItems(Persona user) {
+        List<Finca> fincas = getJpaController().findFincaEntities(user);
+        for (Contrato c : new ContratoController().getItems(user)) {
+            if (!fincas.contains(c.getFinca())) {
+                fincas.add(c.getFinca());
+            }
+        }
+        return fincas;
     }
 
     @FacesConverter(forClass = Finca.class)

@@ -12,9 +12,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.administracion.Contrato;
+import modelo.produccion.administracion.Persona;
 
 /**
  *
@@ -86,6 +88,17 @@ public class ContratoDAO implements Serializable {
             if (em != null) {
                 em.close();
             }
+        }
+    }
+    
+    public List<Contrato> findContratoEntities(Persona persona) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Contrato> query = em.createQuery("SELECT f FROM Contrato f WHERE f.persona = :persona", Contrato.class);
+            query.setParameter("persona", persona);
+            return query.getResultList();
+        } finally {
+            em.close();
         }
     }
 

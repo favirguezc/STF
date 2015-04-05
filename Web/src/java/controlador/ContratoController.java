@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.Persistence;
+import modelo.produccion.administracion.Persona;
 
 @ManagedBean(name = "contratoController")
 @SessionScoped
@@ -111,6 +112,10 @@ public class ContratoController implements Serializable {
 
     public List<Contrato> getItemsAvailableSelectOne() {
         return getJpaController().findContratoEntities();
+    }
+
+    Iterable<Contrato> getItems(Persona user) {
+        return getJpaController().findContratoEntities(user);
     }
 
     @FacesConverter(forClass = Contrato.class)

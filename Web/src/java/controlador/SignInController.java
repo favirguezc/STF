@@ -6,6 +6,7 @@
 package controlador;
 
 import controlador.util.JsfUtil;
+import datos.produccion.administracion.FincaDAO;
 import datos.produccion.administracion.PersonaDAO;
 import datos.produccion.administracion.RolPersonaDAO;
 import datos.util.EntityManagerFactorySingleton;
@@ -27,17 +28,19 @@ import modelo.produccion.administracion.Rol;
 public class SignInController implements Serializable {
 
     private String userString, passString, mensaje;
-    private boolean credentialsOk;
-    private boolean rolSelected;
+    private boolean paso1Completado;
+    private boolean paso2Completado;
+    private boolean paso3Completado;
     private Persona user;
     private Rol rol;
     private List<Rol> roles;
     private Finca finca;
+    private List<Finca> fincas;
 
     public SignInController() {
         EntityManagerFactorySingleton.getEntityManagerFactory();
     }
-    
+
     public String getUserString() {
         return userString;
     }
@@ -78,6 +81,14 @@ public class SignInController implements Serializable {
         this.roles = roles;
     }
 
+    public List<Finca> getFincas() {
+        return fincas;
+    }
+
+    public void setFincas(List<Finca> fincas) {
+        this.fincas = fincas;
+    }
+
     public String getMensaje() {
         return mensaje;
     }
@@ -94,20 +105,28 @@ public class SignInController implements Serializable {
         this.user = user;
     }
 
-    public boolean isCredentialsOk() {
-        return credentialsOk;
+    public boolean isPaso1Completado() {
+        return paso1Completado;
     }
 
-    public void setCredentialsOk(boolean credentialsOk) {
-        this.credentialsOk = credentialsOk;
+    public void setPaso1Completado(boolean paso1Completado) {
+        this.paso1Completado = paso1Completado;
     }
 
-    public boolean isRolSelected() {
-        return rolSelected;
+    public boolean isPaso2Completado() {
+        return paso2Completado;
     }
 
-    public void setRolSelected(boolean rolSelected) {
-        this.rolSelected = rolSelected;
+    public void setPaso2Completado(boolean paso2Completado) {
+        this.paso2Completado = paso2Completado;
+    }
+
+    public boolean isPaso3Completado() {
+        return paso3Completado;
+    }
+
+    public void setPaso3Completado(boolean paso3Completado) {
+        this.paso3Completado = paso3Completado;
     }
 
     public String goToSignUp() {
@@ -119,30 +138,35 @@ public class SignInController implements Serializable {
     }
 
     public String signIn() {
-        if (!credentialsOk) {
-            credentialsOk = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
-            if (credentialsOk) {
+        if (!paso1Completado) {
+            paso1Completado = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
+            if (paso1Completado) {
                 long userId = Long.parseLong(userString);
                 user = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
-                roles = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findRolEntities(user);
-                if (roles != null && roles.size() == 1) {
-                    rol = roles.get(0);
-                    return signIn();
-                } else if (roles == null || roles.isEmpty()) {
+                fincas = new FincaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findFincaEntities(user);
+                if (fincas == null || fincas.isEmpty()) {
                     JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte a un administrador de la finca.");
-                    return signOut();
                 }
             } else {
                 JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
                 return signOut();
             }
-            return "";
+        } else if (!paso2Completado) {
+            roles = new RolPersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findRolEntities(user);
+            if (roles != null && roles.size() == 1) {
+                rol = roles.get(0);
+                return signIn();
+            } else if (roles == null || roles.isEmpty()) {
+                JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte a un administrador de la finca.");
+                return signOut();
+            }
         } else {
             mensaje = "Hola " + user + ", " + rol;
             JsfUtil.getSession().setAttribute("username", userString);
-            rolSelected = true;
+            paso3Completado = true;
             return "/faces/secure/index.xhtml";
         }
+        return "";
     }
 
     public String signOut() {
@@ -150,8 +174,9 @@ public class SignInController implements Serializable {
         userString = null;
         passString = null;
         mensaje = null;
-        credentialsOk = false;
-        rolSelected = false;
+        paso1Completado = false;
+        paso2Completado = false;
+        paso3Completado = false;
         return "/faces/signIn.xhtml";
     }
 

@@ -41,7 +41,7 @@
                         <td align="right" width="30%">
                             <h:outputText value="#{signInController.mensaje}"/>
                             <h:form>                                
-                                <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="true" rendered="#{signInController.rolSelected}" />
+                                <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="true" rendered="#{signInController.paso3Completado}" />
                             </h:form>                            
                         </td>
                     </tr>

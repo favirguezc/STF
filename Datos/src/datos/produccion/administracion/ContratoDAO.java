@@ -7,6 +7,7 @@ package datos.produccion.administracion;
 
 import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +17,9 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.administracion.Contrato;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
 
 /**
  *
@@ -90,7 +93,7 @@ public class ContratoDAO implements Serializable {
             }
         }
     }
-    
+
     public List<Contrato> findContratoEntities(Persona persona) {
         EntityManager em = getEntityManager();
         try {
@@ -100,6 +103,70 @@ public class ContratoDAO implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    public List<Contrato> findContratoEntities(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Contrato> query = em.createQuery("SELECT f FROM Contrato f WHERE f.finca = :finca", Contrato.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Contrato> findContratoEntities(Persona persona, Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Contrato> query = em.createQuery("SELECT f FROM Contrato f WHERE f.persona = :persona AND f.finca = :finca", Contrato.class);
+            query.setParameter("persona", persona);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Finca> findFincaEntities(Persona user) {
+        List<Finca> resultList = new LinkedList<>();
+        for (Contrato c : findContratoEntities(user)) {
+            if (c.getFinca() != null && !resultList.contains(c.getFinca())) {
+                resultList.add(c.getFinca());
+            }
+        }
+        return resultList;
+    }
+
+    public List<Persona> findPersonaEntities(Finca farm) {
+        List<Persona> resultList = new LinkedList<>();
+        for (Contrato c : findContratoEntities(farm)) {
+            if (!resultList.contains(c.getPersona())) {
+                resultList.add(c.getPersona());
+            }
+        }
+        return resultList;
+    }
+
+    public List<Rol> findRolEntities(Persona user, Finca farm) {
+        EntityManager em = getEntityManager();
+        List<Rol> resultList = new LinkedList<>();
+        for (Contrato c : findContratoEntities(user, farm)) {
+            if (!resultList.contains(c.getRol())) {
+                resultList.add(c.getRol());
+            }
+        }
+        return resultList;
+    }
+
+    public List<Persona> findPersonaEntities(Rol rol, Finca selectedFarm) {
+        List<Persona> personas = new LinkedList<>();
+        for (Contrato c : findContratoEntities(selectedFarm)) {
+            if (c.getRol() == rol) {
+                personas.add(c.getPersona());
+            }
+        }
+        return personas;
     }
 
     public List<Contrato> findContratoEntities() {
@@ -147,5 +214,5 @@ public class ContratoDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

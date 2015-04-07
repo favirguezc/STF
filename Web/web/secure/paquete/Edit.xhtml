@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaqueteEditDlg" widgetVar="PaqueteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditPaqueteTitle}">
+            <h:form id="PaqueteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paqueteController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paqueteController.selected.id}" title="#{bundle2.EditPaqueteTitle_id}" />
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{paqueteController.selected.nombre}" title="#{bundle2.EditPaqueteTitle_nombre}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_numeroFincasPermitidas}" for="numeroFincasPermitidas" />
+                        <p:inputText id="numeroFincasPermitidas" value="#{paqueteController.selected.numeroFincasPermitidas}" title="#{bundle2.EditPaqueteTitle_numeroFincasPermitidas}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_numeroFincasPermitidas}"/>
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_numeroTrabajadoresPermitidosPorFinca}" for="numeroTrabajadoresPermitidosPorFinca" />
+                        <p:inputText id="numeroTrabajadoresPermitidosPorFinca" value="#{paqueteController.selected.numeroTrabajadoresPermitidosPorFinca}" title="#{bundle2.EditPaqueteTitle_numeroTrabajadoresPermitidosPorFinca}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_numeroTrabajadoresPermitidosPorFinca}"/>
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{paqueteController.selected.precio}" title="#{bundle2.EditPaqueteTitle_precio}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_precio}"/>
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_cantidadPeriodos}" for="cantidadPeriodos" />
+                        <p:inputText id="cantidadPeriodos" value="#{paqueteController.selected.cantidadPeriodos}" title="#{bundle2.EditPaqueteTitle_cantidadPeriodos}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_cantidadPeriodos}"/>
+                        <p:outputLabel value="#{bundle2.EditPaqueteLabel_tipoPeriodo}" for="tipoPeriodo" />
+                        <p:inputText id="tipoPeriodo" value="#{paqueteController.selected.tipoPeriodo}" title="#{bundle2.EditPaqueteTitle_tipoPeriodo}" required="true" requiredMessage="#{bundle2.EditPaqueteRequiredMessage_tipoPeriodo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paqueteController.update}" value="#{bundle2.Save}" update="display,:PaqueteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PaqueteEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="PaqueteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

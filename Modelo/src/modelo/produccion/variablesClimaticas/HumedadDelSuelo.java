@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -31,26 +33,8 @@ public class HumedadDelSuelo implements Serializable {
     private float valorEn30Cms;
     @Column(nullable = false)
     private float valorEn15Cms;
-
-    /**
-     *
-     */
-    public HumedadDelSuelo() {
-    }
-
-    /**
-     *
-     * @param fecha
-     * @param _30Cms
-     * @param _15Cms
-     * @param hora
-     */
-    public HumedadDelSuelo(Date fecha, float _30Cms, float _15Cms, Date hora) {
-        this.fecha = fecha;
-        this.valorEn30Cms = _30Cms;
-        this.valorEn15Cms = _15Cms;
-        this.hora = hora;
-    }
+    @ManyToOne(optional = false)
+    private Finca finca;
 
     /**
      *
@@ -66,6 +50,14 @@ public class HumedadDelSuelo implements Serializable {
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Finca getFinca() {
+        return finca;
+    }
+
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
     /**
@@ -152,12 +144,13 @@ public class HumedadDelSuelo implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.fecha);
-        hash = 97 * hash + Float.floatToIntBits(this.valorEn30Cms);
-        hash = 97 * hash + Float.floatToIntBits(this.valorEn15Cms);
-        hash = 97 * hash + Objects.hashCode(this.hora);
+        int hash = 5;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.fecha);
+        hash = 11 * hash + Objects.hashCode(this.hora);
+        hash = 11 * hash + Float.floatToIntBits(this.valorEn30Cms);
+        hash = 11 * hash + Float.floatToIntBits(this.valorEn15Cms);
+        hash = 11 * hash + Objects.hashCode(this.finca);
         return hash;
     }
 
@@ -176,16 +169,18 @@ public class HumedadDelSuelo implements Serializable {
         if (!Objects.equals(this.fecha, other.fecha)) {
             return false;
         }
+        if (!Objects.equals(this.hora, other.hora)) {
+            return false;
+        }
         if (Float.floatToIntBits(this.valorEn30Cms) != Float.floatToIntBits(other.valorEn30Cms)) {
             return false;
         }
         if (Float.floatToIntBits(this.valorEn15Cms) != Float.floatToIntBits(other.valorEn15Cms)) {
             return false;
         }
-        if (!Objects.equals(this.hora, other.hora)) {
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         return true;
     }
-
 }

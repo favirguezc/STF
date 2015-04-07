@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -32,30 +32,8 @@ public class TrampaDeInsectos implements Serializable {
     private int individuos;
     private boolean cambioDePegante;
     private String observaciones;
-
-    /**
-     *
-     */
-    public TrampaDeInsectos() {
-    }
-
-    /**
-     *
-     * @param fecha
-     * @param nombre
-     * @param especie
-     * @param individuos
-     * @param cambio
-     * @param observaciones
-     */
-    public TrampaDeInsectos(Date fecha, String nombre, String especie, int individuos, boolean cambio, String observaciones) {
-        this.fecha = fecha;
-        this.nombre = nombre;
-        this.especie = especie;
-        this.individuos = individuos;
-        this.cambioDePegante = cambio;
-        this.observaciones = observaciones;
-    }
+    @ManyToOne(optional = false)
+    private Finca finca;
 
     /**
      *
@@ -87,6 +65,14 @@ public class TrampaDeInsectos implements Serializable {
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Finca getFinca() {
+        return finca;
+    }
+
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
     /**
@@ -171,14 +157,15 @@ public class TrampaDeInsectos implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.fecha);
-        hash = 29 * hash + Objects.hashCode(this.nombre);
-        hash = 29 * hash + Objects.hashCode(this.especie);
-        hash = 29 * hash + this.individuos;
-        hash = 29 * hash + (this.cambioDePegante ? 1 : 0);
-        hash = 29 * hash + Objects.hashCode(this.observaciones);
+        int hash = 5;
+        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.fecha);
+        hash = 47 * hash + Objects.hashCode(this.nombre);
+        hash = 47 * hash + Objects.hashCode(this.especie);
+        hash = 47 * hash + this.individuos;
+        hash = 47 * hash + (this.cambioDePegante ? 1 : 0);
+        hash = 47 * hash + Objects.hashCode(this.observaciones);
+        hash = 47 * hash + Objects.hashCode(this.finca);
         return hash;
     }
 
@@ -212,7 +199,10 @@ public class TrampaDeInsectos implements Serializable {
         if (!Objects.equals(this.observaciones, other.observaciones)) {
             return false;
         }
+        if (!Objects.equals(this.finca, other.finca)) {
+            return false;
+        }
         return true;
     }
-    
+
 }

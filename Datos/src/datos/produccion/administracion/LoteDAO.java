@@ -7,6 +7,7 @@ package datos.produccion.administracion;
 
 import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +16,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Persona;
 
 /**
  *
@@ -190,6 +193,17 @@ public class LoteDAO implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Lote> findLoteEntitiesForSelectedFarm(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Lote> query = em.createQuery("SELECT l FROM Lote l WHERE l.finca = :finca", Lote.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
         } finally {
             em.close();
         }

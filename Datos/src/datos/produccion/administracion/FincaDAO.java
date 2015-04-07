@@ -7,6 +7,7 @@ package datos.produccion.administracion;
 
 import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +17,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
 import modelo.produccion.administracion.Persona;
 
 /**
@@ -92,12 +92,24 @@ public class FincaDAO implements Serializable {
         }
     }
 
-    public List<Finca> findFincaEntities(Persona user) {
+    public List<Finca> findFincaEntitiesForCurrentUser(Persona user) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Finca> query = em.createQuery("SELECT f FROM Finca f WHERE f.propietario = :persona", Finca.class);
-            query.setParameter("persona", user);
-            return query.getResultList();
+            if (user.isAdministrador()) {
+                return findFincaEntities();
+            } else {
+                TypedQuery<Finca> query = em.createQuery("SELECT f FROM Finca f WHERE f.propietario = :persona", Finca.class);
+                query.setParameter("persona", user);
+                List<Finca> resultList = query.getResultList();
+                if (resultList == null) {
+                    resultList = new LinkedList<>();
+                }
+                List<Finca> findFincaEntities = new ContratoDAO(emf).findFincaEntities(user);
+                if (findFincaEntities != null && !findFincaEntities.isEmpty()) {
+                    resultList.addAll(findFincaEntities);
+                }
+                return resultList;
+            }
         } finally {
             em.close();
         }

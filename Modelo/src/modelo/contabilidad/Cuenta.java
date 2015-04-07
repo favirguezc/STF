@@ -6,7 +6,9 @@
 package modelo.contabilidad;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import modelo.produccion.administracion.Persona;
+import modelo.util.DateTools;
 
 /**
  *
@@ -57,22 +60,38 @@ public class Cuenta implements Serializable {
 
     public void setPaquete(Paquete paquete) {
         this.paquete = paquete;
+        setFechas();
     }
 
     public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
     public Date getFechaFinal() {
         return fechaFinal;
     }
 
-    public void setFechaFinal(Date fechaFinal) {
-        this.fechaFinal = fechaFinal;
+    private void setFechas() {
+        if (paquete != null && paquete.getTipoPeriodo() != null && paquete.getCantidadPeriodos() > 0) {
+            this.fechaInicio = DateTools.getDate(DateTools.getYear(), DateTools.getMonth(), DateTools.getDayOfMonth());
+            Calendar calendar = GregorianCalendar.getInstance();
+            switch (paquete.getTipoPeriodo()) {
+                case Dia:
+                    calendar.add(paquete.getCantidadPeriodos(), Calendar.DAY_OF_MONTH);
+                    break;
+                case Mes:
+                    calendar.add(paquete.getCantidadPeriodos(), Calendar.MONTH);
+                    break;
+                case Año:
+                    calendar.add(paquete.getCantidadPeriodos(), Calendar.YEAR);
+                    break;
+            }
+            this.fechaFinal = calendar.getTime();
+        }
+    }
+
+    public boolean isActive() {
+        return !(fechaInicio.before(DateTools.getDate()) || fechaFinal.after(DateTools.getDate()));
     }
 
     @Override
@@ -112,5 +131,5 @@ public class Cuenta implements Serializable {
         }
         return true;
     }
-    
+
 }

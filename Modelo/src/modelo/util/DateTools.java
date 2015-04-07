@@ -281,4 +281,9 @@ public class DateTools {
         Calendar instance = GregorianCalendar.getInstance();
         return instance.get(Calendar.YEAR);
     }
+
+    public static int getDayOfMonth() {
+        Calendar instance = GregorianCalendar.getInstance();
+        return instance.get(Calendar.DAY_OF_MONTH);
+    }
 }

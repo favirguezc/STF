@@ -34,6 +34,8 @@
     <class>modelo.produccion.variablesClimaticas.Lluvia</class>
     <class>modelo.produccion.variablesClimaticas.Temperatura</class>
     <class>modelo.produccion.variablesClimaticas.Termometro</class>
+    <class>modelo.contabilidad.Cuenta</class>
+    <class>modelo.contabilidad.Paquete</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

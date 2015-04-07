@@ -17,7 +17,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 import modelo.produccion.aplicaciones.Aplicacion;
 
 /**
@@ -118,8 +120,20 @@ public class AplicacionDAO implements Serializable {
 
     /**
      *
+     * @param finca
      * @return
      */
+    public List<Aplicacion> findAplicacionEntitiesForSelectedFarm(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Aplicacion> query = em.createQuery("SELECT a FROM Aplicacion a WHERE a.modulo.lote.finca = :finca", Aplicacion.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     public List<Aplicacion> findAplicacionEntities() {
         return AplicacionDAO.this.findAplicacionEntities(true, -1, -1);
     }
@@ -131,7 +145,7 @@ public class AplicacionDAO implements Serializable {
      * @return
      */
     public List<Aplicacion> findAplicacionEntities(int maxResults, int firstResult) {
-        return AplicacionDAO.this.findAplicacionEntities(false, maxResults, firstResult);
+        return findAplicacionEntities(false, maxResults, firstResult);
     }
 
     private List<Aplicacion> findAplicacionEntities(boolean all, int maxResults, int firstResult) {

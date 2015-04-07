@@ -24,6 +24,8 @@
                         <p:inputText id="cedula" value="#{personaController.selected.cedula}" title="#{bundle.CreatePersonaTitle_cedula}" required="true" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_contrasena}" for="contrasena"/>
                         <p:password id="contrasena" value="#{personaController.selected.contrasena}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{bundle.CreatePersonaTitle_correo}" required="true"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
                         <p:selectOneMenu id="sexo" value="#{personaController.selected.sexo}">
                             <f:selectItems value="#{sexoController.sexoValues}"/>

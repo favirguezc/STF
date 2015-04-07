@@ -31,6 +31,8 @@ public class Persona implements Serializable {
     @Column(nullable = false)
     private String contrasena;
     @Column(nullable = false)
+    private String correo;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
     @Column(nullable = false)
@@ -40,36 +42,11 @@ public class Persona implements Serializable {
     @Enumerated(EnumType.STRING)
     private RH rh;
     private boolean administrador;
+
     /**
      *
      */
     public Persona() {
-    }
-
-    /**
-     *
-     * @param nombre
-     * @param nombre2
-     * @param apellido
-     * @param apellido2
-     * @param cedula
-     * @param contrasena
-     * @param sexo
-     * @param telefono
-     * @param grupoSanguineo
-     * @param rh
-     */
-    public Persona(String nombre, String nombre2, String apellido, String apellido2, long cedula, String contrasena, Sexo sexo, long telefono, GrupoSanguineo grupoSanguineo, RH rh) {
-        this.nombre = nombre;
-        this.nombre2 = nombre2;
-        this.apellido = apellido;
-        this.apellido2 = apellido2;
-        this.cedula = cedula;
-        this.contrasena = contrasena;
-        this.sexo = sexo;
-        this.telefono = telefono;
-        this.grupoSanguineo = grupoSanguineo;
-        this.rh = rh;
     }
 
     /**
@@ -182,6 +159,14 @@ public class Persona implements Serializable {
      */
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     /**

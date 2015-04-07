@@ -15,7 +15,6 @@ public enum Pagina {
     Lote,
     Modulo,
     Persona,
-    RolPersona,
     Aplicacion,
     Insumo,
     Trabajo,
@@ -40,5 +39,6 @@ public enum Pagina {
     Departamento,
     Municipio,
     Vereda,
-    Finca;
+    Finca,
+    Contrato;
 }

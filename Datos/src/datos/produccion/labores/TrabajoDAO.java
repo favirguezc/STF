@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.labores.Trabajo;
@@ -119,8 +120,20 @@ public class TrabajoDAO implements Serializable {
 
     /**
      *
+     * @param farm
      * @return
      */
+    public List<Trabajo> findTrabajoEntities(Finca farm) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Trabajo> query = em.createQuery("SELECT a FROM Trabajo a WHERE a.modulo.lote.finca = :finca", Trabajo.class);
+            query.setParameter("finca", farm);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public List<Trabajo> findTrabajoEntities() {
         return findTrabajoEntities(true, -1, -1);
     }
@@ -201,7 +214,7 @@ public class TrabajoDAO implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Trabajo> findTrabajoEntities(Persona trabajador, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         try {

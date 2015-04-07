@@ -15,7 +15,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
+import modelo.produccion.aplicaciones.Aplicacion;
 
 /**
  *
@@ -116,17 +118,11 @@ public class PersonaDAO implements Serializable {
     /**
      *
      * @return
-     */
+     */    
     public List<Persona> findPersonaEntities() {
         return findPersonaEntities(true, -1, -1);
     }
 
-    /**
-     *
-     * @param maxResults
-     * @param firstResult
-     * @return
-     */
     public List<Persona> findPersonaEntities(int maxResults, int firstResult) {
         return findPersonaEntities(false, maxResults, firstResult);
     }

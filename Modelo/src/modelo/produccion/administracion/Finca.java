@@ -129,7 +129,7 @@ public class Finca implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + ", " + vereda;
     }
 
 }

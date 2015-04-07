@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Lote;
 import modelo.produccion.administracion.Modulo;
 
@@ -209,6 +210,17 @@ public class ModuloDAO implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Modulo> findModuloEntitiesForSelectedFarm(Finca selectedFarm) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Modulo> query = em.createQuery("SELECT m FROM Modulo m WHERE m.lote.finca = :finca", Modulo.class);
+            query.setParameter("finca", selectedFarm);
+            return query.getResultList();
         } finally {
             em.close();
         }

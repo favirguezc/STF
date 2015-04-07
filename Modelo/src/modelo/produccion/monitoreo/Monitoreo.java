@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -25,27 +27,12 @@ public class Monitoreo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    @Column(unique = true)
     private long numeroDeMonitoreo;    
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
-    private Date fecha;
-
-    /**
-     *
-     */
-    public Monitoreo() {
-    }
-
-    /**
-     *
-     * @param numeroDeMonitoreo
-     * @param fecha
-     */
-    public Monitoreo(long numeroDeMonitoreo, Date fecha) {
-        this.numeroDeMonitoreo = numeroDeMonitoreo;
-        this.fecha = fecha;
-    }
+    private Date fecha;    
+    @ManyToOne(optional = false)
+    private Finca finca;
 
     /**
      *
@@ -95,12 +82,21 @@ public class Monitoreo implements Serializable {
         this.fecha = fecha;
     }
 
+    public Finca getFinca() {
+        return finca;
+    }
+
+    public void setFinca(Finca finca) {
+        this.finca = finca;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + (int) (this.numeroDeMonitoreo ^ (this.numeroDeMonitoreo >>> 32));
-        hash = 73 * hash + Objects.hashCode(this.fecha);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + (int) (this.numeroDeMonitoreo ^ (this.numeroDeMonitoreo >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.fecha);
+        hash = 67 * hash + Objects.hashCode(this.finca);
         return hash;
     }
 
@@ -120,6 +116,9 @@ public class Monitoreo implements Serializable {
             return false;
         }
         if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         return true;

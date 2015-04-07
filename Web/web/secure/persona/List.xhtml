@@ -58,6 +58,12 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPersonaTitle_correo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.correo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{bundle.ListPersonaTitle_sexo}"/>
                         </f:facet>
                         <h:outputText value="#{item.sexo}"/>

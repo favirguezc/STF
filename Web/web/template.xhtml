@@ -20,7 +20,7 @@
             <p:layoutUnit position="north">
                 <table width="100%">
                     <tr>
-                        <td align="left">
+                        <td align="left" width="25%">
                             <table>
                                 <tr>
                                     <td align="left">
@@ -36,13 +36,35 @@
                             </table>
                         </td>
                         <td align="center">
-                            <h:outputText value="Sistema de Trazabilidad para Fresa" style="font-size:30px;"/>
+                            <center>
+                                <h:outputText value="Sistema de Trazabilidad para Fresa" style="font-size:30px;"/>
+                            </center>
                         </td>
-                        <td align="right" width="30%">
-                            <h:outputText value="#{signInController.mensaje}"/>
-                            <h:form>                                
-                                <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="true" rendered="#{signInController.paso3Completado}" />
-                            </h:form>                            
+                        <td align="right" width="15%">
+                            <table width="100%">
+                                <tr>
+                                    <td align="right">
+                                        <h:outputText value="Hola #{signInController.user}" rendered="#{!empty signInController.user}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <h:outputText value="Finca: #{signInController.finca}" rendered="#{!empty signInController.finca}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <h:outputText value="Rol: #{signInController.rol}" rendered="#{!empty signInController.rol}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <h:form>                                
+                                            <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="false" rendered="#{signInController.step1userSignedIn}" />
+                                        </h:form>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -52,9 +74,9 @@
                         <p:submenu label="#{bundle.Management}">
                             <p:menuitem value="Finca" outcome="/secure/finca/List.xhtml"/>
                             <p:menuitem value="Lote" outcome="/secure/lote/List.xhtml"/>
-                            <p:menuitem value="Módulo" outcome="/secure/modulo/List.xhtml" />
-                            <p:menuitem value="Persona" outcome="/secure/persona/List.xhtml" />
-                            <p:menuitem value="Roles" outcome="/secure/rolPersona/List.xhtml" />
+                            <p:menuitem value="Módulo" outcome="/secure/modulo/List.xhtml"/>
+                            <p:menuitem value="Persona" outcome="/secure/persona/List.xhtml"/>
+                            <p:menuitem value="Contrato" outcome="/secure/contrato/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Application}">
                             <p:menuitem value="Aplicación" outcome="/secure/aplicacion/List.xhtml"/>

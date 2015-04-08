@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import modelo.finanzas.costo.Costo;
 import modelo.finanzas.costo.TipoCosto;
+import modelo.produccion.administracion.Finca;
+import modelo.produccion.administracion.Lote;
 
 /**
  *
@@ -146,26 +148,33 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(TipoCosto tipo, Date inicio, Date fin) {
+    public List<Costo> findCostoEntities(Lote lote, TipoCosto tipo, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
         String queryString = "SELECT c FROM Costo c";
-        if (tipo != null || inicio != null || fin != null) {
+        if (lote != null || tipo != null || inicio != null || fin != null) {
             queryString += " WHERE";
         }
+        if (lote != null) {
+            queryString += " c.lote = :lote";
+            d = true;
+        }
         if (tipo != null) {
+            if (d) {
+                queryString += " AND";
+            }
             queryString += " c.tipo = :tipo";
             a = true;
         }
         if (fin != null) {
-            if (a) {
+            if (a || d) {
                 queryString += " AND";
             }
             queryString += " c.fecha BETWEEN :fecha1 AND :fecha2";
             b = c = true;
         } else if (inicio != null) {
-            if (a) {
+            if (a || d) {
                 queryString += " AND";
             }
             queryString += " c.fecha = :fecha1";
@@ -183,6 +192,39 @@ public class CostoDAO implements Serializable {
             if (a) {
                 query.setParameter("tipo", tipo);
             }
+            if (d) {
+                query.setParameter("lote", lote);
+            }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Costo> findCostoEntities(Lote lote) {
+        EntityManager em = getEntityManager();
+        String queryString = "SELECT c FROM Costo c";
+        if (lote != null) {
+            queryString += " WHERE c.lote = :lote";
+        }
+        queryString += " ORDER BY c.fecha ASC";
+        try {
+            TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
+            if (lote != null) {
+                query.setParameter("lote", lote);
+            }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Costo> findCostoEntitiesForSelectedFarm(Finca selectedFarm) {
+        EntityManager em = getEntityManager();
+        String queryString = "SELECT c FROM Costo c WHERE c.lote.finca = :finca ORDER BY c.fecha ASC";
+        try {
+            TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
+            query.setParameter("finca", selectedFarm);
             return query.getResultList();
         } finally {
             em.close();

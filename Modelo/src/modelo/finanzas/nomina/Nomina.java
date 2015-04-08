@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Column;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
 
 /**
@@ -31,10 +32,12 @@ public class Nomina implements Serializable{
     private Date fechaDesde;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Persona trabajador;
-    @Column
+    @Column(nullable = false)
     private float total;
+    @ManyToOne(optional = false)
+    private Finca finca;
 
     public Nomina() {
     }
@@ -84,6 +87,14 @@ public class Nomina implements Serializable{
         this.total = total;
     }
 
+    public Finca getFinca() {
+        return finca;
+    }
+
+    public void setFinca(Finca finca) {
+        this.finca = finca;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -91,6 +102,7 @@ public class Nomina implements Serializable{
         hash = 71 * hash + Objects.hashCode(this.fecha);
         hash = 71 * hash + Objects.hashCode(this.trabajador);
         hash = 71 * hash + Float.floatToIntBits(this.total);
+        hash = 71 * hash + Objects.hashCode(this.finca);
         return hash;
     }
 
@@ -113,6 +125,9 @@ public class Nomina implements Serializable{
             return false;
         }
         if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
+            return false;
+        }
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         return true;

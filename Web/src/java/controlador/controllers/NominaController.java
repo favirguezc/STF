@@ -22,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.cosecha.Recoleccion;
 import modelo.produccion.labores.Labor;
@@ -36,6 +37,14 @@ public class NominaController implements Serializable {
     private NominaDAO jpaController = null;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
+    @ManagedProperty(value = "#{recoleccionCotroller}")
+    private RecoleccionController recoleccionCotroller;
+    @ManagedProperty(value = "#{trabajoController}")
+    private TrabajoController trabajoController;
+    @ManagedProperty(value = "#{laborController}")
+    private LaborController laborController;
 
     public NominaController() {
     }
@@ -56,15 +65,54 @@ public class NominaController implements Serializable {
         this.permisoBean = permisoBean;
     }
 
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
+    }
+
+    public RecoleccionController getRecoleccionCotroller() {
+        return recoleccionCotroller;
+    }
+
+    public void setRecoleccionCotroller(RecoleccionController recoleccionCotroller) {
+        this.recoleccionCotroller = recoleccionCotroller;
+    }
+
+    public TrabajoController getTrabajoController() {
+        return trabajoController;
+    }
+
+    public void setTrabajoController(TrabajoController trabajoController) {
+        this.trabajoController = trabajoController;
+    }
+
+    public LaborController getLaborController() {
+        return laborController;
+    }
+
+    public void setLaborController(LaborController laborController) {
+        this.laborController = laborController;
+    }
+
     private NominaDAO getJpaController() {
         if (jpaController == null) {
             jpaController = new NominaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
     
     public Nomina prepareCreate() {
         selected = new Nomina();
+        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
+        initializeEmbeddableKey();
         return selected;
     }
 
@@ -122,7 +170,11 @@ public class NominaController implements Serializable {
 
     public List<Nomina> getItems() {
         if (items == null) {
-            items = getJpaController().findNominaEntities();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findNominaEntitiesForSelectedFarm(signInBean.getFinca());
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }
@@ -139,8 +191,8 @@ public class NominaController implements Serializable {
         return getJpaController().findNominaEntities();
     }
     
-    public List<Nomina> leerLista(Persona trabajador, Date inicio, Date fin) {
-        return getJpaController().findNominaEntities(trabajador, inicio, fin);
+    public List<Nomina> leerLista(Finca finca, Persona trabajador, Date inicio, Date fin) {
+        return getJpaController().findNominaEntities(finca, trabajador, inicio, fin);
     }
     
     private static Date getSaturday(Date fecha) {
@@ -156,7 +208,7 @@ public class NominaController implements Serializable {
         if(selected.getFecha().after(calendar.getTime())){
             return false;
         }
-        List<Nomina> anteriores = leerLista(selected.getTrabajador(), selected.getFechaDesde(), selected.getFecha());
+        List<Nomina> anteriores = leerLista(selected.getFinca(), selected.getTrabajador(), selected.getFechaDesde(), selected.getFecha());
         if(anteriores != null && !anteriores.isEmpty()){
             for(Nomina nomina : anteriores){
                 if(nomina.getFecha().equals(selected.getFecha())){
@@ -170,16 +222,7 @@ public class NominaController implements Serializable {
     public float getValorRecolectado(){
         float valorRecolectado = 0;
         if(selected != null){
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(selected.getFecha()); 
-            calendar.add(Calendar.DAY_OF_YEAR, -5);  // numero de días a añadir, o restar en caso de días<0
-            Date inicial = calendar.getTime();
-
-            FacesContext context = FacesContext.getCurrentInstance();
-            RecoleccionController recoleccionCotroller = (RecoleccionController) context.getApplication().
-                        getELResolver().getValue(context.getELContext(), null, "recoleccionController");
-
-            Recoleccion totalRecolectado = recoleccionCotroller.sumarRegistros(selected.getTrabajador(), null,inicial,selected.getFecha());
+            Recoleccion totalRecolectado = recoleccionCotroller.sumarRegistros(selected.getTrabajador(), null,selected.getFechaDesde(),selected.getFecha());
             valorRecolectado = (totalRecolectado.getPesadaGramos()/500)*125;
         }
         return valorRecolectado;
@@ -190,18 +233,7 @@ public class NominaController implements Serializable {
         List<Labor> labores = null;
         if(selected != null){
             labores = new ArrayList<Labor>();
-            FacesContext context = FacesContext.getCurrentInstance();
-            TrabajoController trabajoController = (TrabajoController) context.getApplication().
-                        getELResolver().getValue(context.getELContext(), null, "trabajoController");
-            LaborController laborController = (LaborController) context.getApplication().
-                        getELResolver().getValue(context.getELContext(), null, "laborController");
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(selected.getFecha()); 
-            calendar.add(Calendar.DAY_OF_YEAR, -5);  // numero de días a añadir, o restar en caso de días<0
-            Date inicial = calendar.getTime();
-
-            List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),inicial,selected.getFecha());
+            List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
             for(Labor labor : laborController.getItemsAvailableSelectOne()){
                 float valorTrabajo = 0;
                 for(Trabajo trabajo : trabajosRealizados){
@@ -223,26 +255,12 @@ public class NominaController implements Serializable {
         
         float total = 0;
         
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(selected.getFecha()); 
-        calendar.add(Calendar.DAY_OF_YEAR, -5);  // numero de días a añadir, o restar en caso de días<0
-        Date inicial = calendar.getTime();
-        
-        FacesContext context = FacesContext.getCurrentInstance();
-        RecoleccionController recoleccionCotroller = (RecoleccionController) context.getApplication().
-                    getELResolver().getValue(context.getELContext(), null, "recoleccionController");
-        TrabajoController trabajoController = (TrabajoController) context.getApplication().
-                    getELResolver().getValue(context.getELContext(), null, "trabajoController");
-        LaborController laborController = (LaborController) context.getApplication().
-                    getELResolver().getValue(context.getELContext(), null, "laborController");
-        
         //Fruta recolectada
-        Recoleccion totalRecolectado = recoleccionCotroller.sumarRegistros(selected.getTrabajador(), null,inicial,selected.getFecha());
-        float valorRecolectado = (totalRecolectado.getPesadaGramos()/500)*125;
+        float valorRecolectado = getValorRecolectado();
         
         //Trabajos hechos
         float valorTrabajos = 0;
-        List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),inicial,selected.getFecha());
+        List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
         for(Labor labor : laborController.getItemsAvailableSelectOne()){
             for(Trabajo trabajo : trabajosRealizados){
                 if(trabajo.getLabor().equals(labor)){

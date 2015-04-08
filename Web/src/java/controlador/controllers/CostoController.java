@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.finanzas.costo.TipoCosto;
+import modelo.produccion.administracion.Lote;
 
 @ManagedBean(name = "costoController")
 @SessionScoped
@@ -30,6 +31,8 @@ public class CostoController implements Serializable {
     private CostoDAO jpaController = null;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
 
     public CostoController() {
     }
@@ -50,10 +53,20 @@ public class CostoController implements Serializable {
         this.permisoBean = permisoBean;
     }
 
-    public void setItems(List<Costo> items) {
-        this.items = items;
+    public SignInController getSignInBean() {
+        return signInBean;
     }
 
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
+    }
+
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
+    
     private CostoDAO getJpaController() {
         if (jpaController == null) {
             jpaController = new CostoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
@@ -63,6 +76,7 @@ public class CostoController implements Serializable {
 
     public Costo prepareCreate() {
         selected = new Costo();
+        initializeEmbeddableKey();
         return selected;
     }
 
@@ -109,7 +123,11 @@ public class CostoController implements Serializable {
 
     public List<Costo> getItems() {
         if (items == null) {
-            items = getJpaController().findCostoEntities();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findCostoEntitiesForSelectedFarm(signInBean.getFinca());
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }
@@ -122,12 +140,12 @@ public class CostoController implements Serializable {
         return getJpaController().findCostoEntities();
     }
     
-    public List<Costo> leerLista(TipoCosto tipo, Date inicio, Date fin) {
-        return getJpaController().findCostoEntities(tipo, inicio, fin);
+    public List<Costo> leerLista(Lote lote, TipoCosto tipo, Date inicio, Date fin) {
+        return getJpaController().findCostoEntities(lote, tipo, inicio, fin);
     }
 
-    public Costo sumarRegistros(TipoCosto tipo, Date inicio, Date fin) {
-        List<Costo> leerLista = leerLista(tipo, inicio, fin);
+    public Costo sumarRegistros(Lote lote, TipoCosto tipo, Date inicio, Date fin) {
+        List<Costo> leerLista = leerLista(lote, tipo, inicio, fin);
         Costo suma = new Costo();
         for (Costo c : leerLista) {
             //suma.sumar(c);

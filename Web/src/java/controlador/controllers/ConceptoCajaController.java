@@ -34,6 +34,8 @@ public class ConceptoCajaController implements Serializable {
     private int entrada;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
 
     public ConceptoCajaController() {
     }
@@ -52,6 +54,14 @@ public class ConceptoCajaController implements Serializable {
 
     public void setPermisoBean(PermisoController permisoBean) {
         this.permisoBean = permisoBean;
+    }
+    
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
     }
 
     public List<SelectItem> getItemsEntrada() {
@@ -81,6 +91,12 @@ public class ConceptoCajaController implements Serializable {
         this.cajaFiltro = cajaFiltro;
     }
     
+    protected void setEmbeddableKeys() {
+    }
+
+    protected void initializeEmbeddableKey() {
+    }
+    
     private ConceptoCajaDAO getJpaController() {
         if (jpaController == null) {
             jpaController = new ConceptoCajaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
@@ -90,6 +106,7 @@ public class ConceptoCajaController implements Serializable {
 
     public ConceptoCaja prepareCreate() {
         selected = new ConceptoCaja();
+        initializeEmbeddableKey();
         return selected;
     }
 
@@ -145,8 +162,12 @@ public class ConceptoCajaController implements Serializable {
 
     public List<ConceptoCaja> getItems() {
         if (items == null) {
-            items = getJpaController().findConceptoCajaEntities();
-            obtenerSaldo();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findConceptoCajaEntitiesForSelectedFarm(signInBean.getFinca());
+                obtenerSaldo();
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }

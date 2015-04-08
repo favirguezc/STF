@@ -31,9 +31,9 @@ public class Compra implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     Date fechaCompra;
-    @ManyToOne
+    @ManyToOne(optional = false)
     Lote lote;
-    @ManyToOne
+    @ManyToOne(optional = false)
     Insumo insumo;
     @Column(nullable = false)
     float precio;

@@ -41,6 +41,8 @@ public class CompraController implements Serializable{
     private boolean nuePrecio;
     private CompraDAO jpaController = null;
     private PrecioDAO precioJpaController = null;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
@@ -76,6 +78,14 @@ public class CompraController implements Serializable{
     public void setPermisoBean(PermisoController permisoBean) {
         this.permisoBean = permisoBean;
     }
+
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
+    }
     
     protected void setEmbeddableKeys() {
     }
@@ -93,7 +103,11 @@ public class CompraController implements Serializable{
 
     public List<Compra> getItems() {
         if (items == null) {
-            items = getJpaController().findCompraEntities();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findCompraEntitiesForSelectedFarm(signInBean.getFinca());
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }
@@ -173,13 +187,11 @@ public class CompraController implements Serializable{
                 nuePrecio = false;
                 selected.setPrecio(precio.getValor());
             }else{
-                //else create new precion
+                //else create new precio
                 nuePrecio = true;
                 precio = new Precio(selected.getInsumo().getNombre(),0);
                 selected.setPrecio(0);
             }
-        }else{
-            //insert code here
         }
     }
     

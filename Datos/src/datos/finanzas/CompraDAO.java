@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.finanzas.compra.Compra;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Lote;
 
 /**
@@ -176,6 +177,17 @@ public class CompraDAO {
             if (a) {
                 query.setParameter("lote", lote);
             }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Compra> findCompraEntitiesForSelectedFarm(Finca selectedFarm) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Compra> query = em.createQuery("SELECT co FROM Compra co WHERE co.lote.finca = :finca ORDER BY co.fechaCompra ASC", Compra.class);
+            query.setParameter("finca", selectedFarm);
             return query.getResultList();
         } finally {
             em.close();

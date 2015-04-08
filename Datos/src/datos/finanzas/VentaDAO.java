@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.finanzas.ventas.Venta;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
 
 /**
@@ -177,6 +178,17 @@ public class VentaDAO {
             if (a) {
                 query.setParameter("cliente", cliente);
             }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Venta> findVentaEntitiesForSelectedFarm(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Venta> query = em.createQuery("SELECT v FROM Venta v WHERE v.finca = :finca  ORDER BY v.fechaVenta ASC", Venta.class);
+            query.setParameter("finca", finca);
             return query.getResultList();
         } finally {
             em.close();

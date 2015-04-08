@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
 
 /**
@@ -32,6 +33,8 @@ public class Venta implements Serializable {
     private Date fechaVenta;
     @ManyToOne(optional = false)
     private Persona cliente;
+    @ManyToOne(optional = false)
+    private Finca finca;
     @Column
     private float extraGramos;
     @Column
@@ -177,6 +180,22 @@ public class Venta implements Serializable {
      */
     public void setCliente(Persona cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Finca getFinca() {
+        return finca;
+    }
+
+    /**
+     *
+     * @param finca
+     */
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
     /**
@@ -463,6 +482,7 @@ public class Venta implements Serializable {
         hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 89 * hash + Objects.hashCode(this.fechaVenta);
         hash = 89 * hash + Objects.hashCode(this.cliente);
+        hash = 89 * hash + Objects.hashCode(this.finca);
         hash = 89 * hash + Float.floatToIntBits(this.extraGramos);
         hash = 89 * hash + Float.floatToIntBits(this.primeraGramos);
         hash = 89 * hash + Float.floatToIntBits(this.segundaGramos);
@@ -494,6 +514,9 @@ public class Venta implements Serializable {
             return false;
         }
         if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         if (Float.floatToIntBits(this.extraGramos) != Float.floatToIntBits(other.extraGramos)) {

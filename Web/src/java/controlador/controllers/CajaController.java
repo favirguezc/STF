@@ -28,6 +28,8 @@ public class CajaController implements Serializable {
     private CajaDAO jpaController = null;  
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
 
     public CajaController() {
     }
@@ -48,6 +50,14 @@ public class CajaController implements Serializable {
         this.permisoBean = permisoBean;
     }
     
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
+    }
+    
     private CajaDAO getJpaController() {
         if (jpaController == null) {
             jpaController = new CajaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
@@ -55,9 +65,16 @@ public class CajaController implements Serializable {
         return jpaController;
     }
 
+    protected void setEmbeddableKeys() {
+    }
 
+    protected void initializeEmbeddableKey() {
+    }
+    
     public Caja prepareCreate() {
         selected = new Caja();
+        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
+        initializeEmbeddableKey();
         return selected;
     }
 
@@ -103,17 +120,21 @@ public class CajaController implements Serializable {
     
     public List<Caja> getItems() {
          if (items == null) {
-            items = getJpaController().findCajaEntities();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findCajaEntitiesForSelectedFarm(signInBean.getFinca());
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }
 
     public List<Caja> getItemsAvailableSelectMany() {
-        return getJpaController().findCajaEntities();
+        return getItems();
     }
 
     public List<Caja> getItemsAvailableSelectOne() {
-        return getJpaController().findCajaEntities();
+        return getItems();
     }
 
     @FacesConverter(forClass = Caja.class)

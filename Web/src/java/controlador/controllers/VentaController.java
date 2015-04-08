@@ -38,6 +38,8 @@ public class VentaController implements Serializable {
     private VentaDAO jpaController = null;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
 
     public VentaController() {
     }
@@ -65,6 +67,14 @@ public class VentaController implements Serializable {
         this.permisoBean = permisoBean;
     }
 
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -73,6 +83,7 @@ public class VentaController implements Serializable {
 
     public Venta prepareCreate() {
         selected = new Venta();
+        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
         initializeEmbeddableKey();
         return selected;
     }
@@ -98,7 +109,11 @@ public class VentaController implements Serializable {
 
     public List<Venta> getItems() {
         if (items == null) {
-            items = getJpaController().findVentaEntities();
+            if (signInBean.getFinca() != null) {
+                items = getJpaController().findVentaEntitiesForSelectedFarm(signInBean.getFinca());
+            } else {
+                JsfUtil.addErrorMessage("Seleccione una Finca");
+            }
         }
         return items;
     }

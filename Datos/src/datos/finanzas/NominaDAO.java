@@ -18,6 +18,7 @@ import java.util.Date;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import modelo.finanzas.nomina.Nomina;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
 
 /**
@@ -140,34 +141,26 @@ public class NominaDAO implements Serializable {
         }
     }
     
-    public List<Nomina> findNominaEntities(Persona trabajador, Date inicio, Date fin) {
+    public List<Nomina> findNominaEntities(Finca finca, Persona trabajador, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c;
         a = b = c = false;
-        String queryString = "SELECT t FROM Nomina t";
-        if (trabajador != null || inicio != null || fin != null) {
-            queryString += " WHERE";
-        }
+        String queryString = "SELECT t FROM Nomina t WHERE t.finca = :finca";
         if (trabajador != null) {
-            queryString += " t.trabajador = :trabajador";
+            queryString += "AND t.trabajador = :trabajador";
             a = true;
         }
         if (fin != null) {
-            if (a) {
-                queryString += " AND";
-            }
-            queryString += " t.fecha BETWEEN :fecha1 AND :fecha2";
+            queryString += " AND t.fecha BETWEEN :fecha1 AND :fecha2";
             b = c = true;
         } else if (inicio != null) {
-            if (a) {
-                queryString += " AND";
-            }
-            queryString += " t.fecha = :fecha1";
+            queryString += " AND t.fecha = :fecha1";
             b = true;
         }
         queryString += " ORDER BY t.fecha ASC";
         try {
             TypedQuery<Nomina> query = em.createQuery(queryString, Nomina.class);
+            query.setParameter("finca", finca);
             if (b) {
                 query.setParameter("fecha1", inicio, TemporalType.DATE);
             }
@@ -183,4 +176,14 @@ public class NominaDAO implements Serializable {
         }
     }
     
+    public List<Nomina> findNominaEntitiesForSelectedFarm(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Nomina> query = em.createQuery("SELECT n FROM Nomina n WHERE n.finca = :finca  ORDER BY n.fecha ASC", Nomina.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -27,7 +27,7 @@ public enum TipoCosto {
                 return "Insumos";
             case EQUIPOS:
                 return "Equipos e Implementos";
-                case SERVICIOS:
+            case SERVICIOS:
                 return "Servicios";
             default:
                 return "";

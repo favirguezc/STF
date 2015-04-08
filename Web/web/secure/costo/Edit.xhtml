@@ -12,6 +12,13 @@
             <h:form id="CostoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{costoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateModuloLabel_lote}" for="lote" />
+                        <p:selectOneMenu id="lote" value="#{costoController.selected.lote}" >
+                            <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
+                                           var="loteItem"
+                                           itemValue="#{loteItem}"
+                                           itemLabel="#{loteItem.nombre}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCostoLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{costoController.selected.fecha}" title="#{bundle.EditCostoTitle_fecha}" required="true" requiredMessage="#{CreateCostoRequiredMessage_fecha}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditCostoLabel_tipo}" for="tipo" />
@@ -23,7 +30,9 @@
                         <p:outputLabel value="#{bundle.EditCostoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{costoController.selected.nombre}" title="#{bundle.EditCostoTitle_nombre}" />
                         <p:outputLabel value="#{bundle.EditCostoLabel_item}" for="item" />
-                        <p:inputText id="item" value="#{costoController.selected.item}" title="#{bundle.EditCostoTitle_item}" />
+                        <p:selectOneMenu id="item" value="#{costoController.selected.item}">
+                            <f:selectItems value="#{itemCostoController.itemCostoValues}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCostoLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{costoController.selected.cantidad}" title="#{bundle.EditCostoTitle_cantidad}" />
                         <p:outputLabel value="#{bundle.EditCostoLabel_precioUnid}" for="precioUnid" />

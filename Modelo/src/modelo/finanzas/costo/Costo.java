@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import modelo.produccion.administracion.Lote;
 
 /**
  *
@@ -27,18 +29,20 @@ public class Costo implements Serializable{
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Column
+    @Column(nullable = false)
     private TipoCosto tipo; //enum(?)
     @Column
     private String subTipo; //enum(?)
-    @Column
+    @Column(nullable = false)
     private String nombre;
     @Column
-    private String item;
-    @Column
+    private ItemCosto item;
+    @Column(nullable = false)
     private float cantidad;
     @Column
     private float precioUnid;
+    @ManyToOne(optional = false)
+    private Lote lote;
 
     public Costo() {
     }
@@ -83,11 +87,11 @@ public class Costo implements Serializable{
         this.nombre = nombre;
     }
 
-    public String getItem() {
+    public ItemCosto getItem() {
         return item;
     }
 
-    public void setItem(String item) {
+    public void setItem(ItemCosto item) {
         this.item = item;
     }
 
@@ -110,6 +114,14 @@ public class Costo implements Serializable{
     public float getPrecioTotal(){
         return cantidad * precioUnid;
     }
+    
+    public Lote getLote() {
+        return lote;
+    }
+
+    public void setLote(Lote lote) {
+        this.lote = lote;
+    }
 
     @Override
     public int hashCode() {
@@ -122,6 +134,7 @@ public class Costo implements Serializable{
         hash = 13 * hash + Objects.hashCode(this.item);
         hash = 13 * hash + Float.floatToIntBits(this.cantidad);
         hash = 13 * hash + Float.floatToIntBits(this.precioUnid);
+        hash = 13 * hash + Objects.hashCode(this.lote);
         return hash;
     }
 
@@ -149,13 +162,16 @@ public class Costo implements Serializable{
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.item, other.item)) {
+        if (this.item != other.item) {
             return false;
         }
         if (Float.floatToIntBits(this.cantidad) != Float.floatToIntBits(other.cantidad)) {
             return false;
         }
         if (Float.floatToIntBits(this.precioUnid) != Float.floatToIntBits(other.precioUnid)) {
+            return false;
+        }
+        if (!Objects.equals(this.lote, other.lote)) {
             return false;
         }
         return true;

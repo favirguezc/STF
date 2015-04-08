@@ -2,6 +2,8 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="DatosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modelo.contabilidad.Cuenta</class>
+    <class>modelo.contabilidad.Paquete</class>
     <class>modelo.finanzas.Precio</class>
     <class>modelo.finanzas.caja.Caja</class>
     <class>modelo.finanzas.caja.ConceptoCaja</class>
@@ -17,8 +19,6 @@
     <class>modelo.produccion.administracion.Municipio</class>
     <class>modelo.produccion.administracion.Permiso</class>
     <class>modelo.produccion.administracion.Persona</class>
-    <class>modelo.produccion.administracion.RolPersona</class>
-    <class>modelo.produccion.administracion.Vereda</class>
     <class>modelo.produccion.aplicaciones.Aplicacion</class>
     <class>modelo.produccion.aplicaciones.Insumo</class>
     <class>modelo.produccion.cosecha.Clasificacion</class>
@@ -34,8 +34,6 @@
     <class>modelo.produccion.variablesClimaticas.Lluvia</class>
     <class>modelo.produccion.variablesClimaticas.Temperatura</class>
     <class>modelo.produccion.variablesClimaticas.Termometro</class>
-    <class>modelo.contabilidad.Cuenta</class>
-    <class>modelo.contabilidad.Paquete</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

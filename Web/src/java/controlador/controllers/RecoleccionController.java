@@ -20,6 +20,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
+import modelo.produccion.administracion.Rol;
 
 @ManagedBean(name = "recoleccionController")
 @SessionScoped
@@ -30,6 +31,8 @@ public class RecoleccionController implements Serializable {
     private Recoleccion selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
+    @ManagedProperty(value = "#{signInController}")
+    private SignInController signInBean;
 
     public RecoleccionController() {
     }
@@ -48,6 +51,14 @@ public class RecoleccionController implements Serializable {
 
     public void setPermisoBean(PermisoController permisoBean) {
         this.permisoBean = permisoBean;
+    }
+
+    public SignInController getSignInBean() {
+        return signInBean;
+    }
+
+    public void setSignInBean(SignInController signInBean) {
+        this.signInBean = signInBean;
     }
 
     protected void setEmbeddableKeys() {
@@ -90,7 +101,11 @@ public class RecoleccionController implements Serializable {
 
     public List<Recoleccion> getItems() {
         if (items == null) {
-            items = getJpaController().findRecoleccionEntities();
+            if (signInBean.getRol() == Rol.ASISTENTE_ADMINISTRATIVO || signInBean.getUser().isAdministrador()) {
+                items = leerLista(null, null, null, null);
+            }else{
+                items = leerLista(signInBean.getUser(), null, null, null);
+            }
         }
         return items;
     }
@@ -118,14 +133,17 @@ public class RecoleccionController implements Serializable {
     }
 
     public List<Recoleccion> getItemsAvailableSelectMany() {
-        return getJpaController().findRecoleccionEntities();
+        return leerLista(null, null, null, null);
     }
 
     public List<Recoleccion> getItemsAvailableSelectOne() {
-        return getJpaController().findRecoleccionEntities();
+        return leerLista(null, null, null, null);
     }
 
     public List<Recoleccion> leerLista(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+        if (modulo == null) {
+            return getJpaController().findRecoleccionEntities(recolector, signInBean.getFinca(), inicio, fin);
+        }
         return getJpaController().findRecoleccionEntities(recolector, modulo, inicio, fin);
     }
 

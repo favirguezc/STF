@@ -32,9 +32,6 @@ public class PersonaController implements Serializable {
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
-    public PersonaController() {
-    }
-
     public Persona getSelected() {
         return selected;
     }

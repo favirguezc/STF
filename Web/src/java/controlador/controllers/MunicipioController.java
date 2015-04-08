@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,7 +18,6 @@ import javax.faces.convert.FacesConverter;
 import modelo.produccion.administracion.Departamento;
 
 @ManagedBean(name = "municipioController")
-@SessionScoped
 public class MunicipioController implements Serializable {
 
     private MunicipioDAO jpaController = null;

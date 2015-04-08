@@ -12,8 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.cosecha.Clasificacion;
 
 /**
@@ -89,6 +91,17 @@ public class ClasificacionDAO implements Serializable {
         }
     }
 
+    public List<Clasificacion> findClasificacionEntities(Finca finca) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Clasificacion> query = em.createQuery("SELECT a FROM Clasificacion a WHERE a.modulo.lote.finca = :finca", Clasificacion.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public List<Clasificacion> findClasificacionEntities() {
         return findClasificacionEntities(true, -1, -1);
     }
@@ -134,5 +147,5 @@ public class ClasificacionDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

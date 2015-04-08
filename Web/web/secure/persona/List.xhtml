@@ -62,6 +62,12 @@
                         </f:facet>
                         <h:outputText value="#{item.correo}"/>
                     </p:column>
+                    <p:column rendered="#{signInController.user.administrador}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPersonaTitle_contrasena}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.contrasena}"/>
+                    </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPersonaTitle_sexo}"/>

@@ -87,7 +87,7 @@ public class ClasificacionController implements Serializable {
 
     public List<Clasificacion> getItems() {
         if (items == null) {
-            items = getJpaController().findClasificacionEntities();
+            items = getJpaController().findClasificacionEntities(permisoBean.getSignInBean().getFinca());
         }
         return items;
     }
@@ -115,11 +115,11 @@ public class ClasificacionController implements Serializable {
     }
 
     public List<Clasificacion> getItemsAvailableSelectMany() {
-        return getJpaController().findClasificacionEntities();
+        return getItems();
     }
 
     public List<Clasificacion> getItemsAvailableSelectOne() {
-        return getJpaController().findClasificacionEntities();
+        return getItems();
     }
 
     @FacesConverter(forClass = Clasificacion.class)

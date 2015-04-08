@@ -1,6 +1,5 @@
 package controlador.util;
 
-import controlador.controllers.SignInController;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -8,9 +7,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.administracion.Rol;
 
 public class JsfUtil {
 

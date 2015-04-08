@@ -39,7 +39,6 @@ public class AutorizacionFilter implements Filter {
                 permisoController.setSignInBean(loginBean);
                 ((HttpServletRequest) request).getSession().setAttribute("permisoController", permisoController);
             }
-            System.out.println((PermisoController) ((HttpServletRequest) request).getSession().getAttribute("permisoController"));
             if (permisoController.currentUserHasPermission(Accion.Leer, ((HttpServletRequest) request).getRequestURI())) {
                 chain.doFilter(request, response);
             } else {

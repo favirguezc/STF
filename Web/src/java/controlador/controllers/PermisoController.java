@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -117,8 +116,12 @@ public class PermisoController implements Serializable {
             return true;
         }
         requestPath = requestPath.toLowerCase();
-        if (signInBean.getRol() == null && requestPath.toLowerCase().contains(Pagina.Persona.toString().toLowerCase())) {
-            return true;
+        if (signInBean.getRol() == null) {
+            if (requestPath.contains(Pagina.Index.toString().toLowerCase())) {
+                return true;
+            } else {
+                return false;
+            }
         }
         if (signInBean.getRol() == Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())) {
             return true;

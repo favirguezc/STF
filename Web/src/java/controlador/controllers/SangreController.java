@@ -16,12 +16,6 @@ import modelo.produccion.administracion.RH;
 @ManagedBean(name = "sangreController")
 public class SangreController {
 
-    /**
-     * Creates a new instance of GrupoSanguineoController
-     */
-    public SangreController() {
-    }
-
     public RH[] getRhValues() {
         return RH.values();
     }

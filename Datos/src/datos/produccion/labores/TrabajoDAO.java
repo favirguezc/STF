@@ -215,13 +215,14 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
-    public List<Trabajo> findTrabajoEntities(Persona trabajador, Date inicio, Date fin) {
+    public List<Trabajo> findTrabajoEntities(Finca finca, Persona trabajador, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.operario = :operario AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
+            TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.operario = :operario AND t.modulo.lote.finca = :finca AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
             query.setParameter("inicio", inicio, TemporalType.DATE);
             query.setParameter("fin", fin, TemporalType.DATE);
             query.setParameter("operario", trabajador);
+            query.setParameter("finca", finca);
             return query.getResultList();
         } finally {
             em.close();

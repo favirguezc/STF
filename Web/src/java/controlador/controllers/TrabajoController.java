@@ -135,9 +135,9 @@ public class TrabajoController implements Serializable {
     }
 
     public List<Trabajo> leerLista(Persona trabajador, Date inicio, Date fin) {
-        return getJpaController().findTrabajoEntities(trabajador, inicio, fin);
+        return getJpaController().findTrabajoEntities(signInBean.getFinca(), trabajador, inicio, fin);
     }
-    
+
     @FacesConverter(forClass = Trabajo.class)
     public static class TrabajoControllerConverter implements Converter {
 

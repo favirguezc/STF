@@ -41,35 +41,35 @@
                             </center>
                         </td>
                         <td align="right" width="15%">
-                            <table width="100%">
-                                <tr>
-                                    <td align="right">
-                                        <h:outputText value="Hola #{signInController.user}" rendered="#{!empty signInController.user}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        <h:outputText value="Finca: #{signInController.finca}" rendered="#{!empty signInController.finca}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        <h:outputText value="Rol: #{signInController.rol}" rendered="#{!empty signInController.rol}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        <h:form>                                
+                            <h:form>
+                                <table width="100%">
+                                    <tr>
+                                        <td align="right">
+                                            <h:outputText value="Hola #{signInController.user}" rendered="#{!empty signInController.user}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            <h:outputText value="Finca: #{signInController.finca}" rendered="#{!empty signInController.finca}"/>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            <h:outputText value="Rol: #{signInController.rol}" rendered="#{!empty signInController.rol}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
                                             <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="false" rendered="#{signInController.step1userSignedIn}" />
-                                        </h:form>
-                                    </td>
-                                </tr>
-                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h:form>
                         </td>
                     </tr>
                 </table>
                 <h:form>
-                    <p:menubar>
+                    <p:menubar rendered="#{signInController.step1userSignedIn}">
                         <p:menuitem value="#{bundle.Home}" outcome="/secure/index.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Management}">
                             <p:menuitem value="Finca" outcome="/secure/finca/List.xhtml"/>

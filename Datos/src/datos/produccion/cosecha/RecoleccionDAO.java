@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Modulo;
 import modelo.produccion.administracion.Persona;
 import modelo.produccion.cosecha.Recoleccion;
@@ -194,10 +195,7 @@ public class RecoleccionDAO implements Serializable {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
-        String queryString = "SELECT t FROM Recoleccion t";
-        if (recolector != null || modulo != null || inicio != null || fin != null) {
-            queryString += " WHERE";
-        }
+        String queryString = "SELECT t FROM Recoleccion t WHERE";
         if (recolector != null) {
             queryString += " t.recolector = :recolector";
             a = true;
@@ -235,6 +233,55 @@ public class RecoleccionDAO implements Serializable {
             }
             if (b) {
                 query.setParameter("modulo", modulo);
+            }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Finca finca, Date inicio, Date fin) {
+        EntityManager em = getEntityManager();
+        boolean a, b, c, d;
+        a = b = c = d = false;
+        String queryString = "SELECT t FROM Recoleccion t WHERE";
+        if (recolector != null) {
+            queryString += " t.recolector = :recolector";
+            a = true;
+        }
+        if (finca != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " t.modulo.lote.finca = :finca ";
+            b = true;
+        }
+        if (fin != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.fecha BETWEEN :fecha1 AND :fecha2";
+            c = d = true;
+        } else if (inicio != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.fecha = :fecha1";
+            c = true;
+        }
+        try {
+            TypedQuery<Recoleccion> query = em.createQuery(queryString, Recoleccion.class);
+            if (c) {
+                query.setParameter("fecha1", inicio, TemporalType.DATE);
+            }
+            if (d) {
+                query.setParameter("fecha2", fin, TemporalType.DATE);
+            }
+            if (a) {
+                query.setParameter("recolector", recolector);
+            }
+            if (b) {
+                query.setParameter("finca", finca);
             }
             return query.getResultList();
         } finally {

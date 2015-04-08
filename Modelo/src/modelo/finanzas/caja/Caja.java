@@ -6,14 +6,14 @@
 package modelo.finanzas.caja;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -25,10 +25,10 @@ public class Caja implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String nombre;
-    @OneToMany
-    private List<ConceptoCaja> conceptos;
+    @ManyToOne(optional = false)
+    private Finca finca;
 
     public Caja() {
     }
@@ -53,12 +53,12 @@ public class Caja implements Serializable{
         this.nombre = nombre;
     }
 
-    public List<ConceptoCaja> getConceptos() {
-        return conceptos;
+    public Finca getFinca() {
+        return finca;
     }
 
-    public void setConceptos(List<ConceptoCaja> conceptos) {
-        this.conceptos = conceptos;
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
     @Override
@@ -71,6 +71,7 @@ public class Caja implements Serializable{
         int hash = 7;
         hash = 31 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 31 * hash + Objects.hashCode(this.nombre);
+        hash = 31 * hash + Objects.hashCode(this.finca);
         return hash;
     }
 
@@ -87,6 +88,9 @@ public class Caja implements Serializable{
             return false;
         }
         if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         return true;

@@ -15,9 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import modelo.finanzas.caja.Caja;
-import modelo.finanzas.caja.ConceptoCaja;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -53,34 +52,7 @@ public class CajaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caja persistentCaja = em.find(Caja.class, caja.getId());
-            List<ConceptoCaja> conceptosOld = persistentCaja.getConceptos();
-            List<ConceptoCaja> conceptosNew = caja.getConceptos();
-            List<ConceptoCaja> attachedConceptosNew = new ArrayList<ConceptoCaja>();
-            for (ConceptoCaja conceptosNewConceptoCajaToAttach : conceptosNew) {
-                conceptosNewConceptoCajaToAttach = em.getReference(conceptosNewConceptoCajaToAttach.getClass(), conceptosNewConceptoCajaToAttach.getId());
-                attachedConceptosNew.add(conceptosNewConceptoCajaToAttach);
-            }
-            conceptosNew = attachedConceptosNew;
-            caja.setConceptos(conceptosNew);
             caja = em.merge(caja);
-            for (ConceptoCaja conceptosOldConceptoCaja : conceptosOld) {
-                if (!conceptosNew.contains(conceptosOldConceptoCaja)) {
-                    conceptosOldConceptoCaja.setCaja(null);
-                    conceptosOldConceptoCaja = em.merge(conceptosOldConceptoCaja);
-                }
-            }
-            for (ConceptoCaja conceptosNewConceptoCaja : conceptosNew) {
-                if (!conceptosOld.contains(conceptosNewConceptoCaja)) {
-                    Caja oldCajaOfConceptosNewConceptoCaja = conceptosNewConceptoCaja.getCaja();
-                    conceptosNewConceptoCaja.setCaja(caja);
-                    conceptosNewConceptoCaja = em.merge(conceptosNewConceptoCaja);
-                    if (oldCajaOfConceptosNewConceptoCaja != null && !oldCajaOfConceptosNewConceptoCaja.equals(caja)) {
-                        oldCajaOfConceptosNewConceptoCaja.getConceptos().remove(conceptosNewConceptoCaja);
-                        oldCajaOfConceptosNewConceptoCaja = em.merge(oldCajaOfConceptosNewConceptoCaja);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -109,11 +81,6 @@ public class CajaDAO implements Serializable {
                 caja.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The caja with id " + id + " no longer exists.", enfe);
-            }
-            List<ConceptoCaja> conceptos = caja.getConceptos();
-            for (ConceptoCaja conceptosConceptoCaja : conceptos) {
-                conceptosConceptoCaja.setCaja(null);
-                em.remove(conceptosConceptoCaja);
             }
             em.remove(caja);
             em.getTransaction().commit();
@@ -163,7 +130,6 @@ public class CajaDAO implements Serializable {
             TypedQuery<Caja> query = em.createQuery("SELECT c FROM Caja c WHERE c.nombre = :nombre", Caja.class);
             query.setParameter("nombre", name);
             Caja caja = query.getSingleResult();
-            caja.getConceptos();
             return caja;
         } finally {
             em.close();
@@ -183,15 +149,14 @@ public class CajaDAO implements Serializable {
         }
     }
     
-    public void eliminarConcepto(long id, long idConcepto) throws NonexistentEntityException, Exception{
+    public List<Caja> findCajaEntitiesForSelectedFarm(Finca finca) {
         EntityManager em = getEntityManager();
-        ConceptoCajaDAO conceptoDAO = new ConceptoCajaDAO(emf);
-            Caja caja = findCaja(id);
-            List<ConceptoCaja> conceptos = caja.getConceptos();
-            ConceptoCaja concepto = conceptoDAO.findConceptoCaja(idConcepto);
-            conceptoDAO.destroy(idConcepto);
-            conceptos.remove(concepto);
-            caja.setConceptos(conceptos);
-            edit(caja);
+        try {
+            TypedQuery<Caja> query = em.createQuery("SELECT c FROM Caja c WHERE c.finca = :finca", Caja.class);
+            query.setParameter("finca", finca);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
 }

@@ -17,6 +17,7 @@ import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import modelo.finanzas.caja.ConceptoCaja;
 import modelo.finanzas.caja.Caja;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -38,16 +39,7 @@ public class ConceptoCajaDAO implements Serializable{
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caja caja = conceptoCaja.getCaja();
-            if (caja != null) {
-                caja = em.getReference(caja.getClass(), caja.getId());
-                conceptoCaja.setCaja(caja);
-            }
             em.persist(conceptoCaja);
-            if (caja != null) {
-                caja.getConceptos().add(conceptoCaja);
-                caja = em.merge(caja);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,22 +53,7 @@ public class ConceptoCajaDAO implements Serializable{
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ConceptoCaja persistentConceptoCaja = em.find(ConceptoCaja.class, conceptoCaja.getId());
-            Caja cajaOld = persistentConceptoCaja.getCaja();
-            Caja cajaNew = conceptoCaja.getCaja();
-            if (cajaNew != null) {
-                cajaNew = em.getReference(cajaNew.getClass(), cajaNew.getId());
-                conceptoCaja.setCaja(cajaNew);
-            }
             conceptoCaja = em.merge(conceptoCaja);
-            if (cajaOld != null && !cajaOld.equals(cajaNew)) {
-                cajaOld.getConceptos().remove(conceptoCaja);
-                cajaOld = em.merge(cajaOld);
-            }
-            if (cajaNew != null && !cajaNew.equals(cajaOld)) {
-                cajaNew.getConceptos().add(conceptoCaja);
-                cajaNew = em.merge(cajaNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -105,11 +82,6 @@ public class ConceptoCajaDAO implements Serializable{
                 conceptoCaja.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The conceptoCaja with id " + id + " no longer exists.", enfe);
-            }
-            Caja caja = conceptoCaja.getCaja();
-            if (caja != null) {
-                caja.getConceptos().remove(conceptoCaja);
-                caja = em.merge(caja);
             }
             em.remove(conceptoCaja);
             em.getTransaction().commit();
@@ -203,6 +175,18 @@ public class ConceptoCajaDAO implements Serializable{
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<ConceptoCaja> findConceptoCajaEntitiesForSelectedFarm(Finca selectedFarm) {
+        EntityManager em = getEntityManager();
+        String queryString ="SELECT t FROM ConceptoCaja t WHERE t.caja.finca = :finca ORDER BY t.fecha ASC";
+        try {
+            TypedQuery<ConceptoCaja> query = em.createQuery(queryString, ConceptoCaja.class);
+            query.setParameter("finca", selectedFarm);
+            return query.getResultList();
         } finally {
             em.close();
         }

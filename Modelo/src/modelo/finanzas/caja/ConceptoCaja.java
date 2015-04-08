@@ -30,13 +30,13 @@ public class ConceptoCaja implements Serializable{
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    @Column
+    @Column(nullable = false)
     private String descripcion;
     @Column
     private boolean entrada;
-    @Column
+    @Column(nullable = false)
     private float valor;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Caja caja;
     @Transient
     private float saldo;

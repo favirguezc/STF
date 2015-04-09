@@ -54,7 +54,7 @@ public class RolConverter implements Converter {
             return null;
         }
         if (value instanceof Rol) {
-            return value + "";
+            return value.toString() + "";
         } else {
             return null;
         }

@@ -40,8 +40,8 @@
                             </p:selectOneMenu>
                             <p:spacer/>
                             <p:spacer/>
-                            <p:commandButton action="#{signInController.signIn}" value="Iniciar Sesión" update=":growl,loginPanel" ajax="false"></p:commandButton>
-                            <p:commandButton actionListener="#{personaController.prepareCreate}" action="#{signInController.goToSignUp}" value="Crear Cuenta"/>                            
+                            <p:commandButton id="button" action="#{signInController.signIn}" value="#{signInController.buttonMessage}" update=":growl,loginPanel,button" ajax="false"></p:commandButton>
+                            <p:commandButton actionListener="#{personaController.prepareCreate}" action="#{signInController.goToSignUp}" value="Crear Cuenta" rendered="#{!signInController.step1userSignedIn}"/>                            
                         </h:panelGrid> 
                     </p:panel>
                 </h:form>

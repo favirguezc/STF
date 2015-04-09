@@ -129,7 +129,11 @@ public class Finca implements Serializable {
 
     @Override
     public String toString() {
-        return nombre + ", " + vereda;
+        String ret = nombre;
+        if (vereda != null && !vereda.equals("")) {
+            ret += ", " + vereda;
+        }
+        return ret;
     }
 
 }

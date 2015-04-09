@@ -70,7 +70,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateAplicacionLabel_autoriza}" for="autoriza" />
                         <p:selectOneMenu id="autoriza" value="#{aplicacionController.selected.autoriza}" required="true" requiredMessage="#{bundle.EditAplicacionRequiredMessage_autoriza}">
-                            <f:selectItems value="#{personaController.itemsAvailableAsistente}"
+                            <f:selectItems value="#{personaController.itemsAvailableAsistenteYJefe}"
                                            var="autorizaItem"
                                            itemValue="#{autorizaItem}"/>
                         </p:selectOneMenu>

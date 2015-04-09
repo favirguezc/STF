@@ -14,7 +14,7 @@
 
     <h:body>
 
-        <p:growl id="growl" life="3000" />
+        <p:growl id="growl" life="3000"/>
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north">
@@ -55,12 +55,15 @@
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <h:outputText value="Rol: #{signInController.rol}" rendered="#{!empty signInController.rol}"/>
+                                            <h:outputText value="#{signInController.rol}" converter="#{RolConverter}" rendered="#{!empty signInController.rol}"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <p:commandButton action="#{signInController.signOut}" value="Cerrar Sesión"  ajax="false" rendered="#{signInController.step1userSignedIn}" />
+                                            <p:splitButton value="Cerrar Sesión" action="#{signInController.signOut}" rendered="#{signInController.step1userSignedIn}" ajax="false">
+                                                <p:menuitem value="Seleccionar Finca" action="#{signInController.selectFarm}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
+                                                <p:menuitem value="Seleccionar Rol" action="#{signInController.selectRol}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
+                                            </p:splitButton>
                                         </td>
                                     </tr>
                                 </table>

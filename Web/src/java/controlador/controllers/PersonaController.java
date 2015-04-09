@@ -136,8 +136,14 @@ public class PersonaController implements Serializable {
         return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.TRABAJADOR, signInBean.getFinca());
     }
 
-    public List<Persona> getItemsAvailableAsistente() {
-        return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ESPECIALISTA, signInBean.getFinca());
+    public List<Persona> getItemsAvailableAsistenteYJefe() {
+        List<Persona> findPersonaEntities = new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ESPECIALISTA, signInBean.getFinca());
+        for(Persona p:new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.JEFE_DE_CAMPO, signInBean.getFinca())){
+            if(!findPersonaEntities.contains(p)){
+                findPersonaEntities.add(p);
+            }
+        }
+        return findPersonaEntities;
     }
 
     public List<Persona> getItemsAvailableCliente() {

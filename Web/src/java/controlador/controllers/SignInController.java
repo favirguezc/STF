@@ -14,7 +14,6 @@ import datos.util.LoginDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import modelo.produccion.administracion.Finca;
 import modelo.produccion.administracion.Persona;
@@ -30,6 +29,7 @@ public class SignInController implements Serializable {
 
     private String userString;
     private String passString;
+    private String buttonMessage;
     private boolean step1userSignedIn;
     private boolean step2farmSelected;
     private boolean step3rolSelected;
@@ -42,6 +42,7 @@ public class SignInController implements Serializable {
 
     public SignInController() {
         EntityManagerFactorySingleton.getEntityManagerFactory();
+        buttonMessage = "Iniciar Sesión";
     }
 
     public String getUserString() {
@@ -92,6 +93,14 @@ public class SignInController implements Serializable {
         this.user = user;
     }
 
+    public String getButtonMessage() {
+        return buttonMessage;
+    }
+
+    public void setButtonMessage(String buttonMessage) {
+        this.buttonMessage = buttonMessage;
+    }
+
     public Rol getRol() {
         return rol;
     }
@@ -140,6 +149,22 @@ public class SignInController implements Serializable {
         return "/faces/signIn.xhtml";
     }
 
+    public String selectFarm() {
+        step2farmSelected = false;
+        step3rolSelected = false;
+        finca = null;
+        rol = null;
+        buttonMessage = "Seleccionar Finca";
+        return goToSignIn();
+    }
+
+    public String selectRol() {
+        step3rolSelected = false;
+        rol = null;
+        buttonMessage = "Seleccionar Rol";
+        return goToSignIn();
+    }
+
     public String signIn() {
         if (!step1userSignedIn) {
             step1userSignedIn = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
@@ -151,9 +176,12 @@ public class SignInController implements Serializable {
                 if (!user.isAdministrador() && (fincas == null || fincas.isEmpty()) && !hasActiveAccount) {
                     JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte al administrador de la finca.");
                     return signOut();
-                } else if (fincas!=null && fincas.size() == 1) {
+                } else if (fincas != null && fincas.size() == 1) {
                     finca = fincas.get(0);
+                    buttonMessage = "Seleccionar Finca";
                     return signIn();
+                } else if ((fincas == null || fincas.isEmpty()) && !hasActiveAccount) {
+                    return "/faces/secure/index.xhtml";
                 }
             } else {
                 JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
@@ -165,6 +193,7 @@ public class SignInController implements Serializable {
                 roles = new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findRolEntities(user, finca);
                 if (roles != null && roles.size() == 1) {
                     rol = roles.get(0);
+                    buttonMessage = "Seleccionar Rol";
                     return signIn();
                 } else if (roles == null || roles.isEmpty()) {
                     if (hasActiveAccount || user.isAdministrador()) {
@@ -192,9 +221,13 @@ public class SignInController implements Serializable {
         JsfUtil.getSession().invalidate();
         userString = null;
         passString = null;
+        user = null;
+        finca = null;
+        rol = null;
         step1userSignedIn = false;
         step2farmSelected = false;
         step3rolSelected = false;
+        buttonMessage = "Iniciar Sesión";
         System.out.println("Sesion anulada");
         return "/faces/signIn.xhtml";
     }

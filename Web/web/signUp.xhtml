@@ -17,39 +17,39 @@
 
             <h:form>
                 <center>
-                    <p:panel header="Crear Cuenta">
-                        <h:panelGroup id="display">
-                            <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
-                                <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre2}" for="nombre2" />
-                                <p:inputText id="nombre2" value="#{personaController.selected.nombre2}" title="#{bundle.CreatePersonaTitle_nombre2}" />
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_apellido}" for="apellido" />
-                                <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.CreatePersonaTitle_apellido}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellido}"/>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_apellido2}" for="apellido2" />
-                                <p:inputText id="apellido2" value="#{personaController.selected.apellido2}" title="#{bundle.CreatePersonaTitle_apellido2}"/>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_cedula}" for="cedula" />
-                                <p:inputText id="cedula" value="#{personaController.selected.cedula}" title="#{bundle.CreatePersonaTitle_cedula}" required="true" />
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_contrasena}" for="contrasena"/>
-                                <p:password id="contrasena" value="#{personaController.selected.contrasena}"/>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
-                                <p:selectOneMenu id="sexo" value="#{personaController.selected.sexo}">
-                                    <f:selectItems value="#{sexoController.sexoValues}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}" for="telefono" />
-                                <p:inputText id="telefono" value="#{personaController.selected.telefono}" title="#{bundle.CreatePersonaTitle_telefono}" required="true"/>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_grupoSanguineo}" for="grupoSanguineo" />
-                                <p:selectOneMenu id="grupoSanguineo" value="#{personaController.selected.grupoSanguineo}">
-                                    <f:selectItems value="#{sangreController.grupoSanguineoValues}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.CreatePersonaLabel_rh}" for="rh" />
-                                <p:selectOneMenu id="rh" value="#{personaController.selected.rh}">
-                                    <f:selectItems value="#{sangreController.rhValues}"/>
-                                </p:selectOneMenu>
-                            </p:panelGrid>
-                            <p:commandButton actionListener="#{personaController.create}" action="#{signInController.goToSignIn}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
+                    <p:panel header="Crear Cuenta" style="width: 350px;">
+                        <h:panelGrid columns="2" cellpadding="5" rendered="#{personaController.selected != null}">
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre2}" for="nombre2" />
+                            <p:inputText id="nombre2" value="#{personaController.selected.nombre2}" title="#{bundle.CreatePersonaTitle_nombre2}" />
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_apellido}" for="apellido" />
+                            <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.CreatePersonaTitle_apellido}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellido}"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_apellido2}" for="apellido2" />
+                            <p:inputText id="apellido2" value="#{personaController.selected.apellido2}" title="#{bundle.CreatePersonaTitle_apellido2}"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_cedula}" for="cedula" />
+                            <p:inputText id="cedula" value="#{personaController.selected.cedula}" title="#{bundle.CreatePersonaTitle_cedula}" required="true" />
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_contrasena}" for="contrasena"/>
+                            <p:password id="contrasena" value="#{personaController.selected.contrasena}"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_correo}" for="correo" />
+                            <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{bundle.CreatePersonaTitle_correo}" required="true"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
+                            <p:selectOneMenu id="sexo" value="#{personaController.selected.sexo}">
+                                <f:selectItems value="#{sexoController.sexoValues}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}" for="telefono" />
+                            <p:inputText id="telefono" value="#{personaController.selected.telefono}" title="#{bundle.CreatePersonaTitle_telefono}" required="true"/>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_grupoSanguineo}" for="grupoSanguineo" />
+                            <p:selectOneMenu id="grupoSanguineo" value="#{personaController.selected.grupoSanguineo}">
+                                <f:selectItems value="#{sangreController.grupoSanguineoValues}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreatePersonaLabel_rh}" for="rh" />
+                            <p:selectOneMenu id="rh" value="#{personaController.selected.rh}">
+                                <f:selectItems value="#{sangreController.rhValues}"/>
+                            </p:selectOneMenu>
+                            <p:commandButton actionListener="#{personaController.create}" action="#{signInController.goToSignIn}" value="#{bundle.Save}" update=":growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
                             <p:button value="#{bundle.Cancel}" outcome="/faces/signIn.xhtml"/>
-                        </h:panelGroup>
+                        </h:panelGrid>                       
                     </p:panel>
                 </center>
             </h:form>               

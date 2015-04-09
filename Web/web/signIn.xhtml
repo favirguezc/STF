@@ -14,15 +14,12 @@
             <center>
                 <h:form id="loginForm">          
                     <p:panel header="Iniciar Sesión" style="width: 360px;">
-                        <h:panelGrid id="loginPanel" columns="2">
-
+                        <h:panelGrid id="loginPanel" columns="2" cellpadding="8">
                             <h:outputLabel value="Usuario" rendered="#{!signInController.step1userSignedIn}"/>
                             <h:panelGroup rendered="#{!signInController.step1userSignedIn}">
                                 <p:inputText id="username" value="#{signInController.userString}" title="Número de Cédula"/>
                                 <p:watermark for="username" value="Ingrese su Número de Cédula"/>
                             </h:panelGroup>
-                            <p:spacer rendered="#{!signInController.step1userSignedIn}"/>
-                            <p:spacer rendered="#{!signInController.step1userSignedIn}"/>
                             <h:outputLabel value="Contraseña" rendered="#{!signInController.step1userSignedIn}"/>
                             <h:panelGroup rendered="#{!signInController.step1userSignedIn}">
                                 <p:password id="password" value="#{signInController.passString}"  feedback="false"/> 
@@ -38,10 +35,8 @@
                             <p:selectOneMenu id="rol" value="#{signInController.rol}" rendered="#{signInController.step1userSignedIn and signInController.step2farmSelected}">
                                 <f:selectItems value="#{signInController.roles}"/>
                             </p:selectOneMenu>
-                            <p:spacer/>
-                            <p:spacer/>
                             <p:commandButton id="button" action="#{signInController.signIn}" value="#{signInController.buttonMessage}" update=":growl,loginPanel,button" ajax="false"></p:commandButton>
-                            <p:commandButton actionListener="#{personaController.prepareCreate}" action="#{signInController.goToSignUp}" value="Crear Cuenta" rendered="#{!signInController.step1userSignedIn}"/>                            
+                            <p:commandButton actionListener="#{personaController.prepareCreate}" action="#{signInController.goToSignUp}" value="Crear Cuenta" ajax="false" rendered="#{!signInController.step1userSignedIn}"/>                            
                         </h:panelGrid> 
                     </p:panel>
                 </h:form>

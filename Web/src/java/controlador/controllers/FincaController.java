@@ -22,6 +22,8 @@ import modelo.produccion.administracion.Coordenada;
 import modelo.produccion.administracion.Departamento;
 import modelo.produccion.administracion.Municipio;
 import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.PointSelectEvent;
+import org.primefaces.event.map.StateChangeEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -38,6 +40,7 @@ public class FincaController implements Serializable {
     private Marker marker;
     private Departamento departamento;
     private List<Municipio> municipios;
+    private int zoomLevel;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permisoController}")
@@ -47,14 +50,12 @@ public class FincaController implements Serializable {
     public void init() {
         modelo = new DefaultMapModel();
         marker = new Marker(new LatLng(4.114974, -73.584086));
+        zoomLevel = 5;
         if (selected != null) {
             marker = new Marker(new LatLng(selected.getCoordenada().getX(), selected.getCoordenada().getY()));
         }
         marker.setDraggable(true);
         modelo.addOverlay(marker);
-    }
-
-    public FincaController() {
     }
 
     public Finca getSelected() {
@@ -79,6 +80,14 @@ public class FincaController implements Serializable {
 
     public void setPermisoBean(PermisoController permisoBean) {
         this.permisoBean = permisoBean;
+    }
+
+    public int getZoomLevel() {
+        return zoomLevel;
+    }
+
+    public void setZoomLevel(int zoomLevel) {
+        this.zoomLevel = zoomLevel;
     }
 
     protected void setEmbeddableKeys() {
@@ -123,7 +132,16 @@ public class FincaController implements Serializable {
     public void markerDragged(MarkerDragEvent evt) {
         marker = evt.getMarker();
         selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
-        JsfUtil.addSuccessMessage("Marker Dragged" + "Lat:" + selected.getCoordenada().getX() + ", Lng:" + selected.getCoordenada().getY());
+//        JsfUtil.addSuccessMessage("Marker Dragged" + "Lat:" + selected.getCoordenada().getX() + ", Lng:" + selected.getCoordenada().getY());
+    }
+
+    public void onPointSelect(PointSelectEvent event) {
+        marker.setLatlng(event.getLatLng());
+        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+    }
+    
+    public void onStateChange(StateChangeEvent event) {
+        zoomLevel = event.getZoomLevel();
     }
 
     private FincaDAO getJpaController() {

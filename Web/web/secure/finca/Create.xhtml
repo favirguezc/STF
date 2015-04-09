@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.CreateFincaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{fincaController.selected.nombre}" title="#{bundle.CreateFincaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateFincaRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateFincaLabel_vereda}" for="vereda" />
-                        <p:inputText id="vereda" value="#{fincaController.selected.vereda}" title="#{bundle.CreateFincaTitle_vereda}" />
+                        <p:inputText id="vereda" value="#{fincaController.selected.vereda}" title="#{bundle.CreateFincaTitle_vereda}" required="true" requiredMessage="#{bundle.CreateFincaRequiredMessage_vereda}"/>
                         <p:outputLabel value="#{bundle.CreateFincaLabel_municipio}" for="municipio" />
                         <h:panelGroup>
                             <p:selectOneMenu id="departamento" value="#{fincaController.departamento}" required="true" requiredMessage="#{bundle.CreateMunicipioRequiredMessage_departamento}">
@@ -34,8 +34,10 @@
                         <p:outputLabel value="#{bundle.CreateFincaLabel_altitud}" for="altitud" />
                         <p:inputText id="altitud" value="#{fincaController.selected.altitud}" title="#{bundle.CreateFincaTitle_altitud}" />
                         <p:outputLabel value="#{bundle.CreateFincaLabel_coordenada}" for="coordenada" />
-                        <p:gmap id="coordenada" center="#{fincaController.selected.coordenada.x}, #{fincaController.selected.coordenada.y}" zoom="5" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{fincaController.modelo}">
+                        <p:gmap id="coordenada" center="#{fincaController.selected.coordenada.x}, #{fincaController.selected.coordenada.y}" zoom="#{fincaController.zoomLevel}" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{fincaController.modelo}">
                             <p:ajax event="markerDrag" listener="#{fincaController.markerDragged}" update=":growl"/>
+                            <p:ajax event="pointSelect" listener="#{fincaController.onPointSelect}" update=":growl,coordenada"/>
+                            <p:ajax event="stateChange" listener="#{fincaController.onStateChange}" update=":growl"/>
                         </p:gmap>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{fincaController.create}" value="#{bundle.Save}" update="display,:FincaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FincaCreateDialog');"/>

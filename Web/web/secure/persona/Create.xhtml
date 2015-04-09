@@ -23,7 +23,7 @@
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_cedula}" for="cedula" />
                         <p:inputText id="cedula" value="#{personaController.selected.cedula}" title="#{bundle.CreatePersonaTitle_cedula}" required="true" />
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_contrasena}" for="contrasena"/>
-                        <p:password id="contrasena" value="#{personaController.selected.contrasena}"/>
+                        <p:password id="contrasena" value="#{personaController.selected.contrasena}" required="true"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{bundle.CreatePersonaTitle_correo}" required="true"/>
                         <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />

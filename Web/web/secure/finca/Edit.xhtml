@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.EditFincaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{fincaController.selected.nombre}" title="#{bundle.EditFincaTitle_nombre}" required="true" requiredMessage="#{bundle.EditFincaRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditFincaLabel_vereda}" for="vereda" />
-                        <p:inputText id="vereda" value="#{fincaController.selected.vereda}" title="#{bundle.EditFincaTitle_vereda}" />
+                        <p:inputText id="vereda" value="#{fincaController.selected.vereda}" title="#{bundle.EditFincaTitle_vereda}" required="true" requiredMessage="#{bundle.EditFincaRequiredMessage_vereda}"/>
                         <p:outputLabel value="#{bundle.EditFincaLabel_municipio}" for="municipio" />
                         <h:panelGroup>
                             <p:selectOneMenu id="departamento" value="#{fincaController.departamento}" required="true" requiredMessage="#{bundle.EditMunicipioRequiredMessage_departamento}">

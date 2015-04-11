@@ -15,7 +15,6 @@
 
         <ui:define name="body">
             <h:form id="PermisoListForm">
-                <p:panel header="#{bundle.ListPermisoTitle}">
                     <p:dataTable id="datalist" value="#{permisoController.items}" var="item"
                                  selectionMode="single" selection="#{permisoController.selected}"
                                  paginator="true"
@@ -52,7 +51,6 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{permisoController.destroy}" update=":growl,datalist" disabled="#{empty permisoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

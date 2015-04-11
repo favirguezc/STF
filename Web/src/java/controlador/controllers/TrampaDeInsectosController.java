@@ -62,6 +62,7 @@ public class TrampaDeInsectosController implements Serializable {
 
     public TrampaDeInsectos prepareCreate() {
         selected = new TrampaDeInsectos();
+        selected.setFinca(permisoBean.getSignInBean().getFinca());
         initializeEmbeddableKey();
         return selected;
     }

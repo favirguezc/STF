@@ -18,26 +18,26 @@
                 <p:tab title="Gráficas">
                     <p:tabView dynamic="true">
                         <p:tab title="Por Módulo">
-                            <p:chart type="bar" model="#{recoleccionChart.modelo5}"/>
+                            <p:chart type="bar" model="#{recoleccionController.modelo5}"/>
                         </p:tab>
                         <p:tab title="Semanal">
                             <h:form>
                                 <h:panelGrid columns="3">
                                     <p:outputLabel value="Fecha" for="fecha"/>
-                                    <p:calendar id="fecha" value="#{recoleccionChart.fecha3}" showOn="button"/>
+                                    <p:calendar id="fecha" value="#{recoleccionController.fecha3}" showOn="button"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart3" type="line" model="#{recoleccionChart.modelo3}"/>
-                                <p:remoteCommand name="updateChart3" update="chart3" actionListener="#{recoleccionChart.createModel3}"/>
+                                <p:chart id="chart3" type="line" model="#{recoleccionController.modelo3}"/>
+                                <p:remoteCommand name="updateChart3" update="chart3" actionListener="#{recoleccionController.createModel3}"/>
                             </h:form>
                         </p:tab>
                         <p:tab title="Mensual">
                             <h:form>
                                 <h:panelGrid columns="5" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano2"/>
-                                    <p:spinner id="ano2" value="#{recoleccionChart.ano2}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano2" value="#{recoleccionController.ano2}" title="Año" min="2012" max="2030"/>
                                     <p:outputLabel value="Mes" for="mes"/>
-                                    <p:selectOneMenu id="mes" value="#{recoleccionChart.mes2}">
+                                    <p:selectOneMenu id="mes" value="#{recoleccionController.mes2}">
                                         <f:selectItem itemLabel="Enero" itemValue="0"/>
                                         <f:selectItem itemLabel="Febrero" itemValue="1"/>
                                         <f:selectItem itemLabel="Marzo" itemValue="2"/>
@@ -53,30 +53,30 @@
                                     </p:selectOneMenu>                    
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart2()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart2" type="line" model="#{recoleccionChart.modelo2}"/>
-                                <p:remoteCommand name="updateChart2" update="chart2" actionListener="#{recoleccionChart.createModel2}"/>
+                                <p:chart id="chart2" type="line" model="#{recoleccionController.modelo2}"/>
+                                <p:remoteCommand name="updateChart2" update="chart2" actionListener="#{recoleccionController.createModel2}"/>
                             </h:form>
                         </p:tab>
                         <p:tab title="Anual por Mes">
                             <h:form>
                                 <h:panelGrid columns="3" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano1"/>
-                                    <p:spinner id="ano1" value="#{recoleccionChart.ano1}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano1" value="#{recoleccionController.ano1}" title="Año" min="2012" max="2030"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart1" type="line" model="#{recoleccionChart.modelo1}"/>
-                                <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{recoleccionChart.createModel1}"/>
+                                <p:chart id="chart1" type="line" model="#{recoleccionController.modelo1}"/>
+                                <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{recoleccionController.createModel1}"/>
                             </h:form>
                         </p:tab>
                         <p:tab title="Anual por Semana">
                             <h:form>
                                 <h:panelGrid columns="3" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano1"/>
-                                    <p:spinner id="ano1" value="#{recoleccionChart.ano4}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano1" value="#{recoleccionController.ano4}" title="Año" min="2012" max="2030"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart4" type="line" model="#{recoleccionChart.modelo4}"/>
-                                <p:remoteCommand name="updateChart4" update="chart4" actionListener="#{recoleccionChart.createModel4}"/>
+                                <p:chart id="chart4" type="line" model="#{recoleccionController.modelo4}"/>
+                                <p:remoteCommand name="updateChart4" update="chart4" actionListener="#{recoleccionController.createModel4}"/>
                             </h:form>
                         </p:tab>
                     </p:tabView>

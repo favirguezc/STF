@@ -23,7 +23,7 @@
                                         <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Fecha" for="fecha"/>
-                                    <p:calendar id="fecha" value="#{ventaChart.fecha3}" showOn="button"/>
+                                    <p:calendar id="fecha" value="#{ventaChart.fecha3}" showOn="button" pattern="dd/MM/yyyy"/>
                                     <p:outputLabel value="Ver:" for="eleccionFil"/>
                                     <p:selectOneRadio id="eleccionFil" value="#{ventaChart.opcion3}">
                                         <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>

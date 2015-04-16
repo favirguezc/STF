@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Finca;
 import modelo.produccion.aplicaciones.Insumo;
 
 /**
@@ -32,7 +32,7 @@ public class Compra implements Serializable{
     @Column(nullable = false)
     Date fechaCompra;
     @ManyToOne(optional = false)
-    Lote lote;
+    Finca finca;
     @ManyToOne(optional = false)
     Insumo insumo;
     @Column(nullable = false)
@@ -43,9 +43,9 @@ public class Compra implements Serializable{
     public Compra() {
     }
 
-    public Compra(Date fechaCompra, Lote lote, Insumo insumo, float precio, float cantidad) {
+    public Compra(Date fechaCompra, Finca finca, Insumo insumo, float precio, float cantidad) {
         this.fechaCompra = fechaCompra;
-        this.lote = lote;
+        this.finca = finca;
         this.insumo = insumo;
         this.precio = precio;
         this.cantidad = cantidad;
@@ -67,12 +67,12 @@ public class Compra implements Serializable{
         this.fechaCompra = fechaCompra;
     }
 
-    public Lote getLote() {
-        return lote;
+    public Finca getFinca() {
+        return finca;
     }
 
-    public void setLote(Lote lote) {
-        this.lote = lote;
+    public void setFinca(Finca finca) {
+        this.finca = finca;
     }
 
     public Insumo getInsumo() {
@@ -112,7 +112,7 @@ public class Compra implements Serializable{
         int hash = 3;
         hash = 61 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 61 * hash + Objects.hashCode(this.fechaCompra);
-        hash = 61 * hash + Objects.hashCode(this.lote);
+        hash = 61 * hash + Objects.hashCode(this.finca);
         hash = 61 * hash + Objects.hashCode(this.insumo);
         hash = 61 * hash + Float.floatToIntBits(this.precio);
         hash = 61 * hash + Float.floatToIntBits(this.cantidad);
@@ -134,7 +134,7 @@ public class Compra implements Serializable{
         if (!Objects.equals(this.fechaCompra, other.fechaCompra)) {
             return false;
         }
-        if (!Objects.equals(this.lote, other.lote)) {
+        if (!Objects.equals(this.finca, other.finca)) {
             return false;
         }
         if (!Objects.equals(this.insumo, other.insumo)) {

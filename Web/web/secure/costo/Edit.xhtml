@@ -12,12 +12,12 @@
             <h:form id="CostoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{costoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateModuloLabel_lote}" for="lote" />
-                        <p:selectOneMenu id="lote" value="#{costoController.selected.lote}" >
-                            <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
-                                           var="loteItem"
-                                           itemValue="#{loteItem}"
-                                           itemLabel="#{loteItem.nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCostoLabel_modulo}" for="modulo"/>
+                        <p:selectOneMenu id="modulo" value="#{costoController.selected.modulo}">
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
+                                           var="moduloItem"
+                                           itemValue="#{moduloItem}"
+                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCostoLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{costoController.selected.fecha}" title="#{bundle.EditCostoTitle_fecha}" required="true" requiredMessage="#{CreateCostoRequiredMessage_fecha}" showOn="button"/>

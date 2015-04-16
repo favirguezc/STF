@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Costo implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @Column(nullable = false)
-    private TipoCosto tipo; //enum(?)
+    private TipoCosto tipo;
     @Column
     private String subTipo; //enum(?)
     @Column(nullable = false)
@@ -42,7 +42,7 @@ public class Costo implements Serializable{
     @Column
     private float precioUnid;
     @ManyToOne(optional = false)
-    private Lote lote;
+    private Modulo modulo;
 
     public Costo() {
     }
@@ -115,12 +115,12 @@ public class Costo implements Serializable{
         return cantidad * precioUnid;
     }
     
-    public Lote getLote() {
-        return lote;
+    public Modulo getModulo() {
+        return modulo;
     }
 
-    public void setLote(Lote lote) {
-        this.lote = lote;
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Costo implements Serializable{
         hash = 13 * hash + Objects.hashCode(this.item);
         hash = 13 * hash + Float.floatToIntBits(this.cantidad);
         hash = 13 * hash + Float.floatToIntBits(this.precioUnid);
-        hash = 13 * hash + Objects.hashCode(this.lote);
+        hash = 13 * hash + Objects.hashCode(this.modulo);
         return hash;
     }
 
@@ -171,7 +171,7 @@ public class Costo implements Serializable{
         if (Float.floatToIntBits(this.precioUnid) != Float.floatToIntBits(other.precioUnid)) {
             return false;
         }
-        if (!Objects.equals(this.lote, other.lote)) {
+        if (!Objects.equals(this.modulo, other.modulo)) {
             return false;
         }
         return true;

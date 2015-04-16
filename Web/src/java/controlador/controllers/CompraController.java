@@ -25,7 +25,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.convert.FacesConverter;
 import modelo.finanzas.Precio;
 import modelo.finanzas.compra.Compra;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Finca;
 
 /**
  *
@@ -114,7 +114,13 @@ public class CompraController implements Serializable{
     
     public Compra prepareCreate() {
         selected = new Compra();
-        initializeEmbeddableKey();
+        if (signInBean.getFinca() != null) {
+            selected.setFinca(signInBean.getFinca());
+            initializeEmbeddableKey();
+        } else {
+            JsfUtil.addErrorMessage("Seleccione una finca");
+            selected = null;
+        }
         return selected;
     }
     
@@ -165,13 +171,13 @@ public class CompraController implements Serializable{
         }
     }
     
-    public List<Compra> leerLista(Lote lote, Date inicio, Date fin) {
-        return getJpaController().findCompraEntities(lote, inicio, fin);
+    public List<Compra> leerLista(Finca finca, Date inicio, Date fin) {
+        return getJpaController().findCompraEntities(finca, inicio, fin);
     }
     
-    public Compra sumarRegistros(Lote lote, Date inicio, Date fin) {
-        List<Compra> leerLista = leerLista(lote, inicio, fin);
-        Compra suma = new Compra(null, lote, null,0,0);
+    public Compra sumarRegistros(Finca finca, Date inicio, Date fin) {
+        List<Compra> leerLista = leerLista(finca, inicio, fin);
+        Compra suma = new Compra(null, finca, null,0,0);
         for (Compra v : leerLista) {
             suma.sumar(v);
         }

@@ -23,14 +23,14 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
                     
-                    <p:column filterBy="#{item.lote}" headerText="#{bundle.ListModuloTitle_lote}" filterMatchMode="exact">
+                    <p:column filterBy="#{item.modulo}" headerText="#{bundle.CreateCostoTitle_modulo}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('moduloTable').filter()">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                <f:selectItems value="#{loteController.itemsAvailableSelectOne}"/>
+                                <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                         </f:facet>
-                        <h:outputText value="#{item.lote.nombre}"/>
+                        <h:outputText value="#{item.modulo.lote.nombre} - #{item.modulo.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

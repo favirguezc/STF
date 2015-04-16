@@ -12,8 +12,8 @@
             <h:form id="CostoViewForm">
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2" rendered="#{costoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewModuloLabel_lote}"/>
-                        <h:outputText value="#{costoController.selected.lote.nombre}" title="#{bundle.ViewModuloTitle_lote}"/>
+                        <h:outputText value="#{bundle.CreateCostoLabel_modulo}"/>
+                        <h:outputText value="#{costoController.selected.modulo.nombre} - #{costoController.selected.modulo.lote.nombre}" title="#{bundle.CreateCostoTitle_modulo}"/>
                         <h:outputText value="#{bundle.ViewCostoLabel_fecha}"/>
                         <h:outputText value="#{costoController.selected.fecha}" title="#{bundle.ViewCostoTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />

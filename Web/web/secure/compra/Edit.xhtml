@@ -13,14 +13,6 @@
                     <p:panelGrid columns="2" rendered="#{compraController.selected != null}">
                         <p:outputLabel for="fechaCompra" value="FechaCompra (dd/MM/yyyy):"/>
                         <p:calendar id="fechaCompra" pattern="dd/MM/yyyy" value="#{compraController.selected.fechaCompra}" title="FechaCompra" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
-                        <p:outputLabel for="loteCoE" value="Lote:"/>
-                        <p:selectOneMenu id="loteCoE" value="#{compraController.selected.lote}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{loteController.itemsAvailableSelectOne}"
-                                           var="loteItem"
-                                           itemValue="#{loteItem}"
-                                           itemLabel="#{loteItem.nombre}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel for="insumoCoE" value="Insumo:"/>
                         <p:selectOneMenu id="insumoCoE" value="#{compraController.selected.insumo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

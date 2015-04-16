@@ -7,6 +7,7 @@ package controlador.controllers;
 
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
+import datos.finanzas.PrecioDAO;
 import datos.finanzas.VentaDAO;
 import datos.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.finanzas.Precio;
 import modelo.finanzas.ventas.Venta;
 import modelo.produccion.administracion.Persona;
 
@@ -36,6 +38,9 @@ public class VentaController implements Serializable {
     private Venta selected;
     private List<Venta> items = null;
     private VentaDAO jpaController = null;
+    private Precio precio = null;
+    private boolean nuePrecio;
+    private PrecioDAO precioJpaController = null;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
     @ManagedProperty(value = "#{signInController}")
@@ -51,6 +56,13 @@ public class VentaController implements Serializable {
         return jpaController;
     }
 
+    private PrecioDAO getPrecioJpaController(){
+        if(precioJpaController == null){
+            precioJpaController = new PrecioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return precioJpaController;
+    }
+    
     public Venta getSelected() {
         return selected;
     }
@@ -83,19 +95,30 @@ public class VentaController implements Serializable {
 
     public Venta prepareCreate() {
         selected = new Venta();
-        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
-        initializeEmbeddableKey();
+        if (signInBean.getFinca() != null) {
+            selected.setFinca(signInBean.getFinca());
+            initializeEmbeddableKey();
+        } else {
+            JsfUtil.addErrorMessage("Seleccione una finca");
+            selected = null;
+        }
         return selected;
     }
 
     public void create() {
+        //savePrecio();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VentaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    
+    public void prepareUpdate(){
+        //precio = getPrecioJpaController().findPrecio(selected.getInsumo().getNombre());
+    }
 
     public void update() {
+        //savePrecio();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("VentaUpdated"));
     }
 
@@ -161,6 +184,37 @@ public class VentaController implements Serializable {
         return suma;
     }
 
+    public void verifyPrecio(){
+//        if(selected.getInsumo() != null){
+//            //search precio by item
+//            precio = getPrecioJpaController().findPrecio(selected.getInsumo().getNombre());
+//            //if exists set
+//            if(precio != null){
+//                nuePrecio = false;
+//                selected.setPrecio(precio.getValor());
+//            }else{
+//                //else create new precio
+//                nuePrecio = true;
+//                precio = new Precio(selected.getInsumo().getNombre(),0);
+//                selected.setPrecio(0);
+//            }
+//        }
+    }
+    
+    public void savePrecio(){
+//        if(nuePrecio){
+//            precio.setValor(selected.getPrecio());
+//            getPrecioJpaController().create(precio);
+//        }else{
+//            try {
+//                precio.setValor(selected.getPrecio());
+//                getPrecioJpaController().edit(precio);
+//            } catch (Exception ex) {
+//                Logger.getLogger(CompraController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+    }
+    
     @FacesConverter(forClass = Venta.class)
     public static class VentaConverter implements Converter {
 

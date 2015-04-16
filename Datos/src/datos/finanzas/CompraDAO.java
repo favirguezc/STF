@@ -18,7 +18,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.finanzas.compra.Compra;
 import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
 
 /**
  *
@@ -140,16 +139,16 @@ public class CompraDAO {
         }
     }
     
-    public List<Compra> findCompraEntities(Lote lote, Date inicio, Date fin) {
+    public List<Compra> findCompraEntities(Finca finca, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
         String queryString = "SELECT t FROM Compra t";
-        if (lote != null || inicio != null || fin != null) {
+        if (finca != null || inicio != null || fin != null) {
             queryString += " WHERE";
         }
-        if (lote != null) {
-            queryString += " t.lote = :lote";
+        if (finca != null) {
+            queryString += " t.finca = :finca";
             a = true;
         }
         if (fin != null) {
@@ -175,7 +174,7 @@ public class CompraDAO {
                 query.setParameter("fecha2", fin, TemporalType.DATE);
             }
             if (a) {
-                query.setParameter("lote", lote);
+                query.setParameter("finca", finca);
             }
             return query.getResultList();
         } finally {
@@ -186,7 +185,7 @@ public class CompraDAO {
     public List<Compra> findCompraEntitiesForSelectedFarm(Finca selectedFarm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Compra> query = em.createQuery("SELECT co FROM Compra co WHERE co.lote.finca = :finca ORDER BY co.fechaCompra ASC", Compra.class);
+            TypedQuery<Compra> query = em.createQuery("SELECT co FROM Compra co WHERE co.finca = :finca ORDER BY co.fechaCompra ASC", Compra.class);
             query.setParameter("finca", selectedFarm);
             return query.getResultList();
         } finally {

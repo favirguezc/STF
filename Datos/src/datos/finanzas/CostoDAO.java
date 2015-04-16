@@ -21,7 +21,7 @@ import javax.persistence.TypedQuery;
 import modelo.finanzas.costo.Costo;
 import modelo.finanzas.costo.TipoCosto;
 import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
+import modelo.produccion.administracion.Modulo;
 
 /**
  *
@@ -148,16 +148,16 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(Lote lote, TipoCosto tipo, Date inicio, Date fin) {
+    public List<Costo> findCostoEntities(Modulo modulo, TipoCosto tipo, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
         String queryString = "SELECT c FROM Costo c";
-        if (lote != null || tipo != null || inicio != null || fin != null) {
+        if (modulo != null || tipo != null || inicio != null || fin != null) {
             queryString += " WHERE";
         }
-        if (lote != null) {
-            queryString += " c.lote = :lote";
+        if (modulo != null) {
+            queryString += " c.modulo = :modulo";
             d = true;
         }
         if (tipo != null) {
@@ -193,7 +193,7 @@ public class CostoDAO implements Serializable {
                 query.setParameter("tipo", tipo);
             }
             if (d) {
-                query.setParameter("lote", lote);
+                query.setParameter("modulo", modulo);
             }
             return query.getResultList();
         } finally {
@@ -201,17 +201,17 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(Lote lote) {
+    public List<Costo> findCostoEntities(Modulo modulo) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT c FROM Costo c";
-        if (lote != null) {
-            queryString += " WHERE c.lote = :lote";
+        if (modulo != null) {
+            queryString += " WHERE c.modulo = :modulo";
         }
         queryString += " ORDER BY c.fecha ASC";
         try {
             TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
-            if (lote != null) {
-                query.setParameter("lote", lote);
+            if (modulo != null) {
+                query.setParameter("modulo", modulo);
             }
             return query.getResultList();
         } finally {
@@ -221,7 +221,7 @@ public class CostoDAO implements Serializable {
     
     public List<Costo> findCostoEntitiesForSelectedFarm(Finca selectedFarm) {
         EntityManager em = getEntityManager();
-        String queryString = "SELECT c FROM Costo c WHERE c.lote.finca = :finca ORDER BY c.fecha ASC";
+        String queryString = "SELECT c FROM Costo c WHERE c.modulo.lote.finca = :finca ORDER BY c.fecha ASC";
         try {
             TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
             query.setParameter("finca", selectedFarm);

@@ -63,6 +63,7 @@ public class LluviaController implements Serializable {
 
     public Lluvia prepareCreate() {
         selected = new Lluvia();
+        selected.setFinca(permisoBean.getSignInBean().getFinca());
         initializeEmbeddableKey();
         return selected;
     }

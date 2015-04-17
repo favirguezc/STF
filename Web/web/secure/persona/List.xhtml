@@ -33,25 +33,13 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPersonaTitle_nombre}"/>
                         </f:facet>
-                        <h:outputText value="#{item.nombre}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListPersonaTitle_nombre2}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nombre2}"/>
+                        <h:outputText value="#{item.nombre} #{item.nombre2}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPersonaTitle_apellido}"/>
                         </f:facet>
-                        <h:outputText value="#{item.apellido}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListPersonaTitle_apellido2}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.apellido2}"/>
+                        <h:outputText value="#{item.apellido} #{item.apellido2}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -87,13 +75,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListPersonaTitle_grupoSanguineo}"/>
                         </f:facet>
-                        <h:outputText value="#{item.grupoSanguineo}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListPersonaTitle_rh}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.rh}"/>
+                        <h:outputText value="#{item.grupoSanguineo} #{item.rh}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>

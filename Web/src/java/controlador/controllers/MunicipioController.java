@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Municipio;
+import model.administration.Municipality;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.MunicipioDAO;
@@ -15,23 +15,23 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Departamento;
+import model.administration.Department;
 
 @ManagedBean(name = "municipioController")
 public class MunicipioController implements Serializable {
 
     private MunicipioDAO jpaController = null;
-    private List<Municipio> items = null;
-    private Municipio selected;
+    private List<Municipality> items = null;
+    private Municipality selected;
 
     public MunicipioController() {
     }
 
-    public Municipio getSelected() {
+    public Municipality getSelected() {
         return selected;
     }
 
-    public void setSelected(Municipio selected) {
+    public void setSelected(Municipality selected) {
         this.selected = selected;
     }
 
@@ -48,8 +48,8 @@ public class MunicipioController implements Serializable {
         return jpaController;
     }
 
-    public Municipio prepareCreate() {
-        selected = new Municipio();
+    public Municipality prepareCreate() {
+        selected = new Municipality();
         initializeEmbeddableKey();
         return selected;
     }
@@ -73,7 +73,7 @@ public class MunicipioController implements Serializable {
         }
     }
 
-    public List<Municipio> getItems() {
+    public List<Municipality> getItems() {
         if (items == null) {
             items = getJpaController().findMunicipioEntities();
         }
@@ -99,19 +99,19 @@ public class MunicipioController implements Serializable {
         }
     }
 
-    public List<Municipio> getItemsAvailableSelectMany() {
+    public List<Municipality> getItemsAvailableSelectMany() {
         return getJpaController().findMunicipioEntities();
     }
 
-    public List<Municipio> getItemsAvailableSelectOne() {
+    public List<Municipality> getItemsAvailableSelectOne() {
         return getJpaController().findMunicipioEntities();
     }
 
-    public List<Municipio> getItems(Departamento departamento) {
+    public List<Municipality> getItems(Department departamento) {
         return getJpaController().findMunicipioEntities(departamento);
     }
 
-    @FacesConverter(forClass = Municipio.class)
+    @FacesConverter(forClass = Municipality.class)
     public static class MunicipioControllerConverter implements Converter {
 
         @Override
@@ -141,11 +141,11 @@ public class MunicipioController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Municipio) {
-                Municipio o = (Municipio) object;
+            if (object instanceof Municipality) {
+                Municipality o = (Municipality) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Municipio.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Municipality.class.getName()});
                 return null;
             }
         }

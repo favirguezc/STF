@@ -22,11 +22,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.cosecha.Recoleccion;
-import modelo.produccion.labores.Labor;
-import modelo.produccion.labores.Trabajo;
+import model.administration.Farm;
+import model.administration.Person;
+import model.crop.Crop;
+import model.work.Job;
+import model.work.Work;
 
 @ManagedBean(name = "nominaController")
 @SessionScoped
@@ -191,7 +191,7 @@ public class NominaController implements Serializable {
         return getJpaController().findNominaEntities();
     }
     
-    public List<Nomina> leerLista(Finca finca, Persona trabajador, Date inicio, Date fin) {
+    public List<Nomina> leerLista(Farm finca, Person trabajador, Date inicio, Date fin) {
         return getJpaController().findNominaEntities(finca, trabajador, inicio, fin);
     }
     
@@ -222,28 +222,28 @@ public class NominaController implements Serializable {
     public float getValorRecolectado(){
         float valorRecolectado = 0;
         if(selected != null){
-            Recoleccion totalRecolectado = recoleccionCotroller.sumarRegistros(selected.getTrabajador(), null,selected.getFechaDesde(),selected.getFecha());
-            valorRecolectado = (totalRecolectado.getPesadaGramos()/500)*125;
+            Crop totalRecolectado = recoleccionCotroller.sumarRegistros(selected.getTrabajador(), null,selected.getFechaDesde(),selected.getFecha());
+            valorRecolectado = (totalRecolectado.getWeight()/500)*125;
         }
         return valorRecolectado;
     }
     
-    public List<Labor> getLaboresSelected(){
+    public List<Job> getLaboresSelected(){
         
-        List<Labor> labores = null;
+        List<Job> labores = null;
         if(selected != null){
-            labores = new ArrayList<Labor>();
-            List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
-            for(Labor labor : laborController.getItemsAvailableSelectOne()){
+            labores = new ArrayList<Job>();
+            List<Work> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
+            for(Job labor : laborController.getItemsAvailableSelectOne()){
                 float valorTrabajo = 0;
-                for(Trabajo trabajo : trabajosRealizados){
-                    if(trabajo.getLabor().equals(labor)){
-                        valorTrabajo += labor.getValor() * trabajo.getHoras();
+                for(Work trabajo : trabajosRealizados){
+                    if(trabajo.getJob().equals(labor)){
+                        valorTrabajo += labor.getHourlyRate() * trabajo.getHoursSpent();
                     }
                 }
                 if (valorTrabajo != 0){
-                    Labor nueva = labor;
-                    nueva.setValor(valorTrabajo);
+                    Job nueva = labor;
+                    nueva.setHourlyRate(valorTrabajo);
                     labores.add(nueva);
                 }
             }
@@ -260,11 +260,11 @@ public class NominaController implements Serializable {
         
         //Trabajos hechos
         float valorTrabajos = 0;
-        List<Trabajo> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
-        for(Labor labor : laborController.getItemsAvailableSelectOne()){
-            for(Trabajo trabajo : trabajosRealizados){
-                if(trabajo.getLabor().equals(labor)){
-                    valorTrabajos += labor.getValor() * trabajo.getHoras();
+        List<Work> trabajosRealizados = trabajoController.leerLista(selected.getTrabajador(),selected.getFechaDesde(),selected.getFecha());
+        for(Job labor : laborController.getItemsAvailableSelectOne()){
+            for(Work trabajo : trabajosRealizados){
+                if(trabajo.getJob().equals(labor)){
+                    valorTrabajos += labor.getHourlyRate() * trabajo.getHoursSpent();
                 }
             }
         }

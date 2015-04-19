@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.util.Accion;
+import model.util.Action;
 
 /**
  *
@@ -15,8 +15,8 @@ import modelo.util.Accion;
 @ManagedBean(name = "accionController")
 public class AccionController {
 
-    public Accion[] getAccionValues() {
-        return Accion.values();
+    public Action[] getAccionValues() {
+        return Action.values();
     }
 
 }

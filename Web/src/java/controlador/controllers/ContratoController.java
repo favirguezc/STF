@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Contrato;
+import model.administration.Contract;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.ContratoDAO;
@@ -19,15 +19,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 
 @ManagedBean(name = "contratoController")
 @SessionScoped
 public class ContratoController implements Serializable {
 
     private ContratoDAO jpaController = null;
-    private List<Contrato> items = null;
-    private Contrato selected;
+    private List<Contract> items = null;
+    private Contract selected;
     private long cedula;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
@@ -37,11 +37,11 @@ public class ContratoController implements Serializable {
     public ContratoController() {
     }
 
-    public Contrato getSelected() {
+    public Contract getSelected() {
         return selected;
     }
 
-    public void setSelected(Contrato selected) {
+    public void setSelected(Contract selected) {
         this.selected = selected;
     }
 
@@ -82,10 +82,10 @@ public class ContratoController implements Serializable {
         return jpaController;
     }
 
-    public Contrato prepareCreate() {
-        selected = new Contrato();
+    public Contract prepareCreate() {
+        selected = new Contract();
         if (signInBean.getFinca() != null) {
-            selected.setFinca(signInBean.getFinca());
+            selected.setFarm(signInBean.getFinca());
         } else {
             JsfUtil.addErrorMessage("Seleccione una finca");
             selected = null;
@@ -95,12 +95,12 @@ public class ContratoController implements Serializable {
     }
 
     public void create() {
-        Persona findPersonaPorCedula = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(cedula);
+        Person findPersonaPorCedula = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(cedula);
         if (findPersonaPorCedula == null) {
             JsfUtil.addErrorMessage("La cédula no está registrada.");
             selected=null;
         } else {
-            selected.setPersona(findPersonaPorCedula);
+            selected.setPerson(findPersonaPorCedula);
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContratoCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
@@ -121,7 +121,7 @@ public class ContratoController implements Serializable {
         }
     }
 
-    public List<Contrato> getItems() {
+    public List<Contract> getItems() {
         if (items == null) {
             items = getJpaController().findContratoEntities();
         }
@@ -150,19 +150,19 @@ public class ContratoController implements Serializable {
         }
     }
 
-    public List<Contrato> getItemsAvailableSelectMany() {
+    public List<Contract> getItemsAvailableSelectMany() {
         return getJpaController().findContratoEntities();
     }
 
-    public List<Contrato> getItemsAvailableSelectOne() {
+    public List<Contract> getItemsAvailableSelectOne() {
         return getJpaController().findContratoEntities();
     }
 
-    Iterable<Contrato> getItems(Persona user) {
+    Iterable<Contract> getItems(Person user) {
         return getJpaController().findContratoEntities(user);
     }
 
-    @FacesConverter(forClass = Contrato.class)
+    @FacesConverter(forClass = Contract.class)
     public static class ContratoControllerConverter implements Converter {
 
         @Override
@@ -192,11 +192,11 @@ public class ContratoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Contrato) {
-                Contrato o = (Contrato) object;
+            if (object instanceof Contract) {
+                Contract o = (Contract) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Contrato.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Contract.class.getName()});
                 return null;
             }
         }

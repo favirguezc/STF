@@ -16,7 +16,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.util.Accion;
+import model.util.Action;
 
 /**
  *
@@ -39,7 +39,7 @@ public class AutorizacionFilter implements Filter {
                 permisoController.setSignInBean(loginBean);
                 ((HttpServletRequest) request).getSession().setAttribute("permisoController", permisoController);
             }
-            if (permisoController.currentUserHasPermission(Accion.Leer, ((HttpServletRequest) request).getRequestURI())) {
+            if (permisoController.currentUserHasPermission(Action.READ, ((HttpServletRequest) request).getRequestURI())) {
                 chain.doFilter(request, response);
             } else {
                 HttpServletRequest req = (HttpServletRequest) request;

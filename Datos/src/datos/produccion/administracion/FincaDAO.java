@@ -16,8 +16,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
+import model.administration.Farm;
+import model.administration.Person;
 
 /**
  *
@@ -34,7 +34,7 @@ public class FincaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Finca finca) {
+    public void create(Farm finca) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,7 +48,7 @@ public class FincaDAO implements Serializable {
         }
     }
 
-    public void edit(Finca finca) throws NonexistentEntityException, Exception {
+    public void edit(Farm finca) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -76,9 +76,9 @@ public class FincaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Finca finca;
+            Farm finca;
             try {
-                finca = em.getReference(Finca.class, id);
+                finca = em.getReference(Farm.class, id);
                 finca.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The finca with id " + id + " no longer exists.", enfe);
@@ -92,19 +92,19 @@ public class FincaDAO implements Serializable {
         }
     }
 
-    public List<Finca> findFincaEntitiesForCurrentUser(Persona user) {
+    public List<Farm> findFincaEntitiesForCurrentUser(Person user) {
         EntityManager em = getEntityManager();
         try {
-            if (user.isAdministrador()) {
+            if (user.isSystemAdmin()) {
                 return findFincaEntities();
             } else {
-                TypedQuery<Finca> query = em.createQuery("SELECT f FROM Finca f WHERE f.propietario = :persona", Finca.class);
+                TypedQuery<Farm> query = em.createQuery("SELECT f FROM Finca f WHERE f.propietario = :persona", Farm.class);
                 query.setParameter("persona", user);
-                List<Finca> resultList = query.getResultList();
+                List<Farm> resultList = query.getResultList();
                 if (resultList == null) {
                     resultList = new LinkedList<>();
                 }
-                List<Finca> findFincaEntities = new ContratoDAO(emf).findFincaEntities(user);
+                List<Farm> findFincaEntities = new ContratoDAO(emf).findFincaEntities(user);
                 if (findFincaEntities != null && !findFincaEntities.isEmpty()) {
                     resultList.addAll(findFincaEntities);
                 }
@@ -115,19 +115,19 @@ public class FincaDAO implements Serializable {
         }
     }
 
-    public List<Finca> findFincaEntities() {
+    public List<Farm> findFincaEntities() {
         return findFincaEntities(true, -1, -1);
     }
 
-    public List<Finca> findFincaEntities(int maxResults, int firstResult) {
+    public List<Farm> findFincaEntities(int maxResults, int firstResult) {
         return findFincaEntities(false, maxResults, firstResult);
     }
 
-    private List<Finca> findFincaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Farm> findFincaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Finca.class));
+            cq.select(cq.from(Farm.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -139,10 +139,10 @@ public class FincaDAO implements Serializable {
         }
     }
 
-    public Finca findFinca(Long id) {
+    public Farm findFinca(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Finca.class, id);
+            return em.find(Farm.class, id);
         } finally {
             em.close();
         }
@@ -152,7 +152,7 @@ public class FincaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Finca> rt = cq.from(Finca.class);
+            Root<Farm> rt = cq.from(Farm.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

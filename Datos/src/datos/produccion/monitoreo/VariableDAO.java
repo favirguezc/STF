@@ -14,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.Variable;
+import model.monitoring.MonitorableParameter;
 
 /**
  *
@@ -43,7 +43,7 @@ public class VariableDAO implements Serializable {
      *
      * @param variable
      */
-    public void create(Variable variable) {
+    public void create(MonitorableParameter variable) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -63,7 +63,7 @@ public class VariableDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Variable variable) throws NonexistentEntityException, Exception {
+    public void edit(MonitorableParameter variable) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -96,9 +96,9 @@ public class VariableDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Variable variable;
+            MonitorableParameter variable;
             try {
-                variable = em.getReference(Variable.class, id);
+                variable = em.getReference(MonitorableParameter.class, id);
                 variable.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The variable with id " + id + " no longer exists.", enfe);
@@ -116,7 +116,7 @@ public class VariableDAO implements Serializable {
      *
      * @return
      */
-    public List<Variable> findVariableEntities() {
+    public List<MonitorableParameter> findVariableEntities() {
         return findVariableEntities(true, -1, -1);
     }
 
@@ -126,15 +126,15 @@ public class VariableDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Variable> findVariableEntities(int maxResults, int firstResult) {
+    public List<MonitorableParameter> findVariableEntities(int maxResults, int firstResult) {
         return findVariableEntities(false, maxResults, firstResult);
     }
 
-    private List<Variable> findVariableEntities(boolean all, int maxResults, int firstResult) {
+    private List<MonitorableParameter> findVariableEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Variable.class));
+            cq.select(cq.from(MonitorableParameter.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -151,10 +151,10 @@ public class VariableDAO implements Serializable {
      * @param id
      * @return
      */
-    public Variable findVariable(Long id) {
+    public MonitorableParameter findVariable(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Variable.class, id);
+            return em.find(MonitorableParameter.class, id);
         } finally {
             em.close();
         }
@@ -168,7 +168,7 @@ public class VariableDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Variable> rt = cq.from(Variable.class);
+            Root<MonitorableParameter> rt = cq.from(MonitorableParameter.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

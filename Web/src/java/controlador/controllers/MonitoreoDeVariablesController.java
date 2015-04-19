@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.monitoreo.MonitoreoDeVariables;
+import model.monitoring.ParameterMonitoring;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.monitoreo.MonitoreoDeVariablesDAO;
@@ -17,15 +17,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.monitoreo.TipoDeValoracion;
+import model.monitoring.ValuationTypeEnum;
 
 @ManagedBean(name = "monitoreoDeVariablesController")
 @SessionScoped
 public class MonitoreoDeVariablesController implements Serializable {
 
     private MonitoreoDeVariablesDAO jpaController = null;
-    private List<MonitoreoDeVariables> items = null;
-    private MonitoreoDeVariables selected;
+    private List<ParameterMonitoring> items = null;
+    private ParameterMonitoring selected;
     private int habilitado;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
@@ -33,11 +33,11 @@ public class MonitoreoDeVariablesController implements Serializable {
     public MonitoreoDeVariablesController() {
     }
 
-    public MonitoreoDeVariables getSelected() {
+    public ParameterMonitoring getSelected() {
         return selected;
     }
 
-    public void setSelected(MonitoreoDeVariables selected) {
+    public void setSelected(ParameterMonitoring selected) {
         this.selected = selected;
     }
 
@@ -70,8 +70,8 @@ public class MonitoreoDeVariablesController implements Serializable {
         return jpaController;
     }
 
-    public MonitoreoDeVariables prepareCreate() {
-        selected = new MonitoreoDeVariables();
+    public ParameterMonitoring prepareCreate() {
+        selected = new ParameterMonitoring();
         initializeEmbeddableKey();
         return selected;
     }
@@ -95,7 +95,7 @@ public class MonitoreoDeVariablesController implements Serializable {
         }
     }
 
-    public List<MonitoreoDeVariables> getItems() {
+    public List<ParameterMonitoring> getItems() {
         if (items == null) {
             items = getJpaController().findMonitoreoDeVariablesEntities();
         }
@@ -124,21 +124,21 @@ public class MonitoreoDeVariablesController implements Serializable {
         }
     }
 
-    public List<MonitoreoDeVariables> getItemsAvailableSelectMany() {
+    public List<ParameterMonitoring> getItemsAvailableSelectMany() {
         return getJpaController().findMonitoreoDeVariablesEntities();
     }
 
-    public List<MonitoreoDeVariables> getItemsAvailableSelectOne() {
+    public List<ParameterMonitoring> getItemsAvailableSelectOne() {
         return getJpaController().findMonitoreoDeVariablesEntities();
     }
 
     public void valor() {
-        if (selected.getVariable() != null) {
-            if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.CONTEO) {
+        if (selected.getParameter() != null) {
+            if (selected.getParameter().getValuationType() == ValuationTypeEnum.COUNT) {
                 habilitado = 2;
-            } else if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.RELACION) {
+            } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.RELATION) {
                 habilitado = 1;
-            } else if (selected.getVariable().getTipoDeValoracion() == TipoDeValoracion.RIESGO){
+            } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.RISK){
                 habilitado = 3;
             }
         } else {
@@ -146,7 +146,7 @@ public class MonitoreoDeVariablesController implements Serializable {
         }
     }
 
-    @FacesConverter(forClass = MonitoreoDeVariables.class)
+    @FacesConverter(forClass = ParameterMonitoring.class)
     public static class MonitoreoDeVariablesControllerConverter implements Converter {
 
         @Override
@@ -176,11 +176,11 @@ public class MonitoreoDeVariablesController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof MonitoreoDeVariables) {
-                MonitoreoDeVariables o = (MonitoreoDeVariables) object;
+            if (object instanceof ParameterMonitoring) {
+                ParameterMonitoring o = (ParameterMonitoring) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), MonitoreoDeVariables.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), ParameterMonitoring.class.getName()});
                 return null;
             }
         }

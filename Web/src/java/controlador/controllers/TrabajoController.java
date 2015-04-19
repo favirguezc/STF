@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.labores.Trabajo;
+import model.work.Work;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.labores.TrabajoDAO;
@@ -18,15 +18,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 
 @ManagedBean(name = "trabajoController")
 @SessionScoped
 public class TrabajoController implements Serializable {
 
     private TrabajoDAO jpaController = null;
-    private List<Trabajo> items = null;
-    private Trabajo selected;
+    private List<Work> items = null;
+    private Work selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
     @ManagedProperty(value = "#{signInController}")
@@ -35,11 +35,11 @@ public class TrabajoController implements Serializable {
     public TrabajoController() {
     }
 
-    public Trabajo getSelected() {
+    public Work getSelected() {
         return selected;
     }
 
-    public void setSelected(Trabajo selected) {
+    public void setSelected(Work selected) {
         this.selected = selected;
     }
 
@@ -72,8 +72,8 @@ public class TrabajoController implements Serializable {
         return jpaController;
     }
 
-    public Trabajo prepareCreate() {
-        selected = new Trabajo();
+    public Work prepareCreate() {
+        selected = new Work();
         initializeEmbeddableKey();
         return selected;
     }
@@ -97,7 +97,7 @@ public class TrabajoController implements Serializable {
         }
     }
 
-    public List<Trabajo> getItems() {
+    public List<Work> getItems() {
         if (items == null) {
             items = getJpaController().findTrabajoEntities(signInBean.getFinca());
         }
@@ -126,19 +126,19 @@ public class TrabajoController implements Serializable {
         }
     }
 
-    public List<Trabajo> getItemsAvailableSelectMany() {
+    public List<Work> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Trabajo> getItemsAvailableSelectOne() {
+    public List<Work> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    public List<Trabajo> leerLista(Persona trabajador, Date inicio, Date fin) {
+    public List<Work> leerLista(Person trabajador, Date inicio, Date fin) {
         return getJpaController().findTrabajoEntities(signInBean.getFinca(), trabajador, inicio, fin);
     }
 
-    @FacesConverter(forClass = Trabajo.class)
+    @FacesConverter(forClass = Work.class)
     public static class TrabajoControllerConverter implements Converter {
 
         @Override
@@ -168,11 +168,11 @@ public class TrabajoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Trabajo) {
-                Trabajo o = (Trabajo) object;
+            if (object instanceof Work) {
+                Work o = (Work) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Trabajo.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Work.class.getName()});
                 return null;
             }
         }

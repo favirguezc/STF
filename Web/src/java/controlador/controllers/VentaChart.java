@@ -11,8 +11,8 @@ import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import modelo.finanzas.ventas.Venta;
-import modelo.produccion.administracion.Persona;
-import modelo.util.DateTools;
+import model.administration.Person;
+import model.util.DateTools;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -37,10 +37,10 @@ public class VentaChart {
     private int ano4;
     private int mes2;
     private Date fecha3;
-    private Persona cliente1;
-    private Persona cliente2;
-    private Persona cliente3;
-    private Persona cliente4;
+    private Person cliente1;
+    private Person cliente2;
+    private Person cliente3;
+    private Person cliente4;
     private String opcion1;
     private String opcion2;
     private String opcion3;
@@ -137,35 +137,35 @@ public class VentaChart {
         this.fecha3 = fecha3;
     }
 
-    public Persona getCliente1() {
+    public Person getCliente1() {
         return cliente1;
     }
 
-    public void setCliente1(Persona cliente1) {
+    public void setCliente1(Person cliente1) {
         this.cliente1 = cliente1;
     }
 
-    public Persona getCliente2() {
+    public Person getCliente2() {
         return cliente2;
     }
 
-    public void setCliente2(Persona cliente2) {
+    public void setCliente2(Person cliente2) {
         this.cliente2 = cliente2;
     }
 
-    public Persona getCliente3() {
+    public Person getCliente3() {
         return cliente3;
     }
 
-    public void setCliente3(Persona cliente3) {
+    public void setCliente3(Person cliente3) {
         this.cliente3 = cliente3;
     }
 
-    public Persona getCliente4() {
+    public Person getCliente4() {
         return cliente4;
     }
 
-    public void setCliente4(Persona cliente4) {
+    public void setCliente4(Person cliente4) {
         this.cliente4 = cliente4;
     }
 

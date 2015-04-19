@@ -20,7 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.finanzas.costo.TipoCosto;
-import modelo.produccion.administracion.Modulo;
+import model.administration.ModuleClass;
 
 @ManagedBean(name = "costoController")
 @SessionScoped
@@ -140,11 +140,11 @@ public class CostoController implements Serializable {
         return getJpaController().findCostoEntities();
     }
     
-    public List<Costo> leerLista(Modulo modulo, TipoCosto tipo, Date inicio, Date fin) {
+    public List<Costo> leerLista(ModuleClass modulo, TipoCosto tipo, Date inicio, Date fin) {
         return getJpaController().findCostoEntities(modulo, tipo, inicio, fin);
     }
 
-    public Costo sumarRegistros(Modulo modulo, TipoCosto tipo, Date inicio, Date fin) {
+    public Costo sumarRegistros(ModuleClass modulo, TipoCosto tipo, Date inicio, Date fin) {
         List<Costo> leerLista = leerLista(modulo, tipo, inicio, fin);
         Costo suma = new Costo();
         for (Costo c : leerLista) {

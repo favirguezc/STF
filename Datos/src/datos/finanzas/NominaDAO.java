@@ -18,8 +18,8 @@ import java.util.Date;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import modelo.finanzas.nomina.Nomina;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
+import model.administration.Farm;
+import model.administration.Person;
 
 /**
  *
@@ -141,7 +141,7 @@ public class NominaDAO implements Serializable {
         }
     }
     
-    public List<Nomina> findNominaEntities(Finca finca, Persona trabajador, Date inicio, Date fin) {
+    public List<Nomina> findNominaEntities(Farm finca, Person trabajador, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c;
         a = b = c = false;
@@ -176,7 +176,7 @@ public class NominaDAO implements Serializable {
         }
     }
     
-    public List<Nomina> findNominaEntitiesForSelectedFarm(Finca finca) {
+    public List<Nomina> findNominaEntitiesForSelectedFarm(Farm finca) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Nomina> query = em.createQuery("SELECT n FROM Nomina n WHERE n.finca = :finca  ORDER BY n.fecha ASC", Nomina.class);

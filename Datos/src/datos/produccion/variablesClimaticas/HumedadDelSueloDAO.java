@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
+import model.weather.SoilMoisture;
 
 /**
  *
@@ -46,7 +46,7 @@ public class HumedadDelSueloDAO implements Serializable {
      *
      * @param humedadDelSuelo
      */
-    public void create(HumedadDelSuelo humedadDelSuelo) {
+    public void create(SoilMoisture humedadDelSuelo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class HumedadDelSueloDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(HumedadDelSuelo humedadDelSuelo) throws NonexistentEntityException, Exception {
+    public void edit(SoilMoisture humedadDelSuelo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class HumedadDelSueloDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            HumedadDelSuelo humedadDelSuelo;
+            SoilMoisture humedadDelSuelo;
             try {
-                humedadDelSuelo = em.getReference(HumedadDelSuelo.class, id);
+                humedadDelSuelo = em.getReference(SoilMoisture.class, id);
                 humedadDelSuelo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The humedadDelSuelo with id " + id + " no longer exists.", enfe);
@@ -119,7 +119,7 @@ public class HumedadDelSueloDAO implements Serializable {
      *
      * @return
      */
-    public List<HumedadDelSuelo> findHumedadDelSueloEntities() {
+    public List<SoilMoisture> findHumedadDelSueloEntities() {
         return findHumedadDelSueloEntities(true, -1, -1);
     }
 
@@ -129,15 +129,15 @@ public class HumedadDelSueloDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<HumedadDelSuelo> findHumedadDelSueloEntities(int maxResults, int firstResult) {
+    public List<SoilMoisture> findHumedadDelSueloEntities(int maxResults, int firstResult) {
         return findHumedadDelSueloEntities(false, maxResults, firstResult);
     }
 
-    private List<HumedadDelSuelo> findHumedadDelSueloEntities(boolean all, int maxResults, int firstResult) {
+    private List<SoilMoisture> findHumedadDelSueloEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(HumedadDelSuelo.class));
+            cq.select(cq.from(SoilMoisture.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -154,10 +154,10 @@ public class HumedadDelSueloDAO implements Serializable {
      * @param fecha
      * @return
      */
-    public List<HumedadDelSuelo> findHumedadDelSueloEntities(Date fecha) {
+    public List<SoilMoisture> findHumedadDelSueloEntities(Date fecha) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<HumedadDelSuelo> query = em.createQuery("SELECT t FROM HumedadDelSuelo t WHERE t.fecha = :fecha1", HumedadDelSuelo.class);
+            TypedQuery<SoilMoisture> query = em.createQuery("SELECT t FROM HumedadDelSuelo t WHERE t.fecha = :fecha1", SoilMoisture.class);
             query.setParameter("fecha1", fecha, TemporalType.DATE);
             return query.getResultList();
         } finally {
@@ -171,10 +171,10 @@ public class HumedadDelSueloDAO implements Serializable {
      * @param siguienteMes
      * @return
      */
-    public List<HumedadDelSuelo> findHumedadDelSueloEntities(Date esteMes, Date siguienteMes) {
+    public List<SoilMoisture> findHumedadDelSueloEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<HumedadDelSuelo> query = em.createQuery("SELECT h FROM HumedadDelSuelo h WHERE h.fecha BETWEEN :fecha1 AND :fecha2", HumedadDelSuelo.class);
+            TypedQuery<SoilMoisture> query = em.createQuery("SELECT h FROM HumedadDelSuelo h WHERE h.fecha BETWEEN :fecha1 AND :fecha2", SoilMoisture.class);
             query.setParameter("fecha1", esteMes, TemporalType.DATE);
             query.setParameter("fecha2", siguienteMes, TemporalType.DATE);
             return query.getResultList();
@@ -188,10 +188,10 @@ public class HumedadDelSueloDAO implements Serializable {
      * @param id
      * @return
      */
-    public HumedadDelSuelo findHumedadDelSuelo(Long id) {
+    public SoilMoisture findHumedadDelSuelo(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(HumedadDelSuelo.class, id);
+            return em.find(SoilMoisture.class, id);
         } finally {
             em.close();
         }
@@ -202,11 +202,11 @@ public class HumedadDelSueloDAO implements Serializable {
      * @param date
      * @return
      */
-    public List<HumedadDelSuelo> findHumedadDelSuelo(Date date) {
+    public List<SoilMoisture> findHumedadDelSuelo(Date date) {
         EntityManager em = getEntityManager();
-        List<HumedadDelSuelo> lista = null;
+        List<SoilMoisture> lista = null;
         try {
-            TypedQuery<HumedadDelSuelo> query = em.createQuery("SELECT h FROM HumedadDelSuelo h WHERE h.fecha = :fecha", HumedadDelSuelo.class);
+            TypedQuery<SoilMoisture> query = em.createQuery("SELECT h FROM HumedadDelSuelo h WHERE h.fecha = :fecha", SoilMoisture.class);
             query.setParameter("fecha", date, TemporalType.DATE);
             lista = query.getResultList();
         } finally {
@@ -223,7 +223,7 @@ public class HumedadDelSueloDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<HumedadDelSuelo> rt = cq.from(HumedadDelSuelo.class);
+            Root<SoilMoisture> rt = cq.from(SoilMoisture.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

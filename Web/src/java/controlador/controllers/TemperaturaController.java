@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.variablesClimaticas.Temperatura;
+import model.weather.Temperature;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.variablesClimaticas.TemperaturaDAO;
@@ -18,26 +18,26 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Modulo;
+import model.administration.ModuleClass;
 
 @ManagedBean(name = "temperaturaController")
 @SessionScoped
 public class TemperaturaController implements Serializable {
 
     private TemperaturaDAO jpaController = null;
-    private List<Temperatura> items = null;
-    private Temperatura selected;
+    private List<Temperature> items = null;
+    private Temperature selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public TemperaturaController() {
     }
 
-    public Temperatura getSelected() {
+    public Temperature getSelected() {
         return selected;
     }
 
-    public void setSelected(Temperatura selected) {
+    public void setSelected(Temperature selected) {
         this.selected = selected;
     }
 
@@ -62,8 +62,8 @@ public class TemperaturaController implements Serializable {
         return jpaController;
     }
 
-    public Temperatura prepareCreate() {
-        selected = new Temperatura();
+    public Temperature prepareCreate() {
+        selected = new Temperature();
         initializeEmbeddableKey();
         return selected;
     }
@@ -87,33 +87,33 @@ public class TemperaturaController implements Serializable {
         }
     }
 
-    public List<Temperatura> getItems() {
+    public List<Temperature> getItems() {
         if (items == null) {
             items = getJpaController().findTemperaturaEntities();
         }
         return items;
     }
 
-    public List<Temperatura> getItems(Date fecha1, Date fecha2) {
+    public List<Temperature> getItems(Date fecha1, Date fecha2) {
         return getJpaController().findTemperaturaEntities(fecha1, fecha2, 0);
     }
 
-    public List<Temperatura> getItems(Date fecha1, Date fecha2, int tipo) {
+    public List<Temperature> getItems(Date fecha1, Date fecha2, int tipo) {
         return getJpaController().findTemperaturaEntities(fecha1, fecha2, tipo);
     }
 
-    public List<Temperatura> getItems(Date fecha1, int hora) {
+    public List<Temperature> getItems(Date fecha1, int hora) {
         return getJpaController().findTemperaturaEntities(fecha1, hora);
     }
 
-    public Temperatura calcularPromedio(Date fecha1, Date fecha2) {
+    public Temperature calcularPromedio(Date fecha1, Date fecha2) {
         return calcularPromedio(fecha1, fecha2, 0);
     }
 
-    public Temperatura calcularPromedio(Date fecha1, Date fecha2, int tipo) {
-        Temperatura promedio = new Temperatura(null, null, 0, 0, 0, null);
-        List<Temperatura> buscarLista = getItems(fecha1, fecha2, tipo);
-        for (Temperatura t : buscarLista) {
+    public Temperature calcularPromedio(Date fecha1, Date fecha2, int tipo) {
+        Temperature promedio = new Temperature(null, null, 0, 0, 0, null);
+        List<Temperature> buscarLista = getItems(fecha1, fecha2, tipo);
+        for (Temperature t : buscarLista) {
             promedio.sumar(t);
         }
         if (buscarLista.size() > 1) {
@@ -122,10 +122,10 @@ public class TemperaturaController implements Serializable {
         return promedio;
     }
 
-    public Temperatura calcularPromedio(Date fechaDia, int hora) {
-        Temperatura promedio = new Temperatura(null, null, 0, 0, 0, null);
-        List<Temperatura> buscarLista = getItems(fechaDia, hora);
-        for (Temperatura t : buscarLista) {
+    public Temperature calcularPromedio(Date fechaDia, int hora) {
+        Temperature promedio = new Temperature(null, null, 0, 0, 0, null);
+        List<Temperature> buscarLista = getItems(fechaDia, hora);
+        for (Temperature t : buscarLista) {
             promedio.sumar(t);
         }
         if (buscarLista.size() > 1) {
@@ -156,24 +156,24 @@ public class TemperaturaController implements Serializable {
         }
     }
 
-    public List<Temperatura> getItemsAvailableSelectMany() {
+    public List<Temperature> getItemsAvailableSelectMany() {
         return getJpaController().findTemperaturaEntities();
     }
 
-    public List<Temperatura> getItemsAvailableSelectOne() {
+    public List<Temperature> getItemsAvailableSelectOne() {
         return getJpaController().findTemperaturaEntities();
     }
 
-    public void guardar(Temperatura temperatura) {
+    public void guardar(Temperature temperatura) {
         selected = temperatura;
         persist(PersistAction.CREATE, null);
     }
 
-    public Temperatura nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, Modulo modulo) {
-        return new Temperatura(fecha, hora, temperatura, humedad, puntoDeRocio, modulo);
+    public Temperature nuevo(Date fecha, Date hora, float temperatura, float humedad, float puntoDeRocio, ModuleClass modulo) {
+        return new Temperature(fecha, hora, temperatura, humedad, puntoDeRocio, modulo);
     }
 
-    @FacesConverter(forClass = Temperatura.class)
+    @FacesConverter(forClass = Temperature.class)
     public static class TemperaturaControllerConverter implements Converter {
 
         @Override
@@ -203,11 +203,11 @@ public class TemperaturaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Temperatura) {
-                Temperatura o = (Temperatura) object;
+            if (object instanceof Temperature) {
+                Temperature o = (Temperature) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Temperatura.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Temperature.class.getName()});
                 return null;
             }
         }

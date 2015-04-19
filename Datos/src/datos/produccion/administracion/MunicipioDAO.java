@@ -15,8 +15,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Departamento;
-import modelo.produccion.administracion.Municipio;
+import model.administration.Department;
+import model.administration.Municipality;
 
 /**
  *
@@ -33,7 +33,7 @@ public class MunicipioDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Municipio municipio) {
+    public void create(Municipality municipio) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,7 +47,7 @@ public class MunicipioDAO implements Serializable {
         }
     }
 
-    public void edit(Municipio municipio) throws NonexistentEntityException, Exception {
+    public void edit(Municipality municipio) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,9 +75,9 @@ public class MunicipioDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Municipio municipio;
+            Municipality municipio;
             try {
-                municipio = em.getReference(Municipio.class, id);
+                municipio = em.getReference(Municipality.class, id);
                 municipio.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The municipio with id " + id + " no longer exists.", enfe);
@@ -91,19 +91,19 @@ public class MunicipioDAO implements Serializable {
         }
     }
 
-    public List<Municipio> findMunicipioEntities() {
+    public List<Municipality> findMunicipioEntities() {
         return findMunicipioEntities(true, -1, -1);
     }
 
-    public List<Municipio> findMunicipioEntities(int maxResults, int firstResult) {
+    public List<Municipality> findMunicipioEntities(int maxResults, int firstResult) {
         return findMunicipioEntities(false, maxResults, firstResult);
     }
 
-    private List<Municipio> findMunicipioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Municipality> findMunicipioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Municipio.class));
+            cq.select(cq.from(Municipality.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -115,10 +115,10 @@ public class MunicipioDAO implements Serializable {
         }
     }
 
-    public List<Municipio> findMunicipioEntities(Departamento departamento) {
+    public List<Municipality> findMunicipioEntities(Department departamento) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Municipio> query = em.createQuery("SELECT t FROM Municipio t WHERE t.departamento = :departamento", Municipio.class);
+            TypedQuery<Municipality> query = em.createQuery("SELECT t FROM Municipio t WHERE t.departamento = :departamento", Municipality.class);
             query.setParameter("departamento", departamento);
             return query.getResultList();
         } finally {
@@ -126,10 +126,10 @@ public class MunicipioDAO implements Serializable {
         }
     }
 
-    public Municipio findMunicipio(Long id) {
+    public Municipality findMunicipio(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Municipio.class, id);
+            return em.find(Municipality.class, id);
         } finally {
             em.close();
         }
@@ -139,7 +139,7 @@ public class MunicipioDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Municipio> rt = cq.from(Municipio.class);
+            Root<Municipality> rt = cq.from(Municipality.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

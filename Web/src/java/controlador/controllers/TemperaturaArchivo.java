@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.administracion.Modulo;
+import model.administration.ModuleClass;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -58,7 +58,7 @@ public class TemperaturaArchivo {
     private int procesar(String nombre) {
         FileReader fr;
         BufferedReader br;
-        Modulo modulo;
+        ModuleClass modulo;
         int saltos = 15, creados = 0;
 
         try {
@@ -68,7 +68,7 @@ public class TemperaturaArchivo {
             br.readLine();
             linea = br.readLine();
             long nds = Long.parseLong(linea.split(",")[5]);
-            modulo = new TermometroController().find(nds).getModulo();
+            modulo = new TermometroController().find(nds).getModuleObject();
             TemperaturaController controlador = new TemperaturaController();
             while (linea != null) {
                 Date fecha = DateParser.parseFecha(linea.split(",")[1].split(" ")[0]);

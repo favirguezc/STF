@@ -25,7 +25,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import modelo.finanzas.Precio;
 import modelo.finanzas.ventas.Venta;
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 
 /**
  *
@@ -171,11 +171,11 @@ public class VentaController implements Serializable {
         return getJpaController().findVentaEntities();
     }
 
-    public List<Venta> leerLista(Persona cliente, Date inicio, Date fin) {
+    public List<Venta> leerLista(Person cliente, Date inicio, Date fin) {
         return getJpaController().findVentaEntities(cliente, inicio, fin);
     }
 
-    public Venta sumarRegistros(Persona cliente, Date inicio, Date fin) {
+    public Venta sumarRegistros(Person cliente, Date inicio, Date fin) {
         List<Venta> leerLista = leerLista(cliente, inicio, fin);
         Venta suma = new Venta(null, cliente, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         for (Venta v : leerLista) {

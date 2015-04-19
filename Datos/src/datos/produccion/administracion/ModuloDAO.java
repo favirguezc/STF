@@ -15,9 +15,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
-import modelo.produccion.administracion.Modulo;
+import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.ModuleClass;
 
 /**
  *
@@ -46,7 +46,7 @@ public class ModuloDAO implements Serializable {
      *
      * @param modulo
      */
-    public void create(Modulo modulo) {
+    public void create(ModuleClass modulo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class ModuloDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Modulo modulo) throws NonexistentEntityException, Exception {
+    public void edit(ModuleClass modulo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class ModuloDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Modulo modulo;
+            ModuleClass modulo;
             try {
-                modulo = em.getReference(Modulo.class, id);
+                modulo = em.getReference(ModuleClass.class, id);
                 modulo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The modulo with id " + id + " no longer exists.", enfe);
@@ -119,7 +119,7 @@ public class ModuloDAO implements Serializable {
      *
      * @return
      */
-    public List<Modulo> findModuloEntities() {
+    public List<ModuleClass> findModuloEntities() {
         return findModuloEntities(true, -1, -1);
     }
 
@@ -129,15 +129,15 @@ public class ModuloDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Modulo> findModuloEntities(int maxResults, int firstResult) {
+    public List<ModuleClass> findModuloEntities(int maxResults, int firstResult) {
         return findModuloEntities(false, maxResults, firstResult);
     }
 
-    private List<Modulo> findModuloEntities(boolean all, int maxResults, int firstResult) {
+    private List<ModuleClass> findModuloEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Modulo.class));
+            cq.select(cq.from(ModuleClass.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -154,10 +154,10 @@ public class ModuloDAO implements Serializable {
      * @param id
      * @return
      */
-    public Modulo findModulo(long id) {
+    public ModuleClass findModulo(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Modulo.class, id);
+            return em.find(ModuleClass.class, id);
         } finally {
             em.close();
         }
@@ -170,10 +170,10 @@ public class ModuloDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Modulo findModulo(String nombre, Lote lote) throws Exception {
+    public ModuleClass findModulo(String nombre, Lot lote) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Modulo> query = em.createQuery("SELECT t FROM Modulo t WHERE t.nombre = :nombre AND t.lote = :lote", Modulo.class);
+            TypedQuery<ModuleClass> query = em.createQuery("SELECT t FROM Modulo t WHERE t.nombre = :nombre AND t.lote = :lote", ModuleClass.class);
             query.setParameter("nombre", nombre);
             query.setParameter("lote", lote);
             return query.getSingleResult();
@@ -187,10 +187,10 @@ public class ModuloDAO implements Serializable {
      * @param lote
      * @return
      */
-    public List<Modulo> findModuloEntities(Lote lote) {
+    public List<ModuleClass> findModuloEntities(Lot lote) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Modulo> query = em.createQuery("SELECT t FROM Modulo t WHERE t.lote = :lote", Modulo.class);
+            TypedQuery<ModuleClass> query = em.createQuery("SELECT t FROM Modulo t WHERE t.lote = :lote", ModuleClass.class);
             query.setParameter("lote", lote);
             return query.getResultList();
         } finally {
@@ -206,7 +206,7 @@ public class ModuloDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Modulo> rt = cq.from(Modulo.class);
+            Root<ModuleClass> rt = cq.from(ModuleClass.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -215,10 +215,10 @@ public class ModuloDAO implements Serializable {
         }
     }
 
-    public List<Modulo> findModuloEntitiesForSelectedFarm(Finca selectedFarm) {
+    public List<ModuleClass> findModuloEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Modulo> query = em.createQuery("SELECT m FROM Modulo m WHERE m.lote.finca = :finca", Modulo.class);
+            TypedQuery<ModuleClass> query = em.createQuery("SELECT m FROM Modulo m WHERE m.lote.finca = :finca", ModuleClass.class);
             query.setParameter("finca", selectedFarm);
             return query.getResultList();
         } finally {

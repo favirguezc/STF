@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.variablesClimaticas.Termometro;
+import model.weather.Thermometer;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.variablesClimaticas.TermometroDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class TermometroController implements Serializable {
 
     private TermometroDAO jpaController = null;
-    private List<Termometro> items = null;
-    private Termometro selected;
+    private List<Thermometer> items = null;
+    private Thermometer selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public TermometroController() {
     }
 
-    public Termometro getSelected() {
+    public Thermometer getSelected() {
         return selected;
     }
 
-    public void setSelected(Termometro selected) {
+    public void setSelected(Thermometer selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class TermometroController implements Serializable {
         return jpaController;
     }
 
-    public Termometro prepareCreate() {
-        selected = new Termometro();
+    public Thermometer prepareCreate() {
+        selected = new Thermometer();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,11 +85,11 @@ public class TermometroController implements Serializable {
         }
     }
 
-    public Termometro find(long nds) throws Exception {
+    public Thermometer find(long nds) throws Exception {
         return getJpaController().findTermometro(nds);
     }
 
-    public List<Termometro> getItems() {
+    public List<Thermometer> getItems() {
         if (items == null) {
             items = getJpaController().findTermometroEntities();
         }
@@ -118,15 +118,15 @@ public class TermometroController implements Serializable {
         }
     }
 
-    public List<Termometro> getItemsAvailableSelectMany() {
+    public List<Thermometer> getItemsAvailableSelectMany() {
         return getJpaController().findTermometroEntities();
     }
 
-    public List<Termometro> getItemsAvailableSelectOne() {
+    public List<Thermometer> getItemsAvailableSelectOne() {
         return getJpaController().findTermometroEntities();
     }
 
-    @FacesConverter(forClass = Termometro.class)
+    @FacesConverter(forClass = Thermometer.class)
     public static class TermometroControllerConverter implements Converter {
 
         @Override
@@ -156,11 +156,11 @@ public class TermometroController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Termometro) {
-                Termometro o = (Termometro) object;
+            if (object instanceof Thermometer) {
+                Thermometer o = (Thermometer) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Termometro.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Thermometer.class.getName()});
                 return null;
             }
         }

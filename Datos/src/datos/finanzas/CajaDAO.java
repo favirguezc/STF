@@ -16,7 +16,7 @@ import javax.persistence.criteria.Root;
 import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import modelo.finanzas.caja.Caja;
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 
 /**
  *
@@ -149,7 +149,7 @@ public class CajaDAO implements Serializable {
         }
     }
     
-    public List<Caja> findCajaEntitiesForSelectedFarm(Finca finca) {
+    public List<Caja> findCajaEntitiesForSelectedFarm(Farm finca) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Caja> query = em.createQuery("SELECT c FROM Caja c WHERE c.finca = :finca", Caja.class);

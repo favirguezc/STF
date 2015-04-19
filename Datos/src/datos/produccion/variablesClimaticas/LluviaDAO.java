@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.variablesClimaticas.Lluvia;
+import model.weather.RainFall;
 
 /**
  *
@@ -46,7 +46,7 @@ public class LluviaDAO implements Serializable {
      *
      * @param controlDeLluvias
      */
-    public void create(Lluvia controlDeLluvias) {
+    public void create(RainFall controlDeLluvias) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class LluviaDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Lluvia controlDeLluvias) throws NonexistentEntityException, Exception {
+    public void edit(RainFall controlDeLluvias) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class LluviaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Lluvia controlDeLluvias;
+            RainFall controlDeLluvias;
             try {
-                controlDeLluvias = em.getReference(Lluvia.class, id);
+                controlDeLluvias = em.getReference(RainFall.class, id);
                 controlDeLluvias.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The controlDeLluvias with id " + id + " no longer exists.", enfe);
@@ -119,7 +119,7 @@ public class LluviaDAO implements Serializable {
      *
      * @return
      */
-    public List<Lluvia> findLluviaEntities() {
+    public List<RainFall> findLluviaEntities() {
         return findLluviaEntities(true, -1, -1);
     }
 
@@ -129,15 +129,15 @@ public class LluviaDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Lluvia> findLluviaEntities(int maxResults, int firstResult) {
+    public List<RainFall> findLluviaEntities(int maxResults, int firstResult) {
         return findLluviaEntities(false, maxResults, firstResult);
     }
 
-    private List<Lluvia> findLluviaEntities(boolean all, int maxResults, int firstResult) {
+    private List<RainFall> findLluviaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Lluvia.class));
+            cq.select(cq.from(RainFall.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -154,10 +154,10 @@ public class LluviaDAO implements Serializable {
      * @param id
      * @return
      */
-    public Lluvia findLluvia(long id) {
+    public RainFall findLluvia(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Lluvia.class, id);
+            return em.find(RainFall.class, id);
         } finally {
             em.close();
         }
@@ -168,10 +168,10 @@ public class LluviaDAO implements Serializable {
      * @param fecha1
      * @return
      */
-    public List<Lluvia> findLluviaEntities(Date fecha1) {
+    public List<RainFall> findLluviaEntities(Date fecha1) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha = :fecha1", Lluvia.class);
+            TypedQuery<RainFall> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha = :fecha1", RainFall.class);
             query.setParameter("fecha1", fecha1, TemporalType.DATE);
             return query.getResultList();
         } finally {
@@ -185,10 +185,10 @@ public class LluviaDAO implements Serializable {
      * @param siguienteMes
      * @return
      */
-    public List<Lluvia> findLluviaEntities(Date esteMes, Date siguienteMes) {
+    public List<RainFall> findLluviaEntities(Date esteMes, Date siguienteMes) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lluvia> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", Lluvia.class);
+            TypedQuery<RainFall> query = em.createQuery("SELECT t FROM Lluvia t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", RainFall.class);
             query.setParameter("fecha1", esteMes, TemporalType.DATE);
             query.setParameter("fecha2", siguienteMes, TemporalType.DATE);
             return query.getResultList();
@@ -205,7 +205,7 @@ public class LluviaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Lluvia> rt = cq.from(Lluvia.class);
+            Root<RainFall> rt = cq.from(RainFall.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

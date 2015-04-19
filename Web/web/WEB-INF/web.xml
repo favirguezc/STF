@@ -10,8 +10,8 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>south-street</param-value>
-    </context-param>
+        <param-value>stf-theme</param-value>
+  </context-param>
     <context-param>
         <param-name>primefaces.UPLOADER</param-name>
         <param-value>commons</param-value>

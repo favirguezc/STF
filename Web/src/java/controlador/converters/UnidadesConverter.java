@@ -9,13 +9,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.aplicaciones.Unidades;
+import model.applications.ApplicationMeasurementUnitEnum;
 
 /**
  *
  * @author fredy
  */
-@FacesConverter(forClass = Unidades.class)
+@FacesConverter(forClass = ApplicationMeasurementUnitEnum.class)
 public class UnidadesConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -23,10 +23,10 @@ public class UnidadesConverter implements Converter {
             return null;
         }
         if (value.equals("Cc")) {
-            return Unidades.CC;
+            return ApplicationMeasurementUnitEnum.CC;
         }
         if (value.equals("Gr")) {
-            return Unidades.GR;
+            return ApplicationMeasurementUnitEnum.GR;
         }
         return null;
     }
@@ -35,7 +35,7 @@ public class UnidadesConverter implements Converter {
         if (value == null) {
             return null;
         }
-        if (value instanceof Unidades) {
+        if (value instanceof ApplicationMeasurementUnitEnum) {
             return value + "";
         } else {
             return null;

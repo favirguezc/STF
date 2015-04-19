@@ -6,8 +6,8 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.administracion.GrupoSanguineo;
-import modelo.produccion.administracion.RH;
+import model.administration.BloodGroupEnum;
+import model.administration.RHEnum;
 
 /**
  *
@@ -16,12 +16,12 @@ import modelo.produccion.administracion.RH;
 @ManagedBean(name = "sangreController")
 public class SangreController {
 
-    public RH[] getRhValues() {
-        return RH.values();
+    public RHEnum[] getRhValues() {
+        return RHEnum.values();
     }
 
-    public GrupoSanguineo[] getGrupoSanguineoValues() {
-        return GrupoSanguineo.values();
+    public BloodGroupEnum[] getGrupoSanguineoValues() {
+        return BloodGroupEnum.values();
     }
 
 }

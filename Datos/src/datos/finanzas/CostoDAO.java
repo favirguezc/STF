@@ -20,8 +20,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import modelo.finanzas.costo.Costo;
 import modelo.finanzas.costo.TipoCosto;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Modulo;
+import model.administration.Farm;
+import model.administration.ModuleClass;
 
 /**
  *
@@ -148,7 +148,7 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(Modulo modulo, TipoCosto tipo, Date inicio, Date fin) {
+    public List<Costo> findCostoEntities(ModuleClass modulo, TipoCosto tipo, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -201,7 +201,7 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(Modulo modulo) {
+    public List<Costo> findCostoEntities(ModuleClass modulo) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT c FROM Costo c";
         if (modulo != null) {
@@ -219,7 +219,7 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntitiesForSelectedFarm(Finca selectedFarm) {
+    public List<Costo> findCostoEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT c FROM Costo c WHERE c.modulo.lote.finca = :finca ORDER BY c.fecha ASC";
         try {

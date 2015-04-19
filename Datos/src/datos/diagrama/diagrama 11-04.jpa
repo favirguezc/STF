@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings jaxb-support="false" id="_14288012191371" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:ns4="http://nbmodeler.java.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:entity class="Cuenta" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_14288012192624">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_14288012192945">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fechaInicio" attribute-type="java.util.Date" visibile="true" id="_14288012193098">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="fechaFinal" attribute-type="java.util.Date" visibile="true" id="_14288012193099">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:many-to-one name="usuario" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_14288012192946"/>
+            <jpa:many-to-one name="paquete" target-entity="Paquete" optional="false" primaryKey="false" connected-entity-id="_142880121938710" visibile="true" id="_14288012193097"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Paquete" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121938710">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121938711">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121938712">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="numeroFincasPermitidas" attribute-type="int" visibile="true" id="_142880121938713">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="numeroTrabajadoresPermitidosPorFinca" attribute-type="int" visibile="true" id="_142880121938714">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="precio" attribute-type="float" visibile="true" id="_142880121938715">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="cantidadPeriodos" attribute-type="int" visibile="true" id="_142880121938716">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="tipoPeriodo" attribute-type="modelo.contabilidad.TipoPeriodo" visibile="true" id="_142880121938717">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Precio" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121945018">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121945021">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="item" attribute-type="java.lang.String" visibile="true" id="_142880121945019">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="valor" attribute-type="float" visibile="true" id="_142880121945020">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Caja" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121949722">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121949723">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121949724">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121949725"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="ConceptoCaja" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121954426">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121954427">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_142880121954428">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="descripcion" attribute-type="java.lang.String" visibile="true" id="_142880121954429">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="valor" attribute-type="float" visibile="true" id="_142880121954430">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="caja" target-entity="Caja" optional="false" primaryKey="false" connected-entity-id="_142880121949722" visibile="true" id="_142880121954431"/>
+            <jpa:transient name="saldo" attribute-type="float" visibile="true" id="_142880121954432"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Compra" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121959033">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121959034">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fechaCompra" attribute-type="java.util.Date" visibile="true" id="_142880121959035">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="precio" attribute-type="float" visibile="true" id="_142880121959038">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="cantidad" attribute-type="float" visibile="true" id="_142880121959039">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="lote" target-entity="Lote" optional="false" primaryKey="false" connected-entity-id="_142880121999791" visibile="true" id="_142880121959036"/>
+            <jpa:many-to-one name="insumo" target-entity="Insumo" optional="false" primaryKey="false" connected-entity-id="_1428801220325139" visibile="true" id="_142880121959037"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Costo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121965340">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121965341">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_142880121965342">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="tipo" attribute-type="modelo.finanzas.costo.TipoCosto" visibile="true" id="_142880121965343">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="subTipo" attribute-type="java.lang.String" visibile="true" id="_142880121965344"/>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121965345">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="item" attribute-type="modelo.finanzas.costo.ItemCosto" visibile="true" id="_142880121965346"/>
+            <jpa:basic name="cantidad" attribute-type="float" visibile="true" id="_142880121965347">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="precioUnid" attribute-type="float" visibile="true" id="_142880121965348"/>
+            <jpa:many-to-one name="lote" target-entity="Lote" optional="false" primaryKey="false" connected-entity-id="_142880121999791" visibile="true" id="_142880121965349"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Nomina" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121970050">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121970051">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fechaDesde" attribute-type="java.util.Date" visibile="true" id="_142880121970052">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_142880121970053">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="total" attribute-type="float" visibile="true" id="_142880121970055">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="trabajador" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121970054"/>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121970056"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Venta" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121974757">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121974758">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fechaVenta" attribute-type="java.util.Date" visibile="true" id="_142880121974759">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="extraGramos" attribute-type="float" visibile="true" id="_142880121974762"/>
+            <jpa:basic name="primeraGramos" attribute-type="float" visibile="true" id="_142880121974763"/>
+            <jpa:basic name="segundaGramos" attribute-type="float" visibile="true" id="_142880121974764"/>
+            <jpa:basic name="terceraGramos" attribute-type="float" visibile="true" id="_142880121974765"/>
+            <jpa:basic name="cuartaGramos" attribute-type="float" visibile="true" id="_142880121976266"/>
+            <jpa:basic name="quintaGramos" attribute-type="float" visibile="true" id="_142880121976267"/>
+            <jpa:basic name="extraPrecioUnid" attribute-type="float" visibile="true" id="_142880121976268"/>
+            <jpa:basic name="primeraPrecioUnid" attribute-type="float" visibile="true" id="_142880121976269"/>
+            <jpa:basic name="segundaPrecioUnid" attribute-type="float" visibile="true" id="_142880121976270"/>
+            <jpa:basic name="terceraPrecioUnid" attribute-type="float" visibile="true" id="_142880121976271"/>
+            <jpa:basic name="cuartaPrecioUnid" attribute-type="float" visibile="true" id="_142880121976272"/>
+            <jpa:basic name="quintaPrecioUnid" attribute-type="float" visibile="true" id="_142880121976273"/>
+            <jpa:many-to-one name="cliente" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121974760"/>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121974761"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Contrato" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121980974">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_142880121980975">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_142880121982578">
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="rol" attribute-type="modelo.produccion.administracion.Rol" visibile="true" id="_142880121982579">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121980976"/>
+            <jpa:many-to-one name="persona" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121980977"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Departamento" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121987280">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121987281">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121987282">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Finca" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121993483">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_142880121993484">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121993485">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="vereda" attribute-type="java.lang.String" visibile="true" id="_142880121993486"/>
+            <jpa:basic name="altitud" attribute-type="float" visibile="true" id="_142880121993488"/>
+            <jpa:basic name="coordenada" attribute-type="modelo.produccion.administracion.Coordenada" visibile="true" id="_142880121993489"/>
+            <jpa:many-to-one name="municipio" target-entity="Municipio" optional="false" primaryKey="false" connected-entity-id="_1428801220106100" visibile="true" id="_142880121993487"/>
+            <jpa:many-to-one name="propietario" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121993490"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Lote" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121999791">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880121999793">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880121999792">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121999794"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Modulo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880122005995">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_142880122005996">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_142880122005997">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="area" attribute-type="double" visibile="true" id="_142880122005998">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="lote" target-entity="Lote" optional="false" primaryKey="false" connected-entity-id="_142880121999791" visibile="true" id="_142880122005999"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Municipio" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220106100">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220106101">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220106102">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="departamento" target-entity="Departamento" optional="false" primaryKey="false" connected-entity-id="_142880121987280" visibile="true" id="_1428801220106103"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Permiso" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220153104">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220153105">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="pagina" attribute-type="modelo.produccion.administracion.Pagina" visibile="true" id="_1428801220153106">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="rol" attribute-type="modelo.produccion.administracion.Rol" visibile="true" id="_1428801220153107">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="accion" attribute-type="modelo.util.Accion" visibile="true" id="_1428801220153108">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Persona" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220200109">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220200110">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220200111">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="nombre2" attribute-type="java.lang.String" visibile="true" id="_1428801220200112"/>
+            <jpa:basic name="apellido" attribute-type="java.lang.String" visibile="true" id="_1428801220200113">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="apellido2" attribute-type="java.lang.String" visibile="true" id="_1428801220200114"/>
+            <jpa:basic name="cedula" attribute-type="long" visibile="true" id="_1428801220200115">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="contrasena" attribute-type="java.lang.String" visibile="true" id="_1428801220200116">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="correo" attribute-type="java.lang.String" visibile="true" id="_1428801220200117">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="sexo" attribute-type="modelo.produccion.administracion.Sexo" visibile="true" id="_1428801220200118">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="telefono" attribute-type="long" visibile="true" id="_1428801220200119">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="grupoSanguineo" attribute-type="modelo.produccion.administracion.GrupoSanguineo" visibile="true" id="_1428801220200120">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="rh" attribute-type="modelo.produccion.administracion.RH" visibile="true" id="_1428801220200121">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Aplicacion" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220262122">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220262123">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="tipo" attribute-type="modelo.produccion.aplicaciones.TipoDeAplicacion" visibile="true" id="_1428801220262124">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="fechaDeAutorizacion" attribute-type="java.util.Date" visibile="true" id="_1428801220262126">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="fechaDeAplicacion" attribute-type="java.util.Date" visibile="true" id="_1428801220262127">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="cantidad" attribute-type="float" visibile="true" id="_1428801220262132"/>
+            <jpa:basic name="litrosDeAgua" attribute-type="float" visibile="true" id="_1428801220262133"/>
+            <jpa:basic name="metodo" attribute-type="modelo.produccion.aplicaciones.MetodoDeAplicacion" visibile="true" id="_1428801220262134">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="horas" attribute-type="float" visibile="true" id="_1428801220262137"/>
+            <jpa:basic name="observaciones" attribute-type="java.lang.String" visibile="true" id="_1428801220262138"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220262125"/>
+            <jpa:many-to-one name="producto" target-entity="Insumo" optional="false" primaryKey="false" connected-entity-id="_1428801220325139" visibile="true" id="_1428801220262128"/>
+            <jpa:many-to-one name="motivo1" target-entity="Variable" optional="false" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262129"/>
+            <jpa:many-to-one name="motivo2" target-entity="Variable" optional="true" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262130"/>
+            <jpa:many-to-one name="motivo3" target-entity="Variable" optional="true" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262131"/>
+            <jpa:many-to-one name="responsable" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262135"/>
+            <jpa:many-to-one name="autoriza" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262136"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Insumo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220325139">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220325140">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="tipoDeAplicacion" attribute-type="modelo.produccion.aplicaciones.TipoDeAplicacion" visibile="true" id="_1428801220325141">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220325142">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="ingredienteActivo" attribute-type="java.lang.String" visibile="true" id="_1428801220325143">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="unidades" attribute-type="modelo.produccion.aplicaciones.Unidades" visibile="true" id="_1428801220325144"/>
+            <jpa:basic name="periodoDeCarencia" attribute-type="float" visibile="true" id="_1428801220325145"/>
+            <jpa:basic name="tiempoDeReentrada" attribute-type="float" visibile="true" id="_1428801220325146"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Clasificacion" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220372147">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220372148">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220372149">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="tipo" attribute-type="modelo.produccion.cosecha.TipoDeFresa" visibile="true" id="_1428801220372151">
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic name="gramos" attribute-type="float" visibile="true" id="_1428801220372152"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220372150"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Recoleccion" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220434153">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220434154">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220434156">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="pesadaGramos" attribute-type="float" visibile="true" id="_1428801220434158"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220434155"/>
+            <jpa:many-to-one name="recolector" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220434157"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Labor" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220481159">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220481160">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220481161">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="descripcion" attribute-type="java.lang.String" visibile="true" id="_1428801220481162"/>
+            <jpa:basic name="valor" attribute-type="float" visibile="true" id="_1428801220481163">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Trabajo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220528164">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220528165">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220528166">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="horas" attribute-type="float" visibile="true" id="_1428801220544170"/>
+            <jpa:basic name="observaciones" attribute-type="java.lang.String" visibile="true" id="_1428801220544171"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220528167"/>
+            <jpa:many-to-one name="labor" target-entity="Labor" optional="false" primaryKey="false" connected-entity-id="_1428801220481159" visibile="true" id="_1428801220528168"/>
+            <jpa:many-to-one name="operario" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220544169"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Monitoreo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220591172">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220591173">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="numeroDeMonitoreo" attribute-type="long" visibile="true" id="_1428801220591174"/>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220591175">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_1428801220591176"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="MonitoreoDeVariables" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220637177">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220637178">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="conteo" attribute-type="int" visibile="true" id="_1428801220637182"/>
+            <jpa:basic name="relacion" attribute-type="java.lang.String" visibile="true" id="_1428801220637183"/>
+            <jpa:basic name="riesgo" attribute-type="modelo.produccion.monitoreo.Riesgo" visibile="true" id="_1428801220637184"/>
+            <jpa:many-to-one name="monitoreo" target-entity="Monitoreo" optional="false" primaryKey="false" connected-entity-id="_1428801220591172" visibile="true" id="_1428801220637179"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220637180"/>
+            <jpa:many-to-one name="variable" target-entity="Variable" optional="false" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220637181"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="TrampaDeInsectos" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220684185">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220684186">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220684187">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220684189">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="especie" attribute-type="java.lang.String" visibile="true" id="_1428801220684190">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="individuos" attribute-type="int" visibile="true" id="_1428801220684191"/>
+            <jpa:basic name="observaciones" attribute-type="java.lang.String" visibile="true" id="_1428801220684192"/>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_1428801220684188"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Variable" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220731193">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220731194">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220731195">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="abreviacion" attribute-type="java.lang.String" visibile="true" id="_1428801220731196">
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="tipoDeValoracion" attribute-type="modelo.produccion.monitoreo.TipoDeValoracion" visibile="true" id="_1428801220731197">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Nota" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220762198">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220762199">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="titulo" attribute-type="java.lang.String" visibile="true" id="_1428801220762200"/>
+            <jpa:basic name="nota" attribute-type="java.lang.String" visibile="true" id="_1428801220762201">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="para" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762202"/>
+            <jpa:many-to-one name="de" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762203"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="HumedadDelSuelo" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220794204">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220794210">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220794205">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="valorEn30Cms" attribute-type="float" visibile="true" id="_1428801220794207">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="valorEn15Cms" attribute-type="float" visibile="true" id="_1428801220794208">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="hora" attribute-type="java.util.Date" visibile="true" id="_1428801220794209">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>TIME</jpa:temporal>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_1428801220794206"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Lluvia" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220825211">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220825215">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220825212">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="mm" attribute-type="float" visibile="true" id="_1428801220825214">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="finca" target-entity="Finca" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_1428801220825213"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Temperatura" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220872216">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220872217">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="fecha" attribute-type="java.util.Date" visibile="true" id="_1428801220872218">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>DATE</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="hora" attribute-type="java.util.Date" visibile="true" id="_1428801220872219">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:temporal>TIME</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic name="temperatura" attribute-type="float" visibile="true" id="_1428801220872220">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="humedad" attribute-type="float" visibile="true" id="_1428801220872221">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="puntoDeRocio" attribute-type="float" visibile="true" id="_1428801220872222">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220872223"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Termometro" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220919224">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Long" visibile="true" id="_1428801220919225">
+                <jpa:generated-value strategy="TABLE"/>
+            </jpa:id>
+            <jpa:basic name="nombre" attribute-type="java.lang.String" visibile="true" id="_1428801220919226"/>
+            <jpa:basic name="numeroDeSerie" attribute-type="long" visibile="true" id="_1428801220919227"/>
+            <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220919228"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram id="_14288012191372">
+        <plane elementRef="_14288012191371" id="_14288012191533_p">
+            <shape elementRef="_14288012192624" id="_14288012192624_gui">
+                <Bounds x="1099.0" y="567.0" width="136.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_142880121938710" id="_142880121938710_gui">
+                <Bounds x="1307.0" y="73.0" width="276.0" height="197.0"/>
+            </shape>
+            <shape elementRef="_142880121945018" id="_142880121945018_gui">
+                <Bounds x="2370.0" y="1923.0" width="133.0" height="113.0"/>
+            </shape>
+            <shape elementRef="_142880121949722" id="_142880121949722_gui">
+                <Bounds x="1571.0" y="2450.0" width="128.0" height="126.0"/>
+            </shape>
+            <shape elementRef="_142880121954426" id="_142880121954426_gui">
+                <Bounds x="1857.0" y="2913.0" width="175.0" height="202.0"/>
+            </shape>
+            <shape elementRef="_142880121959033" id="_142880121959033_gui">
+                <Bounds x="258.0" y="841.0" width="141.0" height="189.0"/>
+            </shape>
+            <shape elementRef="_142880121965340" id="_142880121965340_gui">
+                <Bounds x="258.0" y="1460.0" width="129.0" height="252.0"/>
+            </shape>
+            <shape elementRef="_142880121970050" id="_142880121970050_gui">
+                <Bounds x="1099.0" y="2450.0" width="139.0" height="189.0"/>
+            </shape>
+            <shape elementRef="_142880121974757" id="_142880121974757_gui">
+                <Bounds x="491.0" y="2450.0" width="160.0" height="399.0"/>
+            </shape>
+            <shape elementRef="_142880121980974" id="_142880121980974_gui">
+                <Bounds x="491.0" y="1923.0" width="145.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_142880121987280" id="_142880121987280_gui">
+                <Bounds x="1857.0" y="2197.0" width="177.0" height="92.0"/>
+            </shape>
+            <shape elementRef="_142880121993483" id="_142880121993483_gui">
+                <Bounds x="1099.0" y="1923.0" width="128.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_142880121999791" id="_142880121999791_gui">
+                <Bounds x="491.0" y="1094.0" width="128.0" height="126.0"/>
+            </shape>
+            <shape elementRef="_142880122005995" id="_142880122005995_gui">
+                <Bounds x="831.0" y="841.0" width="137.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_1428801220106100" id="_1428801220106100_gui">
+                <Bounds x="1571.0" y="1923.0" width="150.0" height="126.0"/>
+            </shape>
+            <shape elementRef="_1428801220153104" id="_1428801220153104_gui">
+                <Bounds x="2098.0" y="1923.0" width="144.0" height="134.0"/>
+            </shape>
+            <shape elementRef="_1428801220200109" id="_1428801220200109_gui">
+                <Bounds x="1099.0" y="1094.0" width="144.0" height="302.0"/>
+            </shape>
+            <shape elementRef="_1428801220262122" id="_1428801220262122_gui">
+                <Bounds x="1857.0" y="1460.0" width="162.0" height="399.0"/>
+            </shape>
+            <shape elementRef="_1428801220325139" id="_1428801220325139_gui">
+                <Bounds x="32.0" y="1094.0" width="162.0" height="197.0"/>
+            </shape>
+            <shape elementRef="_1428801220372147" id="_1428801220372147_gui">
+                <Bounds x="258.0" y="293.0" width="169.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_1428801220434153" id="_1428801220434153_gui">
+                <Bounds x="491.0" y="567.0" width="166.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_1428801220481159" id="_1428801220481159_gui">
+                <Bounds x="1857.0" y="293.0" width="129.0" height="134.0"/>
+            </shape>
+            <shape elementRef="_1428801220528164" id="_1428801220528164_gui">
+                <Bounds x="1571.0" y="567.0" width="139.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_1428801220591172" id="_1428801220591172_gui">
+                <Bounds x="1307.0" y="1460.0" width="163.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_1428801220637177" id="_1428801220637177_gui">
+                <Bounds x="1571.0" y="1094.0" width="222.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_1428801220684185" id="_1428801220684185_gui">
+                <Bounds x="831.0" y="1460.0" width="204.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_1428801220731193" id="_1428801220731193_gui">
+                <Bounds x="1857.0" y="841.0" width="144.0" height="134.0"/>
+            </shape>
+            <shape elementRef="_1428801220762198" id="_1428801220762198_gui">
+                <Bounds x="1307.0" y="841.0" width="128.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_1428801220794204" id="_1428801220794204_gui">
+                <Bounds x="1307.0" y="2197.0" width="200.0" height="189.0"/>
+            </shape>
+            <shape elementRef="_1428801220825211" id="_1428801220825211_gui">
+                <Bounds x="831.0" y="2197.0" width="129.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_1428801220872216" id="_1428801220872216_gui">
+                <Bounds x="607.0" y="217.0" width="170.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_1428801220919224" id="_1428801220919224_gui">
+                <Bounds x="897.0" y="198.0" width="167.0" height="147.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>

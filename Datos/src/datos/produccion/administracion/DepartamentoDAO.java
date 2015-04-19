@@ -15,7 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Departamento;
+import model.administration.Department;
 
 /**
  *
@@ -32,7 +32,7 @@ public class DepartamentoDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Departamento departamento) {
+    public void create(Department departamento) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -46,7 +46,7 @@ public class DepartamentoDAO implements Serializable {
         }
     }
 
-    public void edit(Departamento departamento) throws NonexistentEntityException, Exception {
+    public void edit(Department departamento) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -74,9 +74,9 @@ public class DepartamentoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Departamento departamento;
+            Department departamento;
             try {
-                departamento = em.getReference(Departamento.class, id);
+                departamento = em.getReference(Department.class, id);
                 departamento.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The departamento with id " + id + " no longer exists.", enfe);
@@ -90,19 +90,19 @@ public class DepartamentoDAO implements Serializable {
         }
     }
 
-    public List<Departamento> findDepartamentoEntities() {
+    public List<Department> findDepartamentoEntities() {
         return findDepartamentoEntities(true, -1, -1);
     }
 
-    public List<Departamento> findDepartamentoEntities(int maxResults, int firstResult) {
+    public List<Department> findDepartamentoEntities(int maxResults, int firstResult) {
         return findDepartamentoEntities(false, maxResults, firstResult);
     }
 
-    private List<Departamento> findDepartamentoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Department> findDepartamentoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Departamento.class));
+            cq.select(cq.from(Department.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -114,19 +114,19 @@ public class DepartamentoDAO implements Serializable {
         }
     }
 
-    public Departamento findDepartamento(long id) {
+    public Department findDepartamento(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Departamento.class, id);
+            return em.find(Department.class, id);
         } finally {
             em.close();
         }
     }
 
-    public Departamento findDepartamento(String nombre) {
+    public Department findDepartamento(String nombre) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Departamento> query = em.createQuery("SELECT t FROM Departamento t WHERE t.nombre = :nombre", Departamento.class);
+            TypedQuery<Department> query = em.createQuery("SELECT t FROM Departamento t WHERE t.nombre = :nombre", Department.class);
             query.setParameter("nombre", nombre);
             return query.getSingleResult();
         } finally {
@@ -138,7 +138,7 @@ public class DepartamentoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Departamento> rt = cq.from(Departamento.class);
+            Root<Department> rt = cq.from(Department.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.cosecha.Recoleccion;
+import model.crop.Crop;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.cosecha.RecoleccionDAO;
@@ -21,10 +21,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Modulo;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.administracion.Rol;
-import modelo.util.DateTools;
+import model.administration.Cultivation;
+import model.administration.ModuleClass;
+import model.administration.Person;
+import model.administration.RoleEnum;
+import model.util.DateTools;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -38,18 +39,18 @@ import org.primefaces.model.chart.LineChartSeries;
 public class RecoleccionController implements Serializable {
 
     private RecoleccionDAO jpaController = null;
-    private List<Recoleccion> items = null;
-    private Recoleccion selected;
+    private List<Crop> items = null;
+    private Crop selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
-    @ManagedProperty(value = "#{moduloController}")
-    private ModuloController moduloBean;
+    @ManagedProperty(value = "#{cultivoController}")
+    private CultivoController cultivoBean;
 
-    public Recoleccion getSelected() {
+    public Crop getSelected() {
         return selected;
     }
 
-    public void setSelected(Recoleccion selected) {
+    public void setSelected(Crop selected) {
         this.selected = selected;
     }
 
@@ -57,12 +58,12 @@ public class RecoleccionController implements Serializable {
         return permisoBean;
     }
 
-    public ModuloController getModuloBean() {
-        return moduloBean;
+    public CultivoController getCultivoBean() {
+        return cultivoBean;
     }
 
-    public void setModuloBean(ModuloController moduloBean) {
-        this.moduloBean = moduloBean;
+    public void setCultivoBean(CultivoController cultivoBean) {
+        this.cultivoBean = cultivoBean;
     }
 
     public void setPermisoBean(PermisoController permisoBean) {
@@ -82,8 +83,8 @@ public class RecoleccionController implements Serializable {
         return jpaController;
     }
 
-    public Recoleccion prepareCreate() {
-        selected = new Recoleccion();
+    public Crop prepareCreate() {
+        selected = new Crop();
         initializeEmbeddableKey();
         return selected;
     }
@@ -107,9 +108,9 @@ public class RecoleccionController implements Serializable {
         }
     }
 
-    public List<Recoleccion> getItems() {
+    public List<Crop> getItems() {
         if (items == null) {
-            if (permisoBean.getSignInBean().getRol() == Rol.ASISTENTE_ADMINISTRATIVO || permisoBean.getSignInBean().getUser().isAdministrador()) {
+            if (permisoBean.getSignInBean().getRol() == RoleEnum.ADMINISTRATIVE_ASSISTANT || permisoBean.getSignInBean().getUser().isSystemAdmin()) {
                 items = leerLista(null, null, null, null);
             } else {
                 items = leerLista(permisoBean.getSignInBean().getUser(), null, null, null);
@@ -140,31 +141,33 @@ public class RecoleccionController implements Serializable {
         }
     }
 
-    public List<Recoleccion> getItemsAvailableSelectMany() {
+    public List<Crop> getItemsAvailableSelectMany() {
         return leerLista(null, null, null, null);
     }
 
-    public List<Recoleccion> getItemsAvailableSelectOne() {
+    public List<Crop> getItemsAvailableSelectOne() {
         return leerLista(null, null, null, null);
     }
 
-    public List<Recoleccion> leerLista(Persona recolector, Modulo modulo, Date inicio, Date fin) {
-        if (modulo == null) {
+    public List<Crop> leerLista(Person recolector, Cultivation cultivo, Date inicio, Date fin) {
+        if (cultivo == null) {
             return getJpaController().findRecoleccionEntities(recolector, permisoBean.getSignInBean().getFinca(), inicio, fin);
         }
-        return getJpaController().findRecoleccionEntities(recolector, modulo, inicio, fin);
+        return getJpaController().findRecoleccionEntities(recolector, cultivo, inicio, fin);
     }
 
-    public Recoleccion sumarRegistros(Persona recolector, Modulo modulo, Date inicio, Date fin) {
-        List<Recoleccion> leerLista = leerLista(recolector, modulo, inicio, fin);
-        Recoleccion suma = new Recoleccion(modulo, null, recolector, 0);
-        for (Recoleccion r : leerLista) {
-            suma.sumar(r);
+    public Crop sumarRegistros(Person recolector, Cultivation cultivo, Date inicio, Date fin) {
+        List<Crop> leerLista = leerLista(recolector, cultivo, inicio, fin);
+        Crop suma = new Crop();
+        suma.setCultivation(cultivo);
+        suma.setCollector(recolector);
+        for (Crop r : leerLista) {
+            suma.sumCrop(r);
         }
         return suma;
     }
 
-    @FacesConverter(forClass = Recoleccion.class)
+    @FacesConverter(forClass = Crop.class)
     public static class RecoleccionControllerConverter implements Converter {
 
         @Override
@@ -194,11 +197,11 @@ public class RecoleccionController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Recoleccion) {
-                Recoleccion o = (Recoleccion) object;
+            if (object instanceof Crop) {
+                Crop o = (Crop) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Recoleccion.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Crop.class.getName()});
                 return null;
             }
         }
@@ -293,7 +296,7 @@ public class RecoleccionController implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
 
-        Recoleccion sumarRegistros;
+        Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(DateTools.getDate(ano1, 0, 1));
         for (int i = 0; i < 12; i++) {
@@ -303,7 +306,7 @@ public class RecoleccionController implements Serializable {
             Date fecha2 = cal.getTime();
             sumarRegistros = sumarRegistros(null, null, fecha1, fecha2);
             String mes = DateTools.getMonth(i);
-            series1.set(mes, sumarRegistros.getPesadaGramos() / 1000);
+            series1.set(mes, sumarRegistros.getWeight() / 1000);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
@@ -319,9 +322,9 @@ public class RecoleccionController implements Serializable {
     public void createModel2() {
         modelo2 = new LineChartModel();
         LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Pesada Kg");
+        series1.setLabel("");
 
-        Recoleccion sumarRegistros;
+        Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(DateTools.getDate(ano2, mes2, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
@@ -329,7 +332,7 @@ public class RecoleccionController implements Serializable {
             cal.add(Calendar.DAY_OF_MONTH, 1);
             sumarRegistros = sumarRegistros(null, null, fecha1, null);
 
-            series1.set(i + 1, sumarRegistros.getPesadaGramos() / 1000);
+            series1.set(i + 1, sumarRegistros.getWeight() / 1000);
         }
 
         modelo2.addSeries(series1);
@@ -346,7 +349,7 @@ public class RecoleccionController implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
 
-        Recoleccion sumarRegistros;
+        Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(DateTools.getFirstDayOfWeek(fecha3));
         for (int i = 0; i < 7; i++) {
@@ -354,7 +357,7 @@ public class RecoleccionController implements Serializable {
             cal.add(Calendar.DAY_OF_MONTH, 1);
             sumarRegistros = sumarRegistros(null, null, fecha1, null);
 
-            series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getPesadaGramos() / 1000);
+            series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getWeight() / 1000);
         }
 
         modelo3.addSeries(series1);
@@ -371,7 +374,7 @@ public class RecoleccionController implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
 
-        Recoleccion sumarRegistros;
+        Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(DateTools.getDate(ano4, 0, 1));
         for (int i = 0; i < 52; i++) {
@@ -380,7 +383,7 @@ public class RecoleccionController implements Serializable {
             Date fecha2 = cal.getTime();
             sumarRegistros = sumarRegistros(null, null, fecha1, fecha2);
 
-            series1.set(i + 1, sumarRegistros.getPesadaGramos() / 1000);
+            series1.set(i + 1, sumarRegistros.getWeight() / 1000);
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -396,9 +399,9 @@ public class RecoleccionController implements Serializable {
 
     public void createModel5() {
         modelo5 = new BarChartModel();
-        List<Modulo> modulos = moduloBean.getItems();
-        ChartSeries[] series = new ChartSeries[modulos.size()];
-        for (int modulo = 0; modulo < modulos.size(); modulo++) {
+        List<Cultivation> cultivos = cultivoBean.getItems();
+        ChartSeries[] series = new ChartSeries[cultivos.size()];
+        for (int modulo = 0; modulo < cultivos.size(); modulo++) {
             series[modulo] = new ChartSeries();
         }
 
@@ -413,13 +416,13 @@ public class RecoleccionController implements Serializable {
             c.add(Calendar.DAY_OF_MONTH, -1);
             fecha2 = c.getTime();
 
-            for (int modulo = 0; modulo < modulos.size(); modulo++) {
-                valor = sumarRegistros(null, modulos.get(modulo), fecha1, fecha2).getPesadaGramos() / 1000;
+            for (int modulo = 0; modulo < cultivos.size(); modulo++) {
+                valor = sumarRegistros(null, cultivos.get(modulo), fecha1, fecha2).getWeight() / 1000;
                 series[modulo].set(i, valor);
             }
         }
-        for (int l = 0; l < modulos.size(); l++) {
-            series[l].setLabel(modulos.get(l).toString());
+        for (int l = 0; l < cultivos.size(); l++) {
+            series[l].setLabel(cultivos.get(l).toString());
             modelo5.addSeries(series[l]);
         }
 

@@ -17,10 +17,10 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.labores.Trabajo;
+import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.Person;
+import model.work.Work;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TrabajoDAO implements Serializable {
      *
      * @param trabajo
      */
-    public void create(Trabajo trabajo) {
+    public void create(Work trabajo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -69,7 +69,7 @@ public class TrabajoDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Trabajo trabajo) throws NonexistentEntityException, Exception {
+    public void edit(Work trabajo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -102,9 +102,9 @@ public class TrabajoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Trabajo trabajo;
+            Work trabajo;
             try {
-                trabajo = em.getReference(Trabajo.class, id);
+                trabajo = em.getReference(Work.class, id);
                 trabajo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The trabajo with id " + id + " no longer exists.", enfe);
@@ -123,10 +123,10 @@ public class TrabajoDAO implements Serializable {
      * @param farm
      * @return
      */
-    public List<Trabajo> findTrabajoEntities(Finca farm) {
+    public List<Work> findTrabajoEntities(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Trabajo> query = em.createQuery("SELECT a FROM Trabajo a WHERE a.modulo.lote.finca = :finca", Trabajo.class);
+            TypedQuery<Work> query = em.createQuery("SELECT a FROM Trabajo a WHERE a.modulo.lote.finca = :finca", Work.class);
             query.setParameter("finca", farm);
             return query.getResultList();
         } finally {
@@ -134,7 +134,7 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
-    public List<Trabajo> findTrabajoEntities() {
+    public List<Work> findTrabajoEntities() {
         return findTrabajoEntities(true, -1, -1);
     }
 
@@ -144,15 +144,15 @@ public class TrabajoDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Trabajo> findTrabajoEntities(int maxResults, int firstResult) {
+    public List<Work> findTrabajoEntities(int maxResults, int firstResult) {
         return findTrabajoEntities(false, maxResults, firstResult);
     }
 
-    private List<Trabajo> findTrabajoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Work> findTrabajoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Trabajo.class));
+            cq.select(cq.from(Work.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -169,10 +169,10 @@ public class TrabajoDAO implements Serializable {
      * @param id
      * @return
      */
-    public Trabajo findTrabajo(long id) {
+    public Work findTrabajo(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Trabajo.class, id);
+            return em.find(Work.class, id);
         } finally {
             em.close();
         }
@@ -186,7 +186,7 @@ public class TrabajoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Trabajo> rt = cq.from(Trabajo.class);
+            Root<Work> rt = cq.from(Work.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -202,10 +202,10 @@ public class TrabajoDAO implements Serializable {
      * @param fin
      * @return
      */
-    public List<Trabajo> findTrabajoEntities(Lote lote, Date inicio, Date fin) {
+    public List<Work> findTrabajoEntities(Lot lote, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.modulo.lote = :lote AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
+            TypedQuery<Work> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.modulo.lote = :lote AND t.fecha BETWEEN :inicio AND :fin", Work.class);
             query.setParameter("inicio", inicio, TemporalType.DATE);
             query.setParameter("fin", fin, TemporalType.DATE);
             query.setParameter("lote", lote);
@@ -215,10 +215,10 @@ public class TrabajoDAO implements Serializable {
         }
     }
 
-    public List<Trabajo> findTrabajoEntities(Finca finca, Persona trabajador, Date inicio, Date fin) {
+    public List<Work> findTrabajoEntities(Farm finca, Person trabajador, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Trabajo> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.operario = :operario AND t.modulo.lote.finca = :finca AND t.fecha BETWEEN :inicio AND :fin", Trabajo.class);
+            TypedQuery<Work> query = em.createQuery("SELECT t FROM Trabajo t WHERE t.operario = :operario AND t.modulo.lote.finca = :finca AND t.fecha BETWEEN :inicio AND :fin", Work.class);
             query.setParameter("inicio", inicio, TemporalType.DATE);
             query.setParameter("fin", fin, TemporalType.DATE);
             query.setParameter("operario", trabajador);

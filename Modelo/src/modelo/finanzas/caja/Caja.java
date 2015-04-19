@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Caja implements Serializable{
     @Column(nullable = false, unique = true)
     private String nombre;
     @ManyToOne(optional = false)
-    private Finca finca;
+    private Farm finca;
 
     public Caja() {
     }
@@ -53,11 +53,11 @@ public class Caja implements Serializable{
         this.nombre = nombre;
     }
 
-    public Finca getFinca() {
+    public Farm getFinca() {
         return finca;
     }
 
-    public void setFinca(Finca finca) {
+    public void setFinca(Farm finca) {
         this.finca = finca;
     }
 

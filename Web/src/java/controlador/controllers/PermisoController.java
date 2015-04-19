@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Permiso;
+import model.administration.Permission;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.PermisoDAO;
@@ -17,25 +17,25 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Pagina;
-import modelo.produccion.administracion.Rol;
-import modelo.util.Accion;
+import model.administration.PageEnum;
+import model.administration.RoleEnum;
+import model.util.Action;
 
 @ManagedBean(name = "permisoController")
 @SessionScoped
 public class PermisoController implements Serializable {
 
     private PermisoDAO jpaController = null;
-    private List<Permiso> items = null;
-    private Permiso selected;
+    private List<Permission> items = null;
+    private Permission selected;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    public Permiso getSelected() {
+    public Permission getSelected() {
         return selected;
     }
 
-    public void setSelected(Permiso selected) {
+    public void setSelected(Permission selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class PermisoController implements Serializable {
         return jpaController;
     }
 
-    public Permiso prepareCreate() {
-        selected = new Permiso();
+    public Permission prepareCreate() {
+        selected = new Permission();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +85,7 @@ public class PermisoController implements Serializable {
         }
     }
 
-    public List<Permiso> getItems() {
+    public List<Permission> getItems() {
         if (items == null) {
             items = getJpaController().findPermisoEntities();
         }
@@ -111,22 +111,22 @@ public class PermisoController implements Serializable {
         }
     }
 
-    public boolean currentUserHasPermission(Accion accion, String requestPath) {
-        if (signInBean.getUser().isAdministrador()) {
+    public boolean currentUserHasPermission(Action accion, String requestPath) {
+        if (signInBean.getUser().isSystemAdmin()) {
             return true;
         }
         requestPath = requestPath.toLowerCase();
         if (signInBean.getRol() == null) {
-            if (requestPath.contains(Pagina.Index.toString().toLowerCase())) {
+            if (requestPath.contains(PageEnum.Index.toString().toLowerCase())) {
                 return true;
             } else {
                 return false;
             }
         }
-        if (signInBean.getRol() == Rol.ASISTENTE_ADMINISTRATIVO && requestPath.contains(Pagina.Permiso.toString().toLowerCase())) {
+        if (signInBean.getRol() == RoleEnum.ADMINISTRATIVE_ASSISTANT && requestPath.contains(PageEnum.Permiso.toString().toLowerCase())) {
             return true;
         }
-        for (Pagina pagina : Pagina.values()) {
+        for (PageEnum pagina : PageEnum.values()) {
             if (requestPath.contains(pagina.toString().toLowerCase())) {
                 if (getJpaController().findPermiso(signInBean.getRol(), pagina, accion)) {
                     return true;
@@ -137,12 +137,12 @@ public class PermisoController implements Serializable {
     }
 
     public boolean currentUserHasPermission(PersistAction persistAction, Class c) {
-        Accion accion = Accion.Leer;
+        Action accion = Action.READ;
         if (persistAction == PersistAction.CREATE || persistAction == PersistAction.UPDATE) {
-            accion = Accion.Escribir;
+            accion = Action.WRITE;
         }
         if (persistAction == PersistAction.DELETE) {
-            accion = Accion.Eliminar;
+            accion = Action.DELETE;
         }
         if (currentUserHasPermission(accion, c.getSimpleName())) {
             return true;
@@ -153,15 +153,15 @@ public class PermisoController implements Serializable {
 
     }
 
-    public List<Permiso> getItemsAvailableSelectMany() {
+    public List<Permission> getItemsAvailableSelectMany() {
         return getJpaController().findPermisoEntities();
     }
 
-    public List<Permiso> getItemsAvailableSelectOne() {
+    public List<Permission> getItemsAvailableSelectOne() {
         return getJpaController().findPermisoEntities();
     }
 
-    @FacesConverter(forClass = Permiso.class)
+    @FacesConverter(forClass = Permission.class)
     public static class PermisoControllerConverter implements Converter {
 
         @Override
@@ -191,11 +191,11 @@ public class PermisoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Permiso) {
-                Permiso o = (Permiso) object;
+            if (object instanceof Permission) {
+                Permission o = (Permission) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Permiso.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Permission.class.getName()});
                 return null;
             }
         }

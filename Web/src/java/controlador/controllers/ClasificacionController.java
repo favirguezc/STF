@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.cosecha.Clasificacion;
+import model.crop.Classification;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.cosecha.ClasificacionDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class ClasificacionController implements Serializable {
 
     private ClasificacionDAO jpaController = null;
-    private List<Clasificacion> items = null;
-    private Clasificacion selected;
+    private List<Classification> items = null;
+    private Classification selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public ClasificacionController() {
     }
 
-    public Clasificacion getSelected() {
+    public Classification getSelected() {
         return selected;
     }
 
-    public void setSelected(Clasificacion selected) {
+    public void setSelected(Classification selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class ClasificacionController implements Serializable {
         return jpaController;
     }
 
-    public Clasificacion prepareCreate() {
-        selected = new Clasificacion();
+    public Classification prepareCreate() {
+        selected = new Classification();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +85,7 @@ public class ClasificacionController implements Serializable {
         }
     }
 
-    public List<Clasificacion> getItems() {
+    public List<Classification> getItems() {
         if (items == null) {
             items = getJpaController().findClasificacionEntities(permisoBean.getSignInBean().getFinca());
         }
@@ -114,15 +114,15 @@ public class ClasificacionController implements Serializable {
         }
     }
 
-    public List<Clasificacion> getItemsAvailableSelectMany() {
+    public List<Classification> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Clasificacion> getItemsAvailableSelectOne() {
+    public List<Classification> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    @FacesConverter(forClass = Clasificacion.class)
+    @FacesConverter(forClass = Classification.class)
     public static class ClasificacionControllerConverter implements Converter {
 
         @Override
@@ -152,11 +152,11 @@ public class ClasificacionController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Clasificacion) {
-                Clasificacion o = (Clasificacion) object;
+            if (object instanceof Classification) {
+                Classification o = (Classification) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Clasificacion.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Classification.class.getName()});
                 return null;
             }
         }

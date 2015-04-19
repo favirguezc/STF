@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.variablesClimaticas.Temperatura;
+import model.weather.Temperature;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TemperaturaDAO implements Serializable {
      * @throws PreexistingEntityException
      * @throws Exception
      */
-    public void create(Temperatura temperatura) throws PreexistingEntityException, Exception {
+    public void create(Temperature temperatura) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -74,7 +74,7 @@ public class TemperaturaDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Temperatura temperatura) throws NonexistentEntityException, Exception {
+    public void edit(Temperature temperatura) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -107,9 +107,9 @@ public class TemperaturaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Temperatura temperatura;
+            Temperature temperatura;
             try {
-                temperatura = em.getReference(Temperatura.class, id);
+                temperatura = em.getReference(Temperature.class, id);
                 temperatura.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The temperatura with id " + id + " no longer exists.", enfe);
@@ -127,7 +127,7 @@ public class TemperaturaDAO implements Serializable {
      *
      * @return
      */
-    public List<Temperatura> findTemperaturaEntities() {
+    public List<Temperature> findTemperaturaEntities() {
         return findTemperaturaEntities(true, -1, -1);
     }
 
@@ -137,15 +137,15 @@ public class TemperaturaDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Temperatura> findTemperaturaEntities(int maxResults, int firstResult) {
+    public List<Temperature> findTemperaturaEntities(int maxResults, int firstResult) {
         return findTemperaturaEntities(false, maxResults, firstResult);
     }
 
-    private List<Temperatura> findTemperaturaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Temperature> findTemperaturaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Temperatura.class));
+            cq.select(cq.from(Temperature.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -162,10 +162,10 @@ public class TemperaturaDAO implements Serializable {
      * @param id
      * @return
      */
-    public Temperatura findTemperatura(Long id) {
+    public Temperature findTemperatura(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Temperatura.class, id);
+            return em.find(Temperature.class, id);
         } finally {
             em.close();
         }
@@ -177,10 +177,10 @@ public class TemperaturaDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Temperatura findTemperatura(Date date) throws Exception {
+    public Temperature findTemperatura(Date date) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Temperatura> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha = :fecha", Temperatura.class);
+            TypedQuery<Temperature> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha = :fecha", Temperature.class);
             query.setParameter("fecha", date, TemporalType.DATE);
             return query.getSingleResult();
         } finally {
@@ -196,7 +196,7 @@ public class TemperaturaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Temperatura> rt = cq.from(Temperatura.class
+            Root<Temperature> rt = cq.from(Temperature.class
             );
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -213,7 +213,7 @@ public class TemperaturaDAO implements Serializable {
      * @param tipo
      * @return
      */
-    public List<Temperatura> findTemperaturaEntities(Date fecha1, Date fecha2, int tipo) {
+    public List<Temperature> findTemperaturaEntities(Date fecha1, Date fecha2, int tipo) {
         EntityManager em = getEntityManager();
         String stringQuery = "SELECT t FROM Temperatura t WHERE t.fecha BETWEEN :fecha1 AND :fecha2";
         if (tipo == 1) {
@@ -222,7 +222,7 @@ public class TemperaturaDAO implements Serializable {
             stringQuery += " AND FUNC('HOUR',t.hora) NOT IN (0,1,2,3,4,5,18,19,20,21,22,23)";
         }
         try {
-            TypedQuery<Temperatura> query = em.createQuery(stringQuery, Temperatura.class
+            TypedQuery<Temperature> query = em.createQuery(stringQuery, Temperature.class
             );
             query.setParameter(
                     "fecha1", fecha1, TemporalType.DATE);
@@ -240,10 +240,10 @@ public class TemperaturaDAO implements Serializable {
      * @param hora
      * @return
      */
-    public List<Temperatura> findTemperaturaEntities(Date fecha1, int hora) {
+    public List<Temperature> findTemperaturaEntities(Date fecha1, int hora) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Temperatura> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha = :fecha1 AND FUNC('HOUR',t.hora) = :hora", Temperatura.class);
+            TypedQuery<Temperature> query = em.createQuery("SELECT t FROM Temperatura t WHERE t.fecha = :fecha1 AND FUNC('HOUR',t.hora) = :hora", Temperature.class);
             query.setParameter("fecha1", fecha1, TemporalType.DATE);
             query.setParameter("hora", hora);
             return query.getResultList();

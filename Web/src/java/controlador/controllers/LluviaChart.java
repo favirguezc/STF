@@ -17,7 +17,7 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
-import modelo.util.DateTools;
+import model.util.DateTools;
 
 /**
  *

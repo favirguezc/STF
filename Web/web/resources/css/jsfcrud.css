@@ -1,5 +1,6 @@
 .ui-widget {
     font-size: 12px !important;
+    border-radius: 0px;
 }
 .ui-layout-north {
     z-index: 20 !important;
@@ -14,4 +15,5 @@
 }
 .ui-button {
     margin-top: 10px !important;
+    border-radius: 0px;
 }

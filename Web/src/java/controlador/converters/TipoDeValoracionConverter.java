@@ -5,17 +5,19 @@
  */
 package controlador.converters;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.monitoreo.TipoDeValoracion;
+import model.monitoring.ValuationTypeEnum;
 
 /**
  *
  * @author fredy
  */
-@FacesConverter(forClass = TipoDeValoracion.class)
+@FacesConverter(forClass = ValuationTypeEnum.class)
+@ApplicationScoped
 public class TipoDeValoracionConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -23,13 +25,13 @@ public class TipoDeValoracionConverter implements Converter {
             return null;
         }
         if (value.equals("Conteo")) {
-            return TipoDeValoracion.CONTEO;
+            return ValuationTypeEnum.COUNT;
         }
         if (value.equals("Riesgo")) {
-            return TipoDeValoracion.RIESGO;
+            return ValuationTypeEnum.RISK;
         }
         if (value.equals("Relación")) {
-            return TipoDeValoracion.RELACION;
+            return ValuationTypeEnum.RELATION;
         }
         return null;
     }
@@ -38,7 +40,7 @@ public class TipoDeValoracionConverter implements Converter {
         if (value == null) {
             return null;
         }
-        if (value instanceof TipoDeValoracion) {
+        if (value instanceof ValuationTypeEnum) {
             return value + "";
         } else {
             return null;

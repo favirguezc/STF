@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.variablesClimaticas.Lluvia;
+import model.weather.RainFall;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.variablesClimaticas.LluviaDAO;
@@ -24,19 +24,19 @@ import javax.faces.convert.FacesConverter;
 public class LluviaController implements Serializable {
 
     private LluviaDAO jpaController = null;
-    private List<Lluvia> items = null;
-    private Lluvia selected;
+    private List<RainFall> items = null;
+    private RainFall selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public LluviaController() {
     }
 
-    public Lluvia getSelected() {
+    public RainFall getSelected() {
         return selected;
     }
 
-    public void setSelected(Lluvia selected) {
+    public void setSelected(RainFall selected) {
         this.selected = selected;
     }
 
@@ -61,9 +61,9 @@ public class LluviaController implements Serializable {
         return jpaController;
     }
 
-    public Lluvia prepareCreate() {
-        selected = new Lluvia();
-        selected.setFinca(permisoBean.getSignInBean().getFinca());
+    public RainFall prepareCreate() {
+        selected = new RainFall();
+        selected.setFarm(permisoBean.getSignInBean().getFinca());
         initializeEmbeddableKey();
         return selected;
     }
@@ -87,18 +87,18 @@ public class LluviaController implements Serializable {
         }
     }
 
-    public List<Lluvia> getItems() {
+    public List<RainFall> getItems() {
         if (items == null) {
             items = getJpaController().findLluviaEntities();
         }
         return items;
     }
 
-    public List<Lluvia> getItems(Date fecha1,Date fecha2) {
+    public List<RainFall> getItems(Date fecha1,Date fecha2) {
         return getJpaController().findLluviaEntities(fecha1,fecha2);
     }
     
-    public List<Lluvia> getItems(Date fecha1) {
+    public List<RainFall> getItems(Date fecha1) {
         return getJpaController().findLluviaEntities(fecha1);
     }
 
@@ -124,19 +124,19 @@ public class LluviaController implements Serializable {
         }
     }
 
-    public List<Lluvia> getItemsAvailableSelectMany() {
+    public List<RainFall> getItemsAvailableSelectMany() {
         return getJpaController().findLluviaEntities();
     }
 
-    public List<Lluvia> getItemsAvailableSelectOne() {
+    public List<RainFall> getItemsAvailableSelectOne() {
         return getJpaController().findLluviaEntities();
     }
 
     public float calcularPromedio(Date fecha1,Date fecha2) {
         float promedio = 0;
-        List<Lluvia> lista = getItems(fecha1,fecha2);
-        for (Lluvia l : lista) {
-            promedio += l.getMm();
+        List<RainFall> lista = getItems(fecha1,fecha2);
+        for (RainFall l : lista) {
+            promedio += l.getMilimeters();
         }
         if (lista.size() > 1) {
             promedio = promedio / lista.size();
@@ -146,9 +146,9 @@ public class LluviaController implements Serializable {
     
     public float calcularPromedio(Date fecha1) {
         float promedio = 0;
-        List<Lluvia> lista = getItems(fecha1);
-        for (Lluvia l : lista) {
-            promedio += l.getMm();
+        List<RainFall> lista = getItems(fecha1);
+        for (RainFall l : lista) {
+            promedio += l.getMilimeters();
         }
         if (lista.size() > 1) {
             promedio = promedio / lista.size();
@@ -156,7 +156,7 @@ public class LluviaController implements Serializable {
         return promedio;
     }
 
-    @FacesConverter(forClass = Lluvia.class)
+    @FacesConverter(forClass = RainFall.class)
     public static class LluviaControllerConverter implements Converter {
 
         @Override
@@ -186,11 +186,11 @@ public class LluviaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Lluvia) {
-                Lluvia o = (Lluvia) object;
+            if (object instanceof RainFall) {
+                RainFall o = (RainFall) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Lluvia.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), RainFall.class.getName()});
                 return null;
             }
         }

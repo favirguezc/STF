@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.TrampaDeInsectos;
+import model.monitoring.InsectTrap;
 
 /**
  *
@@ -46,7 +46,7 @@ public class TrampaDeInsectosDAO implements Serializable {
      *
      * @param trampaDeInsectos
      */
-    public void create(TrampaDeInsectos trampaDeInsectos) {
+    public void create(InsectTrap trampaDeInsectos) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class TrampaDeInsectosDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(TrampaDeInsectos trampaDeInsectos) throws NonexistentEntityException, Exception {
+    public void edit(InsectTrap trampaDeInsectos) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class TrampaDeInsectosDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            TrampaDeInsectos trampaDeInsectos;
+            InsectTrap trampaDeInsectos;
             try {
-                trampaDeInsectos = em.getReference(TrampaDeInsectos.class, id);
+                trampaDeInsectos = em.getReference(InsectTrap.class, id);
                 trampaDeInsectos.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The trampaDeInsectos with id " + id + " no longer exists.", enfe);
@@ -119,7 +119,7 @@ public class TrampaDeInsectosDAO implements Serializable {
      *
      * @return
      */
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities() {
+    public List<InsectTrap> findTrampaDeInsectosEntities() {
         return findTrampaDeInsectosEntities(true, -1, -1);
     }
 
@@ -129,15 +129,15 @@ public class TrampaDeInsectosDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities(int maxResults, int firstResult) {
+    public List<InsectTrap> findTrampaDeInsectosEntities(int maxResults, int firstResult) {
         return findTrampaDeInsectosEntities(false, maxResults, firstResult);
     }
 
-    private List<TrampaDeInsectos> findTrampaDeInsectosEntities(boolean all, int maxResults, int firstResult) {
+    private List<InsectTrap> findTrampaDeInsectosEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(TrampaDeInsectos.class));
+            cq.select(cq.from(InsectTrap.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -154,10 +154,10 @@ public class TrampaDeInsectosDAO implements Serializable {
      * @param id
      * @return
      */
-    public TrampaDeInsectos findTrampaDeInsectos(long id) {
+    public InsectTrap findTrampaDeInsectos(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(TrampaDeInsectos.class, id);
+            return em.find(InsectTrap.class, id);
         } finally {
             em.close();
         }
@@ -171,7 +171,7 @@ public class TrampaDeInsectosDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<TrampaDeInsectos> rt = cq.from(TrampaDeInsectos.class);
+            Root<InsectTrap> rt = cq.from(InsectTrap.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -186,10 +186,10 @@ public class TrampaDeInsectosDAO implements Serializable {
      * @param fecha2
      * @return
      */
-    public List<TrampaDeInsectos> findTrampaDeInsectosEntities(Date fecha1, Date fecha2) {
+    public List<InsectTrap> findTrampaDeInsectosEntities(Date fecha1, Date fecha2) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<TrampaDeInsectos> query = em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", TrampaDeInsectos.class
+            TypedQuery<InsectTrap> query = em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.fecha BETWEEN :fecha1 AND :fecha2", InsectTrap.class
             );
             query.setParameter(
                     "fecha1", fecha1, TemporalType.DATE);

@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.labores.Labor;
+import model.work.Job;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.labores.LaborDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class LaborController implements Serializable {
 
     private LaborDAO jpaController = null;
-    private List<Labor> items = null;
-    private Labor selected;
+    private List<Job> items = null;
+    private Job selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public LaborController() {
     }
 
-    public Labor getSelected() {
+    public Job getSelected() {
         return selected;
     }
 
-    public void setSelected(Labor selected) {
+    public void setSelected(Job selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class LaborController implements Serializable {
         return jpaController;
     }
 
-    public Labor prepareCreate() {
-        selected = new Labor();
+    public Job prepareCreate() {
+        selected = new Job();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +85,7 @@ public class LaborController implements Serializable {
         }
     }
 
-    public List<Labor> getItems() {
+    public List<Job> getItems() {
         if (items == null) {
             items = getJpaController().findLaborEntities();
         }
@@ -114,15 +114,15 @@ public class LaborController implements Serializable {
         }
     }
 
-    public List<Labor> getItemsAvailableSelectMany() {
+    public List<Job> getItemsAvailableSelectMany() {
         return getJpaController().findLaborEntities();
     }
 
-    public List<Labor> getItemsAvailableSelectOne() {
+    public List<Job> getItemsAvailableSelectOne() {
         return getJpaController().findLaborEntities();
     }
 
-    @FacesConverter(forClass = Labor.class)
+    @FacesConverter(forClass = Job.class)
     public static class LaborControllerConverter implements Converter {
 
         @Override
@@ -152,11 +152,11 @@ public class LaborController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Labor) {
-                Labor o = (Labor) object;
+            if (object instanceof Job) {
+                Job o = (Job) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Labor.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Job.class.getName()});
                 return null;
             }
         }

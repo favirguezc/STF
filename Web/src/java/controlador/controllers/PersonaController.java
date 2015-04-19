@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.ContratoDAO;
@@ -18,25 +18,25 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Rol;
+import model.administration.RoleEnum;
 
 @ManagedBean(name = "personaController")
 @SessionScoped
 public class PersonaController implements Serializable {
 
     private PersonaDAO jpaController = null;
-    private List<Persona> items = null;
-    private Persona selected;
+    private List<Person> items = null;
+    private Person selected;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
-    public Persona getSelected() {
+    public Person getSelected() {
         return selected;
     }
 
-    public void setSelected(Persona selected) {
+    public void setSelected(Person selected) {
         this.selected = selected;
     }
 
@@ -69,8 +69,8 @@ public class PersonaController implements Serializable {
         return jpaController;
     }
 
-    public Persona prepareCreate() {
-        selected = new Persona();
+    public Person prepareCreate() {
+        selected = new Person();
         initializeEmbeddableKey();
         return selected;
     }
@@ -94,7 +94,7 @@ public class PersonaController implements Serializable {
         }
     }
 
-    public List<Persona> getItems() {
+    public List<Person> getItems() {
         if (items == null) {
             items = new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(signInBean.getFinca());
         }
@@ -123,22 +123,22 @@ public class PersonaController implements Serializable {
         }
     }
 
-    public List<Persona> getItemsAvailableSelectMany() {
+    public List<Person> getItemsAvailableSelectMany() {
         return getItems();
 
     }
 
-    public List<Persona> getItemsAvailableSelectOne() {
+    public List<Person> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    public List<Persona> getItemsAvailableTrabajador() {
-        return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.TRABAJADOR, signInBean.getFinca());
+    public List<Person> getItemsAvailableTrabajador() {
+        return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(RoleEnum.WORKER, signInBean.getFinca());
     }
 
-    public List<Persona> getItemsAvailableAsistenteYJefe() {
-        List<Persona> findPersonaEntities = new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.ESPECIALISTA, signInBean.getFinca());
-        for(Persona p:new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.JEFE_DE_CAMPO, signInBean.getFinca())){
+    public List<Person> getItemsAvailableAsistenteYJefe() {
+        List<Person> findPersonaEntities = new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(RoleEnum.SPECIALIST, signInBean.getFinca());
+        for(Person p:new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(RoleEnum.FIELD_BOSS, signInBean.getFinca())){
             if(!findPersonaEntities.contains(p)){
                 findPersonaEntities.add(p);
             }
@@ -146,11 +146,11 @@ public class PersonaController implements Serializable {
         return findPersonaEntities;
     }
 
-    public List<Persona> getItemsAvailableCliente() {
-        return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(Rol.CLIENTE, signInBean.getFinca());
+    public List<Person> getItemsAvailableCliente() {
+        return new ContratoDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaEntities(RoleEnum.CLIENT, signInBean.getFinca());
     }
 
-    @FacesConverter(forClass = Persona.class)
+    @FacesConverter(forClass = Person.class)
     public static class PersonaControllerConverter implements Converter {
 
         @Override
@@ -180,11 +180,11 @@ public class PersonaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Persona) {
-                Persona o = (Persona) object;
+            if (object instanceof Person) {
+                Person o = (Person) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Persona.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Person.class.getName()});
                 return null;
             }
         }

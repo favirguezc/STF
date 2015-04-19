@@ -15,9 +15,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.administracion.Rol;
+import model.administration.Farm;
+import model.administration.Person;
+import model.administration.RoleEnum;
 
 /**
  *
@@ -33,11 +33,11 @@ public class SignInController implements Serializable {
     private boolean step1userSignedIn;
     private boolean step2farmSelected;
     private boolean step3rolSelected;
-    private Persona user;
-    private Rol rol;
-    private List<Rol> roles;
-    private Finca finca;
-    private List<Finca> fincas;
+    private Person user;
+    private RoleEnum rol;
+    private List<RoleEnum> roles;
+    private Farm finca;
+    private List<Farm> fincas;
     private boolean hasActiveAccount;
 
     public SignInController() {
@@ -85,11 +85,11 @@ public class SignInController implements Serializable {
         this.step3rolSelected = step3rolSelected;
     }
 
-    public Persona getUser() {
+    public Person getUser() {
         return user;
     }
 
-    public void setUser(Persona user) {
+    public void setUser(Person user) {
         this.user = user;
     }
 
@@ -101,35 +101,35 @@ public class SignInController implements Serializable {
         this.buttonMessage = buttonMessage;
     }
 
-    public Rol getRol() {
+    public RoleEnum getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(RoleEnum rol) {
         this.rol = rol;
     }
 
-    public List<Rol> getRoles() {
+    public List<RoleEnum> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Rol> roles) {
+    public void setRoles(List<RoleEnum> roles) {
         this.roles = roles;
     }
 
-    public Finca getFinca() {
+    public Farm getFinca() {
         return finca;
     }
 
-    public void setFinca(Finca finca) {
+    public void setFinca(Farm finca) {
         this.finca = finca;
     }
 
-    public List<Finca> getFincas() {
+    public List<Farm> getFincas() {
         return fincas;
     }
 
-    public void setFincas(List<Finca> fincas) {
+    public void setFincas(List<Farm> fincas) {
         this.fincas = fincas;
     }
 
@@ -173,7 +173,7 @@ public class SignInController implements Serializable {
                 user = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
                 fincas = new FincaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findFincaEntitiesForCurrentUser(user);
                 hasActiveAccount = new CuentaController().hasActiveAccount(user);
-                if (!user.isAdministrador() && (fincas == null || fincas.isEmpty()) && !hasActiveAccount) {
+                if (!user.isSystemAdmin() && (fincas == null || fincas.isEmpty()) && !hasActiveAccount) {
                     JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte al administrador de la finca.");
                     return signOut();
                 } else if (fincas != null && fincas.size() == 1) {
@@ -196,7 +196,7 @@ public class SignInController implements Serializable {
                     buttonMessage = "Seleccionar Rol";
                     return signIn();
                 } else if (roles == null || roles.isEmpty()) {
-                    if (hasActiveAccount || user.isAdministrador()) {
+                    if (hasActiveAccount || user.isSystemAdmin()) {
                         return "/faces/secure/index.xhtml";
                     } else {
                         JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte a un administrador de la finca.");
@@ -204,7 +204,7 @@ public class SignInController implements Serializable {
                     }
                 }
             } else {
-                if (user.isAdministrador()) {
+                if (user.isSystemAdmin()) {
                     return "/faces/secure/index.xhtml";
                 } else {
                     JsfUtil.addErrorMessage("El campo Finca es obligatorio");

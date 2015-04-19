@@ -14,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.Monitoreo;
+import model.monitoring.Monitoring;
 
 /**
  *
@@ -43,7 +43,7 @@ public class MonitoreoDAO implements Serializable {
      *
      * @param monitoreo
      */
-    public void create(Monitoreo monitoreo) {
+    public void create(Monitoring monitoreo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -63,7 +63,7 @@ public class MonitoreoDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Monitoreo monitoreo) throws NonexistentEntityException, Exception {
+    public void edit(Monitoring monitoreo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -96,9 +96,9 @@ public class MonitoreoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Monitoreo monitoreo;
+            Monitoring monitoreo;
             try {
-                monitoreo = em.getReference(Monitoreo.class, id);
+                monitoreo = em.getReference(Monitoring.class, id);
                 monitoreo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The monitoreo with id " + id + " no longer exists.", enfe);
@@ -116,7 +116,7 @@ public class MonitoreoDAO implements Serializable {
      *
      * @return
      */
-    public List<Monitoreo> findMonitoreoEntities() {
+    public List<Monitoring> findMonitoreoEntities() {
         return findMonitoreoEntities(true, -1, -1);
     }
 
@@ -126,15 +126,15 @@ public class MonitoreoDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Monitoreo> findMonitoreoEntities(int maxResults, int firstResult) {
+    public List<Monitoring> findMonitoreoEntities(int maxResults, int firstResult) {
         return findMonitoreoEntities(false, maxResults, firstResult);
     }
 
-    private List<Monitoreo> findMonitoreoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Monitoring> findMonitoreoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Monitoreo.class));
+            cq.select(cq.from(Monitoring.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -151,10 +151,10 @@ public class MonitoreoDAO implements Serializable {
      * @param id
      * @return
      */
-    public Monitoreo findMonitoreo(Long id) {
+    public Monitoring findMonitoreo(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Monitoreo.class, id);
+            return em.find(Monitoring.class, id);
         } finally {
             em.close();
         }
@@ -168,7 +168,7 @@ public class MonitoreoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Monitoreo> rt = cq.from(Monitoreo.class);
+            Root<Monitoring> rt = cq.from(Monitoring.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

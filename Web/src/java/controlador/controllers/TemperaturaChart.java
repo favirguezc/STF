@@ -11,13 +11,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.variablesClimaticas.Temperatura;
+import model.weather.Temperature;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
-import modelo.util.DateFormatter;
-import modelo.util.DateTools;
+import model.util.DateFormatter;
+import model.util.DateTools;
 
 /**
  *
@@ -126,16 +126,16 @@ public class TemperaturaChart implements Serializable {
             cal.add(Calendar.MONTH, 1);
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date fecha2 = cal.getTime();
-            Temperatura promedioTemp;
+            Temperature promedioTemp;
             promedioTemp = controlador.calcularPromedio(fecha1, fecha2, 2);
-            series1.set(DateTools.getMonth(i), promedioTemp.getTemperatura());
-            series2.set(DateTools.getMonth(i), promedioTemp.getHumedad());
-            series3.set(DateTools.getMonth(i), promedioTemp.getPuntoDeRocio());
+            series1.set(DateTools.getMonth(i), promedioTemp.getTemperature());
+            series2.set(DateTools.getMonth(i), promedioTemp.getHumidity());
+            series3.set(DateTools.getMonth(i), promedioTemp.getDewPoint());
 
             promedioTemp = controlador.calcularPromedio(fecha1, fecha2, 1);
-            series4.set(DateTools.getMonth(i), promedioTemp.getTemperatura());
-            series5.set(DateTools.getMonth(i), promedioTemp.getHumedad());
-            series6.set(DateTools.getMonth(i), promedioTemp.getPuntoDeRocio());
+            series4.set(DateTools.getMonth(i), promedioTemp.getTemperature());
+            series5.set(DateTools.getMonth(i), promedioTemp.getHumidity());
+            series6.set(DateTools.getMonth(i), promedioTemp.getDewPoint());
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
@@ -175,18 +175,18 @@ public class TemperaturaChart implements Serializable {
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Temperatura promedioTemp;
+            Temperature promedioTemp;
             promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 2);
 
-            series1.set(i + 1, promedioTemp.getTemperatura());
-            series2.set(i + 1, promedioTemp.getHumedad());
-            series3.set(i + 1, promedioTemp.getPuntoDeRocio());
+            series1.set(i + 1, promedioTemp.getTemperature());
+            series2.set(i + 1, promedioTemp.getHumidity());
+            series3.set(i + 1, promedioTemp.getDewPoint());
 
             promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 1);
 
-            series4.set(i + 1, promedioTemp.getTemperatura());
-            series5.set(i + 1, promedioTemp.getHumedad());
-            series6.set(i + 1, promedioTemp.getPuntoDeRocio());
+            series4.set(i + 1, promedioTemp.getTemperature());
+            series5.set(i + 1, promedioTemp.getHumidity());
+            series6.set(i + 1, promedioTemp.getDewPoint());
         }
 
         modelo2.addSeries(series1);
@@ -224,18 +224,18 @@ public class TemperaturaChart implements Serializable {
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
-            Temperatura promedioTemp;
+            Temperature promedioTemp;
             promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 2);
 
-            series1.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getTemperatura());
-            series2.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getHumedad());
-            series3.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getPuntoDeRocio());
+            series1.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getTemperature());
+            series2.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getHumidity());
+            series3.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getDewPoint());
 
             promedioTemp = controlador.calcularPromedio(fecha1, fecha1, 1);
 
-            series4.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getTemperatura());
-            series5.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getHumedad());
-            series6.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getPuntoDeRocio());
+            series4.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getTemperature());
+            series5.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getHumidity());
+            series6.set(DateTools.getDayOfWeek(i + 1), promedioTemp.getDewPoint());
         }
 
         modelo3.addSeries(series1);
@@ -264,12 +264,12 @@ public class TemperaturaChart implements Serializable {
         TemperaturaController controlador = new TemperaturaController();
 
         for (int i = 0; i < 24; i++) {
-            Temperatura promedioTemp;
+            Temperature promedioTemp;
             promedioTemp = controlador.calcularPromedio(fechaDia, i);
 
-            series1.set(i + 1, promedioTemp.getTemperatura());
-            series2.set(i + 1, promedioTemp.getHumedad());
-            series3.set(i + 1, promedioTemp.getPuntoDeRocio());
+            series1.set(i + 1, promedioTemp.getTemperature());
+            series2.set(i + 1, promedioTemp.getHumidity());
+            series3.set(i + 1, promedioTemp.getDewPoint());
         }
 
         modelo4.addSeries(series1);

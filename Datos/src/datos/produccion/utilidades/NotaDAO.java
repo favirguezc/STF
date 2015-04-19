@@ -15,8 +15,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.utilidades.Nota;
+import model.administration.Person;
+import model.communication.Note;
 
 /**
  *
@@ -45,7 +45,7 @@ public class NotaDAO implements Serializable {
      *
      * @param nota
      */
-    public void create(Nota nota) {
+    public void create(Note nota) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -65,7 +65,7 @@ public class NotaDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Nota nota) throws NonexistentEntityException, Exception {
+    public void edit(Note nota) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -98,9 +98,9 @@ public class NotaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Nota nota;
+            Note nota;
             try {
-                nota = em.getReference(Nota.class, id);
+                nota = em.getReference(Note.class, id);
                 nota.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The nota with id " + id + " no longer exists.", enfe);
@@ -118,7 +118,7 @@ public class NotaDAO implements Serializable {
      *
      * @return
      */
-    public List<Nota> findNotaEntities() {
+    public List<Note> findNotaEntities() {
         return findNotaEntities(true, -1, -1);
     }
 
@@ -128,15 +128,15 @@ public class NotaDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Nota> findNotaEntities(int maxResults, int firstResult) {
+    public List<Note> findNotaEntities(int maxResults, int firstResult) {
         return findNotaEntities(false, maxResults, firstResult);
     }
 
-    private List<Nota> findNotaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Note> findNotaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Nota.class));
+            cq.select(cq.from(Note.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -148,10 +148,10 @@ public class NotaDAO implements Serializable {
         }
     }
     
-    public List<Nota> findNotaEntities(Persona persona) {
+    public List<Note> findNotaEntities(Person persona) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Nota> query = em.createQuery("SELECT n FROM Nota n WHERE n.para = :persona", Nota.class);
+            TypedQuery<Note> query = em.createQuery("SELECT n FROM Nota n WHERE n.para = :persona", Note.class);
             query.setParameter("persona", persona);
             return query.getResultList();
         } finally {
@@ -164,10 +164,10 @@ public class NotaDAO implements Serializable {
      * @param id
      * @return
      */
-    public Nota findNota(Long id) {
+    public Note findNota(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Nota.class, id);
+            return em.find(Note.class, id);
         } finally {
             em.close();
         }
@@ -181,7 +181,7 @@ public class NotaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Nota> rt = cq.from(Nota.class);
+            Root<Note> rt = cq.from(Note.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -12,13 +12,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.variablesClimaticas.HumedadDelSuelo;
+import model.weather.SoilMoisture;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
-import modelo.util.DateTools;
+import model.util.DateTools;
 
 /**
  *
@@ -68,9 +68,9 @@ public class HumedadChart implements Serializable {
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(DateTools.getDate(ano1, mes1, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            HumedadDelSuelo promedio = controlador.calcularPromedio(cal.getTime());
-            series1.set(i + 1, promedio.getValorEn15Cms());
-            series2.set(i + 1, promedio.getValorEn30Cms());
+            SoilMoisture promedio = controlador.calcularPromedio(cal.getTime());
+            series1.set(i + 1, promedio.getValueIn15Centimeters());
+            series2.set(i + 1, promedio.getValueIn30Centimeters());
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 

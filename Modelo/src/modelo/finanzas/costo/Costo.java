@@ -15,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Modulo;
+import model.administration.ModuleClass;
 
 /**
  *
@@ -42,7 +42,7 @@ public class Costo implements Serializable{
     @Column
     private float precioUnid;
     @ManyToOne(optional = false)
-    private Modulo modulo;
+    private ModuleClass modulo;
 
     public Costo() {
     }
@@ -115,11 +115,11 @@ public class Costo implements Serializable{
         return cantidad * precioUnid;
     }
     
-    public Modulo getModulo() {
+    public ModuleClass getModulo() {
         return modulo;
     }
 
-    public void setModulo(Modulo modulo) {
+    public void setModulo(ModuleClass modulo) {
         this.modulo = modulo;
     }
 

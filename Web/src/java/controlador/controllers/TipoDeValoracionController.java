@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.monitoreo.TipoDeValoracion;
+import model.monitoring.ValuationTypeEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.produccion.monitoreo.TipoDeValoracion;
 @ManagedBean(name = "tipoDeValoracionController")
 public class TipoDeValoracionController {
     
-    public TipoDeValoracion[] getTipoDeValoracionValues(){
-        return TipoDeValoracion.values();
+    public ValuationTypeEnum[] getTipoDeValoracionValues(){
+        return ValuationTypeEnum.values();
     }
 }

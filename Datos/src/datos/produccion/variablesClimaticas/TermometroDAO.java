@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.variablesClimaticas.Termometro;
+import model.weather.Thermometer;
 
 /**
  *
@@ -47,7 +47,7 @@ public class TermometroDAO {
      * @throws PreexistingEntityException
      * @throws Exception
      */
-    public void create(Termometro termometro) throws PreexistingEntityException, Exception {
+    public void create(Thermometer termometro) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -72,7 +72,7 @@ public class TermometroDAO {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Termometro termometro) throws NonexistentEntityException, Exception {
+    public void edit(Thermometer termometro) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -105,9 +105,9 @@ public class TermometroDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Termometro termometro;
+            Thermometer termometro;
             try {
-                termometro = em.getReference(Termometro.class, id);
+                termometro = em.getReference(Thermometer.class, id);
                 termometro.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The termometro with id " + id + " no longer exists.", enfe);
@@ -125,7 +125,7 @@ public class TermometroDAO {
      *
      * @return
      */
-    public List<Termometro> findTermometroEntities() {
+    public List<Thermometer> findTermometroEntities() {
         return findTermometroEntities(true, -1, -1);
     }
 
@@ -135,15 +135,15 @@ public class TermometroDAO {
      * @param firstResult
      * @return
      */
-    public List<Termometro> findTermometroEntities(int maxResults, int firstResult) {
+    public List<Thermometer> findTermometroEntities(int maxResults, int firstResult) {
         return findTermometroEntities(false, maxResults, firstResult);
     }
 
-    private List<Termometro> findTermometroEntities(boolean all, int maxResults, int firstResult) {
+    private List<Thermometer> findTermometroEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Termometro.class));
+            cq.select(cq.from(Thermometer.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -160,10 +160,10 @@ public class TermometroDAO {
      * @param nds
      * @return
      */
-    public Termometro findTermometro(Long nds) {
+    public Thermometer findTermometro(Long nds) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Termometro> query = em.createQuery("SELECT t FROM Termometro t WHERE t.numeroDeSerie = :nds", Termometro.class);
+            TypedQuery<Thermometer> query = em.createQuery("SELECT t FROM Termometro t WHERE t.numeroDeSerie = :nds", Thermometer.class);
             query.setParameter("nds",nds);
             return query.getSingleResult();
         } finally {
@@ -179,7 +179,7 @@ public class TermometroDAO {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Termometro> rt = cq.from(Termometro.class
+            Root<Thermometer> rt = cq.from(Thermometer.class
             );
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);

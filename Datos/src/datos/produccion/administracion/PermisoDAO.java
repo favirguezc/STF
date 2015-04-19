@@ -15,11 +15,11 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Modulo;
-import modelo.produccion.administracion.Pagina;
-import modelo.produccion.administracion.Permiso;
-import modelo.produccion.administracion.Rol;
-import modelo.util.Accion;
+import model.administration.ModuleClass;
+import model.administration.PageEnum;
+import model.administration.Permission;
+import model.administration.RoleEnum;
+import model.util.Action;
 
 /**
  *
@@ -36,7 +36,7 @@ public class PermisoDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Permiso permiso) {
+    public void create(Permission permiso) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -50,7 +50,7 @@ public class PermisoDAO implements Serializable {
         }
     }
 
-    public void edit(Permiso permiso) throws NonexistentEntityException, Exception {
+    public void edit(Permission permiso) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,9 +78,9 @@ public class PermisoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Permiso permiso;
+            Permission permiso;
             try {
-                permiso = em.getReference(Permiso.class, id);
+                permiso = em.getReference(Permission.class, id);
                 permiso.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The permiso with id " + id + " no longer exists.", enfe);
@@ -94,19 +94,19 @@ public class PermisoDAO implements Serializable {
         }
     }
 
-    public List<Permiso> findPermisoEntities() {
+    public List<Permission> findPermisoEntities() {
         return findPermisoEntities(true, -1, -1);
     }
 
-    public List<Permiso> findPermisoEntities(int maxResults, int firstResult) {
+    public List<Permission> findPermisoEntities(int maxResults, int firstResult) {
         return findPermisoEntities(false, maxResults, firstResult);
     }
 
-    private List<Permiso> findPermisoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Permission> findPermisoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Permiso.class));
+            cq.select(cq.from(Permission.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,10 +118,10 @@ public class PermisoDAO implements Serializable {
         }
     }
 
-    public Permiso findPermiso(Long id) {
+    public Permission findPermiso(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Permiso.class, id);
+            return em.find(Permission.class, id);
         } finally {
             em.close();
         }
@@ -131,7 +131,7 @@ public class PermisoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Permiso> rt = cq.from(Permiso.class);
+            Root<Permission> rt = cq.from(Permission.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -140,10 +140,10 @@ public class PermisoDAO implements Serializable {
         }
     }
 
-    public boolean findPermiso(Rol rol, Pagina pagina,Accion accion) {
+    public boolean findPermiso(RoleEnum rol, PageEnum pagina,Action accion) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Modulo> query = em.createQuery("SELECT p FROM Permiso p WHERE p.pagina = :pagina AND p.rol = :rol AND p.accion = :accion", Modulo.class);
+            TypedQuery<ModuleClass> query = em.createQuery("SELECT p FROM Permiso p WHERE p.pagina = :pagina AND p.rol = :rol AND p.accion = :accion", ModuleClass.class);
             query.setParameter("rol", rol);
             query.setParameter("pagina", pagina);
             query.setParameter("accion", accion);

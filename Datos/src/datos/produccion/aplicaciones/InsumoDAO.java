@@ -16,8 +16,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Lote;
-import modelo.produccion.aplicaciones.Insumo;
+import model.administration.Lot;
+import model.applications.Chemical;
 
 /**
  *
@@ -46,7 +46,7 @@ public class InsumoDAO implements Serializable {
      *
      * @param insumo
      */
-    public void create(Insumo insumo) {
+    public void create(Chemical insumo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class InsumoDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Insumo insumo) throws NonexistentEntityException, Exception {
+    public void edit(Chemical insumo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class InsumoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Insumo insumo;
+            Chemical insumo;
             try {
-                insumo = em.getReference(Insumo.class, id);
+                insumo = em.getReference(Chemical.class, id);
                 insumo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The insumo with id " + id + " no longer exists.", enfe);
@@ -119,7 +119,7 @@ public class InsumoDAO implements Serializable {
      *
      * @return
      */
-    public List<Insumo> findInsumoEntities() {
+    public List<Chemical> findInsumoEntities() {
         return findInsumoEntities(true, -1, -1);
     }
 
@@ -129,15 +129,15 @@ public class InsumoDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Insumo> findInsumoEntities(int maxResults, int firstResult) {
+    public List<Chemical> findInsumoEntities(int maxResults, int firstResult) {
         return findInsumoEntities(false, maxResults, firstResult);
     }
 
-    private List<Insumo> findInsumoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Chemical> findInsumoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Insumo.class));
+            cq.select(cq.from(Chemical.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -154,10 +154,10 @@ public class InsumoDAO implements Serializable {
      * @param id
      * @return
      */
-    public Insumo findInsumo(long id) {
+    public Chemical findInsumo(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Insumo.class, id);
+            return em.find(Chemical.class, id);
         } finally {
             em.close();
         }
@@ -171,7 +171,7 @@ public class InsumoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Insumo> rt = cq.from(Insumo.class);
+            Root<Chemical> rt = cq.from(Chemical.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -186,10 +186,10 @@ public class InsumoDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Insumo findInsumo(String nombre)throws Exception{
+    public Chemical findInsumo(String nombre)throws Exception{
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Insumo> query = em.createQuery("SELECT t FROM Insumo t WHERE t.nombre = :nombre", Insumo.class);
+            TypedQuery<Chemical> query = em.createQuery("SELECT t FROM Insumo t WHERE t.nombre = :nombre", Chemical.class);
             query.setParameter("nombre", nombre);
             return query.getSingleResult();
         } finally {
@@ -203,7 +203,7 @@ public class InsumoDAO implements Serializable {
      * @param fecha
      * @return
      */
-    public List<Insumo> findInsumoEntities(Lote lote, Date fecha) {
+    public List<Chemical> findInsumoEntities(Lot lote, Date fecha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

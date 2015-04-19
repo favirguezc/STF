@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.aplicaciones.TipoDeAplicacion;
+import model.applications.AplicationTypeEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.produccion.aplicaciones.TipoDeAplicacion;
 @ManagedBean(name = "tipoDeAplicacionController")
 public class TipoDeAplicacionController {
     
-    public TipoDeAplicacion[] getTipoDeAplicacionValues(){
-        return TipoDeAplicacion.values();
+    public AplicationTypeEnum[] getTipoDeAplicacionValues(){
+        return AplicationTypeEnum.values();
     }
 }

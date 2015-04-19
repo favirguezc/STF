@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.monitoreo.Monitoreo;
+import model.monitoring.Monitoring;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.monitoreo.MonitoreoDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class MonitoreoController implements Serializable {
 
     private MonitoreoDAO jpaController = null;
-    private List<Monitoreo> items = null;
-    private Monitoreo selected;
+    private List<Monitoring> items = null;
+    private Monitoring selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public MonitoreoController() {
     }
 
-    public Monitoreo getSelected() {
+    public Monitoring getSelected() {
         return selected;
     }
 
-    public void setSelected(Monitoreo selected) {
+    public void setSelected(Monitoring selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class MonitoreoController implements Serializable {
         return jpaController;
     }
 
-    public Monitoreo prepareCreate() {
-        selected = new Monitoreo();
+    public Monitoring prepareCreate() {
+        selected = new Monitoring();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +85,7 @@ public class MonitoreoController implements Serializable {
         }
     }
 
-    public List<Monitoreo> getItems() {
+    public List<Monitoring> getItems() {
         if (items == null) {
             items = getJpaController().findMonitoreoEntities();
         }
@@ -114,15 +114,15 @@ public class MonitoreoController implements Serializable {
         }
     }
 
-    public List<Monitoreo> getItemsAvailableSelectMany() {
+    public List<Monitoring> getItemsAvailableSelectMany() {
         return getJpaController().findMonitoreoEntities();
     }
 
-    public List<Monitoreo> getItemsAvailableSelectOne() {
+    public List<Monitoring> getItemsAvailableSelectOne() {
         return getJpaController().findMonitoreoEntities();
     }
 
-    @FacesConverter(forClass = Monitoreo.class)
+    @FacesConverter(forClass = Monitoring.class)
     public static class MonitoreoControllerConverter implements Converter {
 
         @Override
@@ -152,11 +152,11 @@ public class MonitoreoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Monitoreo) {
-                Monitoreo o = (Monitoreo) object;
+            if (object instanceof Monitoring) {
+                Monitoring o = (Monitoring) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Monitoreo.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Monitoring.class.getName()});
                 return null;
             }
         }

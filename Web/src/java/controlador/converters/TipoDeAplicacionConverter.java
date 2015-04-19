@@ -5,13 +5,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.aplicaciones.TipoDeAplicacion;
+import model.applications.AplicationTypeEnum;
 
 /**
  *
  * @author fredy
  */
-@FacesConverter(forClass = TipoDeAplicacion.class)
+@FacesConverter(forClass = AplicationTypeEnum.class)
 public class TipoDeAplicacionConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -19,10 +19,10 @@ public class TipoDeAplicacionConverter implements Converter {
             return null;
         }
         if (value.equals("Fitosanitaria")) {
-            return TipoDeAplicacion.FITOSANITARIA;
+            return AplicationTypeEnum.PHYTOSANITARY;
         }
         if (value.equals("Fertilización")) {
-            return TipoDeAplicacion.FERTILIZACION;
+            return AplicationTypeEnum.FERTILIZATION;
         }
         return null;
     }
@@ -31,7 +31,7 @@ public class TipoDeAplicacionConverter implements Converter {
         if (value == null) {
             return null;
         }
-        if (value instanceof TipoDeAplicacion) {
+        if (value instanceof AplicationTypeEnum) {
             return value + "";
         } else {
             return null;

@@ -17,10 +17,10 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
-import modelo.produccion.administracion.Modulo;
-import modelo.produccion.aplicaciones.Aplicacion;
+import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.ModuleClass;
+import model.applications.Application;
 
 /**
  *
@@ -49,7 +49,7 @@ public class AplicacionDAO implements Serializable {
      *
      * @param aplicacionFitosanitaria
      */
-    public void create(Aplicacion aplicacionFitosanitaria) {
+    public void create(Application aplicacionFitosanitaria) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -69,7 +69,7 @@ public class AplicacionDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Aplicacion aplicacionFitosanitaria) throws NonexistentEntityException, Exception {
+    public void edit(Application aplicacionFitosanitaria) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -102,9 +102,9 @@ public class AplicacionDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Aplicacion aplicacionFitosanitaria;
+            Application aplicacionFitosanitaria;
             try {
-                aplicacionFitosanitaria = em.getReference(Aplicacion.class, id);
+                aplicacionFitosanitaria = em.getReference(Application.class, id);
                 aplicacionFitosanitaria.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The aplicacionFitosanitaria with id " + id + " no longer exists.", enfe);
@@ -123,10 +123,10 @@ public class AplicacionDAO implements Serializable {
      * @param finca
      * @return
      */
-    public List<Aplicacion> findAplicacionEntitiesForSelectedFarm(Finca finca) {
+    public List<Application> findAplicacionEntitiesForSelectedFarm(Farm finca) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Aplicacion> query = em.createQuery("SELECT a FROM Aplicacion a WHERE a.modulo.lote.finca = :finca", Aplicacion.class);
+            TypedQuery<Application> query = em.createQuery("SELECT a FROM Aplicacion a WHERE a.modulo.lote.finca = :finca", Application.class);
             query.setParameter("finca", finca);
             return query.getResultList();
         } finally {
@@ -134,7 +134,7 @@ public class AplicacionDAO implements Serializable {
         }
     }
     
-    public List<Aplicacion> findAplicacionEntities() {
+    public List<Application> findAplicacionEntities() {
         return AplicacionDAO.this.findAplicacionEntities(true, -1, -1);
     }
 
@@ -144,15 +144,15 @@ public class AplicacionDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Aplicacion> findAplicacionEntities(int maxResults, int firstResult) {
+    public List<Application> findAplicacionEntities(int maxResults, int firstResult) {
         return findAplicacionEntities(false, maxResults, firstResult);
     }
 
-    private List<Aplicacion> findAplicacionEntities(boolean all, int maxResults, int firstResult) {
+    private List<Application> findAplicacionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Aplicacion.class));
+            cq.select(cq.from(Application.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -169,10 +169,10 @@ public class AplicacionDAO implements Serializable {
      * @param id
      * @return
      */
-    public Aplicacion findAplicacion(long id) {
+    public Application findAplicacion(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Aplicacion.class, id);
+            return em.find(Application.class, id);
         } finally {
             em.close();
         }
@@ -186,7 +186,7 @@ public class AplicacionDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Aplicacion> rt = cq.from(Aplicacion.class);
+            Root<Application> rt = cq.from(Application.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -202,10 +202,10 @@ public class AplicacionDAO implements Serializable {
      * @param fecha2
      * @return
      */
-    public List<Aplicacion> findAplicacionEntities(Lote lote,Date fecha1,Date fecha2) {
+    public List<Application> findAplicacionEntities(Lot lote,Date fecha1,Date fecha2) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Aplicacion> query = em.createQuery("SELECT t FROM AplicacionFitosanitaria t WHERE t.fecha BETWEEN :fecha1 AND :fecha2 AND t.lote = :lote", Aplicacion.class);
+            TypedQuery<Application> query = em.createQuery("SELECT t FROM AplicacionFitosanitaria t WHERE t.fecha BETWEEN :fecha1 AND :fecha2 AND t.lote = :lote", Application.class);
             query.setParameter("fecha1", fecha1, TemporalType.DATE);
             query.setParameter("fecha2", fecha2,TemporalType.DATE);
             query.setParameter("lote", lote);

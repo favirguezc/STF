@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.administracion.Sexo;
+import model.administration.SexEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.produccion.administracion.Sexo;
 @ManagedBean(name="sexoController")
 public class SexoController {
     
-    public Sexo[] getSexoValues(){
-        return Sexo.values();
+    public SexEnum[] getSexoValues(){
+        return SexEnum.values();
     }
 }

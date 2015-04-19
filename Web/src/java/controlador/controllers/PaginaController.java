@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.administracion.Pagina;
+import model.administration.PageEnum;
 
 /**
  *
@@ -15,8 +15,8 @@ import modelo.produccion.administracion.Pagina;
 @ManagedBean(name = "paginaController")
 public class PaginaController {
     
-    public Pagina[] getPaginaValues(){
-        return Pagina.values();
+    public PageEnum[] getPaginaValues(){
+        return PageEnum.values();
     }
     
 }

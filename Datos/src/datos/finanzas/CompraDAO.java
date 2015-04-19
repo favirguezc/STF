@@ -17,7 +17,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.finanzas.compra.Compra;
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 
 /**
  *
@@ -139,7 +139,7 @@ public class CompraDAO {
         }
     }
     
-    public List<Compra> findCompraEntities(Finca finca, Date inicio, Date fin) {
+    public List<Compra> findCompraEntities(Farm finca, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -182,7 +182,7 @@ public class CompraDAO {
         }
     }
     
-    public List<Compra> findCompraEntitiesForSelectedFarm(Finca selectedFarm) {
+    public List<Compra> findCompraEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Compra> query = em.createQuery("SELECT co FROM Compra co WHERE co.finca = :finca ORDER BY co.fechaCompra ASC", Compra.class);

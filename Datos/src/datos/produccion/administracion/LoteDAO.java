@@ -16,9 +16,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Lote;
-import modelo.produccion.administracion.Persona;
+import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.Person;
 
 /**
  *
@@ -47,7 +47,7 @@ public class LoteDAO implements Serializable {
      *
      * @param lote
      */
-    public void create(Lote lote) {
+    public void create(Lot lote) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -67,7 +67,7 @@ public class LoteDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Lote lote) throws NonexistentEntityException, Exception {
+    public void edit(Lot lote) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -100,9 +100,9 @@ public class LoteDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Lote lote;
+            Lot lote;
             try {
-                lote = em.getReference(Lote.class, id);
+                lote = em.getReference(Lot.class, id);
                 lote.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The lote with id " + id + " no longer exists.", enfe);
@@ -120,7 +120,7 @@ public class LoteDAO implements Serializable {
      *
      * @return
      */
-    public List<Lote> findLoteEntities() {
+    public List<Lot> findLoteEntities() {
         return findLoteEntities(true, -1, -1);
     }
 
@@ -130,15 +130,15 @@ public class LoteDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Lote> findLoteEntities(int maxResults, int firstResult) {
+    public List<Lot> findLoteEntities(int maxResults, int firstResult) {
         return findLoteEntities(false, maxResults, firstResult);
     }
 
-    private List<Lote> findLoteEntities(boolean all, int maxResults, int firstResult) {
+    private List<Lot> findLoteEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Lote.class));
+            cq.select(cq.from(Lot.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -155,10 +155,10 @@ public class LoteDAO implements Serializable {
      * @param id
      * @return
      */
-    public Lote findLote(long id) {
+    public Lot findLote(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Lote.class, id);
+            return em.find(Lot.class, id);
         } finally {
             em.close();
         }
@@ -170,10 +170,10 @@ public class LoteDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Lote findLote(String nombre) throws Exception {
+    public Lot findLote(String nombre) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lote> query = em.createQuery("SELECT t FROM Lote t WHERE t.nombre = :nombre", Lote.class);
+            TypedQuery<Lot> query = em.createQuery("SELECT t FROM Lote t WHERE t.nombre = :nombre", Lot.class);
             query.setParameter("nombre", nombre);
             return query.getSingleResult();
         } finally {
@@ -189,7 +189,7 @@ public class LoteDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Lote> rt = cq.from(Lote.class);
+            Root<Lot> rt = cq.from(Lot.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -198,10 +198,10 @@ public class LoteDAO implements Serializable {
         }
     }
 
-    public List<Lote> findLoteEntitiesForSelectedFarm(Finca finca) {
+    public List<Lot> findLoteEntitiesForSelectedFarm(Farm finca) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Lote> query = em.createQuery("SELECT l FROM Lote l WHERE l.finca = :finca", Lote.class);
+            TypedQuery<Lot> query = em.createQuery("SELECT l FROM Lote l WHERE l.finca = :finca", Lot.class);
             query.setParameter("finca", finca);
             return query.getResultList();
         } finally {

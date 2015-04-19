@@ -17,10 +17,11 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Modulo;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.cosecha.Recoleccion;
+import model.administration.Cultivation;
+import model.administration.Farm;
+import model.administration.ModuleClass;
+import model.administration.Person;
+import model.crop.Crop;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RecoleccionDAO implements Serializable {
      *
      * @param recoleccion
      */
-    public void create(Recoleccion recoleccion) {
+    public void create(Crop recoleccion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -69,7 +70,7 @@ public class RecoleccionDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Recoleccion recoleccion) throws NonexistentEntityException, Exception {
+    public void edit(Crop recoleccion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -102,9 +103,9 @@ public class RecoleccionDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Recoleccion recoleccion;
+            Crop recoleccion;
             try {
-                recoleccion = em.getReference(Recoleccion.class, id);
+                recoleccion = em.getReference(Crop.class, id);
                 recoleccion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The recoleccion with id " + id + " no longer exists.", enfe);
@@ -122,7 +123,7 @@ public class RecoleccionDAO implements Serializable {
      *
      * @return
      */
-    public List<Recoleccion> findRecoleccionEntities() {
+    public List<Crop> findRecoleccionEntities() {
         return findRecoleccionEntities(true, -1, -1);
     }
 
@@ -132,15 +133,15 @@ public class RecoleccionDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Recoleccion> findRecoleccionEntities(int maxResults, int firstResult) {
+    public List<Crop> findRecoleccionEntities(int maxResults, int firstResult) {
         return findRecoleccionEntities(false, maxResults, firstResult);
     }
 
-    private List<Recoleccion> findRecoleccionEntities(boolean all, int maxResults, int firstResult) {
+    private List<Crop> findRecoleccionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Recoleccion.class));
+            cq.select(cq.from(Crop.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -157,10 +158,10 @@ public class RecoleccionDAO implements Serializable {
      * @param id
      * @return
      */
-    public Recoleccion findRecoleccion(long id) {
+    public Crop findRecoleccion(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Recoleccion.class, id);
+            return em.find(Crop.class, id);
         } finally {
             em.close();
         }
@@ -174,7 +175,7 @@ public class RecoleccionDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Recoleccion> rt = cq.from(Recoleccion.class);
+            Root<Crop> rt = cq.from(Crop.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -186,12 +187,12 @@ public class RecoleccionDAO implements Serializable {
     /**
      *
      * @param recolector
-     * @param modulo
+     * @param cultivo
      * @param inicio
      * @param fin
      * @return
      */
-    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Modulo modulo, Date inicio, Date fin) {
+    public List<Crop> findRecoleccionEntities(Person recolector, Cultivation cultivo, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -200,11 +201,11 @@ public class RecoleccionDAO implements Serializable {
             queryString += " t.recolector = :recolector";
             a = true;
         }
-        if (modulo != null) {
+        if (cultivo != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.modulo = :modulo ";
+            queryString += " t.cultivo = :cultivo ";
             b = true;
         }
         if (fin != null) {
@@ -221,7 +222,7 @@ public class RecoleccionDAO implements Serializable {
             c = true;
         }
         try {
-            TypedQuery<Recoleccion> query = em.createQuery(queryString, Recoleccion.class);
+            TypedQuery<Crop> query = em.createQuery(queryString, Crop.class);
             if (c) {
                 query.setParameter("fecha1", inicio, TemporalType.DATE);
             }
@@ -232,7 +233,7 @@ public class RecoleccionDAO implements Serializable {
                 query.setParameter("recolector", recolector);
             }
             if (b) {
-                query.setParameter("modulo", modulo);
+                query.setParameter("cultivo", cultivo);
             }
             return query.getResultList();
         } finally {
@@ -240,7 +241,7 @@ public class RecoleccionDAO implements Serializable {
         }
     }
 
-    public List<Recoleccion> findRecoleccionEntities(Persona recolector, Finca finca, Date inicio, Date fin) {
+    public List<Crop> findRecoleccionEntities(Person recolector, Farm finca, Date inicio, Date fin) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -270,7 +271,7 @@ public class RecoleccionDAO implements Serializable {
             c = true;
         }
         try {
-            TypedQuery<Recoleccion> query = em.createQuery(queryString, Recoleccion.class);
+            TypedQuery<Crop> query = em.createQuery(queryString, Crop.class);
             if (c) {
                 query.setParameter("fecha1", inicio, TemporalType.DATE);
             }

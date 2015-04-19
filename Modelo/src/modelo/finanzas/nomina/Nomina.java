@@ -15,8 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Column;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
+import model.administration.Farm;
+import model.administration.Person;
 
 /**
  *
@@ -33,16 +33,16 @@ public class Nomina implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @ManyToOne(optional = false)
-    private Persona trabajador;
+    private Person trabajador;
     @Column(nullable = false)
     private float total;
     @ManyToOne(optional = false)
-    private Finca finca;
+    private Farm finca;
 
     public Nomina() {
     }
 
-    public Nomina(Date fecha, Persona trabajador) {
+    public Nomina(Date fecha, Person trabajador) {
         this.fecha = fecha;
         this.trabajador = trabajador;
     }
@@ -71,11 +71,11 @@ public class Nomina implements Serializable{
         this.fecha = fecha;
     }
 
-    public Persona getTrabajador() {
+    public Person getTrabajador() {
         return trabajador;
     }
 
-    public void setTrabajador(Persona trabajador) {
+    public void setTrabajador(Person trabajador) {
         this.trabajador = trabajador;
     }
 
@@ -87,11 +87,11 @@ public class Nomina implements Serializable{
         this.total = total;
     }
 
-    public Finca getFinca() {
+    public Farm getFinca() {
         return finca;
     }
 
-    public void setFinca(Finca finca) {
+    public void setFinca(Farm finca) {
         this.finca = finca;
     }
 

@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.monitoreo.TrampaDeInsectos;
+import model.monitoring.InsectTrap;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.monitoreo.TrampaDeInsectosDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class TrampaDeInsectosController implements Serializable {
 
     private TrampaDeInsectosDAO jpaController = null;
-    private List<TrampaDeInsectos> items = null;
-    private TrampaDeInsectos selected;
+    private List<InsectTrap> items = null;
+    private InsectTrap selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public TrampaDeInsectosController() {
     }
 
-    public TrampaDeInsectos getSelected() {
+    public InsectTrap getSelected() {
         return selected;
     }
 
-    public void setSelected(TrampaDeInsectos selected) {
+    public void setSelected(InsectTrap selected) {
         this.selected = selected;
     }
 
@@ -60,9 +60,9 @@ public class TrampaDeInsectosController implements Serializable {
         return jpaController;
     }
 
-    public TrampaDeInsectos prepareCreate() {
-        selected = new TrampaDeInsectos();
-        selected.setFinca(permisoBean.getSignInBean().getFinca());
+    public InsectTrap prepareCreate() {
+        selected = new InsectTrap();
+        selected.setFarm(permisoBean.getSignInBean().getFinca());
         initializeEmbeddableKey();
         return selected;
     }
@@ -86,7 +86,7 @@ public class TrampaDeInsectosController implements Serializable {
         }
     }
 
-    public List<TrampaDeInsectos> getItems() {
+    public List<InsectTrap> getItems() {
         if (items == null) {
             items = getJpaController().findTrampaDeInsectosEntities();
         }
@@ -115,15 +115,15 @@ public class TrampaDeInsectosController implements Serializable {
         }
     }
 
-    public List<TrampaDeInsectos> getItemsAvailableSelectMany() {
+    public List<InsectTrap> getItemsAvailableSelectMany() {
         return getJpaController().findTrampaDeInsectosEntities();
     }
 
-    public List<TrampaDeInsectos> getItemsAvailableSelectOne() {
+    public List<InsectTrap> getItemsAvailableSelectOne() {
         return getJpaController().findTrampaDeInsectosEntities();
     }
 
-    @FacesConverter(forClass = TrampaDeInsectos.class)
+    @FacesConverter(forClass = InsectTrap.class)
     public static class TrampaDeInsectosControllerConverter implements Converter {
 
         @Override
@@ -153,11 +153,11 @@ public class TrampaDeInsectosController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TrampaDeInsectos) {
-                TrampaDeInsectos o = (TrampaDeInsectos) object;
+            if (object instanceof InsectTrap) {
+                InsectTrap o = (InsectTrap) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TrampaDeInsectos.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), InsectTrap.class.getName()});
                 return null;
             }
         }

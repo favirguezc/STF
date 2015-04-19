@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.aplicaciones.Aplicacion;
+import model.applications.Application;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.aplicaciones.AplicacionDAO;
@@ -19,16 +19,16 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.aplicaciones.Insumo;
+import model.applications.Chemical;
 
 @ManagedBean(name = "aplicacionController")
 @SessionScoped
 public class AplicacionController implements Serializable {
 
     private AplicacionDAO jpaController = null;
-    private List<Aplicacion> items = null;
-    private Aplicacion selected;
-    private List<Insumo> insumos;
+    private List<Application> items = null;
+    private Application selected;
+    private List<Chemical> insumos;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
     @ManagedProperty(value = "#{signInController}")
@@ -37,11 +37,11 @@ public class AplicacionController implements Serializable {
     public AplicacionController() {
     }
 
-    public Aplicacion getSelected() {
+    public Application getSelected() {
         return selected;
     }
 
-    public void setSelected(Aplicacion selected) {
+    public void setSelected(Application selected) {
         this.selected = selected;
     }
 
@@ -74,8 +74,8 @@ public class AplicacionController implements Serializable {
         return jpaController;
     }
 
-    public Aplicacion prepareCreate() {
-        selected = new Aplicacion();
+    public Application prepareCreate() {
+        selected = new Application();
         initializeEmbeddableKey();
         return selected;
     }
@@ -99,17 +99,17 @@ public class AplicacionController implements Serializable {
         }
     }
 
-    public List<Aplicacion> getItems() {
+    public List<Application> getItems() {
         if (items == null) {
             items = getJpaController().findAplicacionEntitiesForSelectedFarm(signInBean.getFinca());
         }
         return items;
     }
 
-    public List<Insumo> getInsumos() {
-        insumos = new ArrayList<Insumo>();
-        for (Insumo i : new InsumoController().getItems()) {
-            if (i.getTipoDeAplicacion() == selected.getTipo()) {
+    public List<Chemical> getInsumos() {
+        insumos = new ArrayList<Chemical>();
+        for (Chemical i : new InsumoController().getItems()) {
+            if (i.getAplicationType() == selected.getType()) {
                 insumos.add(i);
             }
         }
@@ -138,11 +138,11 @@ public class AplicacionController implements Serializable {
         }
     }
 
-    public List<Aplicacion> getItemsAvailableSelectMany() {
+    public List<Application> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Aplicacion> getItemsAvailableSelectOne() {
+    public List<Application> getItemsAvailableSelectOne() {
         return getItems();
     }
 
@@ -150,7 +150,7 @@ public class AplicacionController implements Serializable {
 
     }
 
-    @FacesConverter(forClass = Aplicacion.class)
+    @FacesConverter(forClass = Application.class)
     public static class AplicacionControllerConverter implements Converter {
 
         @Override
@@ -180,11 +180,11 @@ public class AplicacionController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Aplicacion) {
-                Aplicacion o = (Aplicacion) object;
+            if (object instanceof Application) {
+                Application o = (Application) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Aplicacion.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Application.class.getName()});
                 return null;
             }
         }

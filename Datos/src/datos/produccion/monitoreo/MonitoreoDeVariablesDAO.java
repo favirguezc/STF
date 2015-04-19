@@ -15,8 +15,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.monitoreo.Monitoreo;
-import modelo.produccion.monitoreo.MonitoreoDeVariables;
+import model.monitoring.Monitoring;
+import model.monitoring.ParameterMonitoring;
 
 /**
  *
@@ -45,7 +45,7 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      *
      * @param monitoreoDeVariables
      */
-    public void create(MonitoreoDeVariables monitoreoDeVariables) {
+    public void create(ParameterMonitoring monitoreoDeVariables) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -65,7 +65,7 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(MonitoreoDeVariables monitoreoDeVariables) throws NonexistentEntityException, Exception {
+    public void edit(ParameterMonitoring monitoreoDeVariables) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -98,9 +98,9 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            MonitoreoDeVariables monitoreoDeVariables;
+            ParameterMonitoring monitoreoDeVariables;
             try {
-                monitoreoDeVariables = em.getReference(MonitoreoDeVariables.class, id);
+                monitoreoDeVariables = em.getReference(ParameterMonitoring.class, id);
                 monitoreoDeVariables.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The monitoreoDeVariables with id " + id + " no longer exists.", enfe);
@@ -119,10 +119,10 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      * @param monitoreo
      * @return
      */
-    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(Monitoreo monitoreo) {
+    public List<ParameterMonitoring> findMonitoreoDeVariablesEntities(Monitoring monitoreo) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<MonitoreoDeVariables> query = em.createQuery("SELECT t FROM MonitoreoDeVariables t WHERE t.monitoreo = :monitoreo", MonitoreoDeVariables.class);
+            TypedQuery<ParameterMonitoring> query = em.createQuery("SELECT t FROM MonitoreoDeVariables t WHERE t.monitoreo = :monitoreo", ParameterMonitoring.class);
             query.setParameter("monitoreo", monitoreo);
             return query.getResultList();
         } finally {
@@ -134,7 +134,7 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      *
      * @return
      */
-    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities() {
+    public List<ParameterMonitoring> findMonitoreoDeVariablesEntities() {
         return findMonitoreoDeVariablesEntities(true, -1, -1);
     }
 
@@ -144,15 +144,15 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(int maxResults, int firstResult) {
+    public List<ParameterMonitoring> findMonitoreoDeVariablesEntities(int maxResults, int firstResult) {
         return findMonitoreoDeVariablesEntities(false, maxResults, firstResult);
     }
 
-    private List<MonitoreoDeVariables> findMonitoreoDeVariablesEntities(boolean all, int maxResults, int firstResult) {
+    private List<ParameterMonitoring> findMonitoreoDeVariablesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(MonitoreoDeVariables.class));
+            cq.select(cq.from(ParameterMonitoring.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -169,10 +169,10 @@ public class MonitoreoDeVariablesDAO implements Serializable {
      * @param id
      * @return
      */
-    public MonitoreoDeVariables findMonitoreoDeVariables(long id) {
+    public ParameterMonitoring findMonitoreoDeVariables(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(MonitoreoDeVariables.class, id);
+            return em.find(ParameterMonitoring.class, id);
         } finally {
             em.close();
         }
@@ -186,7 +186,7 @@ public class MonitoreoDeVariablesDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<MonitoreoDeVariables> rt = cq.from(MonitoreoDeVariables.class);
+            Root<ParameterMonitoring> rt = cq.from(ParameterMonitoring.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

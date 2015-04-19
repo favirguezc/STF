@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.utilidades.Nota;
+import model.communication.Note;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.utilidades.NotaDAO;
@@ -34,8 +34,8 @@ import org.primefaces.model.DefaultDashboardModel;
 public class NotaController implements Serializable {
 
     private NotaDAO jpaController = null;
-    private List<Nota> items = null;
-    private Nota selected;
+    private List<Note> items = null;
+    private Note selected;
     private Dashboard dashboard;
     private DashboardModel dashboardModel;
     private final int columnCount = 3;
@@ -52,11 +52,11 @@ public class NotaController implements Serializable {
         createDasboardModel();
     }
 
-    public Nota getSelected() {
+    public Note getSelected() {
         return selected;
     }
 
-    public void setSelected(Nota selected) {
+    public void setSelected(Note selected) {
         this.selected = selected;
     }
 
@@ -81,12 +81,12 @@ public class NotaController implements Serializable {
         createDasboardModel();
         FacesContext fc = FacesContext.getCurrentInstance();
         Application application = fc.getApplication();
-        List<Nota> items1 = getItems();
+        List<Note> items1 = getItems();
         for (int i = 0; i < items1.size(); i++) {
-            Nota nota = items1.get(i);
+            Note nota = items1.get(i);
             Panel panel = (Panel) application.createComponent(fc, "org.primefaces.component.Panel", "org.primefaces.component.PanelRenderer");
             panel.setId("nota_" + items1.get(i).getId());
-            panel.setHeader(items1.get(i).getTitulo());
+            panel.setHeader(items1.get(i).getTitle());
             panel.setClosable(true);
             panel.setToggleable(true);
 
@@ -94,10 +94,10 @@ public class NotaController implements Serializable {
             DashboardColumn column = dashboardModel.getColumn(i % columnCount);
             column.addWidget(panel.getId());
             HtmlOutputText text = new HtmlOutputText();
-            text.setValue(nota.getDe().toString());
+            text.setValue(nota.getFrom().toString());
             panel.getChildren().add(text);
             HtmlOutputText text2 = new HtmlOutputText();
-            text2.setValue(nota.getNota());
+            text2.setValue(nota.getMessage());
             panel.getChildren().add(text2);
         }
         RequestContext.getCurrentInstance().update(":NotaListForm:notaDashboard");
@@ -125,12 +125,12 @@ public class NotaController implements Serializable {
         return jpaController;
     }
 
-    public Nota prepareCreate() {
-        selected = new Nota();
+    public Note prepareCreate() {
+        selected = new Note();
         initializeEmbeddableKey();
         HttpSession session = JsfUtil.getSession();
         SignInController loginBean = (SignInController) session.getAttribute("signInController");
-        selected.setDe(loginBean.getUser());
+        selected.setFrom(loginBean.getUser());
         return selected;
     }
 
@@ -153,7 +153,7 @@ public class NotaController implements Serializable {
         }
     }
 
-    public List<Nota> getItems() {
+    public List<Note> getItems() {
         if (signInBean.isStep1userSignedIn()) {
             items = getJpaController().findNotaEntities(signInBean.getUser());
         }
@@ -179,11 +179,11 @@ public class NotaController implements Serializable {
         }
     }
 
-    public List<Nota> getItemsAvailableSelectMany() {
+    public List<Note> getItemsAvailableSelectMany() {
         return getJpaController().findNotaEntities();
     }
 
-    public List<Nota> getItemsAvailableSelectOne() {
+    public List<Note> getItemsAvailableSelectOne() {
         return getJpaController().findNotaEntities();
     }
 
@@ -196,7 +196,7 @@ public class NotaController implements Serializable {
         dashboard.setModel(dashboardModel);
     }
 
-    @FacesConverter(forClass = Nota.class)
+    @FacesConverter(forClass = Note.class)
     public static class NotaControllerConverter implements Converter {
 
         @Override
@@ -226,11 +226,11 @@ public class NotaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Nota) {
-                Nota o = (Nota) object;
+            if (object instanceof Note) {
+                Note o = (Note) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Nota.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Note.class.getName()});
                 return null;
             }
         }

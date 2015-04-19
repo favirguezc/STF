@@ -7,7 +7,7 @@ package datos.util;
 
 import datos.produccion.administracion.PersonaDAO;
 import javax.persistence.EntityManagerFactory;
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 
 /**
  *
@@ -31,11 +31,11 @@ public class LoginDAO {
         if (id <= 0) {
             return false;
         }
-        Persona persona = new PersonaDAO(emf).findPersonaPorCedula(id);
+        Person persona = new PersonaDAO(emf).findPersonaPorCedula(id);
         if (persona == null) {
             return false;
         }
-        return persona.getContrasena().equals(pass);
+        return persona.getPassword().equals(pass);
     }
 
 }

@@ -9,13 +9,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.monitoreo.Riesgo;
+import model.monitoring.RiskEnum;
 
 /**
  *
  * @author fredy
  */
-@FacesConverter(forClass = Riesgo.class)
+@FacesConverter(forClass = RiskEnum.class)
 public class RiesgoConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -23,16 +23,16 @@ public class RiesgoConverter implements Converter {
             return null;
         }
         if (value.equals("No")) {
-            return Riesgo.NO;
+            return RiskEnum.NO;
         }
         if (value.equals("Bajo")) {
-            return Riesgo.BAJO;
+            return RiskEnum.LOW;
         }
         if (value.equals("Medio")) {
-            return Riesgo.MEDIO;
+            return RiskEnum.MEDIUM;
         }
         if (value.equals("Alto")) {
-            return Riesgo.ALTO;
+            return RiskEnum.HIGH;
         }
         return null;
     }
@@ -41,7 +41,7 @@ public class RiesgoConverter implements Converter {
         if (value == null) {
             return null;
         }
-        if (value instanceof Riesgo) {
+        if (value instanceof RiskEnum) {
             return value + "";
         } else {
             return null;

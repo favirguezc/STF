@@ -17,7 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Persona;
+import model.administration.Person;
 
 @ManagedBean(name = "cuentaController")
 @SessionScoped
@@ -123,7 +123,7 @@ public class CuentaController implements Serializable {
         return getJpaController().findCuentaEntities();
     }
 
-    boolean hasActiveAccount(Persona user) {
+    boolean hasActiveAccount(Person user) {
         List<Cuenta> findCuentaEntities = getJpaController().findCuentaEntities(user);
         for(Cuenta account:findCuentaEntities){
             if(account.isActive()){

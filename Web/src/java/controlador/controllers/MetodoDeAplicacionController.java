@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.aplicaciones.MetodoDeAplicacion;
+import model.applications.AplicationMethodEnum;
 
 /**
  *
@@ -15,8 +15,8 @@ import modelo.produccion.aplicaciones.MetodoDeAplicacion;
 @ManagedBean(name = "metodoDeAplicacionController")
 public class MetodoDeAplicacionController {
 
-    public MetodoDeAplicacion[] getMetodoDeAplicacionValues(){
-        return MetodoDeAplicacion.values();
+    public AplicationMethodEnum[] getMetodoDeAplicacionValues(){
+        return AplicationMethodEnum.values();
     }
     
 }

@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Modulo;
+import model.administration.ModuleClass;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.ModuloDAO;
@@ -23,8 +23,8 @@ import javax.faces.convert.FacesConverter;
 public class ModuloController implements Serializable {
 
     private ModuloDAO jpaController = null;
-    private List<Modulo> items = null;
-    private Modulo selected;
+    private List<ModuleClass> items = null;
+    private ModuleClass selected;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permisoController}")
@@ -33,11 +33,11 @@ public class ModuloController implements Serializable {
     public ModuloController() {
     }
 
-    public Modulo getSelected() {
+    public ModuleClass getSelected() {
         return selected;
     }
 
-    public void setSelected(Modulo selected) {
+    public void setSelected(ModuleClass selected) {
         this.selected = selected;
     }
 
@@ -70,8 +70,8 @@ public class ModuloController implements Serializable {
         return jpaController;
     }
 
-    public Modulo prepareCreate() {
-        selected = new Modulo();
+    public ModuleClass prepareCreate() {
+        selected = new ModuleClass();
         initializeEmbeddableKey();
         return selected;
     }
@@ -95,7 +95,7 @@ public class ModuloController implements Serializable {
         }
     }
 
-    public List<Modulo> getItems() {
+    public List<ModuleClass> getItems() {
         if (items == null) {
             if (signInBean.getFinca() != null) {
                 items = getJpaController().findModuloEntitiesForSelectedFarm(signInBean.getFinca());
@@ -128,15 +128,15 @@ public class ModuloController implements Serializable {
         }
     }
 
-    public List<Modulo> getItemsAvailableSelectMany() {
+    public List<ModuleClass> getItemsAvailableSelectMany() {
         return getJpaController().findModuloEntities();
     }
 
-    public List<Modulo> getItemsAvailableSelectOne() {
+    public List<ModuleClass> getItemsAvailableSelectOne() {
         return getJpaController().findModuloEntities();
     }
 
-    @FacesConverter(forClass = Modulo.class)
+    @FacesConverter(forClass = ModuleClass.class)
     public static class ModuloControllerConverter implements Converter {
 
         @Override
@@ -166,11 +166,11 @@ public class ModuloController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Modulo) {
-                Modulo o = (Modulo) object;
+            if (object instanceof ModuleClass) {
+                ModuleClass o = (ModuleClass) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Modulo.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), ModuleClass.class.getName()});
                 return null;
             }
         }

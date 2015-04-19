@@ -15,7 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.labores.Labor;
+import model.work.Job;
 
 /**
  *
@@ -44,7 +44,7 @@ public class LaborDAO implements Serializable {
      *
      * @param labor
      */
-    public void create(Labor labor) {
+    public void create(Job labor) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -64,7 +64,7 @@ public class LaborDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Labor labor) throws NonexistentEntityException, Exception {
+    public void edit(Job labor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -97,9 +97,9 @@ public class LaborDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Labor labor;
+            Job labor;
             try {
-                labor = em.getReference(Labor.class, id);
+                labor = em.getReference(Job.class, id);
                 labor.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The labor with id " + id + " no longer exists.", enfe);
@@ -117,7 +117,7 @@ public class LaborDAO implements Serializable {
      *
      * @return
      */
-    public List<Labor> findLaborEntities() {
+    public List<Job> findLaborEntities() {
         return findLaborEntities(true, -1, -1);
     }
 
@@ -127,15 +127,15 @@ public class LaborDAO implements Serializable {
      * @param firstResult
      * @return
      */
-    public List<Labor> findLaborEntities(int maxResults, int firstResult) {
+    public List<Job> findLaborEntities(int maxResults, int firstResult) {
         return findLaborEntities(false, maxResults, firstResult);
     }
 
-    private List<Labor> findLaborEntities(boolean all, int maxResults, int firstResult) {
+    private List<Job> findLaborEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Labor.class));
+            cq.select(cq.from(Job.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -152,10 +152,10 @@ public class LaborDAO implements Serializable {
      * @param id
      * @return
      */
-    public Labor findLabor(long id) {
+    public Job findLabor(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Labor.class, id);
+            return em.find(Job.class, id);
         } finally {
             em.close();
         }
@@ -167,10 +167,10 @@ public class LaborDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Labor findLabor(String name) throws Exception {
+    public Job findLabor(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Labor> query = em.createQuery("SELECT t FROM Labor t WHERE t.nombre = :nombre", Labor.class);
+            TypedQuery<Job> query = em.createQuery("SELECT t FROM Labor t WHERE t.nombre = :nombre", Job.class);
             query.setParameter("nombre", name);
             return query.getSingleResult();
         } finally {
@@ -186,7 +186,7 @@ public class LaborDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Labor> rt = cq.from(Labor.class);
+            Root<Job> rt = cq.from(Job.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

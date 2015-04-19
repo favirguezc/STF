@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.aplicaciones.Unidades;
+import model.applications.ApplicationMeasurementUnitEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.produccion.aplicaciones.Unidades;
 @ManagedBean(name = "unidadesController")
 public class UnidadesController {
 
-    public Unidades[] getUnidadesValues() {
-        return Unidades.values();
+    public ApplicationMeasurementUnitEnum[] getUnidadesValues() {
+        return ApplicationMeasurementUnitEnum.values();
     }
 }

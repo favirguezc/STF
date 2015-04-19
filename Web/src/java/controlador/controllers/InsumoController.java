@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.aplicaciones.Insumo;
+import model.applications.Chemical;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.aplicaciones.InsumoDAO;
@@ -21,19 +21,19 @@ import javax.faces.convert.FacesConverter;
 public class InsumoController implements Serializable {
 
     private InsumoDAO jpaController = null;
-    private List<Insumo> items = null;
-    private Insumo selected;
+    private List<Chemical> items = null;
+    private Chemical selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public InsumoController() {
     }
 
-    public Insumo getSelected() {
+    public Chemical getSelected() {
         return selected;
     }
 
-    public void setSelected(Insumo selected) {
+    public void setSelected(Chemical selected) {
         this.selected = selected;
     }
 
@@ -58,8 +58,8 @@ public class InsumoController implements Serializable {
         return jpaController;
     }
 
-    public Insumo prepareCreate() {
-        selected = new Insumo();
+    public Chemical prepareCreate() {
+        selected = new Chemical();
         initializeEmbeddableKey();
         return selected;
     }
@@ -83,7 +83,7 @@ public class InsumoController implements Serializable {
         }
     }
 
-    public List<Insumo> getItems() {
+    public List<Chemical> getItems() {
         if (items == null) {
             items = getJpaController().findInsumoEntities();
         }
@@ -112,15 +112,15 @@ public class InsumoController implements Serializable {
         }
     }
 
-    public List<Insumo> getItemsAvailableSelectMany() {
+    public List<Chemical> getItemsAvailableSelectMany() {
         return getJpaController().findInsumoEntities();
     }
 
-    public List<Insumo> getItemsAvailableSelectOne() {
+    public List<Chemical> getItemsAvailableSelectOne() {
         return getJpaController().findInsumoEntities();
     }
 
-    @FacesConverter(forClass = Insumo.class)
+    @FacesConverter(forClass = Chemical.class)
     public static class InsumoControllerConverter implements Converter {
 
         @Override
@@ -150,11 +150,11 @@ public class InsumoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Insumo) {
-                Insumo o = (Insumo) object;
+            if (object instanceof Chemical) {
+                Chemical o = (Chemical) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Insumo.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Chemical.class.getName()});
                 return null;
             }
         }

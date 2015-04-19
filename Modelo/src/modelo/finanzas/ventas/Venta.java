@@ -15,8 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
+import model.administration.Farm;
+import model.administration.Person;
 
 /**
  *
@@ -32,9 +32,9 @@ public class Venta implements Serializable {
     @Column(nullable = false)
     private Date fechaVenta;
     @ManyToOne(optional = false)
-    private Persona cliente;
+    private Person cliente;
     @ManyToOne(optional = false)
-    private Finca finca;
+    private Farm finca;
     @Column
     private float extraGramos;
     @Column
@@ -91,7 +91,7 @@ public class Venta implements Serializable {
      * @param cuartaPrecioUnid
      * @param quintaPrecioUnid
      */
-    public Venta(Date fechaVenta, Persona cliente, float extraGramos, float primeraGramos,
+    public Venta(Date fechaVenta, Person cliente, float extraGramos, float primeraGramos,
             float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos, 
             float extraPrecioUnid, float primeraPrecioUnid, float segundaPrecioUnid,
             float terceraPrecioUnid, float cuartaPrecioUnid, float quintaPrecioUnid) {
@@ -122,7 +122,7 @@ public class Venta implements Serializable {
      * @param cuartaGramos
      * @param quintaGramos
      */
-    public Venta(Date fechaVenta, Persona cliente, float extraGramos, float primeraGramos,
+    public Venta(Date fechaVenta, Person cliente, float extraGramos, float primeraGramos,
             float segundaGramos, float terceraGramos, float cuartaGramos, float quintaGramos) {
         this.fechaVenta = fechaVenta;
         this.cliente = cliente;
@@ -170,7 +170,7 @@ public class Venta implements Serializable {
      *
      * @return
      */
-    public Persona getCliente() {
+    public Person getCliente() {
         return cliente;
     }
 
@@ -178,7 +178,7 @@ public class Venta implements Serializable {
      *
      * @param cliente
      */
-    public void setCliente(Persona cliente) {
+    public void setCliente(Person cliente) {
         this.cliente = cliente;
     }
 
@@ -186,7 +186,7 @@ public class Venta implements Serializable {
      *
      * @return
      */
-    public Finca getFinca() {
+    public Farm getFinca() {
         return finca;
     }
 
@@ -194,7 +194,7 @@ public class Venta implements Serializable {
      *
      * @param finca
      */
-    public void setFinca(Finca finca) {
+    public void setFinca(Farm finca) {
         this.finca = finca;
     }
 

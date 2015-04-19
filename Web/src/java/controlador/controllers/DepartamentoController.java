@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Departamento;
+import model.administration.Department;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.DepartamentoDAO;
@@ -20,17 +20,17 @@ import javax.faces.convert.FacesConverter;
 public class DepartamentoController implements Serializable {
 
     private DepartamentoDAO jpaController = null;
-    private List<Departamento> items = null;
-    private Departamento selected;
+    private List<Department> items = null;
+    private Department selected;
 
     public DepartamentoController() {
     }
 
-    public Departamento getSelected() {
+    public Department getSelected() {
         return selected;
     }
 
-    public void setSelected(Departamento selected) {
+    public void setSelected(Department selected) {
         this.selected = selected;
     }
 
@@ -47,8 +47,8 @@ public class DepartamentoController implements Serializable {
         return jpaController;
     }
 
-    public Departamento prepareCreate() {
-        selected = new Departamento();
+    public Department prepareCreate() {
+        selected = new Department();
         initializeEmbeddableKey();
         return selected;
     }
@@ -72,7 +72,7 @@ public class DepartamentoController implements Serializable {
         }
     }
 
-    public List<Departamento> getItems() {
+    public List<Department> getItems() {
         if (items == null) {
             items = getJpaController().findDepartamentoEntities();
         }
@@ -98,15 +98,15 @@ public class DepartamentoController implements Serializable {
         }
     }
 
-    public List<Departamento> getItemsAvailableSelectMany() {
+    public List<Department> getItemsAvailableSelectMany() {
         return getJpaController().findDepartamentoEntities();
     }
 
-    public List<Departamento> getItemsAvailableSelectOne() {
+    public List<Department> getItemsAvailableSelectOne() {
         return getJpaController().findDepartamentoEntities();
     }
 
-    @FacesConverter(forClass = Departamento.class)
+    @FacesConverter(forClass = Department.class)
     public static class DepartamentoControllerConverter implements Converter {
 
         @Override
@@ -136,11 +136,11 @@ public class DepartamentoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Departamento) {
-                Departamento o = (Departamento) object;
+            if (object instanceof Department) {
+                Department o = (Department) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Departamento.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Department.class.getName()});
                 return null;
             }
         }

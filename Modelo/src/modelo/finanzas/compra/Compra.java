@@ -15,8 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.aplicaciones.Insumo;
+import model.administration.Farm;
+import model.applications.Chemical;
 
 /**
  *
@@ -32,9 +32,9 @@ public class Compra implements Serializable{
     @Column(nullable = false)
     Date fechaCompra;
     @ManyToOne(optional = false)
-    Finca finca;
+    Farm finca;
     @ManyToOne(optional = false)
-    Insumo insumo;
+    Chemical insumo;
     @Column(nullable = false)
     float precio;
     @Column(nullable = false)
@@ -43,7 +43,7 @@ public class Compra implements Serializable{
     public Compra() {
     }
 
-    public Compra(Date fechaCompra, Finca finca, Insumo insumo, float precio, float cantidad) {
+    public Compra(Date fechaCompra, Farm finca, Chemical insumo, float precio, float cantidad) {
         this.fechaCompra = fechaCompra;
         this.finca = finca;
         this.insumo = insumo;
@@ -67,19 +67,19 @@ public class Compra implements Serializable{
         this.fechaCompra = fechaCompra;
     }
 
-    public Finca getFinca() {
+    public Farm getFinca() {
         return finca;
     }
 
-    public void setFinca(Finca finca) {
+    public void setFinca(Farm finca) {
         this.finca = finca;
     }
 
-    public Insumo getInsumo() {
+    public Chemical getInsumo() {
         return insumo;
     }
 
-    public void setInsumo(Insumo insumo) {
+    public void setInsumo(Chemical insumo) {
         this.insumo = insumo;
     }
 

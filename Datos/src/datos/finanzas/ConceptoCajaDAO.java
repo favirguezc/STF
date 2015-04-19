@@ -17,7 +17,7 @@ import datos.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import modelo.finanzas.caja.ConceptoCaja;
 import modelo.finanzas.caja.Caja;
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 
 /**
  *
@@ -180,7 +180,7 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
     
-    public List<ConceptoCaja> findConceptoCajaEntitiesForSelectedFarm(Finca selectedFarm) {
+    public List<ConceptoCaja> findConceptoCajaEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         String queryString ="SELECT t FROM ConceptoCaja t WHERE t.caja.finca = :finca ORDER BY t.fecha ASC";
         try {

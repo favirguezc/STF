@@ -25,7 +25,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.convert.FacesConverter;
 import modelo.finanzas.Precio;
 import modelo.finanzas.compra.Compra;
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 
 /**
  *
@@ -133,7 +133,7 @@ public class CompraController implements Serializable{
     }
 
     public void prepareUpdate(){
-        precio = getPrecioJpaController().findPrecio(selected.getInsumo().getNombre());
+        precio = getPrecioJpaController().findPrecio(selected.getInsumo().getName());
     }
     
     public void update() {
@@ -171,11 +171,11 @@ public class CompraController implements Serializable{
         }
     }
     
-    public List<Compra> leerLista(Finca finca, Date inicio, Date fin) {
+    public List<Compra> leerLista(Farm finca, Date inicio, Date fin) {
         return getJpaController().findCompraEntities(finca, inicio, fin);
     }
     
-    public Compra sumarRegistros(Finca finca, Date inicio, Date fin) {
+    public Compra sumarRegistros(Farm finca, Date inicio, Date fin) {
         List<Compra> leerLista = leerLista(finca, inicio, fin);
         Compra suma = new Compra(null, finca, null,0,0);
         for (Compra v : leerLista) {
@@ -187,7 +187,7 @@ public class CompraController implements Serializable{
     public void verifyPrecio(){
         if(selected.getInsumo() != null){
             //search precio by item
-            precio = getPrecioJpaController().findPrecio(selected.getInsumo().getNombre());
+            precio = getPrecioJpaController().findPrecio(selected.getInsumo().getName());
             //if exists set
             if(precio != null){
                 nuePrecio = false;
@@ -195,7 +195,7 @@ public class CompraController implements Serializable{
             }else{
                 //else create new precio
                 nuePrecio = true;
-                precio = new Precio(selected.getInsumo().getNombre(),0);
+                precio = new Precio(selected.getInsumo().getName(),0);
                 selected.setPrecio(0);
             }
         }

@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.monitoreo.Variable;
+import model.monitoring.MonitorableParameter;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.monitoreo.VariableDAO;
@@ -23,19 +23,19 @@ import javax.faces.convert.FacesConverter;
 public class VariableController implements Serializable {
 
     private VariableDAO jpaController = null;
-    private List<Variable> items = null;
-    private Variable selected;
+    private List<MonitorableParameter> items = null;
+    private MonitorableParameter selected;
     @ManagedProperty(value = "#{permisoController}")
     private PermisoController permisoBean;
 
     public VariableController() {
     }
 
-    public Variable getSelected() {
+    public MonitorableParameter getSelected() {
         return selected;
     }
 
-    public void setSelected(Variable selected) {
+    public void setSelected(MonitorableParameter selected) {
         this.selected = selected;
     }
 
@@ -60,8 +60,8 @@ public class VariableController implements Serializable {
         return jpaController;
     }
 
-    public Variable prepareCreate() {
-        selected = new Variable();
+    public MonitorableParameter prepareCreate() {
+        selected = new MonitorableParameter();
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +85,7 @@ public class VariableController implements Serializable {
         }
     }
 
-    public List<Variable> getItems() {
+    public List<MonitorableParameter> getItems() {
         if (items == null) {
             items = getJpaController().findVariableEntities();
         }
@@ -114,15 +114,15 @@ public class VariableController implements Serializable {
         }
     }
 
-    public List<Variable> getItemsAvailableSelectMany() {
+    public List<MonitorableParameter> getItemsAvailableSelectMany() {
         return getJpaController().findVariableEntities();
     }
 
-    public List<Variable> getItemsAvailableSelectOne() {
+    public List<MonitorableParameter> getItemsAvailableSelectOne() {
         return getJpaController().findVariableEntities();
     }
 
-    @FacesConverter(forClass = Variable.class)
+    @FacesConverter(forClass = MonitorableParameter.class)
     public static class VariableControllerConverter implements Converter {
 
         @Override
@@ -152,11 +152,11 @@ public class VariableController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Variable) {
-                Variable o = (Variable) object;
+            if (object instanceof MonitorableParameter) {
+                MonitorableParameter o = (MonitorableParameter) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Variable.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), MonitorableParameter.class.getName()});
                 return null;
             }
         }

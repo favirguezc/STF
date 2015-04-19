@@ -15,8 +15,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.cosecha.Clasificacion;
+import model.administration.Farm;
+import model.crop.Classification;
 
 /**
  *
@@ -33,7 +33,7 @@ public class ClasificacionDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Clasificacion clasificacion) {
+    public void create(Classification clasificacion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,7 +47,7 @@ public class ClasificacionDAO implements Serializable {
         }
     }
 
-    public void edit(Clasificacion clasificacion) throws NonexistentEntityException, Exception {
+    public void edit(Classification clasificacion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,9 +75,9 @@ public class ClasificacionDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Clasificacion clasificacion;
+            Classification clasificacion;
             try {
-                clasificacion = em.getReference(Clasificacion.class, id);
+                clasificacion = em.getReference(Classification.class, id);
                 clasificacion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The clasificacion with id " + id + " no longer exists.", enfe);
@@ -91,10 +91,10 @@ public class ClasificacionDAO implements Serializable {
         }
     }
 
-    public List<Clasificacion> findClasificacionEntities(Finca finca) {
+    public List<Classification> findClasificacionEntities(Farm finca) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Clasificacion> query = em.createQuery("SELECT a FROM Clasificacion a WHERE a.modulo.lote.finca = :finca", Clasificacion.class);
+            TypedQuery<Classification> query = em.createQuery("SELECT a FROM Clasificacion a WHERE a.modulo.lote.finca = :finca", Classification.class);
             query.setParameter("finca", finca);
             return query.getResultList();
         } finally {
@@ -102,19 +102,19 @@ public class ClasificacionDAO implements Serializable {
         }
     }
 
-    public List<Clasificacion> findClasificacionEntities() {
+    public List<Classification> findClasificacionEntities() {
         return findClasificacionEntities(true, -1, -1);
     }
 
-    public List<Clasificacion> findClasificacionEntities(int maxResults, int firstResult) {
+    public List<Classification> findClasificacionEntities(int maxResults, int firstResult) {
         return findClasificacionEntities(false, maxResults, firstResult);
     }
 
-    private List<Clasificacion> findClasificacionEntities(boolean all, int maxResults, int firstResult) {
+    private List<Classification> findClasificacionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Clasificacion.class));
+            cq.select(cq.from(Classification.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -126,10 +126,10 @@ public class ClasificacionDAO implements Serializable {
         }
     }
 
-    public Clasificacion findClasificacion(long id) {
+    public Classification findClasificacion(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Clasificacion.class, id);
+            return em.find(Classification.class, id);
         } finally {
             em.close();
         }
@@ -139,7 +139,7 @@ public class ClasificacionDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Clasificacion> rt = cq.from(Clasificacion.class);
+            Root<Classification> rt = cq.from(Classification.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

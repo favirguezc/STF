@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Rol;
+import model.administration.RoleEnum;
 
 import javax.faces.bean.ManagedBean;
 
@@ -10,7 +10,7 @@ public class RolController {
     public RolController() {
     }
     
-    public Rol[] getRolValues(){
-        return Rol.values();
+    public RoleEnum[] getRolValues(){
+        return RoleEnum.values();
     }
 }

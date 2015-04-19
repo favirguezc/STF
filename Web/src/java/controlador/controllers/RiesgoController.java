@@ -6,7 +6,7 @@
 package controlador.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.produccion.monitoreo.Riesgo;
+import model.monitoring.RiskEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.produccion.monitoreo.Riesgo;
 @ManagedBean(name = "riesgoController")
 public class RiesgoController {
     
-    public Riesgo[] getRiesgoValues(){
-        return Riesgo.values();
+    public RiskEnum[] getRiesgoValues(){
+        return RiskEnum.values();
     }
 }

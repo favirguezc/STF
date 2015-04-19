@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Lote;
+import model.administration.Lot;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.LoteDAO;
@@ -23,8 +23,8 @@ import javax.faces.convert.FacesConverter;
 public class LoteController implements Serializable {
 
     private LoteDAO jpaController = null;
-    private List<Lote> items = null;
-    private Lote selected;
+    private List<Lot> items = null;
+    private Lot selected;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permisoController}")
@@ -33,11 +33,11 @@ public class LoteController implements Serializable {
     public LoteController() {
     }
 
-    public Lote getSelected() {
+    public Lot getSelected() {
         return selected;
     }
 
-    public void setSelected(Lote selected) {
+    public void setSelected(Lot selected) {
         this.selected = selected;
     }
 
@@ -70,9 +70,9 @@ public class LoteController implements Serializable {
         return jpaController;
     }
 
-    public Lote prepareCreate() {
-        selected = new Lote();
-        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
+    public Lot prepareCreate() {
+        selected = new Lot();
+        selected.setFarm(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFinca());
         initializeEmbeddableKey();
         return selected;
     }
@@ -96,7 +96,7 @@ public class LoteController implements Serializable {
         }
     }
 
-    public List<Lote> getItems() {
+    public List<Lot> getItems() {
         if (items == null) {
             if (signInBean.getFinca() != null) {
                 items = getJpaController().findLoteEntitiesForSelectedFarm(signInBean.getFinca());
@@ -129,15 +129,15 @@ public class LoteController implements Serializable {
         }
     }
 
-    public List<Lote> getItemsAvailableSelectMany() {
+    public List<Lot> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Lote> getItemsAvailableSelectOne() {
+    public List<Lot> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    @FacesConverter(forClass = Lote.class)
+    @FacesConverter(forClass = Lot.class)
     public static class LoteControllerConverter implements Converter {
 
         @Override
@@ -167,11 +167,11 @@ public class LoteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Lote) {
-                Lote o = (Lote) object;
+            if (object instanceof Lot) {
+                Lot o = (Lot) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Lote.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Lot.class.getName()});
                 return null;
             }
         }

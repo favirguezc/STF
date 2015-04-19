@@ -15,9 +15,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.produccion.administracion.Finca;
-import modelo.produccion.administracion.Persona;
-import modelo.produccion.aplicaciones.Aplicacion;
+import model.administration.Farm;
+import model.administration.Person;
+import model.applications.Application;
 
 /**
  *
@@ -46,7 +46,7 @@ public class PersonaDAO implements Serializable {
      *
      * @param persona
      */
-    public void create(Persona persona) {
+    public void create(Person persona) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -66,7 +66,7 @@ public class PersonaDAO implements Serializable {
      * @throws NonexistentEntityException
      * @throws Exception
      */
-    public void edit(Persona persona) throws NonexistentEntityException, Exception {
+    public void edit(Person persona) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -99,9 +99,9 @@ public class PersonaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Persona persona;
+            Person persona;
             try {
-                persona = em.getReference(Persona.class, id);
+                persona = em.getReference(Person.class, id);
                 persona.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The persona with id " + id + " no longer exists.", enfe);
@@ -119,19 +119,19 @@ public class PersonaDAO implements Serializable {
      *
      * @return
      */    
-    public List<Persona> findPersonaEntities() {
+    public List<Person> findPersonaEntities() {
         return findPersonaEntities(true, -1, -1);
     }
 
-    public List<Persona> findPersonaEntities(int maxResults, int firstResult) {
+    public List<Person> findPersonaEntities(int maxResults, int firstResult) {
         return findPersonaEntities(false, maxResults, firstResult);
     }
 
-    private List<Persona> findPersonaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Person> findPersonaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Persona.class));
+            cq.select(cq.from(Person.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -148,10 +148,10 @@ public class PersonaDAO implements Serializable {
      * @param id
      * @return
      */
-    public Persona findPersona(long id) {
+    public Person findPersona(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Persona.class, id);
+            return em.find(Person.class, id);
         } finally {
             em.close();
         }
@@ -165,7 +165,7 @@ public class PersonaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Persona> rt = cq.from(Persona.class);
+            Root<Person> rt = cq.from(Person.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -179,11 +179,11 @@ public class PersonaDAO implements Serializable {
      * @param cedula
      * @return
      */
-    public Persona findPersonaPorCedula(long cedula) {
+    public Person findPersonaPorCedula(long cedula) {
         EntityManager em = getEntityManager();
-        Persona r = null;
+        Person r = null;
         try {
-            TypedQuery<Persona> query = em.createQuery("SELECT t FROM Persona t WHERE t.cedula = :cedula", Persona.class);
+            TypedQuery<Person> query = em.createQuery("SELECT t FROM Persona t WHERE t.cedula = :cedula", Person.class);
             query.setParameter("cedula", cedula);
             r = query.getSingleResult();
         } catch (Exception e) {

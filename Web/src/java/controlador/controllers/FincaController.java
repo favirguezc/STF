@@ -1,6 +1,6 @@
 package controlador.controllers;
 
-import modelo.produccion.administracion.Finca;
+import model.administration.Farm;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.produccion.administracion.FincaDAO;
@@ -18,9 +18,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.produccion.administracion.Coordenada;
-import modelo.produccion.administracion.Departamento;
-import modelo.produccion.administracion.Municipio;
+import model.administration.Coordinate;
+import model.administration.Department;
+import model.administration.Municipality;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.event.map.StateChangeEvent;
@@ -34,12 +34,12 @@ import org.primefaces.model.map.Marker;
 public class FincaController implements Serializable {
 
     private FincaDAO jpaController = null;
-    private List<Finca> items = null;
-    private Finca selected;
+    private List<Farm> items = null;
+    private Farm selected;
     private MapModel modelo;
     private Marker marker;
-    private Departamento departamento;
-    private List<Municipio> municipios;
+    private Department departamento;
+    private List<Municipality> municipios;
     private int zoomLevel;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
@@ -52,17 +52,17 @@ public class FincaController implements Serializable {
         marker = new Marker(new LatLng(4.114974, -73.584086));
         zoomLevel = 5;
         if (selected != null) {
-            marker = new Marker(new LatLng(selected.getCoordenada().getX(), selected.getCoordenada().getY()));
+            marker = new Marker(new LatLng(selected.getCoordinate().getX(), selected.getCoordinate().getY()));
         }
         marker.setDraggable(true);
         modelo.addOverlay(marker);
     }
 
-    public Finca getSelected() {
+    public Farm getSelected() {
         return selected;
     }
 
-    public void setSelected(Finca selected) {
+    public void setSelected(Farm selected) {
         this.selected = selected;
     }
 
@@ -104,12 +104,12 @@ public class FincaController implements Serializable {
         this.marker = marker;
     }
 
-    public List<Municipio> getMunicipios() {
+    public List<Municipality> getMunicipios() {
         municipios = new MunicipioController().getItems(departamento);
         return municipios;
     }
 
-    public void setMunicipios(List<Municipio> municipios) {
+    public void setMunicipios(List<Municipality> municipios) {
         this.municipios = municipios;
     }
 
@@ -121,23 +121,23 @@ public class FincaController implements Serializable {
         this.modelo = modelo;
     }
 
-    public Departamento getDepartamento() {
+    public Department getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
+    public void setDepartamento(Department departamento) {
         this.departamento = departamento;
     }
 
     public void markerDragged(MarkerDragEvent evt) {
         marker = evt.getMarker();
-        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+        selected.setCoordinate(new Coordinate(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
 //        JsfUtil.addSuccessMessage("Marker Dragged" + "Lat:" + selected.getCoordenada().getX() + ", Lng:" + selected.getCoordenada().getY());
     }
 
     public void onPointSelect(PointSelectEvent event) {
         marker.setLatlng(event.getLatLng());
-        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+        selected.setCoordinate(new Coordinate(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
     }
     
     public void onStateChange(StateChangeEvent event) {
@@ -151,10 +151,10 @@ public class FincaController implements Serializable {
         return jpaController;
     }
 
-    public Finca prepareCreate() {
-        selected = new Finca();
-        selected.setCoordenada(new Coordenada(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
-        selected.setPropietario(signInBean.getUser());
+    public Farm prepareCreate() {
+        selected = new Farm();
+        selected.setCoordinate(new Coordinate(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
+        selected.setOwner(signInBean.getUser());
         initializeEmbeddableKey();
         return selected;
     }
@@ -178,7 +178,7 @@ public class FincaController implements Serializable {
         }
     }
 
-    public List<Finca> getItems() {
+    public List<Farm> getItems() {
         if (items == null) {
             items = getJpaController().findFincaEntitiesForCurrentUser(signInBean.getUser());
         }
@@ -207,15 +207,15 @@ public class FincaController implements Serializable {
         }
     }
 
-    public List<Finca> getItemsAvailableSelectMany() {
+    public List<Farm> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Finca> getItemsAvailableSelectOne() {
+    public List<Farm> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    @FacesConverter(forClass = Finca.class)
+    @FacesConverter(forClass = Farm.class)
     public static class FincaControllerConverter implements Converter {
 
         @Override
@@ -245,11 +245,11 @@ public class FincaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Finca) {
-                Finca o = (Finca) object;
+            if (object instanceof Farm) {
+                Farm o = (Farm) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Finca.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Farm.class.getName()});
                 return null;
             }
         }

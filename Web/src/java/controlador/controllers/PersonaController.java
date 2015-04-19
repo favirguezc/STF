@@ -3,9 +3,9 @@ package controlador.controllers;
 import model.administration.Person;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.ContratoDAO;
-import datos.produccion.administracion.PersonaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.administration.ContratoDAO;
+import data.administration.PersonDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,7 +24,7 @@ import model.administration.RoleEnum;
 @SessionScoped
 public class PersonaController implements Serializable {
 
-    private PersonaDAO jpaController = null;
+    private PersonDAO jpaController = null;
     private List<Person> items = null;
     private Person selected;
     @ManagedProperty(value = "#{signInController}")
@@ -62,9 +62,9 @@ public class PersonaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private PersonaDAO getJpaController() {
+    private PersonDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new PersonDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

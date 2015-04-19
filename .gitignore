@@ -66,3 +66,7 @@ Temporary Items
 /Datos/build/
 /Datos/dist/
 /PropertiesGenerator/dist/
+/Model/nbproject/private/
+/Data/nbproject/private/
+/Model/build/
+/Model/dist/

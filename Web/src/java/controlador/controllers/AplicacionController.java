@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.applications.Application;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.aplicaciones.AplicacionDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.applications.AplicacionDAO;
+import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
 import java.util.ArrayList;

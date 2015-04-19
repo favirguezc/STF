@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.administration.Permission;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.PermisoDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.administration.PermissionDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ import model.util.Action;
 @SessionScoped
 public class PermisoController implements Serializable {
 
-    private PermisoDAO jpaController = null;
+    private PermissionDAO jpaController = null;
     private List<Permission> items = null;
     private Permission selected;
     @ManagedProperty(value = "#{signInController}")
@@ -53,9 +53,9 @@ public class PermisoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private PermisoDAO getJpaController() {
+    private PermissionDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new PermisoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new PermissionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

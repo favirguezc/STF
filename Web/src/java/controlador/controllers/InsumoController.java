@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.applications.Chemical;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.aplicaciones.InsumoDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.applications.ChemicalDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,7 +20,7 @@ import javax.faces.convert.FacesConverter;
 @ManagedBean(name = "insumoController")
 public class InsumoController implements Serializable {
 
-    private InsumoDAO jpaController = null;
+    private ChemicalDAO jpaController = null;
     private List<Chemical> items = null;
     private Chemical selected;
     @ManagedProperty(value = "#{permisoController}")
@@ -51,9 +51,9 @@ public class InsumoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private InsumoDAO getJpaController() {
+    private ChemicalDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new InsumoDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new ChemicalDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

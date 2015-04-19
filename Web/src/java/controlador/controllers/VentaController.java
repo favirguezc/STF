@@ -9,7 +9,7 @@ import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.finanzas.PrecioDAO;
 import datos.finanzas.VentaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

@@ -4,7 +4,7 @@ import modelo.finanzas.nomina.Nomina;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.finanzas.NominaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
 import java.util.ArrayList;

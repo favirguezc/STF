@@ -3,9 +3,9 @@ package controlador.controllers;
 import model.administration.Contract;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.ContratoDAO;
-import datos.produccion.administracion.PersonaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.administration.ContratoDAO;
+import data.administration.PersonDAO;
+import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
 import java.util.List;
@@ -95,7 +95,7 @@ public class ContratoController implements Serializable {
     }
 
     public void create() {
-        Person findPersonaPorCedula = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(cedula);
+        Person findPersonaPorCedula = new PersonDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonByIdNumber(cedula);
         if (findPersonaPorCedula == null) {
             JsfUtil.addErrorMessage("La cédula no está registrada.");
             selected=null;

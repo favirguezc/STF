@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.crop.Crop;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.cosecha.RecoleccionDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.crop.CropDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,7 +38,7 @@ import org.primefaces.model.chart.LineChartSeries;
 @SessionScoped
 public class RecoleccionController implements Serializable {
 
-    private RecoleccionDAO jpaController = null;
+    private CropDAO jpaController = null;
     private List<Crop> items = null;
     private Crop selected;
     @ManagedProperty(value = "#{permisoController}")
@@ -76,9 +76,9 @@ public class RecoleccionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private RecoleccionDAO getJpaController() {
+    private CropDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new RecoleccionDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new CropDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

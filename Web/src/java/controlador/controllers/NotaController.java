@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.communication.Note;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.utilidades.NotaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.communication.NoteDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,7 +33,7 @@ import org.primefaces.model.DefaultDashboardModel;
 @SessionScoped
 public class NotaController implements Serializable {
 
-    private NotaDAO jpaController = null;
+    private NoteDAO jpaController = null;
     private List<Note> items = null;
     private Note selected;
     private Dashboard dashboard;
@@ -118,9 +118,9 @@ public class NotaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private NotaDAO getJpaController() {
+    private NoteDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new NotaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new NoteDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

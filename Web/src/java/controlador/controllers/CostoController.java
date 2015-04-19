@@ -4,7 +4,7 @@ import modelo.finanzas.costo.Costo;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.finanzas.CostoDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
 import java.util.Date;

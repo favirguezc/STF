@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.administration.Municipality;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.MunicipioDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.administration.MunicipalityDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,7 +20,7 @@ import model.administration.Department;
 @ManagedBean(name = "municipioController")
 public class MunicipioController implements Serializable {
 
-    private MunicipioDAO jpaController = null;
+    private MunicipalityDAO jpaController = null;
     private List<Municipality> items = null;
     private Municipality selected;
 
@@ -41,9 +41,9 @@ public class MunicipioController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private MunicipioDAO getJpaController() {
+    private MunicipalityDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new MunicipioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new MunicipalityDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

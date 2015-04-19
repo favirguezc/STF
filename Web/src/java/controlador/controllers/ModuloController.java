@@ -3,8 +3,8 @@ package controlador.controllers;
 import model.administration.ModuleClass;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.ModuloDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.administration.ModuleDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class ModuloController implements Serializable {
 
-    private ModuloDAO jpaController = null;
+    private ModuleDAO jpaController = null;
     private List<ModuleClass> items = null;
     private ModuleClass selected;
     @ManagedProperty(value = "#{signInController}")
@@ -63,9 +63,9 @@ public class ModuloController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ModuloDAO getJpaController() {
+    private ModuleDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new ModuloDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new ModuleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }

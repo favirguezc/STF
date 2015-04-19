@@ -4,7 +4,7 @@ import modelo.finanzas.caja.Caja;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import datos.finanzas.CajaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
 import java.util.List;

@@ -4,7 +4,7 @@ import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
 import modelo.contabilidad.Cuenta;
 import datos.contabilidad.CuentaDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;

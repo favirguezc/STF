@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import datos.finanzas.CompraDAO;
 import datos.finanzas.PrecioDAO;
-import datos.util.EntityManagerFactorySingleton;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ResourceBundle;

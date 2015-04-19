@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="DatosPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>modelo.contabilidad.Cuenta</class>
+    <class>modelo.contabilidad.Paquete</class>
+    <class>modelo.finanzas.Precio</class>
+    <class>modelo.finanzas.caja.Caja</class>
+    <class>modelo.finanzas.caja.ConceptoCaja</class>
+    <class>modelo.finanzas.compra.Compra</class>
+    <class>modelo.finanzas.costo.Costo</class>
+    <class>modelo.finanzas.nomina.Nomina</class>
+    <class>modelo.finanzas.ventas.Venta</class>
+    <class>modelo.produccion.administracion.Contrato</class>
+    <class>modelo.produccion.administracion.Department</class>
+    <class>modelo.produccion.administracion.Farm</class>
+    <class>modelo.produccion.administracion.Lote</class>
+    <class>modelo.produccion.administracion.Modulo</class>
+    <class>modelo.produccion.administracion.Municipio</class>
+    <class>modelo.produccion.administracion.Permiso</class>
+    <class>modelo.produccion.administracion.Persona</class>
+    <class>modelo.produccion.applicationes.Application</class>
+    <class>modelo.produccion.applicationes.Chemical</class>
+    <class>modelo.produccion.cosecha.Classification</class>
+    <class>modelo.produccion.cosecha.Crop</class>
+    <class>modelo.produccion.jobes.Job</class>
+    <class>modelo.produccion.jobes.Work</class>
+    <class>modelo.produccion.monitoring.Monitoring</class>
+    <class>modelo.produccion.monitoring.ParameterMonitoring</class>
+    <class>modelo.produccion.monitoring.InsectTrap</class>
+    <class>modelo.produccion.monitoring.MonitorableParameter</class>
+    <class>modelo.produccion.utilidades.Nota</class>
+    <class>modelo.produccion.monitorableParametersClimaticas.SoilMoisture</class>
+    <class>modelo.produccion.monitorableParametersClimaticas.RainFall</class>
+    <class>modelo.produccion.monitorableParametersClimaticas.Temperature</class>
+    <class>modelo.produccion.monitorableParametersClimaticas.Thermometer</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

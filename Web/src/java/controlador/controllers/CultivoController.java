@@ -2,7 +2,7 @@ package controlador.controllers;
 
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import datos.produccion.administracion.CultivoDAO;
+import data.administration.CultivoDAO;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -6,11 +6,11 @@
 package controlador.controllers;
 
 import controlador.util.JsfUtil;
-import datos.produccion.administracion.ContratoDAO;
-import datos.produccion.administracion.FincaDAO;
-import datos.produccion.administracion.PersonaDAO;
-import datos.util.EntityManagerFactorySingleton;
-import datos.util.LoginDAO;
+import data.administration.ContratoDAO;
+import data.administration.FincaDAO;
+import data.administration.PersonDAO;
+import data.util.EntityManagerFactorySingleton;
+import data.util.LoginDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -170,7 +170,7 @@ public class SignInController implements Serializable {
             step1userSignedIn = new LoginDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).login(userString, passString);
             if (step1userSignedIn) {
                 long userId = Long.parseLong(userString);
-                user = new PersonaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonaPorCedula(userId);
+                user = new PersonDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonByIdNumber(userId);
                 fincas = new FincaDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findFincaEntitiesForCurrentUser(user);
                 hasActiveAccount = new CuentaController().hasActiveAccount(user);
                 if (!user.isSystemAdmin() && (fincas == null || fincas.isEmpty()) && !hasActiveAccount) {

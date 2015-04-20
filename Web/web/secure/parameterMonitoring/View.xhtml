@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParameterMonitoringViewDlg" widgetVar="ParameterMonitoringViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewParameterMonitoringTitle}">
+            <h:form id="ParameterMonitoringViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{parameterMonitoringController.selected != null}">
+                        <h:outputText value="#{bundle.ViewParameterMonitoringLabel_monitoring}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.monitoring}" title="#{bundle.ViewParameterMonitoringTitle_monitoring}"/>
+                        <h:outputText value="#{bundle.ViewParameterMonitoringLabel_moduleclass}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.moduleclass}" title="#{bundle.ViewParameterMonitoringTitle_moduleclass}"/>
+                        <h:outputText value="#{bundle.ViewParameterMonitoringLabel_monitorableparameter}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.monitorableparameter}" title="#{bundle.ViewParameterMonitoringTitle_monitorableparameter}"/>
+                        <h:outputText value="#{bundle.ViewParameterMonitoringLabel_valor}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.riesgo} #{parameterMonitoringController.selected.conteo!=0 ? parameterMonitoringController.selected.conteo : ''} #{parameterMonitoringController.selected.relacion}" title="#{bundle.ViewParameterMonitoringTitle_valor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ParameterMonitoringViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

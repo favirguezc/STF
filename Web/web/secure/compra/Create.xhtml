@@ -13,13 +13,13 @@
                     <p:panelGrid columns="2" rendered="#{compraController.selected != null}">
                         <p:outputLabel for="fechaCompra" value="FechaCompra (dd/MM/yyyy):"/>
                         <p:calendar id="fechaCompra" pattern="dd/MM/yyyy" value="#{compraController.selected.fechaCompra}" title="FechaCompra" required="true" requiredMessage="The fechaVenta field is required." showOn="button"/>
-                        <p:outputLabel for="insumoCo" value="Insumo:"/>
-                        <p:selectOneMenu id="insumoCo" value="#{compraController.selected.insumo}">
+                        <p:outputLabel for="chemicalCo" value="Chemical:"/>
+                        <p:selectOneMenu id="chemicalCo" value="#{compraController.selected.chemical}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{insumoController.itemsAvailableSelectOne}"
-                                           var="insumoItem"
-                                           itemValue="#{insumoItem}"
-                                           itemLabel="#{insumoItem.nombre}"/>
+                            <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                           var="chemicalItem"
+                                           itemValue="#{chemicalItem}"
+                                           itemLabel="#{chemicalItem.nombre}"/>
                             <p:ajax update="precioCo" listener="#{compraController.verifyPrecio}"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="precioCo" value="Precio:"/>

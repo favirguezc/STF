@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WorkCreateDlg" widgetVar="WorkCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWorkTitle}">
+            <h:form id="WorkCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{workController.selected.fecha}" title="#{bundle.EditWorkTitle_fecha}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_moduleclass}" for="moduleclass" />
+                        <p:selectOneMenu id="moduleclass" value="#{workController.selected.moduleclass}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_moduleclass}">
+                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
+                                           var="moduleclassItem"
+                                           itemValue="#{moduleclassItem}"
+                                           itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_job}" for="job" />
+                        <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_job}">
+                            <f:selectItems value="#{jobController.itemsAvailableSelectOne}"
+                                           var="jobItem"
+                                           itemValue="#{jobItem}"
+                                           itemLabel="#{jobItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_operario}" for="operario" />
+                        <p:selectOneMenu id="operario" value="#{workController.selected.operario}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_operario}">
+                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                                           var="operarioItem"
+                                           itemValue="#{operarioItem}"
+                                           itemLabel="#{operarioItem.nombre} #{operarioItem.apellido}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_horas}" for="horas" />
+                        <p:inputText id="horas" value="#{workController.selected.horas}" title="#{bundle.CreateWorkTitle_horas}" />
+                        <p:outputLabel value="#{bundle.CreateWorkLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{workController.selected.observaciones}" title="#{bundle.CreateWorkTitle_observaciones}"/>                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{workController.create}" value="#{bundle.Save}" update="display,:WorkListForm:datalist,:growl" oncomplete="handleSubmit(args,'WorkCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WorkCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

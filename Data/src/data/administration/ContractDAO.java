@@ -138,7 +138,7 @@ public class ContractDAO implements Serializable {
         return resultList;
     }
 
-    public List<Person> findPersonaEntities(Farm farm) {
+    public List<Person> findPersonEntities(Farm farm) {
         List<Person> resultList = new LinkedList<>();
         for (Contract c : findContractEntities(farm)) {
             if (!resultList.contains(c.getPerson())) {
@@ -159,7 +159,7 @@ public class ContractDAO implements Serializable {
         return resultList;
     }
 
-    public List<Person> findPersonaEntities(RoleEnum rol, Farm selectedFarm) {
+    public List<Person> findPersonEntities(RoleEnum rol, Farm selectedFarm) {
         List<Person> persons = new LinkedList<>();
         for (Contract c : findContractEntities(selectedFarm)) {
             if (c.getRoleEnum() == rol) {

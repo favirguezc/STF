@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SoilMoistureCreateDlg" widgetVar="SoilMoistureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSoilMoistureTitle}">
+            <h:form id="SoilMoistureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{soilMoistureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSoilMoistureLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{soilMoistureController.selected.fecha}" title="#{bundle.EditSoilMoistureTitle_fecha}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSoilMoistureLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{soilMoistureController.selected.hora}" title="#{bundle.EditSoilMoistureTitle_hora}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_hora}" showOn="button" timeOnly="true"/>
+                        <p:outputLabel value="#{bundle.CreateSoilMoistureLabel_valorEn15Cms}" for="valorEn15Cms" />
+                        <p:inputText id="valorEn15Cms" value="#{soilMoistureController.selected.valorEn15Cms}" title="#{bundle.CreateSoilMoistureTitle_valorEn15Cms}" required="true" requiredMessage="#{bundle.CreateSoilMoistureRequiredMessage_valorEn15Cms}"/>
+                        <p:outputLabel value="#{bundle.CreateSoilMoistureLabel_valorEn30Cms}" for="valorEn30Cms" />
+                        <p:inputText id="valorEn30Cms" value="#{soilMoistureController.selected.valorEn30Cms}" title="#{bundle.CreateSoilMoistureTitle_valorEn30Cms}" required="true" requiredMessage="#{bundle.CreateSoilMoistureRequiredMessage_valorEn30Cms}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{soilMoistureController.create}" value="#{bundle.Save}" update="display,:SoilMoistureListPanel:SoilMoistureListForm:datalist,:growl" oncomplete="handleSubmit(args,'SoilMoistureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SoilMoistureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

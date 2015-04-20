@@ -21,7 +21,7 @@ public class Chemical implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Enumerated(EnumType.STRING)
-    private AplicationTypeEnum aplicationType;
+    private ApplicationTypeEnum applicationType;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -50,16 +50,16 @@ public class Chemical implements Serializable {
      *
      * @return
      */
-    public AplicationTypeEnum getAplicationType() {
-        return aplicationType;
+    public ApplicationTypeEnum getApplicationType() {
+        return applicationType;
     }
 
     /**
      *
-     * @param aplicationType
+     * @param applicationType
      */
-    public void setAplicationType(AplicationTypeEnum aplicationType) {
-        this.aplicationType = aplicationType;
+    public void setApplicationType(ApplicationTypeEnum applicationType) {
+        this.applicationType = applicationType;
     }
 
     /**

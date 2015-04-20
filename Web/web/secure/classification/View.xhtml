@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClassificationViewDlg" widgetVar="ClassificationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleClassification.ViewClassificationTitle}">
+            <h:form id="ClassificationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{classificationController.selected != null}">
+                        <h:outputText value="#{bundleClassification.ViewClassificationLabel_classificationDate}"/>
+                        <h:outputText value="#{classificationController.selected.classificationDate}" title="#{bundleClassification.ViewClassificationTitle_classificationDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleClassification.ViewClassificationLabel_cultivation}"/>
+                        <h:outputText value="#{classificationController.selected.cultivation}" title="#{bundleClassification.ViewClassificationTitle_cultivation}"/>
+                        <h:outputText value="#{bundleClassification.ViewClassificationLabel_type}"/>
+                        <h:outputText value="#{classificationController.selected.type}" title="#{bundleClassification.ViewClassificationTitle_type}"/>
+                        <h:outputText value="#{bundleClassification.ViewClassificationLabel_weight}"/>
+                        <h:outputText value="#{classificationController.selected.weight}" title="#{bundleClassification.ViewClassificationTitle_weight}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ClassificationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

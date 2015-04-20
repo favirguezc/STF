@@ -19,10 +19,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.Datos.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${libs.MySQLDriver.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -35,11 +31,15 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${reference.Modelo.jar}</file>
+                    <file>${file.reference.stf-theme.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.stf-theme.jar}</file>
+                    <file>${reference.Model.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.Data.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -56,7 +56,7 @@
         </libraries>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>
-                <foreign-project>Datos</foreign-project>
+                <foreign-project>Data</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
@@ -64,7 +64,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Modelo</foreign-project>
+                <foreign-project>Model</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

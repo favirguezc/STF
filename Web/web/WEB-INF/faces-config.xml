@@ -8,48 +8,55 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleApplication</base-name>
+            <var>bundleApplication</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleChemical</base-name>
+            <var>bundleChemical</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleClassification</base-name>
+            <var>bundleClassification</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleContract</base-name>
+            <var>bundleContract</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCrop</base-name>
+            <var>bundleCrop</var>
+        </resource-bundle>
     </application>
     <managed-bean>
-        <managed-bean-name>RiesgoConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.RiesgoConverter</managed-bean-class>
-        
+        <managed-bean-name>RiskConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.RiskConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>TipoDeAplicacioConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.TipoDeAplicacionConverter</managed-bean-class>
-        
+        <managed-bean-name>ApplicationTypeConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ApplicationTypeConverter</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>TipoDeFresaConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.TipoDeFresaConverter</managed-bean-class>
-        
+        <managed-bean-name>ValuationTypeConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ValuationTypeConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>TipoDeValoracionConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.TipoDeValoracionConverter</managed-bean-class>
-        
+        <managed-bean-name>ApplicationMeasurementUnitEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ApplicationMeasurementUnitEnumConverter</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>UnidadesConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.UnidadesConverter</managed-bean-class>
-        
+        <managed-bean-name>RoleConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.RoleConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>RolConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.RolConverter</managed-bean-class>
-        
+        <managed-bean-name>BooleanConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.BooleanConverter</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>SiNoConverter</managed-bean-name>
-        <managed-bean-class>controlador.converters.BooleanConverter</managed-bean-class>
-        
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
-</managed-bean>
 </faces-config>

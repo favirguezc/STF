@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonEditDlg" widgetVar="PersonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonTitle}">
+            <h:form id="PersonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personController.selected.nombre}" title="#{bundle.EditPersonTitle_nombre}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{personController.selected.nombre2}" title="#{bundle.EditPersonTitle_nombre2}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{personController.selected.apellido}" title="#{bundle.EditPersonTitle_apellido}" required="true" requiredMessage="#{bundle.EditPersonRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{personController.selected.apellido2}" title="#{bundle.EditPersonTitle_apellido2}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{personController.selected.cedula}" title="#{bundle.EditPersonTitle_cedula}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{personController.selected.correo}" title="#{bundle.EditPersonTitle_correo}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{personController.selected.sexo}">
+                            <f:selectItems value="#{sexoController.sexoValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{personController.selected.telefono}" title="#{bundle.EditPersonTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.EditPersonLabel_grupoSanguineo}" for="grupoSanguineo" />
+                        <p:selectOneMenu id="grupoSanguineo" value="#{personController.selected.grupoSanguineo}">
+                            <f:selectItems value="#{sangreController.grupoSanguineoValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonLabel_rh}" for="rh" />
+                        <p:selectOneMenu id="rh" value="#{personController.selected.rh}">
+                            <f:selectItems value="#{sangreController.rhValues}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personController.update}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

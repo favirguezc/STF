@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MonitorableParameterViewDlg" widgetVar="MonitorableParameterViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitorableParameterTitle}">
+            <h:form id="MonitorableParameterViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMonitorableParameterLabel_nombre}"/>
+                        <h:outputText value="#{monitorableparameterController.selected.nombre}" title="#{bundle.ViewMonitorableParameterTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewMonitorableParameterLabel_abreviacion}"/>
+                        <h:outputText value="#{monitorableparameterController.selected.abreviacion}" title="#{bundle.ViewMonitorableParameterTitle_abreviacion}"/>
+                        <h:outputText value="#{bundle.ViewMonitorableParameterLabel_valuationType}"/>
+                        <h:outputText value="#{monitorableparameterController.selected.valuationType}" title="#{bundle.ViewMonitorableParameterTitle_valuationType}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitorableParameterViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

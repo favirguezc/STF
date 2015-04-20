@@ -5,11 +5,7 @@
  */
 package propertiesgenerator;
 
-import modelo.produccion.aplicaciones.TipoDeAplicacion;
-import modelo.produccion.aplicaciones.Unidades;
-import modelo.produccion.cosecha.TipoDeFresa;
-import modelo.produccion.monitoreo.Riesgo;
-import modelo.produccion.monitoreo.TipoDeValoracion;
+import model.monitoring.ValuationTypeEnum;
 
 /**
  *
@@ -52,7 +48,7 @@ public class ConverterGenerator {
     }
 
     public static void main(String args[]) {
-        Class c = TipoDeValoracion.class;
+        Class c = ValuationTypeEnum.class;
         System.out.println("import javax.faces.component.UIComponent;\n"
                 + "import javax.faces.context.FacesContext;\n"
                 + "import javax.faces.convert.Converter;\n"

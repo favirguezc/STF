@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TemperatureEditDlg" widgetVar="TemperatureEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTemperatureTitle}">
+            <h:form id="TemperatureEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{temperatureController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{temperatureController.selected.fecha}" title="#{bundle.EditTemperatureTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperatureController.selected.hora}" title="#{bundle.EditTemperatureTitle_hora}"  showOn="button" timeOnly="true"/>
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_temperature}" for="temperature" />
+                        <p:inputText id="temperature" value="#{temperatureController.selected.temperature}" title="#{bundle.EditTemperatureTitle_temperature}" />
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_soilmoisture}" for="soilmoisture" />
+                        <p:inputText id="soilmoisture" value="#{temperatureController.selected.soilmoisture}" title="#{bundle.EditTemperatureTitle_soilmoisture}" />
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_puntoDeRocio}" for="puntoDeRocio" />
+                        <p:inputText id="puntoDeRocio" value="#{temperatureController.selected.puntoDeRocio}" title="#{bundle.EditTemperatureTitle_puntoDeRocio}" />
+                        <p:outputLabel value="#{bundle.EditTemperatureLabel_moduleclass}" for="moduleclass" />
+                        <p:selectOneMenu id="moduleclass" value="#{temperatureController.selected.moduleclass}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
+                                           var="moduleclassItem"
+                                           itemValue="#{moduleclassItem}"
+                                           itemLabel="#{moduleclassItem.lot.nombre} #{moduleclassItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{temperatureController.update}" value="#{bundle.Save}" update="display,:TemperatureListPanel:TemperatureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperatureEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemperatureEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

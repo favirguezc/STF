@@ -20,7 +20,7 @@
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente3}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Fecha" for="fecha"/>
                                     <p:calendar id="fecha" value="#{ventaChart.fecha3}" showOn="button" pattern="dd/MM/yyyy"/>
@@ -31,7 +31,7 @@
                                     </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart3" type="line" model="#{ventaChart.modelo3}"/>
+                                <p:chart id="chart3" type="line" model="#{ventaChart.model3}"/>
                                 <p:remoteCommand name="updateChart3" update="chart3" actionListener="#{ventaChart.createModel3}"/>
                             </h:form>
                         </p:tab>
@@ -41,7 +41,7 @@
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente2}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Año" for="ano2"/>
                                     <p:spinner id="ano2" value="#{ventaChart.ano2}" title="Año" min="2012" max="2030"/>
@@ -67,7 +67,7 @@
                                     </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart2()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart2" type="line" model="#{ventaChart.modelo2}"/>
+                                <p:chart id="chart2" type="line" model="#{ventaChart.model2}"/>
                                 <p:remoteCommand name="updateChart2" update="chart2" actionListener="#{ventaChart.createModel2}"/>
                             </h:form>
                         </p:tab>
@@ -77,7 +77,7 @@
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente1}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Año" for="ano1"/>
                                     <p:spinner id="ano1" value="#{ventaChart.ano1}" title="Año" min="2010" max="2030"/>
@@ -88,7 +88,7 @@
                                     </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart1" type="line" model="#{ventaChart.modelo1}"/>
+                                <p:chart id="chart1" type="line" model="#{ventaChart.model1}"/>
                                 <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{ventaChart.createModel1}"/>
                             </h:form>
                         </p:tab>
@@ -98,7 +98,7 @@
                                     <p:outputLabel value="Cliente" for="clienteFil"/>
                                     <p:selectOneMenu id="clienteFil" value="#{ventaChart.cliente4}">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Año" for="ano1"/>
                                     <p:spinner id="ano1" value="#{ventaChart.ano4}" title="Año" min="2012" max="2030"/>
@@ -109,7 +109,7 @@
                                     </p:selectOneRadio>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
                                 </h:panelGrid>
-                                <p:chart id="chart4" type="line" model="#{ventaChart.modelo4}"/>
+                                <p:chart id="chart4" type="line" model="#{ventaChart.model4}"/>
                                 <p:remoteCommand name="updateChart4" update="chart4" actionListener="#{ventaChart.createModel4}"/>
                             </h:form>
                         </p:tab>
@@ -123,7 +123,7 @@
                                      rowKey="#{item.id}"
                                      rows="10"
                                      rowsPerPageTemplate="10,20,30,40,50"
-                                     widgetVar="moduloTable">
+                                     widgetVar="moduleclassTable">
 
                             <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                             <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
@@ -141,9 +141,9 @@
                             </p:column>
                             <p:column filterBy="#{item.cliente}" headerText="Cliente" filterMatchMode="exact">
                                 <f:facet name="filter">
-                                    <p:selectOneMenu onchange="PF('moduloTable').filter()">
+                                    <p:selectOneMenu onchange="PF('moduleclassTable').filter()">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personaController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
                                 <h:outputText value="#{item.cliente.nombre} #{item.cliente.apellido}"/>

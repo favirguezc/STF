@@ -12,21 +12,21 @@
             <h:form id="CostoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{costoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateCostoLabel_modulo}" for="modulo"/>
-                        <p:selectOneMenu id="modulo" value="#{costoController.selected.modulo}">
-                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"
-                                           var="moduloItem"
-                                           itemValue="#{moduloItem}"
-                                           itemLabel="#{moduloItem.lote.nombre} - #{moduloItem.nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCostoLabel_moduleclass}" for="moduleclass"/>
+                        <p:selectOneMenu id="moduleclass" value="#{costoController.selected.moduleclass}">
+                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
+                                           var="moduleclassItem"
+                                           itemValue="#{moduleclassItem}"
+                                           itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCostoLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{costoController.selected.fecha}" title="#{bundle.EditCostoTitle_fecha}" required="true" requiredMessage="#{CreateCostoRequiredMessage_fecha}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditCostoLabel_tipo}" for="tipo" />
-                        <p:selectOneMenu id="tipo" value="#{costoController.selected.tipo}">
-                            <f:selectItems value="#{tipoCostoController.tipoCostoValues}"/>
+                        <p:outputLabel value="#{bundle.EditCostoLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{costoController.selected.type}">
+                            <f:selectItems value="#{typeCostoController.typeCostoValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditCostoLabel_subTipo}" for="subTipo" />
-                        <p:inputText id="subTipo" value="#{costoController.selected.subTipo}" title="#{bundle.EditCostoTitle_subTipo}" />
+                        <p:outputLabel value="#{bundle.EditCostoLabel_subType}" for="subType" />
+                        <p:inputText id="subType" value="#{costoController.selected.subType}" title="#{bundle.EditCostoTitle_subType}" />
                         <p:outputLabel value="#{bundle.EditCostoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{costoController.selected.nombre}" title="#{bundle.EditCostoTitle_nombre}" />
                         <p:outputLabel value="#{bundle.EditCostoLabel_item}" for="item" />

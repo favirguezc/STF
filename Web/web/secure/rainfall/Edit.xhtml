@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RainFallEditDlg" widgetVar="RainFallEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRainFallTitle}">
+            <h:form id="RainFallEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rainfallController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRainFallLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{rainfallController.selected.fecha}" title="#{bundle.EditRainFallTitle_fecha}" required="true" requiredMessage="#{bundle.EditRainFallRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRainFallLabel_mm}" for="mm" />
+                        <p:inputText id="mm" value="#{rainfallController.selected.mm}" title="#{bundle.EditRainFallTitle_mm}" required="true" requiredMessage="#{bundle.EditRainFallRequiredMessage_mm}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rainfallController.update}" value="#{bundle.Save}" update="display,:RainFallListPanel:RainFallListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RainFallEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RainFallEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

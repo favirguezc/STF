@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModuleClassCreateDlg" widgetVar="ModuleClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateModuleClassTitle}">
+            <h:form id="ModuleClassCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{moduleclassController.selected.nombre}" title="#{bundle.CreateModuleClassTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_area}" for="area" />
+                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundle.CreateModuleClassTitle_area}" />
+                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_lot}" for="lot" />
+                        <p:selectOneMenu id="lot" value="#{moduleclassController.selected.lot}" >
+                            <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
+                                           var="lotItem"
+                                           itemValue="#{lotItem}"
+                                           itemLabel="#{lotItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{moduleclassController.create}" value="#{bundle.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleClassCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ModuleClassCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

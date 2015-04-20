@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsectTrapViewDlg" widgetVar="InsectTrapViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInsectTrapTitle}">
+            <h:form id="InsectTrapViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insectTrapController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_fecha}"/>
+                        <h:outputText value="#{insectTrapController.selected.fecha}" title="#{bundle.ViewInsectTrapTitle_fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_nombre}"/>
+                        <h:outputText value="#{insectTrapController.selected.nombre}" title="#{bundle.ViewInsectTrapTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_especie}"/>
+                        <h:outputText value="#{insectTrapController.selected.especie}" title="#{bundle.ViewInsectTrapTitle_especie}"/>
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_individuos}"/>
+                        <h:outputText value="#{insectTrapController.selected.individuos}" title="#{bundle.ViewInsectTrapTitle_individuos}"/>
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_cambioDePegante}"/>
+                        <h:outputText value="#{insectTrapController.selected.cambioDePegante}" title="#{bundle.ViewInsectTrapTitle_cambioDePegante}" converter="#{SiNoConverter}"/>
+                        <h:outputText value="#{bundle.ViewInsectTrapLabel_observaciones}"/>
+                        <h:outputText value="#{insectTrapController.selected.observaciones}" title="#{bundle.ViewInsectTrapTitle_observaciones}"/>                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InsectTrapViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

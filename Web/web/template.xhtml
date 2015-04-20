@@ -50,18 +50,18 @@
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <h:outputText value="Finca: #{signInController.finca}" rendered="#{!empty signInController.finca}"/>                                            
+                                            <h:outputText value="Farm: #{signInController.farm}" rendered="#{!empty signInController.farm}"/>                                            
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <h:outputText value="#{signInController.rol}" converter="#{RolConverter}" rendered="#{!empty signInController.rol}"/>
+                                            <h:outputText value="#{signInController.role}" converter="#{RolConverter}" rendered="#{!empty signInController.role}"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right">
                                             <p:splitButton value="Cerrar Sesión" action="#{signInController.signOut}" rendered="#{signInController.step1userSignedIn}" ajax="false">
-                                                <p:menuitem value="Seleccionar Finca" action="#{signInController.selectFarm}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
+                                                <p:menuitem value="Seleccionar Farm" action="#{signInController.selectFarm}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
                                                 <p:menuitem value="Seleccionar Rol" action="#{signInController.selectRol}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
                                             </p:splitButton>
                                         </td>
@@ -75,39 +75,39 @@
                     <p:menubar rendered="#{signInController.step1userSignedIn}">
                         <p:menuitem value="#{bundle.Home}" outcome="/secure/index.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Management}">
-                            <p:menuitem value="Finca" outcome="/secure/finca/List.xhtml"/>
-                            <p:menuitem value="Lote" outcome="/secure/lote/List.xhtml"/>
-                            <p:menuitem value="Módulo" outcome="/secure/modulo/List.xhtml"/>
-                            <p:menuitem value="Persona" outcome="/secure/persona/List.xhtml"/>
-                            <p:menuitem value="Contrato" outcome="/secure/contrato/List.xhtml"/>
+                            <p:menuitem value="Farm" outcome="/secure/farm/List.xhtml"/>
+                            <p:menuitem value="Lot" outcome="/secure/lot/List.xhtml"/>
+                            <p:menuitem value="Módulo" outcome="/secure/moduleclass/List.xhtml"/>
+                            <p:menuitem value="Person" outcome="/secure/person/List.xhtml"/>
+                            <p:menuitem value="Contract" outcome="/secure/contract/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Application}">
-                            <p:menuitem value="Aplicación" outcome="/secure/aplicacion/List.xhtml"/>
-                            <p:menuitem value="Insumo" outcome="/secure/insumo/List.xhtml"/>
+                            <p:menuitem value="Aplicación" outcome="/secure/application/List.xhtml"/>
+                            <p:menuitem value="Chemical" outcome="/secure/chemical/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Work}">
-                            <p:menuitem value="Trabajo" outcome="/secure/trabajo/List.xhtml"/>
-                            <p:menuitem value="Labor" outcome="/secure/labor/List.xhtml"/>
+                            <p:menuitem value="Work" outcome="/secure/work/List.xhtml"/>
+                            <p:menuitem value="Job" outcome="/secure/job/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Monitoring}">
-                            <p:menuitem value="Monitoreo" outcome="/secure/monitoreo/List.xhtml"/>
-                            <p:menuitem value="Monitoreo de Variables" outcome="/secure/monitoreoDeVariables/List.xhtml"/>
-                            <p:menuitem value="Variable" outcome="/secure/variable/List.xhtml"/>
-                            <p:menuitem value="Trampa de Insectos" outcome="/secure/trampaDeInsectos/List.xhtml"/>
+                            <p:menuitem value="Monitoreo" outcome="/secure/monitoring/List.xhtml"/>
+                            <p:menuitem value="Monitoring de Variables" outcome="/secure/parameterMonitoring/List.xhtml"/>
+                            <p:menuitem value="MonitorableParameter" outcome="/secure/monitorableparameter/List.xhtml"/>
+                            <p:menuitem value="Trampa de Insectos" outcome="/secure/insectTrap/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Weather}">
-                            <p:menuitem value="Temperatura" outcome="/secure/temperatura/List.xhtml"/>
-                            <p:menuitem value="Lluvia" outcome="/secure/lluvia/List.xhtml"/>
-                            <p:menuitem value="Humedad Del Suelo" outcome="/secure/humedadDelSuelo/List.xhtml"/>
-                            <p:menuitem value="Termómetro" outcome="/secure/termometro/List.xhtml"/>
+                            <p:menuitem value="Temperature" outcome="/secure/temperature/List.xhtml"/>
+                            <p:menuitem value="RainFall" outcome="/secure/rainfall/List.xhtml"/>
+                            <p:menuitem value="SoilMoisture Del Suelo" outcome="/secure/soilMoisture/List.xhtml"/>
+                            <p:menuitem value="Termómetro" outcome="/secure/thermometer/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Crop}">
-                            <p:menuitem value="Recolección" outcome="/secure/recoleccion/List.xhtml"/>
-                            <p:menuitem value="Clasificación" outcome="/secure/clasificacion/List.xhtml"/>
+                            <p:menuitem value="Recolección" outcome="/secure/crop/List.xhtml"/>
+                            <p:menuitem value="Clasificación" outcome="/secure/classification/List.xhtml"/>
                         </p:submenu>                        
                         <p:menuitem value="Ventas" outcome="/secure/venta/List.xhtml"/>
                         <p:submenu label="Gastos">
-                            <p:menuitem value="Compra de Insumos" outcome="/secure/compra/List.xhtml"/>
+                            <p:menuitem value="Compra de Chemicals" outcome="/secure/compra/List.xhtml"/>
                             <p:menuitem value="Costos" outcome="/secure/costo/List.xhtml"/>
                             <p:menuitem value="Nomina" outcome="/secure/nomina/List.xhtml"/>
                         </p:submenu>
@@ -115,10 +115,7 @@
                             <p:menuitem value="Administrar Cajas" outcome="/secure/caja/List.xhtml"/>
                             <p:menuitem value="Registrar en Cajas" outcome="/secure/conceptoCaja/List.xhtml"/>
                         </p:submenu>
-                        <p:submenu label="Cargar Datos" rendered="false">
-                            <p:menuitem value="Prueba" outcome="/secure/cargarDatos/subirArchivoPrueba.xhtml"/>
-                        </p:submenu>
-                        <p:menuitem value="Permisos" outcome="/secure/permiso/List.xhtml"/>
+                        <p:menuitem value="Permissions" outcome="/secure/permission/List.xhtml"/>
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>

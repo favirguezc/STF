@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NoteViewDlg" widgetVar="NoteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNoteTitle}">
+            <h:form id="NoteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{noteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewNoteLabel_titulo}"/>
+                        <h:outputText value="#{noteController.selected.titulo}" title="#{bundle.ViewNoteTitle_titulo}"/>
+                        <h:outputText value="#{bundle.ViewNoteLabel_note}"/>
+                        <h:outputText value="#{noteController.selected.note}" title="#{bundle.ViewNoteTitle_note}"/>
+                        <h:outputText value="#{bundle.ViewNoteLabel_de}"/>
+                        <h:outputText value="#{noteController.selected.de}" title="#{bundle.ViewNoteTitle_de}"/>
+                        <h:outputText value="#{bundle.ViewNoteLabel_para}"/>
+                        <h:outputText value="#{noteController.selected.para}" title="#{bundle.ViewNoteTitle_para}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="NoteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

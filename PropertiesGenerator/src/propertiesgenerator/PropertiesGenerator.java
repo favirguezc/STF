@@ -13,36 +13,7 @@ public class PropertiesGenerator {
      */
     public static void main(String[] args) {
 //        generarTitulos();
-//        generarPropiedades(modelo.produccion.administracion.Lote.class);
-//        generarPropiedades(modelo.produccion.administracion.Modulo.class);
-//        generarPropiedades(modelo.produccion.administracion.Permiso.class);
-//        generarPropiedades(modelo.produccion.administracion.Persona.class);
-//        generarPropiedades(modelo.produccion.administracion.Departamento.class);
-//        generarPropiedades(modelo.produccion.administracion.Municipio.class);
-//        generarPropiedades(modelo.produccion.administracion.Finca.class);
-//        generarPropiedades(modelo.produccion.administracion.Contrato.class);
-        generarPropiedades(modelo.contabilidad.Cuenta.class);
-        generarPropiedades(modelo.contabilidad.Paquete.class);
-//        generarPropiedades(modelo.produccion.aplicaciones.Aplicacion.class);
-//        generarPropiedades(modelo.produccion.aplicaciones.Insumo.class);
-//        generarPropiedades(modelo.produccion.labores.Labor.class);
-//        generarPropiedades(modelo.produccion.labores.Trabajo.class);
-//        generarPropiedades(modelo.produccion.monitoreo.Monitoreo.class);
-//        generarPropiedades(modelo.produccion.monitoreo.MonitoreoDeVariables.class);
-//        generarPropiedades(modelo.produccion.monitoreo.TrampaDeInsectos.class);
-//        generarPropiedades(modelo.produccion.monitoreo.Variable.class);
-//        generarPropiedades(modelo.produccion.recoleccion.Recoleccion.class);
-//        generarPropiedades(modelo.produccion.utilidades.Nota.class);
-//        generarPropiedades(modelo.produccion.variablesClimaticas.HumedadDelSuelo.class);
-//        generarPropiedades(modelo.produccion.variablesClimaticas.Lluvia.class);
-//        generarPropiedades(modelo.produccion.variablesClimaticas.Temperatura.class);
-//        generarPropiedades(modelo.produccion.variablesClimaticas.Termometro.class);
-//        generarPropiedades(modelo.finanzas.Precio.class);
-//        generarPropiedades(modelo.finanzas.caja.Caja.class);
-//        generarPropiedades(modelo.finanzas.caja.ConceptoCaja.class);
-//        generarPropiedades(modelo.finanzas.compra.Compra.class);
-//        generarPropiedades(modelo.finanzas.ventas.Venta.class);
-//        generarPropiedades(modelo.produccion.cosecha.Clasificacion.class);
+        generarPropiedades(model.crop.Crop.class);
     }
 
     private static String g(String campo) {

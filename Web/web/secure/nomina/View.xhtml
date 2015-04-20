@@ -23,18 +23,18 @@
                         <h:outputText value="#{bundle.ViewNominaLabel_trabajador}"/>
                         <h:outputText value="#{nominaController.selected.trabajador.nombre} #{nominaController.selected.trabajador.apellido}" title="#{bundle.ViewNominaTitle_trabajador}"/>
                     </p:panelGrid>
-                    <p:dataTable id="labores" value="#{nominaController.laboresSelected}" var="item"
+                    <p:dataTable id="jobes" value="#{nominaController.jobesSelected}" var="item"
                                  rowKey="#{item.id}" resizableColumns="false" paginator="true" rows="10"
                                  style="width: 400px;" paginatorPosition="bottom">
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLaborTitle_nombre}"/>
+                                <h:outputText value="#{bundle.ListJobTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLaborTitle_valor}"/>
+                                <h:outputText value="#{bundle.ListJobTitle_valor}"/>
                             </f:facet>
                             <h:outputText value="#{item.valor}">
                                 <f:convertNumber/>

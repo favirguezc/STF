@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsectTrapEditDlg" widgetVar="InsectTrapEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInsectTrapTitle}">
+            <h:form id="InsectTrapEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insectTrapController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{insectTrapController.selected.fecha}" title="#{bundle.EditInsectTrapTitle_fecha}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{insectTrapController.selected.nombre}" title="#{bundle.EditInsectTrapTitle_nombre}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_especie}" for="especie" />
+                        <p:inputText id="especie" value="#{insectTrapController.selected.especie}" title="#{bundle.EditInsectTrapTitle_especie}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_especie}"/>
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_individuos}" for="individuos" />
+                        <p:inputText id="individuos" value="#{insectTrapController.selected.individuos}" title="#{bundle.EditInsectTrapTitle_individuos}" />
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_cambioDePegante}" for="cambioDePegante"/>
+                        <p:selectBooleanButton id="cambioDePegante" value="#{insectTrapController.selected.cambioDePegante}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{insectTrapController.selected.observaciones}" title="#{bundle.EditInsectTrapTitle_observaciones}" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{insectTrapController.update}" value="#{bundle.Save}" update="display,:InsectTrapListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InsectTrapEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InsectTrapEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

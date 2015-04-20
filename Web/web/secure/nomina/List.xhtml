@@ -43,7 +43,7 @@
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('nominaTable').filter()">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                <f:selectItems value="#{personaController.itemsAvailableTrabajador}"/>
+                                <f:selectItems value="#{personController.itemsAvailableTrabajador}"/>
                             </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{item.trabajador.nombre} #{item.trabajador.apellido}"/>

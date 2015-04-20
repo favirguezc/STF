@@ -18,14 +18,14 @@
                      rowKey="#{item.id}"
                      rows="10"
                      rowsPerPageTemplate="10,20,30,40,50"
-                     widgetVar="moduloTable">
+                     widgetVar="moduleclassTable">
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
                     <p:column filterBy="#{item.caja}" headerText="#{bundle.ListConceptoCajaTitle_caja}" filterMatchMode="exact">
                         <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('moduloTable').filter()">
+                            <p:selectOneMenu onchange="PF('moduleclassTable').filter()">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{cajaController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>

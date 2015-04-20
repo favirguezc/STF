@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChemicalEditDlg" widgetVar="ChemicalEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleChemical.EditChemicalTitle}">
+            <h:form id="ChemicalEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chemicalController.selected != null}">
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_applicationType}" for="type"/>
+                        <p:selectOneMenu id="type" value="#{chemicalController.selected.applicationType}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_applicationType}">
+                            <f:selectItems value="#{applicationTypeController.applicationTypeValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.EditChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_activeComponent}" for="activeComponent" />
+                        <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.EditChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_activeComponent}"/>
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_applicationMeasurementUnit}" for="applicationMeasurementUnit" />
+                        <p:selectOneMenu id="applicationMeasurementUnit" value="#{chemicalController.selected.applicationMeasurementUnit}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_applicationMeasurementUnit}">
+                            <f:selectItems value="#{applicationMeasurementUnitController.applicationMeasurementUnitValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_waitingPeriod}" for="pc" />
+                        <p:inputText id="pc" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.EditChemicalTitle_waitingPeriod}" />
+                        <p:outputLabel value="#{bundleChemical.EditChemicalLabel_reEntryTime}" for="tr" />
+                        <p:inputText id="tr" value="#{chemicalController.selected.reEntryTime}" title="#{bundleChemical.EditChemicalTitle_reEntryTime}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chemicalController.update}" value="#{bundle.Save}" update="display,:ChemicalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChemicalEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

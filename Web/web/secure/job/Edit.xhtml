@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JobEditDlg" widgetVar="JobEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditJobTitle}">
+            <h:form id="JobEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jobController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditJobLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{jobController.selected.nombre}" title="#{bundle.EditJobTitle_nombre}" required="true" requiredMessage="#{bundle.EditJobRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditJobLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{jobController.selected.descripcion}" title="#{bundle.EditJobTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditJobLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{jobController.selected.valor}" title="#{bundle.EditJobTitle_valor}" required="true" requiredMessage="#{bundle.EditJobRequiredMessage_valor}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{jobController.update}" value="#{bundle.Save}" update="display,:JobListForm:datalist,:growl" oncomplete="handleSubmit(args, 'JobEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="JobEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

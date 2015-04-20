@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FarmEditDlg" widgetVar="FarmEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFarmTitle}">
+            <h:form id="FarmEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{farmController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFarmLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{farmController.selected.nombre}" title="#{bundle.EditFarmTitle_nombre}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditFarmLabel_vereda}" for="vereda" />
+                        <p:inputText id="vereda" value="#{farmController.selected.vereda}" title="#{bundle.EditFarmTitle_vereda}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_vereda}"/>
+                        <p:outputLabel value="#{bundle.EditFarmLabel_municipality}" for="municipality" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="department" value="#{farmController.department}" required="true" requiredMessage="#{bundle.EditMunicipalityRequiredMessage_department}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{departmentController.itemsAvailableSelectOne}"
+                                               var="departmentItem"
+                                               itemValue="#{departmentItem}"/>
+                                <p:ajax update="municipality"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="municipality" value="#{farmController.selected.municipality}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_municipality}">
+                                <f:selectItems value="#{farmController.municipalitys}"
+                                               var="municipalityItem"
+                                               itemValue="#{municipalityItem}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+                        <p:outputLabel value="#{bundle.EditFarmLabel_altitud}" for="altitud" />
+                        <p:inputText id="altitud" value="#{farmController.selected.altitud}" title="#{bundle.EditFarmTitle_altitud}" />
+                        <p:outputLabel value="#{bundle.EditFarmLabel_propietario}" for="propietario" />
+                        <p:selectOneMenu id="propietario" value="#{farmController.selected.propietario}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_propietario}">
+                            <f:selectItems value="#{personController.itemsAvailableSelectOne}"
+                                           var="propietarioItem"
+                                           itemValue="#{propietarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFarmLabel_coordenada}" for="coordenada" />
+                        <p:gmap id="coordenada" center="#{farmController.selected.coordenada.x}, #{farmController.selected.coordenada.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{farmController.model}">
+                            <p:ajax event="markerDrag" listener="#{farmController.markerDragged}" update=":growl"/>
+                        </p:gmap>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{farmController.update}" value="#{bundle.Save}" update="display,:FarmListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FarmEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FarmEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

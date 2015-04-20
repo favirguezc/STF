@@ -12,16 +12,16 @@
             <h:form id="CostoViewForm">
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2" rendered="#{costoController.selected != null}">
-                        <h:outputText value="#{bundle.CreateCostoLabel_modulo}"/>
-                        <h:outputText value="#{costoController.selected.modulo.nombre} - #{costoController.selected.modulo.lote.nombre}" title="#{bundle.CreateCostoTitle_modulo}"/>
+                        <h:outputText value="#{bundle.CreateCostoLabel_moduleclass}"/>
+                        <h:outputText value="#{costoController.selected.moduleclass.nombre} - #{costoController.selected.moduleclass.lot.nombre}" title="#{bundle.CreateCostoTitle_moduleclass}"/>
                         <h:outputText value="#{bundle.ViewCostoLabel_fecha}"/>
                         <h:outputText value="#{costoController.selected.fecha}" title="#{bundle.ViewCostoTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewCostoLabel_tipo}"/>
-                        <h:outputText value="#{costoController.selected.tipo}" title="#{bundle.ViewCostoTitle_tipo}"/>
-                        <h:outputText value="#{bundle.ViewCostoLabel_subTipo}"/>
-                        <h:outputText value="#{costoController.selected.subTipo}" title="#{bundle.ViewCostoTitle_subTipo}"/>
+                        <h:outputText value="#{bundle.ViewCostoLabel_type}"/>
+                        <h:outputText value="#{costoController.selected.type}" title="#{bundle.ViewCostoTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewCostoLabel_subType}"/>
+                        <h:outputText value="#{costoController.selected.subType}" title="#{bundle.ViewCostoTitle_subType}"/>
                         <h:outputText value="#{bundle.ViewCostoLabel_nombre}"/>
                         <h:outputText value="#{costoController.selected.nombre}" title="#{bundle.ViewCostoTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewCostoLabel_item}"/>

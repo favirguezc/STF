@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WorkEditDlg" widgetVar="WorkEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditWorkTitle}">
+            <h:form id="WorkEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditWorkLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{workController.selected.fecha}" title="#{bundle.EditWorkTitle_fecha}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditWorkLabel_moduleclass}" for="moduleclass" />
+                        <p:selectOneMenu id="moduleclass" value="#{workController.selected.moduleclass}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_moduleclass}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
+                                           var="moduleclassItem"
+                                           itemValue="#{moduleclassItem}"
+                                           itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditWorkLabel_job}" for="job" />
+                        <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_job}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{jobController.itemsAvailableSelectOne}"
+                                           var="jobItem"
+                                           itemValue="#{jobItem}"
+                                           itemLabel="#{jobItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditWorkLabel_operario}" for="operario" />
+                        <p:selectOneMenu id="operario" value="#{workController.selected.operario}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_operario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                                           var="operarioItem"
+                                           itemValue="#{operarioItem}"
+                                           itemLabel="#{operarioItem.nombre} #{operarioItem.apellido}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditWorkLabel_horas}" for="horas" />
+                        <p:inputText id="horas" value="#{workController.selected.horas}" title="#{bundle.EditWorkTitle_horas}" />
+                        <p:outputLabel value="#{bundle.EditWorkLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{workController.selected.observaciones}" title="#{bundle.EditWorkTitle_observaciones}" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{workController.update}" value="#{bundle.Save}" update="display,:WorkListForm:datalist,:growl" oncomplete="handleSubmit(args, 'WorkEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="WorkEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

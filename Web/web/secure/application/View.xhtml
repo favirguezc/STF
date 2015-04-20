@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApplicationViewDlg" widgetVar="ApplicationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleApplication.ViewApplicationTitle}">
+            <h:form id="ApplicationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{applicationController.selected != null}">
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_type}"/>
+                        <h:outputText value="#{applicationController.selected.type}" title="#{bundleApplication.ViewApplicationTitle_type}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_cultivation}"/>
+                        <h:outputText value="#{applicationController.selected.cultivation}" title="#{bundleApplication.ViewApplicationTitle_cultivation}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_authorizationDate}"/>
+                        <h:outputText value="#{applicationController.selected.authorizationDate}" title="#{bundleApplication.ViewApplicationTitle_authorizationDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_applicationDate}"/>
+                        <h:outputText value="#{applicationController.selected.applicationDate}" title="#{bundleApplication.ViewApplicationTitle_applicationDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical}"/>
+                        <h:outputText value="#{applicationController.selected.chemical}" title="#{bundleApplication.ViewApplicationTitle_chemical}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_reason1}"/>
+                        <h:outputText value="#{applicationController.selected.reason1}" title="#{bundleApplication.ViewApplicationTitle_reason1}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_reason2}"/>
+                        <h:outputText value="#{applicationController.selected.reason2}" title="#{bundleApplication.ViewApplicationTitle_reason2}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_reason3}"/>
+                        <h:outputText value="#{applicationController.selected.reason3}" title="#{bundleApplication.ViewApplicationTitle_reason3}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity}"/>
+                        <h:outputText value="#{applicationController.selected.quantity}" title="#{bundleApplication.ViewApplicationTitle_quantity}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_waterLiters}"/>
+                        <h:outputText value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.ViewApplicationTitle_waterLiters}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_method}"/>
+                        <h:outputText value="#{applicationController.selected.method}" title="#{bundleApplication.ViewApplicationTitle_method}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_responsible}"/>
+                        <h:outputText value="#{applicationController.selected.responsible}" title="#{bundleApplication.ViewApplicationTitle_responsible}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_authorizes}"/>
+                        <h:outputText value="#{applicationController.selected.authorizes}" title="#{bundleApplication.ViewApplicationTitle_authorizes}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_hoursSpent}"/>
+                        <h:outputText value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.ViewApplicationTitle_hoursSpent}"/>
+                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_observations}"/>
+                        <h:outputText value="#{applicationController.selected.observations}" title="#{bundleApplication.ViewApplicationTitle_observations}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ApplicationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

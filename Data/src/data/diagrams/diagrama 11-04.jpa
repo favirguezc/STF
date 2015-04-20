@@ -11,7 +11,7 @@
             <jpa:basic name="dateFinal" attribute-type="java.util.Date" visibile="true" id="_14288012193099">
                 <jpa:temporal>DATE</jpa:temporal>
             </jpa:basic>
-            <jpa:many-to-one name="usuario" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_14288012192946"/>
+            <jpa:many-to-one name="usuario" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_14288012192946"/>
             <jpa:many-to-one name="paquete" target-entity="Paquete" optional="false" primaryKey="false" connected-entity-id="_142880121938710" visibile="true" id="_14288012193097"/>
         </jpa:attributes>
     </jpa:entity>
@@ -139,7 +139,7 @@
             <jpa:basic name="total" attribute-type="float" visibile="true" id="_142880121970055">
                 <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
             </jpa:basic>
-            <jpa:many-to-one name="trabajador" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121970054"/>
+            <jpa:many-to-one name="trabajador" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121970054"/>
             <jpa:many-to-one name="farm" target-entity="Farm" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121970056"/>
         </jpa:attributes>
     </jpa:entity>
@@ -164,7 +164,7 @@
             <jpa:basic name="terceraPrecioUnid" attribute-type="float" visibile="true" id="_142880121976271"/>
             <jpa:basic name="cuartaPrecioUnid" attribute-type="float" visibile="true" id="_142880121976272"/>
             <jpa:basic name="quintaPrecioUnid" attribute-type="float" visibile="true" id="_142880121976273"/>
-            <jpa:many-to-one name="cliente" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121974760"/>
+            <jpa:many-to-one name="cliente" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121974760"/>
             <jpa:many-to-one name="farm" target-entity="Farm" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121974761"/>
         </jpa:attributes>
     </jpa:entity>
@@ -180,7 +180,7 @@
                 <jpa:enumerated>STRING</jpa:enumerated>
             </jpa:basic>
             <jpa:many-to-one name="farm" target-entity="Farm" optional="false" primaryKey="false" connected-entity-id="_142880121993483" visibile="true" id="_142880121980976"/>
-            <jpa:many-to-one name="person" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121980977"/>
+            <jpa:many-to-one name="person" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121980977"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="Department" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121987280">
@@ -205,7 +205,7 @@
             <jpa:basic name="altitud" attribute-type="float" visibile="true" id="_142880121993488"/>
             <jpa:basic name="coordenada" attribute-type="modelo.produccion.administracion.Coordenada" visibile="true" id="_142880121993489"/>
             <jpa:many-to-one name="municipio" target-entity="Municipio" optional="false" primaryKey="false" connected-entity-id="_1428801220106100" visibile="true" id="_142880121993487"/>
-            <jpa:many-to-one name="propietario" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121993490"/>
+            <jpa:many-to-one name="propietario" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_142880121993490"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="Lote" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_142880121999791">
@@ -260,7 +260,7 @@
             </jpa:basic>
         </jpa:attributes>
     </jpa:entity>
-    <jpa:entity class="Persona" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220200109">
+    <jpa:entity class="Person" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220200109">
         <jpa:attributes>
             <jpa:id name="id" attribute-type="long" visibile="true" id="_1428801220200110">
                 <jpa:generated-value strategy="TABLE"/>
@@ -325,8 +325,8 @@
             <jpa:many-to-one name="motivo1" target-entity="MonitorableParameter" optional="false" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262129"/>
             <jpa:many-to-one name="motivo2" target-entity="MonitorableParameter" optional="true" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262130"/>
             <jpa:many-to-one name="motivo3" target-entity="MonitorableParameter" optional="true" primaryKey="false" connected-entity-id="_1428801220731193" visibile="true" id="_1428801220262131"/>
-            <jpa:many-to-one name="responsable" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262135"/>
-            <jpa:many-to-one name="autoriza" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262136"/>
+            <jpa:many-to-one name="responsable" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262135"/>
+            <jpa:many-to-one name="autoriza" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220262136"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="Chemical" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220325139">
@@ -375,7 +375,7 @@
             </jpa:basic>
             <jpa:basic name="pesadaGramos" attribute-type="float" visibile="true" id="_1428801220434158"/>
             <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220434155"/>
-            <jpa:many-to-one name="worker" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220434157"/>
+            <jpa:many-to-one name="worker" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220434157"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="Job" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220481159">
@@ -405,7 +405,7 @@
             <jpa:basic name="observaciones" attribute-type="java.lang.String" visibile="true" id="_1428801220544171"/>
             <jpa:many-to-one name="modulo" target-entity="Modulo" optional="false" primaryKey="false" connected-entity-id="_142880122005995" visibile="true" id="_1428801220528167"/>
             <jpa:many-to-one name="job" target-entity="Job" optional="false" primaryKey="false" connected-entity-id="_1428801220481159" visibile="true" id="_1428801220528168"/>
-            <jpa:many-to-one name="worker" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220544169"/>
+            <jpa:many-to-one name="worker" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220544169"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="Monitoring" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220591172">
@@ -480,8 +480,8 @@
             <jpa:basic name="note" attribute-type="java.lang.String" visibile="true" id="_1428801220762201">
                 <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
             </jpa:basic>
-            <jpa:many-to-one name="para" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762202"/>
-            <jpa:many-to-one name="de" target-entity="Persona" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762203"/>
+            <jpa:many-to-one name="para" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762202"/>
+            <jpa:many-to-one name="de" target-entity="Person" optional="false" primaryKey="false" connected-entity-id="_1428801220200109" visibile="true" id="_1428801220762203"/>
         </jpa:attributes>
     </jpa:entity>
     <jpa:entity class="SoilMoisture" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_1428801220794204">

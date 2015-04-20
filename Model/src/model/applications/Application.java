@@ -27,7 +27,7 @@ public class Application implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Enumerated(EnumType.STRING)
-    private AplicationTypeEnum type;
+    private ApplicationTypeEnum type;
     @ManyToOne(optional = false)
     private Cultivation cultivation;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -63,11 +63,11 @@ public class Application implements Serializable {
         this.id = id;
     }
 
-    public AplicationTypeEnum getType() {
+    public ApplicationTypeEnum getType() {
         return type;
     }
 
-    public void setType(AplicationTypeEnum type) {
+    public void setType(ApplicationTypeEnum type) {
         this.type = type;
     }
 

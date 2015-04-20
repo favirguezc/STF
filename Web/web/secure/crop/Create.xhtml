@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CropCreateDialog" widgetVar="CropCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCrop.CreateCropTitle}">
+            <h:form id="CropCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cropController.selected != null}">
+                        <p:outputLabel value="#{bundleCrop.CreateCropLabel_cultivation}" for="cultivation" />
+                        <p:selectOneMenu id="cultivation" value="#{cropController.selected.cultivation}" required="true" requiredMessage="#{bundleCrop.CreateCropRequiredMessage_cultivation}">
+                            <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
+                                           var="cultivationItem"
+                                           itemValue="#{cultivationItem}"
+                                           itemLabel="#{cultivationItem.moduleObject.lot.name} - #{cultivationItem.moduleObject.name}, #{cultivationItem.variety.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCrop.CreateCropLabel_harvestDate}" for="harvestDate" />
+                        <p:calendar id="harvestDate" pattern="dd/MM/yyyy" value="#{cropController.selected.harvestDate}" title="#{bundleCrop.EditCropTitle_harvestDate}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_harvestDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundleCrop.CreateCropLabel_collector}" for="collector" />
+                        <p:selectOneMenu id="collector" value="#{cropController.selected.collector}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_collector}">
+                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                                           var="collectorItem"
+                                           itemValue="#{collectorItem}"
+                                           itemLabel="#{collectorItem.name} #{collectorItem.lastName}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCrop.CreateCropLabel_weight}" for="weight" />
+                        <p:inputText id="weight" value="#{cropController.selected.weight}" title="#{bundleCrop.CreateCropTitle_weight}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cropController.create}" value="#{bundle.Save}" update="display,:CropListPanel:CropListForm:datalist,:growl" oncomplete="handleSubmit(args,'CropCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CropCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

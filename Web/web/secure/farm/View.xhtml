@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <p:dialog id="FarmViewDlg" widgetVar="FarmViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFarmTitle}">
+            <h:form id="FarmViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{farmController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFarmLabel_nombre}"/>
+                        <h:outputText value="#{farmController.selected.nombre}" title="#{bundle.ViewFarmTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewFarmLabel_vereda}"/>
+                        <h:outputText value="#{farmController.selected.vereda}" title="#{bundle.ViewFarmTitle_vereda}"/>
+                        <h:outputText value="#{bundle.ViewFarmLabel_altitud}"/>
+                        <h:outputText value="#{farmController.selected.altitud}" title="#{bundle.ViewFarmTitle_altitud}"/>
+                        <h:outputText value="#{bundle.ViewFarmLabel_propietario}"/>
+                        <h:outputText value="#{farmController.selected.propietario.nombre} #{farmController.selected.propietario.apellido}" title="#{bundle.ViewFarmTitle_propietario}"/>
+                        <h:outputText value="#{bundle.ViewFarmLabel_coordenada}"/>
+                        <p:gmap center="#{farmController.selected.coordenada.x}, #{farmController.selected.coordenada.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" model="#{farmController.model}"/>
+                    </p:panelGrid>                                            
+                    <p:commandButton value="#{bundle.Close}" onclick="FarmViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

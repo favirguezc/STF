@@ -12,22 +12,22 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="NotaListForm">
-                <p:panel header="Notas">
-                    <p:dashboard id="notaDashboard" binding="#{notaController.dashboard}"/>
+            <h:form id="NoteListForm">
+                <p:panel header="Notes">
+                    <p:dashboard id="noteDashboard" binding="#{noteController.dashboard}"/>
                     <div style="clear:both" />
                     <p:panel>
                         <center>
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{notaController.prepareCreate}" update=":NotaCreateForm" oncomplete="PF('NotaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NotaViewForm" oncomplete="PF('NotaViewDialog').show()" disabled="#{empty notaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":NotaEditForm" oncomplete="PF('NotaEditDialog').show()" disabled="#{empty notaController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{noteController.prepareCreate}" update=":NoteCreateForm" oncomplete="PF('NoteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NoteViewForm" oncomplete="PF('NoteViewDialog').show()" disabled="#{empty noteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":NoteEditForm" oncomplete="PF('NoteEditDialog').show()" disabled="#{empty noteController.selected}"/>
                         </center>
                     </p:panel>
                 </p:panel>
             </h:form>
-            <ui:include src="/secure/nota/Create.xhtml"/>
-            <ui:include src="/secure/nota/Edit.xhtml"/>
-            <ui:include src="/secure/nota/View.xhtml"/>
+            <ui:include src="/secure/note/Create.xhtml"/>
+            <ui:include src="/secure/note/Edit.xhtml"/>
+            <ui:include src="/secure/note/View.xhtml"/>
         </ui:define>
     </ui:composition>
 

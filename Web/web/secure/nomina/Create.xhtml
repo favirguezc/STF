@@ -16,7 +16,7 @@
                         <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{nominaController.selected.fecha}" title="#{bundle.CreateNominaTitle_fecha}" required="true" requiredMessage="#{CreateCostoRequiredMessage_fecha}" showOn="button" />
                         <h:outputLabel value="#{bundle.CreateNominaLabel_trabajador}" for="trabajador" />
                         <p:selectOneMenu id="trabajador" value="#{nominaController.selected.trabajador}" required="true" requiredMessage="#{bundle.CreateNominaRequiredMessage_trabajador}">
-                            <f:selectItems value="#{personaController.itemsAvailableTrabajador}"
+                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
                                            var="trabajadorItem"
                                            itemValue="#{trabajadorItem}"
                                            itemLabel="#{trabajadorItem.nombre} #{trabajadorItem.apellido}"/>

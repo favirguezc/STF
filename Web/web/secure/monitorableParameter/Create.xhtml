@@ -8,21 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitorableParameterCreateDlg" widgetVar="MonitorableParameterCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMonitorableParameterTitle}">
+        <p:dialog id="MonitorableParameterCreateDlg" widgetVar="MonitorableParameterCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitorableParameter.CreateMonitorableParameterTitle}">
             <h:form id="MonitorableParameterCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMonitorableParameterLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{monitorableparameterController.selected.nombre}" title="#{bundle.CreateMonitorableParameterTitle_nombre}" required="true" requiredMessage="#{bundle.CreateMonitorableParameterRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.CreateMonitorableParameterLabel_abreviacion}" for="abreviacion" />
-                        <p:inputText id="abreviacion" value="#{monitorableparameterController.selected.abreviacion}" title="#{bundle.CreateMonitorableParameterTitle_abreviacion}" required="true" requiredMessage="#{bundle.CreateMonitorableParameterRequiredMessage_abreviacion}"/>
-                        <p:outputLabel value="#{bundle.CreateMonitorableParameterLabel_valuationType}" for="valuationType" />
-                        <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundle.CreateMonitorableParameterRequiredMessage_valuationType}">
+                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{monitorableparameterController.selected.nombre}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_nombre}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_abreviacion}" for="abreviacion" />
+                        <p:inputText id="abreviacion" value="#{monitorableparameterController.selected.abreviacion}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abreviacion}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abreviacion}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_valuationType}" for="valuationType" />
+                        <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_valuationType}">
                             <f:selectItems value="#{valuationTypeController.valuationTypeValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitorableparameterController.create}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitorableParameterCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitorableparameterController.create}" value="#{bundleMonitorableParameter.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
+                    <p:commandButton value="#{bundleMonitorableParameter.Cancel}" onclick="MonitorableParameterCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

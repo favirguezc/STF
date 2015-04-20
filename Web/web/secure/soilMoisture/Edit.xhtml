@@ -8,21 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="SoilMoistureEditDlg" widgetVar="SoilMoistureEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSoilMoistureTitle}">
+        <p:dialog id="SoilMoistureEditDlg" widgetVar="SoilMoistureEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleSoilMoisture.EditSoilMoistureTitle}">
             <h:form id="SoilMoistureEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{soilMoistureController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSoilMoistureLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{soilMoistureController.selected.fecha}" title="#{bundle.EditSoilMoistureTitle_fecha}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_fecha}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditSoilMoistureLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{soilMoistureController.selected.hora}" title="#{bundle.EditSoilMoistureTitle_hora}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_hora}" showOn="button" timeOnly="true"/>
-                        <p:outputLabel value="#{bundle.EditSoilMoistureLabel_valorEn15Cms}" for="valorEn15Cms" />
-                        <p:inputText id="valorEn15Cms" value="#{soilMoistureController.selected.valorEn15Cms}" title="#{bundle.EditSoilMoistureTitle_valorEn15Cms}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_valorEn15Cms}"/>
-                        <p:outputLabel value="#{bundle.EditSoilMoistureLabel_valorEn30Cms}" for="valorEn30Cms" />
-                        <p:inputText id="valorEn30Cms" value="#{soilMoistureController.selected.valorEn30Cms}" title="#{bundle.EditSoilMoistureTitle_valorEn30Cms}" required="true" requiredMessage="#{bundle.EditSoilMoistureRequiredMessage_valorEn30Cms}"/>
+                        <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{soilMoistureController.selected.fecha}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_fecha}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_hora}" for="hora" />
+                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{soilMoistureController.selected.hora}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_hora}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_hora}" showOn="button" timeOnly="true"/>
+                        <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_valorEn15Cms}" for="valorEn15Cms" />
+                        <p:inputText id="valorEn15Cms" value="#{soilMoistureController.selected.valorEn15Cms}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valorEn15Cms}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valorEn15Cms}"/>
+                        <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_valorEn30Cms}" for="valorEn30Cms" />
+                        <p:inputText id="valorEn30Cms" value="#{soilMoistureController.selected.valorEn30Cms}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valorEn30Cms}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valorEn30Cms}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{soilMoistureController.update}" value="#{bundle.Save}" update="display,:SoilMoistureListPanel:SoilMoistureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SoilMoistureEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SoilMoistureEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{soilMoistureController.update}" value="#{bundleSoilMoisture.Save}" update="display,:SoilMoistureListPanel:SoilMoistureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SoilMoistureEditDialog');"/>
+                    <p:commandButton value="#{bundleSoilMoisture.Cancel}" onclick="SoilMoistureEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,24 +8,24 @@
 
     <ui:composition>
 
-        <p:dialog id="ThermometerCreateDlg" widgetVar="ThermometerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateThermometerTitle}">
+        <p:dialog id="ThermometerCreateDlg" widgetVar="ThermometerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleThermometer.CreateThermometerTitle}">
             <h:form id="ThermometerCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{thermometerController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateThermometerLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{thermometerController.selected.nombre}" title="#{bundle.CreateThermometerTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.CreateThermometerLabel_numeroDeSerie}" for="numeroDeSerie" />
-                        <p:inputText id="numeroDeSerie" value="#{thermometerController.selected.numeroDeSerie}" title="#{bundle.CreateThermometerTitle_numeroDeSerie}" />
-                        <p:outputLabel value="#{bundle.CreateThermometerLabel_moduleclass}" for="moduleclass" />
-                        <p:selectOneMenu id="moduleclass" value="#{thermometerController.selected.moduleclass}" required="true" requiredMessage="#{bundle.EditThermometerRequiredMessage_moduleclass}">
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{thermometerController.selected.nombre}" title="#{bundleThermometer.CreateThermometerTitle_nombre}" />
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_numeroDeSerie}" for="numeroDeSerie" />
+                        <p:inputText id="numeroDeSerie" value="#{thermometerController.selected.numeroDeSerie}" title="#{bundleThermometer.CreateThermometerTitle_numeroDeSerie}" />
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_moduleclass}" for="moduleclass" />
+                        <p:selectOneMenu id="moduleclass" value="#{thermometerController.selected.moduleclass}" required="true" requiredMessage="#{bundleThermometer.EditThermometerRequiredMessage_moduleclass}">
                             <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
                                            var="moduleclassItem"
                                            itemValue="#{moduleclassItem}"
                                            itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{thermometerController.create}" value="#{bundle.Save}" update="display,:ThermometerListForm:datalist,:growl" oncomplete="handleSubmit(args,'ThermometerCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ThermometerCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{thermometerController.create}" value="#{bundleThermometer.Save}" update="display,:ThermometerListForm:datalist,:growl" oncomplete="handleSubmit(args,'ThermometerCreateDialog');"/>
+                    <p:commandButton value="#{bundleThermometer.Cancel}" onclick="ThermometerCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

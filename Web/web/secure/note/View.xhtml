@@ -8,20 +8,20 @@
 
     <ui:composition>
 
-        <p:dialog id="NoteViewDlg" widgetVar="NoteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNoteTitle}">
+        <p:dialog id="NoteViewDlg" widgetVar="NoteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleNote.ViewNoteTitle}">
             <h:form id="NoteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{noteController.selected != null}">
-                        <h:outputText value="#{bundle.ViewNoteLabel_titulo}"/>
-                        <h:outputText value="#{noteController.selected.titulo}" title="#{bundle.ViewNoteTitle_titulo}"/>
-                        <h:outputText value="#{bundle.ViewNoteLabel_note}"/>
-                        <h:outputText value="#{noteController.selected.note}" title="#{bundle.ViewNoteTitle_note}"/>
-                        <h:outputText value="#{bundle.ViewNoteLabel_de}"/>
-                        <h:outputText value="#{noteController.selected.de}" title="#{bundle.ViewNoteTitle_de}"/>
-                        <h:outputText value="#{bundle.ViewNoteLabel_para}"/>
-                        <h:outputText value="#{noteController.selected.para}" title="#{bundle.ViewNoteTitle_para}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_titulo}"/>
+                        <h:outputText value="#{noteController.selected.titulo}" title="#{bundleNote.ViewNoteTitle_titulo}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_note}"/>
+                        <h:outputText value="#{noteController.selected.note}" title="#{bundleNote.ViewNoteTitle_note}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_de}"/>
+                        <h:outputText value="#{noteController.selected.de}" title="#{bundleNote.ViewNoteTitle_de}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_para}"/>
+                        <h:outputText value="#{noteController.selected.para}" title="#{bundleNote.ViewNoteTitle_para}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="NoteViewDialog.hide()"/>
+                    <p:commandButton value="#{bundleNote.Close}" onclick="NoteViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

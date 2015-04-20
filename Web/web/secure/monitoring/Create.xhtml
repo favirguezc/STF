@@ -8,17 +8,17 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitoringCreateDlg" widgetVar="MonitoringCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMonitoringTitle}">
+        <p:dialog id="MonitoringCreateDlg" widgetVar="MonitoringCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitoring.CreateMonitoringTitle}">
             <h:form id="MonitoringCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoringController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMonitoringLabel_numeroDeMonitoring}" for="numeroDeMonitoring" />
-                        <p:inputText id="numeroDeMonitoring" value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundle.CreateMonitoringTitle_numeroDeMonitoring}" />
-                        <p:outputLabel value="#{bundle.CreateMonitoringLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{monitoringController.selected.fecha}" title="#{bundle.EditMonitoringTitle_fecha}" required="true" requiredMessage="#{bundle.EditMonitoringRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundleMonitoring.CreateMonitoringLabel_numeroDeMonitoring}" for="numeroDeMonitoring" />
+                        <p:inputText id="numeroDeMonitoring" value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundleMonitoring.CreateMonitoringTitle_numeroDeMonitoring}" />
+                        <p:outputLabel value="#{bundleMonitoring.CreateMonitoringLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{monitoringController.selected.fecha}" title="#{bundleMonitoring.EditMonitoringTitle_fecha}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_fecha}" showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitoringController.create}" value="#{bundle.Save}" update="display,:MonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitoringCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoringCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitoringController.create}" value="#{bundleMonitoring.Save}" update="display,:MonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitoringCreateDialog');"/>
+                    <p:commandButton value="#{bundleMonitoring.Cancel}" onclick="MonitoringCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

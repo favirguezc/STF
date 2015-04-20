@@ -8,21 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="PermissionEditDlg" widgetVar="PermissionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPermissionTitle}">
+        <p:dialog id="PermissionEditDlg" widgetVar="PermissionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePermission.EditPermissionTitle}">
             <h:form id="PermissionEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{permissionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPermissionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{permissionController.selected.id}" title="#{bundle.EditPermissionTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditPermissionLabel_page}" for="page" />
-                        <p:inputText id="page" value="#{permissionController.selected.page}" title="#{bundle.EditPermissionTitle_page}" />
-                        <p:outputLabel value="#{bundle.EditPermissionLabel_rol}" for="rol" />
-                        <p:inputText id="rol" value="#{permissionController.selected.rol}" title="#{bundle.EditPermissionTitle_rol}" />
-                        <p:outputLabel value="#{bundle.EditPermissionLabel_action}" for="action" />
-                        <p:inputText id="action" value="#{permissionController.selected.action}" title="#{bundle.EditPermissionTitle_action}" />
+                        <p:outputLabel value="#{bundlePermission.EditPermissionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{permissionController.selected.id}" title="#{bundlePermission.EditPermissionTitle_id}" />
+                        <p:outputLabel value="#{bundlePermission.EditPermissionLabel_page}" for="page" />
+                        <p:inputText id="page" value="#{permissionController.selected.page}" title="#{bundlePermission.EditPermissionTitle_page}" />
+                        <p:outputLabel value="#{bundlePermission.EditPermissionLabel_rol}" for="rol" />
+                        <p:inputText id="rol" value="#{permissionController.selected.rol}" title="#{bundlePermission.EditPermissionTitle_rol}" />
+                        <p:outputLabel value="#{bundlePermission.EditPermissionLabel_action}" for="action" />
+                        <p:inputText id="action" value="#{permissionController.selected.action}" title="#{bundlePermission.EditPermissionTitle_action}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{permissionController.update}" value="#{bundle.Save}" update="display,:PermissionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PermissionEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PermissionEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{permissionController.update}" value="#{bundlePermission.Save}" update="display,:PermissionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PermissionEditDialog');"/>
+                    <p:commandButton value="#{bundlePermission.Cancel}" onclick="PermissionEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

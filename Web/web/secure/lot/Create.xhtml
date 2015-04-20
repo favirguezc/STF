@@ -8,15 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="LotCreateDlg" widgetVar="LotCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLotTitle}">
+        <p:dialog id="LotCreateDlg" widgetVar="LotCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleLot.CreateLotTitle}">
             <h:form id="LotCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lotController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLotLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{lotController.selected.nombre}" title="#{bundle.CreateLotTitle_nombre}" />
+                        <p:outputLabel value="#{bundleLot.CreateLotLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{lotController.selected.nombre}" title="#{bundleLot.CreateLotTitle_nombre}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{lotController.create}" value="#{bundle.Save}" update="display,:LotListForm:datalist,:growl" oncomplete="handleSubmit(args,'LotCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="LotCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{lotController.create}" value="#{bundleLot.Save}" update="display,:LotListForm:datalist,:growl" oncomplete="handleSubmit(args,'LotCreateDialog');"/>
+                    <p:commandButton value="#{bundleLot.Cancel}" onclick="LotCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

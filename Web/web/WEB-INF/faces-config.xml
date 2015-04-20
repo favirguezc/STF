@@ -44,6 +44,58 @@
             <base-name>/BundleInsectTrap</base-name>
             <var>bundleInsectTrap</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleJob</base-name>
+            <var>bundleJob</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleLot</base-name>
+            <var>bundleLot</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleModule</base-name>
+            <var>bundleModule</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleMonitorableParameter</base-name>
+            <var>bundleMonitorableParameter</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleMonitoring</base-name>
+            <var>bundleMonitoring</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleNote</base-name>
+            <var>bundleNote</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleParameterMonitoring</base-name>
+            <var>bundleParameterMonitoring</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePermission</base-name>
+            <var>bundlePermission</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleRainFall</base-name>
+            <var>bundleRainFall</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleSoilMoisture</base-name>
+            <var>bundleSoilMoisture</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTemperature</base-name>
+            <var>bundleTemperature</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleThermometer</base-name>
+            <var>bundleThermometer</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleWork</base-name>
+            <var>bundleWork</var>
+        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>RiskConverter</managed-bean-name>

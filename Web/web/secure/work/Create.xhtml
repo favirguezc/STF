@@ -8,40 +8,40 @@
 
     <ui:composition>
 
-        <p:dialog id="WorkCreateDlg" widgetVar="WorkCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateWorkTitle}">
+        <p:dialog id="WorkCreateDlg" widgetVar="WorkCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleWork.CreateWorkTitle}">
             <h:form id="WorkCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{workController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{workController.selected.fecha}" title="#{bundle.EditWorkTitle_fecha}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_fecha}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_moduleclass}" for="moduleclass" />
-                        <p:selectOneMenu id="moduleclass" value="#{workController.selected.moduleclass}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_moduleclass}">
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{workController.selected.fecha}" title="#{bundleWork.EditWorkTitle_fecha}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_moduleclass}" for="moduleclass" />
+                        <p:selectOneMenu id="moduleclass" value="#{workController.selected.moduleclass}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_moduleclass}">
                             <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
                                            var="moduleclassItem"
                                            itemValue="#{moduleclassItem}"
                                            itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_job}" for="job" />
-                        <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_job}">
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_job}" for="job" />
+                        <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_job}">
                             <f:selectItems value="#{jobController.itemsAvailableSelectOne}"
                                            var="jobItem"
                                            itemValue="#{jobItem}"
                                            itemLabel="#{jobItem.nombre}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_operario}" for="operario" />
-                        <p:selectOneMenu id="operario" value="#{workController.selected.operario}" required="true" requiredMessage="#{bundle.EditWorkRequiredMessage_operario}">
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_operario}" for="operario" />
+                        <p:selectOneMenu id="operario" value="#{workController.selected.operario}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_operario}">
                             <f:selectItems value="#{personController.itemsAvailableTrabajador}"
                                            var="operarioItem"
                                            itemValue="#{operarioItem}"
                                            itemLabel="#{operarioItem.nombre} #{operarioItem.apellido}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_horas}" for="horas" />
-                        <p:inputText id="horas" value="#{workController.selected.horas}" title="#{bundle.CreateWorkTitle_horas}" />
-                        <p:outputLabel value="#{bundle.CreateWorkLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{workController.selected.observaciones}" title="#{bundle.CreateWorkTitle_observaciones}"/>                        
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_horas}" for="horas" />
+                        <p:inputText id="horas" value="#{workController.selected.horas}" title="#{bundleWork.CreateWorkTitle_horas}" />
+                        <p:outputLabel value="#{bundleWork.CreateWorkLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{workController.selected.observaciones}" title="#{bundleWork.CreateWorkTitle_observaciones}"/>                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{workController.create}" value="#{bundle.Save}" update="display,:WorkListForm:datalist,:growl" oncomplete="handleSubmit(args,'WorkCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="WorkCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{workController.create}" value="#{bundleWork.Save}" update="display,:WorkListForm:datalist,:growl" oncomplete="handleSubmit(args,'WorkCreateDialog');"/>
+                    <p:commandButton value="#{bundleWork.Cancel}" onclick="WorkCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

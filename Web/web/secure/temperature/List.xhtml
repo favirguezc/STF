@@ -9,7 +9,7 @@
     <ui:composition template="/template.xhtml">
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.AppName}"></h:outputText>
+            <h:outputText value="#{bundleTemperature.AppName}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -97,7 +97,7 @@
 
                             <p:column sortBy="#{item.fecha}">
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTemperatureTitle_fecha}"/>
+                                    <h:outputText value="#{bundleTemperature.ListTemperatureTitle_fecha}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.fecha}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -105,7 +105,7 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTemperatureTitle_hora}"/>
+                                    <h:outputText value="#{bundleTemperature.ListTemperatureTitle_hora}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.hora}">
                                     <f:convertDateTime pattern="hh:mm:ss a"/>
@@ -113,39 +113,39 @@
                             </p:column>
                             <p:column sortBy="#{item.temperature}">
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTemperatureTitle_temperature}"/>
+                                    <h:outputText value="#{bundleTemperature.ListTemperatureTitle_temperature}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.temperature}"/>
                             </p:column>
                             <p:column sortBy="#{item.soilmoisture}">
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTemperatureTitle_soilmoisture}"/>
+                                    <h:outputText value="#{bundleTemperature.ListTemperatureTitle_soilmoisture}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.soilmoisture}"/>
                             </p:column>
                             <p:column sortBy="#{item.puntoDeRocio}">
                                 <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListTemperatureTitle_puntoDeRocio}"/>
+                                    <h:outputText value="#{bundleTemperature.ListTemperatureTitle_puntoDeRocio}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.puntoDeRocio}"/>
                             </p:column>
                             <p:column 
                                 filterBy="#{item.moduleclass}" 
-                                headerText="#{bundle.ListTemperatureTitle_moduleclass}"
+                                headerText="#{bundleTemperature.ListTemperatureTitle_moduleclass}"
                                 filterMatchMode="exact">
                                 <f:facet name="filter">
                                     <p:selectOneMenu onchange="PF('temperatureTable').filter()">
-                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItem itemLabel="#{bundleTemperature.SelectOneMessage}"/>
                                         <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
                                 <h:outputText value="#{item.moduleclass.lot.nombre} - #{item.moduleclass.nombre}"/>
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{temperatureController.prepareCreate}" update=":TemperatureListPanel:TemperatureCreateForm" oncomplete="PF('TemperatureCreateDialog').show()"/>
-                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TemperatureListPanel:TemperatureViewForm" oncomplete="PF('TemperatureViewDialog').show()" disabled="#{empty temperatureController.selected}"/>
-                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TemperatureListPanel:TemperatureEditForm" oncomplete="PF('TemperatureEditDialog').show()" disabled="#{empty temperatureController.selected}"/>
-                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{temperatureController.destroy}" update=":growl,datalist" disabled="#{empty temperatureController.selected}"/>
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleTemperature.Create}" actionListener="#{temperatureController.prepareCreate}" update=":TemperatureListPanel:TemperatureCreateForm" oncomplete="PF('TemperatureCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleTemperature.View}" update=":TemperatureListPanel:TemperatureViewForm" oncomplete="PF('TemperatureViewDialog').show()" disabled="#{empty temperatureController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleTemperature.Edit}" update=":TemperatureListPanel:TemperatureEditForm" oncomplete="PF('TemperatureEditDialog').show()" disabled="#{empty temperatureController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleTemperature.Delete}" actionListener="#{temperatureController.destroy}" update=":growl,datalist" disabled="#{empty temperatureController.selected}"/>
                             </f:facet>
                         </p:dataTable>
                     </h:form>

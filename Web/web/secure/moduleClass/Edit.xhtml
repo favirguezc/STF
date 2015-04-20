@@ -8,25 +8,25 @@
 
     <ui:composition>
 
-        <p:dialog id="ModuleClassEditDlg" widgetVar="ModuleClassEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditModuleClassTitle}">
+        <p:dialog id="ModuleClassEditDlg" widgetVar="ModuleClassEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleModule.EditModuleClassTitle}">
             <h:form id="ModuleClassEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditModuleClassLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{moduleclassController.selected.nombre}" title="#{bundle.EditModuleClassTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.EditModuleClassLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundle.EditModuleClassTitle_area}" />
-                        <p:outputLabel value="#{bundle.EditModuleClassLabel_lot}" for="lot" />
+                        <p:outputLabel value="#{bundleModule.EditModuleClassLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{moduleclassController.selected.nombre}" title="#{bundleModule.EditModuleClassTitle_nombre}" />
+                        <p:outputLabel value="#{bundleModule.EditModuleClassLabel_area}" for="area" />
+                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundleModule.EditModuleClassTitle_area}" />
+                        <p:outputLabel value="#{bundleModule.EditModuleClassLabel_lot}" for="lot" />
                         <p:selectOneMenu id="lot" value="#{moduleclassController.selected.lot}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="#{bundleModule.SelectOneMessage}"/>
                             <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
                                            var="lotItem"
                                            itemValue="#{lotItem}"
                                            itemLabel="#{lotItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{moduleclassController.update}" value="#{bundle.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModuleClassEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ModuleClassEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{moduleclassController.update}" value="#{bundleModule.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModuleClassEditDialog');"/>
+                    <p:commandButton value="#{bundleModule.Cancel}" onclick="ModuleClassEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,15 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="ModuleClassCreateDlg" widgetVar="ModuleClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateModuleClassTitle}">
+        <p:dialog id="ModuleClassCreateDlg" widgetVar="ModuleClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleModule.CreateModuleClassTitle}">
             <h:form id="ModuleClassCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{moduleclassController.selected.nombre}" title="#{bundle.CreateModuleClassTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundle.CreateModuleClassTitle_area}" />
-                        <p:outputLabel value="#{bundle.CreateModuleClassLabel_lot}" for="lot" />
+                        <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{moduleclassController.selected.nombre}" title="#{bundleModule.CreateModuleClassTitle_nombre}" />
+                        <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_area}" for="area" />
+                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundleModule.CreateModuleClassTitle_area}" />
+                        <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_lot}" for="lot" />
                         <p:selectOneMenu id="lot" value="#{moduleclassController.selected.lot}" >
                             <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
                                            var="lotItem"
@@ -24,8 +24,8 @@
                                            itemLabel="#{lotItem.nombre}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{moduleclassController.create}" value="#{bundle.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleClassCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ModuleClassCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{moduleclassController.create}" value="#{bundleModule.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleClassCreateDialog');"/>
+                    <p:commandButton value="#{bundleModule.Cancel}" onclick="ModuleClassCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

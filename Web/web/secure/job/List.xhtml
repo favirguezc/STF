@@ -28,21 +28,21 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListJobTitle_nombre}"/>
+                            <h:outputText value="#{bundleJob.ListJobTitle_name}"/>
                         </f:facet>
-                        <h:outputText value="#{item.nombre}"/>
+                        <h:outputText value="#{item.name}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListJobTitle_descripcion}"/>
+                            <h:outputText value="#{bundleJob.ListJobTitle_description}"/>
                         </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
+                        <h:outputText value="#{item.description}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListJobTitle_valor}"/>
+                            <h:outputText value="#{bundleJob.ListJobTitle_hourlyRate}"/>
                         </f:facet>
-                        <h:outputText value="#{item.valor}">
+                        <h:outputText value="#{item.hourlyRate}">
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>

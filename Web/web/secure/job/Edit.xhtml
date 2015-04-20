@@ -8,16 +8,16 @@
 
     <ui:composition>
 
-        <p:dialog id="JobEditDlg" widgetVar="JobEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditJobTitle}">
+        <p:dialog id="JobEditDlg" widgetVar="JobEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleJob.EditJobTitle}">
             <h:form id="JobEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{jobController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditJobLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{jobController.selected.nombre}" title="#{bundle.EditJobTitle_nombre}" required="true" requiredMessage="#{bundle.EditJobRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditJobLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{jobController.selected.descripcion}" title="#{bundle.EditJobTitle_descripcion}" />
-                        <p:outputLabel value="#{bundle.EditJobLabel_valor}" for="valor" />
-                        <p:inputText id="valor" value="#{jobController.selected.valor}" title="#{bundle.EditJobTitle_valor}" required="true" requiredMessage="#{bundle.EditJobRequiredMessage_valor}" />
+                        <p:outputLabel value="#{bundleJob.EditJobLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{jobController.selected.name}" title="#{bundleJob.EditJobTitle_name}" required="true" requiredMessage="#{bundleJob.EditJobRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundleJob.EditJobLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{jobController.selected.description}" title="#{bundleJob.EditJobTitle_description}" />
+                        <p:outputLabel value="#{bundleJob.EditJobLabel_hourlyRate}" for="value" />
+                        <p:inputText id="value" value="#{jobController.selected.hourlyRate}" title="#{bundleJob.EditJobTitle_hourlyRate}" required="true" requiredMessage="#{bundleJob.EditJobRequiredMessage_hourlyRate}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{jobController.update}" value="#{bundle.Save}" update="display,:JobListForm:datalist,:growl" oncomplete="handleSubmit(args, 'JobEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="JobEditDialog.hide()"/>

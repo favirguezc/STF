@@ -8,18 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="RainFallViewDlg" widgetVar="RainFallViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRainFallTitle}">
+        <p:dialog id="RainFallViewDlg" widgetVar="RainFallViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleRainFall.ViewRainFallTitle}">
             <h:form id="RainFallViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rainfallController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRainFallLabel_fecha}"/>
-                        <h:outputText value="#{rainfallController.selected.fecha}" title="#{bundle.ViewRainFallTitle_fecha}">
+                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_fecha}"/>
+                        <h:outputText value="#{rainfallController.selected.fecha}" title="#{bundleRainFall.ViewRainFallTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewRainFallLabel_mm}"/>
-                        <h:outputText value="#{rainfallController.selected.mm}" title="#{bundle.ViewRainFallTitle_mm}"/>
+                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_mm}"/>
+                        <h:outputText value="#{rainfallController.selected.mm}" title="#{bundleRainFall.ViewRainFallTitle_mm}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="RainFallViewDialog.hide()"/>
+                    <p:commandButton value="#{bundleRainFall.Close}" onclick="RainFallViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

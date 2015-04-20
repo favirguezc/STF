@@ -8,16 +8,16 @@
 
     <ui:composition>
 
-        <p:dialog id="JobViewDlg" widgetVar="JobViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewJobTitle}">
+        <p:dialog id="JobViewDlg" widgetVar="JobViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleJob.ViewJobTitle}">
             <h:form id="JobViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{jobController.selected != null}">
-                        <h:outputText value="#{bundle.ViewJobLabel_nombre}"/>
-                        <h:outputText value="#{jobController.selected.nombre}" title="#{bundle.ViewJobTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewJobLabel_descripcion}"/>
-                        <h:outputText value="#{jobController.selected.descripcion}" title="#{bundle.ViewJobTitle_descripcion}"/>
-                        <h:outputText value="#{bundle.ViewJobLabel_valor}"/>
-                        <h:outputText value="#{jobController.selected.valor}" title="#{bundle.ViewJobTitle_valor}"/>
+                        <h:outputText value="#{bundleJob.ViewJobLabel_name}"/>
+                        <h:outputText value="#{jobController.selected.name}" title="#{bundleJob.ViewJobTitle_name}"/>
+                        <h:outputText value="#{bundleJob.ViewJobLabel_description}"/>
+                        <h:outputText value="#{jobController.selected.description}" title="#{bundleJob.ViewJobTitle_description}"/>
+                        <h:outputText value="#{bundleJob.ViewJobLabel_hourlyRate}"/>
+                        <h:outputText value="#{jobController.selected.hourlyRate}" title="#{bundleJob.ViewJobTitle_hourlyRate}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="JobViewDialog.hide()"/>
                 </h:panelGroup>

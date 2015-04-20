@@ -8,18 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitoringViewDlg" widgetVar="MonitoringViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMonitoringTitle}">
+        <p:dialog id="MonitoringViewDlg" widgetVar="MonitoringViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitoring.ViewMonitoringTitle}">
             <h:form id="MonitoringViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoringController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMonitoringLabel_numeroDeMonitoring}"/>
-                        <h:outputText value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundle.ViewMonitoringTitle_numeroDeMonitoring}"/>
-                        <h:outputText value="#{bundle.ViewMonitoringLabel_fecha}"/>
-                        <h:outputText value="#{monitoringController.selected.fecha}" title="#{bundle.ViewMonitoringTitle_fecha}">
+                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_numeroDeMonitoring}"/>
+                        <h:outputText value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundleMonitoring.ViewMonitoringTitle_numeroDeMonitoring}"/>
+                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_fecha}"/>
+                        <h:outputText value="#{monitoringController.selected.fecha}" title="#{bundleMonitoring.ViewMonitoringTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="MonitoringViewDialog.hide()"/>
+                    <p:commandButton value="#{bundleMonitoring.Close}" onclick="MonitoringViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

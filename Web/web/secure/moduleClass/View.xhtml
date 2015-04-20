@@ -8,18 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="ModuleClassViewDlg" widgetVar="ModuleClassViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewModuleClassTitle}">
+        <p:dialog id="ModuleClassViewDlg" widgetVar="ModuleClassViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleModule.ViewModuleClassTitle}">
             <h:form id="ModuleClassViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
-                        <h:outputText value="#{bundle.ViewModuleClassLabel_nombre}"/>
-                        <h:outputText value="#{moduleclassController.selected.nombre}" title="#{bundle.ViewModuleClassTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewModuleClassLabel_area}"/>
-                        <h:outputText value="#{moduleclassController.selected.area}" title="#{bundle.ViewModuleClassTitle_area}"/>
-                        <h:outputText value="#{bundle.ViewModuleClassLabel_lot}"/>
-                        <h:outputText value="#{moduleclassController.selected.lot.nombre}" title="#{bundle.ViewModuleClassTitle_lot}"/>
+                        <h:outputText value="#{bundleModule.ViewModuleClassLabel_nombre}"/>
+                        <h:outputText value="#{moduleclassController.selected.nombre}" title="#{bundleModule.ViewModuleClassTitle_nombre}"/>
+                        <h:outputText value="#{bundleModule.ViewModuleClassLabel_area}"/>
+                        <h:outputText value="#{moduleclassController.selected.area}" title="#{bundleModule.ViewModuleClassTitle_area}"/>
+                        <h:outputText value="#{bundleModule.ViewModuleClassLabel_lot}"/>
+                        <h:outputText value="#{moduleclassController.selected.lot.nombre}" title="#{bundleModule.ViewModuleClassTitle_lot}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ModuleClassViewDialog.hide()"/>
+                    <p:commandButton value="#{bundleModule.Close}" onclick="ModuleClassViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,14 +8,14 @@
 
     <ui:composition>
 
-        <p:dialog id="LotViewDlg" widgetVar="LotViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLotTitle}">
+        <p:dialog id="LotViewDlg" widgetVar="LotViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleLot.ViewLotTitle}">
             <h:form id="LotViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lotController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLotLabel_nombre}"/>
-                        <h:outputText value="#{lotController.selected.nombre}" title="#{bundle.ViewLotTitle_nombre}"/>
+                        <h:outputText value="#{bundleLot.ViewLotLabel_nombre}"/>
+                        <h:outputText value="#{lotController.selected.nombre}" title="#{bundleLot.ViewLotTitle_nombre}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="LotViewDialog.hide()"/>
+                    <p:commandButton value="#{bundleLot.Close}" onclick="LotViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

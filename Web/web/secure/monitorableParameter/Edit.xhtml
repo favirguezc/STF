@@ -8,21 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="MonitorableParameterEditDlg" widgetVar="MonitorableParameterEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMonitorableParameterTitle}">
+        <p:dialog id="MonitorableParameterEditDlg" widgetVar="MonitorableParameterEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitorableParameter.EditMonitorableParameterTitle}">
             <h:form id="MonitorableParameterEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMonitorableParameterLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{monitorableparameterController.selected.nombre}" title="#{bundle.EditMonitorableParameterTitle_nombre}" required="true" requiredMessage="#{bundle.EditMonitorableParameterRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditMonitorableParameterLabel_abreviacion}" for="abreviacion" />
-                        <p:inputText id="abreviacion" value="#{monitorableparameterController.selected.abreviacion}" title="#{bundle.EditMonitorableParameterTitle_abreviacion}" required="true" requiredMessage="#{bundle.EditMonitorableParameterRequiredMessage_abreviacion}"/>
-                        <p:outputLabel value="#{bundle.EditMonitorableParameterLabel_valuationType}" for="valuationType" />
-                        <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundle.EditMonitorableParameterRequiredMessage_valuationType}">
+                        <p:outputLabel value="#{bundleMonitorableParameter.EditMonitorableParameterLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{monitorableparameterController.selected.nombre}" title="#{bundleMonitorableParameter.EditMonitorableParameterTitle_nombre}" required="true" requiredMessage="#{bundleMonitorableParameter.EditMonitorableParameterRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.EditMonitorableParameterLabel_abreviacion}" for="abreviacion" />
+                        <p:inputText id="abreviacion" value="#{monitorableparameterController.selected.abreviacion}" title="#{bundleMonitorableParameter.EditMonitorableParameterTitle_abreviacion}" required="true" requiredMessage="#{bundleMonitorableParameter.EditMonitorableParameterRequiredMessage_abreviacion}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.EditMonitorableParameterLabel_valuationType}" for="valuationType" />
+                        <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.EditMonitorableParameterRequiredMessage_valuationType}">
                             <f:selectItems value="#{valuationTypeController.valuationTypeValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitorableparameterController.update}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitorableParameterEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitorableParameterEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitorableparameterController.update}" value="#{bundleMonitorableParameter.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitorableParameterEditDialog');"/>
+                    <p:commandButton value="#{bundleMonitorableParameter.Cancel}" onclick="MonitorableParameterEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

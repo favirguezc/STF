@@ -8,24 +8,24 @@
 
     <ui:composition>
 
-        <p:dialog id="NoteEditDlg" widgetVar="NoteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditNoteTitle}">
+        <p:dialog id="NoteEditDlg" widgetVar="NoteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleNote.EditNoteTitle}">
             <h:form id="NoteEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{noteController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditNoteLabel_titulo}" for="titulo" />
-                        <p:inputText id="titulo" value="#{noteController.selected.titulo}" title="#{bundle.EditNoteTitle_titulo}" />
-                        <p:outputLabel value="#{bundle.EditNoteLabel_note}" for="note" />
-                        <p:inputTextarea id="note" value="#{noteController.selected.note}" title="#{bundle.EditNoteTitle_note}" required="true" requiredMessage="#{bundle.EditNoteRequiredMessage_note}"/>
-                        <p:outputLabel value="#{bundle.EditNoteLabel_para}" for="creador" />
-                        <p:selectOneMenu id="creador" value="#{noteController.selected.para}" required="true" requiredMessage="#{bundle.EditNoteRequiredMessage_para}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <p:outputLabel value="#{bundleNote.EditNoteLabel_titulo}" for="titulo" />
+                        <p:inputText id="titulo" value="#{noteController.selected.titulo}" title="#{bundleNote.EditNoteTitle_titulo}" />
+                        <p:outputLabel value="#{bundleNote.EditNoteLabel_note}" for="note" />
+                        <p:inputTextarea id="note" value="#{noteController.selected.note}" title="#{bundleNote.EditNoteTitle_note}" required="true" requiredMessage="#{bundleNote.EditNoteRequiredMessage_note}"/>
+                        <p:outputLabel value="#{bundleNote.EditNoteLabel_para}" for="creador" />
+                        <p:selectOneMenu id="creador" value="#{noteController.selected.para}" required="true" requiredMessage="#{bundleNote.EditNoteRequiredMessage_para}">
+                            <f:selectItem itemLabel="#{bundleNote.SelectOneMessage}"/>
                             <f:selectItems value="#{personController.itemsAvailableSelectOne}"
                                            var="creadorItem"
                                            itemValue="#{creadorItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{noteController.update}" value="#{bundle.Save}" update="display,:NoteListForm:noteDashboard,:growl" oncomplete="handleSubmit(args, 'NoteEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="NoteEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{noteController.update}" value="#{bundleNote.Save}" update="display,:NoteListForm:noteDashboard,:growl" oncomplete="handleSubmit(args, 'NoteEditDialog');"/>
+                    <p:commandButton value="#{bundleNote.Cancel}" onclick="NoteEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

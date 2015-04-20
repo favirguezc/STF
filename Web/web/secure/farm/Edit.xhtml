@@ -8,39 +8,39 @@
 
     <ui:composition>
 
-        <p:dialog id="FarmEditDlg" widgetVar="FarmEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFarmTitle}">
+        <p:dialog id="FarmEditDlg" widgetVar="FarmEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleFarm.EditFarmTitle}">
             <h:form id="FarmEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{farmController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditFarmLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{farmController.selected.nombre}" title="#{bundle.EditFarmTitle_nombre}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditFarmLabel_vereda}" for="vereda" />
-                        <p:inputText id="vereda" value="#{farmController.selected.vereda}" title="#{bundle.EditFarmTitle_vereda}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_vereda}"/>
-                        <p:outputLabel value="#{bundle.EditFarmLabel_municipality}" for="municipality" />
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{farmController.selected.name}" title="#{bundleFarm.EditFarmTitle_name}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_villageName}" for="villageName" />
+                        <p:inputText id="villageName" value="#{farmController.selected.villageName}" title="#{bundleFarm.EditFarmTitle_villageName}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_villageName}"/>
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_municipality}" for="municipality" />
                         <h:panelGroup>
-                            <p:selectOneMenu id="department" value="#{farmController.department}" required="true" requiredMessage="#{bundle.EditMunicipalityRequiredMessage_department}">
+                            <p:selectOneMenu id="department" value="#{farmController.department}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_department}">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{departmentController.itemsAvailableSelectOne}"
                                                var="departmentItem"
                                                itemValue="#{departmentItem}"/>
                                 <p:ajax update="municipality"/>
                             </p:selectOneMenu>
-                            <p:selectOneMenu id="municipality" value="#{farmController.selected.municipality}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_municipality}">
-                                <f:selectItems value="#{farmController.municipalitys}"
+                            <p:selectOneMenu id="municipality" value="#{farmController.selected.municipality}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_municipality}">
+                                <f:selectItems value="#{farmController.municipalities}"
                                                var="municipalityItem"
                                                itemValue="#{municipalityItem}"/>
                             </p:selectOneMenu>
                         </h:panelGroup>
-                        <p:outputLabel value="#{bundle.EditFarmLabel_altitud}" for="altitud" />
-                        <p:inputText id="altitud" value="#{farmController.selected.altitud}" title="#{bundle.EditFarmTitle_altitud}" />
-                        <p:outputLabel value="#{bundle.EditFarmLabel_propietario}" for="propietario" />
-                        <p:selectOneMenu id="propietario" value="#{farmController.selected.propietario}" required="true" requiredMessage="#{bundle.EditFarmRequiredMessage_propietario}">
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_altitude}" for="altitude" />
+                        <p:inputText id="altitude" value="#{farmController.selected.altitude}" title="#{bundleFarm.EditFarmTitle_altitude}" />
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_owner}" for="owner" />
+                        <p:selectOneMenu id="owner" value="#{farmController.selected.owner}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_owner}">
                             <f:selectItems value="#{personController.itemsAvailableSelectOne}"
-                                           var="propietarioItem"
-                                           itemValue="#{propietarioItem}"/>
+                                           var="ownerItem"
+                                           itemValue="#{ownerItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditFarmLabel_coordenada}" for="coordenada" />
-                        <p:gmap id="coordenada" center="#{farmController.selected.coordenada.x}, #{farmController.selected.coordenada.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{farmController.model}">
+                        <p:outputLabel value="#{bundleFarm.EditFarmLabel_coordinate}" for="coordinate" />
+                        <p:gmap id="coordinate" center="#{farmController.selected.coordinate.x}, #{farmController.selected.coordinate.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{farmController.mapModel}">
                             <p:ajax event="markerDrag" listener="#{farmController.markerDragged}" update=":growl"/>
                         </p:gmap>
                     </p:panelGrid>

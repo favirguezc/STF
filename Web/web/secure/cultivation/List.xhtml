@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle2.ListCultivationTitle}"></h:outputText>
+            <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="CultivationListForm">
-                <p:panel header="#{bundle2.ListCultivationTitle}">
+                <p:panel header="#{bundleCultivation.ListCultivationTitle}">
                     <p:dataTable id="datalist" value="#{cultivationController.items}" var="item"
                                  selectionMode="single" selection="#{cultivationController.selected}"
                                  paginator="true"
@@ -29,35 +29,35 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle2.ListCultivationTitle_moduleclass}"/>
+                                <h:outputText value="#{bundleCultivation.ListCultivationTitle_moduleObject}"/>
                             </f:facet>
-                            <h:outputText value="#{item.moduleclass}"/>
+                            <h:outputText value="#{item.moduleObject}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle2.ListCultivationTitle_variety}"/>
+                                <h:outputText value="#{bundleCultivation.ListCultivationTitle_variety}"/>
                             </f:facet>
                             <h:outputText value="#{item.variety}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle2.ListCultivationTitle_fechaDeSiembra}"/>
+                                <h:outputText value="#{bundleCultivation.ListCultivationTitle_plantingDate}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaDeSiembra}">
+                            <h:outputText value="#{item.plantingDate}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle2.ListCultivationTitle_observaciones}"/>
+                                <h:outputText value="#{bundleCultivation.ListCultivationTitle_observations}"/>
                             </f:facet>
-                            <h:outputText value="#{item.observaciones}"/>
+                            <h:outputText value="#{item.observations}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle2.Create}" actionListener="#{cultivationController.prepareCreate}" update=":CultivationCreateForm" oncomplete="PF('CultivationCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle2.View}" update=":CultivationViewForm" oncomplete="PF('CultivationViewDialog').show()" disabled="#{empty cultivationController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle2.Edit}" update=":CultivationEditForm" oncomplete="PF('CultivationEditDialog').show()" disabled="#{empty cultivationController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle2.Delete}" actionListener="#{cultivationController.destroy}" update=":growl,datalist" disabled="#{empty cultivationController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cultivationController.prepareCreate}" update=":CultivationCreateForm" oncomplete="PF('CultivationCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CultivationViewForm" oncomplete="PF('CultivationViewDialog').show()" disabled="#{empty cultivationController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CultivationEditForm" oncomplete="PF('CultivationEditDialog').show()" disabled="#{empty cultivationController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cultivationController.destroy}" update=":growl,datalist" disabled="#{empty cultivationController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

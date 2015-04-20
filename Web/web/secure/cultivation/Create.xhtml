@@ -8,29 +8,29 @@
 
     <ui:composition>
 
-        <p:dialog id="CultivationCreateDlg" widgetVar="CultivationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.CreateCultivationTitle}">
+        <p:dialog id="CultivationCreateDlg" widgetVar="CultivationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCultivation.CreateCultivationTitle}">
             <h:form id="CultivationCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
-                        <p:outputLabel value="#{bundle2.CreateCultivationLabel_moduleclass}" for="moduleclass" />
-                        <p:selectOneMenu id="moduleclass" value="#{cultivationController.selected.moduleclass}" required="true" requiredMessage="#{bundle2.EditCultivationRequiredMessage_moduleclass}">
-                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
-                                           var="moduleclassItem"
-                                           itemValue="#{moduleclassItem}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_moduleObject}" for="moduleObject" />
+                        <p:selectOneMenu id="moduleObject" value="#{cultivationController.selected.moduleObject}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_moduleObject}">
+                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                                           var="moduleObjectItem"
+                                           itemValue="#{moduleObjectItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle2.CreateCultivationLabel_variety}" for="variety" />
-                        <p:selectOneMenu id="variety" value="#{cultivationController.selected.variety}" required="true" requiredMessage="#{bundle2.EditCultivationRequiredMessage_variety}">
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_variety}" for="variety" />
+                        <p:selectOneMenu id="variety" value="#{cultivationController.selected.variety}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_variety}">
                             <f:selectItems value="#{varietyController.itemsAvailableSelectOne}"
                                            var="varietyItem"
                                            itemValue="#{varietyItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle2.CreateCultivationLabel_fechaDeSiembra}" for="fechaDeSiembra" />
-                        <p:calendar id="fechaDeSiembra" pattern="dd/MM/yyyy" value="#{cultivationController.selected.fechaDeSiembra}" title="#{bundle2.EditCultivationTitle_fechaDeSiembra}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle2.CreateCultivationLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{cultivationController.selected.observaciones}" title="#{bundle2.CreateCultivationTitle_observaciones}" />
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plantingDate}" for="plantingDate" />
+                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.EditCultivationTitle_plantingDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_observations}" for="observations" />
+                        <p:inputText id="observations" value="#{cultivationController.selected.observations}" title="#{bundleCultivation.CreateCultivationTitle_observations}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{cultivationController.create}" value="#{bundle2.Save}" update="display,:CultivationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CultivationCreateDialog');"/>
-                    <p:commandButton value="#{bundle2.Cancel}" onclick="CultivationCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{cultivationController.create}" value="#{bundle.Save}" update="display,:CultivationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CultivationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CultivationCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

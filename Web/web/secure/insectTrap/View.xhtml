@@ -8,24 +8,24 @@
 
     <ui:composition>
 
-        <p:dialog id="InsectTrapViewDlg" widgetVar="InsectTrapViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInsectTrapTitle}">
+        <p:dialog id="InsectTrapViewDlg" widgetVar="InsectTrapViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleInsectTrap.ViewInsectTrapTitle}">
             <h:form id="InsectTrapViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{insectTrapController.selected != null}">
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_fecha}"/>
-                        <h:outputText value="#{insectTrapController.selected.fecha}" title="#{bundle.ViewInsectTrapTitle_fecha}">
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_registerDate}"/>
+                        <h:outputText value="#{insectTrapController.selected.registerDate}" title="#{bundleInsectTrap.ViewInsectTrapTitle_registerDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_nombre}"/>
-                        <h:outputText value="#{insectTrapController.selected.nombre}" title="#{bundle.ViewInsectTrapTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_especie}"/>
-                        <h:outputText value="#{insectTrapController.selected.especie}" title="#{bundle.ViewInsectTrapTitle_especie}"/>
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_individuos}"/>
-                        <h:outputText value="#{insectTrapController.selected.individuos}" title="#{bundle.ViewInsectTrapTitle_individuos}"/>
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_cambioDePegante}"/>
-                        <h:outputText value="#{insectTrapController.selected.cambioDePegante}" title="#{bundle.ViewInsectTrapTitle_cambioDePegante}" converter="#{SiNoConverter}"/>
-                        <h:outputText value="#{bundle.ViewInsectTrapLabel_observaciones}"/>
-                        <h:outputText value="#{insectTrapController.selected.observaciones}" title="#{bundle.ViewInsectTrapTitle_observaciones}"/>                        
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_name}"/>
+                        <h:outputText value="#{insectTrapController.selected.name}" title="#{bundleInsectTrap.ViewInsectTrapTitle_name}"/>
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_species}"/>
+                        <h:outputText value="#{insectTrapController.selected.species}" title="#{bundleInsectTrap.ViewInsectTrapTitle_species}"/>
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_individuals}"/>
+                        <h:outputText value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.ViewInsectTrapTitle_individuals}"/>
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_glueChange}"/>
+                        <h:outputText value="#{insectTrapController.selected.glueChange}" title="#{bundleInsectTrap.ViewInsectTrapTitle_glueChange}" converter="#{BooleanConverter}"/>
+                        <h:outputText value="#{bundleInsectTrap.ViewInsectTrapLabel_observations}"/>
+                        <h:outputText value="#{insectTrapController.selected.observations}" title="#{bundleInsectTrap.ViewInsectTrapTitle_observations}"/>                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="InsectTrapViewDialog.hide()"/>
                 </h:panelGroup>

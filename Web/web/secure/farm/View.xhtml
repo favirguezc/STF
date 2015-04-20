@@ -8,20 +8,20 @@
 
     <ui:composition>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <p:dialog id="FarmViewDlg" widgetVar="FarmViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFarmTitle}">
+        <p:dialog id="FarmViewDlg" widgetVar="FarmViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleFarm.ViewFarmTitle}">
             <h:form id="FarmViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{farmController.selected != null}">
-                        <h:outputText value="#{bundle.ViewFarmLabel_nombre}"/>
-                        <h:outputText value="#{farmController.selected.nombre}" title="#{bundle.ViewFarmTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewFarmLabel_vereda}"/>
-                        <h:outputText value="#{farmController.selected.vereda}" title="#{bundle.ViewFarmTitle_vereda}"/>
-                        <h:outputText value="#{bundle.ViewFarmLabel_altitud}"/>
-                        <h:outputText value="#{farmController.selected.altitud}" title="#{bundle.ViewFarmTitle_altitud}"/>
-                        <h:outputText value="#{bundle.ViewFarmLabel_propietario}"/>
-                        <h:outputText value="#{farmController.selected.propietario.nombre} #{farmController.selected.propietario.apellido}" title="#{bundle.ViewFarmTitle_propietario}"/>
-                        <h:outputText value="#{bundle.ViewFarmLabel_coordenada}"/>
-                        <p:gmap center="#{farmController.selected.coordenada.x}, #{farmController.selected.coordenada.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" model="#{farmController.model}"/>
+                        <h:outputText value="#{bundleFarm.ViewFarmLabel_name}"/>
+                        <h:outputText value="#{farmController.selected.name}" title="#{bundleFarm.ViewFarmTitle_name}"/>
+                        <h:outputText value="#{bundleFarm.ViewFarmLabel_villageName}"/>
+                        <h:outputText value="#{farmController.selected.villageName}" title="#{bundleFarm.ViewFarmTitle_villageName}"/>
+                        <h:outputText value="#{bundleFarm.ViewFarmLabel_altitude}"/>
+                        <h:outputText value="#{farmController.selected.altitude}" title="#{bundleFarm.ViewFarmTitle_altitude}"/>
+                        <h:outputText value="#{bundleFarm.ViewFarmLabel_owner}"/>
+                        <h:outputText value="#{farmController.selected.owner.name} #{farmController.selected.owner.lastName}" title="#{bundleFarm.ViewFarmTitle_owner}"/>
+                        <h:outputText value="#{bundleFarm.ViewFarmLabel_coordinate}"/>
+                        <p:gmap center="#{farmController.selected.coordinate.x}, #{farmController.selected.coordinate.y}" zoom="17" type="HYBRID" style="width:500px;height:300px" streetView="true" model="#{farmController.mapModel}"/>
                     </p:panelGrid>                                            
                     <p:commandButton value="#{bundle.Close}" onclick="FarmViewDialog.hide()"/>
                 </h:panelGroup>

@@ -32,6 +32,18 @@
             <base-name>/BundlePerson</base-name>
             <var>bundlePerson</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCultivation</base-name>
+            <var>bundleCultivation</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleFarm</base-name>
+            <var>bundleFarm</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleInsectTrap</base-name>
+            <var>bundleInsectTrap</var>
+        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>RiskConverter</managed-bean-name>

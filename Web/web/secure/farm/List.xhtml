@@ -10,7 +10,7 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListFarmTitle}"></h:outputText>
+            <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -28,27 +28,27 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListFarmTitle_nombre}"/>
+                            <h:outputText value="#{bundleFarm.ListFarmTitle_name}"/>
                         </f:facet>
-                        <h:outputText value="#{item.nombre}"/>
+                        <h:outputText value="#{item.name}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListFarmTitle_vereda}"/>
+                            <h:outputText value="#{bundleFarm.ListFarmTitle_villageName}"/>
                         </f:facet>
-                        <h:outputText value="#{item.vereda}, #{item.municipality.nombre}, #{item.municipality.department.nombre}"/>
+                        <h:outputText value="#{item.villageName}, #{item.municipality.name}, #{item.municipality.department.name}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListFarmTitle_altitud}"/>
+                            <h:outputText value="#{bundleFarm.ListFarmTitle_altitude}"/>
                         </f:facet>
-                        <h:outputText value="#{item.altitud}"/>
+                        <h:outputText value="#{item.altitude}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListFarmTitle_propietario}"/>
+                            <h:outputText value="#{bundleFarm.ListFarmTitle_owner}"/>
                         </f:facet>
-                        <h:outputText value="#{item.propietario.nombre} #{item.propietario.apellido}"/>
+                        <h:outputText value="#{item.owner.name} #{item.owner.lastName}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{farmController.prepareCreate}" update=":FarmCreateForm" oncomplete="PF('FarmCreateDialog').show()"/>

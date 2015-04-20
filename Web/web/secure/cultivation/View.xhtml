@@ -12,18 +12,18 @@
             <h:form id="CultivationViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
-                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_moduleclass}"/>
-                        <h:outputText value="#{cultivationController.selected.moduleclass}" title="#{bundleCultivation.ViewCultivationTitle_moduleclass}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_moduleObject}"/>
+                        <h:outputText value="#{cultivationController.selected.moduleObject}" title="#{bundleCultivation.ViewCultivationTitle_moduleObject}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_variety}"/>
                         <h:outputText value="#{cultivationController.selected.variety}" title="#{bundleCultivation.ViewCultivationTitle_variety}"/>
-                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_fechaDeSiembra}"/>
-                        <h:outputText value="#{cultivationController.selected.fechaDeSiembra}" title="#{bundleCultivation.ViewCultivationTitle_fechaDeSiembra}">
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_plantingDate}"/>
+                        <h:outputText value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.ViewCultivationTitle_plantingDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_observaciones}"/>
-                        <h:outputText value="#{cultivationController.selected.observaciones}" title="#{bundleCultivation.ViewCultivationTitle_observaciones}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_observations}"/>
+                        <h:outputText value="#{cultivationController.selected.observations}" title="#{bundleCultivation.ViewCultivationTitle_observations}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleCultivation.Close}" onclick="CultivationViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="CultivationViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

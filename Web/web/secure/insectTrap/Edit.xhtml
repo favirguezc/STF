@@ -8,22 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="InsectTrapEditDlg" widgetVar="InsectTrapEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInsectTrapTitle}">
+        <p:dialog id="InsectTrapEditDlg" widgetVar="InsectTrapEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleInsectTrap.EditInsectTrapTitle}">
             <h:form id="InsectTrapEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{insectTrapController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{insectTrapController.selected.fecha}" title="#{bundle.EditInsectTrapTitle_fecha}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_fecha}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{insectTrapController.selected.nombre}" title="#{bundle.EditInsectTrapTitle_nombre}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_especie}" for="especie" />
-                        <p:inputText id="especie" value="#{insectTrapController.selected.especie}" title="#{bundle.EditInsectTrapTitle_especie}" required="true" requiredMessage="#{bundle.EditInsectTrapRequiredMessage_especie}"/>
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_individuos}" for="individuos" />
-                        <p:inputText id="individuos" value="#{insectTrapController.selected.individuos}" title="#{bundle.EditInsectTrapTitle_individuos}" />
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_cambioDePegante}" for="cambioDePegante"/>
-                        <p:selectBooleanButton id="cambioDePegante" value="#{insectTrapController.selected.cambioDePegante}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
-                        <p:outputLabel value="#{bundle.EditInsectTrapLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{insectTrapController.selected.observaciones}" title="#{bundle.EditInsectTrapTitle_observaciones}" />                        
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_registerDate}" for="registerDate" />
+                        <p:calendar id="registerDate" pattern="dd/MM/yyyy" value="#{insectTrapController.selected.registerDate}" title="#{bundleInsectTrap.EditInsectTrapTitle_registerDate}" required="true" requiredMessage="#{bundleInsectTrap.EditInsectTrapRequiredMessage_registerDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{insectTrapController.selected.name}" title="#{bundleInsectTrap.EditInsectTrapTitle_name}" required="true" requiredMessage="#{bundleInsectTrap.EditInsectTrapRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_species}" for="species" />
+                        <p:inputText id="species" value="#{insectTrapController.selected.species}" title="#{bundleInsectTrap.EditInsectTrapTitle_species}" required="true" requiredMessage="#{bundleInsectTrap.EditInsectTrapRequiredMessage_species}"/>
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_individuals}" for="individuals" />
+                        <p:inputText id="individuals" value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.EditInsectTrapTitle_individuals}" />
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_glueChange}" for="glueChange"/>
+                        <p:selectBooleanButton id="glueChange" value="#{insectTrapController.selected.glueChange}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+                        <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_observations}" for="observations" />
+                        <p:inputText id="observations" value="#{insectTrapController.selected.observations}" title="#{bundleInsectTrap.EditInsectTrapTitle_observations}" />                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{insectTrapController.update}" value="#{bundle.Save}" update="display,:InsectTrapListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InsectTrapEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InsectTrapEditDialog.hide()"/>

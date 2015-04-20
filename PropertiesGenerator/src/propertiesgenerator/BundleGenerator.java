@@ -12,7 +12,7 @@ package propertiesgenerator;
 public class BundleGenerator {
 
     public static void main(String[] args) {
-        String c = "Person";
+        String c = "InsectTrap";
         System.out.println("<resource-bundle>\n"
                 + "            <base-name>/Bundle" + c + "</base-name>\n"
                 + "            <var>bundle" + c + "</var>\n"

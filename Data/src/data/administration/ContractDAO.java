@@ -97,7 +97,7 @@ public class ContractDAO implements Serializable {
     public List<Contract> findContractEntities(Person person) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Contract> query = em.createQuery("SELECT f FROM Contract f WHERE f.person :person", Contract.class);
+            TypedQuery<Contract> query = em.createQuery("SELECT f FROM Contract f WHERE f.person = :person", Contract.class);
             query.setParameter("person", person);
             return query.getResultList();
         } finally {

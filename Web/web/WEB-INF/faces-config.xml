@@ -28,6 +28,10 @@
             <base-name>/BundleCrop</base-name>
             <var>bundleCrop</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePerson</base-name>
+            <var>bundlePerson</var>
+        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>RiskConverter</managed-bean-name>

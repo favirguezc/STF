@@ -12,10 +12,10 @@ import model.administration.SexEnum;
  *
  * @author fredy
  */
-@ManagedBean(name="sexoController")
-public class SexoController {
+@ManagedBean(name="sexController")
+public class SexController {
     
-    public SexEnum[] getSexoValues(){
+    public SexEnum[] getSexValues(){
         return SexEnum.values();
     }
 }

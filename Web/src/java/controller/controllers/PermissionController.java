@@ -112,10 +112,13 @@ public class PermissionController implements Serializable {
     }
 
     public boolean currentUserHasPermission(Action action, String requestPath) {
+        requestPath = requestPath.toLowerCase();
+        if (signInBean.getUser() == null && requestPath.contains("person")) {
+            return true;
+        }
         if (signInBean.getUser().isSystemAdmin()) {
             return true;
         }
-        requestPath = requestPath.toLowerCase();
         if (signInBean.getRole() == null) {
             if (requestPath.contains(PageEnum.INDEX.toString().toLowerCase())) {
                 return true;

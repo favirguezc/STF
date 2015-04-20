@@ -8,30 +8,30 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonViewDlg" widgetVar="PersonViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonTitle}">
+        <p:dialog id="PersonViewDlg" widgetVar="PersonViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePerson.ViewPersonTitle}">
             <h:form id="PersonViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPersonLabel_nombre}"/>
-                        <h:outputText value="#{personController.selected.nombre}" title="#{bundle.ViewPersonTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_nombre2}"/>
-                        <h:outputText value="#{personController.selected.nombre2}" title="#{bundle.ViewPersonTitle_nombre2}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_apellido}"/>
-                        <h:outputText value="#{personController.selected.apellido}" title="#{bundle.ViewPersonTitle_apellido}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_apellido2}"/>
-                        <h:outputText value="#{personController.selected.apellido2}" title="#{bundle.ViewPersonTitle_apellido2}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_cedula}"/>
-                        <h:outputText value="#{personController.selected.cedula}" title="#{bundle.ViewPersonTitle_cedula}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_correo}"/>
-                        <h:outputText value="#{personController.selected.correo}" title="#{bundle.ViewPersonTitle_correo}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_sexo}"/>
-                        <h:outputText value="#{personController.selected.sexo}" title="#{bundle.ViewPersonTitle_sexo}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_telefono}"/>
-                        <h:outputText value="#{personController.selected.telefono}" title="#{bundle.ViewPersonTitle_telefono}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_grupoSanguineo}"/>
-                        <h:outputText value="#{personController.selected.grupoSanguineo}" title="#{bundle.ViewPersonTitle_grupoSanguineo}"/>
-                        <h:outputText value="#{bundle.ViewPersonLabel_rh}"/>
-                        <h:outputText value="#{personController.selected.rh}" title="#{bundle.ViewPersonTitle_rh}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_name}"/>
+                        <h:outputText value="#{personController.selected.name}" title="#{bundlePerson.ViewPersonTitle_name}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_name2}"/>
+                        <h:outputText value="#{personController.selected.name2}" title="#{bundlePerson.ViewPersonTitle_name2}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_lastName}"/>
+                        <h:outputText value="#{personController.selected.lastName}" title="#{bundlePerson.ViewPersonTitle_lastName}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_lastName2}"/>
+                        <h:outputText value="#{personController.selected.lastName2}" title="#{bundlePerson.ViewPersonTitle_lastName2}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_identityNumber}"/>
+                        <h:outputText value="#{personController.selected.identityNumber}" title="#{bundlePerson.ViewPersonTitle_identityNumber}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_email}"/>
+                        <h:outputText value="#{personController.selected.email}" title="#{bundlePerson.ViewPersonTitle_email}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_sex}"/>
+                        <h:outputText value="#{personController.selected.sex}" title="#{bundlePerson.ViewPersonTitle_sex}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_mobilePhone}"/>
+                        <h:outputText value="#{personController.selected.mobilePhone}" title="#{bundlePerson.ViewPersonTitle_mobilePhone}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_bloodGroup}"/>
+                        <h:outputText value="#{personController.selected.bloodGroup}" title="#{bundlePerson.ViewPersonTitle_bloodGroup}"/>
+                        <h:outputText value="#{bundlePerson.ViewPersonLabel_rhFactor}"/>
+                        <h:outputText value="#{personController.selected.rhFactor}" title="#{bundlePerson.ViewPersonTitle_rhFactor}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PersonViewDialog.hide()"/>
                 </h:panelGroup>

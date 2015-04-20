@@ -31,7 +31,7 @@ public class Person implements Serializable {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private String eMail;
+    private String email;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SexEnum sex;
@@ -40,7 +40,7 @@ public class Person implements Serializable {
     @Enumerated(EnumType.STRING)
     private BloodGroupEnum boodGroup;
     @Enumerated(EnumType.STRING)
-    private RHEnum rHFactor;
+    private RHEnum rhFactor;
     private boolean systemAdmin;
 
     /**
@@ -155,12 +155,12 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -199,7 +199,7 @@ public class Person implements Serializable {
      *
      * @return
      */
-    public BloodGroupEnum getBoodGroup() {
+    public BloodGroupEnum getBloodGroup() {
         return boodGroup;
     }
 
@@ -207,7 +207,7 @@ public class Person implements Serializable {
      *
      * @param boodGroup
      */
-    public void setBoodGroup(BloodGroupEnum boodGroup) {
+    public void setBloodGroup(BloodGroupEnum boodGroup) {
         this.boodGroup = boodGroup;
     }
 
@@ -215,16 +215,16 @@ public class Person implements Serializable {
      *
      * @return
      */
-    public RHEnum getrHFactor() {
-        return rHFactor;
+    public RHEnum getRhFactor() {
+        return rhFactor;
     }
 
     /**
      *
-     * @param rHFactor
+     * @param rhFactor
      */
-    public void setrHFactor(RHEnum rHFactor) {
-        this.rHFactor = rHFactor;
+    public void setRhFactor(RHEnum rhFactor) {
+        this.rhFactor = rhFactor;
     }
 
     public boolean isSystemAdmin() {
@@ -291,7 +291,7 @@ public class Person implements Serializable {
         if (this.boodGroup != other.boodGroup) {
             return false;
         }
-        if (this.rHFactor != other.rHFactor) {
+        if (this.rhFactor != other.rhFactor) {
             return false;
         }
         return true;

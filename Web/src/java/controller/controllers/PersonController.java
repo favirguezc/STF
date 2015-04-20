@@ -96,7 +96,11 @@ public class PersonController implements Serializable {
 
     public List<Person> getItems() {
         if (items == null) {
-            items = new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(signInBean.getFarm());
+            if (signInBean.getUser().isSystemAdmin()) {
+                items = getJpaController().findPersonEntities();
+            } else {
+                items = new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(signInBean.getFarm());
+            }
         }
         return items;
     }
@@ -138,8 +142,8 @@ public class PersonController implements Serializable {
 
     public List<Person> getItemsAvailableAsistenteYJefe() {
         List<Person> findPersonEntities = new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.SPECIALIST, signInBean.getFarm());
-        for(Person p:new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.FIELD_BOSS, signInBean.getFarm())){
-            if(!findPersonEntities.contains(p)){
+        for (Person p : new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.FIELD_BOSS, signInBean.getFarm())) {
+            if (!findPersonEntities.contains(p)) {
                 findPersonEntities.add(p);
             }
         }

@@ -13,14 +13,14 @@ import model.administration.RHEnum;
  *
  * @author fredy
  */
-@ManagedBean(name = "sangreController")
-public class SangreController {
+@ManagedBean(name = "bloodController")
+public class BloodController {
 
-    public RHEnum[] getRhValues() {
+    public RHEnum[] getRhFactorValues() {
         return RHEnum.values();
     }
 
-    public BloodGroupEnum[] getGrupoSanguineoValues() {
+    public BloodGroupEnum[] getBloodGroupValues() {
         return BloodGroupEnum.values();
     }
 

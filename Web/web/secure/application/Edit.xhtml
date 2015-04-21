@@ -13,7 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{applicationController.selected != null}">
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_type}" for="type" />
-                        <p:inputText id="type" value="#{applicationController.selected.type}" title="#{bundleApplication.EditApplicationTitle_type}" />
+                        <p:selectOneMenu id="type" value="#{applicationController.selected.type}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_type}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>  
+                            <f:selectItems value="#{enumController.applicationTypeValues}"/>
+                            <p:ajax update="chemical"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_cultivation}" for="moduleclass" />
                         <p:selectOneMenu id="moduleclass" value="#{applicationController.selected.cultivation}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_cultivation}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -14,15 +14,15 @@
                     <p:panelGrid columns="2" rendered="#{permissionController.selected != null}">
                         <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_pageEnum}" for="pageEnum" />
                         <p:selectOneMenu id="pageEnum" value="#{permissionController.selected.pageEnum}">
-                            <f:selectItems value="#{pageEnumController.pageEnumValues}"/>
+                            <f:selectItems value="#{enumController.pageValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_roleEnum}" for="rol" />
                         <p:selectOneMenu id="rol" value="#{permissionController.selected.roleEnum}">
-                            <f:selectItems value="#{rolController.rolValues}"/>
+                            <f:selectItems value="#{enumController.roleValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_actionEnum}" for="actionEnum" />
                         <p:selectOneMenu id="actionEnum" value="#{permissionController.selected.actionEnum}">
-                            <f:selectItems value="#{actionController.actionValues}"/>
+                            <f:selectItems value="#{enumController.actionValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{permissionController.create}" value="#{bundle.Save}" update="display,:PermissionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PermissionCreateDialog');"/>

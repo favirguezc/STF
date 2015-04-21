@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{chemicalController.selected != null}">
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_applicationType}" for="type"/>
                         <p:selectOneMenu id="type" value="#{chemicalController.selected.applicationType}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_applicationType}">
-                            <f:selectItems value="#{applicationTypeController.applicationTypeValues}"/>
+                            <f:selectItems value="#{enumController.applicationTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_name}" for="name" />
                         <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.CreateChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_name}"/>
@@ -22,7 +22,7 @@
                         <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.CreateChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_activeComponent}"/>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_applicationMeasurementUnit}" for="applicationMeasurementUnit" />
                         <p:selectOneMenu id="applicationMeasurementUnit" value="#{chemicalController.selected.applicationMeasurementUnit}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_applicationMeasurementUnit}">
-                            <f:selectItems value="#{applicationMeasurementUnitController.applicationMeasurementUnitValues}"/>
+                            <f:selectItems value="#{enumController.applicationMeasurementUnitValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_waitingPeriod}" for="pc" />
                         <p:inputText id="pc" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.CreateChemicalTitle_waitingPeriod}" />

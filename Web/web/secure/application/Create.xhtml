@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_type}" for="type" />
                         <p:selectOneMenu id="type" value="#{applicationController.selected.type}" required="true" requiredMessage="#{bundleApplication.CreateApplicationRequiredMessage_type}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>  
-                            <f:selectItems value="#{applicationTypeController.applicationTypeValues}"/>
+                            <f:selectItems value="#{enumController.applicationTypeValues}"/>
                             <p:ajax update="chemical"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_cultivation}" for="cultivation" />

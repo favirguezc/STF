@@ -41,7 +41,7 @@
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Riesgo" for="valor3"/>
                         <p:selectOneMenu id="valor3" value="#{parameterMonitoringController.selected.monitoringValue.count}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{riesgoController.riesgoValues}"/>                            
+                            <f:selectItems value="#{enumController.riskValues}"/>                            
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parameterMonitoringController.update}" value="#{bundle.Save}" update="display,:ParameterMonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParameterMonitoringEditDialog');"/>

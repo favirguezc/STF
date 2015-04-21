@@ -18,7 +18,7 @@
                         <p:inputText id="abbreviation" value="#{monitorableparameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.EditMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.EditMonitorableParameterRequiredMessage_abbreviation}"/>
                         <p:outputLabel value="#{bundleMonitorableParameter.EditMonitorableParameterLabel_valuationType}" for="valuationType" />
                         <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.EditMonitorableParameterRequiredMessage_valuationType}">
-                            <f:selectItems value="#{valuationTypeController.valuationTypeValues}"/>
+                            <f:selectItems value="#{enumController.valuationTypeValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{monitorableparameterController.update}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitorableParameterEditDialog');"/>

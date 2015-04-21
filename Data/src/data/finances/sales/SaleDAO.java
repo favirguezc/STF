@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos.finanzas;
+package data.finances.sales;
 
 import data.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -24,11 +24,11 @@ import model.administration.Person;
  *
  * @author JohnFredy
  */
-public class VentaDAO {
+public class SaleDAO {
     
     private EntityManagerFactory emf = null;
     
-    public VentaDAO(EntityManagerFactory emf) {
+    public SaleDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
    
@@ -36,12 +36,12 @@ public class VentaDAO {
         return emf.createEntityManager();
     }
     
-    public void create(Sale venta) {
+    public void create(Sale sale) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(venta);
+            em.persist(sale);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class VentaDAO {
         }
     }
     
-    public void edit(Sale venta) throws NonexistentEntityException, Exception {
+    public void edit(Sale sale) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            venta = em.merge(venta);
+            sale = em.merge(sale);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = venta.getId();
-                if (findVenta(id) == null) {
-                    throw new NonexistentEntityException("The venta with id " + id + " no longer exists.");
+                long id = sale.getId();
+                if (findSale(id) == null) {
+                    throw new NonexistentEntityException("The sale with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class VentaDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Sale venta;
+            Sale sale;
             try {
-                venta = em.getReference(Sale.class, id);
-                venta.getId();
+                sale = em.getReference(Sale.class, id);
+                sale.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The venta with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The sale with id " + id + " no longer exists.", enfe);
             }
-            em.remove(venta);
+            em.remove(sale);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,20 +94,20 @@ public class VentaDAO {
         }
     }
     
-    public List<Sale> findVentaEntities() {
-        return findVentaEntities(true, -1, -1);
+    public List<Sale> findSaleEntities() {
+        return findSaleEntities(true, -1, -1);
     }
 
-    public List<Sale> findVentaEntities(int maxResults, int firstResult) {
-        return findVentaEntities(false, maxResults, firstResult);
+    public List<Sale> findSaleEntities(int maxResults, int firstResult) {
+        return findSaleEntities(false, maxResults, firstResult);
     }
     
-    private List<Sale> findVentaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Sale> findSaleEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Sale.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Sale.class).get("dateVenta")));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Sale.class).get("saleDate")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,7 +119,7 @@ public class VentaDAO {
         }
     }
     
-    public Sale findVenta(long id) {
+    public Sale findSale(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Sale.class, id);
@@ -128,7 +128,7 @@ public class VentaDAO {
         }
     }
     
-    public int getVentaCount() {
+    public int getSaleCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -141,32 +141,32 @@ public class VentaDAO {
         }
     }
     
-    public List<Sale> findVentaEntities(Person cliente, Date start, Date end) {
+    public List<Sale> findSaleEntities(Person customer, Date start, Date end) {
         EntityManager em = getEntityManager();
-        boolean a, b, c, d;
-        a = b = c = d = false;
-        String queryString = "SELECT t FROM Venta t";
-        if (cliente != null || start != null || end != null) {
+        boolean a, b, c;
+        a = b = c = false;
+        String queryString = "SELECT s FROM Sale s";
+        if (customer != null || start != null || end != null) {
             queryString += " WHERE";
         }
-        if (cliente != null) {
-            queryString += " t.cliente = :cliente";
+        if (customer != null) {
+            queryString += " s.customer = :customer";
             a = true;
         }
         if (end != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.dateVenta BETWEEN :date1 AND :date2";
+            queryString += " s.saleDate BETWEEN :date1 AND :date2";
             b = c = true;
         } else if (start != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.dateVenta = :date1";
+            queryString += " s.saleDate = :date1";
             b = true;
         }
-        queryString += " ORDER BY t.dateVenta ASC";
+        queryString += " ORDER BY s.saleDate ASC";
         try {
             TypedQuery<Sale> query = em.createQuery(queryString, Sale.class);
             if (b) {
@@ -176,7 +176,7 @@ public class VentaDAO {
                 query.setParameter("date2", end, TemporalType.DATE);
             }
             if (a) {
-                query.setParameter("cliente", cliente);
+                query.setParameter("customer", customer);
             }
             return query.getResultList();
         } finally {
@@ -184,10 +184,10 @@ public class VentaDAO {
         }
     }
     
-    public List<Sale> findVentaEntitiesForSelectedFarm(Farm farm) {
+    public List<Sale> findSaleEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Sale> query = em.createQuery("SELECT v FROM Venta v WHERE v.farm = :farm  ORDER BY v.dateVenta ASC", Sale.class);
+            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm  ORDER BY s.saleDate ASC", Sale.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

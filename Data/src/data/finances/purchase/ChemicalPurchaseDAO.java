@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos.finanzas;
+package data.finances.purchase;
 
 import data.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -23,9 +23,9 @@ import model.administration.Farm;
  *
  * @author John Fredy
  */
-public class CompraDAO {
+public class ChemicalPurchaseDAO {
     
-    public CompraDAO(EntityManagerFactory emf) {
+    public ChemicalPurchaseDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -34,12 +34,12 @@ public class CompraDAO {
         return emf.createEntityManager();
     }
 
-    public void create(ChemicalPurchase compra) {
+    public void create(ChemicalPurchase purchase) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(compra);
+            em.persist(purchase);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -48,19 +48,19 @@ public class CompraDAO {
         }
     }
 
-    public void edit(ChemicalPurchase compra) throws NonexistentEntityException, Exception {
+    public void edit(ChemicalPurchase purchase) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            compra = em.merge(compra);
+            purchase = em.merge(purchase);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = compra.getId();
-                if (findCompra(id) == null) {
-                    throw new NonexistentEntityException("The compra with id " + id + " no longer exists.");
+                long id = purchase.getId();
+                if (findChemicalPurchase(id) == null) {
+                    throw new NonexistentEntityException("The chemicalPurchase with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -76,14 +76,14 @@ public class CompraDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ChemicalPurchase compra;
+            ChemicalPurchase purchase;
             try {
-                compra = em.getReference(ChemicalPurchase.class, id);
-                compra.getId();
+                purchase = em.getReference(ChemicalPurchase.class, id);
+                purchase.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The compra with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The chemicalPurchase with id " + id + " no longer exists.", enfe);
             }
-            em.remove(compra);
+            em.remove(purchase);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -92,20 +92,20 @@ public class CompraDAO {
         }
     }
 
-    public List<ChemicalPurchase> findCompraEntities() {
-        return findCompraEntities(true, -1, -1);
+    public List<ChemicalPurchase> findChemicalPurchaseEntities() {
+        return findChemicalPurchaseEntities(true, -1, -1);
     }
 
-    public List<ChemicalPurchase> findCompraEntities(int maxResults, int firstResult) {
-        return findCompraEntities(false, maxResults, firstResult);
+    public List<ChemicalPurchase> findChemicalPurchaseEntities(int maxResults, int firstResult) {
+        return findChemicalPurchaseEntities(false, maxResults, firstResult);
     }
 
-    private List<ChemicalPurchase> findCompraEntities(boolean all, int maxResults, int firstResult) {
+    private List<ChemicalPurchase> findChemicalPurchaseEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(ChemicalPurchase.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(ChemicalPurchase.class).get("dateCompra")));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(ChemicalPurchase.class).get("purchaseDate")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -117,7 +117,7 @@ public class CompraDAO {
         }
     }
 
-    public ChemicalPurchase findCompra(long id) {
+    public ChemicalPurchase findChemicalPurchase(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(ChemicalPurchase.class, id);
@@ -126,7 +126,7 @@ public class CompraDAO {
         }
     }
 
-    public int getCompraCount() {
+    public int getChemicalPurchaseCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -139,32 +139,32 @@ public class CompraDAO {
         }
     }
     
-    public List<ChemicalPurchase> findCompraEntities(Farm farm, Date start, Date end) {
+    public List<ChemicalPurchase> findChemicalPurchaseEntities(Farm farm, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
-        String queryString = "SELECT t FROM Compra t";
+        String queryString = "SELECT cp FROM ChemicalPurchase cp";
         if (farm != null || start != null || end != null) {
             queryString += " WHERE";
         }
         if (farm != null) {
-            queryString += " t.farm = :farm";
+            queryString += " cp.farm = :farm";
             a = true;
         }
         if (end != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.dateCompra BETWEEN :date1 AND :date2";
+            queryString += " cp.purchaseDate BETWEEN :date1 AND :date2";
             b = c = true;
         } else if (start != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.dateCompra = :date1";
+            queryString += " cp.purchaseDate = :date1";
             b = true;
         }
-        queryString += " ORDER BY t.dateCompra ASC";
+        queryString += " ORDER BY cp.purchaseDate ASC";
         try {
             TypedQuery<ChemicalPurchase> query = em.createQuery(queryString, ChemicalPurchase.class);
             if (b) {
@@ -182,10 +182,10 @@ public class CompraDAO {
         }
     }
     
-    public List<ChemicalPurchase> findCompraEntitiesForSelectedFarm(Farm selectedFarm) {
+    public List<ChemicalPurchase> findChemicalPurchaseEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<ChemicalPurchase> query = em.createQuery("SELECT co FROM Compra co WHERE co.farm = :farm ORDER BY co.dateCompra ASC", ChemicalPurchase.class);
+            TypedQuery<ChemicalPurchase> query = em.createQuery("SELECT cp FROM ChemicalPurchase cp WHERE cp.farm = :farm ORDER BY cp.purchaseDate ASC", ChemicalPurchase.class);
             query.setParameter("farm", selectedFarm);
             return query.getResultList();
         } finally {

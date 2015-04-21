@@ -27,13 +27,13 @@
     <class>model.weather.Thermometer</class>
     <class>model.work.Job</class>
     <class>model.work.Work</class>
-    <class>modelo.finanzas.Precio</class>
-    <class>modelo.finanzas.caja.Caja</class>
-    <class>modelo.finanzas.caja.ConceptoCaja</class>
-    <class>modelo.finanzas.compra.Compra</class>
-    <class>modelo.finanzas.costo.Costo</class>
-    <class>modelo.finanzas.nomina.Nomina</class>
-    <class>modelo.finanzas.ventas.Venta</class>
+    <class>model.finances.Price</class>
+    <class>model.finances.cash.Cash</class>
+    <class>model.finances.cash.CashConcept</class>
+    <class>model.finances.cost.Cost</class>
+    <class>model.finances.payroll.Payroll</class>
+    <class>model.finances.purchase.ChemicalPurchase</class>
+    <class>model.finances.sales.Sale</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -3,7 +3,7 @@ package controller.controllers;
 import model.finances.cash.CashConcept;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import datos.finanzas.ConceptoCajaDAO;
+import data.finances.cash.CashConceptDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
@@ -28,7 +28,7 @@ public class ConceptoCajaController implements Serializable {
 
     private CashConcept selected;
     private List<CashConcept> items = null;
-    private ConceptoCajaDAO jpaController = null;
+    private CashConceptDAO jpaController = null;
     private List<SelectItem> itemsEntrada = null;
     private Cash cajaFiltro = null;
     private int entrada;
@@ -97,9 +97,9 @@ public class ConceptoCajaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
     
-    private ConceptoCajaDAO getJpaController() {
+    private CashConceptDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new ConceptoCajaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new CashConceptDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -163,7 +163,7 @@ public class ConceptoCajaController implements Serializable {
     public List<CashConcept> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findConceptoCajaEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm());
                 obtenerSaldo();
             } else {
                 JsfUtil.addErrorMessage("Seleccione una Farm");
@@ -181,11 +181,11 @@ public class ConceptoCajaController implements Serializable {
     }
     
     public List<CashConcept> getItemsAvailableSelectMany() {
-        return getJpaController().findConceptoCajaEntities();
+        return getJpaController().findCashConceptEntities();
     }
 
     public List<CashConcept> getItemsAvailableSelectOne() {
-        return getJpaController().findConceptoCajaEntities();
+        return getJpaController().findCashConceptEntities();
     }
 
     @FacesConverter(forClass = CashConcept.class)
@@ -198,7 +198,7 @@ public class ConceptoCajaController implements Serializable {
             }
             ConceptoCajaController controller = (ConceptoCajaController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "conceptoCajaController");
-            return controller.getJpaController().findConceptoCaja(getKey(value));
+            return controller.getJpaController().findCashConcept(getKey(value));
         }
 
         long getKey(String value) {

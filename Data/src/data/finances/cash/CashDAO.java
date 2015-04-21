@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos.finanzas;
+package data.finances.cash;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,9 +22,9 @@ import model.administration.Farm;
  *
  * @author JohnFredy
  */
-public class CajaDAO implements Serializable {
+public class CashDAO implements Serializable {
     
-    public CajaDAO(EntityManagerFactory emf) {
+    public CashDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -33,12 +33,12 @@ public class CajaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Cash caja) {
+    public void create(Cash cash) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(caja);
+            em.persist(cash);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -47,19 +47,19 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public void edit(Cash caja) throws NonexistentEntityException, Exception {
+    public void edit(Cash cash) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            caja = em.merge(caja);
+            cash = em.merge(cash);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = caja.getId();
-                if (findCaja(id) == null) {
-                    throw new NonexistentEntityException("The caja with id " + id + " no longer exists.");
+                long id = cash.getId();
+                if (findCash(id) == null) {
+                    throw new NonexistentEntityException("The cash with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -75,14 +75,14 @@ public class CajaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cash caja;
+            Cash cash;
             try {
-                caja = em.getReference(Cash.class, id);
-                caja.getId();
+                cash = em.getReference(Cash.class, id);
+                cash.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The caja with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The cash with id " + id + " no longer exists.", enfe);
             }
-            em.remove(caja);
+            em.remove(cash);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -91,15 +91,15 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public List<Cash> findCajaEntities() {
-        return findCajaEntities(true, -1, -1);
+    public List<Cash> findCashEntities() {
+        return findCashEntities(true, -1, -1);
     }
 
-    public List<Cash> findCajaEntities(int maxResults, int firstResult) {
-        return findCajaEntities(false, maxResults, firstResult);
+    public List<Cash> findCashEntities(int maxResults, int firstResult) {
+        return findCashEntities(false, maxResults, firstResult);
     }
 
-    private List<Cash> findCajaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Cash> findCashEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -115,7 +115,7 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public Cash findCaja(long id) {
+    public Cash findCash(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Cash.class, id);
@@ -124,19 +124,19 @@ public class CajaDAO implements Serializable {
         }
     }
     
-    public Cash findCaja(String name) throws Exception {
+    public Cash findCash(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Caja c WHERE c.name = :name", Cash.class);
+            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Cash c WHERE c.name = :name", Cash.class);
             query.setParameter("name", name);
-            Cash caja = query.getSingleResult();
-            return caja;
+            Cash cash = query.getSingleResult();
+            return cash;
         } finally {
             em.close();
         }
     }
 
-    public int getCajaCount() {
+    public int getCashCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -149,10 +149,10 @@ public class CajaDAO implements Serializable {
         }
     }
     
-    public List<Cash> findCajaEntitiesForSelectedFarm(Farm farm) {
+    public List<Cash> findCashEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Caja c WHERE c.farm = :farm", Cash.class);
+            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Cash c WHERE c.farm = :farm", Cash.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

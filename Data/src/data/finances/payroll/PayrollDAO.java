@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos.finanzas;
+package data.finances.payroll;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,9 +25,9 @@ import model.administration.Person;
  *
  * @author John Fredy
  */
-public class NominaDAO implements Serializable {
+public class PayrollDAO implements Serializable {
 
-    public NominaDAO(EntityManagerFactory emf) {
+    public PayrollDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -36,12 +36,12 @@ public class NominaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Payroll nomina) {
+    public void create(Payroll payroll) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(nomina);
+            em.persist(payroll);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,19 +50,19 @@ public class NominaDAO implements Serializable {
         }
     }
 
-    public void edit(Payroll nomina) throws NonexistentEntityException, Exception {
+    public void edit(Payroll payroll) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            nomina = em.merge(nomina);
+            payroll = em.merge(payroll);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = nomina.getId();
-                if (findNomina(id) == null) {
-                    throw new NonexistentEntityException("The nomina with id " + id + " no longer exists.");
+                long id = payroll.getId();
+                if (findPayroll(id) == null) {
+                    throw new NonexistentEntityException("The payroll with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class NominaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Payroll nomina;
+            Payroll payroll;
             try {
-                nomina = em.getReference(Payroll.class, id);
-                nomina.getId();
+                payroll = em.getReference(Payroll.class, id);
+                payroll.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The nomina with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The payroll with id " + id + " no longer exists.", enfe);
             }
-            em.remove(nomina);
+            em.remove(payroll);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,21 +94,21 @@ public class NominaDAO implements Serializable {
         }
     }
 
-    public List<Payroll> findNominaEntities() {
-        return findNominaEntities(true, -1, -1);
+    public List<Payroll> findPayrollEntities() {
+        return findPayrollEntities(true, -1, -1);
     }
 
-    public List<Payroll> findNominaEntities(int maxResults, int firstResult) {
-        return findNominaEntities(false, maxResults, firstResult);
+    public List<Payroll> findPayrollEntities(int maxResults, int firstResult) {
+        return findPayrollEntities(false, maxResults, firstResult);
     }
 
-    private List<Payroll> findNominaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Payroll> findPayrollEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Payroll.class));
             Query q = em.createQuery(cq);
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Payroll.class).get("date")));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Payroll.class).get("dateUntil")));
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -119,7 +119,7 @@ public class NominaDAO implements Serializable {
         }
     }
 
-    public Payroll findNomina(long id) {
+    public Payroll findPayroll(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Payroll.class, id);
@@ -128,7 +128,7 @@ public class NominaDAO implements Serializable {
         }
     }
 
-    public int getNominaCount() {
+    public int getPayrollCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -141,23 +141,23 @@ public class NominaDAO implements Serializable {
         }
     }
     
-    public List<Payroll> findNominaEntities(Farm farm, Person trabajador, Date start, Date end) {
+    public List<Payroll> findPayrollEntities(Farm farm, Person worker, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c;
         a = b = c = false;
-        String queryString = "SELECT t FROM Nomina t WHERE t.farm = :farm";
-        if (trabajador != null) {
-            queryString += "AND t.trabajador = :trabajador";
+        String queryString = "SELECT p FROM Payroll p WHERE p.farm = :farm";
+        if (worker != null) {
+            queryString += "AND p.worker = :worker";
             a = true;
         }
         if (end != null) {
-            queryString += " AND t.date BETWEEN :date1 AND :date2";
+            queryString += " AND p.dateUntil BETWEEN :date1 AND :date2";
             b = c = true;
         } else if (start != null) {
-            queryString += " AND t.date = :date1";
+            queryString += " AND p.dateUntil = :date1";
             b = true;
         }
-        queryString += " ORDER BY t.date ASC";
+        queryString += " ORDER BY p.dateUntil ASC";
         try {
             TypedQuery<Payroll> query = em.createQuery(queryString, Payroll.class);
             query.setParameter("farm", farm);
@@ -168,7 +168,7 @@ public class NominaDAO implements Serializable {
                 query.setParameter("date2", end, TemporalType.DATE);
             }
             if (a) {
-                query.setParameter("trabajador", trabajador);
+                query.setParameter("worker", worker);
             }
             return query.getResultList();
         } finally {
@@ -176,10 +176,10 @@ public class NominaDAO implements Serializable {
         }
     }
     
-    public List<Payroll> findNominaEntitiesForSelectedFarm(Farm farm) {
+    public List<Payroll> findPayrollEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Payroll> query = em.createQuery("SELECT n FROM Nomina n WHERE n.farm = :farm  ORDER BY n.date ASC", Payroll.class);
+            TypedQuery<Payroll> query = em.createQuery("SELECT p FROM Payroll p WHERE p.farm = :farm  ORDER BY p.dateUntil ASC", Payroll.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

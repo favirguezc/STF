@@ -3,7 +3,7 @@ package controller.controllers;
 import model.finances.payroll.Payroll;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import datos.finanzas.NominaDAO;
+import data.finances.payroll.PayrollDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
@@ -34,7 +34,7 @@ public class NominaController implements Serializable {
 
     private Payroll selected;
     private List<Payroll> items = null;
-    private NominaDAO jpaController = null;
+    private PayrollDAO jpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -97,9 +97,9 @@ public class NominaController implements Serializable {
         this.jobController = jobController;
     }
 
-    private NominaDAO getJpaController() {
+    private PayrollDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new NominaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new PayrollDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -172,7 +172,7 @@ public class NominaController implements Serializable {
     public List<Payroll> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findNominaEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findPayrollEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
                 JsfUtil.addErrorMessage("Seleccione una Farm");
             }
@@ -185,15 +185,15 @@ public class NominaController implements Serializable {
     }
 
     public List<Payroll> getItemsAvailableSelectMany() {
-        return getJpaController().findNominaEntities();
+        return getJpaController().findPayrollEntities();
     }
 
     public List<Payroll> getItemsAvailableSelectOne() {
-        return getJpaController().findNominaEntities();
+        return getJpaController().findPayrollEntities();
     }
 
     public List<Payroll> leerLista(Farm farm, Person trabajador, Date inicio, Date fin) {
-        return getJpaController().findNominaEntities(farm, trabajador, inicio, fin);
+        return getJpaController().findPayrollEntities(farm, trabajador, inicio, fin);
     }
 
     private static Date getSaturday(Date fecha) {
@@ -285,7 +285,7 @@ public class NominaController implements Serializable {
             }
             NominaController controller = (NominaController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "nominaController");
-            return controller.getJpaController().findNomina(getKey(value));
+            return controller.getJpaController().findPayroll(getKey(value));
         }
 
         long getKey(String value) {

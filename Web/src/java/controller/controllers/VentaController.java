@@ -7,8 +7,8 @@ package controller.controllers;
 
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import datos.finanzas.PrecioDAO;
-import datos.finanzas.VentaDAO;
+import data.finances.PriceDAO;
+import data.finances.sales.SaleDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
@@ -37,10 +37,10 @@ public class VentaController implements Serializable {
 
     private Sale selected;
     private List<Sale> items = null;
-    private VentaDAO jpaController = null;
+    private SaleDAO jpaController = null;
     private Price precio = null;
     private boolean nuePrecio;
-    private PrecioDAO precioJpaController = null;
+    private PriceDAO precioJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -49,16 +49,16 @@ public class VentaController implements Serializable {
     public VentaController() {
     }
 
-    private VentaDAO getJpaController() {
+    private SaleDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new VentaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new SaleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
 
-    private PrecioDAO getPrecioJpaController(){
+    private PriceDAO getPrecioJpaController(){
         if(precioJpaController == null){
-            precioJpaController = new PrecioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            precioJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return precioJpaController;
     }
@@ -114,7 +114,7 @@ public class VentaController implements Serializable {
     }
     
     public void prepareUpdate(){
-        //precio = getPrecioJpaController().findPrecio(selected.getChemical().getNombre());
+        //precio = getPrecioJpaController().findPrice(selected.getChemical().getNombre());
     }
 
     public void update() {
@@ -133,7 +133,7 @@ public class VentaController implements Serializable {
     public List<Sale> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findVentaEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findSaleEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
                 JsfUtil.addErrorMessage("Seleccione una Farm");
             }
@@ -164,15 +164,15 @@ public class VentaController implements Serializable {
     }
 
     public List<Sale> getItemsAvailableSelectMany() {
-        return getJpaController().findVentaEntities();
+        return getJpaController().findSaleEntities();
     }
 
     public List<Sale> getItemsAvailableSelectOne() {
-        return getJpaController().findVentaEntities();
+        return getJpaController().findSaleEntities();
     }
 
     public List<Sale> leerLista(Person cliente, Date inicio, Date fin) {
-        return getJpaController().findVentaEntities(cliente, inicio, fin);
+        return getJpaController().findSaleEntities(cliente, inicio, fin);
     }
 
     public Sale sumarRegistros(Person cliente, Date inicio, Date fin) {
@@ -187,7 +187,7 @@ public class VentaController implements Serializable {
     public void verifyPrecio(){
 //        if(selected.getChemical() != null){
 //            //search precio by item
-//            precio = getPrecioJpaController().findPrecio(selected.getChemical().getNombre());
+//            precio = getPrecioJpaController().findPrice(selected.getChemical().getNombre());
 //            //if exists set
 //            if(precio != null){
 //                nuePrecio = false;
@@ -226,7 +226,7 @@ public class VentaController implements Serializable {
             long id = Long.parseLong(string);
             VentaController controller = (VentaController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "ventaController");
-            return controller.getJpaController().findVenta(id);
+            return controller.getJpaController().findSale(id);
         }
 
         @Override

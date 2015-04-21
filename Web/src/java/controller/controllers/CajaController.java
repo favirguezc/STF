@@ -3,7 +3,7 @@ package controller.controllers;
 import model.finances.cash.Cash;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import datos.finanzas.CajaDAO;
+import data.finances.cash.CashDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
@@ -25,7 +25,7 @@ public class CajaController implements Serializable {
 
     private Cash selected;
     private List<Cash> items = null;
-    private CajaDAO jpaController = null;  
+    private CashDAO jpaController = null;  
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -58,9 +58,9 @@ public class CajaController implements Serializable {
         this.signInBean = signInBean;
     }
     
-    private CajaDAO getJpaController() {
+    private CashDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new CajaDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new CashDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -121,7 +121,7 @@ public class CajaController implements Serializable {
     public List<Cash> getItems() {
          if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findCajaEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findCashEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
                 JsfUtil.addErrorMessage("Seleccione una Farm");
             }
@@ -147,7 +147,7 @@ public class CajaController implements Serializable {
             }
             CajaController controller = (CajaController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "cajaController");
-            return controller.getJpaController().findCaja(getKey(value));
+            return controller.getJpaController().findCash(getKey(value));
         }
 
         long getKey(String value) {

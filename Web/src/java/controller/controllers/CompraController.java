@@ -11,8 +11,8 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import datos.finanzas.CompraDAO;
-import datos.finanzas.PrecioDAO;
+import data.finances.purchase.ChemicalPurchaseDAO;
+import data.finances.PriceDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
@@ -39,8 +39,8 @@ public class CompraController implements Serializable{
     private List<ChemicalPurchase> items = null;
     private Price precio = null;
     private boolean nuePrecio;
-    private CompraDAO jpaController = null;
-    private PrecioDAO precioJpaController = null;
+    private ChemicalPurchaseDAO jpaController = null;
+    private PriceDAO precioJpaController = null;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permissionController}")
@@ -49,16 +49,16 @@ public class CompraController implements Serializable{
     public CompraController() {
     }
     
-    public CompraDAO getJpaController() {
+    public ChemicalPurchaseDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new CompraDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new ChemicalPurchaseDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
     
-    private PrecioDAO getPrecioJpaController(){
+    private PriceDAO getPrecioJpaController(){
         if(precioJpaController == null){
-            precioJpaController = new PrecioDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            precioJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return precioJpaController;
     }
@@ -94,17 +94,17 @@ public class CompraController implements Serializable{
     }
     
     public List<ChemicalPurchase> getCompraItemsAvailableSelectMany() {
-        return getJpaController().findCompraEntities();
+        return getJpaController().findChemicalPurchaseEntities();
     }
 
     public List<ChemicalPurchase> getCompraItemsAvailableSelectOne() {
-        return getJpaController().findCompraEntities();
+        return getJpaController().findChemicalPurchaseEntities();
     }
 
     public List<ChemicalPurchase> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findCompraEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findChemicalPurchaseEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
                 JsfUtil.addErrorMessage("Seleccione una Farm");
             }
@@ -133,7 +133,7 @@ public class CompraController implements Serializable{
     }
 
     public void prepareUpdate(){
-        precio = getPrecioJpaController().findPrecio(selected.getChemical().getName());
+        precio = getPrecioJpaController().findPrice(selected.getChemical().getName());
     }
     
     public void update() {
@@ -172,7 +172,7 @@ public class CompraController implements Serializable{
     }
     
     public List<ChemicalPurchase> leerLista(Farm farm, Date inicio, Date fin) {
-        return getJpaController().findCompraEntities(farm, inicio, fin);
+        return getJpaController().findChemicalPurchaseEntities(farm, inicio, fin);
     }
     
     public ChemicalPurchase sumarRegistros(Farm farm, Date inicio, Date fin) {
@@ -187,7 +187,7 @@ public class CompraController implements Serializable{
     public void verifyPrecio(){
         if(selected.getChemical() != null){
             //search price by item
-            precio = getPrecioJpaController().findPrecio(selected.getChemical().getName());
+            precio = getPrecioJpaController().findPrice(selected.getChemical().getName());
             //if exists set
             if(precio != null){
                 nuePrecio = false;
@@ -224,7 +224,7 @@ public class CompraController implements Serializable{
             }
             long id = Long.parseLong(string);
             CompraController controller = (CompraController) facesContext.getApplication().getVariableResolver().resolveVariable(facesContext, "compra");
-            return controller.getJpaController().findCompra(id);
+            return controller.getJpaController().findChemicalPurchase(id);
         }
 
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {

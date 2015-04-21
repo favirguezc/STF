@@ -6,7 +6,7 @@
 package controller.controllers;
 
 import javax.faces.bean.ManagedBean;
-import modelo.finanzas.costo.TipoCosto;
+import model.finances.cost.CostTypeEnum;
 
 /**
  *
@@ -15,7 +15,7 @@ import modelo.finanzas.costo.TipoCosto;
 @ManagedBean(name="tipoCostoController")
 public class TipoCostoController {
     
-    public TipoCosto[] getTipoCostoValues(){
-        return TipoCosto.values();
+    public CostTypeEnum[] getTipoCostoValues(){
+        return CostTypeEnum.values();
     }
 }

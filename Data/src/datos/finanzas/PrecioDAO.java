@@ -14,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.finanzas.Precio;
+import model.finances.Price;
 
 /**
  *
@@ -31,7 +31,7 @@ public class PrecioDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Precio precio) {
+    public void create(Price precio) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -45,7 +45,7 @@ public class PrecioDAO {
         }
     }
 
-    public void edit(Precio precio) throws NonexistentEntityException, Exception {
+    public void edit(Price precio) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -73,9 +73,9 @@ public class PrecioDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Precio precio;
+            Price precio;
             try {
-                precio = em.getReference(Precio.class, id);
+                precio = em.getReference(Price.class, id);
                 precio.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The precio with id " + id + " no longer exists.", enfe);
@@ -89,19 +89,19 @@ public class PrecioDAO {
         }
     }
 
-    public List<Precio> findPrecioEntities() {
+    public List<Price> findPrecioEntities() {
         return findPrecioEntities(true, -1, -1);
     }
 
-    public List<Precio> findPrecioEntities(int maxResults, int firstResult) {
+    public List<Price> findPrecioEntities(int maxResults, int firstResult) {
         return findPrecioEntities(false, maxResults, firstResult);
     }
 
-    private List<Precio> findPrecioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Price> findPrecioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Precio.class));
+            cq.select(cq.from(Price.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,25 +113,25 @@ public class PrecioDAO {
         }
     }
 
-    public Precio findPrecio(long id) {
+    public Price findPrecio(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Precio.class, id);
+            return em.find(Price.class, id);
         } finally {
             em.close();
         }
     }
     
-    public Precio findPrecio(String item) {
+    public Price findPrecio(String item) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT t FROM Precio t";
         if (item != null) {
             queryString += " WHERE t.item = :item";
         }
         try {
-            TypedQuery<Precio> query = em.createQuery(queryString, Precio.class);
+            TypedQuery<Price> query = em.createQuery(queryString, Price.class);
             query.setParameter("item", item);
-            List<Precio> result = query.getResultList();
+            List<Price> result = query.getResultList();
             if(result == null || result.isEmpty()){
                 return null;
             }
@@ -145,7 +145,7 @@ public class PrecioDAO {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Precio> rt = cq.from(Precio.class);
+            Root<Price> rt = cq.from(Price.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

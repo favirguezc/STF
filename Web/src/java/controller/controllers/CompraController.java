@@ -23,8 +23,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.convert.FacesConverter;
-import modelo.finanzas.Precio;
-import modelo.finanzas.compra.Compra;
+import model.finances.Price;
+import model.finances.purchase.ChemicalPurchase;
 import model.administration.Farm;
 
 /**
@@ -35,9 +35,9 @@ import model.administration.Farm;
 @SessionScoped
 public class CompraController implements Serializable{
 
-    private Compra selected = null;
-    private List<Compra> items = null;
-    private Precio precio = null;
+    private ChemicalPurchase selected = null;
+    private List<ChemicalPurchase> items = null;
+    private Price precio = null;
     private boolean nuePrecio;
     private CompraDAO jpaController = null;
     private PrecioDAO precioJpaController = null;
@@ -63,11 +63,11 @@ public class CompraController implements Serializable{
         return precioJpaController;
     }
 
-    public Compra getSelected() {
+    public ChemicalPurchase getSelected() {
         return selected;
     }
 
-    public void setSelected(Compra selected) {
+    public void setSelected(ChemicalPurchase selected) {
         this.selected = selected;
     }
 
@@ -93,15 +93,15 @@ public class CompraController implements Serializable{
     protected void initializeEmbeddableKey() {
     }
     
-    public List<Compra> getCompraItemsAvailableSelectMany() {
+    public List<ChemicalPurchase> getCompraItemsAvailableSelectMany() {
         return getJpaController().findCompraEntities();
     }
 
-    public List<Compra> getCompraItemsAvailableSelectOne() {
+    public List<ChemicalPurchase> getCompraItemsAvailableSelectOne() {
         return getJpaController().findCompraEntities();
     }
 
-    public List<Compra> getItems() {
+    public List<ChemicalPurchase> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findCompraEntitiesForSelectedFarm(signInBean.getFarm());
@@ -112,10 +112,10 @@ public class CompraController implements Serializable{
         return items;
     }
     
-    public Compra prepareCreate() {
-        selected = new Compra();
+    public ChemicalPurchase prepareCreate() {
+        selected = new ChemicalPurchase();
         if (signInBean.getFarm() != null) {
-            selected.setFinca(signInBean.getFarm());
+            selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
         } else {
             JsfUtil.addErrorMessage("Seleccione una farm");
@@ -133,7 +133,7 @@ public class CompraController implements Serializable{
     }
 
     public void prepareUpdate(){
-        precio = getPrecioJpaController().findPrecio(selected.getInsumo().getName());
+        precio = getPrecioJpaController().findPrecio(selected.getChemical().getName());
     }
     
     public void update() {
@@ -171,43 +171,43 @@ public class CompraController implements Serializable{
         }
     }
     
-    public List<Compra> leerLista(Farm farm, Date inicio, Date fin) {
+    public List<ChemicalPurchase> leerLista(Farm farm, Date inicio, Date fin) {
         return getJpaController().findCompraEntities(farm, inicio, fin);
     }
     
-    public Compra sumarRegistros(Farm farm, Date inicio, Date fin) {
-        List<Compra> leerLista = leerLista(farm, inicio, fin);
-        Compra suma = new Compra(null, farm, null,0,0);
-        for (Compra v : leerLista) {
-            suma.sumar(v);
+    public ChemicalPurchase sumarRegistros(Farm farm, Date inicio, Date fin) {
+        List<ChemicalPurchase> leerLista = leerLista(farm, inicio, fin);
+        ChemicalPurchase suma = new ChemicalPurchase(null, farm, null,0,0);
+        for (ChemicalPurchase v : leerLista) {
+            suma.add(v);
         }
         return suma;
     }
     
     public void verifyPrecio(){
-        if(selected.getInsumo() != null){
-            //search precio by item
-            precio = getPrecioJpaController().findPrecio(selected.getInsumo().getName());
+        if(selected.getChemical() != null){
+            //search price by item
+            precio = getPrecioJpaController().findPrecio(selected.getChemical().getName());
             //if exists set
             if(precio != null){
                 nuePrecio = false;
-                selected.setPrecio(precio.getValor());
+                selected.setPrice(precio.getPriceValue());
             }else{
-                //else create new precio
+                //else create new price
                 nuePrecio = true;
-                precio = new Precio(selected.getInsumo().getName(),0);
-                selected.setPrecio(0);
+                precio = new Price(selected.getChemical().getName(),0);
+                selected.setPrice(0);
             }
         }
     }
     
     public void savePrecio(){
         if(nuePrecio){
-            precio.setValor(selected.getPrecio());
+            precio.setPriceValue(selected.getPrice());
             getPrecioJpaController().create(precio);
         }else{
             try {
-                precio.setValor(selected.getPrecio());
+                precio.setPriceValue(selected.getPrice());
                 getPrecioJpaController().edit(precio);
             } catch (Exception ex) {
                 Logger.getLogger(CompraController.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,7 +215,7 @@ public class CompraController implements Serializable{
         }
     }
     
-    @FacesConverter(forClass = Compra.class)
+    @FacesConverter(forClass = ChemicalPurchase.class)
     public static class CompraConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String string) {
@@ -231,8 +231,8 @@ public class CompraController implements Serializable{
             if (object == null) {
                 return null;
             }
-            if (object instanceof Compra) {
-                Compra o = (Compra) object;
+            if (object instanceof ChemicalPurchase) {
+                ChemicalPurchase o = (ChemicalPurchase) object;
                 return String.valueOf(o.getId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.finanzas.compra.Compra");

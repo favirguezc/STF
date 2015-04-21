@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.finanzas.compra.Compra;
+import model.finances.purchase.ChemicalPurchase;
 import model.administration.Farm;
 
 /**
@@ -34,7 +34,7 @@ public class CompraDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Compra compra) {
+    public void create(ChemicalPurchase compra) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,7 +48,7 @@ public class CompraDAO {
         }
     }
 
-    public void edit(Compra compra) throws NonexistentEntityException, Exception {
+    public void edit(ChemicalPurchase compra) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -76,9 +76,9 @@ public class CompraDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Compra compra;
+            ChemicalPurchase compra;
             try {
-                compra = em.getReference(Compra.class, id);
+                compra = em.getReference(ChemicalPurchase.class, id);
                 compra.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The compra with id " + id + " no longer exists.", enfe);
@@ -92,20 +92,20 @@ public class CompraDAO {
         }
     }
 
-    public List<Compra> findCompraEntities() {
+    public List<ChemicalPurchase> findCompraEntities() {
         return findCompraEntities(true, -1, -1);
     }
 
-    public List<Compra> findCompraEntities(int maxResults, int firstResult) {
+    public List<ChemicalPurchase> findCompraEntities(int maxResults, int firstResult) {
         return findCompraEntities(false, maxResults, firstResult);
     }
 
-    private List<Compra> findCompraEntities(boolean all, int maxResults, int firstResult) {
+    private List<ChemicalPurchase> findCompraEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Compra.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Compra.class).get("dateCompra")));
+            cq.select(cq.from(ChemicalPurchase.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(ChemicalPurchase.class).get("dateCompra")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -117,10 +117,10 @@ public class CompraDAO {
         }
     }
 
-    public Compra findCompra(long id) {
+    public ChemicalPurchase findCompra(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Compra.class, id);
+            return em.find(ChemicalPurchase.class, id);
         } finally {
             em.close();
         }
@@ -130,7 +130,7 @@ public class CompraDAO {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Compra> rt = cq.from(Compra.class);
+            Root<ChemicalPurchase> rt = cq.from(ChemicalPurchase.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -139,7 +139,7 @@ public class CompraDAO {
         }
     }
     
-    public List<Compra> findCompraEntities(Farm farm, Date start, Date end) {
+    public List<ChemicalPurchase> findCompraEntities(Farm farm, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -166,7 +166,7 @@ public class CompraDAO {
         }
         queryString += " ORDER BY t.dateCompra ASC";
         try {
-            TypedQuery<Compra> query = em.createQuery(queryString, Compra.class);
+            TypedQuery<ChemicalPurchase> query = em.createQuery(queryString, ChemicalPurchase.class);
             if (b) {
                 query.setParameter("date1", start, TemporalType.DATE);
             }
@@ -182,10 +182,10 @@ public class CompraDAO {
         }
     }
     
-    public List<Compra> findCompraEntitiesForSelectedFarm(Farm selectedFarm) {
+    public List<ChemicalPurchase> findCompraEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Compra> query = em.createQuery("SELECT co FROM Compra co WHERE co.farm = :farm ORDER BY co.dateCompra ASC", Compra.class);
+            TypedQuery<ChemicalPurchase> query = em.createQuery("SELECT co FROM Compra co WHERE co.farm = :farm ORDER BY co.dateCompra ASC", ChemicalPurchase.class);
             query.setParameter("farm", selectedFarm);
             return query.getResultList();
         } finally {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.finanzas;
+package model.finances;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,7 +18,7 @@ import javax.persistence.Id;
  * @author John Fredy
  */
 @Entity
-public class Precio implements Serializable{
+public class Price implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -26,14 +26,14 @@ public class Precio implements Serializable{
     @Column(unique = true,nullable = false)
     String item;
     @Column(nullable = false)
-    float valor;
+    float priceValue;
 
-    public Precio() {
+    public Price() {
     }
 
-    public Precio(String item, float valor) {
+    public Price(String item, float priceValue) {
         this.item = item;
-        this.valor = valor;
+        this.priceValue = priceValue;
     }
     
     public String getItem() {
@@ -44,12 +44,12 @@ public class Precio implements Serializable{
         this.item = item;
     }
     
-    public float getValor() {
-        return valor;
+    public float getPriceValue() {
+        return priceValue;
     }
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public void setPriceValue(float priceValue) {
+        this.priceValue = priceValue;
     }    
 
     public long getId() {
@@ -65,7 +65,7 @@ public class Precio implements Serializable{
         int hash = 5;
         hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
         hash = 83 * hash + Objects.hashCode(this.item);
-        hash = 83 * hash + Float.floatToIntBits(this.valor);
+        hash = 83 * hash + Float.floatToIntBits(this.priceValue);
         return hash;
     }
 
@@ -77,14 +77,14 @@ public class Precio implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Precio other = (Precio) obj;
+        final Price other = (Price) obj;
         if (this.id != other.id) {
             return false;
         }
         if (!Objects.equals(this.item, other.item)) {
             return false;
         }
-        if (Float.floatToIntBits(this.valor) != Float.floatToIntBits(other.valor)) {
+        if (Float.floatToIntBits(this.priceValue) != Float.floatToIntBits(other.priceValue)) {
             return false;
         }
         return true;

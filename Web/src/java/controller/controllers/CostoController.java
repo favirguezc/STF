@@ -1,6 +1,6 @@
 package controller.controllers;
 
-import modelo.finanzas.costo.Costo;
+import model.finances.cost.Cost;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import datos.finanzas.CostoDAO;
@@ -20,14 +20,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.administration.ModuleClass;
-import modelo.finanzas.costo.TipoCosto;
+import model.finances.cost.CostTypeEnum;
 
 @ManagedBean(name = "costoController")
 @SessionScoped
 public class CostoController implements Serializable {
 
-    private Costo selected;
-    private List<Costo> items = null;
+    private Cost selected;
+    private List<Cost> items = null;
     private CostoDAO jpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
@@ -37,11 +37,11 @@ public class CostoController implements Serializable {
     public CostoController() {
     }
 
-    public Costo getSelected() {
+    public Cost getSelected() {
         return selected;
     }
 
-    public void setSelected(Costo selected) {
+    public void setSelected(Cost selected) {
         this.selected = selected;
     }
 
@@ -74,8 +74,8 @@ public class CostoController implements Serializable {
         return jpaController;
     }
 
-    public Costo prepareCreate() {
-        selected = new Costo();
+    public Cost prepareCreate() {
+        selected = new Cost();
         initializeEmbeddableKey();
         return selected;
     }
@@ -121,7 +121,7 @@ public class CostoController implements Serializable {
         }
     }
 
-    public List<Costo> getItems() {
+    public List<Cost> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findCostoEntitiesForSelectedFarm(signInBean.getFarm());
@@ -132,28 +132,28 @@ public class CostoController implements Serializable {
         return items;
     }
 
-    public List<Costo> getItemsAvailableSelectMany() {
+    public List<Cost> getItemsAvailableSelectMany() {
         return getJpaController().findCostoEntities();
     }
 
-    public List<Costo> getItemsAvailableSelectOne() {
+    public List<Cost> getItemsAvailableSelectOne() {
         return getJpaController().findCostoEntities();
     }
     
-    public List<Costo> leerLista(ModuleClass moduleclass, TipoCosto tipo, Date inicio, Date fin) {
+    public List<Cost> leerLista(ModuleClass moduleclass, CostTypeEnum tipo, Date inicio, Date fin) {
         return getJpaController().findCostoEntities(moduleclass, tipo, inicio, fin);
     }
 
-    public Costo sumarRegistros(ModuleClass moduleclass, TipoCosto tipo, Date inicio, Date fin) {
-        List<Costo> leerLista = leerLista(moduleclass, tipo, inicio, fin);
-        Costo suma = new Costo();
-        for (Costo c : leerLista) {
+    public Cost sumarRegistros(ModuleClass moduleclass, CostTypeEnum tipo, Date inicio, Date fin) {
+        List<Cost> leerLista = leerLista(moduleclass, tipo, inicio, fin);
+        Cost suma = new Cost();
+        for (Cost c : leerLista) {
             //suma.sumar(c);
         }
         return suma;
     }
 
-    @FacesConverter(forClass = Costo.class)
+    @FacesConverter(forClass = Cost.class)
     public static class CostoControllerConverter implements Converter {
 
         @Override
@@ -183,11 +183,11 @@ public class CostoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Costo) {
-                Costo o = (Costo) object;
+            if (object instanceof Cost) {
+                Cost o = (Cost) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Costo.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Cost.class.getName());
             }
         }
 

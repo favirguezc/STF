@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.finanzas.costo;
+package model.finances.cost;
 
 /**
  *
  * @author John Fredy
  */
-public enum TipoCosto {
-    HORASMAQUINA,
-    MANODEOBRA,
-    INSUMOS,
-    EQUIPOS,
-    SERVICIOS;
+public enum CostTypeEnum {
+    MACHINETIME,
+    MANPOWER,
+    CHEMICALS,
+    TOOLS,
+    SERVICES;
     
     @Override    
     public String toString() {
         switch(this){
-            case HORASMAQUINA:
+            case MACHINETIME:
                 return "Horas Maquina";
-            case MANODEOBRA:
+            case MANPOWER:
                 return "Mano de Obra";
-            case INSUMOS:
+            case CHEMICALS:
                 return "Insumos";
-            case EQUIPOS:
+            case TOOLS:
                 return "Equipos e Implementos";
-            case SERVICIOS:
+            case SERVICES:
                 return "Servicios";
             default:
                 return "";

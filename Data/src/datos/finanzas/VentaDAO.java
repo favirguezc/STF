@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.finanzas.ventas.Venta;
+import model.finances.sales.Sale;
 import model.administration.Farm;
 import model.administration.Person;
 
@@ -36,7 +36,7 @@ public class VentaDAO {
         return emf.createEntityManager();
     }
     
-    public void create(Venta venta) {
+    public void create(Sale venta) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -50,7 +50,7 @@ public class VentaDAO {
         }
     }
     
-    public void edit(Venta venta) throws NonexistentEntityException, Exception {
+    public void edit(Sale venta) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -78,9 +78,9 @@ public class VentaDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Venta venta;
+            Sale venta;
             try {
-                venta = em.getReference(Venta.class, id);
+                venta = em.getReference(Sale.class, id);
                 venta.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The venta with id " + id + " no longer exists.", enfe);
@@ -94,20 +94,20 @@ public class VentaDAO {
         }
     }
     
-    public List<Venta> findVentaEntities() {
+    public List<Sale> findVentaEntities() {
         return findVentaEntities(true, -1, -1);
     }
 
-    public List<Venta> findVentaEntities(int maxResults, int firstResult) {
+    public List<Sale> findVentaEntities(int maxResults, int firstResult) {
         return findVentaEntities(false, maxResults, firstResult);
     }
     
-    private List<Venta> findVentaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Sale> findVentaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Venta.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Venta.class).get("dateVenta")));
+            cq.select(cq.from(Sale.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Sale.class).get("dateVenta")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,10 +119,10 @@ public class VentaDAO {
         }
     }
     
-    public Venta findVenta(long id) {
+    public Sale findVenta(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Venta.class, id);
+            return em.find(Sale.class, id);
         } finally {
             em.close();
         }
@@ -132,7 +132,7 @@ public class VentaDAO {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Venta> rt = cq.from(Venta.class);
+            Root<Sale> rt = cq.from(Sale.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -141,7 +141,7 @@ public class VentaDAO {
         }
     }
     
-    public List<Venta> findVentaEntities(Person cliente, Date start, Date end) {
+    public List<Sale> findVentaEntities(Person cliente, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -168,7 +168,7 @@ public class VentaDAO {
         }
         queryString += " ORDER BY t.dateVenta ASC";
         try {
-            TypedQuery<Venta> query = em.createQuery(queryString, Venta.class);
+            TypedQuery<Sale> query = em.createQuery(queryString, Sale.class);
             if (b) {
                 query.setParameter("date1", start, TemporalType.DATE);
             }
@@ -184,10 +184,10 @@ public class VentaDAO {
         }
     }
     
-    public List<Venta> findVentaEntitiesForSelectedFarm(Farm farm) {
+    public List<Sale> findVentaEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Venta> query = em.createQuery("SELECT v FROM Venta v WHERE v.farm = :farm  ORDER BY v.dateVenta ASC", Venta.class);
+            TypedQuery<Sale> query = em.createQuery("SELECT v FROM Venta v WHERE v.farm = :farm  ORDER BY v.dateVenta ASC", Sale.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

@@ -18,8 +18,8 @@ import data.exceptions.PreexistingEntityException;
 import java.util.Date;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
-import modelo.finanzas.costo.Costo;
-import modelo.finanzas.costo.TipoCosto;
+import model.finances.cost.Cost;
+import model.finances.cost.CostTypeEnum;
 import model.administration.Farm;
 import model.administration.ModuleClass;
 
@@ -38,7 +38,7 @@ public class CostoDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Costo costo) throws PreexistingEntityException, Exception {
+    public void create(Cost costo) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -57,7 +57,7 @@ public class CostoDAO implements Serializable {
         }
     }
 
-    public void edit(Costo costo) throws NonexistentEntityException, Exception {
+    public void edit(Cost costo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,9 +85,9 @@ public class CostoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Costo costo;
+            Cost costo;
             try {
-                costo = em.getReference(Costo.class, id);
+                costo = em.getReference(Cost.class, id);
                 costo.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The costo with id " + id + " no longer exists.", enfe);
@@ -101,20 +101,20 @@ public class CostoDAO implements Serializable {
         }
     }
 
-    public List<Costo> findCostoEntities() {
+    public List<Cost> findCostoEntities() {
         return findCostoEntities(true, -1, -1);
     }
 
-    public List<Costo> findCostoEntities(int maxResults, int firstResult) {
+    public List<Cost> findCostoEntities(int maxResults, int firstResult) {
         return findCostoEntities(false, maxResults, firstResult);
     }
 
-    private List<Costo> findCostoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Cost> findCostoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Costo.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Costo.class).get("date")));
+            cq.select(cq.from(Cost.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Cost.class).get("date")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -126,10 +126,10 @@ public class CostoDAO implements Serializable {
         }
     }
 
-    public Costo findCosto(long id) {
+    public Cost findCosto(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Costo.class, id);
+            return em.find(Cost.class, id);
         } finally {
             em.close();
         }
@@ -139,7 +139,7 @@ public class CostoDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Costo> rt = cq.from(Costo.class);
+            Root<Cost> rt = cq.from(Cost.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -148,7 +148,7 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(ModuleClass modulo, TipoCosto type, Date start, Date end) {
+    public List<Cost> findCostoEntities(ModuleClass modulo, CostTypeEnum type, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -182,7 +182,7 @@ public class CostoDAO implements Serializable {
         }
         queryString += " ORDER BY c.date ASC";
         try {
-            TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
+            TypedQuery<Cost> query = em.createQuery(queryString, Cost.class);
             if (b) {
                 query.setParameter("date1", start, TemporalType.DATE);
             }
@@ -201,7 +201,7 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntities(ModuleClass modulo) {
+    public List<Cost> findCostoEntities(ModuleClass modulo) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT c FROM Costo c";
         if (modulo != null) {
@@ -209,7 +209,7 @@ public class CostoDAO implements Serializable {
         }
         queryString += " ORDER BY c.date ASC";
         try {
-            TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
+            TypedQuery<Cost> query = em.createQuery(queryString, Cost.class);
             if (modulo != null) {
                 query.setParameter("modulo", modulo);
             }
@@ -219,11 +219,11 @@ public class CostoDAO implements Serializable {
         }
     }
     
-    public List<Costo> findCostoEntitiesForSelectedFarm(Farm selectedFarm) {
+    public List<Cost> findCostoEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         String queryString = "SELECT c FROM Costo c WHERE c.modulo.lot.farm = :farm ORDER BY c.date ASC";
         try {
-            TypedQuery<Costo> query = em.createQuery(queryString, Costo.class);
+            TypedQuery<Cost> query = em.createQuery(queryString, Cost.class);
             query.setParameter("farm", selectedFarm);
             return query.getResultList();
         } finally {

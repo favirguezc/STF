@@ -23,8 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import modelo.finanzas.Precio;
-import modelo.finanzas.ventas.Venta;
+import model.finances.Price;
+import model.finances.sales.Sale;
 import model.administration.Person;
 
 /**
@@ -35,10 +35,10 @@ import model.administration.Person;
 @SessionScoped
 public class VentaController implements Serializable {
 
-    private Venta selected;
-    private List<Venta> items = null;
+    private Sale selected;
+    private List<Sale> items = null;
     private VentaDAO jpaController = null;
-    private Precio precio = null;
+    private Price precio = null;
     private boolean nuePrecio;
     private PrecioDAO precioJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
@@ -63,11 +63,11 @@ public class VentaController implements Serializable {
         return precioJpaController;
     }
     
-    public Venta getSelected() {
+    public Sale getSelected() {
         return selected;
     }
 
-    public void setSelected(Venta selected) {
+    public void setSelected(Sale selected) {
         this.selected = selected;
     }
 
@@ -93,10 +93,10 @@ public class VentaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    public Venta prepareCreate() {
-        selected = new Venta();
+    public Sale prepareCreate() {
+        selected = new Sale();
         if (signInBean.getFarm() != null) {
-            selected.setFinca(signInBean.getFarm());
+            selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
         } else {
             JsfUtil.addErrorMessage("Seleccione una farm");
@@ -130,7 +130,7 @@ public class VentaController implements Serializable {
         }
     }
 
-    public List<Venta> getItems() {
+    public List<Sale> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findVentaEntitiesForSelectedFarm(signInBean.getFarm());
@@ -163,22 +163,22 @@ public class VentaController implements Serializable {
         }
     }
 
-    public List<Venta> getItemsAvailableSelectMany() {
+    public List<Sale> getItemsAvailableSelectMany() {
         return getJpaController().findVentaEntities();
     }
 
-    public List<Venta> getItemsAvailableSelectOne() {
+    public List<Sale> getItemsAvailableSelectOne() {
         return getJpaController().findVentaEntities();
     }
 
-    public List<Venta> leerLista(Person cliente, Date inicio, Date fin) {
+    public List<Sale> leerLista(Person cliente, Date inicio, Date fin) {
         return getJpaController().findVentaEntities(cliente, inicio, fin);
     }
 
-    public Venta sumarRegistros(Person cliente, Date inicio, Date fin) {
-        List<Venta> leerLista = leerLista(cliente, inicio, fin);
-        Venta suma = new Venta(null, cliente, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        for (Venta v : leerLista) {
+    public Sale sumarRegistros(Person cliente, Date inicio, Date fin) {
+        List<Sale> leerLista = leerLista(cliente, inicio, fin);
+        Sale suma = new Sale(null, cliente, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        for (Sale v : leerLista) {
             suma.sumar(v);
         }
         return suma;
@@ -195,7 +195,7 @@ public class VentaController implements Serializable {
 //            }else{
 //                //else create new precio
 //                nuePrecio = true;
-//                precio = new Precio(selected.getChemical().getNombre(),0);
+//                precio = new Price(selected.getChemical().getNombre(),0);
 //                selected.setPrecio(0);
 //            }
 //        }
@@ -215,7 +215,7 @@ public class VentaController implements Serializable {
 //        }
     }
     
-    @FacesConverter(forClass = Venta.class)
+    @FacesConverter(forClass = Sale.class)
     public static class VentaConverter implements Converter {
 
         @Override
@@ -234,8 +234,8 @@ public class VentaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Venta) {
-                Venta o = (Venta) object;
+            if (object instanceof Sale) {
+                Sale o = (Sale) object;
                 return String.valueOf(o.getId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.finanzas.ventas.Venta");

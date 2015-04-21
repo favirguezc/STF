@@ -3,59 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.finanzas.costo;
+package model.finances.cost;
 
 /**
  *
  * @author John Fredy
  */
-public enum ItemCosto {
+public enum CostItemEnum {
     
-    hrMaquina,
-    horas,
-    jornales,
-    plantulas,
-    litros,
-    rollosde1000mt,
-    kilos,
-    metros,
-    unidades,
-    galones,
-    uniformeoperario,
-    mensual,
-    dosvisitasmensuales,
-    ninguno;
+    MACHINETIME,
+    HOURS,
+    DAILYWAGE,
+    SEEDLINGS,
+    LITRES,
+    ROLLOF100METRES,
+    KILOS,
+    METRES,
+    UNITS,
+    GALLONS,
+    UNIFORMWORKER,
+    MONTHLY,
+    TWOMONTHLYVISITS,
+    NOTHING;
 
     @Override
     public String toString() {
         switch(this){
-            case hrMaquina:
+            case MACHINETIME:
                 return "Horas Maquina";
-            case horas:
+            case HOURS:
                 return "Horas";
-            case jornales:
+            case DAILYWAGE:
                 return "Jornales";
-            case plantulas:
+            case SEEDLINGS:
                 return "Plantulas";
-            case litros:
+            case LITRES:
                 return "Litros";
-            case rollosde1000mt:
+            case ROLLOF100METRES:
                 return "Rollos de 1000 mt";
-            case kilos:
+            case KILOS:
                 return "Kilos";
-            case metros:
+            case METRES:
                 return "Metros";
-            case unidades:
+            case UNITS:
                 return "Unidades";
-            case galones:
+            case GALLONS:
                 return "Galones";
-            case uniformeoperario:
+            case UNIFORMWORKER:
                 return "Uniforme/Operario";
-            case mensual:
+            case MONTHLY:
                 return "Mensual";
-            case dosvisitasmensuales:
+            case TWOMONTHLYVISITS:
                 return "2 Visitas Mensuales";
-            case ninguno:
+            case NOTHING:
                 return "Ninguno";
             default:
                 return "";

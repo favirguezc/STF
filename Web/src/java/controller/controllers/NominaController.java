@@ -1,6 +1,6 @@
 package controller.controllers;
 
-import modelo.finanzas.nomina.Nomina;
+import model.finances.payroll.Payroll;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import datos.finanzas.NominaDAO;
@@ -32,8 +32,8 @@ import model.work.Work;
 @SessionScoped
 public class NominaController implements Serializable {
 
-    private Nomina selected;
-    private List<Nomina> items = null;
+    private Payroll selected;
+    private List<Payroll> items = null;
     private NominaDAO jpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
@@ -49,11 +49,11 @@ public class NominaController implements Serializable {
     public NominaController() {
     }
 
-    public Nomina getSelected() {
+    public Payroll getSelected() {
         return selected;
     }
 
-    public void setSelected(Nomina selected) {
+    public void setSelected(Payroll selected) {
         this.selected = selected;
     }
 
@@ -110,20 +110,20 @@ public class NominaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    public Nomina prepareCreate() {
-        selected = new Nomina();
-        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFarm());
+    public Payroll prepareCreate() {
+        selected = new Payroll();
+        selected.setFarm(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFarm());
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
         // Generar Total
-        selected.setFecha(getSaturday(selected.getFecha()));
+        selected.setDateUntil(getSaturday(selected.getDateUntil()));
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(selected.getFecha());
+        calendar.setTime(selected.getDateUntil());
         calendar.add(Calendar.DAY_OF_YEAR, -5);  // numero de días a añadir, o restar en caso de días<0
-        selected.setFechaDesde(calendar.getTime());
+        selected.setDateFrom(calendar.getTime());
         if (!validarFecha()) {
             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("NominaFechaNoPermitiva"));
         } else {
@@ -169,7 +169,7 @@ public class NominaController implements Serializable {
         }
     }
 
-    public List<Nomina> getItems() {
+    public List<Payroll> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findNominaEntitiesForSelectedFarm(signInBean.getFarm());
@@ -180,19 +180,19 @@ public class NominaController implements Serializable {
         return items;
     }
 
-    public void setItems(List<Nomina> items) {
+    public void setItems(List<Payroll> items) {
         this.items = items;
     }
 
-    public List<Nomina> getItemsAvailableSelectMany() {
+    public List<Payroll> getItemsAvailableSelectMany() {
         return getJpaController().findNominaEntities();
     }
 
-    public List<Nomina> getItemsAvailableSelectOne() {
+    public List<Payroll> getItemsAvailableSelectOne() {
         return getJpaController().findNominaEntities();
     }
 
-    public List<Nomina> leerLista(Farm farm, Person trabajador, Date inicio, Date fin) {
+    public List<Payroll> leerLista(Farm farm, Person trabajador, Date inicio, Date fin) {
         return getJpaController().findNominaEntities(farm, trabajador, inicio, fin);
     }
 
@@ -206,13 +206,13 @@ public class NominaController implements Serializable {
     private boolean validarFecha() {
         //
         Calendar calendar = GregorianCalendar.getInstance();
-        if (selected.getFecha().after(calendar.getTime())) {
+        if (selected.getDateUntil().after(calendar.getTime())) {
             return false;
         }
-        List<Nomina> anteriores = leerLista(selected.getFinca(), selected.getTrabajador(), selected.getFechaDesde(), selected.getFecha());
+        List<Payroll> anteriores = leerLista(selected.getFarm(), selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
         if (anteriores != null && !anteriores.isEmpty()) {
-            for (Nomina nomina : anteriores) {
-                if (nomina.getFecha().equals(selected.getFecha())) {
+            for (Payroll nomina : anteriores) {
+                if (nomina.getDateUntil().equals(selected.getDateUntil())) {
                     return false;
                 }
             }
@@ -223,7 +223,7 @@ public class NominaController implements Serializable {
     public float getValorRecolectado() {
         float valorRecolectado = 0;
         if (selected != null) {
-            Crop totalRecolectado = cropCotroller.sumarRegistros(selected.getTrabajador(), null, selected.getFechaDesde(), selected.getFecha());
+            Crop totalRecolectado = cropCotroller.sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
             valorRecolectado = (totalRecolectado.getWeight() / 500) * 125;
         }
         return valorRecolectado;
@@ -234,7 +234,7 @@ public class NominaController implements Serializable {
         List<Job> jobes = null;
         if (selected != null) {
             jobes = new ArrayList<Job>();
-            List<Work> worksRealizados = workController.leerLista(selected.getTrabajador(), selected.getFechaDesde(), selected.getFecha());
+            List<Work> worksRealizados = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
             for (Job job : jobController.getItemsAvailableSelectOne()) {
                 float valorWork = 0;
                 for (Work work : worksRealizados) {
@@ -261,7 +261,7 @@ public class NominaController implements Serializable {
 
         //Works hechos
         float valorWorks = 0;
-        List<Work> worksRealizados = workController.leerLista(selected.getTrabajador(), selected.getFechaDesde(), selected.getFecha());
+        List<Work> worksRealizados = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
         for (Job job : jobController.getItemsAvailableSelectOne()) {
             for (Work work : worksRealizados) {
                 if (work.getJob().equals(job)) {
@@ -275,7 +275,7 @@ public class NominaController implements Serializable {
         selected.setTotal(total);
     }
 
-    @FacesConverter(forClass = Nomina.class)
+    @FacesConverter(forClass = Payroll.class)
     public static class NominaControllerConverter implements Converter {
 
         @Override
@@ -305,11 +305,11 @@ public class NominaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Nomina) {
-                Nomina o = (Nomina) object;
+            if (object instanceof Payroll) {
+                Payroll o = (Payroll) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Nomina.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Payroll.class.getName());
             }
         }
 

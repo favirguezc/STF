@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.finanzas.nomina;
+package model.finances.payroll;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,28 +23,28 @@ import model.administration.Person;
  * @author John Fredy
  */
 @Entity
-public class Nomina implements Serializable{
+public class Payroll implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaDesde;
+    private Date dateFrom;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha;
+    private Date dateUntil;
     @ManyToOne(optional = false)
-    private Person trabajador;
+    private Person worker;
     @Column(nullable = false)
     private float total;
     @ManyToOne(optional = false)
-    private Farm finca;
+    private Farm farm;
 
-    public Nomina() {
+    public Payroll() {
     }
 
-    public Nomina(Date fecha, Person trabajador) {
-        this.fecha = fecha;
-        this.trabajador = trabajador;
+    public Payroll(Date dateuntil, Person worker) {
+        this.dateUntil = dateuntil;
+        this.worker = worker;
     }
     
     public long getId() {
@@ -55,28 +55,28 @@ public class Nomina implements Serializable{
         this.id = id;
     }
 
-    public Date getFechaDesde() {
-        return fechaDesde;
+    public Date getDateFrom() {
+        return dateFrom;
     }
 
-    public void setFechaDesde(Date fechaDesde) {
-        this.fechaDesde = fechaDesde;
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
     
-    public Date getFecha() {
-        return fecha;
+    public Date getDateUntil() {
+        return dateUntil;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setDateUntil(Date dateUntil) {
+        this.dateUntil = dateUntil;
     }
 
-    public Person getTrabajador() {
-        return trabajador;
+    public Person getWorker() {
+        return worker;
     }
 
-    public void setTrabajador(Person trabajador) {
-        this.trabajador = trabajador;
+    public void setWorker(Person worker) {
+        this.worker = worker;
     }
 
     public float getTotal() {
@@ -87,22 +87,22 @@ public class Nomina implements Serializable{
         this.total = total;
     }
 
-    public Farm getFinca() {
-        return finca;
+    public Farm getFarm() {
+        return farm;
     }
 
-    public void setFinca(Farm finca) {
-        this.finca = finca;
+    public void setFarm(Farm farm) {
+        this.farm = farm;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.fecha);
-        hash = 71 * hash + Objects.hashCode(this.trabajador);
+        hash = 71 * hash + Objects.hashCode(this.dateUntil);
+        hash = 71 * hash + Objects.hashCode(this.worker);
         hash = 71 * hash + Float.floatToIntBits(this.total);
-        hash = 71 * hash + Objects.hashCode(this.finca);
+        hash = 71 * hash + Objects.hashCode(this.farm);
         return hash;
     }
 
@@ -114,20 +114,20 @@ public class Nomina implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Nomina other = (Nomina) obj;
+        final Payroll other = (Payroll) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.fecha, other.fecha)) {
+        if (!Objects.equals(this.dateUntil, other.dateUntil)) {
             return false;
         }
-        if (!Objects.equals(this.trabajador, other.trabajador)) {
+        if (!Objects.equals(this.worker, other.worker)) {
             return false;
         }
         if (Float.floatToIntBits(this.total) != Float.floatToIntBits(other.total)) {
             return false;
         }
-        if (!Objects.equals(this.finca, other.finca)) {
+        if (!Objects.equals(this.farm, other.farm)) {
             return false;
         }
         return true;

@@ -1,6 +1,6 @@
 package controller.controllers;
 
-import modelo.finanzas.caja.ConceptoCaja;
+import model.finances.cash.CashConcept;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import datos.finanzas.ConceptoCajaDAO;
@@ -20,17 +20,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
-import modelo.finanzas.caja.Caja;
+import model.finances.cash.Cash;
 
 @ManagedBean(name = "conceptoCajaController")
 @SessionScoped
 public class ConceptoCajaController implements Serializable {
 
-    private ConceptoCaja selected;
-    private List<ConceptoCaja> items = null;
+    private CashConcept selected;
+    private List<CashConcept> items = null;
     private ConceptoCajaDAO jpaController = null;
     private List<SelectItem> itemsEntrada = null;
-    private Caja cajaFiltro = null;
+    private Cash cajaFiltro = null;
     private int entrada;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
@@ -40,11 +40,11 @@ public class ConceptoCajaController implements Serializable {
     public ConceptoCajaController() {
     }
 
-    public ConceptoCaja getSelected() {
+    public CashConcept getSelected() {
         return selected;
     }
 
-    public void setSelected(ConceptoCaja selected) {
+    public void setSelected(CashConcept selected) {
         this.selected = selected;
     }
 
@@ -83,11 +83,11 @@ public class ConceptoCajaController implements Serializable {
         this.entrada = entrada;
     }
 
-    public Caja getCajaFiltro() {
+    public Cash getCajaFiltro() {
         return cajaFiltro;
     }
 
-    public void setCajaFiltro(Caja cajaFiltro) {
+    public void setCajaFiltro(Cash cajaFiltro) {
         this.cajaFiltro = cajaFiltro;
     }
     
@@ -104,17 +104,17 @@ public class ConceptoCajaController implements Serializable {
         return jpaController;
     }
 
-    public ConceptoCaja prepareCreate() {
-        selected = new ConceptoCaja();
+    public CashConcept prepareCreate() {
+        selected = new CashConcept();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
         if(entrada == 1){
-            selected.setEntrada(true);
+            selected.setIncome(true);
         }else if(entrada == 2){
-            selected.setEntrada(false);
+            selected.setIncome(false);
         }
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ConceptoCajaCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -123,7 +123,7 @@ public class ConceptoCajaController implements Serializable {
     }
 
     public void prepareUpdate(){
-        entrada = selected.isEntrada()?1:2;
+        entrada = selected.isIncome()?1:2;
     }
     
     public void update() {
@@ -160,7 +160,7 @@ public class ConceptoCajaController implements Serializable {
     }
 
 
-    public List<ConceptoCaja> getItems() {
+    public List<CashConcept> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findConceptoCajaEntitiesForSelectedFarm(signInBean.getFarm());
@@ -174,21 +174,21 @@ public class ConceptoCajaController implements Serializable {
 
     private void obtenerSaldo(){
        float saldo = 0;
-       for(ConceptoCaja concepto : items){
-           concepto.setSaldo(saldo);
-           saldo = concepto.getSaldo();
+       for(CashConcept concepto : items){
+           concepto.setBalance(saldo);
+           saldo = concepto.getBalance();
        }
     }
     
-    public List<ConceptoCaja> getItemsAvailableSelectMany() {
+    public List<CashConcept> getItemsAvailableSelectMany() {
         return getJpaController().findConceptoCajaEntities();
     }
 
-    public List<ConceptoCaja> getItemsAvailableSelectOne() {
+    public List<CashConcept> getItemsAvailableSelectOne() {
         return getJpaController().findConceptoCajaEntities();
     }
 
-    @FacesConverter(forClass = ConceptoCaja.class)
+    @FacesConverter(forClass = CashConcept.class)
     public static class ConceptoCajaControllerConverter implements Converter {
 
         @Override
@@ -218,11 +218,11 @@ public class ConceptoCajaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof ConceptoCaja) {
-                ConceptoCaja o = (ConceptoCaja) object;
+            if (object instanceof CashConcept) {
+                CashConcept o = (CashConcept) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ConceptoCaja.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CashConcept.class.getName());
             }
         }
 

@@ -1,6 +1,6 @@
 package controller.controllers;
 
-import modelo.finanzas.caja.Caja;
+import model.finances.cash.Cash;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import datos.finanzas.CajaDAO;
@@ -23,8 +23,8 @@ import javax.faces.convert.FacesConverter;
 @SessionScoped
 public class CajaController implements Serializable {
 
-    private Caja selected;
-    private List<Caja> items = null;
+    private Cash selected;
+    private List<Cash> items = null;
     private CajaDAO jpaController = null;  
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
@@ -34,11 +34,11 @@ public class CajaController implements Serializable {
     public CajaController() {
     }
 
-    public Caja getSelected() {
+    public Cash getSelected() {
         return selected;
     }
 
-    public void setSelected(Caja selected) {
+    public void setSelected(Cash selected) {
         this.selected = selected;
     }
 
@@ -71,9 +71,9 @@ public class CajaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
     
-    public Caja prepareCreate() {
-        selected = new Caja();
-        selected.setFinca(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFarm());
+    public Cash prepareCreate() {
+        selected = new Cash();
+        selected.setFarm(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFarm());
         initializeEmbeddableKey();
         return selected;
     }
@@ -118,7 +118,7 @@ public class CajaController implements Serializable {
         }
     }
     
-    public List<Caja> getItems() {
+    public List<Cash> getItems() {
          if (items == null) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findCajaEntitiesForSelectedFarm(signInBean.getFarm());
@@ -129,15 +129,15 @@ public class CajaController implements Serializable {
         return items;
     }
 
-    public List<Caja> getItemsAvailableSelectMany() {
+    public List<Cash> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Caja> getItemsAvailableSelectOne() {
+    public List<Cash> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    @FacesConverter(forClass = Caja.class)
+    @FacesConverter(forClass = Cash.class)
     public static class CajaControllerConverter implements Converter {
 
         @Override
@@ -167,11 +167,11 @@ public class CajaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Caja) {
-                Caja o = (Caja) object;
+            if (object instanceof Cash) {
+                Cash o = (Cash) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Caja.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Cash.class.getName());
             }
         }
 

@@ -15,8 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import data.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import modelo.finanzas.caja.ConceptoCaja;
-import modelo.finanzas.caja.Caja;
+import model.finances.cash.CashConcept;
+import model.finances.cash.Cash;
 import model.administration.Farm;
 
 /**
@@ -34,7 +34,7 @@ public class ConceptoCajaDAO implements Serializable{
         return emf.createEntityManager();
     }
 
-    public void create(ConceptoCaja conceptoCaja) {
+    public void create(CashConcept conceptoCaja) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,7 +48,7 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
 
-    public void edit(ConceptoCaja conceptoCaja) throws NonexistentEntityException, Exception {
+    public void edit(CashConcept conceptoCaja) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -76,9 +76,9 @@ public class ConceptoCajaDAO implements Serializable{
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ConceptoCaja conceptoCaja;
+            CashConcept conceptoCaja;
             try {
-                conceptoCaja = em.getReference(ConceptoCaja.class, id);
+                conceptoCaja = em.getReference(CashConcept.class, id);
                 conceptoCaja.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The conceptoCaja with id " + id + " no longer exists.", enfe);
@@ -92,20 +92,20 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
 
-    public List<ConceptoCaja> findConceptoCajaEntities() {
+    public List<CashConcept> findConceptoCajaEntities() {
         return findConceptoCajaEntities(true, -1, -1);
     }
 
-    public List<ConceptoCaja> findConceptoCajaEntities(int maxResults, int firstResult) {
+    public List<CashConcept> findConceptoCajaEntities(int maxResults, int firstResult) {
         return findConceptoCajaEntities(false, maxResults, firstResult);
     }
 
-    private List<ConceptoCaja> findConceptoCajaEntities(boolean all, int maxResults, int firstResult) {
+    private List<CashConcept> findConceptoCajaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(ConceptoCaja.class));
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(ConceptoCaja.class).get("date")));
+            cq.select(cq.from(CashConcept.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(CashConcept.class).get("date")));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -117,19 +117,19 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
    
-    public ConceptoCaja findConceptoCaja(long id) {
+    public CashConcept findConceptoCaja(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(ConceptoCaja.class, id);
+            return em.find(CashConcept.class, id);
         } finally {
             em.close();
         }
     }
     
-    public ConceptoCaja findConceptoCaja(String descripcion) throws Exception {
+    public CashConcept findConceptoCaja(String descripcion) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<ConceptoCaja> query = em.createQuery("SELECT cc FROM ConceptoCaja cc WHERE cc.descripcion = :descripcion", ConceptoCaja.class);
+            TypedQuery<CashConcept> query = em.createQuery("SELECT cc FROM ConceptoCaja cc WHERE cc.descripcion = :descripcion", CashConcept.class);
             query.setParameter("descripcion", descripcion);
             return query.getSingleResult();
         } finally {
@@ -137,10 +137,10 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
 
-    public ConceptoCaja findConceptoCaja(String descripcion, Caja caja) throws Exception {
+    public CashConcept findConceptoCaja(String descripcion, Cash caja) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<ConceptoCaja> query = em.createQuery("SELECT t FROM ConceptoCaja t WHERE t.descripcion = :descripcion AND t.caja.id = :caja_id", ConceptoCaja.class);
+            TypedQuery<CashConcept> query = em.createQuery("SELECT t FROM ConceptoCaja t WHERE t.descripcion = :descripcion AND t.caja.id = :caja_id", CashConcept.class);
             query.setParameter("descripcion", descripcion);
             query.setParameter("caja_id", caja.getId());
             return query.getSingleResult();
@@ -149,7 +149,7 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
 
-    public List<ConceptoCaja> findConceptoCajaEntities(Caja caja) {
+    public List<CashConcept> findConceptoCajaEntities(Cash caja) {
         EntityManager em = getEntityManager();
         String queryString ="SELECT t FROM ConceptoCaja t";
         if(caja != null){
@@ -157,7 +157,7 @@ public class ConceptoCajaDAO implements Serializable{
         }
         queryString += " ORDER BY t.date ASC";
         try {
-            TypedQuery<ConceptoCaja> query = em.createQuery(queryString, ConceptoCaja.class);
+            TypedQuery<CashConcept> query = em.createQuery(queryString, CashConcept.class);
             if(caja !=null){
                 query.setParameter("caja", caja);
             }
@@ -171,7 +171,7 @@ public class ConceptoCajaDAO implements Serializable{
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<ConceptoCaja> rt = cq.from(ConceptoCaja.class);
+            Root<CashConcept> rt = cq.from(CashConcept.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -180,11 +180,11 @@ public class ConceptoCajaDAO implements Serializable{
         }
     }
     
-    public List<ConceptoCaja> findConceptoCajaEntitiesForSelectedFarm(Farm selectedFarm) {
+    public List<CashConcept> findConceptoCajaEntitiesForSelectedFarm(Farm selectedFarm) {
         EntityManager em = getEntityManager();
         String queryString ="SELECT t FROM ConceptoCaja t WHERE t.caja.farm = :farm ORDER BY t.date ASC";
         try {
-            TypedQuery<ConceptoCaja> query = em.createQuery(queryString, ConceptoCaja.class);
+            TypedQuery<CashConcept> query = em.createQuery(queryString, CashConcept.class);
             query.setParameter("farm", selectedFarm);
             return query.getResultList();
         } finally {

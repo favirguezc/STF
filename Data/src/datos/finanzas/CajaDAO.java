@@ -15,7 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import data.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import modelo.finanzas.caja.Caja;
+import model.finances.cash.Cash;
 import model.administration.Farm;
 
 /**
@@ -33,7 +33,7 @@ public class CajaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Caja caja) {
+    public void create(Cash caja) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,7 +47,7 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public void edit(Caja caja) throws NonexistentEntityException, Exception {
+    public void edit(Cash caja) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,9 +75,9 @@ public class CajaDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caja caja;
+            Cash caja;
             try {
-                caja = em.getReference(Caja.class, id);
+                caja = em.getReference(Cash.class, id);
                 caja.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The caja with id " + id + " no longer exists.", enfe);
@@ -91,19 +91,19 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public List<Caja> findCajaEntities() {
+    public List<Cash> findCajaEntities() {
         return findCajaEntities(true, -1, -1);
     }
 
-    public List<Caja> findCajaEntities(int maxResults, int firstResult) {
+    public List<Cash> findCajaEntities(int maxResults, int firstResult) {
         return findCajaEntities(false, maxResults, firstResult);
     }
 
-    private List<Caja> findCajaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Cash> findCajaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Caja.class));
+            cq.select(cq.from(Cash.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -115,21 +115,21 @@ public class CajaDAO implements Serializable {
         }
     }
 
-    public Caja findCaja(long id) {
+    public Cash findCaja(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Caja.class, id);
+            return em.find(Cash.class, id);
         } finally {
             em.close();
         }
     }
     
-    public Caja findCaja(String name) throws Exception {
+    public Cash findCaja(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Caja> query = em.createQuery("SELECT c FROM Caja c WHERE c.name = :name", Caja.class);
+            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Caja c WHERE c.name = :name", Cash.class);
             query.setParameter("name", name);
-            Caja caja = query.getSingleResult();
+            Cash caja = query.getSingleResult();
             return caja;
         } finally {
             em.close();
@@ -140,7 +140,7 @@ public class CajaDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Caja> rt = cq.from(Caja.class);
+            Root<Cash> rt = cq.from(Cash.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -149,10 +149,10 @@ public class CajaDAO implements Serializable {
         }
     }
     
-    public List<Caja> findCajaEntitiesForSelectedFarm(Farm farm) {
+    public List<Cash> findCajaEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Caja> query = em.createQuery("SELECT c FROM Caja c WHERE c.farm = :farm", Caja.class);
+            TypedQuery<Cash> query = em.createQuery("SELECT c FROM Caja c WHERE c.farm = :farm", Cash.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

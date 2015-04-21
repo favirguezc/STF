@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo.finanzas.caja;
+package model.finances.cash;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,21 +20,21 @@ import model.administration.Farm;
  * @author JohnFredy
  */
 @Entity
-public class Caja implements Serializable{
+public class Cash implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Column(nullable = false, unique = true)
-    private String nombre;
+    private String name;
     @ManyToOne(optional = false)
-    private Farm finca;
+    private Farm farm;
 
-    public Caja() {
+    public Cash() {
     }
 
-    public Caja(String nombre) {
-        this.nombre = nombre;
+    public Cash(String name) {
+        this.name = name;
     }
     
     public long getId() {
@@ -45,33 +45,33 @@ public class Caja implements Serializable{
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Farm getFinca() {
-        return finca;
+    public Farm getFarm() {
+        return farm;
     }
 
-    public void setFinca(Farm finca) {
-        this.finca = finca;
+    public void setFarm(Farm farm) {
+        this.farm = farm;
     }
 
     @Override
     public String toString() {
-        return nombre;
+        return name;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 31 * hash + Objects.hashCode(this.nombre);
-        hash = 31 * hash + Objects.hashCode(this.finca);
+        hash = 31 * hash + Objects.hashCode(this.name);
+        hash = 31 * hash + Objects.hashCode(this.farm);
         return hash;
     }
 
@@ -83,14 +83,14 @@ public class Caja implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Caja other = (Caja) obj;
+        final Cash other = (Cash) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.nombre, other.nombre)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.finca, other.finca)) {
+        if (!Objects.equals(this.farm, other.farm)) {
             return false;
         }
         return true;

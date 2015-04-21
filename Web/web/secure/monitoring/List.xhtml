@@ -10,7 +10,7 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundleMonitoring.AppName}"></h:outputText>
+            <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -28,23 +28,23 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_numeroDeMonitoring}"/>
+                            <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_number}"/>
                         </f:facet>
-                        <h:outputText value="#{item.numeroDeMonitoring}"/>
+                        <h:outputText value="#{item.number}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_fecha}"/>
+                            <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_monitoringDate}"/>
                         </f:facet>
-                        <h:outputText value="#{item.fecha}">
+                        <h:outputText value="#{item.monitoringDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleMonitoring.Create}" actionListener="#{monitoringController.prepareCreate}" update=":MonitoringCreateForm" oncomplete="PF('MonitoringCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleMonitoring.View}" update=":MonitoringViewForm" oncomplete="PF('MonitoringViewDialog').show()" disabled="#{empty monitoringController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleMonitoring.Edit}" update=":MonitoringEditForm" oncomplete="PF('MonitoringEditDialog').show()" disabled="#{empty monitoringController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleMonitoring.Delete}" actionListener="#{monitoringController.destroy}" update=":growl,datalist" disabled="#{empty monitoringController.selected}"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoringController.prepareCreate}" update=":MonitoringCreateForm" oncomplete="PF('MonitoringCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoringViewForm" oncomplete="PF('MonitoringViewDialog').show()" disabled="#{empty monitoringController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitoringEditForm" oncomplete="PF('MonitoringEditDialog').show()" disabled="#{empty monitoringController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitoringController.destroy}" update=":growl,datalist" disabled="#{empty monitoringController.selected}"/>
                     </f:facet>
                 </p:dataTable>
             </h:form>

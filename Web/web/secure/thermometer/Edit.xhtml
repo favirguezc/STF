@@ -12,21 +12,20 @@
             <h:form id="ThermometerEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{thermometerController.selected != null}">
-                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{thermometerController.selected.nombre}" title="#{bundleThermometer.EditThermometerTitle_nombre}" />
-                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_numeroDeSerie}" for="numeroDeSerie" />
-                        <p:inputText id="numeroDeSerie" value="#{thermometerController.selected.numeroDeSerie}" title="#{bundleThermometer.EditThermometerTitle_numeroDeSerie}" />
-                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_moduleclass}" for="moduleclass" />
-                        <p:selectOneMenu id="moduleclass" value="#{thermometerController.selected.moduleclass}" required="true" requiredMessage="#{bundleThermometer.EditThermometerRequiredMessage_moduleclass}">
-                            <f:selectItem itemLabel="#{bundleThermometer.SelectOneMessage}"/>
-                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
-                                           var="moduleclassItem"
-                                           itemValue="#{moduleclassItem}"
-                                           itemLabel="#{moduleclassItem.lot.nombre} - #{moduleclassItem.nombre}"/>
+                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{thermometerController.selected.name}" title="#{bundleThermometer.EditThermometerTitle_name}" />
+                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_serialNumber}" for="serialNumber" />
+                        <p:inputText id="serialNumber" value="#{thermometerController.selected.serialNumber}" title="#{bundleThermometer.EditThermometerTitle_serialNumber}" />
+                        <p:outputLabel value="#{bundleThermometer.EditThermometerLabel_moduleObject}" for="moduleObject" />
+                        <p:selectOneMenu id="moduleObject" value="#{thermometerController.selected.moduleObject}" required="true" requiredMessage="#{bundleThermometer.EditThermometerRequiredMessage_moduleObject}">
+                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                                           var="moduleObjectItem"
+                                           itemValue="#{moduleObjectItem}"
+                                           itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{thermometerController.update}" value="#{bundleThermometer.Save}" update="display,:ThermometerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ThermometerEditDialog');"/>
-                    <p:commandButton value="#{bundleThermometer.Cancel}" onclick="ThermometerEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{thermometerController.update}" value="#{bundle.Save}" update="display,:ThermometerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ThermometerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ThermometerEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

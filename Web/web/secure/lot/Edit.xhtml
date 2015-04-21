@@ -12,11 +12,11 @@
             <h:form id="LotEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lotController.selected != null}">
-                        <p:outputLabel value="#{bundleLot.EditLotLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{lotController.selected.nombre}" title="#{bundleLot.EditLotTitle_nombre}" />
+                        <p:outputLabel value="#{bundleLot.EditLotLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{lotController.selected.name}" title="#{bundleLot.EditLotTitle_name}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{lotController.update}" value="#{bundleLot.Save}" update="display,:LotListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LotEditDialog');"/>
-                    <p:commandButton value="#{bundleLot.Cancel}" onclick="LotEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{lotController.update}" value="#{bundle.Save}" update="display,:LotListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LotEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LotEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

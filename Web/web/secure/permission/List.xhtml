@@ -28,27 +28,27 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundlePermission.ListPermissionTitle_page}"/>
+                                <h:outputText value="#{bundlePermission.ListPermissionTitle_pageEnum}"/>
                             </f:facet>
-                            <h:outputText value="#{item.page}"/>
+                            <h:outputText value="#{item.pageEnum}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundlePermission.ListPermissionTitle_rol}"/>
+                                <h:outputText value="#{bundlePermission.ListPermissionTitle_roleEnum}"/>
                             </f:facet>
-                            <h:outputText value="#{item.rol}"/>
+                            <h:outputText value="#{item.roleEnum}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundlePermission.ListPermissionTitle_action}"/>
+                                <h:outputText value="#{bundlePermission.ListPermissionTitle_actionEnum}"/>
                             </f:facet>
-                            <h:outputText value="#{item.action}"/>
+                            <h:outputText value="#{item.actionEnum}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlePermission.Create}" actionListener="#{permissionController.prepareCreate}" update=":PermissionCreateForm" oncomplete="PF('PermissionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePermission.View}" update=":PermissionViewForm" oncomplete="PF('PermissionViewDialog').show()" disabled="#{empty permissionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlePermission.Edit}" update=":PermissionEditForm" oncomplete="PF('PermissionEditDialog').show()" disabled="#{empty permissionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlePermission.Delete}" actionListener="#{permissionController.destroy}" update=":growl,datalist" disabled="#{empty permissionController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{permissionController.prepareCreate}" update=":PermissionCreateForm" oncomplete="PF('PermissionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PermissionViewForm" oncomplete="PF('PermissionViewDialog').show()" disabled="#{empty permissionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PermissionEditForm" oncomplete="PF('PermissionEditDialog').show()" disabled="#{empty permissionController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{permissionController.destroy}" update=":growl,datalist" disabled="#{empty permissionController.selected}"/>
                         </f:facet>
                     </p:dataTable>
             </h:form>

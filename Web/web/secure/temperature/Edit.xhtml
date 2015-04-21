@@ -12,27 +12,26 @@
             <h:form id="TemperatureEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperatureController.selected != null}">
-                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{temperatureController.selected.fecha}" title="#{bundleTemperature.EditTemperatureTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_hora}" for="hora" />
-                        <p:calendar id="hora" pattern="HH:mm:ss" value="#{temperatureController.selected.hora}" title="#{bundleTemperature.EditTemperatureTitle_hora}"  showOn="button" timeOnly="true"/>
+                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_measurementDate}" for="measurementDate" />
+                        <p:calendar id="measurementDate" pattern="dd/MM/yyyy" value="#{temperatureController.selected.measurementDate}" title="#{bundleTemperature.EditTemperatureTitle_measurementDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_measurementTime}" for="measurementTime" />
+                        <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{temperatureController.selected.measurementTime}" title="#{bundleTemperature.EditTemperatureTitle_measurementTime}"  showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_temperature}" for="temperature" />
                         <p:inputText id="temperature" value="#{temperatureController.selected.temperature}" title="#{bundleTemperature.EditTemperatureTitle_temperature}" />
-                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_soilmoisture}" for="soilmoisture" />
-                        <p:inputText id="soilmoisture" value="#{temperatureController.selected.soilmoisture}" title="#{bundleTemperature.EditTemperatureTitle_soilmoisture}" />
-                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_puntoDeRocio}" for="puntoDeRocio" />
-                        <p:inputText id="puntoDeRocio" value="#{temperatureController.selected.puntoDeRocio}" title="#{bundleTemperature.EditTemperatureTitle_puntoDeRocio}" />
-                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_moduleclass}" for="moduleclass" />
-                        <p:selectOneMenu id="moduleclass" value="#{temperatureController.selected.moduleclass}" >
-                            <f:selectItem itemLabel="#{bundleTemperature.SelectOneMessage}"/>
-                            <f:selectItems value="#{moduleclassController.itemsAvailableSelectOne}"
-                                           var="moduleclassItem"
-                                           itemValue="#{moduleclassItem}"
-                                           itemLabel="#{moduleclassItem.lot.nombre} #{moduleclassItem.nombre}"/>
+                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_humidity}" for="humidity" />
+                        <p:inputText id="humidity" value="#{temperatureController.selected.humidity}" title="#{bundleTemperature.EditTemperatureTitle_humidity}" />
+                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_dewPoint}" for="dewPoint" />
+                        <p:inputText id="dewPoint" value="#{temperatureController.selected.dewPoint}" title="#{bundleTemperature.EditTemperatureTitle_dewPoint}" />
+                        <p:outputLabel value="#{bundleTemperature.EditTemperatureLabel_moduleObject}" for="moduleObject" />
+                        <p:selectOneMenu id="moduleObject" value="#{temperatureController.selected.moduleObject}" >
+                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                                           var="moduleObjectItem"
+                                           itemValue="#{moduleObjectItem}"
+                                           itemLabel="#{moduleObjectItem.lot.name} #{moduleObjectItem.name}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{temperatureController.update}" value="#{bundleTemperature.Save}" update="display,:TemperatureListPanel:TemperatureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperatureEditDialog');"/>
-                    <p:commandButton value="#{bundleTemperature.Cancel}" onclick="TemperatureEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{temperatureController.update}" value="#{bundle.Save}" update="display,:TemperatureListPanel:TemperatureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TemperatureEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TemperatureEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

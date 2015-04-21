@@ -12,20 +12,20 @@
             <h:form id="SoilMoistureViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{soilMoistureController.selected != null}">
-                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_fecha}"/>
-                        <h:outputText value="#{soilMoistureController.selected.fecha}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_fecha}">
+                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_measurementDate}"/>
+                        <h:outputText value="#{soilMoistureController.selected.measurementDate}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_measurementDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_hora}"/>
-                        <h:outputText value="#{soilMoistureController.selected.hora}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_hora}">
+                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_measurementTime}"/>
+                        <h:outputText value="#{soilMoistureController.selected.measurementTime}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_measurementTime}">
                             <f:convertDateTime pattern="HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_valorEn15Cms}"/>
-                        <h:outputText value="#{soilMoistureController.selected.valorEn15Cms}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_valorEn15Cms}"/>
-                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_valorEn30Cms}"/>
-                        <h:outputText value="#{soilMoistureController.selected.valorEn30Cms}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_valorEn30Cms}"/>
+                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_valueIn15Centimeters}"/>
+                        <h:outputText value="#{soilMoistureController.selected.valueIn15Centimeters}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_valueIn15Centimeters}"/>
+                        <h:outputText value="#{bundleSoilMoisture.ViewSoilMoistureLabel_valueIn30Centimeters}"/>
+                        <h:outputText value="#{soilMoistureController.selected.valueIn30Centimeters}" title="#{bundleSoilMoisture.ViewSoilMoistureTitle_valueIn30Centimeters}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleSoilMoisture.Close}" onclick="SoilMoistureViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="SoilMoistureViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -14,14 +14,14 @@
                     <p:panelGrid columns="2" rendered="#{permissionController.selected != null}">
                         <h:outputText value="#{bundlePermission.ViewPermissionLabel_id}"/>
                         <h:outputText value="#{permissionController.selected.id}" title="#{bundlePermission.ViewPermissionTitle_id}"/>
-                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_page}"/>
-                        <h:outputText value="#{permissionController.selected.page}" title="#{bundlePermission.ViewPermissionTitle_page}"/>
-                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_rol}"/>
-                        <h:outputText value="#{permissionController.selected.rol}" title="#{bundlePermission.ViewPermissionTitle_rol}"/>
-                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_action}"/>
-                        <h:outputText value="#{permissionController.selected.action}" title="#{bundlePermission.ViewPermissionTitle_action}"/>
+                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_pageEnum}"/>
+                        <h:outputText value="#{permissionController.selected.pageEnum}" title="#{bundlePermission.ViewPermissionTitle_pageEnum}"/>
+                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_roleEnum}"/>
+                        <h:outputText value="#{permissionController.selected.roleEnum}" title="#{bundlePermission.ViewPermissionTitle_roleEnum}"/>
+                        <h:outputText value="#{bundlePermission.ViewPermissionLabel_actionEnum}"/>
+                        <h:outputText value="#{permissionController.selected.actionEnum}" title="#{bundlePermission.ViewPermissionTitle_actionEnum}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundlePermission.Close}" onclick="PermissionViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PermissionViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

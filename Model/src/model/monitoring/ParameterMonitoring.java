@@ -64,6 +64,14 @@ public class ParameterMonitoring implements Serializable {
         this.parameter = parameter;
     }
 
+    public Value getMonitoringValue() {
+        return monitoringValue;
+    }
+
+    public void setMonitoringValue(Value monitoringValue) {
+        this.monitoringValue = monitoringValue;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;

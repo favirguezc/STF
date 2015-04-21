@@ -14,14 +14,14 @@
                     <p:panelGrid columns="2" rendered="#{parameterMonitoringController.selected != null}">
                         <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_monitoring}"/>
                         <h:outputText value="#{parameterMonitoringController.selected.monitoring}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_monitoring}"/>
-                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_moduleclass}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.moduleclass}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_moduleclass}"/>
-                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_monitorableparameter}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.monitorableparameter}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_monitorableparameter}"/>
-                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_valor}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.riesgo} #{parameterMonitoringController.selected.conteo!=0 ? parameterMonitoringController.selected.conteo : ''} #{parameterMonitoringController.selected.relacion}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_valor}"/>
+                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_cultivation}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.cultivation}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_cultivation}"/>
+                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_parameter}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.parameter}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_parameter}"/>
+                        <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_monitoringValue}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.monitoringValue}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleParameterMonitoring.Close}" onclick="ParameterMonitoringViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="ParameterMonitoringViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

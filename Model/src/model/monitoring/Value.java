@@ -19,7 +19,34 @@ public class Value implements Serializable {
     private String relation;
     private RiskEnum risk;
 
-    public void setValue(Object value) {
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        setValue(count);
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        setValue(relation);
+    }
+
+    public RiskEnum getRisk() {
+        return risk;
+    }
+
+    public void setRisk(RiskEnum risk) {
+        setValue(risk);
+    }
+
+    private void setValue(Object value) {
+        if(value==null){
+            return;
+        }
         if (value instanceof Integer) {
             count = (Integer) value;
         } else if (value instanceof RiskEnum) {
@@ -37,5 +64,10 @@ public class Value implements Serializable {
             return risk;
         }
         return count;
+    }
+
+    @Override
+    public String toString() {
+        return get().toString();
     }
 }

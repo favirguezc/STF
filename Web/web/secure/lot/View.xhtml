@@ -12,10 +12,10 @@
             <h:form id="LotViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{lotController.selected != null}">
-                        <h:outputText value="#{bundleLot.ViewLotLabel_nombre}"/>
-                        <h:outputText value="#{lotController.selected.nombre}" title="#{bundleLot.ViewLotTitle_nombre}"/>
+                        <h:outputText value="#{bundleLot.ViewLotLabel_name}"/>
+                        <h:outputText value="#{lotController.selected.name}" title="#{bundleLot.ViewLotTitle_name}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleLot.Close}" onclick="LotViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="LotViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

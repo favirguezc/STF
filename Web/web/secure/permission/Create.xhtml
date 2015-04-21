@@ -12,21 +12,21 @@
             <h:form id="PermissionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{permissionController.selected != null}">
-                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_page}" for="page" />
-                        <p:selectOneMenu id="page" value="#{permissionController.selected.page}">
-                            <f:selectItems value="#{pageController.pageValues}"/>
+                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_pageEnum}" for="pageEnum" />
+                        <p:selectOneMenu id="pageEnum" value="#{permissionController.selected.pageEnum}">
+                            <f:selectItems value="#{pageEnumController.pageEnumValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_rol}" for="rol" />
-                        <p:selectOneMenu id="rol" value="#{permissionController.selected.rol}">
+                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_roleEnum}" for="rol" />
+                        <p:selectOneMenu id="rol" value="#{permissionController.selected.roleEnum}">
                             <f:selectItems value="#{rolController.rolValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_action}" for="action" />
-                        <p:selectOneMenu id="action" value="#{permissionController.selected.action}">
+                        <p:outputLabel value="#{bundlePermission.CreatePermissionLabel_actionEnum}" for="actionEnum" />
+                        <p:selectOneMenu id="actionEnum" value="#{permissionController.selected.actionEnum}">
                             <f:selectItems value="#{actionController.actionValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{permissionController.create}" value="#{bundlePermission.Save}" update="display,:PermissionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PermissionCreateDialog');"/>
-                    <p:commandButton value="#{bundlePermission.Cancel}" onclick="PermissionCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{permissionController.create}" value="#{bundle.Save}" update="display,:PermissionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PermissionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PermissionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -12,14 +12,14 @@
             <h:form id="RainFallViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rainfallController.selected != null}">
-                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_fecha}"/>
-                        <h:outputText value="#{rainfallController.selected.fecha}" title="#{bundleRainFall.ViewRainFallTitle_fecha}">
+                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_rainDate}"/>
+                        <h:outputText value="#{rainfallController.selected.rainDate}" title="#{bundleRainFall.ViewRainFallTitle_rainDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_mm}"/>
-                        <h:outputText value="#{rainfallController.selected.mm}" title="#{bundleRainFall.ViewRainFallTitle_mm}"/>
+                        <h:outputText value="#{bundleRainFall.ViewRainFallLabel_milimeters}"/>
+                        <h:outputText value="#{rainfallController.selected.milimeters}" title="#{bundleRainFall.ViewRainFallTitle_milimeters}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleRainFall.Close}" onclick="RainFallViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="RainFallViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

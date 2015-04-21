@@ -12,22 +12,22 @@
             <h:form id="WorkViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{workController.selected != null}">
-                        <h:outputText value="#{bundleWork.ViewWorkLabel_fecha}"/>
-                        <h:outputText value="#{workController.selected.fecha}" title="#{bundleWork.ViewWorkTitle_fecha}">
+                        <h:outputText value="#{bundleWork.ViewWorkLabel_workDate}"/>
+                        <h:outputText value="#{workController.selected.workDate}" title="#{bundleWork.ViewWorkTitle_workDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundleWork.ViewWorkLabel_moduleclass}"/>
-                        <h:outputText value="#{workController.selected.moduleclass.lot.nombre} - #{workController.selected.moduleclass.nombre}" title="#{bundleWork.ViewWorkTitle_moduleclass}"/>
+                        <h:outputText value="#{bundleWork.ViewWorkLabel_cultivation}"/>
+                        <h:outputText value="#{workController.selected.cultivation.moduleObject.lot.name} - #{workController.selected.cultivation.moduleObject.name}, #{workController.selected.cultivation.variety.name}" title="#{bundleWork.ViewWorkTitle_cultivation}"/>
                         <h:outputText value="#{bundleWork.ViewWorkLabel_job}"/>
-                        <h:outputText value="#{workController.selected.job.nombre}" title="#{bundleWork.ViewWorkTitle_job}"/>
-                        <h:outputText value="#{bundleWork.ViewWorkLabel_operario}"/>
-                        <h:outputText value="#{workController.selected.operario.nombre} #{workController.selected.operario.apellido}" title="#{bundleWork.ViewWorkTitle_operario}"/>
-                        <h:outputText value="#{bundleWork.ViewWorkLabel_horas}"/>
-                        <h:outputText value="#{workController.selected.horas}" title="#{bundleWork.ViewWorkTitle_horas}"/>
-                        <h:outputText value="#{bundleWork.ViewWorkLabel_observaciones}"/>
-                        <h:outputText value="#{workController.selected.observaciones}" title="#{bundleWork.ViewWorkTitle_observaciones}"/>                        
+                        <h:outputText value="#{workController.selected.job.name}" title="#{bundleWork.ViewWorkTitle_job}"/>
+                        <h:outputText value="#{bundleWork.ViewWorkLabel_worker}"/>
+                        <h:outputText value="#{workController.selected.worker.name} #{workController.selected.worker.lastName}" title="#{bundleWork.ViewWorkTitle_worker}"/>
+                        <h:outputText value="#{bundleWork.ViewWorkLabel_hoursSpent}"/>
+                        <h:outputText value="#{workController.selected.hoursSpent}" title="#{bundleWork.ViewWorkTitle_hoursSpent}"/>
+                        <h:outputText value="#{bundleWork.ViewWorkLabel_observations}"/>
+                        <h:outputText value="#{workController.selected.observations}" title="#{bundleWork.ViewWorkTitle_observations}"/>                        
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleWork.Close}" onclick="WorkViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="WorkViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

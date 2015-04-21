@@ -132,7 +132,7 @@ public class ParameterMonitoringController implements Serializable {
         return getJpaController().findParameterMonitoringEntities();
     }
 
-    public void valor() {
+    public void value() {
         if (selected.getParameter() != null) {
             if (selected.getParameter().getValuationType() == ValuationTypeEnum.COUNT) {
                 habilitado = 2;

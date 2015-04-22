@@ -20,8 +20,8 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Aplicación")) {
             return PageEnum.APPLICATION;
         }
-        if (value.equals("Caja")) {
-            return PageEnum.Caja;
+        if (value.equals("Administrar Cajas")) {
+            return PageEnum.CASH;
         }
         if (value.equals("Insumo")) {
             return PageEnum.CHEMICAL;
@@ -29,17 +29,17 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Clasificación")) {
             return PageEnum.CLASSIFICATION;
         }
-        if (value.equals("Compra")) {
-            return PageEnum.Compra;
+        if (value.equals("Compra de Insumos")) {
+            return PageEnum.CHEMICALPURCHASE;
         }
-        if (value.equals("Concepto Caja")) {
-            return PageEnum.ConceptoCaja;
+        if (value.equals("Registrar en Cajas")) {
+            return PageEnum.CASHCONCEPT;
         }
         if (value.equals("Contrato")) {
             return PageEnum.CONTRACT;
         }
         if (value.equals("Costo")) {
-            return PageEnum.Costo;
+            return PageEnum.COST;
         }
         if (value.equals("Departamento")) {
             return PageEnum.DEPARTMENT;
@@ -72,7 +72,7 @@ public class PageEnumConverter implements Converter {
             return PageEnum.MUNICIPALITY;
         }
         if (value.equals("Nómina")) {
-            return PageEnum.Nomina;
+            return PageEnum.PAYROLL;
         }
         if (value.equals("Permiso")) {
             return PageEnum.PERMISSION;
@@ -99,7 +99,7 @@ public class PageEnumConverter implements Converter {
             return PageEnum.MONITORABLEPARAMETER;
         }
         if (value.equals("Venta")) {
-            return PageEnum.Venta;
+            return PageEnum.SALE;
         }
         return null;
     }

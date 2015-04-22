@@ -11,7 +11,6 @@ package model.administration;
  */
 public enum PageEnum {
 //Add new pages alphabetically
-
     APPLICATION,
     CASH,
     CASHCONCEPT,
@@ -39,8 +38,7 @@ public enum PageEnum {
     THERMOMETER,
     WORK,
     INSECTTRAP,
-    MONITORABLEPARAMETER,
-    Venta;
+    MONITORABLEPARAMETER;
 
     @Override
     public String toString() {
@@ -53,15 +51,15 @@ public enum PageEnum {
                 return "Clasificación";
             case CROP:
                 return "Recolección";
-            case Caja:
-                return "Caja";
-            case Compra:
-                return "Compra";
-            case ConceptoCaja:
-                return "Concepto Caja";
+            case CASH:
+                return "Administrar Cajas";
+            case CHEMICALPURCHASE:
+                return "Compra de Insumos";
+            case CASHCONCEPT:
+                return "Registrar en Cajas";
             case CONTRACT:
                 return "Contrato";
-            case Costo:
+            case COST:
                 return "Costo";
             case DEPARTMENT:
                 return "Departamento";
@@ -83,7 +81,7 @@ public enum PageEnum {
                 return "Monitoreo";
             case MUNICIPALITY:
                 return "Municipio";
-            case Nomina:
+            case PAYROLL:
                 return "Nómina";
             case PARAMETERMONITORING:
                 return "Monitoreo de Variables";
@@ -97,7 +95,7 @@ public enum PageEnum {
                 return "Temperatura";
             case THERMOMETER:
                 return "Termómetro";
-            case Venta:
+            case SALE:
                 return "Venta";
             case WORK:
                 return "Trabajo";
@@ -105,6 +103,4 @@ public enum PageEnum {
                 return "";
         }
     }
-
-    MONITORABLEPARAMETER;
 }

@@ -135,18 +135,18 @@ public class NoteController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("NotaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleNote").getString("NotaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("NotaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleNote").getString("NotaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("NotaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleNote").getString("NotaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -205,7 +205,7 @@ public class NoteController implements Serializable {
                 return null;
             }
             NoteController controller = (NoteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "notaController");
+                    getValue(facesContext.getELContext(), null, "noteController");
             return controller.getJpaController().findNota(getKey(value));
         }
 

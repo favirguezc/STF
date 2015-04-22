@@ -56,18 +56,18 @@ public class CultivationController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle2").getString("CultivationCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCultivation").getString("CultivationCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle2").getString("CultivationUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCultivation").getString("CultivationUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle2").getString("CultivationDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCultivation").getString("CultivationDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -95,7 +95,7 @@ public class CultivationController implements Serializable {
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle2").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
     }

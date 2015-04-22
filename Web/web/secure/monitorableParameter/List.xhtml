@@ -15,8 +15,8 @@
 
         <ui:define name="body">
             <h:form id="MonitorableParameterListForm">
-                <p:dataTable id="datalist" value="#{monitorableparameterController.items}" var="item"
-                             selectionMode="single" selection="#{monitorableparameterController.selected}"
+                <p:dataTable id="datalist" value="#{monitorableParameterController.items}" var="item"
+                             selectionMode="single" selection="#{monitorableParameterController.selected}"
                              paginator="true"
                              rowKey="#{item.id}"
                              rows="10"
@@ -45,10 +45,10 @@
                         <h:outputText value="#{item.valuationType}"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitorableparameterController.prepareCreate}" update=":MonitorableParameterCreateForm" oncomplete="PF('MonitorableParameterCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitorableParameterViewForm" oncomplete="PF('MonitorableParameterViewDialog').show()" disabled="#{empty monitorableparameterController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitorableParameterEditForm" oncomplete="PF('MonitorableParameterEditDialog').show()" disabled="#{empty monitorableparameterController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitorableparameterController.destroy}" update=":growl,datalist" disabled="#{empty monitorableparameterController.selected}"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitorableParameterController.prepareCreate}" update=":MonitorableParameterCreateForm" oncomplete="PF('MonitorableParameterCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitorableParameterViewForm" oncomplete="PF('MonitorableParameterViewDialog').show()" disabled="#{empty monitorableParameterController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitorableParameterEditForm" oncomplete="PF('MonitorableParameterEditDialog').show()" disabled="#{empty monitorableParameterController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitorableParameterController.destroy}" update=":growl,datalist" disabled="#{empty monitorableParameterController.selected}"/>
                     </f:facet>
                 </p:dataTable>
             </h:form>

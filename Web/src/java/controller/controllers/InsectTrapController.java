@@ -68,18 +68,18 @@ public class InsectTrapController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("InsectTrapCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleInsectTrap").getString("InsectTrapCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InsectTrapUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleInsectTrap").getString("InsectTrapUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("InsectTrapDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleInsectTrap").getString("InsectTrapDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

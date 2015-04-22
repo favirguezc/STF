@@ -67,18 +67,18 @@ public class JobController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("JobCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleJob").getString("JobCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("JobUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleJob").getString("JobUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("JobDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleJob").getString("JobDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

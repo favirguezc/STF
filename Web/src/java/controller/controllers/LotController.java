@@ -78,18 +78,18 @@ public class LotController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("LotCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleLot").getString("LotCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("LotUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleLot").getString("LotUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("LotDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleLot").getString("LotDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

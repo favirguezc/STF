@@ -11,13 +11,13 @@
         <p:dialog id="RainFallCreateDlg" widgetVar="RainFallCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleRainFall.CreateRainFallTitle}">
             <h:form id="RainFallCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{rainfallController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{rainFallController.selected != null}">
                         <p:outputLabel value="#{bundleRainFall.CreateRainFallLabel_rainDate}" for="rainDate" />
-                        <p:calendar id="rainDate" pattern="dd/MM/yyyy" value="#{rainfallController.selected.rainDate}" title="#{bundleRainFall.EditRainFallTitle_rainDate}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_rainDate}" showOn="button"/>
+                        <p:calendar id="rainDate" pattern="dd/MM/yyyy" value="#{rainFallController.selected.rainDate}" title="#{bundleRainFall.EditRainFallTitle_rainDate}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_rainDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleRainFall.CreateRainFallLabel_milimeters}" for="milimeters" />
-                        <p:inputText id="milimeters" value="#{rainfallController.selected.milimeters}" title="#{bundleRainFall.CreateRainFallTitle_milimeters}" required="true" requiredMessage="#{bundleRainFall.CreateRainFallRequiredMessage_milimeters}"/>
+                        <p:inputText id="milimeters" value="#{rainFallController.selected.milimeters}" title="#{bundleRainFall.CreateRainFallTitle_milimeters}" required="true" requiredMessage="#{bundleRainFall.CreateRainFallRequiredMessage_milimeters}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{rainfallController.create}" value="#{bundle.Save}" update="display,:RainFallListPanel:RainFallListForm:datalist,:growl" oncomplete="handleSubmit(args,'RainFallCreateDialog');"/>
+                    <p:commandButton actionListener="#{rainFallController.create}" value="#{bundle.Save}" update="display,:RainFallListPanel:RainFallListForm:datalist,:growl" oncomplete="handleSubmit(args,'RainFallCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RainFallCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

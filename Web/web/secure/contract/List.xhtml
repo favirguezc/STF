@@ -10,7 +10,7 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundleContract.ListContractTitle}"></h:outputText>
+            <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
@@ -46,7 +46,7 @@
                         </f:facet>
                         <h:outputText value="#{item.roleEnum}"/>
                     </p:column>
-                    <p:column rendered="#{signInController.user.administrador}">
+                    <p:column rendered="#{signInController.user.systemAdmin}">
                         <f:facet name="header">
                             <h:outputText value="#{bundleContract.ListContractTitle_farm}"/>
                         </f:facet>

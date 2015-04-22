@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_moduleObject}" for="moduleObject" />
                         <p:selectOneMenu id="moduleObject" value="#{cultivationController.selected.moduleObject}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_moduleObject}">
-                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"
                                            itemValue="#{moduleObjectItem}"/>
                         </p:selectOneMenu>

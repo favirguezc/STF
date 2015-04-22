@@ -9,7 +9,7 @@ package model.applications;
  *
  * @author fredy
  */
-public enum AplicationMethodEnum {
+public enum ApplicationMethodEnum {
 
     INJECTED,
     IRRIGATION,

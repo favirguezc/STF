@@ -65,7 +65,7 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_}"/>
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_activeComponent}"/>
                         </f:facet>
                         <h:outputText value="#{item.chemical.activeComponent}"/>
                     </p:column>
@@ -89,13 +89,13 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_periodoDeCarencia}"/>
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_waitingPeriod}"/>
                         </f:facet>
                         <h:outputText value="#{item.chemical.waitingPeriod}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_tiempoDeReentrada}"/>
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_reEntryTime}"/>
                         </f:facet>
                         <h:outputText value="#{item.chemical.reEntryTime}"/>
                     </p:column>

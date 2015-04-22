@@ -13,8 +13,6 @@ public enum RHEnum {
 
     /**
      *
-     *//**
-     *
      */
     POSITIVE,
     /**

@@ -101,7 +101,7 @@ public class ContractController implements Serializable {
             selected=null;
         } else {
             selected.setPerson(findPersonPorCedula);
-            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContractCreated"));
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleContract").getString("ContractCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
             }
@@ -110,11 +110,11 @@ public class ContractController implements Serializable {
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ContractUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleContract").getString("ContractUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ContractDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleContract").getString("ContractDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

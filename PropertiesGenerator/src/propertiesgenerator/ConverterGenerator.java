@@ -5,7 +5,16 @@
  */
 package propertiesgenerator;
 
+import model.administration.PageEnum;
+import model.administration.RHEnum;
+import model.administration.RoleEnum;
+import model.administration.SexEnum;
+import model.applications.ApplicationMethodEnum;
+import model.applications.ApplicationTypeEnum;
+import model.crop.ClassificationTypeEnum;
+import model.monitoring.RiskEnum;
 import model.monitoring.ValuationTypeEnum;
+import model.util.Action;
 
 /**
  *
@@ -19,7 +28,7 @@ public class ConverterGenerator {
                 + "            return null;\n"
                 + "        }");
         for (Object o : c.getEnumConstants()) {
-            System.out.println("if (value.equals(\"" + o + "\")) {");
+            System.out.println("if (value.equals(\"" + o.toString() + "\")) {");
             System.out.println("return " + c.getSimpleName() + "." + ((Enum) o).name() + ";");
             System.out.println("}");
         }

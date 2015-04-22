@@ -2,7 +2,9 @@ package controller.controllers;
 
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import model.crop.Variety;
 import data.crop.VarietyDAO;
+import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,8 +16,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.persistence.Persistence;
-import model.crop.Variety;
 
 @ManagedBean(name = "varietyController")
 @SessionScoped
@@ -42,9 +42,9 @@ public class VarietyController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private VarietyDAO getDAO() {
+    private VarietyDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new VarietyDAO(Persistence.createEntityManagerFactory("WebPU"));
+            jpaController = new VarietyDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
@@ -76,7 +76,7 @@ public class VarietyController implements Serializable {
 
     public List<Variety> getItems() {
         if (items == null) {
-            items = getDAO().findVarietyEntities();
+            items = getJpaController().findVarietyEntities();
         }
         return items;
     }
@@ -86,26 +86,26 @@ public class VarietyController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction == PersistAction.UPDATE) {
-                    getDAO().edit(selected);
+                    getJpaController().edit(selected);
                 } else if (persistAction == PersistAction.CREATE) {
-                    getDAO().create(selected);
+                    getJpaController().create(selected);
                 } else {
-                    getDAO().destroy(selected.getId());
+                    getJpaController().destroy(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle2").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
     }
 
     public List<Variety> getItemsAvailableSelectMany() {
-        return getDAO().findVarietyEntities();
+        return getJpaController().findVarietyEntities();
     }
 
     public List<Variety> getItemsAvailableSelectOne() {
-        return getDAO().findVarietyEntities();
+        return getJpaController().findVarietyEntities();
     }
 
     @FacesConverter(forClass = Variety.class)
@@ -118,7 +118,7 @@ public class VarietyController implements Serializable {
             }
             VarietyController controller = (VarietyController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "varietyController");
-            return controller.getDAO().findVariety(getKey(value));
+            return controller.getJpaController().findVariety(getKey(value));
         }
 
         java.lang.Long getKey(String value) {

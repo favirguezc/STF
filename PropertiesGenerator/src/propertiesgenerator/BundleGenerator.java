@@ -12,7 +12,7 @@ package propertiesgenerator;
 public class BundleGenerator {
 
     public static void main(String[] args) {
-        String[] cs = {"Job", "Lot", "Module", "MonitorableParameter", "Monitoring", "Note", "ParameterMonitoring", "Permission", "RainFall", "SoilMoisture", "Temperature", "Thermometer", "Work"};
+        String[] cs = {"Variety"};
         for (String c : cs) {
             System.out.println("<resource-bundle>\n"
                     + "            <base-name>/Bundle" + c + "</base-name>\n"

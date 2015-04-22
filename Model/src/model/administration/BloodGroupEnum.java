@@ -29,5 +29,5 @@ public enum BloodGroupEnum {
     /**
      *
      */
-    AB
+    AB;
 }

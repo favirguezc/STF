@@ -77,18 +77,18 @@ public class ModuleClassController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ModuleClassCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleModule").getString("ModuleClassCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ModuleClassUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleModule").getString("ModuleClassUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ModuleClassDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleModule").getString("ModuleClassDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -145,7 +145,7 @@ public class ModuleClassController implements Serializable {
                 return null;
             }
             ModuleClassController controller = (ModuleClassController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "moduleclassController");
+                    getValue(facesContext.getELContext(), null, "moduleClassController");
             return controller.getJpaController().findModule(getKey(value));
         }
 

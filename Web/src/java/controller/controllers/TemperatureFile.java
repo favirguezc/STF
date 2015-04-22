@@ -69,8 +69,8 @@ public class TemperatureFile {
             moduleclass = new ThermometerController().find(nds).getModuleObject();
             TemperatureController controller = new TemperatureController();
             while (linea != null) {
-                Date fecha = DateParser.parseFecha(linea.split(",")[1].split(" ")[0]);
-                Date hora = DateParser.parseHora(linea.split(",")[1].split(" ")[1]);
+                Date fecha = DateParser.parseDate(linea.split(",")[1].split(" ")[0]);
+                Date hora = DateParser.parseTime(linea.split(",")[1].split(" ")[1]);
                 float temperature = Float.parseFloat(linea.split(",")[2]);
                 float soilmoisture = Float.parseFloat(linea.split(",")[3]);
                 float puntoDeRocio = Float.parseFloat(linea.split(",")[4]);

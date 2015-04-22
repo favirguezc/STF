@@ -69,18 +69,18 @@ public class TemperatureController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TemperatureCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleTemperature").getString("TemperatureCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("TemperatureUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleTemperature").getString("TemperatureUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TemperatureDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleTemperature").getString("TemperatureDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

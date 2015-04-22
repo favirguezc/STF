@@ -11,17 +11,17 @@
         <p:dialog id="MonitorableParameterCreateDlg" widgetVar="MonitorableParameterCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitorableParameter.CreateMonitorableParameterTitle}">
             <h:form id="MonitorableParameterCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{monitorableParameterController.selected != null}">
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{monitorableparameterController.selected.name}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_name}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_name}"/>
+                        <p:inputText id="name" value="#{monitorableParameterController.selected.name}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_name}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_abbreviation}" for="abbreviation" />
-                        <p:inputText id="abbreviation" value="#{monitorableparameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abbreviation}"/>
+                        <p:inputText id="abbreviation" value="#{monitorableParameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abbreviation}"/>
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_valuationType}" for="valuationType" />
-                        <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_valuationType}">
+                        <p:selectOneMenu id="valuationType" value="#{monitorableParameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_valuationType}">
                             <f:selectItems value="#{enumController.valuationTypeValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitorableparameterController.create}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
+                    <p:commandButton actionListener="#{monitorableParameterController.create}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitorableParameterCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

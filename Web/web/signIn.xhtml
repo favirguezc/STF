@@ -32,7 +32,7 @@
                                 <p:ajax update="rol"/>
                             </p:selectOneMenu>
                             <h:outputLabel value="Rol" rendered="#{signInController.step1userSignedIn and signInController.step2farmSelected}"/>
-                            <p:selectOneMenu id="rol" value="#{signInController.rol}" rendered="#{signInController.step1userSignedIn and signInController.step2farmSelected}">
+                            <p:selectOneMenu id="rol" value="#{signInController.role}" rendered="#{signInController.step1userSignedIn and signInController.step2farmSelected}">
                                 <f:selectItems value="#{signInController.roles}"/>
                             </p:selectOneMenu>
                             <p:commandButton id="button" action="#{signInController.signIn}" value="#{signInController.buttonMessage}" update=":growl,loginPanel,button" ajax="false"></p:commandButton>

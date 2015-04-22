@@ -19,9 +19,9 @@
                     <h:form>
                         <h:panelGrid columns="5" cellpadding="10">
                             <p:outputLabel value="Año" for="ano1"/>
-                            <p:spinner id="ano1" value="#{rainfallChart.ano1}" title="Año" min="2012" max="2030"/>
+                            <p:spinner id="ano1" value="#{rainFallChart.year1}" title="Año" min="2012" max="2030"/>
                             <p:outputLabel value="Mes" for="mes1"/>
-                            <p:selectOneMenu id="mes1" value="#{rainfallChart.mes1}">
+                            <p:selectOneMenu id="mes1" value="#{rainFallChart.month1}">
                                         <f:selectItem itemLabel="Enero" itemValue="0"/>
                                         <f:selectItem itemLabel="Febrero" itemValue="1"/>
                                         <f:selectItem itemLabel="Marzo" itemValue="2"/>
@@ -37,14 +37,14 @@
                                     </p:selectOneMenu>
                             <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                         </h:panelGrid>
-                        <p:chart id="chart1" type="line" model="#{rainfallChart.model1}"/>
-                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{rainfallChart.createModel1}"/>
+                        <p:chart id="chart1" type="line" model="#{rainFallChart.model1}"/>
+                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{rainFallChart.createModel1}"/>
                     </h:form>
                 </p:tab>
                 <p:tab title="Datos">
                     <h:form id="RainFallListForm">
-                        <p:dataTable id="datalist" value="#{rainfallController.items}" var="item"
-                                     selectionMode="single" selection="#{rainfallController.selected}"
+                        <p:dataTable id="datalist" value="#{rainFallController.items}" var="item"
+                                     selectionMode="single" selection="#{rainFallController.selected}"
                                      paginator="true"
                                      rowKey="#{item.id}"
                                      rows="10"
@@ -69,10 +69,10 @@
                                 <h:outputText value="#{item.milimeters}"/>
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rainfallController.prepareCreate}" update=":RainFallListPanel:RainFallCreateForm" oncomplete="PF('RainFallCreateDialog').show()"/>
-                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RainFallListPanel:RainFallViewForm" oncomplete="PF('RainFallViewDialog').show()" disabled="#{empty rainfallController.selected}"/>
-                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RainFallListPanel:RainFallEditForm" oncomplete="PF('RainFallEditDialog').show()" disabled="#{empty rainfallController.selected}"/>
-                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rainfallController.destroy}" update=":growl,datalist" disabled="#{empty rainfallController.selected}"/>
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rainFallController.prepareCreate}" update=":RainFallListPanel:RainFallCreateForm" oncomplete="PF('RainFallCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RainFallListPanel:RainFallViewForm" oncomplete="PF('RainFallViewDialog').show()" disabled="#{empty rainFallController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RainFallListPanel:RainFallEditForm" oncomplete="PF('RainFallEditDialog').show()" disabled="#{empty rainFallController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rainFallController.destroy}" update=":growl,datalist" disabled="#{empty rainFallController.selected}"/>
                             </f:facet>
                         </p:dataTable>
                     </h:form>

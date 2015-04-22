@@ -24,7 +24,7 @@
                             <h:form>
                                 <h:panelGrid columns="3">
                                     <p:outputLabel value="Fecha" for="harvestDate"/>
-                                    <p:calendar id="harvestDate" value="#{cropController.harvestDate3}" showOn="button"/>
+                                    <p:calendar id="harvestDate" value="#{cropController.date3}" showOn="button"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart3" type="line" model="#{cropController.model3}"/>
@@ -35,9 +35,9 @@
                             <h:form>
                                 <h:panelGrid columns="5" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano2"/>
-                                    <p:spinner id="ano2" value="#{cropController.ano2}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano2" value="#{cropController.year2}" title="Año" min="2012" max="2030"/>
                                     <p:outputLabel value="Mes" for="mes"/>
-                                    <p:selectOneMenu id="mes" value="#{cropController.mes2}">
+                                    <p:selectOneMenu id="mes" value="#{cropController.month2}">
                                         <f:selectItem itemLabel="Enero" itemValue="0"/>
                                         <f:selectItem itemLabel="Febrero" itemValue="1"/>
                                         <f:selectItem itemLabel="Marzo" itemValue="2"/>
@@ -61,7 +61,7 @@
                             <h:form>
                                 <h:panelGrid columns="3" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano1"/>
-                                    <p:spinner id="ano1" value="#{cropController.ano1}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano1" value="#{cropController.year1}" title="Año" min="2012" max="2030"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart1" type="line" model="#{cropController.model1}"/>
@@ -72,7 +72,7 @@
                             <h:form>
                                 <h:panelGrid columns="3" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano1"/>
-                                    <p:spinner id="ano1" value="#{cropController.ano4}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano1" value="#{cropController.year4}" title="Año" min="2012" max="2030"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart4" type="line" model="#{cropController.model4}"/>

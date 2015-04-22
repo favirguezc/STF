@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class DateParser {
 
-    public static Date parseFecha(String fecha) {
+    public static Date parseDate(String fecha) {
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
         } catch (Exception ex) {
@@ -23,7 +23,7 @@ public class DateParser {
         return null;
     }
 
-    public static Date parseHora(String fecha) {
+    public static Date parseTime(String fecha) {
         try {
             return new SimpleDateFormat("kk:mm:ss").parse(fecha);
         } catch (Exception ex) {

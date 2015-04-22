@@ -160,18 +160,18 @@ public class FarmController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("FarmCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleFarm").getString("FarmCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("FarmUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleFarm").getString("FarmUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("FarmDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleFarm").getString("FarmDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

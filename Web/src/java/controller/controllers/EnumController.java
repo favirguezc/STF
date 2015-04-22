@@ -11,7 +11,7 @@ import model.administration.PageEnum;
 import model.administration.RHEnum;
 import model.administration.RoleEnum;
 import model.administration.SexEnum;
-import model.applications.AplicationMethodEnum;
+import model.applications.ApplicationMethodEnum;
 import model.applications.ApplicationMeasurementUnitEnum;
 import model.applications.ApplicationTypeEnum;
 import model.crop.ClassificationTypeEnum;
@@ -52,8 +52,8 @@ public class EnumController {
         return ApplicationMeasurementUnitEnum.values();
     }
 
-    public AplicationMethodEnum[] getAplicationMethodValues() {
-        return AplicationMethodEnum.values();
+    public ApplicationMethodEnum[] getApplicationMethodValues() {
+        return ApplicationMethodEnum.values();
     }
 
     public RHEnum[] getRhFactorValues() {

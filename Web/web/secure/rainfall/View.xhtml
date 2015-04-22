@@ -11,13 +11,13 @@
         <p:dialog id="RainFallViewDlg" widgetVar="RainFallViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleRainFall.ViewRainFallTitle}">
             <h:form id="RainFallViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{rainfallController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{rainFallController.selected != null}">
                         <h:outputText value="#{bundleRainFall.ViewRainFallLabel_rainDate}"/>
-                        <h:outputText value="#{rainfallController.selected.rainDate}" title="#{bundleRainFall.ViewRainFallTitle_rainDate}">
+                        <h:outputText value="#{rainFallController.selected.rainDate}" title="#{bundleRainFall.ViewRainFallTitle_rainDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundleRainFall.ViewRainFallLabel_milimeters}"/>
-                        <h:outputText value="#{rainfallController.selected.milimeters}" title="#{bundleRainFall.ViewRainFallTitle_milimeters}"/>
+                        <h:outputText value="#{rainFallController.selected.milimeters}" title="#{bundleRainFall.ViewRainFallTitle_milimeters}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RainFallViewDialog.hide()"/>
                 </h:panelGroup>

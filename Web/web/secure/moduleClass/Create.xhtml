@@ -11,20 +11,20 @@
         <p:dialog id="ModuleClassCreateDlg" widgetVar="ModuleClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleModule.CreateModuleClassTitle}">
             <h:form id="ModuleClassCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{moduleClassController.selected != null}">
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{moduleclassController.selected.name}" title="#{bundleModule.CreateModuleClassTitle_name}" />
+                        <p:inputText id="name" value="#{moduleClassController.selected.name}" title="#{bundleModule.CreateModuleClassTitle_name}" />
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduleclassController.selected.area}" title="#{bundleModule.CreateModuleClassTitle_area}" />
+                        <p:inputText id="area" value="#{moduleClassController.selected.area}" title="#{bundleModule.CreateModuleClassTitle_area}" />
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_lot}" for="lot" />
-                        <p:selectOneMenu id="lot" value="#{moduleclassController.selected.lot}" >
+                        <p:selectOneMenu id="lot" value="#{moduleClassController.selected.lot}" >
                             <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
                                            var="lotItem"
                                            itemValue="#{lotItem}"
                                            itemLabel="#{lotItem.name}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{moduleclassController.create}" value="#{bundle.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleClassCreateDialog');"/>
+                    <p:commandButton actionListener="#{moduleClassController.create}" value="#{bundle.Save}" update="display,:ModuleClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleClassCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ModuleClassCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

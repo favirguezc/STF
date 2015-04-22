@@ -11,13 +11,13 @@
         <p:dialog id="ModuleClassViewDlg" widgetVar="ModuleClassViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleModule.ViewModuleClassTitle}">
             <h:form id="ModuleClassViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{moduleclassController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{moduleClassController.selected != null}">
                         <h:outputText value="#{bundleModule.ViewModuleClassLabel_name}"/>
-                        <h:outputText value="#{moduleclassController.selected.name}" title="#{bundleModule.ViewModuleClassTitle_name}"/>
+                        <h:outputText value="#{moduleClassController.selected.name}" title="#{bundleModule.ViewModuleClassTitle_name}"/>
                         <h:outputText value="#{bundleModule.ViewModuleClassLabel_area}"/>
-                        <h:outputText value="#{moduleclassController.selected.area}" title="#{bundleModule.ViewModuleClassTitle_area}"/>
+                        <h:outputText value="#{moduleClassController.selected.area}" title="#{bundleModule.ViewModuleClassTitle_area}"/>
                         <h:outputText value="#{bundleModule.ViewModuleClassLabel_lot}"/>
-                        <h:outputText value="#{moduleclassController.selected.lot.name}" title="#{bundleModule.ViewModuleClassTitle_lot}"/>
+                        <h:outputText value="#{moduleClassController.selected.lot.name}" title="#{bundleModule.ViewModuleClassTitle_lot}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ModuleClassViewDialog.hide()"/>
                 </h:panelGroup>

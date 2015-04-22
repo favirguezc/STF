@@ -67,18 +67,18 @@ public class PermissionController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PermissionCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePermission").getString("PermissionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PermissionUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePermission").getString("PermissionUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PermissionDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePermission").getString("PermissionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -148,9 +148,11 @@ public class PermissionController implements Serializable {
             action = Action.DELETE;
         }
         if (currentUserHasPermission(action, c.getSimpleName())) {
+            System.out.println("Si tiene permiso");
             return true;
         } else {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("PermissionErrorOcurred"));
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/BundlePermission").getString("PermissionErrorOcurred"));
+            System.out.println("No tiene permiso");
             return false;
         }
 

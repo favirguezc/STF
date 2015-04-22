@@ -7,6 +7,7 @@ package model.monitoring;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,8 @@ public class ParameterMonitoring implements Serializable {
     private Cultivation cultivation;
     @ManyToOne(optional = false)
     private MonitorableParameter parameter;
-    private Value monitoringValue;
+    @Column(nullable = false)
+    private String monitoringValue;
 
     public long getId() {
         return id;
@@ -64,11 +66,11 @@ public class ParameterMonitoring implements Serializable {
         this.parameter = parameter;
     }
 
-    public Value getMonitoringValue() {
+    public String getMonitoringValue() {
         return monitoringValue;
     }
 
-    public void setMonitoringValue(Value monitoringValue) {
+    public void setMonitoringValue(String monitoringValue) {
         this.monitoringValue = monitoringValue;
     }
 

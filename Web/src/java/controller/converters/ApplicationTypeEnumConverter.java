@@ -1,6 +1,5 @@
 package controller.converters;
 
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -12,7 +11,7 @@ import model.applications.ApplicationTypeEnum;
  * @author fredy
  */
 @FacesConverter(forClass = ApplicationTypeEnum.class)
-public class ApplicationTypeConverter implements Converter {
+public class ApplicationTypeEnumConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null) {

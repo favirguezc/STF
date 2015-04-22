@@ -1,6 +1,5 @@
 package controller.controllers;
 
-import model.applications.Chemical;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import data.applications.ChemicalDAO;
@@ -11,20 +10,21 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.Persistence;
+import model.applications.Chemical;
 
 @ManagedBean(name = "chemicalController")
+@SessionScoped
 public class ChemicalController implements Serializable {
 
     private ChemicalDAO jpaController = null;
     private List<Chemical> items = null;
     private Chemical selected;
-    @ManagedProperty(value = "#{permissionController}")
-    private PermissionController permissionBean;
 
     public ChemicalController() {
     }
@@ -35,14 +35,6 @@ public class ChemicalController implements Serializable {
 
     public void setSelected(Chemical selected) {
         this.selected = selected;
-    }
-
-    public PermissionController getPermissionBean() {
-        return permissionBean;
-    }
-
-    public void setPermissionBean(PermissionController permissionBean) {
-        this.permissionBean = permissionBean;
     }
 
     protected void setEmbeddableKeys() {
@@ -65,18 +57,18 @@ public class ChemicalController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ChemicalCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleChemical").getString("ChemicalCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ChemicalUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleChemical").getString("ChemicalUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ChemicalDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleChemical").getString("ChemicalDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -93,9 +85,6 @@ public class ChemicalController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
-            if (!permissionBean.currentUserHasPermission(persistAction, selected.getClass())) {
-                return;
-            }
             try {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);
@@ -107,7 +96,7 @@ public class ChemicalController implements Serializable {
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleChemical").getString("PersistenceErrorOccured"));
             }
         }
     }

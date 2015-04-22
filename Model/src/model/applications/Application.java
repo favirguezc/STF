@@ -47,7 +47,7 @@ public class Application implements Serializable {
     private float quantity;
     private float waterLiters;
     @Enumerated(EnumType.STRING)
-    private AplicationMethodEnum method;
+    private ApplicationMethodEnum method;
     @ManyToOne(optional = false)
     private Person responsible;
     @ManyToOne(optional = false)
@@ -143,11 +143,11 @@ public class Application implements Serializable {
         this.waterLiters = waterLiters;
     }
 
-    public AplicationMethodEnum getMethod() {
+    public ApplicationMethodEnum getMethod() {
         return method;
     }
 
-    public void setMethod(AplicationMethodEnum method) {
+    public void setMethod(ApplicationMethodEnum method) {
         this.method = method;
     }
 

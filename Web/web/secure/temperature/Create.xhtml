@@ -24,7 +24,7 @@
                         <p:inputText id="dewPoint" value="#{temperatureController.selected.dewPoint}" title="#{bundleTemperature.CreateTemperatureTitle_dewPoint}" required="true"/>
                         <p:outputLabel value="#{bundleTemperature.CreateTemperatureLabel_moduleObject}" for="moduleObject" />
                         <p:selectOneMenu id="moduleObject" value="#{temperatureController.selected.moduleObject}" required="true" >
-                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"
                                            itemValue="#{moduleObjectItem}"
                                            itemLabel="#{moduleObjectItem.lot.name} #{moduleObjectItem.name}"/>

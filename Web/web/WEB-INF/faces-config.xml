@@ -5,6 +5,10 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <application>
         <resource-bundle>
+            <base-name>/BundleVariety</base-name>
+            <var>bundleVariety</var>
+        </resource-bundle>
+        <resource-bundle>
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
@@ -122,33 +126,63 @@
         </resource-bundle>
     </application>
     <managed-bean>
-        <managed-bean-name>RiskConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.RiskConverter</managed-bean-class>        
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>ApplicationTypeConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.ApplicationTypeConverter</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <managed-bean-name>ValuationTypeConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.ValuationTypeConverter</managed-bean-class>        
+        <managed-bean-name>ActionConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ActionConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>ApplicationMeasurementUnitEnumConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.ApplicationMeasurementUnitEnumConverter</managed-bean-class>
+        <managed-bean-class>controller.converters.ApplicationMeasurementUnitEnumConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>RoleConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.RoleConverter</managed-bean-class>        
+        <managed-bean-name>ApplicationMethodEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ApplicationMethodEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ApplicationTypeEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ApplicationTypeEnumConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>BooleanConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.BooleanConverter</managed-bean-class>
+        <managed-bean-class>controller.converters.BooleanConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ClassificationTypeEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ClassificationTypeEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>PageEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.PageEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>RHEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.RHEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>RiskEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.RiskEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>RoleEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.RoleEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>SexEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.SexEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ValuationTypeEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.ValuationTypeEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>    
 </faces-config>

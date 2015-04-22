@@ -11,13 +11,13 @@
         <p:dialog id="MonitorableParameterViewDlg" widgetVar="MonitorableParameterViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitorableParameter.ViewMonitorableParameterTitle}">
             <h:form id="MonitorableParameterViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{monitorableParameterController.selected != null}">
                         <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_name}"/>
-                        <h:outputText value="#{monitorableparameterController.selected.name}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_name}"/>
+                        <h:outputText value="#{monitorableParameterController.selected.name}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_name}"/>
                         <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_abbreviation}"/>
-                        <h:outputText value="#{monitorableparameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_abbreviation}"/>
+                        <h:outputText value="#{monitorableParameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_abbreviation}"/>
                         <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_valuationType}"/>
-                        <h:outputText value="#{monitorableparameterController.selected.valuationType}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_valuationType}"/>
+                        <h:outputText value="#{monitorableParameterController.selected.valuationType}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_valuationType}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MonitorableParameterViewDialog.hide()"/>
                 </h:panelGroup>

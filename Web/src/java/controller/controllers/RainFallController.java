@@ -69,18 +69,18 @@ public class RainFallController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RainFallCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRainFall").getString("RainFallCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RainFallUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRainFall").getString("RainFallUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RainFallDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRainFall").getString("RainFallDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -165,7 +165,7 @@ public class RainFallController implements Serializable {
                 return null;
             }
             RainFallController controller = (RainFallController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "rainfallController");
+                    getValue(facesContext.getELContext(), null, "rainFallController");
             return controller.getJpaController().findRainFall(getKey(value));
         }
 

@@ -18,7 +18,7 @@
                         <p:inputText id="serialNumber" value="#{thermometerController.selected.serialNumber}" title="#{bundleThermometer.CreateThermometerTitle_serialNumber}" />
                         <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_moduleObject}" for="moduleObject" />
                         <p:selectOneMenu id="moduleObject" value="#{thermometerController.selected.moduleObject}" required="true" requiredMessage="#{bundleThermometer.EditThermometerRequiredMessage_moduleObject}">
-                            <f:selectItems value="#{moduleObjectController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"
                                            itemValue="#{moduleObjectItem}"
                                            itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>

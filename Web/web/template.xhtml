@@ -50,18 +50,18 @@
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <h:outputText value="Farm: #{signInController.farm}" rendered="#{!empty signInController.farm}"/>                                            
+                                            <h:outputText value="Finca: #{signInController.farm}" rendered="#{!empty signInController.farm}"/>                                            
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right">
-                                            <h:outputText value="#{signInController.role}" converter="#{RolConverter}" rendered="#{!empty signInController.role}"/>
+                                            <h:outputText value="#{signInController.role}" rendered="#{!empty signInController.role}"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="right">
                                             <p:splitButton value="Cerrar Sesión" action="#{signInController.signOut}" rendered="#{signInController.step1userSignedIn}" ajax="false">
-                                                <p:menuitem value="Seleccionar Farm" action="#{signInController.selectFarm}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
+                                                <p:menuitem value="Seleccionar Finca" action="#{signInController.selectFarm}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
                                                 <p:menuitem value="Seleccionar Rol" action="#{signInController.selectRol}" icon="ui-icon-arrowreturnthick-1-w" ajax="false"/>
                                             </p:splitButton>
                                         </td>
@@ -78,6 +78,7 @@
                             <p:menuitem value="Finca" outcome="/secure/farm/List.xhtml"/>
                             <p:menuitem value="Lote" outcome="/secure/lot/List.xhtml"/>
                             <p:menuitem value="Módulo" outcome="/secure/moduleClass/List.xhtml"/>
+                            <p:menuitem value="Cultivo" outcome="/secure/cultivation/List.xhtml"/>
                             <p:menuitem value="Persona" outcome="/secure/person/List.xhtml"/>
                             <p:menuitem value="Contrato" outcome="/secure/contract/List.xhtml"/>
                         </p:submenu>
@@ -104,6 +105,7 @@
                         <p:submenu label="#{bundle.Crop}">
                             <p:menuitem value="Recolección" outcome="/secure/crop/List.xhtml"/>
                             <p:menuitem value="Clasificación" outcome="/secure/classification/List.xhtml"/>
+                            <p:menuitem value="Variedad" outcome="/secure/variety/List.xhtml"/>
                         </p:submenu>                        
                         <p:menuitem value="#{bundle.Sales}" outcome="/secure/venta/List.xhtml"/>
                         <p:submenu label="#{bundle.Outcomes}">

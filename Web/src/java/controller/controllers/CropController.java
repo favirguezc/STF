@@ -89,18 +89,18 @@ public class CropController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CropCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCrop").getString("CropCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CropUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCrop").getString("CropUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CropDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCrop").getString("CropDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -212,17 +212,17 @@ public class CropController implements Serializable {
     private LineChartModel model3;
     private LineChartModel model4;
     private BarChartModel model5;
-    private int ano1;
-    private int ano2;
-    private int ano4;
-    private int mes2;
-    private Date fecha3;
+    private int year1;
+    private int year2;
+    private int year4;
+    private int month2;
+    private Date date3;
 
     @PostConstruct
     public void init() {
-        ano1 = ano2 = ano4 = DateTools.getYear();
-        mes2 = DateTools.getMonth();
-        fecha3 = DateTools.getDate();
+        year1 = year2 = year4 = DateTools.getYear();
+        month2 = DateTools.getMonth();
+        date3 = DateTools.getDate();
         createModel1();
         createModel2();
         createModel3();
@@ -238,56 +238,56 @@ public class CropController implements Serializable {
         return model4;
     }
 
-    public int getAno4() {
-        return ano4;
+    public int getYear4() {
+        return year4;
     }
 
-    public void setAno4(int ano4) {
-        this.ano4 = ano4;
+    public void setYear4(int year4) {
+        this.year4 = year4;
     }
 
     public LineChartModel getModel3() {
         return model3;
     }
 
-    public Date getFecha3() {
-        return fecha3;
+    public Date getDate3() {
+        return date3;
     }
 
-    public void setFecha3(Date fecha3) {
-        this.fecha3 = fecha3;
+    public void setDate3(Date date3) {
+        this.date3 = date3;
     }
 
     public LineChartModel getModel2() {
         return model2;
     }
 
-    public int getAno2() {
-        return ano2;
+    public int getYear2() {
+        return year2;
     }
 
-    public void setAno2(int ano2) {
-        this.ano2 = ano2;
+    public void setYear2(int year2) {
+        this.year2 = year2;
     }
 
-    public int getMes2() {
-        return mes2;
+    public int getMonth2() {
+        return month2;
     }
 
-    public void setMes2(int mes2) {
-        this.mes2 = mes2;
+    public void setMonth2(int month2) {
+        this.month2 = month2;
     }
 
     public LineChartModel getModel1() {
         return model1;
     }
 
-    public int getAno1() {
-        return ano1;
+    public int getYear1() {
+        return year1;
     }
 
-    public void setAno1(int ano1) {
-        this.ano1 = ano1;
+    public void setYear1(int year1) {
+        this.year1 = year1;
     }
 
     public void createModel1() {
@@ -297,7 +297,7 @@ public class CropController implements Serializable {
 
         Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(ano1, 0, 1));
+        cal.setTime(DateTools.getDate(year1, 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
@@ -312,7 +312,7 @@ public class CropController implements Serializable {
         model1.addSeries(series1);
         model1.setShowPointLabels(true);
         model1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        model1.setTitle("Recolección por Mes Año " + ano1);
+        model1.setTitle("Recolección por Mes Año " + year1);
         model1.setLegendPosition("e");
         Axis yAxis = model1.getAxis(AxisType.Y);
         yAxis.setMin(0);
@@ -325,7 +325,7 @@ public class CropController implements Serializable {
 
         Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(ano2, mes2, 1));
+        cal.setTime(DateTools.getDate(year2, month2, 1));
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -337,7 +337,7 @@ public class CropController implements Serializable {
         model2.addSeries(series1);
         model2.setShowPointLabels(true);
         model2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model2.setTitle("Recolección por Día " + DateTools.getMonth(mes2) + " de " + ano2);
+        model2.setTitle("Recolección por Día " + DateTools.getMonth(month2) + " de " + year2);
         model2.setLegendPosition("e");
         Axis yAxis = model2.getAxis(AxisType.Y);
         yAxis.setMin(0);
@@ -350,7 +350,7 @@ public class CropController implements Serializable {
 
         Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getFirstDayOfWeek(fecha3));
+        cal.setTime(DateTools.getFirstDayOfWeek(date3));
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -362,7 +362,7 @@ public class CropController implements Serializable {
         model3.addSeries(series1);
         model3.setShowPointLabels(true);
         model3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model3.setTitle("Recolección por Día " + DateTools.getWeek(fecha3));
+        model3.setTitle("Recolección por Día " + DateTools.getWeek(date3));
         model3.setLegendPosition("e");
         Axis yAxis = model3.getAxis(AxisType.Y);
         yAxis.setMin(0);
@@ -375,7 +375,7 @@ public class CropController implements Serializable {
 
         Crop sumarRegistros;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(ano4, 0, 1));
+        cal.setTime(DateTools.getDate(year4, 0, 1));
         for (int i = 0; i < 52; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, 6);
@@ -390,7 +390,7 @@ public class CropController implements Serializable {
         model4.addSeries(series1);
         model4.setShowPointLabels(true);
         model4.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
-        model4.setTitle("Recolección por Semana Año " + ano4);
+        model4.setTitle("Recolección por Semana Año " + year4);
         model4.setLegendPosition("e");
         Axis yAxis = model4.getAxis(AxisType.Y);
         yAxis.setMin(0);

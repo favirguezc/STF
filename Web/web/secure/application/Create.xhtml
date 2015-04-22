@@ -36,21 +36,21 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_reason1}" for="reason1" />
                         <p:selectOneMenu id="reason1" value="#{applicationController.selected.reason1}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_reason1}">
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason1Item"
                                            itemValue="#{reason1Item}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_reason2}" for="reason2" />
                         <p:selectOneMenu id="reason2" value="#{applicationController.selected.reason2}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason2Item"
                                            itemValue="#{reason2Item}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_reason3}" for="reason3" />
                         <p:selectOneMenu id="reason3" value="#{applicationController.selected.reason3}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason3Item"
                                            itemValue="#{reason3Item}"/>
                         </p:selectOneMenu>
@@ -60,7 +60,7 @@
                         <p:inputText id="waterLiters" value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.CreateApplicationTitle_waterLiters}" />
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_method}" for="method" />
                         <p:selectOneMenu id="method" value="#{applicationController.selected.method}" required="true" requiredMessage="#{bundleApplication.CreateApplicationRequiredMessage_method}">
-                            <f:selectItems value="#{aplicationMethodEnumController.aplicationMethodEnumValues}"/>
+                            <f:selectItems value="#{enumController.applicationMethodValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_responsible}" for="responsible" />
                         <p:selectOneMenu id="responsible" value="#{applicationController.selected.responsible}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_responsible}">

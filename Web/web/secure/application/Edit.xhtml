@@ -38,21 +38,21 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason1}" for="reason1" />
                         <p:selectOneMenu id="reason1" value="#{applicationController.selected.reason1}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_reason1}">
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason1Item"
                                            itemValue="#{reason1Item}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason2}" for="reason2" />
                         <p:selectOneMenu id="reason2" value="#{applicationController.selected.reason2}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason2Item"
                                            itemValue="#{reason2Item}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason3}" for="reason3" />
                         <p:selectOneMenu id="reason3" value="#{applicationController.selected.reason3}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableparameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason3Item"
                                            itemValue="#{reason3Item}"/>
                         </p:selectOneMenu>

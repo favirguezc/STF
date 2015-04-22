@@ -67,18 +67,18 @@ public class MonitorableParameterController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MonitorableParameterCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMonitorableParameter").getString("MonitorableParameterCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("MonitorableParameterUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleMonitorableParameter").getString("MonitorableParameterUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MonitorableParameterDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleMonitorableParameter").getString("MonitorableParameterDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -131,7 +131,7 @@ public class MonitorableParameterController implements Serializable {
                 return null;
             }
             MonitorableParameterController controller = (MonitorableParameterController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "monitorableparameterController");
+                    getValue(facesContext.getELContext(), null, "monitorableParameterController");
             return controller.getJpaController().findMonitorableParameter(getKey(value));
         }
 

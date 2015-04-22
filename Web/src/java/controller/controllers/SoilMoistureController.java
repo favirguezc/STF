@@ -68,18 +68,18 @@ public class SoilMoistureController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SoilMoistureCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleSoilMoisture").getString("SoilMoistureCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("SoilMoistureUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleSoilMoisture").getString("SoilMoistureUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("SoilMoistureDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleSoilMoisture").getString("SoilMoistureDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

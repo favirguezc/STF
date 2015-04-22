@@ -28,17 +28,17 @@
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_parameter}" for="parameter" />
                         <p:selectOneMenu id="parameter" value="#{parameterMonitoringController.selected.parameter}" required="true" requiredMessage="#{bundleParameterMonitoring.EditParameterMonitoringRequiredMessage_parameter}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{parameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="parameterItem"
                                            itemValue="#{parameterItem}"/>
                             <p:ajax update="valor1 valor2 valor3" listener="#{parameterMonitoringController.value}"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Relación" for="valor1"/>
-                        <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue.relation}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Conteo" for="valor2" />
-                        <p:inputText id="valor2" disabled="#{parameterMonitoringController.habilitado!=2}" value="#{parameterMonitoringController.selected.monitoringValue.count}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor2" disabled="#{parameterMonitoringController.habilitado!=2}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Riesgo" for="valor3"/>
-                        <p:selectOneMenu id="valor3" disabled="#{parameterMonitoringController.habilitado!=3}" value="#{parameterMonitoringController.selected.monitoringValue.risk}">
+                        <p:selectOneMenu id="valor3" disabled="#{parameterMonitoringController.habilitado!=3}" value="#{parameterMonitoringController.selected.monitoringValue}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{enumController.riskValues}"/>                            
                         </p:selectOneMenu>                        

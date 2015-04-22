@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_moduleObject}"/>
-                        <h:outputText value="#{cultivationController.selected.moduleObject}" title="#{bundleCultivation.ViewCultivationTitle_moduleObject}"/>
+                        <h:outputText value="#{cultivationController.selected.moduleObject.lot.name} - #{cultivationController.selected.moduleObject.name}" title="#{bundleCultivation.ViewCultivationTitle_moduleObject}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_variety}"/>
-                        <h:outputText value="#{cultivationController.selected.variety}" title="#{bundleCultivation.ViewCultivationTitle_variety}"/>
+                        <h:outputText value="#{cultivationController.selected.variety.name}" title="#{bundleCultivation.ViewCultivationTitle_variety}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_plantingDate}"/>
                         <h:outputText value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.ViewCultivationTitle_plantingDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />

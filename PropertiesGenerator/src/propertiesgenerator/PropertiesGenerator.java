@@ -13,7 +13,7 @@ public class PropertiesGenerator {
      */
     public static void main(String[] args) {
 //        generarTitulos();
-        generarPropiedades(model.work.Work.class);
+        generarPropiedades(model.finances.sales.Sale.class);
     }
 
     private static String g(String campo) {

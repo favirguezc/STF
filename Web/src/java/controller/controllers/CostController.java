@@ -22,9 +22,9 @@ import javax.faces.convert.FacesConverter;
 import model.administration.ModuleClass;
 import model.finances.cost.CostTypeEnum;
 
-@ManagedBean(name = "costoController")
+@ManagedBean(name = "costController")
 @SessionScoped
-public class CostoController implements Serializable {
+public class CostController implements Serializable {
 
     private Cost selected;
     private List<Cost> items = null;
@@ -34,7 +34,7 @@ public class CostoController implements Serializable {
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    public CostoController() {
+    public CostController() {
     }
 
     public Cost getSelected() {
@@ -81,19 +81,19 @@ public class CostoController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CostoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCost").getString("CostCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CostoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCost").getString("CostUpdated"));
         
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CostoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCost").getString("CostDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -140,29 +140,29 @@ public class CostoController implements Serializable {
         return getJpaController().findCostEntities();
     }
     
-    public List<Cost> leerLista(ModuleClass moduleclass, CostTypeEnum tipo, Date inicio, Date fin) {
-        return getJpaController().findCostEntities(moduleclass, tipo, inicio, fin);
+    public List<Cost> readList(ModuleClass moduleObject, CostTypeEnum type, Date start, Date end) {
+        return getJpaController().findCostEntities(moduleObject, type, start, end);
     }
 
-    public Cost sumarRegistros(ModuleClass moduleclass, CostTypeEnum tipo, Date inicio, Date fin) {
-        List<Cost> leerLista = leerLista(moduleclass, tipo, inicio, fin);
-        Cost suma = new Cost();
-        for (Cost c : leerLista) {
+    public Cost sumRegistries(ModuleClass moduleObject, CostTypeEnum type, Date start, Date end) {
+        List<Cost> readList = readList(moduleObject, type, start, end);
+        Cost sum = new Cost();
+        for (Cost c : readList) {
             //suma.sumar(c);
         }
-        return suma;
+        return sum;
     }
 
     @FacesConverter(forClass = Cost.class)
-    public static class CostoControllerConverter implements Converter {
+    public static class CostControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CostoController controller = (CostoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "costoController");
+            CostController controller = (CostController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "costController");
             return controller.getJpaController().findCost(getKey(value));
         }
 

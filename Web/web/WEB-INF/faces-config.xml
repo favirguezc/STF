@@ -96,6 +96,30 @@
             <base-name>/BundleWork</base-name>
             <var>bundleWork</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCash</base-name>
+            <var>bundleCash</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCashConcept</base-name>
+            <var>bundleCashConcept</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCost</base-name>
+            <var>bundleCost</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePayroll</base-name>
+            <var>bundlePayroll</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleChemicalPurchase</base-name>
+            <var>bundleChemicalPurchase</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleSale</base-name>
+            <var>bundleSale</var>
+        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>RiskConverter</managed-bean-name>

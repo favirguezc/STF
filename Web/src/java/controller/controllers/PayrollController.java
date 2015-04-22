@@ -28,9 +28,9 @@ import model.crop.Crop;
 import model.work.Job;
 import model.work.Work;
 
-@ManagedBean(name = "nominaController")
+@ManagedBean(name = "payrollController")
 @SessionScoped
-public class NominaController implements Serializable {
+public class PayrollController implements Serializable {
 
     private Payroll selected;
     private List<Payroll> items = null;
@@ -46,7 +46,7 @@ public class NominaController implements Serializable {
     @ManagedProperty(value = "#{jobController}")
     private JobController jobController;
 
-    public NominaController() {
+    public PayrollController() {
     }
 
     public Payroll getSelected() {
@@ -118,17 +118,17 @@ public class NominaController implements Serializable {
     }
 
     public void create() {
-        // Generar Total
+        // Generate Total
         selected.setDateUntil(getSaturday(selected.getDateUntil()));
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(selected.getDateUntil());
-        calendar.add(Calendar.DAY_OF_YEAR, -5);  // numero de días a añadir, o restar en caso de días<0
+        calendar.add(Calendar.DAY_OF_YEAR, -5);  // number of days to add, o subtract when the days<0
         selected.setDateFrom(calendar.getTime());
-        if (!validarFecha()) {
-            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("NominaFechaNoPermitiva"));
+        if (!validateDate()) {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/BundlePayroll").getString("PayrollDateNoEnable"));
         } else {
-            calcularTotal();
-            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("NominaCreated"));
+            calculateTotal();
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePayroll").getString("PayrollCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
             }
@@ -137,11 +137,11 @@ public class NominaController implements Serializable {
 
     //Posiblemente no se use
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("NominaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayroll").getString("PayrollUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("NominaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePayroll").getString("PayrollDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -174,7 +174,7 @@ public class NominaController implements Serializable {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findPayrollEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
-                JsfUtil.addErrorMessage("Seleccione una Farm");
+                JsfUtil.addErrorMessage("Seleccione una Finca");
             }
         }
         return items;
@@ -192,27 +192,26 @@ public class NominaController implements Serializable {
         return getJpaController().findPayrollEntities();
     }
 
-    public List<Payroll> leerLista(Farm farm, Person trabajador, Date inicio, Date fin) {
-        return getJpaController().findPayrollEntities(farm, trabajador, inicio, fin);
+    public List<Payroll> readList(Farm farm, Person worker, Date start, Date end) {
+        return getJpaController().findPayrollEntities(farm, worker, start, end);
     }
 
-    private static Date getSaturday(Date fecha) {
+    private static Date getSaturday(Date day) {
         Calendar c = GregorianCalendar.getInstance();
-        c.setTime(fecha);
+        c.setTime(day);
         c.add(Calendar.DAY_OF_MONTH, -c.get(Calendar.DAY_OF_WEEK) + 7);
         return c.getTime();
     }
 
-    private boolean validarFecha() {
-        //
+    private boolean validateDate() {
         Calendar calendar = GregorianCalendar.getInstance();
         if (selected.getDateUntil().after(calendar.getTime())) {
             return false;
         }
-        List<Payroll> anteriores = leerLista(selected.getFarm(), selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
-        if (anteriores != null && !anteriores.isEmpty()) {
-            for (Payroll nomina : anteriores) {
-                if (nomina.getDateUntil().equals(selected.getDateUntil())) {
+        List<Payroll> previousItems = readList(selected.getFarm(), selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
+        if (previousItems != null && !previousItems.isEmpty()) {
+            for (Payroll payroll : previousItems) {
+                if (payroll.getDateUntil().equals(selected.getDateUntil())) {
                     return false;
                 }
             }
@@ -220,71 +219,68 @@ public class NominaController implements Serializable {
         return true;
     }
 
-    public float getValorRecolectado() {
-        float valorRecolectado = 0;
+    public float getCroppedValue() {
+        float croppedValue = 0;
         if (selected != null) {
-            Crop totalRecolectado = cropCotroller.sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
-            valorRecolectado = (totalRecolectado.getWeight() / 500) * 125;
+            Crop totalCropped = cropCotroller.sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
+            croppedValue = (totalCropped.getWeight() / 500) * 125;
         }
-        return valorRecolectado;
+        return croppedValue;
     }
 
-    public List<Job> getJobesSelected() {
+    public List<Job> getJobsSelected() {
 
-        List<Job> jobes = null;
+        List<Job> jobs = null;
         if (selected != null) {
-            jobes = new ArrayList<Job>();
-            List<Work> worksRealizados = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
+            jobs = new ArrayList<Job>();
+            List<Work> doneWorks = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
             for (Job job : jobController.getItemsAvailableSelectOne()) {
-                float valorWork = 0;
-                for (Work work : worksRealizados) {
+                float workValue = 0;
+                for (Work work : doneWorks) {
                     if (work.getJob().equals(job)) {
-                        valorWork += job.getHourlyRate() * work.getHoursSpent();
+                        workValue += job.getHourlyRate() * work.getHoursSpent();
                     }
                 }
-                if (valorWork != 0) {
-                    Job nueva = job;
-                    nueva.setHourlyRate(valorWork);
-                    jobes.add(nueva);
+                if (workValue != 0) {
+                    Job newJob = job;
+                    newJob.setHourlyRate(workValue);
+                    jobs.add(newJob);
                 }
             }
         }
-        return jobes;
+        return jobs;
     }
 
-    private void calcularTotal() {
+    private void calculateTotal() {
 
         float total = 0;
-
-        //Fruta recolectada
-        float valorRecolectado = getValorRecolectado();
-
-        //Works hechos
-        float valorWorks = 0;
-        List<Work> worksRealizados = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
+        //Fruit cropped
+        float croppedValue = getCroppedValue();
+        //Works done
+        float worksValue = 0;
+        List<Work> doneWorks = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
         for (Job job : jobController.getItemsAvailableSelectOne()) {
-            for (Work work : worksRealizados) {
+            for (Work work : doneWorks) {
                 if (work.getJob().equals(job)) {
-                    valorWorks += job.getHourlyRate() * work.getHoursSpent();
+                    worksValue += job.getHourlyRate() * work.getHoursSpent();
                 }
             }
         }
-
         //Total
-        total += valorRecolectado + valorWorks;
+        total += croppedValue + worksValue;
         selected.setTotal(total);
     }
 
     @FacesConverter(forClass = Payroll.class)
-    public static class NominaControllerConverter implements Converter {
+    public static class PayrollControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            NominaController controller = (NominaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "nominaController");
+            PayrollController controller = (PayrollController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "payrollController");
             return controller.getJpaController().findPayroll(getKey(value));
         }
 

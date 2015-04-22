@@ -31,22 +31,22 @@ import model.administration.Person;
  *
  * @author JohnFredy
  */
-@ManagedBean(name = "ventaController")
+@ManagedBean(name = "saleController")
 @SessionScoped
-public class VentaController implements Serializable {
+public class SaleController implements Serializable {
 
     private Sale selected;
     private List<Sale> items = null;
     private SaleDAO jpaController = null;
-    private Price precio = null;
-    private boolean nuePrecio;
-    private PriceDAO precioJpaController = null;
+    private Price price = null;
+    private boolean newPrice;
+    private PriceDAO priceJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    public VentaController() {
+    public SaleController() {
     }
 
     private SaleDAO getJpaController() {
@@ -56,11 +56,11 @@ public class VentaController implements Serializable {
         return jpaController;
     }
 
-    private PriceDAO getPrecioJpaController(){
-        if(precioJpaController == null){
-            precioJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+    private PriceDAO getPriceJpaController(){
+        if(priceJpaController == null){
+            priceJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
-        return precioJpaController;
+        return priceJpaController;
     }
     
     public Sale getSelected() {
@@ -99,7 +99,7 @@ public class VentaController implements Serializable {
             selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
         } else {
-            JsfUtil.addErrorMessage("Seleccione una farm");
+            JsfUtil.addErrorMessage("Seleccione una finca");
             selected = null;
         }
         return selected;
@@ -135,7 +135,7 @@ public class VentaController implements Serializable {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findSaleEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
-                JsfUtil.addErrorMessage("Seleccione una Farm");
+                JsfUtil.addErrorMessage("Seleccione una finca");
             }
         }
         return items;
@@ -171,20 +171,20 @@ public class VentaController implements Serializable {
         return getJpaController().findSaleEntities();
     }
 
-    public List<Sale> leerLista(Person cliente, Date inicio, Date fin) {
-        return getJpaController().findSaleEntities(cliente, inicio, fin);
+    public List<Sale> readList(Person customer, Date start, Date end) {
+        return getJpaController().findSaleEntities(customer, start, end);
     }
 
-    public Sale sumarRegistros(Person cliente, Date inicio, Date fin) {
-        List<Sale> leerLista = leerLista(cliente, inicio, fin);
-        Sale suma = new Sale(null, cliente, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        for (Sale v : leerLista) {
-            suma.sumar(v);
+    public Sale sumRegistries(Person customer, Date start, Date end) {
+        List<Sale> readList = readList(customer, start, end);
+        Sale sum = new Sale(null, customer, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        for (Sale s : readList) {
+            sum.sumar(s);
         }
-        return suma;
+        return sum;
     }
 
-    public void verifyPrecio(){
+    public void verifyPrice(){
 //        if(selected.getChemical() != null){
 //            //search precio by item
 //            precio = getPrecioJpaController().findPrice(selected.getChemical().getNombre());
@@ -201,7 +201,7 @@ public class VentaController implements Serializable {
 //        }
     }
     
-    public void savePrecio(){
+    public void savePrice(){
 //        if(nuePrecio){
 //            precio.setValor(selected.getPrecio());
 //            getPrecioJpaController().create(precio);
@@ -216,17 +216,28 @@ public class VentaController implements Serializable {
     }
     
     @FacesConverter(forClass = Sale.class)
-    public static class VentaConverter implements Converter {
+    public static class SaleConverter implements Converter {
 
         @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String string) {
-            if (string == null || string.length() == 0) {
+        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+            if (value == null || value.length() == 0) {
                 return null;
             }
-            long id = Long.parseLong(string);
-            VentaController controller = (VentaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "ventaController");
-            return controller.getJpaController().findSale(id);
+            SaleController controller = (SaleController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "saleController");
+            return controller.getJpaController().findSale(getKey(value));
+        }
+
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
+            return key;
+        }
+
+        String getStringKey(long value) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(value);
+            return sb.toString();
         }
 
         @Override
@@ -238,7 +249,7 @@ public class VentaController implements Serializable {
                 Sale o = (Sale) object;
                 return String.valueOf(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.finanzas.ventas.Venta");
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Sale.class.getName());
             }
         }
 

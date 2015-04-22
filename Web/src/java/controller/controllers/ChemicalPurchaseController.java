@@ -31,22 +31,22 @@ import model.administration.Farm;
  *
  * @author John Fredy
  */
-@ManagedBean(name = "compraController")
+@ManagedBean(name = "chemicalPurchaseController")
 @SessionScoped
-public class CompraController implements Serializable{
+public class ChemicalPurchaseController implements Serializable{
 
     private ChemicalPurchase selected = null;
     private List<ChemicalPurchase> items = null;
-    private Price precio = null;
-    private boolean nuePrecio;
+    private Price price = null;
+    private boolean newPrice;
     private ChemicalPurchaseDAO jpaController = null;
-    private PriceDAO precioJpaController = null;
+    private PriceDAO priceJpaController = null;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
 
-    public CompraController() {
+    public ChemicalPurchaseController() {
     }
     
     public ChemicalPurchaseDAO getJpaController() {
@@ -56,11 +56,11 @@ public class CompraController implements Serializable{
         return jpaController;
     }
     
-    private PriceDAO getPrecioJpaController(){
-        if(precioJpaController == null){
-            precioJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+    private PriceDAO getPriceJpaController(){
+        if(priceJpaController == null){
+            priceJpaController = new PriceDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
-        return precioJpaController;
+        return priceJpaController;
     }
 
     public ChemicalPurchase getSelected() {
@@ -93,11 +93,11 @@ public class CompraController implements Serializable{
     protected void initializeEmbeddableKey() {
     }
     
-    public List<ChemicalPurchase> getCompraItemsAvailableSelectMany() {
+    public List<ChemicalPurchase> getItemsAvailableSelectMany() {
         return getJpaController().findChemicalPurchaseEntities();
     }
 
-    public List<ChemicalPurchase> getCompraItemsAvailableSelectOne() {
+    public List<ChemicalPurchase> getItemsAvailableSelectOne() {
         return getJpaController().findChemicalPurchaseEntities();
     }
 
@@ -106,7 +106,7 @@ public class CompraController implements Serializable{
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findChemicalPurchaseEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
-                JsfUtil.addErrorMessage("Seleccione una Farm");
+                JsfUtil.addErrorMessage("Seleccione una finca");
             }
         }
         return items;
@@ -118,31 +118,31 @@ public class CompraController implements Serializable{
             selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
         } else {
-            JsfUtil.addErrorMessage("Seleccione una farm");
+            JsfUtil.addErrorMessage("Seleccione una finca");
             selected = null;
         }
         return selected;
     }
     
     public void create() {
-        savePrecio();    
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CompraCreated"));
+        savePrice();    
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleChemicalPurchase").getString("ChemicalPurchaseCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void prepareUpdate(){
-        precio = getPrecioJpaController().findPrice(selected.getChemical().getName());
+        price = getPriceJpaController().findPrice(selected.getChemical().getName());
     }
     
     public void update() {
-        savePrecio();
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CompraUpdated"));
+        savePrice();
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleChemicalPurchase").getString("ChemicalPurchaseUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("CompraDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleChemicalPurchase").getString("ChemicalPurchaseDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -171,71 +171,85 @@ public class CompraController implements Serializable{
         }
     }
     
-    public List<ChemicalPurchase> leerLista(Farm farm, Date inicio, Date fin) {
-        return getJpaController().findChemicalPurchaseEntities(farm, inicio, fin);
+    public List<ChemicalPurchase> readList(Farm farm, Date start, Date end) {
+        return getJpaController().findChemicalPurchaseEntities(farm, start, end);
     }
     
-    public ChemicalPurchase sumarRegistros(Farm farm, Date inicio, Date fin) {
-        List<ChemicalPurchase> leerLista = leerLista(farm, inicio, fin);
-        ChemicalPurchase suma = new ChemicalPurchase(null, farm, null,0,0);
-        for (ChemicalPurchase v : leerLista) {
-            suma.add(v);
+    public ChemicalPurchase sumRegistries(Farm farm, Date start, Date end) {
+        List<ChemicalPurchase> readList = readList(farm, start, end);
+        ChemicalPurchase sum = new ChemicalPurchase(null, farm, null,0,0);
+        for (ChemicalPurchase v : readList) {
+            sum.add(v);
         }
-        return suma;
+        return sum;
     }
     
-    public void verifyPrecio(){
+    public void verifyPrice(){
         if(selected.getChemical() != null){
             //search price by item
-            precio = getPrecioJpaController().findPrice(selected.getChemical().getName());
+            price = getPriceJpaController().findPrice(selected.getChemical().getName());
             //if exists set
-            if(precio != null){
-                nuePrecio = false;
-                selected.setPrice(precio.getPriceValue());
+            if(price != null){
+                newPrice = false;
+                selected.setPrice(price.getPriceValue());
             }else{
                 //else create new price
-                nuePrecio = true;
-                precio = new Price(selected.getChemical().getName(),0);
+                newPrice = true;
+                price = new Price(selected.getChemical().getName(),0);
                 selected.setPrice(0);
             }
         }
     }
     
-    public void savePrecio(){
-        if(nuePrecio){
-            precio.setPriceValue(selected.getPrice());
-            getPrecioJpaController().create(precio);
+    public void savePrice(){
+        if(newPrice){
+            price.setPriceValue(selected.getPrice());
+            getPriceJpaController().create(price);
         }else{
             try {
-                precio.setPriceValue(selected.getPrice());
-                getPrecioJpaController().edit(precio);
+                price.setPriceValue(selected.getPrice());
+                getPriceJpaController().edit(price);
             } catch (Exception ex) {
-                Logger.getLogger(CompraController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ChemicalPurchaseController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
     
     @FacesConverter(forClass = ChemicalPurchase.class)
-    public static class CompraConverter implements Converter {
+    public static class ChemicalPurchaseConverter implements Converter {
 
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String string) {
-            if (string == null || string.length() == 0) {
+        @Override
+        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+            if (value == null || value.length() == 0) {
                 return null;
             }
-            long id = Long.parseLong(string);
-            CompraController controller = (CompraController) facesContext.getApplication().getVariableResolver().resolveVariable(facesContext, "compra");
-            return controller.getJpaController().findChemicalPurchase(id);
+            ChemicalPurchaseController controller = (ChemicalPurchaseController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "chemicalPurchaseController");
+            return controller.getJpaController().findChemicalPurchase(getKey(value));
+        }
+        
+        long getKey(String value) {
+            long key;
+            key = Long.parseLong(value);
+            return key;
         }
 
+        String getStringKey(long value) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(value);
+            return sb.toString();
+        }
+
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
             if (object instanceof ChemicalPurchase) {
                 ChemicalPurchase o = (ChemicalPurchase) object;
-                return String.valueOf(o.getId());
+                return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: model.finanzas.compra.Compra");
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ChemicalPurchase.class.getName());
             }
         }
 

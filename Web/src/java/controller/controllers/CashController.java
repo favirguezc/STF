@@ -1,13 +1,12 @@
 package controller.controllers;
 
-import model.finances.cash.CashConcept;
+import model.finances.cash.Cash;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import data.finances.cash.CashConceptDAO;
+import data.finances.cash.CashDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,32 +18,27 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.model.SelectItem;
-import model.finances.cash.Cash;
 
-@ManagedBean(name = "conceptoCajaController")
+@ManagedBean(name = "cashController")
 @SessionScoped
-public class ConceptoCajaController implements Serializable {
+public class CashController implements Serializable {
 
-    private CashConcept selected;
-    private List<CashConcept> items = null;
-    private CashConceptDAO jpaController = null;
-    private List<SelectItem> itemsEntrada = null;
-    private Cash cajaFiltro = null;
-    private int entrada;
+    private Cash selected;
+    private List<Cash> items = null;
+    private CashDAO jpaController = null;  
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    public ConceptoCajaController() {
+    public CashController() {
     }
 
-    public CashConcept getSelected() {
+    public Cash getSelected() {
         return selected;
     }
 
-    public void setSelected(CashConcept selected) {
+    public void setSelected(Cash selected) {
         this.selected = selected;
     }
 
@@ -63,75 +57,40 @@ public class ConceptoCajaController implements Serializable {
     public void setSignInBean(SignInController signInBean) {
         this.signInBean = signInBean;
     }
-
-    public List<SelectItem> getItemsEntrada() {
-        if(itemsEntrada == null){
-            itemsEntrada = new ArrayList<SelectItem>();
-            SelectItem item = new SelectItem(1, "Entrada");
-            itemsEntrada.add(item);
-            item = new SelectItem(2, "Salida");
-            itemsEntrada.add(item);
-        }
-        return itemsEntrada;
-    }
-
-    public int getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(int entrada) {
-        this.entrada = entrada;
-    }
-
-    public Cash getCajaFiltro() {
-        return cajaFiltro;
-    }
-
-    public void setCajaFiltro(Cash cajaFiltro) {
-        this.cajaFiltro = cajaFiltro;
-    }
     
+    private CashDAO getJpaController() {
+        if (jpaController == null) {
+            jpaController = new CashDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return jpaController;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
     protected void initializeEmbeddableKey() {
     }
     
-    private CashConceptDAO getJpaController() {
-        if (jpaController == null) {
-            jpaController = new CashConceptDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
-        }
-        return jpaController;
-    }
-
-    public CashConcept prepareCreate() {
-        selected = new CashConcept();
+    public Cash prepareCreate() {
+        selected = new Cash();
+        selected.setFarm(((SignInController) JsfUtil.getSession().getAttribute("signInController")).getFarm());
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        if(entrada == 1){
-            selected.setIncome(true);
-        }else if(entrada == 2){
-            selected.setIncome(false);
-        }
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ConceptoCajaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCash").getString("CashCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public void prepareUpdate(){
-        entrada = selected.isIncome()?1:2;
-    }
-    
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ConceptoCajaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCash").getString("CashUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ConceptoCajaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCash").getString("CashDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -158,47 +117,37 @@ public class ConceptoCajaController implements Serializable {
             }
         }
     }
-
-
-    public List<CashConcept> getItems() {
-        if (items == null) {
+    
+    public List<Cash> getItems() {
+         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm());
-                obtenerSaldo();
+                items = getJpaController().findCashEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
-                JsfUtil.addErrorMessage("Seleccione una Farm");
+                JsfUtil.addErrorMessage("Seleccione una Finca");
             }
         }
         return items;
     }
 
-    private void obtenerSaldo(){
-       float saldo = 0;
-       for(CashConcept concepto : items){
-           concepto.setBalance(saldo);
-           saldo = concepto.getBalance();
-       }
-    }
-    
-    public List<CashConcept> getItemsAvailableSelectMany() {
-        return getJpaController().findCashConceptEntities();
+    public List<Cash> getItemsAvailableSelectMany() {
+        return getItems();
     }
 
-    public List<CashConcept> getItemsAvailableSelectOne() {
-        return getJpaController().findCashConceptEntities();
+    public List<Cash> getItemsAvailableSelectOne() {
+        return getItems();
     }
 
-    @FacesConverter(forClass = CashConcept.class)
-    public static class ConceptoCajaControllerConverter implements Converter {
+    @FacesConverter(forClass = Cash.class)
+    public static class CashControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ConceptoCajaController controller = (ConceptoCajaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "conceptoCajaController");
-            return controller.getJpaController().findCashConcept(getKey(value));
+            CashController controller = (CashController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "cashController");
+            return controller.getJpaController().findCash(getKey(value));
         }
 
         long getKey(String value) {
@@ -218,11 +167,11 @@ public class ConceptoCajaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof CashConcept) {
-                CashConcept o = (CashConcept) object;
+            if (object instanceof Cash) {
+                Cash o = (Cash) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CashConcept.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Cash.class.getName());
             }
         }
 

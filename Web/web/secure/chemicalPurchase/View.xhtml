@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChemicalPurchaseViewDlg" widgetVar="ChemicalPurchaseViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle}">
+            <h:form id="ChemicalPurchaseViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chemicalPurchaseController.selected != null}">
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_purchaseDate}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.purchaseDate}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle_purchaseDate}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_chemical}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.chemical.name}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle_chemical}"/>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle_price}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.price}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle_price}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_quantity}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_quantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_total}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.total}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_total}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ChemicalPurchaseViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
+

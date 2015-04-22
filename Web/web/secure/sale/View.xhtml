@@ -9,94 +9,94 @@
 
     <ui:composition>
 
-        <p:dialog id="VentaViewDlg" widgetVar="VentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVentaTitle}">
-            <h:form id="VentaViewForm">
+        <p:dialog id="SaleViewDlg" widgetVar="SaleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleSale.ViewSaleTitle}">
+            <h:form id="SaleViewForm">
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="2" rendered="#{ventaController.selected != null}">
-                    <h:outputText value="Fecha de la Venta:"/>
-                    <h:outputText value="#{ventaController.selected.fechaVenta}" title="Fechade la Venta" >
+                    <h:panelGrid columns="2" rendered="#{saleController.selected != null}">
+                    <h:outputText value="Fecha de la Sale:"/>
+                    <h:outputText value="#{saleController.selected.saleDate}" title="Fechade la Sale" >
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                     <h:outputText value="Cliente:"/>
-                    <h:outputText value="#{ventaController.selected.cliente.nombre} #{ventaController.selected.cliente.apellido}" title="Cliente"/>
+                    <h:outputText value="#{saleController.selected.customer.name} #{saleController.selected.customer.lastName}" title="Cliente"/>
                     <h:outputText value="Cantidad Type Extra:"/>
-                    <h:outputText value="#{ventaController.selected.extraGramos}" title="Cantidad Type Extra">
+                    <h:outputText value="#{saleController.selected.extraGrams}" title="Cantidad Type Extra">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Primera:"/>
-                    <h:outputText value="#{ventaController.selected.primeraGramos}" title="Cantidad Type Primera">
+                    <h:outputText value="#{saleController.selected.firstGrams}" title="Cantidad Type Primera">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Segunda:"/>
-                    <h:outputText value="#{ventaController.selected.segundaGramos}" title="Cantidad Type Segunda">
+                    <h:outputText value="#{saleController.selected.secondGrams}" title="Cantidad Type Segunda">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Tercera:"/>
-                    <h:outputText value="#{ventaController.selected.terceraGramos}" title="Cantidad Type Tercera">
+                    <h:outputText value="#{saleController.selected.thirdGrams}" title="Cantidad Type Tercera">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Cuarta:"/>
-                    <h:outputText value="#{ventaController.selected.cuartaGramos}" title="Cantidad Type Cuarta">
+                    <h:outputText value="#{saleController.selected.fourthGrams}" title="Cantidad Type Cuarta">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Quinta:"/>
-                    <h:outputText value="#{ventaController.selected.quintaGramos}" title="Cantidad Type Quinta">
+                    <h:outputText value="#{saleController.selected.fifthGrams}" title="Cantidad Type Quinta">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Extra Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.extraPrecioUnid}" title="Extra Precio Unidad">
+                    <h:outputText value="#{saleController.selected.extraUnitPrice}" title="Extra Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Primera Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.primeraPrecioUnid}" title="Primera Precio Unidad">
+                    <h:outputText value="#{saleController.selected.firstUnitPrice}" title="Primera Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Segunda Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.segundaPrecioUnid}" title="Segunda Precio Unidad">
+                    <h:outputText value="#{saleController.selected.secondUnitPrice}" title="Segunda Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Tercera Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.terceraPrecioUnid}" title="Tercera Precio Unidad">
+                    <h:outputText value="#{saleController.selected.thirdUnitPrice}" title="Tercera Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cuarta Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.cuartaPrecioUnid}" title="Cuarta Precio Unidad" >
+                    <h:outputText value="#{saleController.selected.fourthUnitPrice}" title="Cuarta Precio Unidad" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Quinta Precio Unidad:"/>
-                    <h:outputText value="#{ventaController.selected.quintaPrecioUnid}" title="Quinta Precio Unidad" >
+                    <h:outputText value="#{saleController.selected.fifthUnitPrice}" title="Quinta Precio Unidad" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Extra Precio Total:"/>
-                    <h:outputText value="#{ventaController.selected.extraPrecioTotal}" title="Extra Precio Total" >
+                    <h:outputText value="#{saleController.selected.extraTotalPrice}" title="Extra Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Primera Precio Total:"/>
-                    <h:outputText value="#{ventaController.selected.primeraPrecioTotal}" title="Primera Precio Total" >
+                    <h:outputText value="#{saleController.selected.firstTotalPrice}" title="Primera Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Segunda Precio Total:"/>
-                    <h:outputText value="#{ventaController.selected.segundaPrecioTotal}" title="Segunda Precio Total" >
+                    <h:outputText value="#{saleController.selected.segundaPrecioTotal}" title="Segunda Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Tercera Precio Total:"/>
-                    <h:outputText value="#{ventaController.selected.terceraPrecioTotal}" title="Tercera Precio Total" >
+                    <h:outputText value="#{saleController.selected.thirdTotalPrice}" title="Tercera Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cuarta Precioc Total:"/>
-                    <h:outputText value="#{ventaController.selected.cuartaPrecioTotal}" title="Cuarta Precio Total" >
+                    <h:outputText value="#{saleController.selected.fourthTotalPrice}" title="Cuarta Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Quinta Precio Total:"/>
-                    <h:outputText value="#{ventaController.selected.quintaPrecioTotal}" title="Quinta Precio Total" >
+                    <h:outputText value="#{saleController.selected.fifthTotalPrice}" title="Quinta Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
-                    <h:outputText value="Venta Total:"/>
-                    <h:outputText value="#{ventaController.selected.ventaTotal}" title="Venta Total" >
+                    <h:outputText value="Sale Total:"/>
+                    <h:outputText value="#{saleController.selected.saleTotal}" title="Sale Total" >
                         <f:convertNumber/>
                     </h:outputText>
                 </h:panelGrid>
-                <p:commandButton value="#{bundle.Close}" onclick="VentaViewDialog.hide()"/>
+                <p:commandButton value="#{bundle.Close}" onclick="SaleViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

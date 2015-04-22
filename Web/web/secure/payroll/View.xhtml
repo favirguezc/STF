@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        
+        <p:dialog id="PayrollViewDlg" widgetVar="PayrollViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePayroll.ViewPayrollTitle}">
+            <h:form id="PayrollViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{payrollController.selected != null}" style="width: 400px;">
+                        <h:outputText value="#{bundlePayroll.ViewPayrollLabel_dateFrom}"/>
+                        <h:outputText value="#{payrollController.selected.dateFrom}" title="#{bundlePayroll.ViewPayrollTitle_dateFrom}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePayroll.ViewPayrollLabel_dateUntil}"/>
+                        <h:outputText value="#{payrollController.selected.dateUntil}" title="#{bundlePayroll.ViewPayrollTitle_dateUntil}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePayroll.ViewPayrollLabel_worker}"/>
+                        <h:outputText value="#{payrollController.selected.worker.name} #{payrollController.selected.worker.lastName}" title="#{bundlePayroll.ViewPayrollTitle_worker}"/>
+                    </p:panelGrid>
+                    <p:dataTable id="jobs" value="#{payrollController.jobsSelected}" var="item"
+                                 rowKey="#{item.id}" resizableColumns="false" paginator="true" rows="10"
+                                 style="width: 400px;" paginatorPosition="bottom">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlePayroll.ListJobTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlePayroll.ListJobTitle_hourlyRate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hourlyRate}">
+                                <f:convertNumber/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                    <p:panelGrid columns="2" rendered="#{payrollController.selected != null}" style="width: 400px;">
+                        <h:outputText value="#{bundlePayroll.ViewPayrollLabel_crop}"/>
+                        <h:outputText value="#{payrollController.croppedValue}" title="#{bundlePayroll.ViewPayrollTitle_crop}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundlePayroll.ViewPayrollLabel_total}"/>
+                        <h:outputText value="#{payrollController.selected.total}" title="#{bundlePayroll.ViewPayrollTitle_total}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PayrollViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

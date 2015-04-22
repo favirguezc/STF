@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        
+        <p:dialog id="CostCreateDlg" widgetVar="CostCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCost.CreateCostTitle}">
+            <h:form id="CostCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{costController.selected != null}">
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_moduleObject}" for="moduleObject" />
+                        <p:selectOneMenu id="moduleObject" value="#{costController.selected.moduleObject}">
+                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
+                                           var="moduleObjectItem"
+                                           itemValue="#{moduleObjectItem}"
+                                           itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_costDate}" for="costDate" />
+                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.CreateCostTitle_costDate}" required="true" requiredMessage="#{CreateCostRequiredMessage_costDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{costController.selected.type}">
+                            <f:selectItems value="#{enumController.costTypeValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_subType}" for="subType" />
+                        <p:inputText id="subType" value="#{costController.selected.subType}" title="#{bundleCost.CreateCostTitle_subType}" />
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{costController.selected.name}" title="#{bundleCost.CreateCostTitle_name}" />
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_item}" for="item" />
+                        <p:selectOneMenu id="item" value="#{costController.selected.item}">
+                            <f:selectItems value="#{enumController.costItemValues}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{costController.selected.quantity}" title="#{bundleCost.CreateCostTitle_quantity}" />
+                        <p:outputLabel value="#{bundleCost.CreateCostLabel_unitPrice}" for="unitPrice" />
+                        <p:inputText id="unitPrice" value="#{costController.selected.unitPrice}" title="#{bundleCost.CreateCostTitle_unitPrice}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{costController.create}" value="#{bundle.Save}" update="display,:CostListForm:datalist,:growl" oncomplete="handleSubmit(args,'CostCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CostCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

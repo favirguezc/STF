@@ -8,12 +8,12 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListConceptoCajaTitle}"></h:outputText>
+            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form id="ConceptoCajaListForm">
-                <p:dataTable id="datalist" value="#{conceptoCajaController.items}" var="item"
-                     selectionMode="single" selection="#{conceptoCajaController.selected}"
+            <h:form id="CashConceptListForm">
+                <p:dataTable id="datalist" value="#{cashConceptController.items}" var="item"
+                     selectionMode="single" selection="#{cashConceptController.selected}"
                      paginator="true"
                      rowKey="#{item.id}"
                      rows="10"
@@ -23,58 +23,58 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column filterBy="#{item.caja}" headerText="#{bundle.ListConceptoCajaTitle_caja}" filterMatchMode="exact">
+                    <p:column filterBy="#{item.cash}" headerText="#{bundleCashConcept.ListCashConceptTitle_cash}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('moduleclassTable').filter()">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                <f:selectItems value="#{cajaController.itemsAvailableSelectOne}"/>
+                                <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                         </f:facet>
-                        <h:outputText value="#{item.caja.nombre}"/>
+                        <h:outputText value="#{item.cash.name}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListConceptoCajaTitle_fecha}"/>
+                            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_conceptDate}"/>
                         </f:facet>
-                        <h:outputText value="#{item.fecha}">
+                        <h:outputText value="#{item.conceptDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListConceptoCajaTitle_descripcion}"/>
+                            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_description}"/>
                         </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
+                        <h:outputText value="#{item.description}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListConceptoCajaTitle_entrada}"/>
+                            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_income}"/>
                         </f:facet>
-                        <h:outputText value="#{item.valor}" rendered="#{item.entrada}">
+                        <h:outputText value="#{item.conceptValue}" rendered="#{item.income}">
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListConceptoCajaTitle_salida}"/>
+                            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_outcome}"/>
                         </f:facet>
-                        <h:outputText value="#{item.valor}" rendered="#{!item.entrada}">
+                        <h:outputText value="#{item.conceptValue}" rendered="#{!item.income}">
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListConceptoCajaTitle_saldo}"/>
+                            <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_balance}"/>
                         </f:facet>
-                        <h:outputText value="#{item.saldo}">
+                        <h:outputText value="#{item.balance}">
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{conceptoCajaController.prepareCreate}" update=":ConceptoCajaCreateForm" oncomplete="PF('ConceptoCajaCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConceptoCajaViewForm" oncomplete="PF('ConceptoCajaViewDialog').show()" disabled="#{empty conceptoCajaController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{conceptoCajaController.prepareUpdate}" update=":ConceptoCajaEditForm" oncomplete="PF('ConceptoCajaEditDialog').show()" disabled="#{empty conceptoCajaController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{conceptoCajaController.destroy}" update=":growl,datalist" disabled="#{empty conceptoCajaController.selected}"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cashConceptController.prepareCreate}" update=":CashConceptCreateForm" oncomplete="PF('CashConceptCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CashConceptViewForm" oncomplete="PF('CashConceptViewDialog').show()" disabled="#{empty cashConceptController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{cashConceptController.prepareUpdate}" update=":CashConceptEditForm" oncomplete="PF('CashConceptEditDialog').show()" disabled="#{empty cashConceptController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cashConceptController.destroy}" update=":growl,datalist" disabled="#{empty cashConceptController.selected}"/>
                     </f:facet>    
                 </p:dataTable>
             </h:form>

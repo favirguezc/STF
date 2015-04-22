@@ -7,14 +7,14 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="CajaViewDlg" widgetVar="CajaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCajaTitle}">
-            <h:form id="CajaViewForm">
+        <p:dialog id="CashViewDlg" widgetVar="CashViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCash.ViewCashTitle}">
+            <h:form id="CashViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cajaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCajaLabel_nombre}"/>
-                        <h:outputText value="#{cajaController.selected.nombre}" title="#{bundle.ViewCajaTitle_nombre}"/>
+                        <h:outputText value="#{bundleCash.ViewCashLabel_name}"/>
+                        <h:outputText value="#{cajaController.selected.name}" title="#{bundleCash.ViewCashTitle_name}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CajaViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="CashViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -12,13 +12,13 @@ package model.administration;
 public enum PageEnum {
 //Add new pages alphabetically
     APPLICATION,
-    Caja,
+    CASH,
+    CASHCONCEPT,
     CHEMICAL,
+    CHEMICALPURCHASE,
     CLASSIFICATION,
-    Compra,
-    ConceptoCaja,
     CONTRACT,
-    Costo,
+    COST,
     DEPARTMENT,
     FARM,
     INDEX,
@@ -29,14 +29,14 @@ public enum PageEnum {
     MONITORING,
     PARAMETERMONITORING,
     MUNICIPALITY,
-    Nomina,
+    PAYROLL,
     PERMISSION,
     PERSON,
+    SALE,
     CROP,
     TEMPERATURE,
     THERMOMETER,
     WORK,
     INSECTTRAP,
-    MONITORABLEPARAMETER,
-    Venta;
+    MONITORABLEPARAMETER;
 }

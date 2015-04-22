@@ -8,12 +8,12 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListNominaTitle}"></h:outputText>
+            <h:outputText value="#{bundlePayroll.ListPayrollTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form id="NominaListForm">
-                <p:dataTable id="datalist" value="#{nominaController.items}" var="item"
-                     selectionMode="single" selection="#{nominaController.selected}"
+            <h:form id="PayrollListForm">
+                <p:dataTable id="datalist" value="#{payrollController.items}" var="item"
+                     selectionMode="single" selection="#{payrollController.selected}"
                      paginator="true"
                      rowKey="#{item.id}"
                      rows="10"
@@ -25,41 +25,41 @@
                     
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListNominaTitle_fechaDesde}"/>
+                            <h:outputText value="#{bundlePayroll.ListPayrollTitle_dateFrom}"/>
                         </f:facet>
-                        <h:outputText value="#{item.fechaDesde}">
+                        <h:outputText value="#{item.dateFrom}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListNominaTitle_fecha}"/>
+                            <h:outputText value="#{bundlePayroll.ListPayrollTitle_dateUntil}"/>
                         </f:facet>
-                        <h:outputText value="#{item.fecha}">
+                        <h:outputText value="#{item.dateUntil}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column filterBy="#{item.trabajador}" headerText="#{bundle.ListNominaTitle_trabajador}" filterMatchMode="exact">
+                    <p:column filterBy="#{item.worker}" headerText="#{bundlePayroll.ListPayrollTitle_worker}" filterMatchMode="exact">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('nominaTable').filter()">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{personController.itemsAvailableTrabajador}"/>
                             </p:selectOneMenu>
                         </f:facet>
-                        <h:outputText value="#{item.trabajador.nombre} #{item.trabajador.apellido}"/>
+                        <h:outputText value="#{item.worker.name} #{item.worker.lastName}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListNominaTitle_total}"/>
+                            <h:outputText value="#{bundlePayroll.ListPayrollTitle_total}"/>
                         </f:facet>
                         <h:outputText value="#{item.total}">
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
                     <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{nominaController.prepareCreate}" update=":NominaCreateForm" oncomplete="PF('NominaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NominaViewForm" oncomplete="PF('NominaViewDialog').show()" disabled="#{empty nominaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{nominaController.destroy}" update=":growl,datalist" disabled="#{empty nominaController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{payrollController.prepareCreate}" update=":PayrollCreateForm" oncomplete="PF('PayrollCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PayrollViewForm" oncomplete="PF('PayrollViewDialog').show()" disabled="#{empty payrollController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{payrollController.destroy}" update=":growl,datalist" disabled="#{empty payrollController.selected}"/>
                         </f:facet>    
                 </p:dataTable>
                     

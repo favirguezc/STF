@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SaleCreateDlg" widgetVar="SaleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleSale.CreateSaleTitle}">
+            <h:form id="SaleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{saleController.selected != null}">
+                        <p:outputLabel for="saleDate" value="Fecha Sale (dd/MM/yyyy):"/>
+                        <p:calendar id="saleDate" pattern="dd/MM/yyyy" value="#{saleController.selected.saleDate}" title="Fecha de la Sale" required="true" requiredMessage="The saleDate field is required." showOn="button"/>
+                        <p:outputLabel for="customer" value="Cliente:"/>
+                        <p:selectOneMenu id="customer" value="#{saleController.selected.customer}" required="true" requiredMessage="The customer field is required." >
+                            <f:selectItems value="#{personController.itemsAvailableCliente}"
+                                           var="customerItem"
+                                           itemValue="#{customerItem}"
+                                           itemLabel="#{customerItem.name} #{customerItem.lastName}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="extraGrams" value="Cantidad Type Extra**:"/>
+                        <p:inputText id="extraGrams" value="#{saleController.selected.extraGrams}" title="Cantidad Type Extra">
+                            <p:ajax update="extraUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="firstGrams" value="Cantidad Type Primera**:"/>
+                        <p:inputText id="firstGrams" value="#{saleController.selected.firstGrams}" title="Cantidad Type Primera" >
+                            <p:ajax update="firstUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="secondGrams" value="Cantidad Type Segunda**:"/>
+                        <p:inputText id="secondGrams" value="#{saleController.selected.secondGrams}" title="Cantidad Type Segunda" >
+                            <p:ajax update="secondUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="thirdGrams" value="Cantidad Type Tercera**:"/>
+                        <p:inputText id="thirdGrams" value="#{saleController.selected.thirdGrams}" title="Cantidad Type Tercera" >
+                            <p:ajax update="thirdUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="fourthGrams" value="Cantidad Type Cuarta**:"/>
+                        <p:inputText id="fourthGrams" value="#{saleController.selected.fourthGrams}" title="Cantidad Type Cuarta" >
+                            <p:ajax update="fourthUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="fifthGrams" value="Cantidad Type Quinta**:"/>
+                        <p:inputText id="fifthGrams" value="#{saleController.selected.fifthGrams}" title="Cantidad Type Quinta" >
+                            <p:ajax update="fifthUnitPrice"/>
+                        </p:inputText>
+                        <p:outputLabel for="extraUnitPrice" value="Extra Precio Unidad:"/>
+                        <p:inputText id="extraUnitPrice" value="#{saleController.selected.extraUnitPrice}" disabled="#{saleController.selected.extraGrams == 0}" title="Extra Precio Unidad" />
+                        <p:outputLabel for="firstUnitPrice" value="Primera Precio Unidad:"/>
+                        <p:inputText id="firstUnitPrice" value="#{saleController.selected.firstUnitPrice}" disabled="#{saleController.selected.firstGrams == 0}" title="Primera Precio Unidad" />
+                        <p:outputLabel for="secondUnitPrice" value="Segunda Precio Unidad:"/>
+                        <p:inputText id="secondUnitPrice" value="#{saleController.selected.secondUnitPrice}" disabled="#{saleController.selected.secondGrams == 0}" title="Segunda Precio Unidad" />
+                        <p:outputLabel for="thirdUnitPrice" value="Tercera Precio Unidad:"/>
+                        <p:inputText id="thirdUnitPrice" value="#{saleController.selected.thirdUnitPrice}" disabled="#{saleController.selected.thirdGrams == 0}" title="Tercera Precio Unidad" />
+                        <p:outputLabel for="fourthUnitPrice" value="Cuarta Precio Unidad:"/>
+                        <p:inputText id="fourthUnitPrice" value="#{saleController.selected.fourthUnitPrice}" disabled="#{saleController.selected.fourthGrams == 0}" title="Cuarta Precio Unidad" />
+                        <p:outputLabel for="fifthUnitPrice" value="Quinta Precio Unidad:"/>
+                        <p:inputText id="fifthUnitPrice" value="#{saleController.selected.fifthUnitPrice}" disabled="#{saleController.selected.fifthGrams == 0}" title="Quinta Precio Unidad" />
+                    </p:panelGrid>
+                    <h:outputText value="**Ingresar los valores en Libras" style="color: red"/>
+                    <br/>
+                    <p:commandButton actionListener="#{saleController.create}" value="#{bundle.Save}" update="display,:SaleListPanel:SaleListForm:datalist,:growl" oncomplete="handleSubmit(args,'SaleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SaleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

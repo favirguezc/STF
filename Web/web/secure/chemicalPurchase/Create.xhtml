@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ChemicalPurchaseCreateDlg" widgetVar="ChemicalPurchaseCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle}">
+            <h:form id="ChemicalPurchaseCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chemicalPurchaseController.selected != null}">
+                        <p:outputLabel for="purchaseDate" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_purchaseDate}"/>
+                        <p:calendar id="purchaseDate" pattern="dd/MM/yyyy" value="#{chemicalPurchaseController.selected.purchaseDate}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_purchaseDate}" required="true" requiredMessage="#{bundleChemicalPurchase.CreateChemicalPurchaseRequiredMessage_purchaseDate}" showOn="button"/>
+                        <p:outputLabel for="chemicalCo" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_chemical}"/>
+                        <p:selectOneMenu id="chemicalCo" value="#{chemicalPurchaseController.selected.chemical}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                           var="chemicalItem"
+                                           itemValue="#{chemicalItem}"
+                                           itemLabel="#{chemicalItem.name}"/>
+                            <p:ajax update="priceCo" listener="#{chemicalPurchaseController.verifyPrice}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="priceCo" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_price}"/>
+                        <p:inputText id="priceCo" value="#{chemicalPurchaseController.selected.price}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_price}"/>
+                        <p:outputLabel for="quantityCo" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_quantity}"/>
+                        <p:inputText id="quantityCo" value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_quantity}" required="true" requiredMessage="#{bundleChemicalPurchase.CreateChemicalPurchaseRequiredMessage_quantity}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chemicalPurchaseController.create}" value="#{bundle.Save}" update="display,:ChemicalPurchaseListPanel:ChemicalPurchaseListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalPurchaseCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalPurchaseCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

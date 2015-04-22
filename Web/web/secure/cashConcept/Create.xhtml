@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        
+        <p:dialog id="CashConceptCreateDlg" widgetVar="CashConceptCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCashConcept.CreateCashConceptTitle}">
+            <h:form id="CashConceptCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cashConceptController.selected != null}">
+                        <p:outputLabel value="#{bundleCashConcept.CreateCashConceptLabel_cash}" for="cashC" />
+                        <p:selectOneMenu id="cashC" value="#{cashConceptController.selected.cash}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cashController.itemsAvailableSelectOne}"
+                                           var="cashItem"
+                                           itemValue="#{cashItem}"
+                                           itemLabel="#{cashItem.nombre}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleCashConcept.CreateCashConceptLabel_conceptDate}" for="conceptDate" />
+                        <p:calendar id="conceptDate" pattern="dd/MM/yyyy" value="#{cashConceptController.selected.conceptDate}" title="#{bundleCashConcept.CreateCashConceptTitle_conceptDate}" required="true" requiredMessage="#{CreateCashConceptRequiredMessage_conceptDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundleCashConcept.CreateCashConceptLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{cashConceptController.selected.description}" title="#{bundleCashConcept.CreateCashConceptTitle_description}" />
+                        <p:outputLabel for="income" value="#{bundleCashConcept.CreateCashConceptLabel_eos}" />
+                        <p:selectOneRadio id="income" value="#{cashConceptController.income}">
+                            <f:selectItems value="#{cashConceptController.incomeItems}"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="#{bundleCashConcept.CreateCashConceptLabel_conceptValue}" for="conceptValue" />
+                        <p:inputText id="conceptValue" value="#{cashConceptController.selected.conceptValue}" title="#{bundleCashConcept.CreateCashConceptTitle_conceptValue}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cashConceptController.create}" value="#{bundle.Save}" update="display,:CashConceptListForm:datalist,:growl" oncomplete="handleSubmit(args,'CashConceptCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CashConceptCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

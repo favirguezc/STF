@@ -105,13 +105,13 @@
                             <p:menuitem value="Recolección" outcome="/secure/crop/List.xhtml"/>
                             <p:menuitem value="Clasificación" outcome="/secure/classification/List.xhtml"/>
                         </p:submenu>                        
-                        <p:menuitem value="Ventas" outcome="/secure/venta/List.xhtml"/>
-                        <p:submenu label="Gastos">
+                        <p:menuitem value="#{bundle.Sales}" outcome="/secure/venta/List.xhtml"/>
+                        <p:submenu label="#{bundle.Outcomes}">
                             <p:menuitem value="Compra de Insumos" outcome="/secure/compra/List.xhtml"/>
                             <p:menuitem value="Costos" outcome="/secure/costo/List.xhtml"/>
                             <p:menuitem value="Nomina" outcome="/secure/nomina/List.xhtml"/>
                         </p:submenu>
-                        <p:submenu label="Caja">
+                        <p:submenu label="#{bundle.Cash}">
                             <p:menuitem value="Administrar Cajas" outcome="/secure/caja/List.xhtml"/>
                             <p:menuitem value="Registrar en Cajas" outcome="/secure/conceptoCaja/List.xhtml"/>
                         </p:submenu>

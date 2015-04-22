@@ -12,14 +12,14 @@
             <h:form id="MonitoringViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoringController.selected != null}">
-                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_numeroDeMonitoring}"/>
-                        <h:outputText value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundleMonitoring.ViewMonitoringTitle_numeroDeMonitoring}"/>
-                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_fecha}"/>
-                        <h:outputText value="#{monitoringController.selected.fecha}" title="#{bundleMonitoring.ViewMonitoringTitle_fecha}">
+                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_number}"/>
+                        <h:outputText value="#{monitoringController.selected.number}" title="#{bundleMonitoring.ViewMonitoringTitle_number}"/>
+                        <h:outputText value="#{bundleMonitoring.ViewMonitoringLabel_monitoringDate}"/>
+                        <h:outputText value="#{monitoringController.selected.monitoringDate}" title="#{bundleMonitoring.ViewMonitoringTitle_monitoringDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleMonitoring.Close}" onclick="MonitoringViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitoringViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

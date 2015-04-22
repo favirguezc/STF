@@ -12,14 +12,14 @@
             <h:form id="ThermometerViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{thermometerController.selected != null}">
-                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_nombre}"/>
-                        <h:outputText value="#{thermometerController.selected.nombre}" title="#{bundleThermometer.ViewThermometerTitle_nombre}"/>
-                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_numeroDeSerie}"/>
-                        <h:outputText value="#{thermometerController.selected.numeroDeSerie}" title="#{bundleThermometer.ViewThermometerTitle_numeroDeSerie}"/>
-                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_moduleclass}"/>
-                        <h:outputText value="#{thermometerController.selected.moduleclass.lot.nombre} - #{thermometerController.selected.moduleclass.nombre}" title="#{bundleThermometer.ViewThermometerTitle_moduleclass}"/>
+                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_name}"/>
+                        <h:outputText value="#{thermometerController.selected.name}" title="#{bundleThermometer.ViewThermometerTitle_name}"/>
+                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_serialNumber}"/>
+                        <h:outputText value="#{thermometerController.selected.serialNumber}" title="#{bundleThermometer.ViewThermometerTitle_serialNumber}"/>
+                        <h:outputText value="#{bundleThermometer.ViewThermometerLabel_moduleObject}"/>
+                        <h:outputText value="#{thermometerController.selected.moduleObject.lot.name} - #{thermometerController.selected.moduleObject.name}" title="#{bundleThermometer.ViewThermometerTitle_moduleObject}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleThermometer.Close}" onclick="ThermometerViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="ThermometerViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -12,16 +12,16 @@
             <h:form id="NoteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{noteController.selected != null}">
-                        <h:outputText value="#{bundleNote.ViewNoteLabel_titulo}"/>
-                        <h:outputText value="#{noteController.selected.titulo}" title="#{bundleNote.ViewNoteTitle_titulo}"/>
-                        <h:outputText value="#{bundleNote.ViewNoteLabel_note}"/>
-                        <h:outputText value="#{noteController.selected.note}" title="#{bundleNote.ViewNoteTitle_note}"/>
-                        <h:outputText value="#{bundleNote.ViewNoteLabel_de}"/>
-                        <h:outputText value="#{noteController.selected.de}" title="#{bundleNote.ViewNoteTitle_de}"/>
-                        <h:outputText value="#{bundleNote.ViewNoteLabel_para}"/>
-                        <h:outputText value="#{noteController.selected.para}" title="#{bundleNote.ViewNoteTitle_para}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_title}"/>
+                        <h:outputText value="#{noteController.selected.title}" title="#{bundleNote.ViewNoteTitle_title}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_message}"/>
+                        <h:outputText value="#{noteController.selected.message}" title="#{bundleNote.ViewNoteTitle_message}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_from}"/>
+                        <h:outputText value="#{noteController.selected.from}" title="#{bundleNote.ViewNoteTitle_from}"/>
+                        <h:outputText value="#{bundleNote.ViewNoteLabel_to}"/>
+                        <h:outputText value="#{noteController.selected.to}" title="#{bundleNote.ViewNoteTitle_to}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleNote.Close}" onclick="NoteViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="NoteViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

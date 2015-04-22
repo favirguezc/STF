@@ -35,17 +35,17 @@
                         <p:inputText id="email" value="#{personController.selected.email}" title="#{bundlePerson.CreatePersonTitle_email}" required="true"/>
                         <p:outputLabel value="#{bundlePerson.CreatePersonLabel_sex}" for="sex" />
                         <p:selectOneMenu id="sex" value="#{personController.selected.sex}">
-                            <f:selectItems value="#{sexController.sexValues}"/>
+                            <f:selectItems value="#{enumController.sexValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePerson.CreatePersonLabel_mobilePhone}" for="mobilePhone" />
                         <p:inputText id="mobilePhone" value="#{personController.selected.mobilePhone}" title="#{bundlePerson.CreatePersonTitle_mobilePhone}" required="true"/>
                         <p:outputLabel value="#{bundlePerson.CreatePersonLabel_bloodGroup}" for="bloodGroup" />
                         <p:selectOneMenu id="bloodGroup" value="#{personController.selected.bloodGroup}">
-                            <f:selectItems value="#{bloodController.bloodGroupValues}"/>
+                            <f:selectItems value="#{enumController.bloodGroupValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePerson.CreatePersonLabel_rhFactor}" for="rhFactor" />
                         <p:selectOneMenu id="rhFactor" value="#{personController.selected.rhFactor}">
-                            <f:selectItems value="#{bloodController.rhFactorValues}"/>
+                            <f:selectItems value="#{enumController.rhFactorValues}"/>
                         </p:selectOneMenu>
                             <p:commandButton actionListener="#{personController.create}" action="#{signInController.goToSignIn}" value="#{bundle.Save}" update=":growl" oncomplete="handleSubmit(args,'PersonCreateDialog');"/>
                             <p:button value="#{bundle.Cancel}" outcome="/faces/signIn.xhtml"/>

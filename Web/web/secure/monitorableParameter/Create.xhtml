@@ -12,17 +12,17 @@
             <h:form id="MonitorableParameterCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
-                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{monitorableparameterController.selected.nombre}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_nombre}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_abreviacion}" for="abreviacion" />
-                        <p:inputText id="abreviacion" value="#{monitorableparameterController.selected.abreviacion}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abreviacion}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abreviacion}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{monitorableparameterController.selected.name}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_name}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_abbreviation}" for="abbreviation" />
+                        <p:inputText id="abbreviation" value="#{monitorableparameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abbreviation}"/>
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_valuationType}" for="valuationType" />
                         <p:selectOneMenu id="valuationType" value="#{monitorableparameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_valuationType}">
-                            <f:selectItems value="#{valuationTypeController.valuationTypeValues}"/>
+                            <f:selectItems value="#{enumController.valuationTypeValues}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitorableparameterController.create}" value="#{bundleMonitorableParameter.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
-                    <p:commandButton value="#{bundleMonitorableParameter.Cancel}" onclick="MonitorableParameterCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitorableparameterController.create}" value="#{bundle.Save}" update="display,:MonitorableParameterListForm:datalist,:growl" oncomplete="handleSubmit(args,'MonitorableParameterCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitorableParameterCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

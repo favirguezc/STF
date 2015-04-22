@@ -12,14 +12,14 @@
             <h:form id="MonitorableParameterViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitorableparameterController.selected != null}">
-                        <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_nombre}"/>
-                        <h:outputText value="#{monitorableparameterController.selected.nombre}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_nombre}"/>
-                        <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_abreviacion}"/>
-                        <h:outputText value="#{monitorableparameterController.selected.abreviacion}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_abreviacion}"/>
+                        <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_name}"/>
+                        <h:outputText value="#{monitorableparameterController.selected.name}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_name}"/>
+                        <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_abbreviation}"/>
+                        <h:outputText value="#{monitorableparameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_abbreviation}"/>
                         <h:outputText value="#{bundleMonitorableParameter.ViewMonitorableParameterLabel_valuationType}"/>
                         <h:outputText value="#{monitorableparameterController.selected.valuationType}" title="#{bundleMonitorableParameter.ViewMonitorableParameterTitle_valuationType}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleMonitorableParameter.Close}" onclick="MonitorableParameterViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="MonitorableParameterViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

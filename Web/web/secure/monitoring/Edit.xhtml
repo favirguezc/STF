@@ -12,13 +12,13 @@
             <h:form id="MonitoringEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{monitoringController.selected != null}">
-                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_numeroDeMonitoring}" for="numeroDeMonitoring" />
-                        <p:inputText id="numeroDeMonitoring" value="#{monitoringController.selected.numeroDeMonitoring}" title="#{bundleMonitoring.EditMonitoringTitle_numeroDeMonitoring}" />
-                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="dd/MM/yyyy" value="#{monitoringController.selected.fecha}" title="#{bundleMonitoring.EditMonitoringTitle_fecha}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_number}" for="number" />
+                        <p:inputText id="number" value="#{monitoringController.selected.number}" title="#{bundleMonitoring.EditMonitoringTitle_number}" />
+                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_monitoringDate}" for="monitoringDate" />
+                        <p:calendar id="monitoringDate" pattern="dd/MM/yyyy" value="#{monitoringController.selected.monitoringDate}" title="#{bundleMonitoring.EditMonitoringTitle_monitoringDate}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_monitoringDate}" showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{monitoringController.update}" value="#{bundleMonitoring.Save}" update="display,:MonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoringEditDialog');"/>
-                    <p:commandButton value="#{bundleMonitoring.Cancel}" onclick="MonitoringEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{monitoringController.update}" value="#{bundle.Save}" update="display,:MonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MonitoringEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoringEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

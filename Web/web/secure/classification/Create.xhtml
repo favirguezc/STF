@@ -22,9 +22,9 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleClassification.CreateClassificationLabel_type}" for="type" />
                         <p:selectOneMenu id="type" value="#{classificationController.selected.type}" required="true" requiredMessage="#{bundleClassification.CreateClassificationRequiredMessage_type}">
-                            <f:selectItems value="#{typeDeFresaController.typeDeFresaValues}"
-                                           var="typeDeFresaItem"
-                                           itemValue="#{typeDeFresaItem}"/>
+                            <f:selectItems value="#{enumController.classificationTypeValues}"
+                                           var="classificationTypeItem"
+                                           itemValue="#{classificationTypeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleClassification.CreateClassificationLabel_weight}" for="weight" />
                         <p:inputText id="weight" value="#{classificationController.selected.weight}" title="#{bundleClassification.CreateClassificationTitle_weight}" />

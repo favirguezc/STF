@@ -12,6 +12,16 @@
         </ui:define>
         <ui:define name="body">
             <h:form id="CashConceptListForm">
+                <h:outputText rendered="#{empty cashConceptController.cashFilter}" value="#{bundleCashConcept.ListCashConcept_noCash}" style="color: red;" />
+                <br/>
+                <p:panelGrid columns="2" style="font-size: large; width: 400px; font-style: italic;">
+                    <p:outputLabel value="#{bundleCashConcept.ListCashConceptTitle_cash}" for="cashFilter" />
+                    <p:selectOneMenu id="cashFilter" value="#{cashConceptController.cashFilter}" >
+                        <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
+                        <p:ajax update="datalist"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <br/>
                 <p:dataTable id="datalist" value="#{cashConceptController.items}" var="item"
                      selectionMode="single" selection="#{cashConceptController.selected}"
                      paginator="true"
@@ -23,15 +33,6 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column filterBy="#{item.cash}" headerText="#{bundleCashConcept.ListCashConceptTitle_cash}" filterMatchMode="exact">
-                        <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('moduleclassTable').filter()">
-                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
-                        </f:facet>
-                        <h:outputText value="#{item.cash.name}"/>
-                    </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleCashConcept.ListCashConceptTitle_conceptDate}"/>
@@ -71,7 +72,7 @@
                         </h:outputText>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cashConceptController.prepareCreate}" update=":CashConceptCreateForm" oncomplete="PF('CashConceptCreateDialog').show()"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{cashConceptController.prepareCreate}" update=":CashConceptCreateForm" oncomplete="PF('CashConceptCreateDialog').show()" disabled="#{empty cashConceptController.cashFilter}"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CashConceptViewForm" oncomplete="PF('CashConceptViewDialog').show()" disabled="#{empty cashConceptController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{cashConceptController.prepareUpdate}" update=":CashConceptEditForm" oncomplete="PF('CashConceptEditDialog').show()" disabled="#{empty cashConceptController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{cashConceptController.destroy}" update=":growl,datalist" disabled="#{empty cashConceptController.selected}"/>

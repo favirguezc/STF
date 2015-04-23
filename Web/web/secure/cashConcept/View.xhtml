@@ -21,8 +21,8 @@
                         <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_description}"/>
                         <h:outputText value="#{cashConceptController.selected.description}" title="#{bundleCashConcept.ViewCashConceptTitle_description}"/>
                         <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_eos}"/>
-                        <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_income}" rendered="#{cashConceptController.selected.income}"/>
-                        <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_outcome}" rendered="#{!cashConceptController.selected.income}"/>
+                        <h:outputText value="#{bundleCashConcept.ViewCashConceptTitle_income}" rendered="#{cashConceptController.selected.income}"/>
+                        <h:outputText value="#{bundleCashConcept.ViewCashConceptTitle_outcome}" rendered="#{!cashConceptController.selected.income}"/>
                         <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_conceptValue}"/>
                         <h:outputText value="#{cashConceptController.selected.conceptValue}" title="#{bundleCashConcept.ViewCashConceptTitle_conceptValue}">
                             <f:convertNumber/>

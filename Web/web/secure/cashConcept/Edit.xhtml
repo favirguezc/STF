@@ -12,13 +12,7 @@
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2" rendered="#{cashConceptController.selected != null}">
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_cash}" for="cashE" />
-                        <p:selectOneMenu id="cashE" value="#{cashConceptController.selected.cash}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{cashController.itemsAvailableSelectOne}"
-                                           var="cashItem"
-                                           itemValue="#{cashItem}"
-                                           itemLabel="#{cashItem.nombre}"/>
-                        </p:selectOneMenu>
+                        <h:outputText id="cashE" value="#{cashConceptController.selected.cash.name}" title="#{bundleCashConcept.CreateCashConceptTitle_cash}"/>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_conceptDate}" for="conceptDate" />
                         <p:calendar id="conceptDate" pattern="dd/MM/yyyy" value="#{cashConceptController.selected.conceptDate}" title="#{bundleCashConcept.EditCashConceptTitle_conceptDate}" required="true" requiredMessage="#{CreateCashConceptRequiredMessage_conceptDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_description}" for="description" />

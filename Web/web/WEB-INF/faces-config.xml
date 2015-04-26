@@ -156,6 +156,16 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>CostItemEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.CostItemEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>CostTypeEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.CostTypeEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>PageEnumConverter</managed-bean-name>
         <managed-bean-class>controller.converters.PageEnumConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>

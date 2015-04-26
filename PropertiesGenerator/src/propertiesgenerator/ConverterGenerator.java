@@ -5,16 +5,7 @@
  */
 package propertiesgenerator;
 
-import model.administration.PageEnum;
-import model.administration.RHEnum;
-import model.administration.RoleEnum;
-import model.administration.SexEnum;
-import model.applications.ApplicationMethodEnum;
-import model.applications.ApplicationTypeEnum;
-import model.crop.ClassificationTypeEnum;
-import model.monitoring.RiskEnum;
-import model.monitoring.ValuationTypeEnum;
-import model.util.Action;
+import model.finances.cost.CostItemEnum;
 
 /**
  *
@@ -57,7 +48,7 @@ public class ConverterGenerator {
     }
 
     public static void main(String args[]) {
-        Class c = ValuationTypeEnum.class;
+        Class c = CostItemEnum.class;
         System.out.println("import javax.faces.component.UIComponent;\n"
                 + "import javax.faces.context.FacesContext;\n"
                 + "import javax.faces.convert.Converter;\n"

@@ -131,7 +131,7 @@ public class ChemicalPurchaseController implements Serializable{
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public void prepareUpdate(){
         price = getPriceJpaController().findPrice(selected.getChemical().getName());
     }

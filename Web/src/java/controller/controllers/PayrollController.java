@@ -1,9 +1,9 @@
 package controller.controllers;
 
-import model.finances.payroll.Payroll;
+import model.finances.expenses.Payroll;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import data.finances.payroll.PayrollDAO;
+import data.finances.expenses.PayrollDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;

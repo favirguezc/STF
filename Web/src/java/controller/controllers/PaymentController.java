@@ -1,13 +1,11 @@
 package controller.controllers;
 
-import model.finances.expenses.Cost;
 import controller.util.JsfUtil;
-import controller.util.JsfUtil.PersistAction;
-import data.finances.expenses.CostDAO;
+import model.finances.incomes.Payment;
+import data.finances.incomes.PaymentDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,30 +17,35 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import model.administration.ModuleClass;
-import model.finances.expenses.CostTypeEnum;
 
-@ManagedBean(name = "costController")
+@ManagedBean(name = "paymentController")
 @SessionScoped
-public class CostController implements Serializable {
+public class PaymentController implements Serializable {
 
-    private Cost selected;
-    private List<Cost> items = null;
-    private CostDAO jpaController = null;
+    private Payment selected;
+    private List<Payment> items = null;
+    private PaymentDAO jpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    public CostController() {
+    public PaymentController() {
     }
 
-    public Cost getSelected() {
+    public Payment getSelected() {
         return selected;
     }
 
-    public void setSelected(Cost selected) {
+    public void setSelected(Payment selected) {
         this.selected = selected;
+    }
+
+    private PaymentDAO getJpaController() {
+        if (jpaController == null) {
+            jpaController = new PaymentDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return jpaController;
     }
 
     public PermissionController getPermissionBean() {
@@ -67,48 +70,46 @@ public class CostController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
     
-    private CostDAO getJpaController() {
-        if (jpaController == null) {
-            jpaController = new CostDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+    public void prepareCreate() {
+        selected = new Payment();
+        if (signInBean.getFarm() != null) {
+            selected.setFarm(signInBean.getFarm());
+            initializeEmbeddableKey();
+        } else {
+            JsfUtil.addErrorMessage("Seleccione una finca");
+            selected = null;
         }
-        return jpaController;
-    }
-
-    public Cost prepareCreate() {
-        selected = new Cost();
-        initializeEmbeddableKey();
-        return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCost").getString("CostCreated"));
+        persist(JsfUtil.PersistAction.CREATE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCost").getString("CostUpdated"));
-        
+        persist(JsfUtil.PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCost").getString("CostDeleted"));
+        persist(JsfUtil.PersistAction.DELETE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
     
-    private void persist(PersistAction persistAction, String successMessage) {
+    private void persist(JsfUtil.PersistAction persistAction, String successMessage) {
         if (selected != null) {
-            if (!permissionBean.currentUserHasPermission(persistAction, selected.getClass())) {
+            setEmbeddableKeys();
+            if (!getPermissionBean().currentUserHasPermission(persistAction, selected.getClass())) {
                 return;
             }
             try {
-                if (persistAction == PersistAction.UPDATE) {
+                if (persistAction == JsfUtil.PersistAction.UPDATE) {
                     getJpaController().edit(selected);
-                } else if (persistAction == PersistAction.CREATE) {
+                } else if (persistAction == JsfUtil.PersistAction.CREATE) {
                     getJpaController().create(selected);
                 } else {
                     getJpaController().destroy(selected.getId());
@@ -121,49 +122,36 @@ public class CostController implements Serializable {
         }
     }
 
-    public List<Cost> getItems() {
+    public List<Payment> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findCostEntitiesForSelectedFarm(signInBean.getFarm());
+                items = getJpaController().findPaymentEntitiesForSelectedFarm(signInBean.getFarm());
             } else {
-                JsfUtil.addErrorMessage("Seleccione una Farm");
+                JsfUtil.addErrorMessage("Seleccione una finca");
             }
         }
         return items;
     }
 
-    public List<Cost> getItemsAvailableSelectMany() {
-        return getJpaController().findCostEntities();
+    public List<Payment> getItemsAvailableSelectMany() {
+        return getJpaController().findPaymentEntities();
     }
 
-    public List<Cost> getItemsAvailableSelectOne() {
-        return getJpaController().findCostEntities();
-    }
-    
-    public List<Cost> readList(ModuleClass moduleObject, CostTypeEnum type, Date start, Date end) {
-        return getJpaController().findCostEntities(moduleObject, type, start, end);
+    public List<Payment> getItemsAvailableSelectOne() {
+        return getJpaController().findPaymentEntities();
     }
 
-    public Cost sumRegistries(ModuleClass moduleObject, CostTypeEnum type, Date start, Date end) {
-        List<Cost> readList = readList(moduleObject, type, start, end);
-        Cost sum = new Cost();
-        for (Cost c : readList) {
-            //suma.sumar(c);
-        }
-        return sum;
-    }
-
-    @FacesConverter(forClass = Cost.class)
-    public static class CostControllerConverter implements Converter {
+    @FacesConverter(forClass = Payment.class)
+    public static class PaymentControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CostController controller = (CostController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "costController");
-            return controller.getJpaController().findCost(getKey(value));
+            PaymentController controller = (PaymentController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "paymentController");
+            return controller.getJpaController().findPayment(getKey(value));
         }
 
         long getKey(String value) {
@@ -183,11 +171,11 @@ public class CostController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Cost) {
-                Cost o = (Cost) object;
+            if (object instanceof Payment) {
+                Payment o = (Payment) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Cost.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Payment.class.getName());
             }
         }
 

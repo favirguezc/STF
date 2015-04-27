@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data.finances.purchase;
+package data.finances.expenses;
 
 import data.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.finances.purchase.ChemicalPurchase;
+import model.finances.expenses.ChemicalPurchase;
 import model.administration.Farm;
 
 /**

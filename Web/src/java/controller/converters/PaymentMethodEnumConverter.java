@@ -9,33 +9,30 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import model.finances.expenses.CostTypeEnum;
+import model.finances.incomes.PaymentMethodEnum;
 
 /**
  *
  * @author John Fredy
  */
-@FacesConverter(forClass = CostTypeEnum.class)
-public class CostTypeEnumConverter implements Converter {
+@FacesConverter(forClass = PaymentMethodEnum.class)
+public class PaymentMethodEnumConverter implements Converter {
 
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null) {
             return null;
         }
-        if (value.equals("Horas Maquina")) {
-            return CostTypeEnum.MACHINETIME;
+        if (value.equals("Efectivo")) {
+            return PaymentMethodEnum.CASH;
         }
-        if (value.equals("Mano de Obra")) {
-            return CostTypeEnum.MANPOWER;
+        if (value.equals("Consignación")) {
+            return PaymentMethodEnum.CONSIGNMENT;
         }
-        if (value.equals("Insumos")) {
-            return CostTypeEnum.CHEMICALS;
+        if (value.equals("Crédito")) {
+            return PaymentMethodEnum.CREDIT;
         }
-        if (value.equals("Equipos e Implementos")) {
-            return CostTypeEnum.TOOLS;
-        }
-        if (value.equals("Servicios")) {
-            return CostTypeEnum.SERVICES;
+        if (value.equals("Débito")) {
+            return PaymentMethodEnum.DEBIT;
         }
         return null;
     }
@@ -44,7 +41,7 @@ public class CostTypeEnumConverter implements Converter {
         if (value == null) {
             return null;
         }
-        if (value instanceof CostTypeEnum) {
+        if (value instanceof PaymentMethodEnum) {
             return value + "";
         } else {
             return null;

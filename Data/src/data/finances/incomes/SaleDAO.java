@@ -3,45 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data.finances.payroll;
+package data.finances.incomes;
 
-import java.io.Serializable;
+import data.exceptions.NonexistentEntityException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import data.exceptions.NonexistentEntityException;
-import java.util.Date;
+import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
-import model.finances.payroll.Payroll;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import model.finances.incomes.Sale;
 import model.administration.Farm;
 import model.administration.Person;
 
 /**
  *
- * @author John Fredy
+ * @author JohnFredy
  */
-public class PayrollDAO implements Serializable {
-
-    public PayrollDAO(EntityManagerFactory emf) {
+public class SaleDAO {
+    
+    private EntityManagerFactory emf = null;
+    
+    public SaleDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
-
+   
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
-    public void create(Payroll payroll) {
+    
+    public void create(Sale sale) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(payroll);
+            em.persist(sale);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,20 +49,20 @@ public class PayrollDAO implements Serializable {
             }
         }
     }
-
-    public void edit(Payroll payroll) throws NonexistentEntityException, Exception {
+    
+    public void edit(Sale sale) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            payroll = em.merge(payroll);
+            sale = em.merge(sale);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = payroll.getId();
-                if (findPayroll(id) == null) {
-                    throw new NonexistentEntityException("The payroll with id " + id + " no longer exists.");
+                long id = sale.getId();
+                if (findSale(id) == null) {
+                    throw new NonexistentEntityException("The sale with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -72,20 +72,20 @@ public class PayrollDAO implements Serializable {
             }
         }
     }
-
+    
     public void destroy(long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Payroll payroll;
+            Sale sale;
             try {
-                payroll = em.getReference(Payroll.class, id);
-                payroll.getId();
+                sale = em.getReference(Sale.class, id);
+                sale.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The payroll with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The sale with id " + id + " no longer exists.", enfe);
             }
-            em.remove(payroll);
+            em.remove(sale);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -93,22 +93,22 @@ public class PayrollDAO implements Serializable {
             }
         }
     }
-
-    public List<Payroll> findPayrollEntities() {
-        return findPayrollEntities(true, -1, -1);
+    
+    public List<Sale> findSaleEntities() {
+        return findSaleEntities(true, -1, -1);
     }
 
-    public List<Payroll> findPayrollEntities(int maxResults, int firstResult) {
-        return findPayrollEntities(false, maxResults, firstResult);
+    public List<Sale> findSaleEntities(int maxResults, int firstResult) {
+        return findSaleEntities(false, maxResults, firstResult);
     }
-
-    private List<Payroll> findPayrollEntities(boolean all, int maxResults, int firstResult) {
+    
+    private List<Sale> findSaleEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Payroll.class));
+            cq.select(cq.from(Sale.class));
+            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Sale.class).get("saleDate")));
             Query q = em.createQuery(cq);
-            cq.orderBy(em.getCriteriaBuilder().asc(cq.from(Payroll.class).get("dateUntil")));
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -118,21 +118,21 @@ public class PayrollDAO implements Serializable {
             em.close();
         }
     }
-
-    public Payroll findPayroll(long id) {
+    
+    public Sale findSale(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Payroll.class, id);
+            return em.find(Sale.class, id);
         } finally {
             em.close();
         }
     }
-
-    public int getPayrollCount() {
+    
+    public int getSaleCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Payroll> rt = cq.from(Payroll.class);
+            Root<Sale> rt = cq.from(Sale.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -141,26 +141,34 @@ public class PayrollDAO implements Serializable {
         }
     }
     
-    public List<Payroll> findPayrollEntities(Farm farm, Person worker, Date start, Date end) {
+    public List<Sale> findSaleEntities(Person customer, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c;
         a = b = c = false;
-        String queryString = "SELECT p FROM Payroll p WHERE p.farm = :farm";
-        if (worker != null) {
-            queryString += "AND p.worker = :worker";
+        String queryString = "SELECT s FROM Sale s";
+        if (customer != null || start != null || end != null) {
+            queryString += " WHERE";
+        }
+        if (customer != null) {
+            queryString += " s.customer = :customer";
             a = true;
         }
         if (end != null) {
-            queryString += " AND p.dateUntil BETWEEN :date1 AND :date2";
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " s.saleDate BETWEEN :date1 AND :date2";
             b = c = true;
         } else if (start != null) {
-            queryString += " AND p.dateUntil = :date1";
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " s.saleDate = :date1";
             b = true;
         }
-        queryString += " ORDER BY p.dateUntil ASC";
+        queryString += " ORDER BY s.saleDate ASC";
         try {
-            TypedQuery<Payroll> query = em.createQuery(queryString, Payroll.class);
-            query.setParameter("farm", farm);
+            TypedQuery<Sale> query = em.createQuery(queryString, Sale.class);
             if (b) {
                 query.setParameter("date1", start, TemporalType.DATE);
             }
@@ -168,7 +176,7 @@ public class PayrollDAO implements Serializable {
                 query.setParameter("date2", end, TemporalType.DATE);
             }
             if (a) {
-                query.setParameter("worker", worker);
+                query.setParameter("customer", customer);
             }
             return query.getResultList();
         } finally {
@@ -176,10 +184,10 @@ public class PayrollDAO implements Serializable {
         }
     }
     
-    public List<Payroll> findPayrollEntitiesForSelectedFarm(Farm farm) {
+    public List<Sale> findSaleEntitiesForSelectedFarm(Farm farm) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Payroll> query = em.createQuery("SELECT p FROM Payroll p WHERE p.farm = :farm  ORDER BY p.dateUntil ASC", Payroll.class);
+            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm  ORDER BY s.saleDate ASC", Sale.class);
             query.setParameter("farm", farm);
             return query.getResultList();
         } finally {

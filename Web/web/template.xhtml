@@ -107,8 +107,11 @@
                             <p:menuitem value="Clasificación" outcome="/secure/classification/List.xhtml"/>
                             <p:menuitem value="Variedad" outcome="/secure/variety/List.xhtml"/>
                         </p:submenu>                        
-                        <p:menuitem value="#{bundle.Sales}" outcome="/secure/sale/List.xhtml"/>
-                        <p:submenu label="#{bundle.Outcomes}">
+                        <p:submenu label="#{bundle.Incomes}">
+                            <p:menuitem value="Ventas" outcome="/secure/sale/List.xhtml"/>
+                            <p:menuitem value="Pagos de Clientes" outcome="/secure/payment/List.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Expenses}">
                             <p:menuitem value="Compra de Insumos" outcome="/secure/chemicalPurchase/List.xhtml"/>
                             <p:menuitem value="Costos" outcome="/secure/cost/List.xhtml"/>
                             <p:menuitem value="Nomina" outcome="/secure/payroll/List.xhtml"/>

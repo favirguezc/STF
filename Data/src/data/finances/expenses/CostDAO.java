@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data.finances.cost;
+package data.finances.expenses;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,8 +18,8 @@ import data.exceptions.PreexistingEntityException;
 import java.util.Date;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
-import model.finances.cost.Cost;
-import model.finances.cost.CostTypeEnum;
+import model.finances.expenses.Cost;
+import model.finances.expenses.CostTypeEnum;
 import model.administration.Farm;
 import model.administration.ModuleClass;
 

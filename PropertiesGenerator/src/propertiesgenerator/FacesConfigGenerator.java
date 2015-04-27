@@ -5,8 +5,8 @@
  */
 package propertiesgenerator;
 
-import model.finances.cost.CostItemEnum;
-import model.finances.cost.CostTypeEnum;
+import model.finances.incomes.BankEnum;
+import model.finances.incomes.PaymentMethodEnum;
 
 /**
  *
@@ -16,8 +16,8 @@ public class FacesConfigGenerator {
 
     public static void main(String[] args) {
         Class[] cs = {
-            CostItemEnum.class,
-            CostTypeEnum.class};
+            PaymentMethodEnum.class,
+            BankEnum.class};
         for (Class c : cs) {
             System.out.println("<managed-bean>\n"
                     + "        <managed-bean-name>" + c.getSimpleName() + "Converter</managed-bean-name>\n"

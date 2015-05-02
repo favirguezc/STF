@@ -180,12 +180,13 @@ public class CashConceptDAO implements Serializable{
         }
     }
     
-    public List<CashConcept> findCashConceptEntitiesForSelectedFarm(Farm selectedFarm) {
+    public List<CashConcept> findCashConceptEntitiesForSelectedFarm(Farm selectedFarm,Cash cash) {
         EntityManager em = getEntityManager();
-        String queryString ="SELECT cc FROM CashConcept cc WHERE cc.cash.farm = :farm ORDER BY cc.conceptDate ASC";
+        String queryString ="SELECT cc FROM CashConcept cc WHERE cc.cash = :cash AND cc.cash.farm = :farm ORDER BY cc.conceptDate ASC";
         try {
             TypedQuery<CashConcept> query = em.createQuery(queryString, CashConcept.class);
             query.setParameter("farm", selectedFarm);
+            query.setParameter("cash", cash);
             return query.getResultList();
         } finally {
             em.close();

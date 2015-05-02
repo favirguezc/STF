@@ -11,7 +11,7 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import data.finances.purchase.ChemicalPurchaseDAO;
+import data.finances.expenses.ChemicalPurchaseDAO;
 import data.finances.PriceDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
@@ -24,7 +24,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.convert.FacesConverter;
 import model.finances.Price;
-import model.finances.purchase.ChemicalPurchase;
+import model.finances.expenses.ChemicalPurchase;
 import model.administration.Farm;
 
 /**
@@ -131,7 +131,7 @@ public class ChemicalPurchaseController implements Serializable{
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public void prepareUpdate(){
         price = getPriceJpaController().findPrice(selected.getChemical().getName());
     }

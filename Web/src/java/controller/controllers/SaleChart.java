@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import model.finances.sales.Sale;
+import model.finances.incomes.Sale;
 import model.administration.Person;
 import model.util.DateTools;
 import org.primefaces.model.chart.Axis;

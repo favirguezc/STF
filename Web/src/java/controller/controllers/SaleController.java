@@ -8,7 +8,7 @@ package controller.controllers;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import data.finances.PriceDAO;
-import data.finances.sales.SaleDAO;
+import data.finances.incomes.SaleDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.finances.Price;
-import model.finances.sales.Sale;
+import model.finances.incomes.Sale;
 import model.administration.Person;
 
 /**

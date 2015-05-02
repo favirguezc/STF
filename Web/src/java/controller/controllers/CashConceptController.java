@@ -36,6 +36,8 @@ public class CashConceptController implements Serializable {
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
+    @ManagedProperty(value = "#{cashController}")
+    private CashController cashController;
 
     public CashConceptController() {
     }
@@ -64,6 +66,14 @@ public class CashConceptController implements Serializable {
         this.signInBean = signInBean;
     }
 
+    public CashController getCashController() {
+        return cashController;
+    }
+
+    public void setCashController(CashController cashController) {
+        this.cashController = cashController;
+    }
+    
     public List<SelectItem> getIncomeItems() {
         if(incomeItems == null){
             incomeItems = new ArrayList<SelectItem>();
@@ -84,11 +94,19 @@ public class CashConceptController implements Serializable {
     }
 
     public Cash getCashFilter() {
+        if(cashFilter == null){
+            if(cashController.getItemsAvailableSelectOne() != null 
+               && !cashController.getItemsAvailableSelectOne().isEmpty()){
+                cashFilter = cashController.getItemsAvailableSelectOne().get(0);
+            }
+        }
         return cashFilter;
     }
 
     public void setCashFilter(Cash cashFilter) {
         this.cashFilter = cashFilter;
+        items = null;
+        selected = null;
     }
     
     protected void setEmbeddableKeys() {
@@ -107,6 +125,7 @@ public class CashConceptController implements Serializable {
     public CashConcept prepareCreate() {
         selected = new CashConcept();
         initializeEmbeddableKey();
+        selected.setCash(cashFilter);
         return selected;
     }
 
@@ -163,8 +182,12 @@ public class CashConceptController implements Serializable {
     public List<CashConcept> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
-                items = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm());
-                calculateBalance();
+                if(cashFilter != null){
+                    items = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm(),cashFilter);
+                    calculateBalance();
+                }else{
+                    JsfUtil.addErrorMessage("Primero cree una caja");
+                }
             } else {
                 JsfUtil.addErrorMessage("Seleccione una finca");
             }

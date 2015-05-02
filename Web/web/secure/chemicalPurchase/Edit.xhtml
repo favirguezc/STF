@@ -23,7 +23,9 @@
                             <p:ajax update="priceCoE" listener="#{chemicalPurchaseController.verifyPrice}"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="priceCoE" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_price}"/>
-                        <p:inputText id="priceCoE" value="#{chemicalPurchaseController.selected.price}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_price}"/>
+                        <p:inputText id="priceCoE" value="#{chemicalPurchaseController.selected.price}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_price}">
+                            <p:ajax listener="#{chemicalPurchaseController.verifyPrice}"/>
+                        </p:inputText>
                         <p:outputLabel for="quantityCoE" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_quantity}"/>
                         <p:inputText id="quantityCoE" value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_quantity}" required="true" requiredMessage="#{bundleChemicalPurchase.EditChemicalPurchaseRequiredMessage_quantity}" />
                     </p:panelGrid>

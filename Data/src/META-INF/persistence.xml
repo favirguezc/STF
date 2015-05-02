@@ -30,10 +30,11 @@
     <class>model.finances.Price</class>
     <class>model.finances.cash.Cash</class>
     <class>model.finances.cash.CashConcept</class>
-    <class>model.finances.cost.Cost</class>
-    <class>model.finances.payroll.Payroll</class>
-    <class>model.finances.purchase.ChemicalPurchase</class>
-    <class>model.finances.sales.Sale</class>
+    <class>model.finances.expenses.ChemicalPurchase</class>
+    <class>model.finances.expenses.Cost</class>
+    <class>model.finances.expenses.Payroll</class>
+    <class>model.finances.incomes.Payment</class>
+    <class>model.finances.incomes.Sale</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

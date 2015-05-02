@@ -10,9 +10,9 @@
         <p:dialog id="CashViewDlg" widgetVar="CashViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCash.ViewCashTitle}">
             <h:form id="CashViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{cashController.selected != null}">
                         <h:outputText value="#{bundleCash.ViewCashLabel_name}"/>
-                        <h:outputText value="#{cajaController.selected.name}" title="#{bundleCash.ViewCashTitle_name}"/>
+                        <h:outputText value="#{cashController.selected.name}" title="#{bundleCash.ViewCashTitle_name}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CashViewDialog.hide()"/>
                 </h:panelGroup>

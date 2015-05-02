@@ -84,7 +84,7 @@ public class CashController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCash").getString("CashUpdated"));
     }

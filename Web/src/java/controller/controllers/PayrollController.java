@@ -1,9 +1,9 @@
 package controller.controllers;
 
-import model.finances.payroll.Payroll;
+import model.finances.expenses.Payroll;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import data.finances.payroll.PayrollDAO;
+import data.finances.expenses.PayrollDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
@@ -40,7 +40,7 @@ public class PayrollController implements Serializable {
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{cropCotroller}")
-    private CropController cropCotroller;
+    private CropController cropController;
     @ManagedProperty(value = "#{workController}")
     private WorkController workController;
     @ManagedProperty(value = "#{jobController}")
@@ -73,15 +73,25 @@ public class PayrollController implements Serializable {
         this.signInBean = signInBean;
     }
 
-    public CropController getCropCotroller() {
-        return cropCotroller;
+    public CropController getCropController() {
+        if (cropController == null){
+            FacesContext context = FacesContext.getCurrentInstance();
+            cropController = (CropController) context.getApplication().
+                        getELResolver().getValue(context.getELContext(), null, "cropController");
+        }
+        return cropController;
     }
 
-    public void setCropCotroller(CropController cropCotroller) {
-        this.cropCotroller = cropCotroller;
+    public void setCropController(CropController cropController) {
+        this.cropController = cropController;
     }
 
     public WorkController getWorkController() {
+        if (workController == null){
+            FacesContext context = FacesContext.getCurrentInstance();
+            workController = (WorkController) context.getApplication().
+                        getELResolver().getValue(context.getELContext(), null, "workController");
+        }
         return workController;
     }
 
@@ -90,6 +100,11 @@ public class PayrollController implements Serializable {
     }
 
     public JobController getJobController() {
+        if (jobController == null){
+            FacesContext context = FacesContext.getCurrentInstance();
+            jobController = (JobController) context.getApplication().
+                        getELResolver().getValue(context.getELContext(), null, "jobController");
+        }
         return jobController;
     }
 
@@ -222,7 +237,7 @@ public class PayrollController implements Serializable {
     public float getCroppedValue() {
         float croppedValue = 0;
         if (selected != null) {
-            Crop totalCropped = cropCotroller.sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
+            Crop totalCropped = getCropController().sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
             croppedValue = (totalCropped.getWeight() / 500) * 125;
         }
         return croppedValue;
@@ -233,8 +248,8 @@ public class PayrollController implements Serializable {
         List<Job> jobs = null;
         if (selected != null) {
             jobs = new ArrayList<Job>();
-            List<Work> doneWorks = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
-            for (Job job : jobController.getItemsAvailableSelectOne()) {
+            List<Work> doneWorks = getWorkController().leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
+            for (Job job : getJobController().getItemsAvailableSelectOne()) {
                 float workValue = 0;
                 for (Work work : doneWorks) {
                     if (work.getJob().equals(job)) {
@@ -258,8 +273,8 @@ public class PayrollController implements Serializable {
         float croppedValue = getCroppedValue();
         //Works done
         float worksValue = 0;
-        List<Work> doneWorks = workController.leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
-        for (Job job : jobController.getItemsAvailableSelectOne()) {
+        List<Work> doneWorks = getWorkController().leerLista(selected.getWorker(), selected.getDateFrom(), selected.getDateUntil());
+        for (Job job : getJobController().getItemsAvailableSelectOne()) {
             for (Work work : doneWorks) {
                 if (work.getJob().equals(job)) {
                     worksValue += job.getHourlyRate() * work.getHoursSpent();

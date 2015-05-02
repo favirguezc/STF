@@ -15,8 +15,10 @@ import model.applications.ApplicationMethodEnum;
 import model.applications.ApplicationMeasurementUnitEnum;
 import model.applications.ApplicationTypeEnum;
 import model.crop.ClassificationTypeEnum;
-import model.finances.cost.CostItemEnum;
-import model.finances.cost.CostTypeEnum;
+import model.finances.expenses.CostItemEnum;
+import model.finances.expenses.CostTypeEnum;
+import model.finances.incomes.BankEnum;
+import model.finances.incomes.PaymentMethodEnum;
 import model.monitoring.RiskEnum;
 import model.monitoring.ValuationTypeEnum;
 import model.util.Action;
@@ -82,5 +84,13 @@ public class EnumController {
     
     public CostTypeEnum[] getCostTypeValues(){
         return CostTypeEnum.values();
+    }
+    
+    public PaymentMethodEnum[] getPaymentMethodValues(){
+        return PaymentMethodEnum.values();
+    }
+    
+    public BankEnum[] getBankValues(){
+        return BankEnum.values();
     }
 }

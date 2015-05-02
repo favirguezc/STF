@@ -124,6 +124,10 @@
             <base-name>/BundleSale</base-name>
             <var>bundleSale</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePayment</base-name>
+            <var>bundlePayment</var>
+        </resource-bundle>
     </application>
     <managed-bean>
         <managed-bean-name>ActionConverter</managed-bean-name>
@@ -146,6 +150,11 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>BankEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.BankEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>BooleanConverter</managed-bean-name>
         <managed-bean-class>controller.converters.BooleanConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
@@ -156,8 +165,23 @@
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>CostItemEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.CostItemEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>CostTypeEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.CostTypeEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>PageEnumConverter</managed-bean-name>
         <managed-bean-class>controller.converters.PageEnumConverter</managed-bean-class>        
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>PaymentMethodEnumConverter</managed-bean-name>
+        <managed-bean-class>controller.converters.PaymentMethodEnumConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <managed-bean>
@@ -184,5 +208,5 @@
         <managed-bean-name>ValuationTypeEnumConverter</managed-bean-name>
         <managed-bean-class>controller.converters.ValuationTypeEnumConverter</managed-bean-class>        
         <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>    
+    </managed-bean>
 </faces-config>

@@ -35,11 +35,11 @@
                                            itemValue="#{parameterItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Relación" for="valor1"/>
-                        <p:inputText id="valor1" value="#{parameterMonitoringController.selected.monitoringValue.relation}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor1" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Conteo" for="valor2" />
-                        <p:inputText id="valor2" value="#{parameterMonitoringController.selected.monitoringValue.count}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor2" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Riesgo" for="valor3"/>
-                        <p:selectOneMenu id="valor3" value="#{parameterMonitoringController.selected.monitoringValue.count}">
+                        <p:selectOneMenu id="valor3" value="#{parameterMonitoringController.selected.monitoringValue}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{enumController.riskValues}"/>                            
                         </p:selectOneMenu>

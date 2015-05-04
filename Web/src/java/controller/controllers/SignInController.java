@@ -12,6 +12,7 @@ import data.administration.PersonDAO;
 import data.util.EntityManagerFactorySingleton;
 import data.util.LoginDAO;
 import java.io.Serializable;
+import java.util.Enumeration;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -146,6 +147,7 @@ public class SignInController implements Serializable {
         farm = null;
         role = null;
         buttonMessage = "Seleccionar Farm";
+        deleteControllers();
         return goToSignIn();
     }
 
@@ -153,6 +155,7 @@ public class SignInController implements Serializable {
         step3rolSelected = false;
         role = null;
         buttonMessage = "Seleccionar Rol";
+        deleteControllers();
         return goToSignIn();
     }
 
@@ -220,6 +223,17 @@ public class SignInController implements Serializable {
         buttonMessage = "Iniciar Sesión";
         System.out.println("Sesion anulada");
         return "/faces/signIn.xhtml";
+    }
+
+    private void deleteControllers() {
+
+        Enumeration attributeNames = JsfUtil.getSession().getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String attrib = attributeNames.nextElement().toString().toLowerCase();
+            if (attrib.contains("controller") && !attrib.contains("sign")) {
+                JsfUtil.getSession().removeAttribute(attrib);
+            }
+        }
     }
 
 }

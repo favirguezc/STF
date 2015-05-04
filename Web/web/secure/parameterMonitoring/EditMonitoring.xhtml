@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MonitoringEditDlg" widgetVar="MonitoringEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMonitoring.EditMonitoringTitle}">
+            <h:form id="MonitoringEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{monitoringController.selected != null}">
+                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_number}" for="number" />
+                        <p:inputText id="number" value="#{monitoringController.selected.number}" title="#{bundleMonitoring.EditMonitoringTitle_number}" />
+                        <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_monitoringDate}" for="monitoringDate" />
+                        <p:calendar id="monitoringDate" pattern="dd/MM/yyyy" value="#{monitoringController.selected.monitoringDate}" title="#{bundleMonitoring.EditMonitoringTitle_monitoringDate}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_monitoringDate}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MonitoringEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

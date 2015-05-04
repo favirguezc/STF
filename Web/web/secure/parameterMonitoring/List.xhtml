@@ -14,54 +14,100 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ParameterMonitoringListForm">
-                <p:dataTable id="datalist" value="#{parameterMonitoringController.items}" var="item"
-                             selectionMode="single" selection="#{parameterMonitoringController.selected}"
-                             paginator="true"
-                             rowKey="#{item.id}"
-                             rows="10"
-                             rowsPerPageTemplate="10,20,30,40,50"
-                             >
+            <p:layout>
+                <p:layoutUnit position="center" header="Monitoreo de Variables">
+                    <p:panel style="border: 0px;">
+                        <h:form id="ParameterMonitoringListForm">
+                            <p:dataTable id="datalist" value="#{parameterMonitoringController.items}" var="item"
+                                         selectionMode="single" selection="#{parameterMonitoringController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_monitoring}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.monitoring.number}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_cultivation}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}, #{item.cultivation.variety.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_parameter}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.parameter.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_monitoringValue}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.monitoringValue}"/>
-                    </p:column>
-                    <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{parameterMonitoringController.prepareCreate}" update=":ParameterMonitoringCreateForm" oncomplete="PF('ParameterMonitoringCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParameterMonitoringViewForm" oncomplete="PF('ParameterMonitoringViewDialog').show()" disabled="#{empty parameterMonitoringController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParameterMonitoringEditForm" oncomplete="PF('ParameterMonitoringEditDialog').show()" disabled="#{empty parameterMonitoringController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{parameterMonitoringController.destroy}" update=":growl,datalist" disabled="#{empty parameterMonitoringController.selected}"/>
-                    </f:facet>
-                </p:dataTable>
-            </h:form>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_monitoring}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.monitoring.number}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_cultivation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}, #{item.cultivation.variety.name}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_parameter}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.parameter.name}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleParameterMonitoring.ListParameterMonitoringTitle_monitoringValue}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.monitoringValue}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{parameterMonitoringController.prepareCreate}" update=":ParameterMonitoringCreateForm" oncomplete="PF('ParameterMonitoringCreateDialog').show()"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParameterMonitoringViewForm" oncomplete="PF('ParameterMonitoringViewDialog').show()" disabled="#{empty parameterMonitoringController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParameterMonitoringEditForm" oncomplete="PF('ParameterMonitoringEditDialog').show()" disabled="#{empty parameterMonitoringController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{parameterMonitoringController.destroy}" update=":growl,datalist" disabled="#{empty parameterMonitoringController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="400" header="Monitoreo">
+                    <p:panel style="border: 0px;">
+                        <h:form id="MonitoringListForm">
+                            <p:dataTable id="datalist" value="#{monitoringController.items}" var="item"
+                                         selectionMode="single" selection="#{monitoringController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"                                        
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_number}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.number}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleMonitoring.ListMonitoringTitle_monitoringDate}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.monitoringDate}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoringController.prepareCreate}" update=":MonitoringCreateForm" oncomplete="PF('MonitoringCreateDialog').show()"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoringViewForm" oncomplete="PF('MonitoringViewDialog').show()" disabled="#{empty monitoringController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitoringEditForm" oncomplete="PF('MonitoringEditDialog').show()" disabled="#{empty monitoringController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitoringController.destroy}" update=":growl,datalist" disabled="#{empty monitoringController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                </p:layoutUnit>
+            </p:layout>
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
+            <ui:include src="CreateMonitoring.xhtml"/>
+            <ui:include src="EditMonitoring.xhtml"/>
+            <ui:include src="ViewMonitoring.xhtml"/>
         </ui:define>
     </ui:composition>
 

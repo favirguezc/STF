@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                 </table>
-                <h:form>
+                <h:form>                    
                     <p:menubar rendered="#{signInController.step1userSignedIn}">
                         <p:menuitem value="#{bundle.Home}" outcome="/secure/index.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Management}">
@@ -91,7 +91,7 @@
                             <p:menuitem value="Labor" outcome="/secure/job/List.xhtml"/>
                         </p:submenu>
                         <p:submenu label="#{bundle.Monitoring}">
-                            <p:menuitem value="Monitoreo" outcome="/secure/monitoring/List.xhtml"/>
+                            <p:menuitem value="Monitoreo" outcome="/secure/monitoring/List.xhtml" rendered="false"/>
                             <p:menuitem value="Moniteo de Variables" outcome="/secure/parameterMonitoring/List.xhtml"/>
                             <p:menuitem value="Parámetro Monitoreable" outcome="/secure/monitorableParameter/List.xhtml"/>
                             <p:menuitem value="Trampa de Insectos" outcome="/secure/insectTrap/List.xhtml"/>

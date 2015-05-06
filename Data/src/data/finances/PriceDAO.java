@@ -6,6 +6,7 @@
 package data.finances;
 
 import data.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,7 +21,7 @@ import model.finances.Price;
  *
  * @author John Fredy
  */
-public class PriceDAO {
+public class PriceDAO implements Serializable {
     
     public PriceDAO(EntityManagerFactory emf) {
         this.emf = emf;

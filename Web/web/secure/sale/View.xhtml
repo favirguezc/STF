@@ -20,79 +20,91 @@
                     <h:outputText value="Cliente:"/>
                     <h:outputText value="#{saleController.selected.customer.name} #{saleController.selected.customer.lastName}" title="Cliente"/>
                     <h:outputText value="Cantidad Type Extra:"/>
-                    <h:outputText value="#{saleController.selected.extraGrams}" title="Cantidad Type Extra">
+                    <h:outputText value="#{saleController.extraTypeSaleItem.quantity}" title="Cantidad Type Extra">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Primera:"/>
-                    <h:outputText value="#{saleController.selected.firstGrams}" title="Cantidad Type Primera">
+                    <h:outputText value="#{saleController.oneTypeSaleItem.quantity}" title="Cantidad Type Primera">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Segunda:"/>
-                    <h:outputText value="#{saleController.selected.secondGrams}" title="Cantidad Type Segunda">
+                    <h:outputText value="#{saleController.twoTypeSaleItem.quantity}" title="Cantidad Type Segunda">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Tercera:"/>
-                    <h:outputText value="#{saleController.selected.thirdGrams}" title="Cantidad Type Tercera">
+                    <h:outputText value="#{saleController.threeTypeSaleItem.quantity}" title="Cantidad Type Tercera">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Cuarta:"/>
-                    <h:outputText value="#{saleController.selected.fourthGrams}" title="Cantidad Type Cuarta">
+                    <h:outputText value="#{saleController.fourTypeSaleItem.quantity}" title="Cantidad Type Cuarta">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cantidad Type Quinta:"/>
-                    <h:outputText value="#{saleController.selected.fifthGrams}" title="Cantidad Type Quinta">
+                    <h:outputText value="#{saleController.fiveTypeSaleItem.quantity}" title="Cantidad Type Quinta">
+                        <f:convertNumber/>
+                    </h:outputText>
+                    <h:outputText value="Cantidad Type Muñeco:"/>
+                    <h:outputText value="#{saleController.dummieTypeSaleItem.quantity}" title="Cantidad Type Muñeco">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Extra Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.extraUnitPrice}" title="Extra Precio Unidad">
+                    <h:outputText value="#{saleController.extraTypeSaleItem.unitValue}" title="Extra Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Primera Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.firstUnitPrice}" title="Primera Precio Unidad">
+                    <h:outputText value="#{saleController.oneTypeSaleItem.unitValue}" title="Primera Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Segunda Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.secondUnitPrice}" title="Segunda Precio Unidad">
+                    <h:outputText value="#{saleController.twoTypeSaleItem.unitValue}" title="Segunda Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Tercera Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.thirdUnitPrice}" title="Tercera Precio Unidad">
+                    <h:outputText value="#{saleController.threeTypeSaleItem.unitValue}" title="Tercera Precio Unidad">
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cuarta Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.fourthUnitPrice}" title="Cuarta Precio Unidad" >
+                    <h:outputText value="#{saleController.fourTypeSaleItem.unitValue}" title="Cuarta Precio Unidad" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Quinta Precio Unidad:"/>
-                    <h:outputText value="#{saleController.selected.fifthUnitPrice}" title="Quinta Precio Unidad" >
+                    <h:outputText value="#{saleController.fiveTypeSaleItem.unitValue}" title="Quinta Precio Unidad" >
+                        <f:convertNumber/>
+                    </h:outputText>
+                    <h:outputText value="Muñeco Precio Unidad:"/>
+                    <h:outputText value="#{saleController.dummieTypeSaleItem.unitValue}" title="Muñeco Precio Unidad" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Extra Precio Total:"/>
-                    <h:outputText value="#{saleController.selected.extraTotalPrice}" title="Extra Precio Total" >
+                    <h:outputText value="#{saleController.extraTypeSaleItem.totalValue}" title="Extra Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Primera Precio Total:"/>
-                    <h:outputText value="#{saleController.selected.firstTotalPrice}" title="Primera Precio Total" >
+                    <h:outputText value="#{saleController.oneTypeSaleItem.totalValue}" title="Primera Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Segunda Precio Total:"/>
-                    <h:outputText value="#{saleController.selected.segundaPrecioTotal}" title="Segunda Precio Total" >
+                    <h:outputText value="#{saleController.twoTypeSaleItem.totalValue}" title="Segunda Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Tercera Precio Total:"/>
-                    <h:outputText value="#{saleController.selected.thirdTotalPrice}" title="Tercera Precio Total" >
+                    <h:outputText value="#{saleController.threeTypeSaleItem.totalValue}" title="Tercera Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Cuarta Precioc Total:"/>
-                    <h:outputText value="#{saleController.selected.fourthTotalPrice}" title="Cuarta Precio Total" >
+                    <h:outputText value="#{saleController.fourTypeSaleItem.totalValue}" title="Cuarta Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Quinta Precio Total:"/>
-                    <h:outputText value="#{saleController.selected.fifthTotalPrice}" title="Quinta Precio Total" >
+                    <h:outputText value="#{saleController.fiveTypeSaleItem.totalValue}" title="Quinta Precio Total" >
+                        <f:convertNumber/>
+                    </h:outputText>
+                    <h:outputText value="Muñeco Precio Total:"/>
+                    <h:outputText value="#{saleController.fiveTypeSaleItem.totalValue}" title="Mueñeco Precio Total" >
                         <f:convertNumber/>
                     </h:outputText>
                     <h:outputText value="Sale Total:"/>
-                    <h:outputText value="#{saleController.selected.saleTotal}" title="Sale Total" >
+                    <h:outputText value="#{saleController.selected.saleTotalValue}" title="Sale Total" >
                         <f:convertNumber/>
                     </h:outputText>
                 </h:panelGrid>

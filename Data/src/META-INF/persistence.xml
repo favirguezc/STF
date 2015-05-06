@@ -35,6 +35,7 @@
     <class>model.finances.expenses.Payroll</class>
     <class>model.finances.incomes.Payment</class>
     <class>model.finances.incomes.Sale</class>
+    <class>model.finances.incomes.SaleItem</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

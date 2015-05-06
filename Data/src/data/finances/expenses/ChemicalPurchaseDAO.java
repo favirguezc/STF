@@ -6,6 +6,7 @@
 package data.finances.expenses;
 
 import data.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import model.administration.Farm;
  *
  * @author John Fredy
  */
-public class ChemicalPurchaseDAO {
+public class ChemicalPurchaseDAO implements Serializable {
     
     public ChemicalPurchaseDAO(EntityManagerFactory emf) {
         this.emf = emf;

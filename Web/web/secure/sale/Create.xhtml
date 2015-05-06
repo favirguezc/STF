@@ -20,47 +20,81 @@
                                            itemValue="#{customerItem}"
                                            itemLabel="#{customerItem.name} #{customerItem.lastName}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel for="extraGrams" value="Cantidad Type Extra**:"/>
-                        <p:inputText id="extraGrams" value="#{saleController.selected.extraGrams}" title="Cantidad Type Extra">
-                            <p:ajax update="extraUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.extraType}">
+                                <p:ajax update="extraGrams extraUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="extraGrams" value=" Cantidad Tipo Extra**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="extraGrams" value="#{saleController.extraTypeSaleItem.quantity}" title="Cantidad Tipo Extra" disabled="#{!saleController.extraType}">
                         </p:inputText>
-                        <p:outputLabel for="firstGrams" value="Cantidad Type Primera**:"/>
-                        <p:inputText id="firstGrams" value="#{saleController.selected.firstGrams}" title="Cantidad Type Primera" >
-                            <p:ajax update="firstUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.oneType}">
+                                <p:ajax update="firstGrams firstUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="firstGrams" value=" Cantidad Tipo Primera**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="firstGrams" value="#{saleController.oneTypeSaleItem.quantity}" title="Cantidad Tipo Primera" disabled="#{!saleController.oneType}">
                         </p:inputText>
-                        <p:outputLabel for="secondGrams" value="Cantidad Type Segunda**:"/>
-                        <p:inputText id="secondGrams" value="#{saleController.selected.secondGrams}" title="Cantidad Type Segunda" >
-                            <p:ajax update="secondUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.twoType}">
+                                <p:ajax update="secondGrams secondUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="secondGrams" value=" Cantidad Tipo Segunda**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="secondGrams" value="#{saleController.twoTypeSaleItem.quantity}" title="Cantidad Tipo Segunda" disabled="#{!saleController.twoType}">
                         </p:inputText>
-                        <p:outputLabel for="thirdGrams" value="Cantidad Type Tercera**:"/>
-                        <p:inputText id="thirdGrams" value="#{saleController.selected.thirdGrams}" title="Cantidad Type Tercera" >
-                            <p:ajax update="thirdUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.threeType}">
+                                <p:ajax update="thirdGrams thirdUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="thirdGrams" value=" Cantidad Tipo Tercera**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="thirdGrams" value="#{saleController.threeTypeSaleItem.quantity}" title="Cantidad Tipo Tercera" disabled="#{!saleController.threeType}">
                         </p:inputText>
-                        <p:outputLabel for="fourthGrams" value="Cantidad Type Cuarta**:"/>
-                        <p:inputText id="fourthGrams" value="#{saleController.selected.fourthGrams}" title="Cantidad Type Cuarta" >
-                            <p:ajax update="fourthUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.fourType}">
+                                <p:ajax update="fourthGrams fourthUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="fourthGrams" value=" Cantidad Tipo Cuarta**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="fourthGrams" value="#{saleController.fourTypeSaleItem.quantity}" title="Cantidad Tipo Cuarta" disabled="#{!saleController.fourType}">
                         </p:inputText>
-                        <p:outputLabel for="fifthGrams" value="Cantidad Type Quinta**:"/>
-                        <p:inputText id="fifthGrams" value="#{saleController.selected.fifthGrams}" title="Cantidad Type Quinta" >
-                            <p:ajax update="fifthUnitPrice"/>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.fiveType}">
+                                <p:ajax update="fifthGrams fifthUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="fifthGrams" value=" Cantidad Tipo Quinta**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="fifthGrams" value="#{saleController.fiveTypeSaleItem.quantity}" title="Cantidad Tipo Quinta" disabled="#{!saleController.fiveType}">
+                        </p:inputText>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{saleController.dummieType}">
+                                <p:ajax update="dummieGrams dummieUnitPrice" />
+                            </p:selectBooleanCheckbox>
+                            <p:outputLabel for="dummieGrams" value=" Cantidad Tipo Muñeco**:"/>
+                        </h:panelGroup>
+                        <p:inputText id="dummieGrams" value="#{saleController.dummieTypeSaleItem.quantity}" title="Cantidad Tipo Quinta" disabled="#{!saleController.dummieType}">
                         </p:inputText>
                         <p:outputLabel for="extraUnitPrice" value="Extra Precio Unidad:"/>
-                        <p:inputText id="extraUnitPrice" value="#{saleController.selected.extraUnitPrice}" disabled="#{saleController.selected.extraGrams == 0}" title="Extra Precio Unidad" />
+                        <p:inputText id="extraUnitPrice" value="#{saleController.extraTypeSaleItem.unitValue}" disabled="#{!saleController.extraType}" title="Extra Precio Unidad" />
                         <p:outputLabel for="firstUnitPrice" value="Primera Precio Unidad:"/>
-                        <p:inputText id="firstUnitPrice" value="#{saleController.selected.firstUnitPrice}" disabled="#{saleController.selected.firstGrams == 0}" title="Primera Precio Unidad" />
+                        <p:inputText id="firstUnitPrice" value="#{saleController.oneTypeSaleItem.unitValue}" disabled="#{!saleController.oneType}" title="Primera Precio Unidad" />
                         <p:outputLabel for="secondUnitPrice" value="Segunda Precio Unidad:"/>
-                        <p:inputText id="secondUnitPrice" value="#{saleController.selected.secondUnitPrice}" disabled="#{saleController.selected.secondGrams == 0}" title="Segunda Precio Unidad" />
+                        <p:inputText id="secondUnitPrice" value="#{saleController.twoTypeSaleItem.unitValue}" disabled="#{!saleController.twoType}" title="Segunda Precio Unidad" />
                         <p:outputLabel for="thirdUnitPrice" value="Tercera Precio Unidad:"/>
-                        <p:inputText id="thirdUnitPrice" value="#{saleController.selected.thirdUnitPrice}" disabled="#{saleController.selected.thirdGrams == 0}" title="Tercera Precio Unidad" />
+                        <p:inputText id="thirdUnitPrice" value="#{saleController.threeTypeSaleItem.unitValue}" disabled="#{!saleController.threeType}" title="Tercera Precio Unidad" />
                         <p:outputLabel for="fourthUnitPrice" value="Cuarta Precio Unidad:"/>
-                        <p:inputText id="fourthUnitPrice" value="#{saleController.selected.fourthUnitPrice}" disabled="#{saleController.selected.fourthGrams == 0}" title="Cuarta Precio Unidad" />
+                        <p:inputText id="fourthUnitPrice" value="#{saleController.fourTypeSaleItem.unitValue}" disabled="#{!saleController.fourType}" title="Cuarta Precio Unidad" />
                         <p:outputLabel for="fifthUnitPrice" value="Quinta Precio Unidad:"/>
-                        <p:inputText id="fifthUnitPrice" value="#{saleController.selected.fifthUnitPrice}" disabled="#{saleController.selected.fifthGrams == 0}" title="Quinta Precio Unidad" />
+                        <p:inputText id="fifthUnitPrice" value="#{saleController.fiveTypeSaleItem.unitValue}" disabled="#{!saleController.fiveType}" title="Quinta Precio Unidad" />
+                        <p:outputLabel for="dummieUnitPrice" value="Muñeco Precio Unidad:"/>
+                        <p:inputText id="dummieUnitPrice" value="#{saleController.dummieTypeSaleItem.unitValue}" disabled="#{!saleController.dummieType}" title="Muñeco Precio Unidad" />
                     </p:panelGrid>
                     <h:outputText value="**Ingresar los valores en Libras" style="color: red"/>
                     <br/>
                     <p:commandButton actionListener="#{saleController.create}" value="#{bundle.Save}" update="display,:SaleListPanel:SaleListForm:datalist,:growl" oncomplete="handleSubmit(args,'SaleCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SaleCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{saleController.cancel}" value="#{bundle.Cancel}" onclick="SaleCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

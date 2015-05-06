@@ -342,7 +342,7 @@ public class SaleController implements Serializable {
         }
     }
     
-    private void calculateSaleTotalValue(){
+    public void calculateSaleTotalValue(){
         float saleTotalValue = 0;
         for(SaleItem item : saleItems){
             saleTotalValue += item.getTotalValue();

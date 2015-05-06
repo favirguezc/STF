@@ -13,101 +13,96 @@
             <h:form id="SaleViewForm">
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2" rendered="#{saleController.selected != null}">
-                    <h:outputText value="Fecha de la Sale:"/>
-                    <h:outputText value="#{saleController.selected.saleDate}" title="Fechade la Sale" >
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="Cliente:"/>
-                    <h:outputText value="#{saleController.selected.customer.name} #{saleController.selected.customer.lastName}" title="Cliente"/>
-                    <h:outputText value="Cantidad Type Extra:"/>
-                    <h:outputText value="#{saleController.extraTypeSaleItem.quantity}" title="Cantidad Type Extra">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Primera:"/>
-                    <h:outputText value="#{saleController.oneTypeSaleItem.quantity}" title="Cantidad Type Primera">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Segunda:"/>
-                    <h:outputText value="#{saleController.twoTypeSaleItem.quantity}" title="Cantidad Type Segunda">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Tercera:"/>
-                    <h:outputText value="#{saleController.threeTypeSaleItem.quantity}" title="Cantidad Type Tercera">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Cuarta:"/>
-                    <h:outputText value="#{saleController.fourTypeSaleItem.quantity}" title="Cantidad Type Cuarta">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Quinta:"/>
-                    <h:outputText value="#{saleController.fiveTypeSaleItem.quantity}" title="Cantidad Type Quinta">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cantidad Type Muñeco:"/>
-                    <h:outputText value="#{saleController.dummieTypeSaleItem.quantity}" title="Cantidad Type Muñeco">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Extra Precio Unidad:"/>
-                    <h:outputText value="#{saleController.extraTypeSaleItem.unitValue}" title="Extra Precio Unidad">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Primera Precio Unidad:"/>
-                    <h:outputText value="#{saleController.oneTypeSaleItem.unitValue}" title="Primera Precio Unidad">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Segunda Precio Unidad:"/>
-                    <h:outputText value="#{saleController.twoTypeSaleItem.unitValue}" title="Segunda Precio Unidad">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Tercera Precio Unidad:"/>
-                    <h:outputText value="#{saleController.threeTypeSaleItem.unitValue}" title="Tercera Precio Unidad">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cuarta Precio Unidad:"/>
-                    <h:outputText value="#{saleController.fourTypeSaleItem.unitValue}" title="Cuarta Precio Unidad" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Quinta Precio Unidad:"/>
-                    <h:outputText value="#{saleController.fiveTypeSaleItem.unitValue}" title="Quinta Precio Unidad" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Muñeco Precio Unidad:"/>
-                    <h:outputText value="#{saleController.dummieTypeSaleItem.unitValue}" title="Muñeco Precio Unidad" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Extra Precio Total:"/>
-                    <h:outputText value="#{saleController.extraTypeSaleItem.totalValue}" title="Extra Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Primera Precio Total:"/>
-                    <h:outputText value="#{saleController.oneTypeSaleItem.totalValue}" title="Primera Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Segunda Precio Total:"/>
-                    <h:outputText value="#{saleController.twoTypeSaleItem.totalValue}" title="Segunda Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Tercera Precio Total:"/>
-                    <h:outputText value="#{saleController.threeTypeSaleItem.totalValue}" title="Tercera Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Cuarta Precioc Total:"/>
-                    <h:outputText value="#{saleController.fourTypeSaleItem.totalValue}" title="Cuarta Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Quinta Precio Total:"/>
-                    <h:outputText value="#{saleController.fiveTypeSaleItem.totalValue}" title="Quinta Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Muñeco Precio Total:"/>
-                    <h:outputText value="#{saleController.fiveTypeSaleItem.totalValue}" title="Mueñeco Precio Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value="Sale Total:"/>
-                    <h:outputText value="#{saleController.selected.saleTotalValue}" title="Sale Total" >
-                        <f:convertNumber/>
-                    </h:outputText>
-                </h:panelGrid>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_saleDate}"/>
+                        <h:outputText value="#{saleController.selected.saleDate}" title="#{bundleSale.ViewSaleTitle_saleDate}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_customer}"/>
+                        <h:outputText value="#{saleController.selected.customer.name} #{saleController.selected.customer.lastName}" title="#{bundleSale.ViewSaleTitle_customer}"/>
+                    </h:panelGrid>
+                    <br/>
+                    <p:panelGrid columns="4" rendered="#{saleController.selected != null}">
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_type}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_quantity}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_unitValue}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_totalValue}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_extraType}"/>
+                        <h:outputText value="#{saleController.extraTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_extraQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.extraTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_extraUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.extraTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_extraTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_firstType}"/>
+                        <h:outputText value="#{saleController.oneTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_firstQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.oneTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_firstUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.oneTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_firstTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_secondType}"/>
+                        <h:outputText value="#{saleController.twoTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_secondQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.twoTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_secondUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.twoTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_secondTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_thirdType}"/>
+                        <h:outputText value="#{saleController.threeTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_thirdQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.threeTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_thirdUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.threeTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_thirdTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_fourthType}"/>
+                        <h:outputText value="#{saleController.fourTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_fourthQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.fourTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_fourthUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.fourTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_fourthTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_fifthType}"/>
+                        <h:outputText value="#{saleController.fiveTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_fifthQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.fiveTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_fifthUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.fiveTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_fifthTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_dummieType}"/>
+                        <h:outputText value="#{saleController.dummieTypeSaleItem.quantity}" title="#{bundleSale.ViewSaleTitle_dummieQuantity}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.dummieTypeSaleItem.unitValue}" title="#{bundleSale.ViewSaleTitle_dummieUnitValue}">
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value="#{saleController.dummieTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_dummieTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value=" "/>
+                        <h:outputText value=" "/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_totalSaleValue}" style="font-weight: bold;"/>
+                        <h:outputText value="#{saleController.selected.saleTotalValue}" title="#{bundleSale.ViewSaleTitle_totalSaleValue}" style="font-weight: bold;">
+                            <f:convertNumber/>
+                        </h:outputText>
+                    </p:panelGrid>
                 <p:commandButton value="#{bundle.Close}" onclick="SaleViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

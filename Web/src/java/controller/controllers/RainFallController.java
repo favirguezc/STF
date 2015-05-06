@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -31,6 +32,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 @ManagedBean(name = "rainFallController")
 @SessionScoped
@@ -39,11 +45,20 @@ public class RainFallController implements Serializable {
     private RainFallDAO jpaController = null;
     private List<RainFall> items = null;
     private RainFall selected;
-    private String message;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
+    //File variables
+    private String message;
+    //Chart variables
+    private LineChartModel model;
+    private int year;
+    private int month;
 
-    public RainFallController() {
+    @PostConstruct
+    public void init() {
+        year = DateTools.getYear();
+        month = DateTools.getMonth();
+        createModel();
     }
 
     public RainFall getSelected() {
@@ -60,6 +75,26 @@ public class RainFallController implements Serializable {
 
     public void setPermissionBean(PermissionController permissionBean) {
         this.permissionBean = permissionBean;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public LineChartModel getModel() {
+        return model;
     }
 
     protected void setEmbeddableKeys() {
@@ -165,7 +200,7 @@ public class RainFallController implements Serializable {
         return mean;
     }
 
-    public float calcularMean(Date fecha1) {
+    public float calculateMean(Date fecha1) {
         float mean = 0;
         List<RainFall> lista = getItems(fecha1);
         for (RainFall l : lista) {
@@ -216,7 +251,8 @@ public class RainFallController implements Serializable {
             }
         }
     }
-    
+
+    //File functions
     public void upload(FileUploadEvent event) {
         String filename = "rainFall" + new Date().getTime() + ".xlsx";
         if (permissionBean.getSignInBean().getFarm() != null) {
@@ -239,7 +275,7 @@ public class RainFallController implements Serializable {
             RainFall temp = null;
             while (sheetIterator.hasNext()) {
                 XSSFSheet sheet = sheetIterator.next();
-                int year = Integer.parseInt(sheet.getSheetName());
+                int yearSheetName = Integer.parseInt(sheet.getSheetName());
                 Iterator<Row> rowIterator = sheet.iterator();
                 rowIterator.next();
                 rowIterator.next();
@@ -249,16 +285,16 @@ public class RainFallController implements Serializable {
                 while (rowIterator.hasNext()) {
                     Row row = rowIterator.next();
                     if (row.getCell(0) != null) {
-                        int month = DateTools.getMonth(row.getCell(0).getStringCellValue());
-                        int dayOfMonth = new GregorianCalendar(year, month, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
-                        for (int day = 1; day <= dayOfMonth; day++) {
+                        int monthCellValue = DateTools.getMonth(row.getCell(0).getStringCellValue());
+                        int dayOfMonthCellValue = new GregorianCalendar(yearSheetName, monthCellValue, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
+                        for (int day = 1; day <= dayOfMonthCellValue; day++) {
                             Cell cell = row.getCell(day);
-                            double cellValue = CellDataExtractor.parseNumber(cell);
-                            if (cellValue > 0) {
+                            double millimetersCellValue = CellDataExtractor.parseNumber(cell);
+                            if (millimetersCellValue > 0) {
                                 temp = new RainFall();
                                 temp.setFarm(permissionBean.getSignInBean().getFarm());
-                                temp.setRainDate(DateTools.getDate(year, month, day));
-                                temp.setMilimeters((float) cellValue);
+                                temp.setRainDate(DateTools.getDate(yearSheetName, monthCellValue, day));
+                                temp.setMilimeters((float) millimetersCellValue);
                                 save(temp);
                                 created++;
                             }
@@ -272,6 +308,28 @@ public class RainFallController implements Serializable {
             e.printStackTrace();
             message = "Error inesperado.";
         }
+    }
+
+    //Chart functions
+    public void createModel() {
+        model = new LineChartModel();
+        LineChartSeries series1 = new LineChartSeries();
+        series1.setLabel("Lluvia");
+        Calendar cal = GregorianCalendar.getInstance();
+        cal.setTime(DateTools.getDate(year, month, 1));
+        for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+            Date date = cal.getTime();
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+            series1.set(i + 1, calculateMean(date));
+        }
+
+        model.addSeries(series1);
+        model.setShowPointLabels(true);
+        model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
+        model.setTitle("Promedio de Lluvia por Mes " + DateTools.getMonth(month) + " de " + year);
+        model.setLegendPosition("e");
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setMin(0);
     }
 
 }

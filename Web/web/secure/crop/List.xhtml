@@ -107,6 +107,20 @@
                         <p:remoteCommand name="drawChart" update="chart" actionListener="#{cropController.createChart}"/>
                     </h:form>
                 </p:tab>
+                <p:tab title="Cargar Archivo">
+                    <h:form enctype="multipart/form-data">
+                        <p:fileUpload 
+                            fileUploadListener="#{cropController.upload}"
+                            update=":growl"
+                            dragDropSupport="true"
+                            auto="true"
+                            label="Seleccionar"
+                            allowTypes="/(\.|\/)(xls|xlsx)$/"
+                            validatorMessage="Archivo no válido"
+                            cancelLabel="Cancelar"
+                            uploadLabel="Cargar"/>
+                    </h:form>                     
+                </p:tab>
                 <p:tab title="Datos">
                     <h:form id="CropListForm">
                         <p:dataTable id="datalist" value="#{cropController.items}" var="item"

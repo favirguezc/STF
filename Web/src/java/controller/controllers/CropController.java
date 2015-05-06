@@ -1,14 +1,19 @@
 package controller.controllers;
 
+import controller.util.CellDataExtractor;
 import model.crop.Crop;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.Storage;
 import data.crop.CropDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,13 +26,17 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import model.administration.Cultivation;
 import model.administration.Farm;
 import model.administration.Lot;
 import model.administration.ModuleClass;
 import model.administration.Person;
 import model.administration.RoleEnum;
 import model.util.DateTools;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.CartesianChartModel;
@@ -46,6 +55,30 @@ public class CropController implements Serializable {
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{cultivationController}")
     private CultivationController cultivationBean;
+    //File variables
+    private String message;
+    //Chart variables
+    private CartesianChartModel model;
+    private Date date;
+    private int year;
+    private int month;
+    private int terrain;
+    private int period;
+    private Lot lot;
+    private ModuleClass module;
+
+    public CropController() {
+        year = DateTools.getYear();
+        month = DateTools.getMonth();
+        date = DateTools.getDate();
+        terrain = 0;
+        period = 0;
+    }
+
+    @PostConstruct
+    public void init() {
+        createChart();
+    }
 
     public Crop getSelected() {
         return selected;
@@ -69,6 +102,70 @@ public class CropController implements Serializable {
 
     public void setPermissionBean(PermissionController permissionBean) {
         this.permissionBean = permissionBean;
+    }
+
+    public CartesianChartModel getModel() {
+        return model;
+    }
+
+    public void setModel(CartesianChartModel model) {
+        this.model = model;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getTerrain() {
+        return terrain;
+    }
+
+    public void setTerrain(int terrain) {
+        this.terrain = terrain;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public Lot getLot() {
+        return lot;
+    }
+
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
+
+    public ModuleClass getModule() {
+        return module;
+    }
+
+    public void setModule(ModuleClass module) {
+        this.module = module;
     }
 
     protected void setEmbeddableKeys() {
@@ -148,6 +245,11 @@ public class CropController implements Serializable {
 
     public List<Crop> getItemsAvailableSelectOne() {
         return getItems();
+    }
+
+    public void save(Crop crop) {
+        selected = crop;
+        persist(PersistAction.CREATE, null);
     }
 
     public List<Crop> readListByModule(Person recolector, ModuleClass module, Date inicio, Date fin) {
@@ -233,92 +335,63 @@ public class CropController implements Serializable {
 
     }
 
-    private CartesianChartModel model;
-    private Date date;
-    private int year;
-    private int month;
-    private int terrain;
-    private int period;
-    private Lot lot;
-    private ModuleClass module;
-
-    public CropController() {
-        year = DateTools.getYear();
-        month = DateTools.getMonth();
-        date = DateTools.getDate();
-        terrain = 0;
-        period = 0;
+    //File functions
+    public void upload(FileUploadEvent event) {
+        String filename = "crop" + new Date().getTime() + ".xlsx";
+        if (permissionBean.getSignInBean().getFarm() != null) {
+            Storage.save(filename, event.getFile());
+            parse(filename);
+            Storage.delete(filename);
+        } else {
+            message = "¡Error! No hay una finca seleccionada.";
+        }
+        JsfUtil.addSuccessMessage(message);
     }
 
-    @PostConstruct
-    public void init() {
-        createChart();
+    private void parse(String filename) {
+//        int created = 0;
+//        try {
+//            FileInputStream fis = null;
+//            fis = new FileInputStream(new File(filename));
+//            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+//            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
+//            Crop temp = null;
+//            while (sheetIterator.hasNext()) {
+//                XSSFSheet sheet = sheetIterator.next();
+//                int yearSheetName = Integer.parseInt(sheet.getSheetName());
+//                Iterator<Row> rowIterator = sheet.iterator();
+//                rowIterator.next();
+//                rowIterator.next();
+//                rowIterator.next();
+//                rowIterator.next();
+//
+//                while (rowIterator.hasNext()) {
+//                    Row row = rowIterator.next();
+//                    if (row.getCell(0) != null) {
+//                        int monthCellValue = DateTools.getMonth(row.getCell(0).getStringCellValue());
+//                        int dayOfMonthCellValue = new GregorianCalendar(yearSheetName, monthCellValue, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
+//                        for (int day = 1; day <= dayOfMonthCellValue; day++) {
+//                            Cell cell = row.getCell(day);
+//                            double millimetersCellValue = CellDataExtractor.parseNumber(cell);
+//                            if (millimetersCellValue > 0) {
+//                                temp = new Crop();
+//                                
+//                                save(temp);
+//                                created++;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            fis.close();
+//            message = "Se crearon " + created + " nuevos registros.";
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            message = "Error inesperado.";
+//        }
     }
 
-    public CartesianChartModel getModel() {
-        return model;
-    }
-
-    public void setModel(CartesianChartModel model) {
-        this.model = model;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getTerrain() {
-        return terrain;
-    }
-
-    public void setTerrain(int terrain) {
-        this.terrain = terrain;
-    }
-
-    public int getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(int period) {
-        this.period = period;
-    }
-
-    public Lot getLot() {
-        return lot;
-    }
-
-    public void setLot(Lot lot) {
-        this.lot = lot;
-    }
-
-    public ModuleClass getModule() {
-        return module;
-    }
-
-    public void setModule(ModuleClass module) {
-        this.module = module;
-    }
-
+    //Chart functions
     public void createChart() {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
@@ -381,7 +454,7 @@ public class CropController implements Serializable {
                     label = i + "";
                     break;
                 case 3:
-                    label = DateTools.getMonth(i-1);
+                    label = DateTools.getMonth(i - 1);
                     break;
             }
             series1.set(label, totalSum.getWeightInKilograms());

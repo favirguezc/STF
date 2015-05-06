@@ -19,9 +19,9 @@
                     <h:form>
                         <h:panelGrid columns="5" cellpadding="10">
                             <p:outputLabel value="Año" for="ano1"/>
-                            <p:spinner id="ano1" value="#{soilMoistureChart.year1}" title="Año" min="2012" max="2030"/>
+                            <p:spinner id="ano1" value="#{soilMoistureController.year1}" title="Año" min="2012" max="2030"/>
                             <p:outputLabel value="Mes" for="mes1"/>
-                            <p:selectOneMenu id="mes1" value="#{soilMoistureChart.month1}">
+                            <p:selectOneMenu id="mes1" value="#{soilMoistureController.month1}">
                                 <f:selectItem itemLabel="Enero" itemValue="0"/>
                                 <f:selectItem itemLabel="Febrero" itemValue="1"/>
                                 <f:selectItem itemLabel="Marzo" itemValue="2"/>
@@ -37,8 +37,8 @@
                             </p:selectOneMenu>
                             <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                         </h:panelGrid>
-                        <p:chart id="chart1" type="line" model="#{soilMoistureChart.model1}"/>
-                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{soilMoistureChart.createModel1}"/>
+                        <p:chart id="chart1" type="line" model="#{soilMoistureController.model1}"/>
+                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{soilMoistureController.createModel}"/>
                     </h:form>
                 </p:tab>
                 <p:tab title="Cargar Archivo">
@@ -52,8 +52,6 @@
                             allowTypes="/(\.|\/)(xls|xlsx)$/"
                             validatorMessage="Archivo no válido"
                             cancelLabel="Cancelar"
-                            fileLimit="1"
-                            fileLimitMessage="Máximo un archivo permitido"
                             uploadLabel="Cargar"/>
                     </h:form>                     
                 </p:tab>

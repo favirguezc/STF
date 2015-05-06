@@ -30,18 +30,18 @@ public class TemperatureChart implements Serializable {
     private LineChartModel model2;
     private LineChartModel model3;
     private LineChartModel model4;
-    private int ano1;
-    private int mes;
-    private int anoMes;
-    private Date fechaSemana;
-    private Date fechaDia;
+    private int year1;
+    private int month;
+    private int yearMonth;
+    private Date dateWeek;
+    private Date dateDay;
 
     @PostConstruct
     public void init() {
-        ano1 = anoMes = DateTools.getYear();
-        mes = DateTools.getMonth();
-        fechaSemana = DateTools.getDate();
-        fechaDia = DateTools.getDate();
+        year1 = yearMonth = DateTools.getYear();
+        month = DateTools.getMonth();
+        dateWeek = DateTools.getDate();
+        dateDay = DateTools.getDate();
         createModel1();
         createModel2();
         createModel3();
@@ -52,52 +52,52 @@ public class TemperatureChart implements Serializable {
         return model1;
     }
 
-    public int getAno1() {
-        return ano1;
+    public int getYear1() {
+        return year1;
     }
 
-    public void setAno1(int ano1) {
-        this.ano1 = ano1;
+    public void setYear1(int year1) {
+        this.year1 = year1;
     }
 
     public LineChartModel getModel2() {
         return model2;
     }
 
-    public int getMes() {
-        return mes;
+    public int getMonth() {
+        return month;
     }
 
-    public void setMes(int mes) {
-        this.mes = mes;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public int getAnoMes() {
-        return anoMes;
+    public int getYearMonth() {
+        return yearMonth;
     }
 
-    public void setAnoMes(int anoMes) {
-        this.anoMes = anoMes;
+    public void setYearMonth(int yearMonth) {
+        this.yearMonth = yearMonth;
     }
 
-    public Date getFechaSemana() {
-        return fechaSemana;
+    public Date getDateWeek() {
+        return dateWeek;
     }
 
-    public void setFechaSemana(Date fechaSemana) {
-        this.fechaSemana = fechaSemana;
+    public void setDateWeek(Date dateWeek) {
+        this.dateWeek = dateWeek;
     }
 
     public LineChartModel getModel3() {
         return model3;
     }
 
-    public Date getFechaDia() {
-        return fechaDia;
+    public Date getDateDay() {
+        return dateDay;
     }
 
-    public void setFechaDia(Date fechaDia) {
-        this.fechaDia = fechaDia;
+    public void setDateDay(Date dateDay) {
+        this.dateDay = dateDay;
     }
 
     public LineChartModel getModel4() {
@@ -112,15 +112,15 @@ public class TemperatureChart implements Serializable {
         LineChartSeries series4 = new LineChartSeries();
         LineChartSeries series5 = new LineChartSeries();
         LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperature - Día");
-        series2.setLabel("SoilMoisture - Día");
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad del Suelo - Día");
         series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperature - Noche");
-        series5.setLabel("SoilMoisture - Noche");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad del Suelo - Noche");
         series6.setLabel("Punto De Rocío - Noche");
         TemperatureController controller = new TemperatureController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(ano1, 0, 1));
+        cal.setTime(DateTools.getDate(year1, 0, 1));
         for (int i = 0; i < 12; i++) {
             Date fecha1 = cal.getTime();
             cal.add(Calendar.MONTH, 1);
@@ -148,7 +148,7 @@ public class TemperatureChart implements Serializable {
         model1.addSeries(series6);
         model1.setShowPointLabels(true);
         model1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        model1.setTitle("Mean de Temperature por Mes - Año " + ano1);
+        model1.setTitle("Media de Temperatura por Mes - Año " + year1);
         model1.setLegendPosition("e");
     }
 
@@ -161,16 +161,16 @@ public class TemperatureChart implements Serializable {
         LineChartSeries series4 = new LineChartSeries();
         LineChartSeries series5 = new LineChartSeries();
         LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperature - Día");
-        series2.setLabel("SoilMoisture - Día");
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad del Suelo - Día");
         series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperature - Noche");
-        series5.setLabel("SoilMoisture - Noche");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad del Suelo - Noche");
         series6.setLabel("Punto De Rocío - Noche");
 
         TemperatureController controller = new TemperatureController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(anoMes, mes, 1));
+        cal.setTime(DateTools.getDate(yearMonth, month, 1));
 
         for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
             Date fecha1 = cal.getTime();
@@ -197,7 +197,7 @@ public class TemperatureChart implements Serializable {
         model2.addSeries(series6);
         model2.setShowPointLabels(true);
         model2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model2.setTitle("Mean de Temperature por Día " + DateTools.getMonth(mes) + " de " + anoMes);
+        model2.setTitle("Promedio de Temperatura por Día " + DateTools.getMonth(month) + " de " + yearMonth);
         model2.setLegendPosition("e");
     }
 
@@ -210,16 +210,16 @@ public class TemperatureChart implements Serializable {
         LineChartSeries series4 = new LineChartSeries();
         LineChartSeries series5 = new LineChartSeries();
         LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperature - Día");
-        series2.setLabel("SoilMoisture - Día");
+        series1.setLabel("Temperatura - Día");
+        series2.setLabel("Humedad del Suelo - Día");
         series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperature - Noche");
-        series5.setLabel("SoilMoisture - Noche");
+        series4.setLabel("Temperatura - Noche");
+        series5.setLabel("Humedad del Suelo - Noche");
         series6.setLabel("Punto De Rocío - Noche");
 
         TemperatureController controller = new TemperatureController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getFirstDayOfWeek(fechaSemana));
+        cal.setTime(DateTools.getFirstDayOfWeek(dateWeek));
 
         for (int i = 0; i < 7; i++) {
             Date fecha1 = cal.getTime();
@@ -246,7 +246,7 @@ public class TemperatureChart implements Serializable {
         model3.addSeries(series6);
         model3.setShowPointLabels(true);
         model3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model3.setTitle("Mean de Temperature " + DateTools.getWeek(fechaSemana));
+        model3.setTitle("Promedio de Temperatura " + DateTools.getWeek(dateWeek));
         model3.setLegendPosition("e");
     }
 
@@ -257,19 +257,19 @@ public class TemperatureChart implements Serializable {
         LineChartSeries series2 = new LineChartSeries();
         LineChartSeries series3 = new LineChartSeries();
 
-        series1.setLabel("Temperature");
-        series2.setLabel("SoilMoisture");
+        series1.setLabel("Temperatura");
+        series2.setLabel("Humedad del Suelo");
         series3.setLabel("Punto De Rocío");
 
         TemperatureController controller = new TemperatureController();
 
         for (int i = 0; i < 24; i++) {
             Temperature meanTemp;
-            meanTemp = controller.calcularMean(fechaDia, i);
+            meanTemp = controller.calcularMean(dateDay, i);
 
-            series1.set(i + 1, meanTemp.getTemperature());
-            series2.set(i + 1, meanTemp.getHumidity());
-            series3.set(i + 1, meanTemp.getDewPoint());
+            series1.set(i, meanTemp.getTemperature());
+            series2.set(i, meanTemp.getHumidity());
+            series3.set(i, meanTemp.getDewPoint());
         }
 
         model4.addSeries(series1);
@@ -277,7 +277,7 @@ public class TemperatureChart implements Serializable {
         model4.addSeries(series3);
         model4.setShowPointLabels(true);
         model4.getAxes().put(AxisType.X, new CategoryAxis("Hora"));
-        model4.setTitle("Mean de Temperature " + DateFormatter.formatDate(fechaDia));
+        model4.setTitle("Promedio de Temperatura " + DateFormatter.formatDate(dateDay));
         model4.setLegendPosition("e");
     }
 

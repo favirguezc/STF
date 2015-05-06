@@ -22,14 +22,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.administration.Cultivation;
+import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.ModuleClass;
 import model.administration.Person;
 import model.administration.RoleEnum;
 import model.util.DateTools;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.CategoryAxis;
-import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
@@ -110,9 +112,9 @@ public class CropController implements Serializable {
     public List<Crop> getItems() {
         if (items == null) {
             if (permissionBean.getSignInBean().getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT || permissionBean.getSignInBean().getUser().isSystemAdmin()) {
-                items = leerLista(null, null, null, null);
+                items = readListByFarm(null, permissionBean.getSignInBean().getFarm(), null, null);
             } else {
-                items = leerLista(permissionBean.getSignInBean().getUser(), null, null, null);
+                items = readListByModule(permissionBean.getSignInBean().getUser(), null, null, null);
             }
         }
         return items;
@@ -141,24 +143,48 @@ public class CropController implements Serializable {
     }
 
     public List<Crop> getItemsAvailableSelectMany() {
-        return leerLista(null, null, null, null);
+        return getItems();
     }
 
     public List<Crop> getItemsAvailableSelectOne() {
-        return leerLista(null, null, null, null);
+        return getItems();
     }
 
-    public List<Crop> leerLista(Person recolector, Cultivation cultivation, Date inicio, Date fin) {
-        if (cultivation == null) {
-            return getJpaController().findCropEntities(recolector, permissionBean.getSignInBean().getFarm(), inicio, fin);
-        }
-        return getJpaController().findCropEntities(recolector, cultivation, inicio, fin);
+    public List<Crop> readListByModule(Person recolector, ModuleClass module, Date inicio, Date fin) {
+        return getJpaController().findCropEntities(recolector, module, inicio, fin);
     }
 
-    public Crop sumarRegistros(Person recolector, Cultivation cultivation, Date inicio, Date fin) {
-        List<Crop> leerLista = leerLista(recolector, cultivation, inicio, fin);
+    public List<Crop> readListByLot(Person recolector, Lot lot, Date inicio, Date fin) {
+        return getJpaController().findCropEntities(recolector, lot, inicio, fin);
+    }
+
+    public List<Crop> readListByFarm(Person recolector, Farm farm, Date inicio, Date fin) {
+        return getJpaController().findCropEntities(recolector, farm, inicio, fin);
+    }
+
+    public Crop sumRegistersByModule(Person recolector, ModuleClass module, Date inicio, Date fin) {
+        List<Crop> list = readListByModule(recolector, module, inicio, fin);
         Crop suma = new Crop();
-        suma.setCultivation(cultivation);
+        suma.setCollector(recolector);
+        for (Crop r : list) {
+            suma.sumCrop(r);
+        }
+        return suma;
+    }
+
+    public Crop sumRegistersByLot(Person recolector, Lot lot, Date inicio, Date fin) {
+        List<Crop> leerLista = readListByLot(recolector, lot, inicio, fin);
+        Crop suma = new Crop();
+        suma.setCollector(recolector);
+        for (Crop r : leerLista) {
+            suma.sumCrop(r);
+        }
+        return suma;
+    }
+
+    public Crop sumRegistersByFarm(Person recolector, Farm farm, Date inicio, Date fin) {
+        List<Crop> leerLista = readListByFarm(recolector, farm, inicio, fin);
+        Crop suma = new Crop();
         suma.setCollector(recolector);
         for (Crop r : leerLista) {
             suma.sumCrop(r);
@@ -207,228 +233,183 @@ public class CropController implements Serializable {
 
     }
 
-    private LineChartModel model1;
-    private LineChartModel model2;
-    private LineChartModel model3;
-    private LineChartModel model4;
-    private BarChartModel model5;
-    private int year1;
-    private int year2;
-    private int year4;
-    private int month2;
-    private Date date3;
+    private CartesianChartModel model;
+    private Date date;
+    private int year;
+    private int month;
+    private int terrain;
+    private int period;
+    private Lot lot;
+    private ModuleClass module;
+
+    public CropController() {
+        year = DateTools.getYear();
+        month = DateTools.getMonth();
+        date = DateTools.getDate();
+        terrain = 0;
+        period = 0;
+    }
 
     @PostConstruct
     public void init() {
-        year1 = year2 = year4 = DateTools.getYear();
-        month2 = DateTools.getMonth();
-        date3 = DateTools.getDate();
-        createModel1();
-        createModel2();
-        createModel3();
-        createModel4();
-        createModel5();
+        createChart();
     }
 
-    public BarChartModel getModel5() {
-        return model5;
+    public CartesianChartModel getModel() {
+        return model;
     }
 
-    public LineChartModel getModel4() {
-        return model4;
+    public void setModel(CartesianChartModel model) {
+        this.model = model;
     }
 
-    public int getYear4() {
-        return year4;
+    public Date getDate() {
+        return date;
     }
 
-    public void setYear4(int year4) {
-        this.year4 = year4;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public LineChartModel getModel3() {
-        return model3;
+    public int getYear() {
+        return year;
     }
 
-    public Date getDate3() {
-        return date3;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public void setDate3(Date date3) {
-        this.date3 = date3;
+    public int getMonth() {
+        return month;
     }
 
-    public LineChartModel getModel2() {
-        return model2;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public int getYear2() {
-        return year2;
+    public int getTerrain() {
+        return terrain;
     }
 
-    public void setYear2(int year2) {
-        this.year2 = year2;
+    public void setTerrain(int terrain) {
+        this.terrain = terrain;
     }
 
-    public int getMonth2() {
-        return month2;
+    public int getPeriod() {
+        return period;
     }
 
-    public void setMonth2(int month2) {
-        this.month2 = month2;
+    public void setPeriod(int period) {
+        this.period = period;
     }
 
-    public LineChartModel getModel1() {
-        return model1;
+    public Lot getLot() {
+        return lot;
     }
 
-    public int getYear1() {
-        return year1;
+    public void setLot(Lot lot) {
+        this.lot = lot;
     }
 
-    public void setYear1(int year1) {
-        this.year1 = year1;
+    public ModuleClass getModule() {
+        return module;
     }
 
-    public void createModel1() {
-        model1 = new LineChartModel();
+    public void setModule(ModuleClass module) {
+        this.module = module;
+    }
+
+    public void createChart() {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
-
-        Crop sumarRegistros;
+        Crop totalSum = new Crop();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(year1, 0, 1));
-        for (int i = 0; i < 12; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.MONTH, 1);
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            Date fecha2 = cal.getTime();
-            sumarRegistros = sumarRegistros(null, null, fecha1, fecha2);
-            String mes = DateTools.getMonth(i);
-            series1.set(mes, sumarRegistros.getWeight() / 1000);
-            cal.add(Calendar.DAY_OF_MONTH, 1);
+        int maxPeriods = 0;
+        switch (period) {
+            case 0:
+                maxPeriods = 7;
+                cal.setTime(DateTools.getFirstDayOfWeek(date));
+                break;
+            case 1:
+                maxPeriods = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                cal.setTime(DateTools.getDate(year, month, 1));
+                break;
+            case 2:
+                maxPeriods = 52;
+                cal.setTime(DateTools.getDate(year, 0, 1));
+                break;
+            case 3:
+                maxPeriods = 12;
+                cal.setTime(DateTools.getDate(year, 0, 1));
+                break;
         }
-
-        model1.addSeries(series1);
-        model1.setShowPointLabels(true);
-        model1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        model1.setTitle("Recolección por Mes Año " + year1);
-        model1.setLegendPosition("e");
-        Axis yAxis = model1.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-    }
-
-    public void createModel2() {
-        model2 = new LineChartModel();
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("");
-
-        Crop sumarRegistros;
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(year2, month2, 1));
-        for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-            sumarRegistros = sumarRegistros(null, null, fecha1, null);
-
-            series1.set(i + 1, sumarRegistros.getWeight() / 1000);
-        }
-
-        model2.addSeries(series1);
-        model2.setShowPointLabels(true);
-        model2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model2.setTitle("Recolección por Día " + DateTools.getMonth(month2) + " de " + year2);
-        model2.setLegendPosition("e");
-        Axis yAxis = model2.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-    }
-
-    public void createModel3() {
-        model3 = new LineChartModel();
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Pesada Kg");
-
-        Crop sumarRegistros;
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getFirstDayOfWeek(date3));
-        for (int i = 0; i < 7; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-            sumarRegistros = sumarRegistros(null, null, fecha1, null);
-
-            series1.set(DateTools.getDayOfWeek(i + 1), sumarRegistros.getWeight() / 1000);
-        }
-
-        model3.addSeries(series1);
-        model3.setShowPointLabels(true);
-        model3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model3.setTitle("Recolección por Día " + DateTools.getWeek(date3));
-        model3.setLegendPosition("e");
-        Axis yAxis = model3.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-    }
-
-    public void createModel4() {
-        model4 = new LineChartModel();
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Pesada Kg");
-
-        Crop sumarRegistros;
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(year4, 0, 1));
-        for (int i = 0; i < 52; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.DAY_OF_MONTH, 6);
-            Date fecha2 = cal.getTime();
-            sumarRegistros = sumarRegistros(null, null, fecha1, fecha2);
-
-            series1.set(i + 1, sumarRegistros.getWeight() / 1000);
-
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
-        model4.addSeries(series1);
-        model4.setShowPointLabels(true);
-        model4.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
-        model4.setTitle("Recolección por Semana Año " + year4);
-        model4.setLegendPosition("e");
-        Axis yAxis = model4.getAxis(AxisType.Y);
-        yAxis.setMin(0);
-    }
-
-    public void createModel5() {
-        model5 = new BarChartModel();
-        List<Cultivation> cultivations = cultivationBean.getItems();
-        ChartSeries[] series = new ChartSeries[cultivations.size()];
-        for (int moduleclass = 0; moduleclass < cultivations.size(); moduleclass++) {
-            series[moduleclass] = new ChartSeries();
-        }
-
-        Calendar c = GregorianCalendar.getInstance();
-        c.setTime(DateTools.getDate(2012, 0, 1));
-        Date fecha1;
-        Date fecha2;
-        double valor;
-        for (int i = 2012; i <= DateTools.getYear(); i++) {
-            fecha1 = c.getTime();
-            c.add(Calendar.YEAR, 1);
-            c.add(Calendar.DAY_OF_MONTH, -1);
-            fecha2 = c.getTime();
-
-            for (int moduleclass = 0; moduleclass < cultivations.size(); moduleclass++) {
-                valor = sumarRegistros(null, cultivations.get(moduleclass), fecha1, fecha2).getWeight() / 1000;
-                series[moduleclass].set(i, valor);
+        for (int i = 1; i <= maxPeriods; i++) {
+            Date startDate = cal.getTime();
+            switch (period) {
+                case 2:
+                    cal.add(Calendar.DAY_OF_MONTH, 6);
+                    break;
+                case 3:
+                    cal.add(Calendar.MONTH, 1);
+                    cal.add(Calendar.DAY_OF_MONTH, -1);
+                    break;
             }
+            Date endDate = cal.getTime();
+            if (period == 0 || period == 1) {
+                endDate = null;
+            }
+            switch (terrain) {
+                case 0:
+                    totalSum = sumRegistersByModule(null, module, startDate, endDate);
+                    break;
+                case 1:
+                    totalSum = sumRegistersByLot(null, lot, startDate, endDate);
+                    break;
+                case 2:
+                    totalSum = sumRegistersByFarm(null, permissionBean.getSignInBean().getFarm(), startDate, endDate);
+                    break;
+            }
+            String label = "";
+            switch (period) {
+                case 0:
+                    label = DateTools.getDayOfWeek(i);
+                    break;
+                case 1:
+                    label = i + "";
+                    break;
+                case 2:
+                    label = i + "";
+                    break;
+                case 3:
+                    label = DateTools.getMonth(i-1);
+                    break;
+            }
+            series1.set(label, totalSum.getWeightInKilograms());
+            cal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        for (int l = 0; l < cultivations.size(); l++) {
-            series[l].setLabel(cultivations.get(l).toString());
-            model5.addSeries(series[l]);
+        model = new LineChartModel();
+        model.addSeries(series1);
+        model.setShowPointLabels(true);
+        switch (period) {
+            case 0:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
+                model.setTitle("Recolección por Día " + DateTools.getWeek(date));
+                break;
+            case 1:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
+                model.setTitle("Recolección por Día " + DateTools.getMonth(month) + " de " + year);
+                break;
+            case 2:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
+                model.setTitle("Recolección por Semana Año" + year);
+                break;
+            case 3:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
+                model.setTitle("Recolección por Mes Año" + year);
+                break;
         }
-
-        model5.getAxes().put(AxisType.X, new CategoryAxis("Módulo"));
-        model5.setTitle("Recolección por Módulo");
-        model5.setLegendPosition("e");
-        Axis yAxis = model5.getAxis(AxisType.Y);
+        model.setLegendPosition("e");
+        Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setMin(0);
     }
 

@@ -1,12 +1,17 @@
 package controller.controllers;
 
+import controller.util.CellDataExtractor;
 import model.weather.SoilMoisture;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.Storage;
 import data.weather.SoilMoistureDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +23,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean(name = "soilMoistureController")
 @SessionScoped
@@ -26,6 +35,7 @@ public class SoilMoistureController implements Serializable {
     private SoilMoistureDAO jpaController = null;
     private List<SoilMoisture> items = null;
     private SoilMoisture selected;
+    private String message;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
 
@@ -127,6 +137,11 @@ public class SoilMoistureController implements Serializable {
         return getJpaController().findSoilMoistureEntities();
     }
 
+    public void save(SoilMoisture soilMoisture) {
+        selected = soilMoisture;
+        persist(PersistAction.CREATE, null);
+    }
+
     public SoilMoisture getMean(Date time) {
         SoilMoisture mean = new SoilMoisture();
         mean.setMeasurementDate(time);
@@ -134,7 +149,7 @@ public class SoilMoistureController implements Serializable {
         for (SoilMoisture h : lista) {
             mean.sumSoilMoisture(h);
         }
-        if(lista.size()>1){
+        if (lista.size() > 1) {
             mean.divideSoilMoistureBy(lista.size());
         }
         return mean;
@@ -178,7 +193,61 @@ public class SoilMoistureController implements Serializable {
                 return null;
             }
         }
+    }
 
+    public void upload(FileUploadEvent event) {
+        String filename = "soilMoisture" + new Date().getTime() + ".xlsx";
+        if (permissionBean.getSignInBean().getFarm() != null) {
+            Storage.save(filename, event.getFile());
+            parse(filename);
+            Storage.delete(filename);
+        } else {
+            message = "¡Error! No hay una finca seleccionada.";
+        }
+        JsfUtil.addSuccessMessage(message);
+    }
+
+    private void parse(String filename) {
+        int created = 0;
+        try {
+            FileInputStream file = new FileInputStream(new File(filename));
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = sheet.iterator();
+            rowIterator.next();
+            rowIterator.next();
+            SoilMoisture temp = null;
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                Date date = CellDataExtractor.parseDate(row.getCell(0));
+                double cell15 = CellDataExtractor.parseNumber(row.getCell(1));
+                double cell30 = CellDataExtractor.parseNumber(row.getCell(2));
+                Date time = CellDataExtractor.parseTime(row.getCell(3));
+                if (date != null && time != null) {
+                    try {
+                        temp = new SoilMoisture();
+                        temp.setFarm(permissionBean.getSignInBean().getFarm());
+                        temp.setMeasurementDate(date);
+                        temp.setMeasurementTime(time);
+                        temp.setValueIn15Centimeters((float) cell15);
+                        temp.setValueIn30Centimeters((float) cell30);
+                        save(temp);
+                        created++;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (date == null) {
+                    System.out.println("Date null");
+                } else if (time == null) {
+                    System.out.println("Time null");
+                }
+            }
+            file.close();
+            message = "Se crearon " + created + " nuevos registros.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "Error inesperado.";
+        }
     }
 
 }

@@ -13,9 +13,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import model.administration.Contract;
 import model.administration.Cultivation;
+import model.administration.ModuleClass;
 
 /**
  *
@@ -34,6 +37,11 @@ public class CultivationDAO implements Serializable {
 
     public void create(Cultivation cultivation) throws PreexistingEntityException, Exception {
         EntityManager em = null;
+        Cultivation old = findActiveCultivationEntity(cultivation.getModuleObject());
+        if (old != null) {
+            old.setActive(false);
+            edit(old);
+        }
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -96,11 +104,11 @@ public class CultivationDAO implements Serializable {
     }
 
     public List<Cultivation> findCultivationEntities() {
-        return findActiveCultivationEntities(true, -1, -1);
+        return CultivationDAO.this.findActiveCultivationEntities(true, -1, -1);
     }
 
     public List<Cultivation> findCultivationEntities(int maxResults, int firstResult) {
-        return findActiveCultivationEntities(false, maxResults, firstResult);
+        return CultivationDAO.this.findActiveCultivationEntities(false, maxResults, firstResult);
     }
 
     private List<Cultivation> findActiveCultivationEntities(boolean all, int maxResults, int firstResult) {
@@ -114,8 +122,8 @@ public class CultivationDAO implements Serializable {
                 q.setFirstResult(firstResult);
             }
             List<Cultivation> resultList = q.getResultList();
-            for(Cultivation c:resultList){
-                if(!c.isActive()){
+            for (Cultivation c : resultList) {
+                if (!c.isActive()) {
                     resultList.remove(c);
                 }
             }
@@ -123,6 +131,19 @@ public class CultivationDAO implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    public Cultivation findActiveCultivationEntity(ModuleClass module) {
+        EntityManager em = getEntityManager();
+        Cultivation cultivation = null;
+        try {
+            TypedQuery<Cultivation> query = em.createQuery("SELECT c FROM Cultivation c WHERE c.moduleObject = :module", Cultivation.class);
+            query.setParameter("module", module);
+            cultivation = query.getSingleResult();
+        } finally {
+            em.close();
+        }
+        return cultivation;
     }
 
     public Cultivation findCultivation(Long id) {
@@ -146,5 +167,5 @@ public class CultivationDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

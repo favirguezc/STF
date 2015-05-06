@@ -109,9 +109,13 @@ public class Crop implements Serializable {
         }
         return true;
     }
-    
+
     public void sumCrop(Crop r) {
         this.weight += r.weight;
+    }
+
+    public float getWeightInKilograms() {
+        return getWeight() / 1000;
     }
 
 }

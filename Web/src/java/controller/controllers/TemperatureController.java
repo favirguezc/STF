@@ -164,7 +164,7 @@ public class TemperatureController implements Serializable {
         return getJpaController().findTemperatureEntities();
     }
 
-    public void guardar(Temperature temperature) {
+    public void save(Temperature temperature) {
         selected = temperature;
         persist(PersistAction.CREATE, null);
     }

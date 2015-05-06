@@ -13,14 +13,14 @@
         </ui:define>
 
         <ui:define name="body">
-            <p:accordionPanel dynamic="true" id="TemperatureListPanel">
+            <p:tabView dynamic="true" id="TemperatureListPanel">
                 <p:tab title="Gráficas">
                     <p:tabView dynamic="true">
                         <p:tab title="Por Hora">
                             <h:form>
                                 <h:panelGrid columns="3">
                                     <p:outputLabel value="Fecha" for="measurementDatedia"/>
-                                    <p:calendar id="measurementDatedia" value="#{temperatureChart.fechaDia}" showOn="button"/>
+                                    <p:calendar id="measurementDatedia" value="#{temperatureChart.dateDay}" showOn="button"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart4()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart4" type="line" model="#{temperatureChart.model4}"/>
@@ -31,7 +31,7 @@
                             <h:form>
                                 <h:panelGrid columns="3">
                                     <p:outputLabel value="Fecha" for="measurementDate"/>
-                                    <p:calendar id="measurementDate" value="#{temperatureChart.fechaSemana}" showOn="button"/>
+                                    <p:calendar id="measurementDate" value="#{temperatureChart.dateWeek}" showOn="button"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart3()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart3" type="line" model="#{temperatureChart.model3}"/>
@@ -42,9 +42,9 @@
                             <h:form>
                                 <h:panelGrid columns="5" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano2"/>
-                                    <p:spinner id="ano2" value="#{temperatureChart.anoMes}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano2" value="#{temperatureChart.yearMonth}" title="Año" min="2012" max="2030"/>
                                     <p:outputLabel value="Mes" for="mes"/>
-                                    <p:selectOneMenu id="mes" value="#{temperatureChart.mes}">
+                                    <p:selectOneMenu id="mes" value="#{temperatureChart.month}">
                                         <f:selectItem itemLabel="Enero" itemValue="0"/>
                                         <f:selectItem itemLabel="Febrero" itemValue="1"/>
                                         <f:selectItem itemLabel="Marzo" itemValue="2"/>
@@ -68,7 +68,7 @@
                             <h:form>
                                 <h:panelGrid columns="3" cellpadding="10">
                                     <p:outputLabel value="Año" for="ano1"/>
-                                    <p:spinner id="ano1" value="#{temperatureChart.ano1}" title="Año" min="2012" max="2030"/>
+                                    <p:spinner id="ano1" value="#{temperatureChart.year1}" title="Año" min="2012" max="2030"/>
                                     <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                                 </h:panelGrid>
                                 <p:chart id="chart1" type="line" model="#{temperatureChart.model1}"/>
@@ -79,7 +79,18 @@
                 </p:tab>
                 <p:tab title="Cargar Archivo">
                     <h:form enctype="multipart/form-data">
-                        <p:fileUpload fileUploadListener="#{temperatureFile.upload}" update=":growl" dragDropSupport="true" auto="true"/>
+                        <p:fileUpload 
+                            fileUploadListener="#{temperatureFile.upload}" 
+                            update=":growl" 
+                            dragDropSupport="true" 
+                            auto="true" 
+                            label="Seleccionar" 
+                            allowTypes="/(\.|\/)(txt)$/"
+                            validatorMessage="Archivo no válido"
+                            cancelLabel="Cancelar"
+                            fileLimit="1"
+                            fileLimitMessage="Máximo un archivo permitido"
+                            uploadLabel="Cargar"/>
                     </h:form>                  
                 </p:tab>
                 <p:tab title="Datos">
@@ -153,7 +164,7 @@
                     <ui:include src="Edit.xhtml"/>
                     <ui:include src="View.xhtml"/>
                 </p:tab>
-            </p:accordionPanel>            
+            </p:tabView>            
         </ui:define>
     </ui:composition>
 

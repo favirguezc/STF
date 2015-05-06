@@ -7,18 +7,15 @@ package controller.controllers;
 
 import controller.util.DateParser;
 import controller.util.JsfUtil;
+import controller.util.Storage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import model.administration.ModuleClass;
+import model.weather.Thermometer;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -27,75 +24,60 @@ import org.primefaces.model.UploadedFile;
 @ManagedBean(name = "temperatureFile")
 public class TemperatureFile {
 
+    private String message;
+
     public void upload(FileUploadEvent event) {
-        String nombre = "temperature" + new Date().getTime() + ".txt";
-        guardar(nombre, event.getFile());
-        int creados = procesar(nombre);
-        eliminar(nombre);
-        JsfUtil.addSuccessMessage("Se añadieron " + creados + " registros de Temperatura.");
+        String filename = "temperature" + new Date().getTime() + ".txt";
+        Storage.save(filename, event.getFile());
+        parse(filename);
+        Storage.delete(filename);
+        JsfUtil.addSuccessMessage(message);
     }
 
-    private void guardar(String nombre, UploadedFile file) {
-        try {
-            // write the inputStream to a FileOutputStream
-            OutputStream out = new FileOutputStream(new File(nombre));
-            InputStream in = file.getInputstream();
-            int read;
-            byte[] bytes = new byte[1024];
-            while ((read = in.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-            in.close();
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private int procesar(String nombre) {
+    private void parse(String filename) {
         FileReader fr;
         BufferedReader br;
         ModuleClass moduleclass;
-        int saltos = 15, creados = 0;
+        int skip = 15, created = 0;
 
         try {
-            fr = new FileReader(new File(nombre));
+            fr = new FileReader(new File(filename));
             br = new BufferedReader(fr);
-            String linea;
+            String line;
             br.readLine();
-            linea = br.readLine();
-            long nds = Long.parseLong(linea.split(",")[5]);
-            moduleclass = new ThermometerController().find(nds).getModuleObject();
-            TemperatureController controller = new TemperatureController();
-            while (linea != null) {
-                Date fecha = DateParser.parseDate(linea.split(",")[1].split(" ")[0]);
-                Date hora = DateParser.parseTime(linea.split(",")[1].split(" ")[1]);
-                float temperature = Float.parseFloat(linea.split(",")[2]);
-                float soilmoisture = Float.parseFloat(linea.split(",")[3]);
-                float puntoDeRocio = Float.parseFloat(linea.split(",")[4]);
-                controller.guardar(controller.nuevo(fecha, hora, temperature, soilmoisture, puntoDeRocio, moduleclass));
-                creados++;
-                for (int i = 1; i < saltos; i++) {
-                    if ((linea = br.readLine()) == null) {
-                        break;
+            line = br.readLine();
+            long nds = Long.parseLong(line.split(",")[5]);
+            Thermometer thermometer = new ThermometerController().find(nds);
+            if (thermometer != null) {
+                moduleclass = thermometer.getModuleObject();
+                TemperatureController controller = new TemperatureController();
+                while (line != null) {
+                    Date date = DateParser.parseDate(line.split(",")[1].split(" ")[0]);
+                    Date time = DateParser.parseTime(line.split(",")[1].split(" ")[1]);
+                    float temperature = Float.parseFloat(line.split(",")[2]);
+                    float soilMoisture = Float.parseFloat(line.split(",")[3]);
+                    float dewPoint = Float.parseFloat(line.split(",")[4]);
+                    controller.save(controller.nuevo(date, time, temperature, soilMoisture, dewPoint, moduleclass));
+                    created++;
+                    for (int i = 1; i < skip; i++) {
+                        if ((line = br.readLine()) == null) {
+                            break;
+                        }
+                    }
+                    if (line != null) {
+                        line = br.readLine();
                     }
                 }
-                if (linea != null) {
-                    linea = br.readLine();
-                }
+                br.close();
+                fr.close();
+                message = "Se crearon " + created + " nuevos registros.";
+            } else {
+                message = "¡Error! Termómetro no registrado.";
             }
-            br.close();
-            fr.close();
-            return creados;
         } catch (Exception e) {
             e.printStackTrace();
+            message = "Error inesperado.";
         }
-        return 0;
-    }
-
-    private void eliminar(String nombre) {
-        new File(nombre).delete();
     }
 
 }

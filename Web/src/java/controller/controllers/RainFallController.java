@@ -1,12 +1,19 @@
 package controller.controllers;
 
+import controller.util.CellDataExtractor;
 import model.weather.RainFall;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.Storage;
 import data.weather.RainFallDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +25,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.util.DateTools;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean(name = "rainFallController")
 @SessionScoped
@@ -26,6 +39,7 @@ public class RainFallController implements Serializable {
     private RainFallDAO jpaController = null;
     private List<RainFall> items = null;
     private RainFall selected;
+    private String message;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
 
@@ -94,10 +108,10 @@ public class RainFallController implements Serializable {
         return items;
     }
 
-    public List<RainFall> getItems(Date fecha1,Date fecha2) {
-        return getJpaController().findRainFallEntities(fecha1,fecha2);
+    public List<RainFall> getItems(Date fecha1, Date fecha2) {
+        return getJpaController().findRainFallEntities(fecha1, fecha2);
     }
-    
+
     public List<RainFall> getItems(Date fecha1) {
         return getJpaController().findRainFallEntities(fecha1);
     }
@@ -132,9 +146,16 @@ public class RainFallController implements Serializable {
         return getJpaController().findRainFallEntities();
     }
 
-    public float calcularMean(Date fecha1,Date fecha2) {
+    public void save(RainFall rainFall) {
+        selected = rainFall;
+        if (getJpaController().findRainFallEntities(rainFall.getRainDate()).isEmpty()) {
+            persist(PersistAction.CREATE, null);
+        }
+    }
+
+    public float calcularMean(Date fecha1, Date fecha2) {
         float mean = 0;
-        List<RainFall> lista = getItems(fecha1,fecha2);
+        List<RainFall> lista = getItems(fecha1, fecha2);
         for (RainFall l : lista) {
             mean += l.getMilimeters();
         }
@@ -143,7 +164,7 @@ public class RainFallController implements Serializable {
         }
         return mean;
     }
-    
+
     public float calcularMean(Date fecha1) {
         float mean = 0;
         List<RainFall> lista = getItems(fecha1);
@@ -194,7 +215,63 @@ public class RainFallController implements Serializable {
                 return null;
             }
         }
+    }
+    
+    public void upload(FileUploadEvent event) {
+        String filename = "rainFall" + new Date().getTime() + ".xlsx";
+        if (permissionBean.getSignInBean().getFarm() != null) {
+            Storage.save(filename, event.getFile());
+            parse(filename);
+            Storage.delete(filename);
+        } else {
+            message = "¡Error! No hay una finca seleccionada.";
+        }
+        JsfUtil.addSuccessMessage(message);
+    }
 
+    private void parse(String filename) {
+        int created = 0;
+        try {
+            FileInputStream fis = null;
+            fis = new FileInputStream(new File(filename));
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
+            RainFall temp = null;
+            while (sheetIterator.hasNext()) {
+                XSSFSheet sheet = sheetIterator.next();
+                int year = Integer.parseInt(sheet.getSheetName());
+                Iterator<Row> rowIterator = sheet.iterator();
+                rowIterator.next();
+                rowIterator.next();
+                rowIterator.next();
+                rowIterator.next();
+
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    if (row.getCell(0) != null) {
+                        int month = DateTools.getMonth(row.getCell(0).getStringCellValue());
+                        int dayOfMonth = new GregorianCalendar(year, month, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
+                        for (int day = 1; day <= dayOfMonth; day++) {
+                            Cell cell = row.getCell(day);
+                            double cellValue = CellDataExtractor.parseNumber(cell);
+                            if (cellValue > 0) {
+                                temp = new RainFall();
+                                temp.setFarm(permissionBean.getSignInBean().getFarm());
+                                temp.setRainDate(DateTools.getDate(year, month, day));
+                                temp.setMilimeters((float) cellValue);
+                                save(temp);
+                                created++;
+                            }
+                        }
+                    }
+                }
+            }
+            fis.close();
+            message = "Se crearon " + created + " nuevos registros.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "Error inesperado.";
+        }
     }
 
 }

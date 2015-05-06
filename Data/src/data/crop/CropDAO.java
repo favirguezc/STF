@@ -19,6 +19,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.administration.Cultivation;
 import model.administration.Farm;
+import model.administration.Lot;
+import model.administration.ModuleClass;
 import model.administration.Person;
 import model.crop.Crop;
 
@@ -186,12 +188,12 @@ public class CropDAO implements Serializable {
     /**
      *
      * @param worker
-     * @param cultivation
+     * @param module
      * @param start
      * @param end
      * @return
      */
-    public List<Crop> findCropEntities(Person worker, Cultivation cultivation, Date start, Date end) {
+    public List<Crop> findCropEntities(Person worker, ModuleClass module, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
@@ -200,11 +202,11 @@ public class CropDAO implements Serializable {
             queryString += " t.worker = :worker";
             a = true;
         }
-        if (cultivation != null) {
+        if (module != null) {
             if (a) {
                 queryString += " AND";
             }
-            queryString += " t.cultivation = :cultivation ";
+            queryString += " t.cultivation.moduleObject = :module ";
             b = true;
         }
         if (end != null) {
@@ -232,7 +234,64 @@ public class CropDAO implements Serializable {
                 query.setParameter("worker", worker);
             }
             if (b) {
-                query.setParameter("cultivation", cultivation);
+                query.setParameter("module", module);
+            }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     *
+     * @param worker
+     * @param lot
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<Crop> findCropEntities(Person worker, Lot lot, Date start, Date end) {
+        EntityManager em = getEntityManager();
+        boolean a, b, c, d;
+        a = b = c = d = false;
+        String queryString = "SELECT t FROM Crop t WHERE";
+        if (worker != null) {
+            queryString += " t.worker = :worker";
+            a = true;
+        }
+        if (lot != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " t.cultivation.moduleObject.lot = :lot ";
+            b = true;
+        }
+        if (end != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.harvestDate BETWEEN :date1 AND :date2";
+            c = d = true;
+        } else if (start != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " t.harvestDate = :date1";
+            c = true;
+        }
+        try {
+            TypedQuery<Crop> query = em.createQuery(queryString, Crop.class);
+            if (c) {
+                query.setParameter("date1", start, TemporalType.DATE);
+            }
+            if (d) {
+                query.setParameter("date2", end, TemporalType.DATE);
+            }
+            if (a) {
+                query.setParameter("worker", worker);
+            }
+            if (b) {
+                query.setParameter("lot", lot);
             }
             return query.getResultList();
         } finally {

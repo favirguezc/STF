@@ -237,7 +237,7 @@ public class PayrollController implements Serializable {
     public float getCroppedValue() {
         float croppedValue = 0;
         if (selected != null) {
-            Crop totalCropped = getCropController().sumarRegistros(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
+            Crop totalCropped = getCropController().sumRegistersByModule(selected.getWorker(), null, selected.getDateFrom(), selected.getDateUntil());
             croppedValue = (totalCropped.getWeight() / 500) * 125;
         }
         return croppedValue;

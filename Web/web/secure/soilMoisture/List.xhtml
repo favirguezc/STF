@@ -14,32 +14,46 @@
         </ui:define>
 
         <ui:define name="body">
-            <p:accordionPanel id="SoilMoistureListPanel" dynamic="true">
+            <p:tabView id="SoilMoistureListPanel" dynamic="true">
                 <p:tab title="Gráfica">
                     <h:form>
                         <h:panelGrid columns="5" cellpadding="10">
                             <p:outputLabel value="Año" for="ano1"/>
-                            <p:spinner id="ano1" value="#{soilMoistureChart.year1}" title="Año" min="2012" max="2030"/>
+                            <p:spinner id="ano1" value="#{soilMoistureController.year1}" title="Año" min="2012" max="2030"/>
                             <p:outputLabel value="Mes" for="mes1"/>
-                            <p:selectOneMenu id="mes1" value="#{soilMoistureChart.month1}">
-                                        <f:selectItem itemLabel="Enero" itemValue="0"/>
-                                        <f:selectItem itemLabel="Febrero" itemValue="1"/>
-                                        <f:selectItem itemLabel="Marzo" itemValue="2"/>
-                                        <f:selectItem itemLabel="Abril" itemValue="3"/>
-                                        <f:selectItem itemLabel="Mayo" itemValue="4"/>
-                                        <f:selectItem itemLabel="Junio" itemValue="5"/>
-                                        <f:selectItem itemLabel="Julio" itemValue="6"/>
-                                        <f:selectItem itemLabel="Agosto" itemValue="7"/>
-                                        <f:selectItem itemLabel="Septiembre" itemValue="8"/>
-                                        <f:selectItem itemLabel="Octubre" itemValue="9"/>
-                                        <f:selectItem itemLabel="Noviembre" itemValue="10"/>
-                                        <f:selectItem itemLabel="Diciembre" itemValue="11"/>
-                                    </p:selectOneMenu>
+                            <p:selectOneMenu id="mes1" value="#{soilMoistureController.month1}">
+                                <f:selectItem itemLabel="Enero" itemValue="0"/>
+                                <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                                <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                                <f:selectItem itemLabel="Abril" itemValue="3"/>
+                                <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                                <f:selectItem itemLabel="Junio" itemValue="5"/>
+                                <f:selectItem itemLabel="Julio" itemValue="6"/>
+                                <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                                <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                                <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                                <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                                <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                            </p:selectOneMenu>
                             <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="updateChart1()"/>
                         </h:panelGrid>
-                        <p:chart id="chart1" type="line" model="#{soilMoistureChart.model1}"/>
-                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{soilMoistureChart.createModel1}"/>
+                        <p:chart id="chart1" type="line" model="#{soilMoistureController.model1}"/>
+                        <p:remoteCommand name="updateChart1" update="chart1" actionListener="#{soilMoistureController.createModel}"/>
                     </h:form>
+                </p:tab>
+                <p:tab title="Cargar Archivo">
+                    <h:form enctype="multipart/form-data">
+                        <p:fileUpload 
+                            fileUploadListener="#{soilMoistureController.upload}"
+                            update=":growl"
+                            dragDropSupport="true"
+                            auto="true"
+                            label="Seleccionar"
+                            allowTypes="/(\.|\/)(xls|xlsx)$/"
+                            validatorMessage="Archivo no válido"
+                            cancelLabel="Cancelar"
+                            uploadLabel="Cargar"/>
+                    </h:form>                     
                 </p:tab>
                 <p:tab title="Datos">
                     <h:form id="SoilMoistureListForm">
@@ -95,7 +109,7 @@
                     <ui:include src="Edit.xhtml"/>
                     <ui:include src="View.xhtml"/>
                 </p:tab>
-            </p:accordionPanel>
+            </p:tabView>
         </ui:define>
     </ui:composition>
 

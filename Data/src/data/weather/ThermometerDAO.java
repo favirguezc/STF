@@ -164,11 +164,14 @@ public class ThermometerDAO {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Thermometer> query = em.createQuery("SELECT t FROM Thermometer t WHERE t.serialNumber = :nds", Thermometer.class);
-            query.setParameter("nds",serialNumber);
+            query.setParameter("nds", serialNumber);
             return query.getSingleResult();
+        } catch (Exception e) {
+
         } finally {
             em.close();
         }
+        return null;
     }
 
     /**

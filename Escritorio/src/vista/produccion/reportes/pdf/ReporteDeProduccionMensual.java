@@ -99,7 +99,7 @@ public class ReporteDeProduccionMensual {
     }
 
     private Element tabla() {
-        PdfPTable tabla = new PdfPTable(8);
+        PdfPTable tabla = new PdfPTable(2);
         PdfPCell celda;
         Font fuenteBold = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.BLACK);
         Font fuenteNormal = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);

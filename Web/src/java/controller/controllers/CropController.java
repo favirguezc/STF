@@ -1,19 +1,27 @@
 package controller.controllers;
 
-import controller.util.CellDataExtractor;
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 import model.crop.Crop;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.TableRowData;
 import controller.util.Storage;
 import data.crop.CropDAO;
 import data.util.EntityManagerFactorySingleton;
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.Color;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,11 +39,8 @@ import model.administration.Lot;
 import model.administration.ModuleClass;
 import model.administration.Person;
 import model.administration.RoleEnum;
+import model.util.DateFormatter;
 import model.util.DateTools;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -66,6 +71,8 @@ public class CropController implements Serializable {
     private int period;
     private Lot lot;
     private ModuleClass module;
+    private Person worker;
+    private List<TableRowData> chartPairs;
 
     public CropController() {
         year = DateTools.getYear();
@@ -166,6 +173,30 @@ public class CropController implements Serializable {
 
     public void setModule(ModuleClass module) {
         this.module = module;
+    }
+
+    public Person getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Person worker) {
+        this.worker = worker;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<TableRowData> getChartPairs() {
+        return chartPairs;
+    }
+
+    public void setChartPairs(List<TableRowData> chartPairs) {
+        this.chartPairs = chartPairs;
     }
 
     protected void setEmbeddableKeys() {
@@ -393,11 +424,13 @@ public class CropController implements Serializable {
 
     //Chart functions
     public void createChart() {
+        chartPairs = new ArrayList<TableRowData>();
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("Pesada Kg");
         Crop totalSum = new Crop();
         Calendar cal = GregorianCalendar.getInstance();
         int maxPeriods = 0;
+        float total = 0;
         switch (period) {
             case 0:
                 maxPeriods = 7;
@@ -433,13 +466,13 @@ public class CropController implements Serializable {
             }
             switch (terrain) {
                 case 0:
-                    totalSum = sumRegistersByModule(null, module, startDate, endDate);
+                    totalSum = sumRegistersByModule(worker, module, startDate, endDate);
                     break;
                 case 1:
-                    totalSum = sumRegistersByLot(null, lot, startDate, endDate);
+                    totalSum = sumRegistersByLot(worker, lot, startDate, endDate);
                     break;
                 case 2:
-                    totalSum = sumRegistersByFarm(null, permissionBean.getSignInBean().getFarm(), startDate, endDate);
+                    totalSum = sumRegistersByFarm(worker, permissionBean.getSignInBean().getFarm(), startDate, endDate);
                     break;
             }
             String label = "";
@@ -458,8 +491,11 @@ public class CropController implements Serializable {
                     break;
             }
             series1.set(label, totalSum.getWeightInKilograms());
+            total += totalSum.getWeightInKilograms();
+            chartPairs.add(new TableRowData(label, "" + totalSum.getWeightInKilograms()));
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
+        chartPairs.add(new TableRowData("Total", "" + total));
         model = new LineChartModel();
         model.addSeries(series1);
         model.setShowPointLabels(true);
@@ -486,4 +522,67 @@ public class CropController implements Serializable {
         yAxis.setMin(0);
     }
 
+    //Report functions
+    public void postProcessPDF(Object document) throws DocumentException {
+        Document pdf = (Document) document;
+        pdf.add(Chunk.NEWLINE);
+        Paragraph footer = new Paragraph("*Valores en kilogramos");
+        footer.add(new Paragraph("Este reporte fue generado automáticamente"));
+        footer.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate())));
+        pdf.add(footer);
+    }
+
+    public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.setPageSize(PageSize.A4);
+        Paragraph header = new Paragraph("Finca: " + permissionBean.getSignInBean().getFarm().getName() + "\n", new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+        header.setAlignment(Element.ALIGN_CENTER);
+        String title = "";
+        String subTitle = "";
+        switch (period) {
+            case 0:
+                title = "Reporte Semanal Por Día";
+                subTitle = DateTools.getWeek(date);
+                break;
+            case 1:
+                title = "Reporte Mensual Por Día";
+                subTitle = DateTools.getMonth(month) + " de " + year;
+                break;
+            case 2:
+                title = "Reporte Anual Por Semana";
+                subTitle = "" + year;
+                break;
+            case 3:
+                title = "Reporte Anual Por Mes";
+                subTitle = "" + year;
+                break;
+        }
+        Paragraph paragraph = new Paragraph(title, new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        header.add(paragraph);
+        paragraph = new Paragraph(subTitle, new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        header.add(paragraph);
+        if (worker != null) {
+            paragraph = new Paragraph("Trabajador: " + worker, new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+            paragraph.setAlignment(Element.ALIGN_CENTER);
+            header.add(paragraph);
+        }
+        switch (terrain) {
+            case 0:
+                paragraph = new Paragraph("Módulo: " + module, new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+                paragraph.setAlignment(Element.ALIGN_CENTER);
+                header.add(paragraph);
+                break;
+            case 1:
+                paragraph = new Paragraph("Lote: " + lot, new Font(Font.HELVETICA, 20, Font.BOLD, Color.BLACK));
+                paragraph.setAlignment(Element.ALIGN_CENTER);
+                header.add(paragraph);
+                break;
+        }
+        header.setAlignment(Element.ALIGN_CENTER);
+        pdf.add(header);
+        pdf.add(Chunk.NEWLINE);
+    }
 }

@@ -21,9 +21,6 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <p:commandButton value="Graficar" icon="ui-icon-refresh" onclick="drawChart()"/>
-                                    </td>
-                                    <td>
                                         <h:outputLabel value="Terreno:"/>
                                     </td>
                                     <td>
@@ -79,31 +76,74 @@
                                         <p:outputLabel value="Módulo:" rendered="#{cropController.terrain == 0}"/>
                                     </td>
                                     <td>
-                                        <p:selectOneMenu value="#{cropController.module}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_moduleObject}" rendered="#{cropController.terrain == 0}">
-                                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
-                                                           var="moduleObjectItem"
-                                                           itemValue="#{moduleObjectItem}"/>
+                                        <p:selectOneMenu value="#{cropController.module}" rendered="#{cropController.terrain == 0}">
+                                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="Trabajador:"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu value="#{cropController.worker}">
+                                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                            <f:selectItems value="#{personController.itemsAvailableWorker}"/>
                                         </p:selectOneMenu>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
                                     <td>
                                         <h:outputLabel value="Periodo:"/>
                                     </td>
                                     <td>
                                         <p:selectOneRadio value="#{cropController.period}">
-                                            <f:selectItem itemLabel="Día - Semana" itemValue="0"/>
-                                            <f:selectItem itemLabel="Día - Mes" itemValue="1"/>
+                                            <f:selectItem itemLabel="Semana - Día" itemValue="0"/>
+                                            <f:selectItem itemLabel="Mes - Día" itemValue="1"/>
                                             <f:selectItem itemLabel="Año - Semana" itemValue="2"/>
                                             <f:selectItem itemLabel="Año - Mes" itemValue="3"/>
                                             <p:ajax update="chartForm"/>
                                         </p:selectOneRadio>
-                                    </td>                                    
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="drawChart()"/>
+                                    </td>
+                                    <td></td><td></td>
+                                    <td align="right">
+                                        <h:outputLabel value="Guardar"/>
+                                    </td>
+                                    <td>
+                                        <h:commandLink>
+                                            <p:graphicImage value="/resources/imagenes/pdf.png" width="24"/>
+                                            <p:dataExporter type="pdf" target="tbl" fileName="reporte" preProcessor="#{cropController.preProcessPDF}" postProcessor="#{cropController.postProcessPDF}"/>
+                                        </h:commandLink>
+                                    </td>
                                 </tr>
                             </table>
                         </p:panel>
                         <p:chart id="chart" type="line" model="#{cropController.model}"/>
+                        <p:dataTable id="tbl"
+                                     value="#{cropController.chartPairs}"
+                                     disabledSelection="true"
+                                     paginator="true"
+                                     rows="10"
+                                     var="pair"
+                                     >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value1}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pesada"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value2}"/>
+                            </p:column>
+                        </p:dataTable>
                         <p:remoteCommand name="drawChart" update="chart" actionListener="#{cropController.createChart}"/>
                     </h:form>
                 </p:tab>

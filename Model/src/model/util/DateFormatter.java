@@ -15,10 +15,10 @@ import java.util.Locale;
  */
 public class DateFormatter {
 
-    private static SimpleDateFormat dateFormatExtraShort = new SimpleDateFormat("MMM dd", new Locale("es", "CO"));
-    private static SimpleDateFormat dateFormatShort = new SimpleDateFormat("MMM dd yyyy", new Locale("es", "CO"));
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", new Locale("es", "CO"));
-    private static SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+    private static final SimpleDateFormat dateFormatExtraShort = new SimpleDateFormat("dd 'de' MMMMMMMM", new Locale("es", "CO"));
+    private static final SimpleDateFormat dateFormatShort = new SimpleDateFormat("dd 'de' MMMMMMMMM 'de' yyyy", new Locale("es", "CO"));
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd 'de' MMMMMMMMM 'de' yyyy", new Locale("es", "CO"));
+    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
 
     /**
      *

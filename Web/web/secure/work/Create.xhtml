@@ -30,7 +30,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleWork.CreateWorkLabel_worker}" for="worker" />
                         <p:selectOneMenu id="worker" value="#{workController.selected.worker}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_worker}">
-                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                            <f:selectItems value="#{personController.itemsAvailableWorker}"
                                            var="workerItem"
                                            itemValue="#{workerItem}"
                                            itemLabel="#{workerItem.name} #{workerItem.lastName}"/>

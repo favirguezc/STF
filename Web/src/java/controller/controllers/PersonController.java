@@ -136,11 +136,11 @@ public class PersonController implements Serializable {
         return getItems();
     }
 
-    public List<Person> getItemsAvailableTrabajador() {
+    public List<Person> getItemsAvailableWorker() {
         return new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.WORKER, signInBean.getFarm());
     }
 
-    public List<Person> getItemsAvailableAsistenteYJefe() {
+    public List<Person> getItemsAvailableSpecialistAndFieldBoss() {
         List<Person> findPersonEntities = new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.SPECIALIST, signInBean.getFarm());
         for (Person p : new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.FIELD_BOSS, signInBean.getFarm())) {
             if (!findPersonEntities.contains(p)) {
@@ -150,7 +150,7 @@ public class PersonController implements Serializable {
         return findPersonEntities;
     }
 
-    public List<Person> getItemsAvailableCliente() {
+    public List<Person> getItemsAvailableClient() {
         return new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findPersonEntities(RoleEnum.CLIENT, signInBean.getFarm());
     }
 

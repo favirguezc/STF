@@ -64,13 +64,13 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_responsible}" for="responsible" />
                         <p:selectOneMenu id="responsible" value="#{applicationController.selected.responsible}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_responsible}">
-                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                            <f:selectItems value="#{personController.itemsAvailableWorker}"
                                            var="responsibleItem"
                                            itemValue="#{responsibleItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_authorizes}" for="authorizes" />
                         <p:selectOneMenu id="authorizes" value="#{applicationController.selected.authorizes}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizes}">
-                            <f:selectItems value="#{personController.itemsAvailableAsistenteYJefe}"
+                            <f:selectItems value="#{personController.itemsAvailableAssitantAndBoss}"
                                            var="authorizesItem"
                                            itemValue="#{authorizesItem}"/>
                         </p:selectOneMenu>

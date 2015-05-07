@@ -23,7 +23,7 @@
                         <p:calendar id="harvestDate" pattern="dd/MM/yyyy" value="#{cropController.selected.harvestDate}" title="#{bundleCrop.EditCropTitle_harvestDate}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_harvestDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCrop.CreateCropLabel_collector}" for="collector" />
                         <p:selectOneMenu id="collector" value="#{cropController.selected.collector}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_collector}">
-                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                            <f:selectItems value="#{personController.itemsAvailableWorker}"
                                            var="collectorItem"
                                            itemValue="#{collectorItem}"
                                            itemLabel="#{collectorItem.name} #{collectorItem.lastName}"/>

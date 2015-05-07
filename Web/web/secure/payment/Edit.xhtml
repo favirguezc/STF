@@ -15,7 +15,7 @@
                         <p:calendar id="paymentDate" pattern="dd/MM/yyyy" value="#{paymentController.selected.paymentDate}" title="#{bundlePayment.EditPaymentTitle_paymentDate}" required="true" requiredMessage="#{bundlePayment.EditPaymentRequiredMessage_paymentDate}" showOn="button"/>
                         <p:outputLabel value="#{bundlePayment.EditPaymentLabel_customer}" for="customer" />
                         <p:selectOneMenu id="customer" value="#{paymentController.selected.customer}" required="true" requiredMessage="#{bundlePayment.EditPaymentRequiredMessage_customer}">
-                            <f:selectItems value="#{personController.itemsAvailableCliente}"
+                            <f:selectItems value="#{personController.itemsAvailableClient}"
                                            var="customerItem"
                                            itemValue="#{customerItem}"
                                            itemLabel="#{customerItem.name} #{customerItem.lastName}"/>

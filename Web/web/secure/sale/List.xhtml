@@ -38,7 +38,7 @@
                                 <f:facet name="filter">
                                     <p:selectOneMenu onchange="PF('moduleclassTable').filter()">
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{personController.itemsAvailableCliente}"/>
+                                        <f:selectItems value="#{personController.itemsAvailableClient}"/>
                                     </p:selectOneMenu>
                                 </f:facet>
                                 <h:outputText value="#{item.customer.name} #{item.customer.lastName}"/>

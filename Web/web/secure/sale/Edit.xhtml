@@ -10,54 +10,113 @@
         <p:dialog id="SaleEditDlg" widgetVar="SaleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleSale.EditSaleTitle}">
             <h:form id="SaleEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{saleController.selected != null}">
-                        <p:outputLabel for="saleDate" value="Fecha Sale (dd/MM/yyyy):"/>
-                        <p:calendar id="saleDate" pattern="dd/MM/yyyy" value="#{saleController.selected.saleDate}" title="Fecha de la Sale" required="true" requiredMessage="The saleDate field is required." showOn="button"/>
-                        <p:outputLabel for="customer" value="Cliente:"/>
-                        <p:selectOneMenu id="customer" value="#{saleController.selected.customer}" required="true" requiredMessage="The customer field is required." >
+                    <p:panelGrid columns="4" rendered="#{saleController.selected != null}">
+                        <p:outputLabel for="saleDate" value="#{bundleSale.EditSaleLabel_saleDate}"/>
+                        <p:calendar id="saleDate" pattern="dd/MM/yyyy" value="#{saleController.selected.saleDate}" title="#{bundleSale.EditSaleLabel_saleDate}" required="true" requiredMessage="#{bundleSale.EditSaleRequiredMessage_saleDate}" showOn="button"/>
+                        <p:outputLabel for="customer" value="#{bundleSale.EditSaleLabel_customer}"/>
+                        <p:selectOneMenu id="customer" value="#{saleController.selected.customer}" required="true" requiredMessage="#{bundleSale.EditSaleRequiredMessage_customer}" >
                             <f:selectItems value="#{personController.itemsAvailableCliente}"
                                            var="customerItem"
                                            itemValue="#{customerItem}"
                                            itemLabel="#{customerItem.name} #{customerItem.lastName}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel for="extraGrams" value="Cantidad Type Extra**:"/>
-                        <p:inputText id="extraGrams" value="#{saleController.selected.extraGrams}" title="Cantidad Type Extra">
-                            <p:ajax update="extraUnitPrice"/>
+                        <h:outputText value="#{bundleSale.EditSaleLabel_type}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.EditSaleLabel_quantity}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.EditSaleLabel_unitValue}" style="font-weight: bold;"/>
+                        <h:outputText value="#{bundleSale.EditSaleLabel_totalValue}" style="font-weight: bold;"/>
+                        <p:selectBooleanCheckbox value="#{saleController.extraType}" itemLabel="#{bundleSale.EditSaleLabel_extraType}">
+                            <p:ajax update="extraGrams extraUnitPrice extraTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="extraGrams" value="#{saleController.extraTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_extraQuantity}" disabled="#{!saleController.extraType}" >
+                            <p:ajax update="extraTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="firstGrams" value="Cantidad Type Primera**:"/>
-                        <p:inputText id="firstGrams" value="#{saleController.selected.firstGrams}" title="Cantidad Type Primera" >
-                            <p:ajax update="firstUnitPrice"/>
+                        <p:inputText id="extraUnitPrice" value="#{saleController.extraTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_extraUnitValue}" disabled="#{!saleController.extraType}">
+                            <p:ajax update="extraTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="secondGrams" value="Cantidad Type Segunda**:"/>
-                        <p:inputText id="secondGrams" value="#{saleController.selected.secondGrams}" title="Cantidad Type Segunda" >
-                            <p:ajax update="secondUnitPrice"/>
+                        <h:outputText id="extraTotal" value="#{saleController.extraTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_extraTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.oneType}" itemLabel="#{bundleSale.EditSaleLabel_firstType}">
+                            <p:ajax update="firstGrams firstUnitPrice firstTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="firstGrams" value="#{saleController.oneTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_firstQuantity}" disabled="#{!saleController.oneType}" >
+                            <p:ajax update="firstTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="thirdGrams" value="Cantidad Type Tercera**:"/>
-                        <p:inputText id="thirdGrams" value="#{saleController.selected.thirdGrams}" title="Cantidad Type Tercera" >
-                            <p:ajax update="thirdUnitPrice"/>
+                        <p:inputText id="firstUnitPrice" value="#{saleController.oneTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_firstUnitValue}" disabled="#{!saleController.oneType}">
+                            <p:ajax update="firstTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="fourthGrams" value="Cantidad Type Cuarta**:"/>
-                        <p:inputText id="fourthGrams" value="#{saleController.selected.fourthGrams}" title="Cantidad Type Cuarta" >
-                            <p:ajax update="fourthUnitPrice"/>
+                        <h:outputText id="firstTotal" value="#{saleController.oneTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_firstTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.twoType}" itemLabel="#{bundleSale.EditSaleLabel_secondType}">
+                            <p:ajax update="secondGrams secondUnitPrice secondTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="secondGrams" value="#{saleController.twoTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_secondQuantity}" disabled="#{!saleController.twoType}" >
+                            <p:ajax update="secondTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="fifthGrams" value="Cantidad Type Quinta**:"/>
-                        <p:inputText id="fifthGrams" value="#{saleController.selected.fifthGrams}" title="Cantidad Type Quinta" >
-                            <p:ajax update="fifthUnitPrice"/>
+                        <p:inputText id="secondUnitPrice" value="#{saleController.twoTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_secondUnitValue}" disabled="#{!saleController.twoType}">
+                            <p:ajax update="secondTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
                         </p:inputText>
-                        <p:outputLabel for="extraUnitPrice" value="Extra Precio Unidad:"/>
-                        <p:inputText id="extraUnitPrice" value="#{saleController.selected.extraUnitPrice}" disabled="#{saleController.selected.extraGrams == 0}" title="Extra Precio Unidad" />
-                        <p:outputLabel for="firstUnitPrice" value="Primera Precio Unidad:"/>
-                        <p:inputText id="firstUnitPrice" value="#{saleController.selected.firstUnitPrice}" disabled="#{saleController.selected.firstGrams == 0}" title="Primera Precio Unidad" />
-                        <p:outputLabel for="secondUnitPrice" value="Segunda Precio Unidad:"/>
-                        <p:inputText id="secondUnitPrice" value="#{saleController.selected.secondUnitPrice}" disabled="#{saleController.selected.secondGrams == 0}" title="Segunda Precio Unidad" />
-                        <p:outputLabel for="thirdUnitPrice" value="Tercera Precio Unidad:"/>
-                        <p:inputText id="thirdUnitPrice" value="#{saleController.selected.thirdUnitPrice}" disabled="#{saleController.selected.thirdGrams == 0}" title="Tercera Precio Unidad" />
-                        <p:outputLabel for="fourthUnitPrice" value="Cuarta Precio Unidad:"/>
-                        <p:inputText id="fourthUnitPrice" value="#{saleController.selected.fourthUnitPrice}" disabled="#{saleController.selected.fourthGrams == 0}" title="Cuarta Precio Unidad" />
-                        <p:outputLabel for="fifthUnitPrice" value="Quinta Precio Unidad:"/>
-                        <p:inputText id="fifthUnitPrice" value="#{saleController.selected.fifthUnitPrice}" disabled="#{saleController.selected.fifthGrams == 0}" title="Quinta Precio Unidad" />
+                        <h:outputText id="secondTotal" value="#{saleController.twoTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_secondTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.threeType}" itemLabel="#{bundleSale.EditSaleLabel_thirdType}">
+                            <p:ajax update="thirdGrams thirdUnitPrice thirdTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="thirdGrams" value="#{saleController.threeTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_thirdQuantity}" disabled="#{!saleController.threeType}" >
+                            <p:ajax update="thirdTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <p:inputText id="thirdUnitPrice" value="#{saleController.threeTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_thirdUnitValue}" disabled="#{!saleController.threeType}">
+                            <p:ajax update="thirdTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <h:outputText id="thirdTotal" value="#{saleController.threeTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_thirdTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.fourType}" itemLabel="#{bundleSale.EditSaleLabel_fourthType}">
+                            <p:ajax update="fourthGrams fourthUnitPrice fourthTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="fourthGrams" value="#{saleController.fourTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_fourthQuantity}" disabled="#{!saleController.fourType}" >
+                            <p:ajax update="fourthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <p:inputText id="fourthUnitPrice" value="#{saleController.fourTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_fourthUnitValue}" disabled="#{!saleController.fourType}">
+                            <p:ajax update="fourthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <h:outputText id="fourthTotal" value="#{saleController.fourTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_fourthTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.fiveType}" itemLabel="#{bundleSale.EditSaleLabel_fifthType}">
+                            <p:ajax update="fifthGrams fifthUnitPrice fifthTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="fifthGrams" value="#{saleController.fiveTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_fifthQuantity}" disabled="#{!saleController.fiveType}" >
+                            <p:ajax update="fifthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <p:inputText id="fifthUnitPrice" value="#{saleController.fiveTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_fifthUnitValue}" disabled="#{!saleController.fiveType}">
+                            <p:ajax update="fifthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <h:outputText id="fifthTotal" value="#{saleController.fiveTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_fifthTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <p:selectBooleanCheckbox value="#{saleController.dummieType}" itemLabel="#{bundleSale.EditSaleLabel_dummieType}">
+                            <p:ajax update="dummieGrams dummieUnitPrice dummieTotal" />
+                        </p:selectBooleanCheckbox>
+                        <p:inputText id="dummieGrams" value="#{saleController.dummieTypeSaleItem.quantity}" title="#{bundleSale.EditSaleTitle_dummieQuantity}" disabled="#{!saleController.dummieType}" >
+                            <p:ajax update="dummieTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <p:inputText id="dummieUnitPrice" value="#{saleController.dummieTypeSaleItem.unitValue}" title="#{bundleSale.EditSaleTitle_dummieUnitValue}" disabled="#{!saleController.dummieType}">
+                            <p:ajax update="dummieTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                        </p:inputText>
+                        <h:outputText id="dummieTotal" value="#{saleController.dummieTypeSaleItem.totalValue}" title="#{bundleSale.EditSaleTitle_dummieTotalValue}" >
+                            <f:convertNumber/>
+                        </h:outputText>
+                        <h:outputText value=" "/>
+                        <h:outputText value=" "/>
+                        <h:outputText value="#{bundleSale.EditSaleLabel_totalSaleValue}" style="font-weight: bold;"/>
+                        <h:outputText id="SaleValueTotal" value="#{saleController.selected.saleTotalValue}" title="#{bundleSale.EditSaleTitle_totalSaleValue}" style="font-weight: bold;">
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:panelGrid>
-                    <h:outputText value="**Ingresar los valores en Libras" style="color: red"/>
+                    <h:outputText value="#{bundleSale.EditSaleMessageLabel_important}" style="font-weight: bold;"/>
+                    <br/>
                     <p:commandButton actionListener="#{saleController.update}" value="#{bundle.Save}" update="display,:SaleListPanel:SaleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SaleEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SaleEditDialog.hide()"/>
                 </h:panelGroup>

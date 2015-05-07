@@ -3,27 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data.finances;
+package data.finances.incomes;
 
-import data.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.finances.Price;
+import data.exceptions.NonexistentEntityException;
+import javax.persistence.TypedQuery;
+import model.finances.incomes.Sale;
+import model.finances.incomes.SaleItem;
 
 /**
  *
  * @author John Fredy
  */
-public class PriceDAO implements Serializable {
-    
-    public PriceDAO(EntityManagerFactory emf) {
+public class SaleItemDAO implements Serializable {
+
+    public SaleItemDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,12 +33,12 @@ public class PriceDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Price price) {
+    public void create(SaleItem saleItem) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(price);
+            em.persist(saleItem);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -46,19 +47,19 @@ public class PriceDAO implements Serializable {
         }
     }
 
-    public void edit(Price price) throws NonexistentEntityException, Exception {
+    public void edit(SaleItem saleItem) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            price = em.merge(price);
+            saleItem = em.merge(saleItem);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = price.getId();
-                if (findPrice(id) == null) {
-                    throw new NonexistentEntityException("The price with id " + id + " no longer exists.");
+                long id = saleItem.getId();
+                if (findSaleItem(id) == null) {
+                    throw new NonexistentEntityException("The saleItem with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -74,14 +75,14 @@ public class PriceDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Price price;
+            SaleItem saleItem;
             try {
-                price = em.getReference(Price.class, id);
-                price.getId();
+                saleItem = em.getReference(SaleItem.class, id);
+                saleItem.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The price with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The saleItem with id " + id + " no longer exists.", enfe);
             }
-            em.remove(price);
+            em.remove(saleItem);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -90,19 +91,19 @@ public class PriceDAO implements Serializable {
         }
     }
 
-    public List<Price> findPriceEntities() {
-        return findPriceEntities(true, -1, -1);
+    public List<SaleItem> findSaleItemEntities() {
+        return findSaleItemEntities(true, -1, -1);
     }
 
-    public List<Price> findPriceEntities(int maxResults, int firstResult) {
-        return findPriceEntities(false, maxResults, firstResult);
+    public List<SaleItem> findSaleItemEntities(int maxResults, int firstResult) {
+        return findSaleItemEntities(false, maxResults, firstResult);
     }
 
-    private List<Price> findPriceEntities(boolean all, int maxResults, int firstResult) {
+    private List<SaleItem> findSaleItemEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Price.class));
+            cq.select(cq.from(SaleItem.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -114,42 +115,34 @@ public class PriceDAO implements Serializable {
         }
     }
 
-    public Price findPrice(long id) {
+    public SaleItem findSaleItem(long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Price.class, id);
-        } finally {
-            em.close();
-        }
-    }
-    
-    public Price findPrice(String item) {
-        EntityManager em = getEntityManager();
-        String queryString = "SELECT p FROM Price p";
-        if (item != null) {
-            queryString += " WHERE p.item = :item";
-        }
-        try {
-            TypedQuery<Price> query = em.createQuery(queryString, Price.class);
-            query.setParameter("item", item);
-            List<Price> result = query.getResultList();
-            if(result == null || result.isEmpty()){
-                return null;
-            }
-            return result.get(0);
+            return em.find(SaleItem.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getPriceCount() {
+    public int getSaleItemCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Price> rt = cq.from(Price.class);
+            Root<SaleItem> rt = cq.from(SaleItem.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<SaleItem> findSaleItemEntities(Sale sale){
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<SaleItem> query = em.createQuery("SELECT si FROM SaleItem si WHERE si.sale = :sale", SaleItem.class);
+            query.setParameter("sale", sale);
+            return query.getResultList();
         } finally {
             em.close();
         }

@@ -6,6 +6,7 @@
 package data.finances.incomes;
 
 import data.exceptions.NonexistentEntityException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ import model.administration.Person;
  *
  * @author JohnFredy
  */
-public class SaleDAO {
+public class SaleDAO implements Serializable {
     
     private EntityManagerFactory emf = null;
     
@@ -179,6 +180,20 @@ public class SaleDAO {
                 query.setParameter("customer", customer);
             }
             return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Sale findSale(Sale sale) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.saleDate = :saleDate AND s.customer = :customer AND s.farm = :farm  AND s.saleTotalValue = :saleTotalValue", Sale.class);
+            query.setParameter("saleDate", sale.getSaleDate());
+            query.setParameter("customer", sale.getCustomer());
+            query.setParameter("farm", sale.getFarm());
+            query.setParameter("saleTotalValue", sale.getSaleTotalValue());
+            return query.getSingleResult();
         } finally {
             em.close();
         }

@@ -29,7 +29,7 @@
                         <p:outputLabel for="quantityCoE" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_quantity}"/>
                         <p:inputText id="quantityCoE" value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_quantity}" required="true" requiredMessage="#{bundleChemicalPurchase.EditChemicalPurchaseRequiredMessage_quantity}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{chemicalPurchaseController.update}" value="#{bundle.Save}" update="display,:ChemicalPurchaseListPanel:ChemicalPurchaseListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalPurchaseEditDialog');"/>
+                    <p:commandButton actionListener="#{chemicalPurchaseController.update}" value="#{bundle.Save}" update="display,:ChemicalPurchaseListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalPurchaseEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalPurchaseEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

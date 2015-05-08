@@ -43,5 +43,28 @@ public enum ClassificationTypeEnum {
                 return "";
         }
     }
+    
+    public static ClassificationTypeEnum stringTo(String word){
+        switch (word) {
+            case "Cuarta":
+                return FOUR;
+            case "Dañada":
+                return DAMAGED;
+            case "Extra":
+                return EXTRA;
+            case "Muñeco":
+                return DUMMIE;
+            case "Primera":
+                return ONE;
+            case "Quinta":
+                return FIVE;
+            case "Segunda":
+                return TWO;
+            case "Tercera":
+                return THREE;
+            default:
+                return null;
+        }
+    }
 
 }

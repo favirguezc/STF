@@ -44,14 +44,13 @@ public class SaleController implements Serializable {
     private Sale selected;
     private List<Sale> items = null;
     private SaleDAO jpaController = null;
-    private Price price = null;
-    private boolean newPrice;
     private PriceDAO priceJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     private SaleItemDAO saleItemJpaController = null;
+    private List<Price> prices = null;
     private List<SaleItem> saleItems = null;
     private List<SaleItem> oldSaleItems = null;
     private boolean extraType;
@@ -234,6 +233,10 @@ public class SaleController implements Serializable {
                         saleItem = searchSaleItemByType(type);
                     }else{
                         //when create
+                        Price price = searchPriceByType(type);
+                        if(price != null){ //if exits then set
+                            saleItem.setUnitValue(price.getPriceValue());
+                        }
                         saleItems.add(saleItem);
                     }
                 }
@@ -243,12 +246,17 @@ public class SaleController implements Serializable {
                     saleItem = searchSaleItemByType(type);
                 }else{
                     //when create
+                    Price price = searchPriceByType(type);
+                    if(price != null){ //if exits then set
+                        saleItem.setUnitValue(price.getPriceValue());
+                    }
                     saleItems.add(saleItem);
                 }
             }
         }else{
             saleItem = null;
             removeSaleItem(type);
+            removePrice(type);
             
         }
         return saleItem;
@@ -289,11 +297,33 @@ public class SaleController implements Serializable {
         return found;
     }
     
+    private Price searchPriceByType(ClassificationTypeEnum type){
+        Price price = getPriceJpaController().findPrice(type.toString());
+        if(price == null){
+            price = new Price();
+            price.setItem(type.toString());
+            prices.add(price);
+            return null;
+        }
+        prices.add(price);
+        return price;
+    }
+    
     private void removeSaleItem(ClassificationTypeEnum type){
         Iterator<SaleItem> iterator = saleItems.iterator();
         while(iterator.hasNext()){
             SaleItem item = iterator.next();
             if(item.getType() == type){
+                iterator.remove();
+            }
+        }
+    }
+    
+    private void removePrice(ClassificationTypeEnum type){
+        Iterator<Price> iterator = prices.iterator();
+        while(iterator.hasNext()){
+            Price price = iterator.next();
+            if(price.getItem().equals(type.toString())){
                 iterator.remove();
             }
         }
@@ -308,6 +338,7 @@ public class SaleController implements Serializable {
     private void initializeSaleItems(){
         saleItems = new ArrayList<SaleItem>();
         initializeTypeBooleans();
+        prices = new ArrayList<Price>();
     }
     
     private void initializeTypeBooleans(){
@@ -355,6 +386,7 @@ public class SaleController implements Serializable {
         saleItems = new ArrayList<SaleItem>(oldSaleItems);
         initializeTypeBooleans();
         setTypeBooleans();
+        findAndSetPrices();
     }
     
     private void setTypeBooleans(){
@@ -381,6 +413,17 @@ public class SaleController implements Serializable {
                 case DUMMIE:
                     dummieType = true;
                     break;
+            }
+        }
+    }
+    
+    private void findAndSetPrices(){
+        prices = new ArrayList<Price>();
+        Price findPrice = null;
+        for(SaleItem item : saleItems){
+            findPrice = getPriceJpaController().findPrice(item.getType().toString());
+            if(findPrice != null){
+                prices.add(findPrice);
             }
         }
     }
@@ -426,9 +469,11 @@ public class SaleController implements Serializable {
                 if (persistAction == PersistAction.UPDATE) {
                     getJpaController().edit(selected);
                     updateSaleItems();
+                    savePrices();
                 } else if (persistAction == PersistAction.CREATE) {
                     getJpaController().create(selected);
                     createSaleItems();
+                    savePrices();
                 } else {
                     destroySaleItems();
                     getJpaController().destroy(selected.getId());
@@ -501,36 +546,23 @@ public class SaleController implements Serializable {
         }
         return sum;
     }
-
-    public void verifyPrice(){
-//        if(selected.getChemical() != null){
-//            //search precio by item
-//            precio = getPrecioJpaController().findPrice(selected.getChemical().getNombre());
-//            //if exists set
-//            if(precio != null){
-//                nuePrecio = false;
-//                selected.setPrecio(precio.getValor());
-//            }else{
-//                //else create new precio
-//                nuePrecio = true;
-//                precio = new Price(selected.getChemical().getNombre(),0);
-//                selected.setPrecio(0);
-//            }
-//        }
-    }
     
-    public void savePrice(){
-//        if(nuePrecio){
-//            precio.setValor(selected.getPrecio());
-//            getPrecioJpaController().create(precio);
-//        }else{
-//            try {
-//                precio.setValor(selected.getPrecio());
-//                getPrecioJpaController().edit(precio);
-//            } catch (Exception ex) {
-//                Logger.getLogger(CompraController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
+    public void savePrices(){
+        for(Price price : prices){
+            Price searchPrice = getPriceJpaController().findPrice(price.getItem());
+            ClassificationTypeEnum type = ClassificationTypeEnum.stringTo(price.getItem());
+            SaleItem item = searchSaleItemByType(type);
+            price.setPriceValue(item.getUnitValue());
+            if(searchPrice == null){
+                getPriceJpaController().create(price);
+            }else{
+                try {
+                    getPriceJpaController().edit(price);
+                } catch (Exception ex) {
+                    Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
     
     @FacesConverter(forClass = Sale.class)

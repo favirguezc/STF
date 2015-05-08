@@ -197,7 +197,10 @@ public class CropDAO implements Serializable {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
-        String queryString = "SELECT t FROM Crop t WHERE";
+        String queryString = "SELECT t FROM Crop t";
+        if(worker != null || module != null || start != null || end != null){
+            queryString += " WHERE";
+        }
         if (worker != null) {
             queryString += " t.worker = :worker";
             a = true;
@@ -254,7 +257,10 @@ public class CropDAO implements Serializable {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
-        String queryString = "SELECT t FROM Crop t WHERE";
+        String queryString = "SELECT t FROM Crop t";
+        if(worker != null || lot != null || start != null || end != null){
+            queryString += " WHERE";
+        }
         if (worker != null) {
             queryString += " t.worker = :worker";
             a = true;
@@ -303,7 +309,10 @@ public class CropDAO implements Serializable {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
-        String queryString = "SELECT t FROM Crop t WHERE";
+        String queryString = "SELECT t FROM Crop t";
+        if(worker != null || farm != null || start != null || end != null){
+            queryString += " WHERE";
+        }
         if (worker != null) {
             queryString += " t.worker = :worker";
             a = true;

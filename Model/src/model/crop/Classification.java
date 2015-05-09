@@ -78,6 +78,10 @@ public class Classification implements Serializable {
         this.weight = weight;
     }
 
+    public float getWeightInKilograms() {
+        return getWeight() / 1000;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -114,6 +118,12 @@ public class Classification implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public void sumClassification(Classification r) {
+        if (r != null) {
+            this.weight += r.weight;
+        }
     }
 
 }

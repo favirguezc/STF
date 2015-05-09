@@ -74,7 +74,7 @@
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizes}" for="authorizes" />
                         <p:selectOneMenu id="authorizes" value="#{applicationController.selected.authorizes}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizes}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personController.itemsAvailableAssitantAndBoss}"
+                            <f:selectItems value="#{personController.itemsAvailableSpecialistAndFieldBoss}"
                                            var="authorizesItem"
                                            itemValue="#{authorizesItem}"/>
                         </p:selectOneMenu>

@@ -41,7 +41,7 @@
                                         <p:outputLabel value="Año:" rendered="#{cropController.period gt 0}"/>
                                     </td>
                                     <td>
-                                        <p:spinner value="#{cropController.year}" min="2012" max="2030" rendered="#{cropController.period gt 0}"/>
+                                        <p:spinner value="#{cropController.year}" min="2012" rendered="#{cropController.period gt 0}"/>
                                     </td>
                                     <td>
                                         <p:outputLabel value="Mes:" rendered="#{cropController.period==1}"/>
@@ -116,8 +116,14 @@
                                     </td>
                                     <td>
                                         <h:commandLink>
-                                            <p:graphicImage value="/resources/imagenes/pdf.png" width="24"/>
-                                            <p:dataExporter type="pdf" target="tbl" fileName="reporte" preProcessor="#{cropController.preProcessPDF}" postProcessor="#{cropController.postProcessPDF}"/>
+                                            <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                                            <p:dataExporter type="pdf" target="tbl" fileName="reporteRecolección" preProcessor="#{cropController.preProcessPDF}" postProcessor="#{cropController.postProcessPDF}"/>
+                                        </h:commandLink>
+                                    </td>
+                                    <td>
+                                        <h:commandLink>
+                                            <p:graphicImage value="/resources/images/excel.png" width="24"/>
+                                            <p:dataExporter type="xls" target="tbl" fileName="reporteRecolección"/>
                                         </h:commandLink>
                                     </td>
                                 </tr>
@@ -127,24 +133,22 @@
                         <p:dataTable id="tbl"
                                      value="#{cropController.chartPairs}"
                                      disabledSelection="true"
-                                     paginator="true"
-                                     rows="10"
                                      var="pair"
                                      >
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value=""/>
                                 </f:facet>
-                                <h:outputText value="#{pair.value1}"/>
+                                <h:outputText value="#{pair.label}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Pesada"/>
                                 </f:facet>
-                                <h:outputText value="#{pair.value2}"/>
+                                <h:outputText value="#{pair.value1}"/>
                             </p:column>
                         </p:dataTable>
-                        <p:remoteCommand name="drawChart" update="chart" actionListener="#{cropController.createChart}"/>
+                        <p:remoteCommand name="drawChart" update="chart,tbl" actionListener="#{cropController.createChart}"/>
                     </h:form>
                 </p:tab>
                 <p:tab title="Cargar Archivo">

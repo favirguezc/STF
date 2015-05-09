@@ -14,60 +14,252 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ClassificationListForm">                
-                <p:dataTable id="datalist" value="#{classificationController.items}" var="item"
-                             selectionMode="single" selection="#{classificationController.selected}"
-                             paginator="true"
-                             rowKey="#{item.id}"
-                             rows="10"
-                             rowsPerPageTemplate="10,20,30,40,50"
-                             widgetVar="classificationTable"
-                             >
+            <p:tabView dynamic="true" id="ClassificationListPanel">
+                <p:tab title="Gráficas">
+                    <h:form>
+                        <p:panel id="chartForm">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Terreno:"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneRadio value="#{classificationController.terrain}">
+                                            <f:selectItem itemLabel="Módulo" itemValue="0"/>
+                                            <f:selectItem itemLabel="Lote" itemValue="1"/>
+                                            <f:selectItem itemLabel="Finca" itemValue="2"/>
+                                            <p:ajax update="chartForm"/>
+                                        </p:selectOneRadio>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="Fecha:" rendered="#{classificationController.period==0}"/>
+                                    </td>
+                                    <td>
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{classificationController.date}" showOn="button" rendered="#{classificationController.period==0}"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="Año:" rendered="#{classificationController.period gt 0}"/>
+                                    </td>
+                                    <td>
+                                        <p:spinner value="#{classificationController.year}" min="2012" rendered="#{classificationController.period gt 0}"/>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="Mes:" rendered="#{classificationController.period==1}"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu value="#{classificationController.month}" rendered="#{classificationController.period==1}">
+                                            <f:selectItem itemLabel="Enero" itemValue="0"/>
+                                            <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                                            <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                                            <f:selectItem itemLabel="Abril" itemValue="3"/>
+                                            <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                                            <f:selectItem itemLabel="Junio" itemValue="5"/>
+                                            <f:selectItem itemLabel="Julio" itemValue="6"/>
+                                            <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                                            <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                                            <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                                            <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                                            <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="Lote:" rendered="#{classificationController.terrain == 1}"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu value="#{classificationController.lot}" rendered="#{classificationController.terrain == 1}">
+                                            <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
+                                                           var="lotItem"
+                                                           itemValue="#{lotItem}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="Módulo:" rendered="#{classificationController.terrain == 0}"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneMenu value="#{classificationController.module}" rendered="#{classificationController.terrain == 0}">
+                                            <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"/>
+                                        </p:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Periodo:"/>
+                                    </td>
+                                    <td>
+                                        <p:selectOneRadio value="#{classificationController.period}">
+                                            <f:selectItem itemLabel="Semana - Día" itemValue="0"/>
+                                            <f:selectItem itemLabel="Mes - Día" itemValue="1"/>
+                                            <f:selectItem itemLabel="Año - Semana" itemValue="2"/>
+                                            <f:selectItem itemLabel="Año - Mes" itemValue="3"/>
+                                            <p:ajax update="chartForm"/>
+                                        </p:selectOneRadio>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="drawChart()"/>
+                                    </td>
+                                    <td></td><td></td>
+                                    <td align="right">
+                                        <h:outputLabel value="Guardar"/>
+                                    </td>
+                                    <td>
+                                        <h:commandLink>
+                                            <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                                            <p:dataExporter type="pdf" target="tbl" fileName="reporteClasificación" preProcessor="#{classificationController.preProcessPDF}" postProcessor="#{classificationController.postProcessPDF}"/>
+                                        </h:commandLink>
+                                    </td>
+                                    <td>
+                                        <h:commandLink>
+                                            <p:graphicImage value="/resources/images/excel.png" width="24"/>
+                                            <p:dataExporter type="xls" target="tbl" fileName="reporteClasificación"/>
+                                        </h:commandLink>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:panel>
+                        <p:chart id="chart" type="line" model="#{classificationController.model}"/>
+                        <p:dataTable id="tbl"
+                                     value="#{classificationController.chartPairs}"
+                                     disabledSelection="true"
+                                     var="pair"
+                                     >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <h:outputText value="#{pair.label}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header1}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value1}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header2}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value2}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header3}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value3}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header4}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value4}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header5}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value5}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header6}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value6}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header7}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value7}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{classificationController.header8}"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value8}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total"/>
+                                </f:facet>
+                                <h:outputText value="#{pair.value9}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <p:remoteCommand name="drawChart" update="chart,tbl" actionListener="#{classificationController.createChart}"/>
+                    </h:form>
+                </p:tab>
+                <p:tab title="Cargar Archivo">
+                    <h:form enctype="multipart/form-data">
+                        <p:fileUpload 
+                            fileUploadListener="#{classificationController.upload}" 
+                            update=":growl" 
+                            dragDropSupport="true" 
+                            auto="true" 
+                            label="Seleccionar" 
+                            allowTypes="/(\.|\/)(xlsx|xls)$/"
+                            validatorMessage="Archivo no válido"
+                            cancelLabel="Cancelar"
+                            uploadLabel="Cargar"/>
+                    </h:form>                  
+                </p:tab>
+                <p:tab title="Datos">
+                    <h:form id="ClassificationListForm">                
+                        <p:dataTable id="datalist" value="#{classificationController.items}" var="item"
+                                     selectionMode="single" selection="#{classificationController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     widgetVar="classificationTable"
+                                     >
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleClassification.ListClassificationTitle_classificationDate}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.classificationDate}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column filterBy="#{item.cultivation}" headerText="#{bundleClassification.ListClassificationTitle_cultivation}" filterMatchMode="exact">
-                        <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('classificationTable').filter()">
-                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
-                        </f:facet>
-                        <h:outputText value="#{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}, #{item.cultivation.variety.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleClassification.ListClassificationTitle_type}"/>
-                        </f:facet>                        
-                        <h:outputText value="#{item.type}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleClassification.ListClassificationTitle_weight}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.weight}"/>
-                    </p:column>
-                    <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{classificationController.prepareCreate}" update=":ClassificationCreateForm" oncomplete="PF('ClassificationCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClassificationViewForm" oncomplete="PF('ClassificationViewDialog').show()" disabled="#{empty classificationController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClassificationEditForm" oncomplete="PF('ClassificationEditDialog').show()" disabled="#{empty classificationController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{classificationController.destroy}" update=":growl,datalist" disabled="#{empty classificationController.selected}"/>
-                    </f:facet>
-                </p:dataTable>                
-            </h:form>
-
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundleClassification.ListClassificationTitle_classificationDate}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.classificationDate}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column filterBy="#{item.cultivation}" headerText="#{bundleClassification.ListClassificationTitle_cultivation}" filterMatchMode="exact">
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('classificationTable').filter()">
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"/>
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                <h:outputText value="#{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}, #{item.cultivation.variety.name}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundleClassification.ListClassificationTitle_type}"/>
+                                </f:facet>                        
+                                <h:outputText value="#{item.type}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundleClassification.ListClassificationTitle_weight}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.weight}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{classificationController.prepareCreate}" update=":ClassificationCreateForm" oncomplete="PF('ClassificationCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClassificationViewForm" oncomplete="PF('ClassificationViewDialog').show()" disabled="#{empty classificationController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClassificationEditForm" oncomplete="PF('ClassificationEditDialog').show()" disabled="#{empty classificationController.selected}"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{classificationController.destroy}" update=":growl,datalist" disabled="#{empty classificationController.selected}"/>
+                            </f:facet>
+                        </p:dataTable>                
+                    </h:form>
+                    <ui:include src="Create.xhtml"/>
+                    <ui:include src="Edit.xhtml"/>
+                    <ui:include src="View.xhtml"/>
+                </p:tab>
+            </p:tabView>
         </ui:define>
     </ui:composition>
 

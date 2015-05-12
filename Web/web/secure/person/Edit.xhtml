@@ -12,29 +12,45 @@
             <h:form id="PersonEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personController.selected != null}">
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{personController.selected.name}" title="#{bundlePerson.EditPersonTitle_name}" required="true" requiredMessage="#{bundlePerson.EditPersonRequiredMessage_name}"/>
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_name2}" for="name2" />
-                        <p:inputText id="name2" value="#{personController.selected.name2}" title="#{bundlePerson.EditPersonTitle_name2}" />
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_lastName}" for="lastName" />
-                        <p:inputText id="lastName" value="#{personController.selected.lastName}" title="#{bundlePerson.EditPersonTitle_lastName}" required="true" requiredMessage="#{bundlePerson.EditPersonRequiredMessage_lastName}"/>
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_lastName2}" for="lastName2" />
-                        <p:inputText id="lastName2" value="#{personController.selected.lastName2}" title="#{bundlePerson.EditPersonTitle_lastName2}" />
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_identityNumber}" for="identityNumber" />
-                        <p:inputText id="identityNumber" value="#{personController.selected.identityNumber}" title="#{bundlePerson.EditPersonTitle_identityNumber}" />
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_email}" for="email" />
-                        <p:inputText id="email" value="#{personController.selected.email}" title="#{bundlePerson.EditPersonTitle_email}" />
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_sex}" for="sex" />
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_name}" for="name"/>
+                        <p:inputText id="name" value="#{personController.selected.name}" title="#{bundlePerson.EditPersonTitle_name}" required="true" requiredMessage="#{bundlePerson.EditPersonRequiredMessage_name}">
+                            <f:validateLength minimum="2" maximum="25"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_name2}" for="name2"/>
+                        <p:inputText id="name2" value="#{personController.selected.name2}" title="#{bundlePerson.EditPersonTitle_name2}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_lastName}" for="lastName"/>
+                        <p:inputText id="lastName" value="#{personController.selected.lastName}" title="#{bundlePerson.EditPersonTitle_lastName}" required="true" requiredMessage="#{bundlePerson.EditPersonRequiredMessage_lastName}">
+                            <f:validateLength minimum="2" maximum="25"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_lastName2}" for="lastName2"/>
+                        <p:inputText id="lastName2" value="#{personController.selected.lastName2}" title="#{bundlePerson.EditPersonTitle_lastName2}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_identityNumber}" for="identityNumber"/>
+                        <p:inputText id="identityNumber" value="#{personController.selected.identityNumber}" title="#{bundlePerson.EditPersonTitle_identityNumber}" required="true">
+                            <f:validateLongRange minimum="1"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_password}" for="password" rendered="#{signInController.user.systemAdmin}"/>
+                        <p:password id="password" value="#{personController.selected.password}" required="true" feedback="true" goodLabel="Buena" inline="true" promptLabel="Ingrese la contraseña" strongLabel="Fuerte" weakLabel="Débil" validatorMessage="Contrseña no válida" redisplay="true" rendered="#{signInController.user.systemAdmin}"/>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_email}" for="email"/>
+                        <p:inputText id="email" value="#{personController.selected.email}" title="#{bundlePerson.EditPersonTitle_email}" required="true" validatorMessage="Email no válido">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_sex}" for="sex"/>
                         <p:selectOneMenu id="sex" value="#{personController.selected.sex}">
                             <f:selectItems value="#{enumController.sexValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_mobilePhone}" for="mobilePhone" />
-                        <p:inputText id="mobilePhone" value="#{personController.selected.mobilePhone}" title="#{bundlePerson.EditPersonTitle_mobilePhone}" />
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_bloodGroup}" for="bloodGroup" />
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_mobilePhone}" for="mobilePhone"/>
+                        <p:inputText id="mobilePhone" value="#{personController.selected.mobilePhone}" title="#{bundlePerson.EditPersonTitle_mobilePhone}" required="true">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_bloodGroup}" for="bloodGroup"/>
                         <p:selectOneMenu id="bloodGroup" value="#{personController.selected.bloodGroup}">
                             <f:selectItems value="#{enumController.bloodGroupValues}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_rhFactor}" for="rhFactor" />
+                        <p:outputLabel value="#{bundlePerson.EditPersonLabel_rhFactor}" for="rhFactor"/>
                         <p:selectOneMenu id="rhFactor" value="#{personController.selected.rhFactor}">
                             <f:selectItems value="#{enumController.rhFactorValues}"/>
                         </p:selectOneMenu>

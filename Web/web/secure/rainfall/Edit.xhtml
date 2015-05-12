@@ -15,7 +15,9 @@
                         <p:outputLabel value="#{bundleRainFall.EditRainFallLabel_rainDate}" for="rainDate" />
                         <p:calendar id="rainDate" pattern="dd/MM/yyyy" value="#{rainFallController.selected.rainDate}" title="#{bundleRainFall.EditRainFallTitle_rainDate}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_rainDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleRainFall.EditRainFallLabel_milimeters}" for="milimeters" />
-                        <p:inputText id="milimeters" value="#{rainFallController.selected.milimeters}" title="#{bundleRainFall.EditRainFallTitle_milimeters}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_milimeters}"/>
+                        <p:inputText id="milimeters" value="#{rainFallController.selected.milimeters}" title="#{bundleRainFall.EditRainFallTitle_milimeters}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_milimeters}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{rainFallController.update}" value="#{bundle.Save}" update="display,:RainFallListPanel:RainFallListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RainFallEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RainFallEditDialog.hide()"/>

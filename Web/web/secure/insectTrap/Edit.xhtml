@@ -19,7 +19,9 @@
                         <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_species}" for="species" />
                         <p:inputText id="species" value="#{insectTrapController.selected.species}" title="#{bundleInsectTrap.EditInsectTrapTitle_species}" required="true" requiredMessage="#{bundleInsectTrap.EditInsectTrapRequiredMessage_species}"/>
                         <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_individuals}" for="individuals" />
-                        <p:inputText id="individuals" value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.EditInsectTrapTitle_individuals}" />
+                        <p:inputText id="individuals" value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.EditInsectTrapTitle_individuals}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_glueChange}" for="glueChange"/>
                         <p:selectBooleanButton id="glueChange" value="#{insectTrapController.selected.glueChange}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundleInsectTrap.EditInsectTrapLabel_observations}" for="observations" />

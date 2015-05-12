@@ -15,7 +15,9 @@
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_name}" for="name" />
                         <p:inputText id="name" value="#{monitorableParameterController.selected.name}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_name}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_abbreviation}" for="abbreviation" />
-                        <p:inputText id="abbreviation" value="#{monitorableParameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abbreviation}"/>
+                        <p:inputText id="abbreviation" value="#{monitorableParameterController.selected.abbreviation}" title="#{bundleMonitorableParameter.CreateMonitorableParameterTitle_abbreviation}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_abbreviation}">
+                            <f:validateLength minimum="0" maximum="2"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleMonitorableParameter.CreateMonitorableParameterLabel_valuationType}" for="valuationType" />
                         <p:selectOneMenu id="valuationType" value="#{monitorableParameterController.selected.valuationType}" required="true" requiredMessage="#{bundleMonitorableParameter.CreateMonitorableParameterRequiredMessage_valuationType}">
                             <f:selectItems value="#{enumController.valuationTypeValues}"/>

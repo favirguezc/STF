@@ -13,21 +13,29 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{chemicalController.selected != null}">
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_applicationType}" for="applicationType" />
-                        <p:selectOneMenu id="applicationType" value="#{chemicalController.selected.applicationType}" >
+                        <p:selectOneMenu id="applicationType" value="#{chemicalController.selected.applicationType}" required="true">
                             <f:selectItems value="#{enumController.applicationTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.EditChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_name}"/>
+                        <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.EditChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_name}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_activeComponent}" for="activeComponent" />
-                        <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.EditChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_activeComponent}"/>
+                        <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.EditChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.EditChemicalRequiredMessage_activeComponent}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_applicationMeasurementUnit}" for="applicationMeasurementUnit" />
                         <p:selectOneMenu id="applicationMeasurementUnit" value="#{chemicalController.selected.applicationMeasurementUnit}">
                             <f:selectItems value="#{enumController.applicationMeasurementUnitValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_waitingPeriod}" for="waitingPeriod" />
-                        <p:inputText id="waitingPeriod" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.EditChemicalTitle_waitingPeriod}" />
+                        <p:inputText id="waitingPeriod" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.EditChemicalTitle_waitingPeriod}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.EditChemicalLabel_reEntryTime}" for="reEntryTime" />
-                        <p:inputText id="reEntryTime" value="#{chemicalController.selected.reEntryTime}" title="#{bundleChemical.EditChemicalTitle_reEntryTime}" />
+                        <p:inputText id="reEntryTime" value="#{chemicalController.selected.reEntryTime}" title="#{bundleChemical.EditChemicalTitle_reEntryTime}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{chemicalController.update}" value="#{bundle.Save}" update="display,:ChemicalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ChemicalEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalEditDialog.hide()"/>

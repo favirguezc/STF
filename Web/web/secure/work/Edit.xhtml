@@ -12,33 +12,35 @@
             <h:form id="WorkEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{workController.selected != null}">
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_workDate}" for="workDate" />
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_workDate}" for="workDate"/>
                         <p:calendar id="workDate" pattern="dd/MM/yyyy" value="#{workController.selected.workDate}" title="#{bundleWork.EditWorkTitle_workDate}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_workDate}" showOn="button"/>
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_cultivation}" for="cultivation" />
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_cultivation}" for="cultivation"/>
                         <p:selectOneMenu id="cultivation" value="#{workController.selected.cultivation}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_cultivation}">
                             <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
                                            var="cultivationItem"
                                            itemValue="#{cultivationItem}"
                                            itemLabel="#{cultivationItem.moduleObject.lot.name} - #{cultivationItem.moduleObject.name}, #{cultivationItem.variety.name}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_job}" for="job" />
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_job}" for="job"/>
                         <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_job}">
                             <f:selectItems value="#{jobController.itemsAvailableSelectOne}"
                                            var="jobItem"
                                            itemValue="#{jobItem}"
                                            itemLabel="#{jobItem.name}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_worker}" for="worker" />
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_worker}" for="worker"/>
                         <p:selectOneMenu id="worker" value="#{workController.selected.worker}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_worker}">
                             <f:selectItems value="#{personController.itemsAvailableTrabajador}"
                                            var="workerItem"
                                            itemValue="#{workerItem}"
                                            itemLabel="#{workerItem.name} #{workerItem.lastName}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_hoursSpent}" for="hoursSpent" />
-                        <p:inputText id="hoursSpent" value="#{workController.selected.hoursSpent}" title="#{bundleWork.EditWorkTitle_hoursSpent}" />
-                        <p:outputLabel value="#{bundleWork.EditWorkLabel_observations}" for="observations" />
-                        <p:inputText id="observations" value="#{workController.selected.observations}" title="#{bundleWork.EditWorkTitle_observations}" />                        
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_hoursSpent}" for="hoursSpent"/>
+                        <p:inputText id="hoursSpent" value="#{workController.selected.hoursSpent}" title="#{bundleWork.EditWorkTitle_hoursSpent}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_observations}" for="observations"/>
+                        <p:inputText id="observations" value="#{workController.selected.observations}" title="#{bundleWork.EditWorkTitle_observations}"/>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{workController.update}" value="#{bundle.Save}" update="display,:WorkListForm:datalist,:growl" oncomplete="handleSubmit(args, 'WorkEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="WorkEditDialog.hide()"/>

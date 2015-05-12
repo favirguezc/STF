@@ -17,17 +17,25 @@
                             <f:selectItems value="#{enumController.applicationTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.CreateChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_name}"/>
+                        <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.CreateChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_name}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_activeComponent}" for="activeComponent" />
-                        <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.CreateChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_activeComponent}"/>
+                        <p:inputText id="activeComponent" value="#{chemicalController.selected.activeComponent}" title="#{bundleChemical.CreateChemicalTitle_activeComponent}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_activeComponent}">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_applicationMeasurementUnit}" for="applicationMeasurementUnit" />
                         <p:selectOneMenu id="applicationMeasurementUnit" value="#{chemicalController.selected.applicationMeasurementUnit}">
                             <f:selectItems value="#{enumController.applicationMeasurementUnitValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_waitingPeriod}" for="waitingPeriod" />
-                        <p:inputText id="waitingPeriod" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.CreateChemicalTitle_waitingPeriod}" />
+                        <p:inputText id="waitingPeriod" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.CreateChemicalTitle_waitingPeriod}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_reEntryTime}" for="reEntryTime" />
-                        <p:inputText id="reEntryTime" value="#{chemicalController.selected.reEntryTime}" title="#{bundleChemical.CreateChemicalTitle_reEntryTime}" />
+                        <p:inputText id="reEntryTime" value="#{chemicalController.selected.reEntryTime}" title="#{bundleChemical.CreateChemicalTitle_reEntryTime}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{chemicalController.create}" value="#{bundle.Save}" update="display,:ChemicalListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalCreateDialog.hide()"/>

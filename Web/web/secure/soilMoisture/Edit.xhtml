@@ -17,9 +17,13 @@
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_measurementTime}" for="measurementTime" />
                         <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{soilMoistureController.selected.measurementTime}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_measurementTime}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_measurementTime}" showOn="button" timeOnly="true"/>
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_valueIn15Centimeters}" for="valueIn15Centimeters" />
-                        <p:inputText id="valueIn15Centimeters" value="#{soilMoistureController.selected.valueIn15Centimeters}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valueIn15Centimeters}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valueIn15Centimeters}"/>
+                        <p:inputText id="valueIn15Centimeters" value="#{soilMoistureController.selected.valueIn15Centimeters}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valueIn15Centimeters}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valueIn15Centimeters}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_valueIn30Centimeters}" for="valueIn30Centimeters" />
-                        <p:inputText id="valueIn30Centimeters" value="#{soilMoistureController.selected.valueIn30Centimeters}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valueIn30Centimeters}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valueIn30Centimeters}"/>
+                        <p:inputText id="valueIn30Centimeters" value="#{soilMoistureController.selected.valueIn30Centimeters}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valueIn30Centimeters}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valueIn30Centimeters}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{soilMoistureController.update}" value="#{bundle.Save}" update="display,:SoilMoistureListPanel:SoilMoistureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SoilMoistureEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SoilMoistureEditDialog.hide()"/>

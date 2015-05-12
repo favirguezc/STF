@@ -55,9 +55,13 @@
                                            itemValue="#{reason3Item}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_quantity}" for="quantity" />
-                        <p:inputText id="quantity" value="#{applicationController.selected.quantity}" title="#{bundleApplication.CreateApplicationTitle_quantity}" />
+                        <p:inputText id="quantity" value="#{applicationController.selected.quantity}" title="#{bundleApplication.CreateApplicationTitle_quantity}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_waterLiters}" for="waterLiters" />
-                        <p:inputText id="waterLiters" value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.CreateApplicationTitle_waterLiters}" />
+                        <p:inputText id="waterLiters" value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.CreateApplicationTitle_waterLiters}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_method}" for="method" />
                         <p:selectOneMenu id="method" value="#{applicationController.selected.method}" required="true" requiredMessage="#{bundleApplication.CreateApplicationRequiredMessage_method}">
                             <f:selectItems value="#{enumController.applicationMethodValues}"/>
@@ -73,9 +77,11 @@
                             <f:selectItems value="#{personController.itemsAvailableSpecialistAndFieldBoss}"
                                            var="authorizesItem"
                                            itemValue="#{authorizesItem}"/>
-                        </p:selectOneMenu>
+                        </p:selectOneMenu>  
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_hoursSpent}" for="jornales" />
-                        <p:inputText id="jornales" value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.CreateApplicationTitle_hoursSpent}" />
+                        <p:inputText id="jornales" value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.CreateApplicationTitle_hoursSpent}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleApplication.CreateApplicationLabel_observations}" for="observations" />
                         <p:inputText id="observations" value="#{applicationController.selected.observations}" title="#{bundleApplication.CreateApplicationTitle_observations}" />
                     </p:panelGrid>

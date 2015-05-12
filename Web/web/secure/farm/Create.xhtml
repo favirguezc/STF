@@ -32,7 +32,7 @@
                             </p:selectOneMenu>
                         </h:panelGroup>
                         <p:outputLabel value="#{bundleFarm.CreateFarmLabel_altitude}" for="altitude" />
-                        <p:inputText id="altitude" value="#{farmController.selected.altitude}" title="#{bundleFarm.CreateFarmTitle_altitude}" />
+                        <p:inputText id="altitude" value="#{farmController.selected.altitude}" title="#{bundleFarm.CreateFarmTitle_altitude}">
                         <p:outputLabel value="#{bundleFarm.CreateFarmLabel_coordinate}" for="coordinate" />
                         <p:gmap id="coordinate" center="#{farmController.selected.coordinate.x}, #{farmController.selected.coordinate.y}" zoom="#{farmController.zoomLevel}" type="HYBRID" style="width:500px;height:300px" streetView="true" widgetVar="map" model="#{farmController.mapModel}">
                             <p:ajax event="markerDrag" listener="#{farmController.markerDragged}" update=":growl"/>

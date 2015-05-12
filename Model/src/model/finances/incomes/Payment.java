@@ -40,6 +40,8 @@ public class Payment implements Serializable{
     private float paymentValue;
     @ManyToOne(optional = false)
     private Farm farm;
+    @Column(nullable = false)
+    private float usedValue;
 
     public Payment() {
     }
@@ -100,6 +102,14 @@ public class Payment implements Serializable{
         this.farm = farm;
     }
 
+    public float getUsedValue() {
+        return usedValue;
+    }
+
+    public void setUsedValue(float usedValue) {
+        this.usedValue = usedValue;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -110,6 +120,7 @@ public class Payment implements Serializable{
         hash = 67 * hash + Objects.hashCode(this.bank);
         hash = 67 * hash + Float.floatToIntBits(this.paymentValue);
         hash = 67 * hash + Objects.hashCode(this.farm);
+        hash = 67 * hash + Float.floatToIntBits(this.usedValue);
         return hash;
     }
 
@@ -141,6 +152,9 @@ public class Payment implements Serializable{
             return false;
         }
         if (!Objects.equals(this.farm, other.farm)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.usedValue) != Float.floatToIntBits(other.usedValue)) {
             return false;
         }
         return true;

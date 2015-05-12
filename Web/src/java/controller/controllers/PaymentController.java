@@ -3,6 +3,7 @@ package controller.controllers;
 import controller.util.JsfUtil;
 import model.finances.incomes.Payment;
 import data.finances.incomes.PaymentDAO;
+import data.finances.incomes.SaleDAO;
 import data.util.EntityManagerFactorySingleton;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.finances.incomes.Sale;
 
 @ManagedBean(name = "paymentController")
 @SessionScoped
@@ -25,6 +27,7 @@ public class PaymentController implements Serializable {
     private Payment selected;
     private List<Payment> items = null;
     private PaymentDAO jpaController = null;
+    private SaleDAO saleJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -46,6 +49,13 @@ public class PaymentController implements Serializable {
             jpaController = new PaymentDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
+    }
+
+    public SaleDAO getSaleJpaController() {
+        if (saleJpaController == null){
+            saleJpaController = new SaleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return saleJpaController;
     }
 
     public PermissionController getPermissionBean() {
@@ -87,7 +97,7 @@ public class PaymentController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public void update() {
         persist(JsfUtil.PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentUpdated"));
     }
@@ -108,10 +118,13 @@ public class PaymentController implements Serializable {
             }
             try {
                 if (persistAction == JsfUtil.PersistAction.UPDATE) {
+                    verifyUsedValue();
                     getJpaController().edit(selected);
                 } else if (persistAction == JsfUtil.PersistAction.CREATE) {
+                    verifySalesPayable();
                     getJpaController().create(selected);
                 } else {
+                    undoPayment();
                     getJpaController().destroy(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
@@ -122,6 +135,135 @@ public class PaymentController implements Serializable {
         }
     }
 
+    private void verifyUsedValue(){
+        if(selected.getUsedValue() > selected.getPaymentValue()){
+            checkPayWithUnUsedValue(selected.getUsedValue() - selected.getPaymentValue());
+            selected.setUsedValue(selected.getPaymentValue());
+        }else{
+            float valueForUse = selected.getPaymentValue() - selected.getUsedValue();
+            float usedValue = valueForUse - paySalesPayable(valueForUse);
+            selected.setUsedValue(selected.getUsedValue() + usedValue);
+        }
+    }
+    
+    private void verifySalesPayable(){
+        if(!existPaymentsWithUnusedValue()){
+            float valueForUse = selected.getPaymentValue();
+            float usedValue = selected.getPaymentValue() - paySalesPayable(valueForUse);
+            selected.setUsedValue(usedValue);
+        }else{
+            selected.setUsedValue(0);
+        }
+    }
+    
+    private boolean existPaymentsWithUnusedValue(){
+        List<Payment> paymentsWereNotUse = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        if(paymentsWereNotUse != null && !paymentsWereNotUse.isEmpty()){
+            for(Payment payment : paymentsWereNotUse){
+                float valueForUse = payment.getPaymentValue() - payment.getUsedValue();
+                float usedValue = valueForUse - paySalesPayable(valueForUse);
+                if(usedValue == valueForUse){
+                    payment.setUsedValue(payment.getPaymentValue());
+                    updatePayment(payment);
+                }else{
+                    payment.setUsedValue(payment.getUsedValue() + usedValue);
+                    updatePayment(payment);
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            return false;
+        }
+    }
+    
+    private float paySalesPayable(float valueForUse){
+        List<Sale> salesPayable = getSaleJpaController().findSaleEntitiesPayable(signInBean.getFarm());
+        if(salesPayable != null && !salesPayable.isEmpty()){
+            for(Sale sale : salesPayable){
+                float valuePayable = sale.getValuePayable();
+                if(valuePayable >= valueForUse){
+                    sale.setValuePayable(valuePayable - valueForUse);
+                    updateSale(sale);
+                    return 0;
+                }else{
+                    sale.setValuePayable(0);
+                    updateSale(sale);
+                    valueForUse = valueForUse - valuePayable;
+                }
+            }
+        }
+        return valueForUse;
+    }
+    
+    private void updateSale(Sale sale){
+        try {
+            getSaleJpaController().edit(sale);
+        } catch (Exception ex) {
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void updatePayment(Payment payment){
+        try{
+            getJpaController().edit(payment);
+        }catch(Exception ex){
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void undoPayment(){
+        if(selected.getUsedValue() != 0){
+            checkPayWithUnUsedValue(selected.getUsedValue());
+        }
+    }
+    
+    private void checkPayWithUnUsedValue(float value){
+        List<Payment> payments = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        if(payments != null && !payments.isEmpty()){
+            int size = payments.size();
+            for(Payment payment : payments){
+                if(payment.getId() != selected.getId()){
+                    float unUsedValue = payment.getPaymentValue() - payment.getUsedValue();
+                    if(unUsedValue >= value){
+                        payment.setUsedValue(payment.getUsedValue() + value);
+                        updatePayment(payment);
+                        break;
+                    }else{
+                        payment.setUsedValue(payment.getPaymentValue());
+                        updatePayment(payment);
+                        value = value - unUsedValue;
+                    }
+                    
+                }
+                size--;
+            }
+            if(size==0){
+                undoPaySale(value);
+            }
+        }else{
+            undoPaySale(value);
+        }
+    }
+    
+    private void undoPaySale(float value){
+        List<Sale> paidSales = getSaleJpaController().findSaleEntitiesPaidAndPayable(signInBean.getFarm());
+        if(paidSales != null && !paidSales.isEmpty()){
+            for(Sale sale : paidSales){
+                float saleValue = sale.getSaleTotalValue() - sale.getValuePayable();
+                if(saleValue >= value){
+                    sale.setValuePayable(sale.getValuePayable() + value);
+                    updateSale(sale);
+                    break;
+                }else{
+                    sale.setValuePayable(sale.getSaleTotalValue());
+                    updateSale(sale);
+                    value = value - saleValue;
+                }
+            }
+        }
+    }
+    
     public List<Payment> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {

@@ -37,6 +37,8 @@ public class Sale implements Serializable {
     private Farm farm;
     @Column
     private float saleTotalValue;
+    @Column
+    private float valuePayable;
     
     /**
      *
@@ -123,6 +125,22 @@ public class Sale implements Serializable {
     public void setSaleTotalValue(float saleTotalValue) {
         this.saleTotalValue = saleTotalValue;
     }
+
+    /**
+     *
+     * @return
+     */
+    public float getValuePayable() {
+        return valuePayable;
+    }
+
+    /**
+     *
+     * @param valuePayable
+     */
+    public void setValuePayable(float valuePayable) {
+        this.valuePayable = valuePayable;
+    }
     
     /**
      *
@@ -138,7 +156,8 @@ public class Sale implements Serializable {
         hash = 89 * hash + Objects.hashCode(this.saleDate);
         hash = 89 * hash + Objects.hashCode(this.customer);
         hash = 89 * hash + Objects.hashCode(this.farm);
-        hash = 59 * hash + Float.floatToIntBits(this.saleTotalValue);
+        hash = 89 * hash + Float.floatToIntBits(this.saleTotalValue);
+        hash = 89 * hash + Float.floatToIntBits(this.valuePayable);
         return hash;
     }
 
@@ -164,6 +183,9 @@ public class Sale implements Serializable {
             return false;
         }
         if (Float.floatToIntBits(this.saleTotalValue) != Float.floatToIntBits(other.saleTotalValue)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.valuePayable) != Float.floatToIntBits(other.valuePayable)) {
             return false;
         }
         return true;

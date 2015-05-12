@@ -9,6 +9,7 @@ import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import data.exceptions.NonexistentEntityException;
 import data.finances.PriceDAO;
+import data.finances.incomes.PaymentDAO;
 import data.finances.incomes.SaleDAO;
 import data.finances.incomes.SaleItemDAO;
 import data.util.EntityManagerFactorySingleton;
@@ -31,6 +32,7 @@ import model.finances.Price;
 import model.finances.incomes.Sale;
 import model.administration.Person;
 import model.crop.ClassificationTypeEnum;
+import model.finances.incomes.Payment;
 import model.finances.incomes.SaleItem;
 
 /**
@@ -45,6 +47,7 @@ public class SaleController implements Serializable {
     private List<Sale> items = null;
     private SaleDAO jpaController = null;
     private PriceDAO priceJpaController = null;
+    private PaymentDAO paymentJpaController = null;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -84,6 +87,13 @@ public class SaleController implements Serializable {
             saleItemJpaController = new SaleItemDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return saleItemJpaController;
+    }
+
+    public PaymentDAO getPaymentJpaController() {
+        if (paymentJpaController == null) {
+            paymentJpaController = new PaymentDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return paymentJpaController;
     }
     
     public Sale getSelected() {
@@ -367,10 +377,31 @@ public class SaleController implements Serializable {
     public void create() {
         //savePrecio();
         calculateSaleTotalValue();
+        float valuePayable = verifyPaymentsWithUnUsedValue(selected.getSaleTotalValue());
+        selected.setValuePayable(valuePayable);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleSale").getString("SaleCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+
+    private float verifyPaymentsWithUnUsedValue(float valuePayable){
+        List<Payment> unUsedPays = getPaymentJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        if(unUsedPays != null && !unUsedPays.isEmpty()){
+            for(Payment payment : unUsedPays){
+                float unUsedValue = payment.getPaymentValue() - payment.getUsedValue();
+                if(unUsedValue >= valuePayable){
+                    payment.setUsedValue(payment.getUsedValue() + valuePayable);
+                    updatePayment(payment);
+                    return 0;
+                }else{
+                    payment.setUsedValue(payment.getPaymentValue());
+                    updatePayment(payment);
+                    valuePayable = valuePayable - unUsedValue;
+                }
+            }
+        }
+        return valuePayable;
     }
     
     public void calculateSaleTotalValue(){
@@ -429,18 +460,112 @@ public class SaleController implements Serializable {
     }
     
     public void prepareUpdate(){
-        //precio = getPrecioJpaController().findPrice(selected.getChemical().getNombre());
         editing = true;
         initializeOldSaleItems();
     }
 
     public void update() {
-        //savePrecio();
         calculateSaleTotalValue();
+        verifyValuePayable();
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleSale").getString("SaleUpdated"));
         editing = false;
     }
 
+    private void verifyValuePayable(){
+        float oldSaleTotalValue = calculateOldSaleTotalValue();
+        float newSaleTotalValue = selected.getSaleTotalValue();
+        if(oldSaleTotalValue != newSaleTotalValue){
+            //if newValue is greater than oldValue,then the difference is added to valuePayable
+            if(oldSaleTotalValue < newSaleTotalValue){
+                float newValuePayable = selected.getValuePayable() + (newSaleTotalValue - oldSaleTotalValue);
+                newValuePayable = verifyPaymentsWithUnUsedValue(newValuePayable);
+                selected.setValuePayable(newValuePayable);
+            }else {
+                //if newvalue is less, then the difference is subtracted to valuePayable, 
+                //and if the result is less than 0, a sale (or more) is sought and is subtracted from its valuePayable
+                float newValuePayable = selected.getValuePayable() - (oldSaleTotalValue - newSaleTotalValue);
+                if(newValuePayable < 0){
+                    selected.setValuePayable(0);
+                    float surplusValuePayable = newValuePayable * (-1);
+                    searchAndSetSurplusValuePayable(surplusValuePayable);
+                }else{
+                    selected.setValuePayable(newValuePayable);
+                }
+            }
+            
+        }
+    }
+    
+    private void searchAndSetSurplusValuePayable(float surplusValuePayable){
+        List<Sale> sales = getJpaController().findSaleEntitiesPayable(selected.getFarm());
+        int size = sales.size();
+        float value = surplusValuePayable;
+        if(sales != null && !sales.isEmpty()){
+            for(Sale sale : sales){
+                if(sale.getId() != selected.getId()){
+                    float newValuePayable = sale.getValuePayable() - value;
+                    if(newValuePayable >= 0){
+                        sale.setValuePayable(newValuePayable);
+                        updateSale(sale);
+                        break;
+                    }else{
+                        sale.setValuePayable(0);
+                        updateSale(sale);
+                        value = newValuePayable * (-1);
+                    }
+                }
+                size--;
+            }
+            if(size == 0){
+                undoPayment(value);
+            }
+        }else{
+            undoPayment(value);
+        }
+    }
+    
+    private void updateSale(Sale sale){
+        try {
+            getJpaController().edit(sale);
+        } catch (Exception ex) {
+            Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void undoPayment(float value){
+        List<Payment> payments = getPaymentJpaController().findPaymentEntitiesWithUnusedAndUsedValue(signInBean.getFarm());
+        if(payments != null && !payments.isEmpty()){
+            for(Payment payment : payments){
+                float usedValue = payment.getUsedValue();
+                if(usedValue >= value){
+                    payment.setUsedValue(usedValue - value);
+                    updatePayment(payment);
+                    break;
+                }else{
+                    payment.setUsedValue(0);
+                    updatePayment(payment);
+                    value = value - usedValue;
+                }
+            }
+        }
+    }
+    
+    private void updatePayment(Payment payment){
+        try{
+            getPaymentJpaController().edit(payment);
+        }catch(Exception ex){
+            Logger.getLogger(SaleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public float calculateOldSaleTotalValue(){
+        float oldSaleTotalValue = 0;
+        for(SaleItem item : oldSaleItems){
+            oldSaleTotalValue += item.getTotalValue();
+        }
+        return oldSaleTotalValue;
+    }
+    
     public void prepareView(){
         saleItems = getSaleItemJpaController().findSaleItemEntities(selected);
         initializeTypeBooleans();
@@ -448,6 +573,7 @@ public class SaleController implements Serializable {
     }
     
     public void destroy() {
+        verifySaleValuePayable();
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleSale").getString("SaleDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
@@ -455,6 +581,13 @@ public class SaleController implements Serializable {
         }
     }
 
+    private void verifySaleValuePayable(){
+        if(selected.getValuePayable() < selected.getSaleTotalValue()){
+            float paidValue = selected.getSaleTotalValue() - selected.getValuePayable();
+            searchAndSetSurplusValuePayable(paidValue);
+        }
+    }
+    
     public void cancel(){
         selected = null;
     }

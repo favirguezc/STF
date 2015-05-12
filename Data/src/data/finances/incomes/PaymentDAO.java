@@ -149,4 +149,25 @@ public class PaymentDAO implements Serializable {
         }
     }
     
+    public List<Payment> findPaymentEntitiesWithUnusedValue(Farm farm) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.usedValue <> p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
+            query.setParameter("farm", farm);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Payment> findPaymentEntitiesWithUnusedAndUsedValue(Farm farm) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.usedValue <= p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
+            query.setParameter("farm", farm);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -18,8 +18,10 @@
                         <p:inputText id="name" value="#{insectTrapController.selected.name}" title="#{bundleInsectTrap.CreateInsectTrapTitle_name}" required="true" requiredMessage="#{bundleInsectTrap.CreateInsectTrapRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundleInsectTrap.CreateInsectTrapLabel_species}" for="species" />
                         <p:inputText id="species" value="#{insectTrapController.selected.species}" title="#{bundleInsectTrap.CreateInsectTrapTitle_species}" required="true" requiredMessage="#{bundleInsectTrap.CreateInsectTrapRequiredMessage_species}"/>
-                        <p:outputLabel value="#{bundleInsectTrap.CreateInsectTrapLabel_individuals}" for="individuals" />
-                        <p:inputText id="individuals" value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.CreateInsectTrapTitle_individuals}" />
+                        <p:outputLabel value="#{bundleInsectTrap.CreateInsectTrapLabel_individuals}" for="individuals"/>
+                        <p:inputText id="individuals" value="#{insectTrapController.selected.individuals}" title="#{bundleInsectTrap.CreateInsectTrapTitle_individuals}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleInsectTrap.CreateInsectTrapLabel_glueChange}" for="glueChange"/>
                         <p:selectBooleanButton id="glueChange" value="#{insectTrapController.selected.glueChange}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                         <p:outputLabel value="#{bundleInsectTrap.CreateInsectTrapLabel_observations}" for="observations" />

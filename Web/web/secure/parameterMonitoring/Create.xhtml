@@ -34,9 +34,13 @@
                             <p:ajax update="valor1 valor2 valor3" listener="#{parameterMonitoringController.value}"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Relación" for="valor1"/>
-                        <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}">
+                            <f:validateRegex pattern="[0-9]+/[0-9]+" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Conteo" for="valor2" />
-                        <p:inputText id="valor2" disabled="#{parameterMonitoringController.habilitado!=2}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor2" disabled="#{parameterMonitoringController.habilitado!=2}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}">
+                            <f:validateDoubleRange minimum="0" maximum="100"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Riesgo" for="valor3"/>
                         <p:selectOneMenu id="valor3" disabled="#{parameterMonitoringController.habilitado!=3}" value="#{parameterMonitoringController.selected.monitoringValue}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

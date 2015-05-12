@@ -17,7 +17,9 @@
                         <p:outputLabel value="#{bundleJob.CreateJobLabel_description}" for="description" />
                         <p:inputText id="description" value="#{jobController.selected.description}" title="#{bundleJob.CreateJobTitle_description}" />
                         <p:outputLabel value="#{bundleJob.CreateJobLabel_hourlyRate}" for="value" />
-                        <p:inputText id="value" value="#{jobController.selected.hourlyRate}" title="#{bundleJob.CreateJobTitle_hourlyRate}" required="true" requiredMessage="#{bundleJob.CreateJobRequiredMessage_hourlyRate}" />
+                        <p:inputText id="value" value="#{jobController.selected.hourlyRate}" title="#{bundleJob.CreateJobTitle_hourlyRate}" required="true" requiredMessage="#{bundleJob.CreateJobRequiredMessage_hourlyRate}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{jobController.create}" value="#{bundle.Save}" update="display,:JobListForm:datalist,:growl" oncomplete="handleSubmit(args,'JobCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="JobCreateDialog.hide()"/>

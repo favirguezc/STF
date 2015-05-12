@@ -15,7 +15,9 @@
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_name}" for="name" />
                         <p:inputText id="name" value="#{moduleClassController.selected.name}" title="#{bundleModule.CreateModuleClassTitle_name}" />
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_area}" for="area" />
-                        <p:inputText id="area" value="#{moduleClassController.selected.area}" title="#{bundleModule.CreateModuleClassTitle_area}" />
+                        <p:inputText id="area" value="#{moduleClassController.selected.area}" title="#{bundleModule.CreateModuleClassTitle_area}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleModule.CreateModuleClassLabel_lot}" for="lot" />
                         <p:selectOneMenu id="lot" value="#{moduleClassController.selected.lot}" >
                             <f:selectItems value="#{lotController.itemsAvailableSelectOne}"

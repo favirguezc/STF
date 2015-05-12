@@ -14,7 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{parameterMonitoringController.selected != null}">
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoring}" for="monitoring" />
                         <p:selectOneMenu id="monitoring" value="#{parameterMonitoringController.selected.monitoring}" required="true" requiredMessage="#{bundleParameterMonitoring.EditParameterMonitoringRequiredMessage_monitoring}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{monitoringController.itemsAvailableSelectOne}"
                                            var="monitoringItem"
                                            itemValue="#{monitoringItem}"
@@ -22,7 +21,6 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_cultivation}" for="cultivation" />
                         <p:selectOneMenu id="cultivation" value="#{parameterMonitoringController.selected.cultivation}" required="true" requiredMessage="#{bundleParameterMonitoring.EditParameterMonitoringRequiredMessage_cultivation}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
                                            var="cultivationItem"
                                            itemValue="#{cultivationItem}"/>
@@ -30,19 +28,24 @@
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_parameter}" for="parameter" />
                         <p:selectOneMenu id="parameter" value="#{parameterMonitoringController.selected.parameter}" required="true" requiredMessage="#{bundleParameterMonitoring.EditParameterMonitoringRequiredMessage_parameter}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{parameterController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="parameterItem"
                                            itemValue="#{parameterItem}"/>
+                            <p:ajax update="valor1 valor2 valor3" listener="#{parameterMonitoringController.value}"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Relación" for="valor1"/>
-                        <p:inputText id="valor1" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}">
+                            <f:validateRegex pattern="[0-9]+/[0-9]+" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Conteo" for="valor2" />
-                        <p:inputText id="valor2" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}"/>
+                        <p:inputText id="valor2" disabled="#{parameterMonitoringController.habilitado!=2}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.EditParameterMonitoringTitle_monitoringValue}">
+                            <f:validateDoubleRange minimum="0" maximum="100"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundleParameterMonitoring.EditParameterMonitoringLabel_monitoringValue} Riesgo" for="valor3"/>
-                        <p:selectOneMenu id="valor3" value="#{parameterMonitoringController.selected.monitoringValue}">
+                        <p:selectOneMenu id="valor3" disabled="#{parameterMonitoringController.habilitado!=3}" value="#{parameterMonitoringController.selected.monitoringValue}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{enumController.riskValues}"/>                            
-                        </p:selectOneMenu>
+                        </p:selectOneMenu>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parameterMonitoringController.update}" value="#{bundle.Save}" update="display,:ParameterMonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParameterMonitoringEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParameterMonitoringEditDialog.hide()"/>

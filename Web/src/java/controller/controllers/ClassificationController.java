@@ -8,12 +8,12 @@ import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import controller.util.Font;
-import model.crop.Crop;
+import model.crop.Classification;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import controller.util.TableRowData;
 import controller.util.Storage;
-import data.crop.CropDAO;
+import controller.util.TableRowData;
+import data.crop.ClassificationDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.IOException;
 import java.io.Serializable;
@@ -36,8 +36,7 @@ import javax.faces.convert.FacesConverter;
 import model.administration.Farm;
 import model.administration.Lot;
 import model.administration.ModuleClass;
-import model.administration.Person;
-import model.administration.RoleEnum;
+import model.crop.ClassificationTypeEnum;
 import model.util.DateFormatter;
 import model.util.DateTools;
 import org.primefaces.event.FileUploadEvent;
@@ -48,17 +47,15 @@ import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
-@ManagedBean(name = "cropController")
+@ManagedBean(name = "classificationController")
 @SessionScoped
-public class CropController implements Serializable {
+public class ClassificationController implements Serializable {
 
-    private CropDAO jpaController = null;
-    private List<Crop> items = null;
-    private Crop selected;
+    private ClassificationDAO jpaController = null;
+    private List<Classification> items = null;
+    private Classification selected;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
-    @ManagedProperty(value = "#{cultivationController}")
-    private CultivationController cultivationBean;
     //File variables
     private String message;
     //Chart variables
@@ -70,15 +67,23 @@ public class CropController implements Serializable {
     private int period;
     private Lot lot;
     private ModuleClass module;
-    private Person worker;
     private List<TableRowData> chartPairs;
+    private String header1;
+    private String header2;
+    private String header3;
+    private String header4;
+    private String header5;
+    private String header6;
+    private String header7;
+    private String header8;
 
-    public CropController() {
+    public ClassificationController() {
         year = DateTools.getYear();
         month = DateTools.getMonth();
         date = DateTools.getDate();
         terrain = 0;
         period = 0;
+        model = new LineChartModel();
     }
 
     @PostConstruct
@@ -86,24 +91,16 @@ public class CropController implements Serializable {
         createChart();
     }
 
-    public Crop getSelected() {
+    public Classification getSelected() {
         return selected;
     }
 
-    public void setSelected(Crop selected) {
+    public void setSelected(Classification selected) {
         this.selected = selected;
     }
 
     public PermissionController getPermissionBean() {
         return permissionBean;
-    }
-
-    public CultivationController getCultivationBean() {
-        return cultivationBean;
-    }
-
-    public void setCultivationBean(CultivationController cultivationBean) {
-        this.cultivationBean = cultivationBean;
     }
 
     public void setPermissionBean(PermissionController permissionBean) {
@@ -174,22 +171,6 @@ public class CropController implements Serializable {
         this.module = module;
     }
 
-    public Person getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Person worker) {
-        this.worker = worker;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public List<TableRowData> getChartPairs() {
         return chartPairs;
     }
@@ -198,51 +179,111 @@ public class CropController implements Serializable {
         this.chartPairs = chartPairs;
     }
 
+    public String getHeader1() {
+        return header1;
+    }
+
+    public void setHeader1(String header1) {
+        this.header1 = header1;
+    }
+
+    public String getHeader2() {
+        return header2;
+    }
+
+    public void setHeader2(String header2) {
+        this.header2 = header2;
+    }
+
+    public String getHeader3() {
+        return header3;
+    }
+
+    public void setHeader3(String header3) {
+        this.header3 = header3;
+    }
+
+    public String getHeader4() {
+        return header4;
+    }
+
+    public void setHeader4(String header4) {
+        this.header4 = header4;
+    }
+
+    public String getHeader5() {
+        return header5;
+    }
+
+    public void setHeader5(String header5) {
+        this.header5 = header5;
+    }
+
+    public String getHeader6() {
+        return header6;
+    }
+
+    public void setHeader6(String header6) {
+        this.header6 = header6;
+    }
+
+    public String getHeader7() {
+        return header7;
+    }
+
+    public void setHeader7(String header7) {
+        this.header7 = header7;
+    }
+
+    public String getHeader8() {
+        return header8;
+    }
+
+    public void setHeader8(String header8) {
+        this.header8 = header8;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
     protected void initializeEmbeddableKey() {
     }
 
-    private CropDAO getJpaController() {
+    private ClassificationDAO getJpaController() {
         if (jpaController == null) {
-            jpaController = new CropDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            jpaController = new ClassificationDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
         }
         return jpaController;
     }
 
-    public Crop prepareCreate() {
-        selected = new Crop();
+    public Classification prepareCreate() {
+        selected = new Classification();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCrop").getString("CropCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleClassification").getString("ClassificationCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCrop").getString("CropUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleClassification").getString("ClassificationUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCrop").getString("CropDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleClassification").getString("ClassificationDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Crop> getItems() {
+    public List<Classification> getItems() {
         if (items == null) {
-            if (permissionBean.getSignInBean().getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT || permissionBean.getSignInBean().getUser().isSystemAdmin()) {
-                items = readListByFarm(null, permissionBean.getSignInBean().getFarm(), null, null);
-            } else {
-                items = readListByModule(permissionBean.getSignInBean().getUser(), null, null, null);
-            }
+            items = getJpaController().findClassificationEntities(permissionBean.getSignInBean().getFarm());
         }
         return items;
     }
@@ -269,72 +310,64 @@ public class CropController implements Serializable {
         }
     }
 
-    public List<Crop> getItemsAvailableSelectMany() {
+    public List<Classification> getItemsAvailableSelectMany() {
         return getItems();
     }
 
-    public List<Crop> getItemsAvailableSelectOne() {
+    public List<Classification> getItemsAvailableSelectOne() {
         return getItems();
     }
 
-    public void save(Crop crop) {
-        selected = crop;
-        persist(PersistAction.CREATE, null);
+    public List<Classification> readListByModule(ModuleClass module, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        return getJpaController().findClassificationEntities(module, startDate, endDate, type);
     }
 
-    public List<Crop> readListByModule(Person worker, ModuleClass module, Date startDate, Date endDate) {
-        return getJpaController().findCropEntities(worker, module, startDate, endDate);
+    public List<Classification> readListByLot(Lot lot, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        return getJpaController().findClassificationEntities(lot, startDate, endDate, type);
     }
 
-    public List<Crop> readListByLot(Person worker, Lot lot, Date startDate, Date endDate) {
-        return getJpaController().findCropEntities(worker, lot, startDate, endDate);
+    public List<Classification> readListByFarm(Farm farm, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        return getJpaController().findClassificationEntities(farm, startDate, endDate, type);
     }
 
-    public List<Crop> readListByFarm(Person worker, Farm farm, Date startDate, Date endDate) {
-        return getJpaController().findCropEntities(worker, farm, startDate, endDate);
-    }
-
-    public Crop sumRegistersByModule(Person worker, ModuleClass module, Date startDate, Date endDate) {
-        List<Crop> list = readListByModule(worker, module, startDate, endDate);
-        Crop suma = new Crop();
-        suma.setCollector(worker);
-        for (Crop r : list) {
-            suma.sumCrop(r);
+    public Classification sumRegistersByModule(ModuleClass module, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        List<Classification> list = readListByModule(module, startDate, endDate, type);
+        Classification sum = new Classification();
+        for (Classification register : list) {
+            sum.sumClassification(register);
         }
-        return suma;
+        return sum;
     }
 
-    public Crop sumRegistersByLot(Person worker, Lot lot, Date startDate, Date endDate) {
-        List<Crop> leerLista = readListByLot(worker, lot, startDate, endDate);
-        Crop suma = new Crop();
-        suma.setCollector(worker);
-        for (Crop r : leerLista) {
-            suma.sumCrop(r);
+    public Classification sumRegistersByLot(Lot lot, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        List<Classification> list = readListByLot(lot, startDate, endDate, type);
+        Classification sum = new Classification();
+        for (Classification register : list) {
+            sum.sumClassification(register);
         }
-        return suma;
+        return sum;
     }
 
-    public Crop sumRegistersByFarm(Person worker, Farm farm, Date startDate, Date endDate) {
-        List<Crop> leerLista = readListByFarm(worker, farm, startDate, endDate);
-        Crop suma = new Crop();
-        suma.setCollector(worker);
-        for (Crop r : leerLista) {
-            suma.sumCrop(r);
+    public Classification sumRegistersByFarm(Farm farm, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        List<Classification> leerLista = readListByFarm(farm, startDate, endDate, type);
+        Classification sum = new Classification();
+        for (Classification register : leerLista) {
+            sum.sumClassification(register);
         }
-        return suma;
+        return sum;
     }
 
-    @FacesConverter(forClass = Crop.class)
-    public static class CropControllerConverter implements Converter {
+    @FacesConverter(forClass = Classification.class)
+    public static class ClasificacionControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CropController controller = (CropController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "cropController");
-            return controller.getJpaController().findCrop(getKey(value));
+            ClassificationController controller = (ClassificationController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "classificationController");
+            return controller.getJpaController().findClassification(getKey(value));
         }
 
         long getKey(String value) {
@@ -354,20 +387,19 @@ public class CropController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Crop) {
-                Crop o = (Crop) object;
+            if (object instanceof Classification) {
+                Classification o = (Classification) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Crop.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Classification.class.getName()});
                 return null;
             }
         }
-
     }
 
     //File functions
     public void upload(FileUploadEvent event) {
-        String filename = "crop" + new Date().getTime() + ".xlsx";
+        String filename = "classification" + new Date().getTime() + ".xlsx";
         if (permissionBean.getSignInBean().getFarm() != null) {
             Storage.save(filename, event.getFile());
             parse(filename);
@@ -381,39 +413,39 @@ public class CropController implements Serializable {
     private void parse(String filename) {
 //        int created = 0;
 //        try {
-//            FileInputStream fis = null;
-//            fis = new FileInputStream(new File(filename));
-//            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-//            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
-//            Crop temp = null;
-//            while (sheetIterator.hasNext()) {
-//                XSSFSheet sheet = sheetIterator.next();
-//                int yearSheetName = Integer.parseInt(sheet.getSheetName());
-//                Iterator<Row> rowIterator = sheet.iterator();
-//                rowIterator.next();
-//                rowIterator.next();
-//                rowIterator.next();
-//                rowIterator.next();
-//
-//                while (rowIterator.hasNext()) {
-//                    Row row = rowIterator.next();
-//                    if (row.getCell(0) != null) {
-//                        int monthCellValue = DateTools.getMonth(row.getCell(0).getStringCellValue());
-//                        int dayOfMonthCellValue = new GregorianCalendar(yearSheetName, monthCellValue, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
-//                        for (int day = 1; day <= dayOfMonthCellValue; day++) {
-//                            Cell cell = row.getCell(day);
-//                            double millimetersCellValue = CellDataExtractor.parseNumber(cell);
-//                            if (millimetersCellValue > 0) {
-//                                temp = new Crop();
-//                                
-//                                save(temp);
-//                                created++;
-//                            }
-//                        }
+//            FileInputStream file = new FileInputStream(new File(filename));
+//            XSSFWorkbook workbook = new XSSFWorkbook(file);
+//            XSSFSheet sheet = workbook.getSheetAt(0);
+//            Iterator<Row> rowIterator = sheet.iterator();
+//            rowIterator.next();
+//            rowIterator.next();
+//            SoilMoisture temp = null;
+//            while (rowIterator.hasNext()) {
+//                Row row = rowIterator.next();
+//                Date date = CellDataExtractor.parseDate(row.getCell(0));
+//                double cell15 = CellDataExtractor.parseNumber(row.getCell(1));
+//                double cell30 = CellDataExtractor.parseNumber(row.getCell(2));
+//                Date time = CellDataExtractor.parseTime(row.getCell(3));
+//                if (date != null && time != null) {
+//                    try {
+//                        temp = new SoilMoisture();
+//                        temp.setFarm(permissionBean.getSignInBean().getFarm());
+//                        temp.setMeasurementDate(date);
+//                        temp.setMeasurementTime(time);
+//                        temp.setValueIn15Centimeters((float) cell15);
+//                        temp.setValueIn30Centimeters((float) cell30);
+//                        save(temp);
+//                        created++;
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
 //                    }
+//                } else if (date == null) {
+//                    System.out.println("Date null");
+//                } else if (time == null) {
+//                    System.out.println("Time null");
 //                }
 //            }
-//            fis.close();
+//            file.close();
 //            message = "Se crearon " + created + " nuevos registros.";
 //        } catch (Exception e) {
 //            e.printStackTrace();
@@ -424,12 +456,24 @@ public class CropController implements Serializable {
     //Chart functions
     public void createChart() {
         chartPairs = new ArrayList<TableRowData>();
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Pesada Kg");
-        Crop totalSum = new Crop();
+        LineChartSeries[] series = new LineChartSeries[8];
+        ClassificationTypeEnum[] types = ClassificationTypeEnum.values();
+        for (int i = 0; i < 8; i++) {
+            series[i] = new LineChartSeries(types[i].toString());
+        }
+        header1 = types[0].toString();
+        header2 = types[1].toString();
+        header3 = types[2].toString();
+        header4 = types[3].toString();
+        header5 = types[4].toString();
+        header6 = types[5].toString();
+        header7 = types[6].toString();
+        header8 = types[7].toString();
+        Classification totalSum = new Classification();
         Calendar cal = GregorianCalendar.getInstance();
         int maxPeriods = 0;
-        float total = 0;
+        float[] total = new float[8];
+        TableRowData rowData;
         switch (period) {
             case 0:
                 maxPeriods = 7;
@@ -448,6 +492,7 @@ public class CropController implements Serializable {
                 cal.setTime(DateTools.getDate(year, 0, 1));
                 break;
         }
+        String label = "";
         for (int i = 1; i <= maxPeriods; i++) {
             Date startDate = cal.getTime();
             switch (period) {
@@ -463,18 +508,6 @@ public class CropController implements Serializable {
             if (period == 0 || period == 1) {
                 endDate = null;
             }
-            switch (terrain) {
-                case 0:
-                    totalSum = sumRegistersByModule(worker, module, startDate, endDate);
-                    break;
-                case 1:
-                    totalSum = sumRegistersByLot(worker, lot, startDate, endDate);
-                    break;
-                case 2:
-                    totalSum = sumRegistersByFarm(worker, permissionBean.getSignInBean().getFarm(), startDate, endDate);
-                    break;
-            }
-            String label = "";
             switch (period) {
                 case 0:
                     label = DateTools.getDayOfWeek(i);
@@ -489,31 +522,61 @@ public class CropController implements Serializable {
                     label = DateTools.getMonth(i - 1);
                     break;
             }
-            series1.set(label, totalSum.getWeightInKilograms());
-            total += totalSum.getWeightInKilograms();
-            chartPairs.add(new TableRowData(label, "" + totalSum.getWeightInKilograms()));
+            rowData = new TableRowData();
+            rowData.setLabel(label);
+            float sum = 0;
+            for (int t = 0; t < 8; t++) {
+                ClassificationTypeEnum type = types[t];
+                switch (terrain) {
+                    case 0:
+                        totalSum = sumRegistersByModule(module, startDate, endDate, type);
+                        break;
+                    case 1:
+                        totalSum = sumRegistersByLot(lot, startDate, endDate, type);
+                        break;
+                    case 2:
+                        totalSum = sumRegistersByFarm(permissionBean.getSignInBean().getFarm(), startDate, endDate, type);
+                        break;
+                }
+                series[t].set(label, totalSum.getWeightInKilograms());
+                sum += totalSum.getWeightInKilograms();
+                total[t] += totalSum.getWeightInKilograms();
+                rowData.setValue(t + 1, totalSum.getWeightInKilograms());
+            }
+            rowData.setValue(9, sum);
+            chartPairs.add(rowData);
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        chartPairs.add(new TableRowData("Total", "" + total));
+        rowData = new TableRowData();
+        rowData.setLabel("Total");
+        float sum = 0;
+        for (int i = 0; i < 8; i++) {
+            rowData.setValue(i + 1, total[i]);
+            sum += total[i];
+        }
+        rowData.setValue(9, sum);
+        chartPairs.add(rowData);
         model = new LineChartModel();
-        model.addSeries(series1);
+        for (int i = 0; i < 8; i++) {
+            model.addSeries(series[i]);
+        }
         model.setShowPointLabels(true);
         switch (period) {
             case 0:
                 model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-                model.setTitle("Recolección por Día " + DateTools.getWeek(date));
+                model.setTitle("Clasificación por Día " + DateTools.getWeek(date));
                 break;
             case 1:
                 model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-                model.setTitle("Recolección por Día " + DateTools.getMonth(month) + " de " + year);
+                model.setTitle("Clasificación por Día " + DateTools.getMonth(month) + " de " + year);
                 break;
             case 2:
                 model.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
-                model.setTitle("Recolección por Semana Año" + year);
+                model.setTitle("Clasificación por Semana Año" + year);
                 break;
             case 3:
                 model.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-                model.setTitle("Recolección por Mes Año" + year);
+                model.setTitle("Clasificación por Mes Año" + year);
                 break;
         }
         model.setLegendPosition("e");
@@ -535,6 +598,7 @@ public class CropController implements Serializable {
         Document pdf = (Document) document;
         pdf.open();
         pdf.setPageSize(PageSize.A4);
+        pdf.setMargins(20, 30, 20, 20);
         Paragraph header = new Paragraph("Finca: " + permissionBean.getSignInBean().getFarm().getName() + "\n", Font.getFont(20));
         header.setAlignment(Element.ALIGN_CENTER);
         String title = "";
@@ -563,11 +627,6 @@ public class CropController implements Serializable {
         paragraph = new Paragraph(subTitle, Font.getFont(20));
         paragraph.setAlignment(Element.ALIGN_CENTER);
         header.add(paragraph);
-        if (worker != null) {
-            paragraph = new Paragraph("Trabajador: " + worker, Font.getFont(20));
-            paragraph.setAlignment(Element.ALIGN_CENTER);
-            header.add(paragraph);
-        }
         switch (terrain) {
             case 0:
                 paragraph = new Paragraph("Módulo: " + module, Font.getFont(20));

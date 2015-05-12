@@ -12,11 +12,13 @@
             <h:form id="ThermometerCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{thermometerController.selected != null}">
-                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{thermometerController.selected.name}" title="#{bundleThermometer.CreateThermometerTitle_name}" />
-                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_serialNumber}" for="serialNumber" />
-                        <p:inputText id="serialNumber" value="#{thermometerController.selected.serialNumber}" title="#{bundleThermometer.CreateThermometerTitle_serialNumber}" />
-                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_moduleObject}" for="moduleObject" />
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_name}" for="name"/>
+                        <p:inputText id="name" value="#{thermometerController.selected.name}" title="#{bundleThermometer.CreateThermometerTitle_name}"/>
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_serialNumber}" for="serialNumber"/>
+                        <p:inputText id="serialNumber" value="#{thermometerController.selected.serialNumber}" title="#{bundleThermometer.CreateThermometerTitle_serialNumber}">
+                            <f:validateLongRange minimum="0"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundleThermometer.CreateThermometerLabel_moduleObject}" for="moduleObject"/>
                         <p:selectOneMenu id="moduleObject" value="#{thermometerController.selected.moduleObject}" required="true" requiredMessage="#{bundleThermometer.EditThermometerRequiredMessage_moduleObject}">
                             <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"

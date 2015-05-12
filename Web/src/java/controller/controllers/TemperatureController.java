@@ -1,16 +1,27 @@
 package controller.controllers;
 
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
 import controller.util.DateParser;
+import controller.util.Font;
 import model.weather.Temperature;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.Storage;
+import controller.util.TableRowData;
 import data.weather.TemperatureDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -48,26 +59,29 @@ public class TemperatureController implements Serializable {
     //File variables
     private String message;
     //Chart variables
-    private LineChartModel model1;
-    private LineChartModel model2;
-    private LineChartModel model3;
-    private LineChartModel model4;
-    private int year1;
+    private LineChartModel model;
+    private int period;
+    private Date date;
+    private int year;
     private int month;
-    private int yearMonth;
-    private Date dateWeek;
-    private Date dateDay;
+    private List<TableRowData> chartPairs;
+    private String header1;
+    private String header2;
+    private String header3;
+    private String header4;
+    private String header5;
+    private String header6;
+
+    public TemperatureController() {
+        year = DateTools.getYear();
+        month = DateTools.getMonth();
+        date = DateTools.getDate();
+        period = 0;
+    }
 
     @PostConstruct
     public void init() {
-        year1 = yearMonth = DateTools.getYear();
-        month = DateTools.getMonth();
-        dateWeek = DateTools.getDate();
-        dateDay = DateTools.getDate();
-        createModel1();
-        createModel2();
-        createModel3();
-        createModel4();
+        createChart();
     }
 
     public Temperature getSelected() {
@@ -85,21 +99,37 @@ public class TemperatureController implements Serializable {
     public void setPermissionBean(PermissionController permissionBean) {
         this.permissionBean = permissionBean;
     }
-    
-    public LineChartModel getModel1() {
-        return model1;
+
+    public LineChartModel getModel() {
+        return model;
     }
 
-    public int getYear1() {
-        return year1;
+    public void setModel(LineChartModel model) {
+        this.model = model;
     }
 
-    public void setYear1(int year1) {
-        this.year1 = year1;
+    public int getPeriod() {
+        return period;
     }
 
-    public LineChartModel getModel2() {
-        return model2;
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public int getMonth() {
@@ -110,36 +140,60 @@ public class TemperatureController implements Serializable {
         this.month = month;
     }
 
-    public int getYearMonth() {
-        return yearMonth;
+    public List<TableRowData> getChartPairs() {
+        return chartPairs;
     }
 
-    public void setYearMonth(int yearMonth) {
-        this.yearMonth = yearMonth;
+    public void setChartPairs(List<TableRowData> chartPairs) {
+        this.chartPairs = chartPairs;
     }
 
-    public Date getDateWeek() {
-        return dateWeek;
+    public String getHeader1() {
+        return header1;
     }
 
-    public void setDateWeek(Date dateWeek) {
-        this.dateWeek = dateWeek;
+    public void setHeader1(String header1) {
+        this.header1 = header1;
     }
 
-    public LineChartModel getModel3() {
-        return model3;
+    public String getHeader2() {
+        return header2;
     }
 
-    public Date getDateDay() {
-        return dateDay;
+    public void setHeader2(String header2) {
+        this.header2 = header2;
     }
 
-    public void setDateDay(Date dateDay) {
-        this.dateDay = dateDay;
+    public String getHeader3() {
+        return header3;
     }
 
-    public LineChartModel getModel4() {
-        return model4;
+    public void setHeader3(String header3) {
+        this.header3 = header3;
+    }
+
+    public String getHeader4() {
+        return header4;
+    }
+
+    public void setHeader4(String header4) {
+        this.header4 = header4;
+    }
+
+    public String getHeader5() {
+        return header5;
+    }
+
+    public void setHeader5(String header5) {
+        this.header5 = header5;
+    }
+
+    public String getHeader6() {
+        return header6;
+    }
+
+    public void setHeader6(String header6) {
+        this.header6 = header6;
     }
 
     protected void setEmbeddableKeys() {
@@ -262,10 +316,6 @@ public class TemperatureController implements Serializable {
         persist(PersistAction.CREATE, null);
     }
 
-    public Temperature nuevo(Date fecha, Date hora, float temperature, float soilmoisture, float puntoDeRocio, ModuleClass moduleclass) {
-        return new Temperature(fecha, hora, temperature, soilmoisture, puntoDeRocio, moduleclass);
-    }
-
     @FacesConverter(forClass = Temperature.class)
     public static class TemperatureControllerConverter implements Converter {
 
@@ -305,9 +355,8 @@ public class TemperatureController implements Serializable {
             }
         }
     }
-    
+
     //File functions
-    
     public void upload(FileUploadEvent event) {
         String filename = "temperature" + new Date().getTime() + ".txt";
         Storage.save(filename, event.getFile());
@@ -319,7 +368,7 @@ public class TemperatureController implements Serializable {
     private void parse(String filename) {
         FileReader fr;
         BufferedReader br;
-        ModuleClass moduleclass;
+        ModuleClass module;
         int skip = 15, created = 0;
 
         try {
@@ -331,15 +380,14 @@ public class TemperatureController implements Serializable {
             long nds = Long.parseLong(line.split(",")[5]);
             Thermometer thermometer = new ThermometerController().find(nds);
             if (thermometer != null) {
-                moduleclass = thermometer.getModuleObject();
-                TemperatureController controller = new TemperatureController();
+                module = thermometer.getModuleObject();
                 while (line != null) {
-                    Date date = DateParser.parseDate(line.split(",")[1].split(" ")[0]);
-                    Date time = DateParser.parseTime(line.split(",")[1].split(" ")[1]);
-                    float temperature = Float.parseFloat(line.split(",")[2]);
-                    float soilMoisture = Float.parseFloat(line.split(",")[3]);
-                    float dewPoint = Float.parseFloat(line.split(",")[4]);
-                    controller.save(controller.nuevo(date, time, temperature, soilMoisture, dewPoint, moduleclass));
+                    Date dateTemp = DateParser.parseDate(line.split(",")[1].split(" ")[0]);
+                    Date timeTemp = DateParser.parseTime(line.split(",")[1].split(" ")[1]);
+                    float temperatureTemp = Float.parseFloat(line.split(",")[2]);
+                    float soilMoistureTemp = Float.parseFloat(line.split(",")[3]);
+                    float dewPointTemp = Float.parseFloat(line.split(",")[4]);
+                    save(new Temperature(dateTemp, timeTemp, temperatureTemp, soilMoistureTemp, dewPointTemp, module));
                     created++;
                     for (int i = 1; i < skip; i++) {
                         if ((line = br.readLine()) == null) {
@@ -361,184 +409,204 @@ public class TemperatureController implements Serializable {
             message = "Error inesperado.";
         }
     }
-    
+
     //Chart functions
-    
-    public void createModel1() {
-        model1 = new LineChartModel();
+    public void createChart() {
+        model = new LineChartModel();
+        chartPairs = new ArrayList<TableRowData>();
+        header1 = null;
+        header2 = null;
+        header3 = null;
+        header4 = null;
+        header5 = null;
+        header6 = null;
         LineChartSeries series1 = new LineChartSeries();
         LineChartSeries series2 = new LineChartSeries();
         LineChartSeries series3 = new LineChartSeries();
         LineChartSeries series4 = new LineChartSeries();
         LineChartSeries series5 = new LineChartSeries();
         LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperatura - Día");
-        series2.setLabel("Humedad del Suelo - Día");
-        series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperatura - Noche");
-        series5.setLabel("Humedad del Suelo - Noche");
-        series6.setLabel("Punto De Rocío - Noche");
-        TemperatureController controller = new TemperatureController();
         Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(year1, 0, 1));
-        for (int i = 0; i < 12; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.MONTH, 1);
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            Date fecha2 = cal.getTime();
-            Temperature meanTemp;
-            meanTemp = controller.calcularMean(fecha1, fecha2, 2);
-            series1.set(DateTools.getMonth(i), meanTemp.getTemperature());
-            series2.set(DateTools.getMonth(i), meanTemp.getHumidity());
-            series3.set(DateTools.getMonth(i), meanTemp.getDewPoint());
-
-            meanTemp = controller.calcularMean(fecha1, fecha2, 1);
-            series4.set(DateTools.getMonth(i), meanTemp.getTemperature());
-            series5.set(DateTools.getMonth(i), meanTemp.getHumidity());
-            series6.set(DateTools.getMonth(i), meanTemp.getDewPoint());
-
-            cal.add(Calendar.DAY_OF_MONTH, 1);
+        int maxPeriods = 0;
+        Temperature meanTemp = new Temperature();
+        TableRowData rowData;
+        String axis = "";
+        String chartTitle = "";
+        switch (period) {
+            case 0:
+                maxPeriods = 24;
+                cal.setTime(date);
+                axis = "Hora";
+                chartTitle = "Temperatura por Hora " + DateFormatter.formatDateLong(date);
+                header1 = "Temperatura";
+                header2 = "Humedad";
+                header3 = "Punto de Rocío";
+                break;
+            case 1:
+                maxPeriods = 7;
+                cal.setTime(DateTools.getFirstDayOfWeek(date));
+                axis = "Día";
+                chartTitle = "Temperatura por Día " + DateTools.getWeek(date);
+                header1 = "Temperatura - Día";
+                header2 = "Humedad - Día";
+                header3 = "Punto de Rocío - Día";
+                header4 = "Temperatura - Noche";
+                header5 = "Humedad - Noche";
+                header6 = "Punto de Rocío - Noche";
+                break;
+            case 2:
+                maxPeriods = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                cal.setTime(DateTools.getDate(year, month, 1));
+                axis = "Día";
+                chartTitle = "Temperatura por Día " + DateTools.getMonth(month) + " de " + year;
+                header1 = "Temperatura - Día";
+                header2 = "Humedad - Día";
+                header3 = "Punto de Rocío - Día";
+                header4 = "Temperatura - Noche";
+                header5 = "Humedad - Noche";
+                header6 = "Punto de Rocío - Noche";
+                break;
+            case 3:
+                maxPeriods = 12;
+                cal.setTime(DateTools.getDate(year, 0, 1));
+                axis = "Mes";
+                chartTitle = "Temperatura por Mes Año " + year;
+                header1 = "Temperatura - Día";
+                header2 = "Humedad - Día";
+                header3 = "Punto de Rocío - Día";
+                header4 = "Temperatura - Noche";
+                header5 = "Humedad - Noche";
+                header6 = "Punto de Rocío - Noche";
+                break;
         }
-
-        model1.addSeries(series1);
-        model1.addSeries(series2);
-        model1.addSeries(series3);
-        model1.addSeries(series4);
-        model1.addSeries(series5);
-        model1.addSeries(series6);
-        model1.setShowPointLabels(true);
-        model1.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
-        model1.setTitle("Media de Temperatura por Mes - Año " + year1);
-        model1.setLegendPosition("e");
+        for (int i = 1; i <= maxPeriods; i++) {
+            Date startDate = cal.getTime();
+            rowData = new TableRowData();
+            String label = "";
+            switch (period) {
+                case 0:
+                    label = (i - 1) + "";
+                    break;
+                case 1:
+                    label = DateTools.getDayOfWeek(i);
+                    break;
+                case 2:
+                    label = i + "";
+                    break;
+                case 3:
+                    label = DateTools.getMonth(i - 1);
+                    break;
+            }
+            rowData.setLabel(label);
+            switch (period) {
+                case 0:
+                    meanTemp = calcularMean(startDate, i - 1);
+                    break;
+                case 1:
+                    meanTemp = calcularMean(startDate, startDate, 2);
+                    break;
+                case 2:
+                    meanTemp = calcularMean(startDate, startDate, 2);
+                    break;
+                case 3:
+                    cal.add(Calendar.MONTH, 1);
+                    cal.add(Calendar.DAY_OF_MONTH, -1);
+                    meanTemp = calcularMean(startDate, cal.getTime(), 2);
+                    break;
+            }
+            series1.set(label, meanTemp.getTemperature());
+            series2.set(label, meanTemp.getHumidity());
+            series3.set(label, meanTemp.getDewPoint());
+            rowData.setValue1(meanTemp.getTemperature());
+            rowData.setValue2(meanTemp.getHumidity());
+            rowData.setValue3(meanTemp.getDewPoint());
+            if (period != 0) {
+                switch (period) {
+                    case 1:
+                        meanTemp = calcularMean(startDate, startDate, 1);
+                        break;
+                    case 2:
+                        meanTemp = calcularMean(startDate, startDate, 1);
+                        break;
+                    case 3:
+                        meanTemp = calcularMean(startDate, cal.getTime(), 1);
+                        break;
+                }
+                series4.set(label, meanTemp.getTemperature());
+                series5.set(label, meanTemp.getHumidity());
+                series6.set(label, meanTemp.getDewPoint());
+                rowData.setValue4(meanTemp.getTemperature());
+                rowData.setValue5(meanTemp.getHumidity());
+                rowData.setValue6(meanTemp.getDewPoint());
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+            }
+            chartPairs.add(rowData);
+        }
+        series1.setLabel(header1);
+        series2.setLabel(header2);
+        series3.setLabel(header3);
+        if (period != 0) {
+            series4.setLabel(header4);
+            series5.setLabel(header5);
+            series6.setLabel(header6);
+        }
+        model.addSeries(series1);
+        model.addSeries(series2);
+        model.addSeries(series3);
+        if (period != 0) {
+            model.addSeries(series4);
+            model.addSeries(series5);
+            model.addSeries(series6);
+        }
+        model.setShowPointLabels(true);
+        model.getAxes().put(AxisType.X, new CategoryAxis(axis));
+        model.setTitle(chartTitle);
+        model.setLegendPosition("e");
     }
 
-    public void createModel2() {
-        model2 = new LineChartModel();
-
-        LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperatura - Día");
-        series2.setLabel("Humedad del Suelo - Día");
-        series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperatura - Noche");
-        series5.setLabel("Humedad del Suelo - Noche");
-        series6.setLabel("Punto De Rocío - Noche");
-
-        TemperatureController controller = new TemperatureController();
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getDate(yearMonth, month, 1));
-
-        for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-            Temperature meanTemp;
-            meanTemp = controller.calcularMean(fecha1, fecha1, 2);
-
-            series1.set(i + 1, meanTemp.getTemperature());
-            series2.set(i + 1, meanTemp.getHumidity());
-            series3.set(i + 1, meanTemp.getDewPoint());
-
-            meanTemp = controller.calcularMean(fecha1, fecha1, 1);
-
-            series4.set(i + 1, meanTemp.getTemperature());
-            series5.set(i + 1, meanTemp.getHumidity());
-            series6.set(i + 1, meanTemp.getDewPoint());
-        }
-
-        model2.addSeries(series1);
-        model2.addSeries(series2);
-        model2.addSeries(series3);
-        model2.addSeries(series4);
-        model2.addSeries(series5);
-        model2.addSeries(series6);
-        model2.setShowPointLabels(true);
-        model2.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model2.setTitle("Promedio de Temperatura por Día " + DateTools.getMonth(month) + " de " + yearMonth);
-        model2.setLegendPosition("e");
+    //Report functions
+    public void postProcessPDF(Object document) throws DocumentException {
+        Document pdf = (Document) document;
+        pdf.add(Chunk.NEWLINE);
+        Paragraph footer = new Paragraph("Este reporte fue generado automáticamente\n", Font.getFont(12));
+        footer.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate()), Font.getFont(12)));
+        pdf.add(footer);
     }
 
-    public void createModel3() {
-        model3 = new LineChartModel();
-
-        LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-        LineChartSeries series4 = new LineChartSeries();
-        LineChartSeries series5 = new LineChartSeries();
-        LineChartSeries series6 = new LineChartSeries();
-        series1.setLabel("Temperatura - Día");
-        series2.setLabel("Humedad del Suelo - Día");
-        series3.setLabel("Punto De Rocío - Día");
-        series4.setLabel("Temperatura - Noche");
-        series5.setLabel("Humedad del Suelo - Noche");
-        series6.setLabel("Punto De Rocío - Noche");
-
-        TemperatureController controller = new TemperatureController();
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(DateTools.getFirstDayOfWeek(dateWeek));
-
-        for (int i = 0; i < 7; i++) {
-            Date fecha1 = cal.getTime();
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-            Temperature meanTemp;
-            meanTemp = controller.calcularMean(fecha1, fecha1, 2);
-
-            series1.set(DateTools.getDayOfWeek(i + 1), meanTemp.getTemperature());
-            series2.set(DateTools.getDayOfWeek(i + 1), meanTemp.getHumidity());
-            series3.set(DateTools.getDayOfWeek(i + 1), meanTemp.getDewPoint());
-
-            meanTemp = controller.calcularMean(fecha1, fecha1, 1);
-
-            series4.set(DateTools.getDayOfWeek(i + 1), meanTemp.getTemperature());
-            series5.set(DateTools.getDayOfWeek(i + 1), meanTemp.getHumidity());
-            series6.set(DateTools.getDayOfWeek(i + 1), meanTemp.getDewPoint());
+    public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.setPageSize(PageSize.A4);
+        Paragraph header = new Paragraph("Finca: " + permissionBean.getSignInBean().getFarm().getName() + "\n", Font.getFont(20));
+        header.setAlignment(Element.ALIGN_CENTER);
+        String title = "";
+        String subtitle = "";
+        switch (period) {
+            case 0:
+                title = "Temperatura por Hora";
+                subtitle = DateFormatter.formatDateLong(date);
+                break;
+            case 1:
+                title = "Temperatura por Día";
+                subtitle = DateTools.getWeek(date);
+                break;
+            case 2:
+                title = "Temperatura por Día";
+                subtitle = DateTools.getMonth(month) + " de " + year;
+                break;
+            case 3:
+                title = "Temperatura por Mes";
+                subtitle = "Año " + year;
+                break;
         }
-
-        model3.addSeries(series1);
-        model3.addSeries(series2);
-        model3.addSeries(series3);
-        model3.addSeries(series4);
-        model3.addSeries(series5);
-        model3.addSeries(series6);
-        model3.setShowPointLabels(true);
-        model3.getAxes().put(AxisType.X, new CategoryAxis("Día"));
-        model3.setTitle("Promedio de Temperatura " + DateTools.getWeek(dateWeek));
-        model3.setLegendPosition("e");
+        Paragraph paragraph = new Paragraph(title, Font.getFont(20));
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        header.add(paragraph);
+        paragraph = new Paragraph(subtitle, Font.getFont(20));
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        header.add(paragraph);
+        header.setAlignment(Element.ALIGN_CENTER);
+        pdf.add(header);
+        pdf.add(Chunk.NEWLINE);
     }
-
-    public void createModel4() {
-        model4 = new LineChartModel();
-
-        LineChartSeries series1 = new LineChartSeries();
-        LineChartSeries series2 = new LineChartSeries();
-        LineChartSeries series3 = new LineChartSeries();
-
-        series1.setLabel("Temperatura");
-        series2.setLabel("Humedad del Suelo");
-        series3.setLabel("Punto De Rocío");
-
-        TemperatureController controller = new TemperatureController();
-
-        for (int i = 0; i < 24; i++) {
-            Temperature meanTemp;
-            meanTemp = controller.calcularMean(dateDay, i);
-
-            series1.set(i, meanTemp.getTemperature());
-            series2.set(i, meanTemp.getHumidity());
-            series3.set(i, meanTemp.getDewPoint());
-        }
-
-        model4.addSeries(series1);
-        model4.addSeries(series2);
-        model4.addSeries(series3);
-        model4.setShowPointLabels(true);
-        model4.getAxes().put(AxisType.X, new CategoryAxis("Hora"));
-        model4.setTitle("Promedio de Temperatura " + DateFormatter.formatDate(dateDay));
-        model4.setLegendPosition("e");
-    }
-
 }

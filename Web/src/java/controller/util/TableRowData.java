@@ -11,7 +11,8 @@ package controller.util;
  */
 public class TableRowData {
 
-    private String value1;
+    private Object label;
+    private Object value1;
     private Object value2;
     private Object value3;
     private Object value4;
@@ -25,16 +26,24 @@ public class TableRowData {
     public TableRowData() {
     }
 
-    public TableRowData(String value1, String value2) {
+    public TableRowData(Object label, Object value1) {
+        this.label = label;
         this.value1 = value1;
-        this.value2 = value2;
     }
 
-    public String getValue1() {
+    public Object getLabel() {
+        return label;
+    }
+
+    public void setLabel(Object label) {
+        this.label = label;
+    }
+
+    public Object getValue1() {
         return value1;
     }
 
-    public void setValue1(String value1) {
+    public void setValue1(Object value1) {
         this.value1 = value1;
     }
 
@@ -110,19 +119,55 @@ public class TableRowData {
         this.value10 = value10;
     }
 
+    public void setValue(int i, float weight) {
+        switch (i) {
+            case 1:
+                setValue1(weight);
+                break;
+            case 2:
+                setValue2(weight);
+                break;
+            case 3:
+                setValue3(weight);
+                break;
+            case 4:
+                setValue4(weight);
+                break;
+            case 5:
+                setValue5(weight);
+                break;
+            case 6:
+                setValue6(weight);
+                break;
+            case 7:
+                setValue7(weight);
+                break;
+            case 8:
+                setValue8(weight);
+                break;
+            case 9:
+                setValue9(weight);
+                break;
+            case 10:
+                setValue10(weight);
+                break;
+        }
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + (this.value1 != null ? this.value1.hashCode() : 0);
-        hash = 71 * hash + (this.value2 != null ? this.value2.hashCode() : 0);
-        hash = 71 * hash + (this.value3 != null ? this.value3.hashCode() : 0);
-        hash = 71 * hash + (this.value4 != null ? this.value4.hashCode() : 0);
-        hash = 71 * hash + (this.value5 != null ? this.value5.hashCode() : 0);
-        hash = 71 * hash + (this.value6 != null ? this.value6.hashCode() : 0);
-        hash = 71 * hash + (this.value7 != null ? this.value7.hashCode() : 0);
-        hash = 71 * hash + (this.value8 != null ? this.value8.hashCode() : 0);
-        hash = 71 * hash + (this.value9 != null ? this.value9.hashCode() : 0);
-        hash = 71 * hash + (this.value10 != null ? this.value10.hashCode() : 0);
+        int hash = 5;
+        hash = 11 * hash + (this.label != null ? this.label.hashCode() : 0);
+        hash = 11 * hash + (this.value1 != null ? this.value1.hashCode() : 0);
+        hash = 11 * hash + (this.value2 != null ? this.value2.hashCode() : 0);
+        hash = 11 * hash + (this.value3 != null ? this.value3.hashCode() : 0);
+        hash = 11 * hash + (this.value4 != null ? this.value4.hashCode() : 0);
+        hash = 11 * hash + (this.value5 != null ? this.value5.hashCode() : 0);
+        hash = 11 * hash + (this.value6 != null ? this.value6.hashCode() : 0);
+        hash = 11 * hash + (this.value7 != null ? this.value7.hashCode() : 0);
+        hash = 11 * hash + (this.value8 != null ? this.value8.hashCode() : 0);
+        hash = 11 * hash + (this.value9 != null ? this.value9.hashCode() : 0);
+        hash = 11 * hash + (this.value10 != null ? this.value10.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +180,10 @@ public class TableRowData {
             return false;
         }
         final TableRowData other = (TableRowData) obj;
-        if ((this.value1 == null) ? (other.value1 != null) : !this.value1.equals(other.value1)) {
+        if (this.label != other.label && (this.label == null || !this.label.equals(other.label))) {
+            return false;
+        }
+        if (this.value1 != other.value1 && (this.value1 == null || !this.value1.equals(other.value1))) {
             return false;
         }
         if (this.value2 != other.value2 && (this.value2 == null || !this.value2.equals(other.value2))) {
@@ -167,4 +215,5 @@ public class TableRowData {
         }
         return true;
     }
+
 }

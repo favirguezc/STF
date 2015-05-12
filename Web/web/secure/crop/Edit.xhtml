@@ -29,7 +29,9 @@
                                            itemLabel="#{collectorItem.name} #{collectorItem.lastName}"/>/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCrop.EditCropLabel_weight}" for="weight" />
-                        <p:inputText id="weight" value="#{cropController.selected.weight}" title="#{bundleCrop.EditCropTitle_weight}" />                        
+                        <p:inputText id="weight" value="#{cropController.selected.weight}" title="#{bundleCrop.EditCropTitle_weight}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cropController.update}" value="#{bundle.Save}" update="display,:CropListPanel:CropListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CropEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CropEditDialog.hide()"/>

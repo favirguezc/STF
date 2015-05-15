@@ -11,8 +11,93 @@
             <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <p:accordionPanel dynamic="true" id="SaleListPanel">
-                
+            <p:tabView dynamic="true" id="SaleListPanel">
+                <p:tab title="Gráficas">
+                    <h:form>
+                        <p:panel id="chartPanel">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td> 
+                                            <h:outputLabel value="Periodo:"/>
+                                        </td>
+                                        <td> 
+                                            <p:selectOneRadio value="#{saleController.period}">
+                                                <f:selectItem itemLabel="Semana - Día" itemValue="0"/>
+                                                <f:selectItem itemLabel="Mes - Día" itemValue="1"/>
+                                                <f:selectItem itemLabel="Año - Semana" itemValue="2"/>
+                                                <f:selectItem itemLabel="Año - Mes" itemValue="3"/>
+                                                <p:ajax update="chartPanel"/>
+                                            </p:selectOneRadio>
+                                        </td>
+                                        <td> 
+                                            <h:outputLabel value="Fecha:" rendered="#{saleController.period==0}"/>
+                                        </td>
+                                        <td>
+                                            <p:calendar pattern="dd/MM/yyyy" value="#{saleController.date}" showOn="button" rendered="#{saleController.period==0}"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel value="Año:" rendered="#{saleController.period gt 0}"/>
+                                        </td>
+                                        <td>
+                                            <p:spinner value="#{saleController.year}" min="2012" rendered="#{saleController.period gt 0}"/>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel value="Mes:" rendered="#{saleController.period==1}"/>
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu value="#{saleController.month}" rendered="#{saleController.period==1}">
+                                                <f:selectItem itemLabel="Enero" itemValue="0"/>
+                                                <f:selectItem itemLabel="Febrero" itemValue="1"/>
+                                                <f:selectItem itemLabel="Marzo" itemValue="2"/>
+                                                <f:selectItem itemLabel="Abril" itemValue="3"/>
+                                                <f:selectItem itemLabel="Mayo" itemValue="4"/>
+                                                <f:selectItem itemLabel="Junio" itemValue="5"/>
+                                                <f:selectItem itemLabel="Julio" itemValue="6"/>
+                                                <f:selectItem itemLabel="Agosto" itemValue="7"/>
+                                                <f:selectItem itemLabel="Septiembre" itemValue="8"/>
+                                                <f:selectItem itemLabel="Octubre" itemValue="9"/>
+                                                <f:selectItem itemLabel="Noviembre" itemValue="10"/>
+                                                <f:selectItem itemLabel="Diciembre" itemValue="11"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                        <td>
+                                            <p:outputLabel value="Cliente" for="customerFil"/>
+                                        </td>
+                                        <td>
+                                            <p:selectOneMenu id="customerFil" value="#{saleController.customer}">
+                                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                                <f:selectItems value="#{personController.itemsAvailableClient}"/>
+                                            </p:selectOneMenu>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p:outputLabel value="Ver:" for="eleccionFil"/>
+                                        </td>
+                                        <td>
+                                            <p:selectOneRadio id="eleccionFil" value="#{saleController.option}">
+                                                <f:selectItem itemLabel="Por Cantidad Vendida" itemValue="cantidad"/>
+                                                <f:selectItem itemLabel="Por Ingresos Obtenidos" itemValue="precio"/>
+                                            </p:selectOneRadio>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p:commandButton value="Actualizar" icon="ui-icon-refresh" onclick="drawChart()"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p:panel>
+                        <p:chart id="chart" type="line" model="#{saleController.model}"/>
+                        <p:remoteCommand name="drawChart" update="chart" actionListener="#{saleController.createChart}"/>
+                    </h:form>
+                </p:tab>    
                 <p:tab title="Datos">
                     <h:form id="SaleListForm">
                         <p:dataTable id="datalist" value="#{saleController.items}" var="item" 
@@ -65,7 +150,7 @@
                     <ui:include src="Edit.xhtml"/>
                     <ui:include src="View.xhtml"/>
                 </p:tab>
-            </p:accordionPanel>
+            </p:tabView>
         </ui:define>
     </ui:composition>
 </html>

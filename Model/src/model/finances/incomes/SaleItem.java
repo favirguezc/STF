@@ -81,6 +81,17 @@ public class SaleItem implements Serializable{
         return quantity * unitValue;
     }
 
+    public void sumSaleItem(SaleItem saleitem){
+        if(saleitem != null){
+            this.quantity += saleitem.quantity;
+            if(this.unitValue == 0){
+                this.unitValue += saleitem.unitValue;
+            }else{
+                this.unitValue = (this.unitValue + saleitem.unitValue)/2;
+            }
+        }
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

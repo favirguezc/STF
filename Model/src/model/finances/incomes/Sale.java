@@ -146,7 +146,10 @@ public class Sale implements Serializable {
      *
      * @param s
      */
-    public void sumar(Sale s) {
+    public void sumSale(Sale s) {
+        if(s != null){
+            this.saleTotalValue += s.saleTotalValue;
+        }
     }
 
     @Override

@@ -14,7 +14,11 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import data.exceptions.NonexistentEntityException;
+import java.util.Date;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
+import model.administration.Person;
+import model.crop.ClassificationTypeEnum;
 import model.finances.incomes.Sale;
 import model.finances.incomes.SaleItem;
 
@@ -142,6 +146,58 @@ public class SaleItemDAO implements Serializable {
         try {
             TypedQuery<SaleItem> query = em.createQuery("SELECT si FROM SaleItem si WHERE si.sale = :sale", SaleItem.class);
             query.setParameter("sale", sale);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<SaleItem> findSaleItemEntities(Person customer, Date start, Date end, ClassificationTypeEnum type) {
+        EntityManager em = getEntityManager();
+        boolean a, b, c, d;
+        a = b = c = d = false;
+        String queryString = "SELECT si FROM SaleItem si";
+        if (customer != null || start != null || end != null || type != null) {
+            queryString += " WHERE";
+        }
+        if (customer != null) {
+            queryString += " si.sale.customer = :customer ";
+            a = true;
+        }
+        if (end != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " si.sale.saleDate BETWEEN :date1 AND :date2";
+            b = c = true;
+        } else if (start != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " si.sale.saleDate = :date1";
+            b = true;
+        }
+        if (type != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " si.type = :type";
+            d = true;
+        }
+        try {
+            TypedQuery<SaleItem> query = em.createQuery(queryString, SaleItem.class);
+            if (a) {
+                query.setParameter("customer", customer);
+            }
+            if (b) {
+                query.setParameter("date1", start, TemporalType.DATE);
+            }
+            if (c) {
+                query.setParameter("date2", end, TemporalType.DATE);
+            }
+            if (d) {
+                query.setParameter("type", type);
+            }
             return query.getResultList();
         } finally {
             em.close();

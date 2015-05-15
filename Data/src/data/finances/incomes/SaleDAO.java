@@ -142,12 +142,12 @@ public class SaleDAO implements Serializable {
         }
     }
     
-    public List<Sale> findSaleEntities(Person customer, Date start, Date end) {
+    public List<Sale> findSaleEntities(Person customer, Date start, Date end, Farm farm) {
         EntityManager em = getEntityManager();
-        boolean a, b, c;
-        a = b = c = false;
+        boolean a, b, c, d;
+        a = b = c = d = false;
         String queryString = "SELECT s FROM Sale s";
-        if (customer != null || start != null || end != null) {
+        if (customer != null || start != null || end != null || farm != null) {
             queryString += " WHERE";
         }
         if (customer != null) {
@@ -167,6 +167,13 @@ public class SaleDAO implements Serializable {
             queryString += " s.saleDate = :date1";
             b = true;
         }
+        if (farm != null) {
+            if (a || b) {
+                queryString += " AND";
+            }
+            queryString += " s.farm = :farm";
+            d = true;
+        }
         queryString += " ORDER BY s.saleDate ASC";
         try {
             TypedQuery<Sale> query = em.createQuery(queryString, Sale.class);
@@ -178,6 +185,9 @@ public class SaleDAO implements Serializable {
             }
             if (a) {
                 query.setParameter("customer", customer);
+            }
+            if (d) {
+                query.setParameter("farm", farm);
             }
             return query.getResultList();
         } finally {

@@ -15,12 +15,15 @@ import data.finances.incomes.SaleItemDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -34,6 +37,12 @@ import model.administration.Person;
 import model.crop.ClassificationTypeEnum;
 import model.finances.incomes.Payment;
 import model.finances.incomes.SaleItem;
+import model.util.DateTools;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 
 /**
  *
@@ -64,8 +73,26 @@ public class SaleController implements Serializable {
     private boolean fiveType;
     private boolean dummieType;
     private boolean editing;
+    //Chart variables
+    private LineChartModel model;
+    private Date date;
+    private int year;
+    private int month;
+    private int period;
+    private String option;
+    private Person customer;
 
     public SaleController() {
+        year = DateTools.getYear();
+        month = DateTools.getMonth();
+        date = DateTools.getDate();
+        period = 0;
+        option = "cantidad";
+    }
+
+    @PostConstruct
+    public void init() {
+        createChart();
     }
 
     private SaleDAO getJpaController() {
@@ -186,7 +213,63 @@ public class SaleController implements Serializable {
     public void setDummieType(boolean dummieType) {
         this.dummieType = dummieType;
     }
-    
+
+    public LineChartModel getModel() {
+        return model;
+    }
+
+    public void setModel(LineChartModel model) {
+        this.model = model;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public Person getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Person customer) {
+        this.customer = customer;
+    }
+
     public SaleItem getExtraTypeSaleItem(){
         SaleItem extraTypeSaleItem = assignSaleItem(ClassificationTypeEnum.EXTRA, extraType);
         return extraTypeSaleItem;
@@ -668,14 +751,14 @@ public class SaleController implements Serializable {
     }
 
     public List<Sale> readList(Person customer, Date start, Date end) {
-        return getJpaController().findSaleEntities(customer, start, end);
+        return getJpaController().findSaleEntities(customer, start, end, signInBean.getFarm());
     }
 
     public Sale sumRegistries(Person customer, Date start, Date end) {
         List<Sale> readList = readList(customer, start, end);
         Sale sum = new Sale();
         for (Sale s : readList) {
-            sum.sumar(s);
+            sum.sumSale(s);
         }
         return sum;
     }
@@ -696,6 +779,21 @@ public class SaleController implements Serializable {
                 }
             }
         }
+    }
+    
+    public List<SaleItem> readItemsListByCustomer(Person customer, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        return getSaleItemJpaController().findSaleItemEntities(customer, startDate, endDate, type);
+    }
+    
+    public SaleItem sumItemsRegistriesByCustomer(Person customer, Date startDate, Date endDate, ClassificationTypeEnum type) {
+        List<SaleItem>  readList = readItemsListByCustomer(customer, startDate, endDate, type);
+        SaleItem sum = new SaleItem();
+        sum.setQuantity(0);
+        sum.setUnitValue(0);
+        for (SaleItem register : readList) {
+            sum.sumSaleItem(register);
+        }
+        return sum;
     }
     
     @FacesConverter(forClass = Sale.class)
@@ -736,5 +834,119 @@ public class SaleController implements Serializable {
             }
         }
 
+    }
+    
+    //Chart functions
+    public void createChart() {
+        model = new LineChartModel();
+        LineChartSeries[] series = new LineChartSeries[8];
+        ClassificationTypeEnum[] types = ClassificationTypeEnum.values();
+        List<SaleItem> itemsSums = new ArrayList<SaleItem>();
+        for (int i = 0; i < 8; i++) {
+            series[i] = new LineChartSeries(types[i].toString());
+            if(types[i] == ClassificationTypeEnum.DAMAGED){
+                series[i] = new LineChartSeries("Total");
+            }
+        }
+        Sale totalSum = new Sale();
+        Calendar cal = GregorianCalendar.getInstance();
+        int maxPeriods = 0;
+        switch (period) {
+            case 0:
+                maxPeriods = 7;
+                cal.setTime(DateTools.getFirstDayOfWeek(date));
+                break;
+            case 1:
+                maxPeriods = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                cal.setTime(DateTools.getDate(year, month, 1));
+                break;
+            case 2:
+                maxPeriods = 52;
+                cal.setTime(DateTools.getDate(year, 0, 1));
+                break;
+            case 3:
+                maxPeriods = 12;
+                cal.setTime(DateTools.getDate(year, 0, 1));
+                break;
+        }
+        
+        for (int i = 1; i <= maxPeriods; i++) {
+            Date startDate = cal.getTime();
+            switch (period) {
+                case 2:
+                    cal.add(Calendar.DAY_OF_MONTH, 6);
+                    break;
+                case 3:
+                    cal.add(Calendar.MONTH, 1);
+                    cal.add(Calendar.DAY_OF_MONTH, -1);
+                    break;
+            }
+            Date endDate = cal.getTime();
+            if (period == 0 || period == 1) {
+                endDate = null;
+            }
+            String label = "";
+            switch (period) {
+                case 0:
+                    label = DateTools.getDayOfWeek(i);
+                    break;
+                case 1:
+                    label = i + "";
+                    break;
+                case 2:
+                    label = i + "";
+                    break;
+                case 3:
+                    label = DateTools.getMonth(i - 1);
+                    break;
+            }
+            for (int t = 0; t < 8; t++) {
+                ClassificationTypeEnum type = types[t];
+                if(types[t] != ClassificationTypeEnum.DAMAGED){
+                    SaleItem itemSum = sumItemsRegistriesByCustomer(customer, startDate, endDate, type);
+                    itemsSums.add(itemSum);
+                    if(option.equals("cantidad")){
+                        series[t].set(label, itemSum.getQuantity());
+                    }else{
+                        series[t].set(label, itemSum.getTotalValue());
+                    }
+                }else{
+                    if(option.equals("cantidad")){
+                        SaleItem itemSum = sumItemsRegistriesByCustomer(customer, startDate, endDate, null);
+                        series[t].set(label, itemSum.getQuantity());
+                    }else{
+                        totalSum = sumRegistries(customer, startDate, endDate);
+                        series[t].set(label, totalSum.getSaleTotalValue());
+                    }
+                }
+            }
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        model = new LineChartModel();
+        for(int t = 0; t < 8; t ++ ){
+            model.addSeries(series[t]);
+        }
+        model.setShowPointLabels(true);
+        switch (period) {
+            case 0:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
+                model.setTitle("Ventas por Día " + DateTools.getWeek(date));
+                break;
+            case 1:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Día"));
+                model.setTitle("Ventas por Día " + DateTools.getMonth(month) + " de " + year);
+                break;
+            case 2:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Semana"));
+                model.setTitle("Ventas por Semana Año" + year);
+                break;
+            case 3:
+                model.getAxes().put(AxisType.X, new CategoryAxis("Mes"));
+                model.setTitle("Ventas por Mes Año" + year);
+                break;
+        }
+        model.setLegendPosition("e");
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setMin(0);
     }
 }

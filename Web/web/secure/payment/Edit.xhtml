@@ -29,7 +29,9 @@
                             <f:selectItems value="#{enumController.bankValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePayment.EditPaymentLabel_paymentValue}" for="paymentValue" />
-                        <p:inputText id="paymentValue" value="#{paymentController.selected.paymentValue}" title="#{bundlePayment.EditPaymentTitle_paymentValue}" required="true" requiredMessage="#{bundlePayment.EditPaymentRequiredMessage_paymentValue}"/>
+                        <p:inputText id="paymentValue" value="#{paymentController.selected.paymentValue}" title="#{bundlePayment.EditPaymentTitle_paymentValue}" required="true" requiredMessage="#{bundlePayment.EditPaymentRequiredMessage_paymentValue}" >
+                            <f:validateDoubleRange minimum="0" />
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{paymentController.update}" value="#{bundle.Save}" update="display,:PaymentListForm:datalist,:growl" oncomplete="handleSubmit(args,'PaymentEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PaymentEditDialog.hide()"/>

@@ -12,7 +12,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cashController.selected != null}">
                         <p:outputLabel value="#{bundleCash.EditCashLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{cashController.selected.name}" title="#{bundleCash.EditCashTitle_name}" required="true" requiredMessage="#{bundleCash.EditCashRequiredMessage_name}"/>
+                        <p:inputText id="name" value="#{cashController.selected.name}" title="#{bundleCash.EditCashTitle_name}" required="true" requiredMessage="#{bundleCash.EditCashRequiredMessage_name}" >
+                            <f:validateLength minimum="5"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cashController.update}" value="#{bundle.Save}" update="display,:CashListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CashEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CashEditDialog.hide()"/>

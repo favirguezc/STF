@@ -24,10 +24,18 @@
                         </p:selectOneMenu>
                         <p:outputLabel for="priceCoE" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_price}"/>
                         <p:inputText id="priceCoE" value="#{chemicalPurchaseController.selected.price}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_price}">
-                            <p:ajax listener="#{chemicalPurchaseController.verifyPrice}"/>
+                            <p:ajax update="totalCoE" listener="#{chemicalPurchaseController.verifyPrice}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <p:outputLabel for="quantityCoE" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_quantity}"/>
-                        <p:inputText id="quantityCoE" value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_quantity}" required="true" requiredMessage="#{bundleChemicalPurchase.EditChemicalPurchaseRequiredMessage_quantity}" />
+                        <p:inputText id="quantityCoE" value="#{chemicalPurchaseController.selected.quantity}" title="#{bundleChemicalPurchase.EditChemicalPurchaseTitle_quantity}" required="true" requiredMessage="#{bundleChemicalPurchase.EditChemicalPurchaseRequiredMessage_quantity}" >
+                            <p:ajax update="totalCoE" />
+                            <f:validateDoubleRange minimum="1" />
+                        </p:inputText>
+                        <p:outputLabel for="totalCoE" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_total}" style="font-weight: bold;"/>
+                        <h:outputText id="totalCoE" value="#{chemicalPurchaseController.selected.total}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_total}" style="font-weight: bold;" >
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{chemicalPurchaseController.update}" value="#{bundle.Save}" update="display,:ChemicalPurchaseListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalPurchaseEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalPurchaseEditDialog.hide()"/>

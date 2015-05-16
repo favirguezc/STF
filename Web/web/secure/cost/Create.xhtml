@@ -20,23 +20,35 @@
                                            itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_costDate}" for="costDate" />
-                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.CreateCostTitle_costDate}" required="true" requiredMessage="#{CreateCostRequiredMessage_costDate}" showOn="button"/>
+                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.CreateCostTitle_costDate}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_costDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_type}" for="type" />
-                        <p:selectOneMenu id="type" value="#{costController.selected.type}">
+                        <p:selectOneMenu id="type" value="#{costController.selected.type}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_type}" >
                             <f:selectItems value="#{enumController.costTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_subType}" for="subType" />
                         <p:inputText id="subType" value="#{costController.selected.subType}" title="#{bundleCost.CreateCostTitle_subType}" />
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{costController.selected.name}" title="#{bundleCost.CreateCostTitle_name}" />
+                        <p:inputText id="name" value="#{costController.selected.name}" title="#{bundleCost.CreateCostTitle_name}" >
+                            <f:validateLength minimum="3" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_item}" for="item" />
                         <p:selectOneMenu id="item" value="#{costController.selected.item}">
                             <f:selectItems value="#{enumController.costItemValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_quantity}" for="quantity" />
-                        <p:inputText id="quantity" value="#{costController.selected.quantity}" title="#{bundleCost.CreateCostTitle_quantity}" />
+                        <p:inputText id="quantity" value="#{costController.selected.quantity}" title="#{bundleCost.CreateCostTitle_quantity}" >
+                            <f:validateDoubleRange minimum="1" />
+                            <p:ajax update="total" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_unitPrice}" for="unitPrice" />
-                        <p:inputText id="unitPrice" value="#{costController.selected.unitPrice}" title="#{bundleCost.CreateCostTitle_unitPrice}" />
+                        <p:inputText id="unitPrice" value="#{costController.selected.unitPrice}" title="#{bundleCost.CreateCostTitle_unitPrice}" >
+                            <f:validateDoubleRange minimum="0" />
+                            <p:ajax update="total" />
+                        </p:inputText>
+                        <p:outputLabel for="total" value="#{bundleCost.CreateCostLabel_totalPrice}" style="font-weight: bold;" />
+                        <h:outputText id="total" value="#{costController.selected.totalPrice}" title="#{bundleCost.CreateCostTitle_totalPrice}" style="font-weight: bold;" >
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{costController.create}" value="#{bundle.Save}" update="display,:CostListForm:datalist,:growl" oncomplete="handleSubmit(args,'CostCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CostCreateDialog.hide()"/>

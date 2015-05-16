@@ -14,15 +14,19 @@
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_cash}" for="cashE" />
                         <h:outputText id="cashE" value="#{cashConceptController.selected.cash.name}" title="#{bundleCashConcept.CreateCashConceptTitle_cash}"/>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_conceptDate}" for="conceptDate" />
-                        <p:calendar id="conceptDate" pattern="dd/MM/yyyy" value="#{cashConceptController.selected.conceptDate}" title="#{bundleCashConcept.EditCashConceptTitle_conceptDate}" required="true" requiredMessage="#{CreateCashConceptRequiredMessage_conceptDate}" showOn="button"/>
+                        <p:calendar id="conceptDate" pattern="dd/MM/yyyy" value="#{cashConceptController.selected.conceptDate}" title="#{bundleCashConcept.EditCashConceptTitle_conceptDate}" required="true" requiredMessage="#{bundleCashConcept.EditCashConceptRequiredMessage_conceptDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{cashConceptController.selected.description}" title="#{bundleCashConcept.EditCashConceptTitle_description}" />
+                        <p:inputText id="description" value="#{cashConceptController.selected.description}" title="#{bundleCashConcept.EditCashConceptTitle_description}" >
+                            <f:validateLength minimum="3"/>
+                        </p:inputText>
                         <p:outputLabel for="income" value="#{bundleCashConcept.EditCashConceptLabel_eos}" />
                         <p:selectOneRadio id="income" value="#{cashConceptController.income}">
                             <f:selectItems value="#{cashConceptController.incomeItems}"/>
                         </p:selectOneRadio>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_conceptValue}" for="conceptValue" />
-                        <p:inputText id="conceptValue" value="#{cashConceptController.selected.conceptValue}" title="#{bundleCashConcept.EditCashConceptTitle_conceptValue}" />
+                        <p:inputText id="conceptValue" value="#{cashConceptController.selected.conceptValue}" title="#{bundleCashConcept.EditCashConceptTitle_conceptValue}" >
+                            <f:validateDoubleRange minimum="0" />
+                        </p:inputText>
                     </h:panelGrid>
                     <p:commandButton actionListener="#{cashConceptController.update}" value="#{bundle.Save}" update="display,:CashConceptListForm:datalist,:growl" oncomplete="handleSubmit(args,'CashConceptEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CashConceptEditDialog.hide()"/>

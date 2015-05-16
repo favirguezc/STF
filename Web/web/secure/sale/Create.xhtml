@@ -29,9 +29,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="extraGrams" value="#{saleController.extraTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_extraQuantity}" disabled="#{!saleController.extraType}" >
                             <p:ajax update="extraTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="extraUnitPrice" value="#{saleController.extraTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_extraUnitValue}" disabled="#{!saleController.extraType}">
                             <p:ajax update="extraTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="extraTotal" value="#{saleController.extraTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_extraTotalValue}" >
                             <f:convertNumber/>
@@ -41,9 +43,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="firstGrams" value="#{saleController.oneTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_firstQuantity}" disabled="#{!saleController.oneType}" >
                             <p:ajax update="firstTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="firstUnitPrice" value="#{saleController.oneTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_firstUnitValue}" disabled="#{!saleController.oneType}">
                             <p:ajax update="firstTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="firstTotal" value="#{saleController.oneTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_firstTotalValue}" >
                             <f:convertNumber/>
@@ -53,9 +57,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="secondGrams" value="#{saleController.twoTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_secondQuantity}" disabled="#{!saleController.twoType}" >
                             <p:ajax update="secondTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="secondUnitPrice" value="#{saleController.twoTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_secondUnitValue}" disabled="#{!saleController.twoType}">
                             <p:ajax update="secondTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="secondTotal" value="#{saleController.twoTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_secondTotalValue}" >
                             <f:convertNumber/>
@@ -65,9 +71,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="thirdGrams" value="#{saleController.threeTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_thirdQuantity}" disabled="#{!saleController.threeType}" >
                             <p:ajax update="thirdTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="thirdUnitPrice" value="#{saleController.threeTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_thirdUnitValue}" disabled="#{!saleController.threeType}">
                             <p:ajax update="thirdTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="thirdTotal" value="#{saleController.threeTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_thirdTotalValue}" >
                             <f:convertNumber/>
@@ -77,9 +85,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="fourthGrams" value="#{saleController.fourTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_fourthQuantity}" disabled="#{!saleController.fourType}" >
                             <p:ajax update="fourthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="fourthUnitPrice" value="#{saleController.fourTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_fourthUnitValue}" disabled="#{!saleController.fourType}">
                             <p:ajax update="fourthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="fourthTotal" value="#{saleController.fourTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_fourthTotalValue}" >
                             <f:convertNumber/>
@@ -89,9 +99,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="fifthGrams" value="#{saleController.fiveTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_fifthQuantity}" disabled="#{!saleController.fiveType}" >
                             <p:ajax update="fifthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="fifthUnitPrice" value="#{saleController.fiveTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_fifthUnitValue}" disabled="#{!saleController.fiveType}">
                             <p:ajax update="fifthTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="fifthTotal" value="#{saleController.fiveTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_fifthTotalValue}" >
                             <f:convertNumber/>
@@ -101,9 +113,11 @@
                         </p:selectBooleanCheckbox>
                         <p:inputText id="dummieGrams" value="#{saleController.dummieTypeSaleItem.quantity}" title="#{bundleSale.CreateSaleTitle_dummieQuantity}" disabled="#{!saleController.dummieType}" >
                             <p:ajax update="dummieTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="1" />
                         </p:inputText>
                         <p:inputText id="dummieUnitPrice" value="#{saleController.dummieTypeSaleItem.unitValue}" title="#{bundleSale.CreateSaleTitle_dummieUnitValue}" disabled="#{!saleController.dummieType}">
                             <p:ajax update="dummieTotal SaleValueTotal" listener="#{saleController.calculateSaleTotalValue}" />
+                            <f:validateDoubleRange minimum="0" />
                         </p:inputText>
                         <h:outputText id="dummieTotal" value="#{saleController.dummieTypeSaleItem.totalValue}" title="#{bundleSale.CreateSaleTitle_dummieTotalValue}" >
                             <f:convertNumber/>

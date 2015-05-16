@@ -20,23 +20,35 @@
                                            itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_costDate}" for="costDate" />
-                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.EditCostTitle_costDate}" required="true" requiredMessage="#{CreateCostRequiredMessage_costDate}" showOn="button"/>
+                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.EditCostTitle_costDate}" required="true" requiredMessage="#{bundleCost.EditCostRequiredMessage_costDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_type}" for="type" />
-                        <p:selectOneMenu id="type" value="#{costController.selected.type}">
+                        <p:selectOneMenu id="type" value="#{costController.selected.type}" required="true" requiredMessage="#{bundleCost.EditCostRequiredMessage_type}" >
                             <f:selectItems value="#{enumController.costTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_subType}" for="subType" />
                         <p:inputText id="subType" value="#{costController.selected.subType}" title="#{bundleCost.EditCostTitle_subType}" />
                         <p:outputLabel value="#{bundleCost.EditCostLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{costController.selected.name}" title="#{bundleCost.EditCostTitle_name}" />
+                        <p:inputText id="name" value="#{costController.selected.name}" title="#{bundleCost.EditCostTitle_name}" >
+                            <f:validateLength minimum="3" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_item}" for="item" />
                         <p:selectOneMenu id="item" value="#{costController.selected.item}">
                             <f:selectItems value="#{enumController.costItemValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_quantity}" for="quantity" />
-                        <p:inputText id="quantity" value="#{costController.selected.quantity}" title="#{bundleCost.EditCostTitle_quantity}" />
+                        <p:inputText id="quantity" value="#{costController.selected.quantity}" title="#{bundleCost.EditCostTitle_quantity}" >
+                            <f:validateDoubleRange minimum="1" />
+                            <p:ajax update="total" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundleCost.EditCostLabel_unitPrice}" for="unitPrice" />
-                        <p:inputText id="unitPrice" value="#{costController.selected.unitPrice}" title="#{bundleCost.EditCostTitle_unitPrice}" />
+                        <p:inputText id="unitPrice" value="#{costController.selected.unitPrice}" title="#{bundleCost.EditCostTitle_unitPrice}" >
+                            <f:validateDoubleRange minimum="0" />
+                            <p:ajax update="total" />
+                        </p:inputText>
+                        <p:outputLabel for="total" value="#{bundleCost.EditCostLabel_totalPrice}" style="font-weight: bold;" />
+                        <h:outputText id="total" value="#{costController.selected.totalPrice}" title="#{bundleCost.EditCostTitle_totalPrice}" style="font-weight: bold;" >
+                            <f:convertNumber/>
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{costController.update}" value="#{bundle.Save}" update="display,:CostListForm:datalist,:growl" oncomplete="handleSubmit(args,'CostEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CostEditDialog.hide()"/>

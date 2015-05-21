@@ -1,10 +1,19 @@
 package controller.controllers;
 
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import controller.util.Font;
 import model.finances.cash.CashConcept;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import data.finances.cash.CashConceptDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +30,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
 import model.finances.cash.Cash;
+import model.util.DateFormatter;
+import model.util.DateTools;
 
 @ManagedBean(name = "cashConceptController")
 @SessionScoped
@@ -210,6 +221,18 @@ public class CashConceptController implements Serializable {
     public List<CashConcept> getItemsAvailableSelectOne() {
         return getJpaController().findCashConceptEntities();
     }
+    
+    public List<String> completeName(String query) {
+        List<String> filteredConcepts = new ArrayList<String>();
+         
+        for (CashConcept concept : items) {
+            if(concept.getDescription().toLowerCase().startsWith(query)) {
+                filteredConcepts.add(concept.getDescription());
+            }
+        }
+         
+        return filteredConcepts;
+    }
 
     @FacesConverter(forClass = CashConcept.class)
     public static class CashConceptControllerConverter implements Converter {
@@ -251,4 +274,28 @@ public class CashConceptController implements Serializable {
 
     }
 
+    public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.setPageSize(PageSize.A4);
+        pdf.setMargins(20, 30, 20, 20);
+        Paragraph header = new Paragraph("Finca: " + permissionBean.getSignInBean().getFarm().getName() + "\n", Font.getFont(20));
+        header.setAlignment(Element.ALIGN_CENTER);
+        String title = "Reporte de los Conceptos de " + cashFilter.getName();
+        
+        Paragraph paragraph = new Paragraph(title, Font.getFont(20));
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        header.add(paragraph);
+        header.setAlignment(Element.ALIGN_CENTER);
+        pdf.add(header);
+        pdf.add(Chunk.NEWLINE);
+    }
+    
+    public void postProcessPDF(Object document) throws DocumentException {
+        Document pdf = (Document) document;
+        pdf.add(Chunk.NEWLINE);
+        Paragraph footer = new Paragraph("Este reporte fue generado automáticamente.\n", Font.getFont(12));
+        footer.add(new Paragraph("Fecha de creación: " + DateFormatter.formatDateLong(DateTools.getDate()) + " a las " + DateFormatter.formatTime(DateTools.getDate()), Font.getFont(12)));
+        pdf.add(footer);
+    }
 }

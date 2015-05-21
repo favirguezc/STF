@@ -14,6 +14,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import data.exceptions.NonexistentEntityException;
+import java.util.Date;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import model.administration.Farm;
 import model.finances.incomes.Payment;
@@ -165,6 +167,49 @@ public class PaymentDAO implements Serializable {
         try {
             TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.usedValue <= p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
             query.setParameter("farm", farm);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Payment> findPaymentEntities(Farm farm, Date start, Date end) {
+        EntityManager em = getEntityManager();
+        boolean a, b, c;
+        a = b = c = false;
+        String queryString = "SELECT p FROM Payment p";
+        if (farm != null || start != null || end != null) {
+            queryString += " WHERE";
+        }
+        if (farm != null) {
+            queryString += " p.farm = :farm";
+            a = true;
+        }
+        if (end != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " p.paymentDate BETWEEN :date1 AND :date2";
+            b = c = true;
+        } else if (start != null) {
+            if (a) {
+                queryString += " AND";
+            }
+            queryString += " p.paymentDate = :date1";
+            b = true;
+        }
+        queryString += " ORDER BY p.paymentDate ASC";
+        try {
+            TypedQuery<Payment> query = em.createQuery(queryString, Payment.class);
+            if (b) {
+                query.setParameter("date1", start, TemporalType.DATE);
+            }
+            if (c) {
+                query.setParameter("date2", end, TemporalType.DATE);
+            }
+            if (a) {
+                query.setParameter("farm", farm);
+            }
             return query.getResultList();
         } finally {
             em.close();

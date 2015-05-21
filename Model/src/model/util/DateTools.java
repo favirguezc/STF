@@ -286,4 +286,43 @@ public class DateTools {
         Calendar instance = GregorianCalendar.getInstance();
         return instance.get(Calendar.DAY_OF_MONTH);
     }
+    
+    public static Date getFirstMondayOfMonth(int year, int month) {
+        Calendar c;
+        c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        c.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.YEAR, year);
+        return c.getTime();
+    }
+    
+    public static Date getSunday(Date monday) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(monday);
+        c.add(Calendar.DAY_OF_MONTH, -c.get(Calendar.DAY_OF_WEEK) + 8);
+        return c.getTime();
+    }
+    
+    public static Date getNextMonday(Date sunday){
+        Calendar c = Calendar.getInstance();
+        c.setTime(sunday);
+        c.add(Calendar.DAY_OF_MONTH, -c.get(Calendar.DAY_OF_WEEK) + 2);
+        return c.getTime();
+    }
+    
+    public static Date getLastDay(int year, int month){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.YEAR, year);
+        int lastDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        c.set(Calendar.DAY_OF_MONTH, lastDay);
+        return c.getTime();
+    }
+    
+    public static int getDay(Date date){
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        return c.get(Calendar.DATE);
+    }
 }

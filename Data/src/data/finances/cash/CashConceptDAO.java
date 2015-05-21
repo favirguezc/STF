@@ -15,6 +15,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import data.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.TemporalType;
 import model.finances.cash.CashConcept;
 import model.finances.cash.Cash;
 import model.administration.Farm;
@@ -187,6 +189,41 @@ public class CashConceptDAO implements Serializable{
             TypedQuery<CashConcept> query = em.createQuery(queryString, CashConcept.class);
             query.setParameter("farm", selectedFarm);
             query.setParameter("cash", cash);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<CashConcept> findCashConceptEntities(Cash cash, Date start, Date end, boolean income){
+        EntityManager em = getEntityManager();
+        boolean a, b, c;
+        a = b = c = false;
+        String queryString = "SELECT cc FROM CashConcept cc WHERE cc.income = :income";
+        if (cash != null) {
+            queryString += " AND cc.cash = :cash";
+            a = true;
+        }
+        if (end != null) {
+            queryString += " AND cc.conceptDate BETWEEN :date1 AND :date2";
+            b = c = true;
+        } else if (start != null) {
+            queryString += " AND cc.conceptDate = :date1";
+            b = true;
+        }
+        queryString += " ORDER BY cc.conceptDate ASC";
+        try {
+            TypedQuery<CashConcept> query = em.createQuery(queryString, CashConcept.class);
+            query.setParameter("income", income);
+            if (b) {
+                query.setParameter("date1", start, TemporalType.DATE);
+            }
+            if (c) {
+                query.setParameter("date2", end, TemporalType.DATE);
+            }
+            if (a) {
+                query.setParameter("cash", cash);
+            }
             return query.getResultList();
         } finally {
             em.close();

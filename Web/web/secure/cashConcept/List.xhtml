@@ -14,12 +14,23 @@
             <h:form id="CashConceptListForm">
                 <h:outputText rendered="#{empty cashConceptController.cashFilter}" value="#{bundleCashConcept.ListCashConcept_noCash}" style="color: red;" />
                 <br/>
-                <p:panelGrid columns="2" style="font-size: large; width: 400px; font-style: italic;">
+                <p:panelGrid columns="2" style="font-size: large; width: 400px;">
                     <p:outputLabel value="#{bundleCashConcept.ListCashConceptTitle_cash}" for="cashFilter" />
                     <p:selectOneMenu id="cashFilter" value="#{cashConceptController.cashFilter}" >
                         <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
                         <p:ajax update="datalist"/>
                     </p:selectOneMenu>
+                    <h:outputLabel value="Guardar" rendered="#{cashConceptController.cashFilter != null}"/>
+                    <h:panelGroup rendered="#{cashConceptController.cashFilter != null}" >
+                        <h:commandLink>
+                            <p:graphicImage value="/resources/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="datalist" fileName="reporte Conceptos de #{cashConceptController.cashFilter.name}"/>
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="datalist" fileName="reporte Conceptos de #{cashConceptController.cashFilter.name}" preProcessor="#{cashConceptController.preProcessPDF}" postProcessor="#{cashConceptController.postProcessPDF}"/>
+                        </h:commandLink>
+                    </h:panelGroup>
                 </p:panelGrid>
                 <br/>
                 <p:dataTable id="datalist" value="#{cashConceptController.items}" var="item"

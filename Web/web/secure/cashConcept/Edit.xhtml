@@ -16,9 +16,9 @@
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_conceptDate}" for="conceptDate" />
                         <p:calendar id="conceptDate" pattern="dd/MM/yyyy" value="#{cashConceptController.selected.conceptDate}" title="#{bundleCashConcept.EditCashConceptTitle_conceptDate}" required="true" requiredMessage="#{bundleCashConcept.EditCashConceptRequiredMessage_conceptDate}" showOn="button"/>
                         <p:outputLabel value="#{bundleCashConcept.EditCashConceptLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{cashConceptController.selected.description}" title="#{bundleCashConcept.EditCashConceptTitle_description}" >
+                        <p:autoComplete id="description" value="#{cashConceptController.selected.description}" completeMethod="#{cashConceptController.completeName}" title="#{bundleCashConcept.EditCashConceptTitle_description}" >
                             <f:validateLength minimum="3"/>
-                        </p:inputText>
+                        </p:autoComplete>
                         <p:outputLabel for="income" value="#{bundleCashConcept.EditCashConceptLabel_eos}" />
                         <p:selectOneRadio id="income" value="#{cashConceptController.income}">
                             <f:selectItems value="#{cashConceptController.incomeItems}"/>

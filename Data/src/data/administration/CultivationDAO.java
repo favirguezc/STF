@@ -140,7 +140,7 @@ public class CultivationDAO implements Serializable {
             TypedQuery<Cultivation> query = em.createQuery("SELECT c FROM Cultivation c WHERE c.moduleObject = :module", Cultivation.class);
             query.setParameter("module", module);
             cultivation = query.getSingleResult();
-        } finally {
+        } catch(Exception e){}finally {
             em.close();
         }
         return cultivation;

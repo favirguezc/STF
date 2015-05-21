@@ -56,18 +56,18 @@ public class VarietyController implements Serializable {
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle2").getString("VarietyCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleVariety").getString("VarietyCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle2").getString("VarietyUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleVariety").getString("VarietyUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle2").getString("VarietyDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleVariety").getString("VarietyDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

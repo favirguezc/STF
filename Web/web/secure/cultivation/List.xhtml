@@ -40,9 +40,41 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_nursery}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nursery}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_bedWidth}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bedWidth} x #{item.bedLength}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_beds}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.beds}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_plants}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.plants}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{bundleCultivation.ListCultivationTitle_plantingDate}"/>
                         </f:facet>
                         <h:outputText value="#{item.plantingDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_productionStartDate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.productionStartDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>

@@ -13,19 +13,31 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_moduleObject}" for="moduleObject" />
-                        <p:selectOneMenu id="moduleObject" value="#{cultivationController.selected.moduleObject}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_moduleObject}">
+                        <p:selectOneMenu id="moduleObject" value="#{cultivationController.selected.moduleObject}" required="true" requiredMessage="#{bundleCultivation.CreateCultivationRequiredMessage_moduleObject}">
                             <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"
                                            itemValue="#{moduleObjectItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_variety}" for="variety" />
-                        <p:selectOneMenu id="variety" value="#{cultivationController.selected.variety}" required="true" requiredMessage="#{bundleCultivation.EditCultivationRequiredMessage_variety}">
+                        <p:selectOneMenu id="variety" value="#{cultivationController.selected.variety}" required="true" requiredMessage="#{bundleCultivation.CreateCultivationRequiredMessage_variety}">
                             <f:selectItems value="#{varietyController.itemsAvailableSelectOne}"
                                            var="varietyItem"
                                            itemValue="#{varietyItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plantingDate}" for="plantingDate" />
-                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.EditCultivationTitle_plantingDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_nursery}" for="nursery"/>
+                        <p:inputText id="nursery" value="#{cultivationController.selected.nursery}" title="#{bundleCultivation.CreateCultivationTitle_nursery}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_bedWidth}" for="bedWidth"/>
+                        <p:inputText id="bedWidth" value="#{cultivationController.selected.bedWidth}" title="#{bundleCultivation.CreateCultivationTitle_bedWidth}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_bedLength}" for="bedLength"/>
+                        <p:inputText id="bedLength" value="#{cultivationController.selected.bedLength}" title="#{bundleCultivation.CreateCultivationTitle_bedLength}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_beds}" for="beds"/>
+                        <p:inputText id="beds" value="#{cultivationController.selected.beds}" title="#{bundleCultivation.CreateCultivationTitle_beds}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plants}" for="plants"/>
+                        <p:inputText id="plants" value="#{cultivationController.selected.plants}" title="#{bundleCultivation.CreateCultivationTitle_plants}"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plantingDate}" for="plantingDate"/>
+                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.CreateCultivationTitle_plantingDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_productionStartDate}" for="productionStartDate"/>
+                        <p:calendar id="productionStartDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.productionStartDate}" title="#{bundleCultivation.CreateCultivationTitle_productionStartDate}"  showOn="button"/>
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_observations}" for="observations" />
                         <p:inputText id="observations" value="#{cultivationController.selected.observations}" title="#{bundleCultivation.CreateCultivationTitle_observations}" />
                     </p:panelGrid>

@@ -35,11 +35,9 @@
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plants}" for="plants"/>
                         <p:inputText id="plants" value="#{cultivationController.selected.plants}" title="#{bundleCultivation.CreateCultivationTitle_plants}"/>
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plantingDate}" for="plantingDate"/>
-                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.CreateCultivationTitle_plantingDate}"  showOn="button"/>
+                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.CreateCultivationTitle_plantingDate}"  showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_productionStartDate}" for="productionStartDate"/>
-                        <p:calendar id="productionStartDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.productionStartDate}" title="#{bundleCultivation.CreateCultivationTitle_productionStartDate}"  showOn="button"/>
-                        <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_plantingDate}" for="plantingDate" />
-                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.EditCultivationTitle_plantingDate}"  showOn="button" locale="es"/>
+                        <p:calendar id="productionStartDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.productionStartDate}" title="#{bundleCultivation.CreateCultivationTitle_productionStartDate}"  showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleCultivation.CreateCultivationLabel_observations}" for="observations" />
                         <p:inputText id="observations" value="#{cultivationController.selected.observations}" title="#{bundleCultivation.CreateCultivationTitle_observations}" />
                     </p:panelGrid>

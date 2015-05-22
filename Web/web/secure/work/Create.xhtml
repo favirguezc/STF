@@ -15,7 +15,8 @@
                         <p:outputLabel value="#{bundleWork.CreateWorkLabel_workDate}" for="workDate"/>
                         <p:calendar id="workDate" pattern="dd/MM/yyyy" value="#{workController.selected.workDate}" title="#{bundleWork.EditWorkTitle_workDate}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_workDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleWork.CreateWorkLabel_cultivation}" for="cultivation"/>
-                        <p:selectOneMenu id="cultivation" value="#{workController.selected.cultivation}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_cultivation}">
+                        <p:selectOneMenu id="cultivation" value="#{workController.selected.cultivation}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
                                            var="cultivationItem"
                                            itemValue="#{cultivationItem}"

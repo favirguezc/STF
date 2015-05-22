@@ -26,7 +26,7 @@ public class Work implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
     private Date workDate;
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Cultivation cultivation;
     @ManyToOne(optional = false)
     private Job job;
@@ -137,5 +137,4 @@ public class Work implements Serializable {
         return true;
     }
 
-    
 }

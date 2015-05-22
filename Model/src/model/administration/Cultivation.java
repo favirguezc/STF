@@ -30,8 +30,15 @@ public class Cultivation implements Serializable {
     private ModuleClass moduleObject;
     @ManyToOne(optional = false)
     private Variety variety;
+    private String nursery;
+    private float bedWidth;
+    private float bedLength;
+    private int beds;
+    private int plants;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date plantingDate;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date productionStartDate;
     private boolean active;
     private String observations;
 
@@ -63,12 +70,60 @@ public class Cultivation implements Serializable {
         this.variety = variety;
     }
 
+    public String getNursery() {
+        return nursery;
+    }
+
+    public void setNursery(String nursery) {
+        this.nursery = nursery;
+    }
+
+    public float getBedWidth() {
+        return bedWidth;
+    }
+
+    public void setBedWidth(float bedWidth) {
+        this.bedWidth = bedWidth;
+    }
+
+    public float getBedLength() {
+        return bedLength;
+    }
+
+    public void setBedLength(float bedLength) {
+        this.bedLength = bedLength;
+    }
+
+    public int getBeds() {
+        return beds;
+    }
+
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
+
+    public int getPlants() {
+        return plants;
+    }
+
+    public void setPlants(int plants) {
+        this.plants = plants;
+    }
+
     public Date getPlantingDate() {
         return plantingDate;
     }
 
     public void setPlantingDate(Date plantingDate) {
         this.plantingDate = plantingDate;
+    }
+
+    public Date getProductionStartDate() {
+        return productionStartDate;
+    }
+
+    public void setProductionStartDate(Date productionStartDate) {
+        this.productionStartDate = productionStartDate;
     }
 
     public boolean isActive() {
@@ -89,13 +144,19 @@ public class Cultivation implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.moduleObject);
-        hash = 67 * hash + Objects.hashCode(this.variety);
-        hash = 67 * hash + Objects.hashCode(this.plantingDate);
-        hash = 67 * hash + (this.active ? 1 : 0);
-        hash = 67 * hash + Objects.hashCode(this.observations);
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.moduleObject);
+        hash = 79 * hash + Objects.hashCode(this.variety);
+        hash = 79 * hash + Objects.hashCode(this.nursery);
+        hash = 79 * hash + Float.floatToIntBits(this.bedWidth);
+        hash = 79 * hash + Float.floatToIntBits(this.bedLength);
+        hash = 79 * hash + this.beds;
+        hash = 79 * hash + this.plants;
+        hash = 79 * hash + Objects.hashCode(this.plantingDate);
+        hash = 79 * hash + Objects.hashCode(this.productionStartDate);
+        hash = 79 * hash + (this.active ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.observations);
         return hash;
     }
 
@@ -117,7 +178,25 @@ public class Cultivation implements Serializable {
         if (!Objects.equals(this.variety, other.variety)) {
             return false;
         }
+        if (!Objects.equals(this.nursery, other.nursery)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.bedWidth) != Float.floatToIntBits(other.bedWidth)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.bedLength) != Float.floatToIntBits(other.bedLength)) {
+            return false;
+        }
+        if (this.beds != other.beds) {
+            return false;
+        }
+        if (this.plants != other.plants) {
+            return false;
+        }
         if (!Objects.equals(this.plantingDate, other.plantingDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.productionStartDate, other.productionStartDate)) {
             return false;
         }
         if (this.active != other.active) {
@@ -128,6 +207,8 @@ public class Cultivation implements Serializable {
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

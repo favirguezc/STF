@@ -21,28 +21,73 @@
                              rowKey="#{item.id}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             widgetVar="cultivationTable"
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                    
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_moduleObject}"/>
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_active}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.active}" converter="#{BooleanConverter}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.moduleObject}" headerText="#{bundleCultivation.ListCultivationTitle_moduleObject}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('cultivationTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{item.moduleObject.lot.name} - #{item.moduleObject.name}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_variety}"/>
+                    <p:column filterBy="#{item.variety}" headerText="#{bundleCultivation.ListCultivationTitle_variety}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('cultivationTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{varietyController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{item.variety.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_nursery}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nursery}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_bedWidth}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bedWidth} x #{item.bedLength}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_beds}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.beds}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_plants}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.plants}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleCultivation.ListCultivationTitle_plantingDate}"/>
                         </f:facet>
                         <h:outputText value="#{item.plantingDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_productionStartDate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.productionStartDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>

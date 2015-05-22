@@ -21,20 +21,33 @@
                              rowKey="#{item.id}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             widgetVar="cultivationTable"
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                    
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_moduleObject}"/>
+                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_active}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.active}" converter="#{BooleanConverter}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.moduleObject}" headerText="#{bundleCultivation.ListCultivationTitle_moduleObject}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('cultivationTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{item.moduleObject.lot.name} - #{item.moduleObject.name}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleCultivation.ListCultivationTitle_variety}"/>
+                    <p:column filterBy="#{item.variety}" headerText="#{bundleCultivation.ListCultivationTitle_variety}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('cultivationTable').filter()">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{varietyController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{item.variety.name}"/>
                     </p:column>

@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rainFallController.selected != null}">
                         <p:outputLabel value="#{bundleRainFall.EditRainFallLabel_rainDate}" for="rainDate" />
-                        <p:calendar id="rainDate" pattern="dd/MM/yyyy" value="#{rainFallController.selected.rainDate}" title="#{bundleRainFall.EditRainFallTitle_rainDate}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_rainDate}" showOn="button"/>
+                        <p:calendar id="rainDate" pattern="dd/MM/yyyy" value="#{rainFallController.selected.rainDate}" title="#{bundleRainFall.EditRainFallTitle_rainDate}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_rainDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleRainFall.EditRainFallLabel_milimeters}" for="milimeters" />
                         <p:inputText id="milimeters" value="#{rainFallController.selected.milimeters}" title="#{bundleRainFall.EditRainFallTitle_milimeters}" required="true" requiredMessage="#{bundleRainFall.EditRainFallRequiredMessage_milimeters}">
                             <f:validateDoubleRange minimum="0"/>

@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{contractController.selected != null}">
                         <p:outputLabel value="#{bundleContract.CreateContractLabel_dateOfSignature}" for="dateOfSignature" />
-                        <p:calendar id="dateOfSignature" pattern="dd/MM/yyyy" value="#{contractController.selected.dateOfSignature}" title="#{bundleContract.CreateContractTitle_dateOfSignature}"  showOn="button"/>
+                        <p:calendar id="dateOfSignature" pattern="dd/MM/yyyy" value="#{contractController.selected.dateOfSignature}" title="#{bundleContract.CreateContractTitle_dateOfSignature}"  showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleContract.CreateContractLabel_person}" for="person"/>
                         <p:inputText id="person" value="#{contractController.cedula}"/>
                         <p:outputLabel value="#{bundleContract.CreateContractLabel_roleEnum}" for="roleEnum" />

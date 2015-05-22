@@ -35,7 +35,7 @@
                                         <h:outputLabel value="Fecha:" rendered="#{cropController.period==0}"/>
                                     </td>
                                     <td>
-                                        <p:calendar pattern="dd/MM/yyyy" value="#{cropController.date}" showOn="button" rendered="#{cropController.period==0}"/>
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{cropController.date}" showOn="button" locale="es" rendered="#{cropController.period==0}"/>
                                     </td>
                                     <td>
                                         <p:outputLabel value="Año:" rendered="#{cropController.period gt 0}"/>

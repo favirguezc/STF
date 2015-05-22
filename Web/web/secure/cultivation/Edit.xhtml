@@ -25,7 +25,7 @@
                                            itemValue="#{varietyItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCultivation.EditCultivationLabel_plantingDate}" for="plantingDate" />
-                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.EditCultivationTitle_plantingDate}"  showOn="button"/>
+                        <p:calendar id="plantingDate" pattern="dd/MM/yyyy" value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.EditCultivationTitle_plantingDate}"  showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleCultivation.EditCultivationLabel_observations}" for="observations" />
                         <p:inputText id="observations" value="#{cultivationController.selected.observations}" title="#{bundleCultivation.EditCultivationTitle_observations}" />
                     </p:panelGrid>

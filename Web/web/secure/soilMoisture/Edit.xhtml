@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{soilMoistureController.selected != null}">
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_measurementDate}" for="measurementDate" />
-                        <p:calendar id="measurementDate" pattern="dd/MM/yyyy" value="#{soilMoistureController.selected.measurementDate}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_measurementDate}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_measurementDate}" showOn="button"/>
+                        <p:calendar id="measurementDate" pattern="dd/MM/yyyy" value="#{soilMoistureController.selected.measurementDate}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_measurementDate}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_measurementDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_measurementTime}" for="measurementTime" />
-                        <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{soilMoistureController.selected.measurementTime}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_measurementTime}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_measurementTime}" showOn="button" timeOnly="true"/>
+                        <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{soilMoistureController.selected.measurementTime}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_measurementTime}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_measurementTime}" showOn="button" locale="es" timeOnly="true"/>
                         <p:outputLabel value="#{bundleSoilMoisture.EditSoilMoistureLabel_valueIn15Centimeters}" for="valueIn15Centimeters" />
                         <p:inputText id="valueIn15Centimeters" value="#{soilMoistureController.selected.valueIn15Centimeters}" title="#{bundleSoilMoisture.EditSoilMoistureTitle_valueIn15Centimeters}" required="true" requiredMessage="#{bundleSoilMoisture.EditSoilMoistureRequiredMessage_valueIn15Centimeters}">
                             <f:validateDoubleRange minimum="0"/>

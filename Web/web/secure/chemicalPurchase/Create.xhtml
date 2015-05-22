@@ -12,7 +12,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{chemicalPurchaseController.selected != null}">
                         <p:outputLabel for="purchaseDate" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_purchaseDate}"/>
-                        <p:calendar id="purchaseDate" pattern="dd/MM/yyyy" value="#{chemicalPurchaseController.selected.purchaseDate}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_purchaseDate}" required="true" requiredMessage="#{bundleChemicalPurchase.CreateChemicalPurchaseRequiredMessage_purchaseDate}" showOn="button"/>
+                        <p:calendar id="purchaseDate" pattern="dd/MM/yyyy" value="#{chemicalPurchaseController.selected.purchaseDate}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_purchaseDate}" required="true" requiredMessage="#{bundleChemicalPurchase.CreateChemicalPurchaseRequiredMessage_purchaseDate}" showOn="button" locale="es"/>
                         <p:outputLabel for="chemicalCo" value="#{bundleChemicalPurchase.CreateChemicalPurchaseLabel_chemical}"/>
                         <p:selectOneMenu id="chemicalCo" value="#{chemicalPurchaseController.selected.chemical}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

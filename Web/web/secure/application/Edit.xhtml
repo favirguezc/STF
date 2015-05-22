@@ -25,9 +25,9 @@
                                            itemValue="#{cultivationItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizationDate}" for="authorizationDate" />
-                        <p:calendar id="authorizationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.authorizationDate}" title="#{bundleApplication.EditApplicationTitle_authorizationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizationDate}" showOn="button"/>
+                        <p:calendar id="authorizationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.authorizationDate}" title="#{bundleApplication.EditApplicationTitle_authorizationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizationDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_applicationDate}" for="applicationDate" />
-                        <p:calendar id="applicationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.applicationDate}" title="#{bundleApplication.EditApplicationTitle_applicationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_applicationDate}" showOn="button"/>
+                        <p:calendar id="applicationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.applicationDate}" title="#{bundleApplication.EditApplicationTitle_applicationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_applicationDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical}" for="chemical" />
                         <p:selectOneMenu id="chemical" value="#{applicationController.selected.chemical}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_chemical}">
                             <f:selectItems value="#{applicationController.chemicals}"

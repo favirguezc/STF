@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{temperatureController.selected != null}">
                         <p:outputLabel value="#{bundleTemperature.CreateTemperatureLabel_measurementDate}" for="measurementDate"/>
-                        <p:calendar id="measurementDate" pattern="dd/MM/yyyy" value="#{temperatureController.selected.measurementDate}" title="#{bundleTemperature.CreateTemperatureTitle_measurementDate}"  showOn="button" required="true"/>
+                        <p:calendar id="measurementDate" pattern="dd/MM/yyyy" value="#{temperatureController.selected.measurementDate}" title="#{bundleTemperature.CreateTemperatureTitle_measurementDate}"  showOn="button" locale="es" required="true"/>
                         <p:outputLabel value="#{bundleTemperature.CreateTemperatureLabel_measurementTime}" for="measurementTime"/>
-                        <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{temperatureController.selected.measurementTime}" title="#{bundleTemperature.CreateTemperatureTitle_measurementTime}"  showOn="button" required="true" timeOnly="true"/>
+                        <p:calendar id="measurementTime" pattern="HH:mm:ss" value="#{temperatureController.selected.measurementTime}" title="#{bundleTemperature.CreateTemperatureTitle_measurementTime}"  showOn="button" locale="es" required="true" timeOnly="true"/>
                         <p:outputLabel value="#{bundleTemperature.CreateTemperatureLabel_temperature}" for="temperature"/>
                         <p:inputText id="temperature" value="#{temperatureController.selected.temperature}" title="#{bundleTemperature.CreateTemperatureTitle_temperature}" required="true"/>
                         <p:outputLabel value="#{bundleTemperature.CreateTemperatureLabel_humidity}" for="humidity"/>

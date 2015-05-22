@@ -12,7 +12,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{saleController.selected != null}">
                         <p:outputLabel for="saleDate" value="#{bundleSale.CreateSaleLabel_saleDate}"/>
-                        <p:calendar id="saleDate" pattern="dd/MM/yyyy" value="#{saleController.selected.saleDate}" title="#{bundleSale.CreateSaleLabel_saleDate}" required="true" requiredMessage="#{bundleSale.CreateSaleRequiredMessage_saleDate}" showOn="button"/>
+                        <p:calendar id="saleDate" pattern="dd/MM/yyyy" value="#{saleController.selected.saleDate}" title="#{bundleSale.CreateSaleLabel_saleDate}" required="true" requiredMessage="#{bundleSale.CreateSaleRequiredMessage_saleDate}" showOn="button" locale="es"/>
                         <p:outputLabel for="customer" value="#{bundleSale.CreateSaleLabel_customer}"/>
                         <p:selectOneMenu id="customer" value="#{saleController.selected.customer}" required="true" requiredMessage="#{bundleSale.CreateSaleRequiredMessage_customer}" >
                             <f:selectItems value="#{personController.itemsAvailableClient}"

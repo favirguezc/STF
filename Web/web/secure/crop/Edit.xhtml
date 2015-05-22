@@ -20,7 +20,7 @@
                                            itemLabel="#{cultivationItem.moduleObject.lot.name} - #{cultivationItem.moduleObject.name}, #{cultivationItem.variety.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCrop.EditCropLabel_harvestDate}" for="harvestDate" />
-                        <p:calendar id="harvestDate" pattern="dd/MM/yyyy" value="#{cropController.selected.harvestDate}" title="#{bundleCrop.EditCropTitle_harvestDate}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_harvestDate}" showOn="button"/>
+                        <p:calendar id="harvestDate" pattern="dd/MM/yyyy" value="#{cropController.selected.harvestDate}" title="#{bundleCrop.EditCropTitle_harvestDate}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_harvestDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleCrop.EditCropLabel_collector}" for="collector" />
                         <p:selectOneMenu id="collector" value="#{cropController.selected.collector}" required="true" requiredMessage="#{bundleCrop.EditCropRequiredMessage_collector}">
                             <f:selectItems value="#{personController.itemsAvailableWorker}"

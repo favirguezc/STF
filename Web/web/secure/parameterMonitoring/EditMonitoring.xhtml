@@ -17,7 +17,7 @@
                             <f:validateDoubleRange minimum="0"/>
                         </p:inputText>
                         <p:outputLabel value="#{bundleMonitoring.EditMonitoringLabel_monitoringDate}" for="monitoringDate" />
-                        <p:calendar id="monitoringDate" pattern="dd/MM/yyyy" value="#{monitoringController.selected.monitoringDate}" title="#{bundleMonitoring.EditMonitoringTitle_monitoringDate}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_monitoringDate}" showOn="button"/>
+                        <p:calendar id="monitoringDate" pattern="dd/MM/yyyy" value="#{monitoringController.selected.monitoringDate}" title="#{bundleMonitoring.EditMonitoringTitle_monitoringDate}" required="true" requiredMessage="#{bundleMonitoring.EditMonitoringRequiredMessage_monitoringDate}" showOn="button" locale="es"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MonitoringEditDialog.hide()"/>
                 </h:panelGroup>

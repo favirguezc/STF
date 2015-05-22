@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{classificationController.selected != null}">
                         <p:outputLabel value="#{bundleClassification.CreateClassificationLabel_classificationDate}" for="classificationDate" />
-                        <p:calendar id="classificationDate" pattern="dd/MM/yyyy" value="#{classificationController.selected.classificationDate}" title="#{bundleClassification.CreateClassificationTitle_classificationDate}" required="true" requiredMessage="#{bundleClassification.CreateClassificationRequiredMessage_classificationDate}" showOn="button"/>
+                        <p:calendar id="classificationDate" pattern="dd/MM/yyyy" value="#{classificationController.selected.classificationDate}" title="#{bundleClassification.CreateClassificationTitle_classificationDate}" required="true" requiredMessage="#{bundleClassification.CreateClassificationRequiredMessage_classificationDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleClassification.CreateClassificationLabel_cultivation}" for="cultivation" />
                         <p:selectOneMenu id="cultivation" value="#{classificationController.selected.cultivation}" required="true" requiredMessage="#{bundleClassification.CreateClassificationRequiredMessage_cultivation}">
                             <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"

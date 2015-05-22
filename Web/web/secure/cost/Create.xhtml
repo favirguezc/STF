@@ -20,7 +20,7 @@
                                            itemLabel="#{moduleObjectItem.lot.name} - #{moduleObjectItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_costDate}" for="costDate" />
-                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.CreateCostTitle_costDate}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_costDate}" showOn="button"/>
+                        <p:calendar id="costDate" pattern="dd/MM/yyyy" value="#{costController.selected.costDate}" title="#{bundleCost.CreateCostTitle_costDate}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_costDate}" showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleCost.CreateCostLabel_type}" for="type" />
                         <p:selectOneMenu id="type" value="#{costController.selected.type}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_type}" >
                             <f:selectItems value="#{enumController.costTypeValues}"/>

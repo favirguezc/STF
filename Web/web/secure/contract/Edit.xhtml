@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{contractController.selected != null}">
                         <p:outputLabel value="#{bundleContract.EditContractLabel_dateOfSignature}" for="dateOfSignature" />
-                        <p:calendar id="dateOfSignature" pattern="dd/MM/yyyy" value="#{contractController.selected.dateOfSignature}" title="#{bundleContract.EditContractTitle_dateOfSignature}"  showOn="button"/>
+                        <p:calendar id="dateOfSignature" pattern="dd/MM/yyyy" value="#{contractController.selected.dateOfSignature}" title="#{bundleContract.EditContractTitle_dateOfSignature}"  showOn="button" locale="es"/>
                         <p:outputLabel value="#{bundleContract.EditContractLabel_person}" for="person" />
                         <p:selectOneMenu id="person" value="#{contractController.selected.person}" >
                             <f:selectItems value="#{personController.itemsAvailableSelectOne}"

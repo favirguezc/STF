@@ -36,7 +36,7 @@
                                             <h:outputLabel value="Fecha:" rendered="#{temperatureController.period lt 2}"/>
                                         </td>
                                         <td>
-                                            <p:calendar pattern="dd/MM/yyyy" value="#{temperatureController.date}" showOn="button" rendered="#{temperatureController.period lt 2}"/>
+                                            <p:calendar pattern="dd/MM/yyyy" value="#{temperatureController.date}" showOn="button" locale="es" rendered="#{temperatureController.period lt 2}"/>
                                         </td>
                                         <td>
                                             <p:outputLabel value="Año:" rendered="#{temperatureController.period gt 1}"/>

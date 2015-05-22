@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <h:panelGrid columns="2" rendered="#{payrollController.selected != null}">
                         <h:outputLabel value="#{bundlePayroll.CreatePayrollLabel_dateUntil}" for="dateUntil" />
-                        <p:calendar id="dateUntil" pattern="dd/MM/yyyy" value="#{payrollController.selected.dateUntil}" title="#{bundlePayroll.CreatePayrollTitle_dateUntil}" required="true" requiredMessage="#{bundlePayroll.CreatePayrollRequiredMessage_dateUntil}" showOn="button" />
+                        <p:calendar id="dateUntil" pattern="dd/MM/yyyy" value="#{payrollController.selected.dateUntil}" title="#{bundlePayroll.CreatePayrollTitle_dateUntil}" required="true" requiredMessage="#{bundlePayroll.CreatePayrollRequiredMessage_dateUntil}" showOn="button" locale="es"/>
                         <h:outputLabel value="#{bundlePayroll.CreatePayrollLabel_worker}" for="worker" />
                         <p:selectOneMenu id="worker" value="#{payrollController.selected.worker}" required="true" requiredMessage="#{bundlePayroll.CreatePayrollRequiredMessage_worker}">
                             <f:selectItems value="#{personController.itemsAvailableWorker}"

@@ -10,7 +10,6 @@ package model.finances.incomes;
  * @author John Fredy
  */
 public enum BankEnum {
-    NOONE,
     BANCOBOGOTA,
     BANCOPOPULAR,
     BANCOCORPBANCA,
@@ -84,8 +83,6 @@ public enum BankEnum {
                 return "Banco Santander";
             case OTHER:
                 return "Otro";
-            case NOONE:
-                return "Ninguno";
             default:
                 return "";
         }

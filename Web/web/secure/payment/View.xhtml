@@ -25,6 +25,8 @@
                         <h:outputText value="#{paymentController.selected.paymentValue}" title="#{bundlePayment.ViewPaymentTitle_paymentValue}">
                             <f:convertNumber/>
                         </h:outputText>
+                        <h:outputText value="Guardado en: "/>
+                        <h:outputText value="#{paymentController.cash.name}" title="Caja en donde esta guardado"/>
                     </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PaymentViewDialog.hide()"/>
                 </h:panelGroup>

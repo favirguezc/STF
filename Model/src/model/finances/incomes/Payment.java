@@ -8,15 +8,18 @@ package model.finances.incomes;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import model.administration.Farm;
 import model.administration.Person;
+import model.finances.cash.CashConcept;
 
 /**
  *
@@ -41,7 +44,9 @@ public class Payment implements Serializable{
     @ManyToOne(optional = false)
     private Farm farm;
     @Column(nullable = false)
-    private float usedValue;
+    private float usedValue;    
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private CashConcept asociatedConcept;
 
     public Payment() {
     }
@@ -110,6 +115,14 @@ public class Payment implements Serializable{
         this.usedValue = usedValue;
     }
 
+    public CashConcept getAsociatedConcept() {
+        return asociatedConcept;
+    }
+
+    public void setAsociatedConcept(CashConcept asociatedConcept) {
+        this.asociatedConcept = asociatedConcept;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -121,6 +134,7 @@ public class Payment implements Serializable{
         hash = 67 * hash + Float.floatToIntBits(this.paymentValue);
         hash = 67 * hash + Objects.hashCode(this.farm);
         hash = 67 * hash + Float.floatToIntBits(this.usedValue);
+        hash = 67 * hash + Objects.hashCode(this.asociatedConcept);
         return hash;
     }
 
@@ -155,6 +169,9 @@ public class Payment implements Serializable{
             return false;
         }
         if (Float.floatToIntBits(this.usedValue) != Float.floatToIntBits(other.usedValue)) {
+            return false;
+        }
+        if (!Objects.equals(this.asociatedConcept, other.asociatedConcept)) {
             return false;
         }
         return true;

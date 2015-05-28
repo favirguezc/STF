@@ -18,6 +18,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.finances.cash.Cash;
+import model.finances.cash.CashConcept;
+import model.finances.incomes.PaymentMethodEnum;
 import model.finances.incomes.Sale;
 
 @ManagedBean(name = "paymentController")
@@ -28,10 +31,14 @@ public class PaymentController implements Serializable {
     private List<Payment> items = null;
     private PaymentDAO jpaController = null;
     private SaleDAO saleJpaController = null;
+    private Cash cash;
+    private boolean payWithCash;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
+    @ManagedProperty(value = "#{cashConceptController}")
+    private CashConceptController cashConceptController;
 
     public PaymentController() {
     }
@@ -57,7 +64,7 @@ public class PaymentController implements Serializable {
         }
         return saleJpaController;
     }
-
+    
     public PermissionController getPermissionBean() {
         return permissionBean;
     }
@@ -74,6 +81,30 @@ public class PaymentController implements Serializable {
         this.signInBean = signInBean;
     }
 
+    public CashConceptController getCashConceptController() {
+        return cashConceptController;
+    }
+
+    public void setCashConceptController(CashConceptController cashConceptController) {
+        this.cashConceptController = cashConceptController;
+    }
+
+    public Cash getCash() {
+        return cash;
+    }
+
+    public void setCash(Cash cash) {
+        this.cash = cash;
+    }
+
+    public boolean isPayWithCash() {
+        return payWithCash;
+    }
+
+    public void setPayWithCash(boolean payWithCash) {
+        this.payWithCash = payWithCash;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -82,6 +113,8 @@ public class PaymentController implements Serializable {
     
     public void prepareCreate() {
         selected = new Payment();
+        cash = new Cash();
+        payWithCash = true;
         if (signInBean.getFarm() != null) {
             selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
@@ -92,16 +125,31 @@ public class PaymentController implements Serializable {
     }
 
     public void create() {
+        if(payWithCash){
+            selected.setBank(null);
+        }
         persist(JsfUtil.PersistAction.CREATE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
     
+    public void prepareUpdate(){
+        cash = selected.getAsociatedConcept().getCash();
+        verifyPayWithCash();
+    }
+    
     public void update() {
+        if(payWithCash){
+            selected.setBank(null);
+        }
         persist(JsfUtil.PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentUpdated"));
     }
 
+    public void prepareView(){
+        cash = selected.getAsociatedConcept().getCash();
+    }
+    
     public void destroy() {
         persist(JsfUtil.PersistAction.DELETE, ResourceBundle.getBundle("/BundlePayment").getString("PaymentDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -119,15 +167,18 @@ public class PaymentController implements Serializable {
             try {
                 if (persistAction == JsfUtil.PersistAction.UPDATE) {
                     verifyUsedValue();
+                    editCashConcept();
                     getJpaController().edit(selected);
                 } else if (persistAction == JsfUtil.PersistAction.CREATE) {
                     verifySalesPayable();
+                    createCashConcept();
                     getJpaController().create(selected);
                 } else {
                     undoPayment();
                     getJpaController().destroy(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
+                cashConceptController.setNullItems();
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -264,6 +315,34 @@ public class PaymentController implements Serializable {
         }
     }
     
+    private void createCashConcept(){
+        CashConcept concept = new CashConcept();
+        setCashConcept(concept);
+        
+    }
+    
+    private void editCashConcept() throws Exception{
+        CashConcept concept = selected.getAsociatedConcept();
+        setCashConcept(concept);
+    }
+    
+    private void setCashConcept(CashConcept concept){
+        concept.setConceptDate(selected.getPaymentDate());
+        concept.setDescription("Pago de " + selected.getCustomer().getName() + " " + selected.getCustomer().getLastName());
+        concept.setIncome(true);
+        concept.setConceptValue(selected.getPaymentValue());
+        concept.setCash(cash);
+        selected.setAsociatedConcept(concept);
+    }
+    
+    public void verifyPayWithCash(){
+        if(selected.getPaymentMethod() == PaymentMethodEnum.CASH){
+            payWithCash = true;
+        }else{
+            payWithCash = false;
+        }
+    }
+            
     public List<Payment> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {

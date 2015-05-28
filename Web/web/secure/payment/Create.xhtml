@@ -23,15 +23,24 @@
                         <p:outputLabel value="#{bundlePayment.CreatePaymentLabel_paymentMethod}" for="paymentMethod" />
                         <p:selectOneMenu id="paymentMethod" value="#{paymentController.selected.paymentMethod}" required="true" requiredMessage="#{bundlePayment.CreatePaymentRequiredMessage_paymentMethod}">
                             <f:selectItems value="#{enumController.paymentMethodValues}"/>
+                            <p:ajax update="bankLGr bankGr" listener="#{paymentController.verifyPayWithCash}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePayment.CreatePaymentLabel_bank}" for="bank" />
-                        <p:selectOneMenu id="bank" value="#{paymentController.selected.bank}">
-                            <f:selectItems value="#{enumController.bankValues}"/>
-                        </p:selectOneMenu>
+                        <h:panelGroup id="bankLGr"> 
+                            <p:outputLabel id="bankLabel" value="#{bundlePayment.CreatePaymentLabel_bank}" for="bank" rendered="#{!paymentController.payWithCash}"/>
+                        </h:panelGroup>
+                        <h:panelGroup id="bankGr"> 
+                            <p:selectOneMenu id="bank" value="#{paymentController.selected.bank}" rendered="#{!paymentController.payWithCash}">
+                                <f:selectItems value="#{enumController.bankValues}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
                         <p:outputLabel value="#{bundlePayment.CreatePaymentLabel_paymentValue}" for="paymentValue" />
                         <p:inputText id="paymentValue" value="#{paymentController.selected.paymentValue}" title="#{bundlePayment.CreatePaymentTitle_paymentValue}" required="true" requiredMessage="#{bundlePayment.CreatePaymentRequiredMessage_paymentValue}" >
                             <f:validateDoubleRange minimum="0" />
                         </p:inputText>
+                        <p:outputLabel value="#{bundlePayment.CreatePaymentLabel_cash}" for="cash" />
+                        <p:selectOneMenu id="cash" value="#{paymentController.cash}" required="true" requiredMessage="#{bundlePayment.CreatePaymentRequiredMessage_cash}">
+                            <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{paymentController.create}" value="#{bundle.Save}" update="display,:PaymentListForm:datalist,:growl" oncomplete="handleSubmit(args,'PaymentCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PaymentCreateDialog.hide()"/>

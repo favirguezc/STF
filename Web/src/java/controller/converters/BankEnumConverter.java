@@ -88,9 +88,6 @@ public class BankEnumConverter implements Converter {
         if (value.equals("Banco Santander")) {
             return BankEnum.BANCOSANTANDER;
         }
-        if (value.equals("Ninguno")) {
-            return BankEnum.NOONE;
-        }
         if (value.equals("Otro")) {
             return BankEnum.OTHER;
         }

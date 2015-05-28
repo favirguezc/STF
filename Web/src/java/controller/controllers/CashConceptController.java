@@ -136,6 +136,7 @@ public class CashConceptController implements Serializable {
     public CashConcept prepareCreate() {
         selected = new CashConcept();
         initializeEmbeddableKey();
+        income = 1;
         selected.setCash(cashFilter);
         return selected;
     }
@@ -157,7 +158,13 @@ public class CashConceptController implements Serializable {
     }
     
     public void update() {
+        if(income == 1){
+            selected.setIncome(true);
+        }else if(income == 2){
+            selected.setIncome(false);
+        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCashConcept").getString("CashConceptUpdated"));
+        items = null;
     }
 
     public void destroy() {
@@ -189,7 +196,6 @@ public class CashConceptController implements Serializable {
         }
     }
 
-
     public List<CashConcept> getItems() {
         if (items == null) {
             if (signInBean.getFarm() != null) {
@@ -206,6 +212,10 @@ public class CashConceptController implements Serializable {
         return items;
     }
 
+    public void setNullItems(){
+        items = null;
+    }
+    
     private void calculateBalance(){
        float balance = 0;
        for(CashConcept concept : items){
@@ -224,8 +234,8 @@ public class CashConceptController implements Serializable {
     
     public List<String> completeName(String query) {
         List<String> filteredConcepts = new ArrayList<String>();
-         
-        for (CashConcept concept : items) {
+        List<CashConcept> itemsToSearch = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm(),cashFilter);
+        for (CashConcept concept : itemsToSearch) {
             if(concept.getDescription().toLowerCase().startsWith(query)) {
                 filteredConcepts.add(concept.getDescription());
             }

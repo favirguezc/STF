@@ -16,7 +16,7 @@ import model.administration.Municipality;
  *
  * @author fredy
  */
-public class Municipios {
+public class Municipalities {
 
     public static void main(String[] args) {
         List<String> lista = getList();

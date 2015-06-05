@@ -24,6 +24,15 @@ public class Job implements Serializable {
     @Column(nullable = false)
     private float hourlyRate;
 
+    public Job() {
+    }
+
+    public Job(String name, String description, float hourlyRate) {
+        this.name = name;
+        this.description = description;
+        this.hourlyRate = hourlyRate;
+    }
+
     public long getId() {
         return id;
     }

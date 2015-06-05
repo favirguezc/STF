@@ -15,7 +15,7 @@ import model.util.Action;
  *
  * @author fredy
  */
-public class Permisos {
+public class Permissions {
     public static void main(String[] args) {
         for(PageEnum p:PageEnum.values()){
             for(Action a:Action.values()){

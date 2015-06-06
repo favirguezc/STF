@@ -248,9 +248,9 @@
                                 <h:outputText value="#{item.weight}"/>
                             </p:column>
                             <f:facet name="footer">
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{classificationController.prepareCreate}" update=":ClassificationCreateForm" oncomplete="PF('ClassificationCreateDialog').show()"/>
-                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClassificationViewForm" oncomplete="PF('ClassificationViewDialog').show()" disabled="#{empty classificationController.selected}"/>
-                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClassificationEditForm" oncomplete="PF('ClassificationEditDialog').show()" disabled="#{empty classificationController.selected}"/>
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{classificationController.prepareCreate}" update=":ClassificationListPanel:ClassificationCreateForm" oncomplete="PF('ClassificationCreateDialog').show()"/>
+                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClassificationListPanel:ClassificationViewForm" oncomplete="PF('ClassificationViewDialog').show()" disabled="#{empty classificationController.selected}"/>
+                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClassificationListPanel:ClassificationEditForm" oncomplete="PF('ClassificationEditDialog').show()" disabled="#{empty classificationController.selected}"/>
                                 <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{classificationController.destroy}" update=":growl,datalist" disabled="#{empty classificationController.selected}"/>
                             </f:facet>
                         </p:dataTable>                

@@ -7,20 +7,29 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import controller.util.CellDataExtractor;
 import controller.util.Font;
 import model.crop.Crop;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.TableRowData;
 import controller.util.Storage;
+import data.administration.ContractDAO;
+import data.administration.CultivationDAO;
+import data.administration.LotDAO;
+import data.administration.ModuleDAO;
+import data.administration.PersonDAO;
 import data.crop.CropDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,6 +42,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.administration.Cultivation;
 import model.administration.Farm;
 import model.administration.Lot;
 import model.administration.ModuleClass;
@@ -40,10 +50,13 @@ import model.administration.Person;
 import model.administration.RoleEnum;
 import model.util.DateFormatter;
 import model.util.DateTools;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
@@ -237,7 +250,7 @@ public class CropController implements Serializable {
     }
 
     public List<Crop> getItems() {
-        if (items == null) {
+        if (items == null || items.size() == 0) {
             if (permissionBean.getSignInBean().getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT || permissionBean.getSignInBean().getUser().isSystemAdmin()) {
                 items = readListByFarm(null, permissionBean.getSignInBean().getFarm(), null, null);
             } else {
@@ -379,46 +392,75 @@ public class CropController implements Serializable {
     }
 
     private void parse(String filename) {
-//        int created = 0;
-//        try {
-//            FileInputStream fis = null;
-//            fis = new FileInputStream(new File(filename));
-//            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-//            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
-//            Crop temp = null;
-//            while (sheetIterator.hasNext()) {
-//                XSSFSheet sheet = sheetIterator.next();
-//                int yearSheetName = Integer.parseInt(sheet.getSheetName());
-//                Iterator<Row> rowIterator = sheet.iterator();
-//                rowIterator.next();
-//                rowIterator.next();
-//                rowIterator.next();
-//                rowIterator.next();
-//
-//                while (rowIterator.hasNext()) {
-//                    Row row = rowIterator.next();
-//                    if (row.getCell(0) != null) {
-//                        int monthCellValue = DateTools.getMonth(row.getCell(0).getStringCellValue());
-//                        int dayOfMonthCellValue = new GregorianCalendar(yearSheetName, monthCellValue, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
-//                        for (int day = 1; day <= dayOfMonthCellValue; day++) {
-//                            Cell cell = row.getCell(day);
-//                            double millimetersCellValue = CellDataExtractor.parseNumber(cell);
-//                            if (millimetersCellValue > 0) {
-//                                temp = new Crop();
-//                                
-//                                save(temp);
-//                                created++;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            fis.close();
-//            message = "Se crearon " + created + " nuevos registros.";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            message = "Error inesperado.";
-//        }
+        int created = 0;
+        if (permissionBean.getSignInBean().getFarm() == null) {
+            message = "Error. No hay una finca seleccionada";
+            return;
+        }
+        try {
+            FileInputStream fis = null;
+            fis = new FileInputStream(new File(filename));
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
+            Crop temp = null;
+            LotDAO lotDAO = new LotDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            ModuleDAO moduleDAO = new ModuleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            PersonDAO personDAO = new PersonDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            ContractDAO contractDAO = new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            CultivationDAO cultivationDAO = new CultivationDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            Lot lot2;
+            ModuleClass moduleObject;
+            Person worker2;
+            Cultivation cultivation;
+            while (sheetIterator.hasNext()) {
+                XSSFSheet sheet = sheetIterator.next();
+                Iterator<Row> rowIterator = sheet.iterator();
+                rowIterator.next();//Título de la hoja
+                rowIterator.next();//Título de la tabla
+
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    if (row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
+                        Date date2 = CellDataExtractor.parseDate(row.getCell(0));
+                        String lotName = row.getCell(1).getStringCellValue();
+                        String moduleName = CellDataExtractor.readString(row.getCell(2));
+                        Long idNumber = CellDataExtractor.parseLong(row.getCell(3));
+                        double weight = CellDataExtractor.parseNumber(row.getCell(4));
+                        if (date2 != null && lotName != null && moduleName != null && idNumber != 0l && weight > 0) {
+                            try {
+                                lot2 = lotDAO.findLot(lotName, permissionBean.getSignInBean().getFarm());
+                                moduleObject = moduleDAO.findModule(moduleName, lot2);
+                                worker2 = personDAO.findPersonByIdNumber(idNumber);
+                                cultivation = cultivationDAO.findActiveCultivationEntity(moduleObject);
+                                if (contractDAO.findPersonEntities(RoleEnum.WORKER, permissionBean.getSignInBean().getFarm()).contains(worker2)
+                                        && lot2 != null && moduleObject != null && worker2 != null && cultivation != null) {
+                                    temp = new Crop();
+                                    temp.setCollector(worker2);
+                                    temp.setCultivation(cultivation);
+                                    temp.setHarvestDate(date2);
+                                    temp.setWeight((float) weight);
+                                    save(temp);
+                                    created++;
+                                } else {
+                                    System.out.println("Error en los datos 2." + contractDAO.findPersonEntities(RoleEnum.WORKER, permissionBean.getSignInBean().getFarm()).contains(worker2) + " "
+                                            + lot2 + " " + moduleObject + " " + worker2 + " " + cultivation);
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("Error en los datos." + date2 + " " + lotName + " " + moduleName + " " + idNumber + " " + weight);
+                        }
+                    }
+                }
+            }
+            fis.close();
+            message = "Se crearon " + created + " nuevos registros.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "Error inesperado.";
+        }
+        selected = null;
     }
 
     //Chart functions

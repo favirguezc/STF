@@ -155,7 +155,7 @@
                     <h:form enctype="multipart/form-data">
                         <p:fileUpload 
                             fileUploadListener="#{cropController.upload}"
-                            update=":growl"
+                            update=":CropListPanel:CropListForm:datalist,:growl"
                             dragDropSupport="true"
                             auto="true"
                             label="Seleccionar"

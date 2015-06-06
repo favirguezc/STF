@@ -31,7 +31,7 @@
                             <f:validateDoubleRange minimum="0"/>
                         </p:inputText>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{classificationController.create}" value="#{bundle.Save}" update="display,:ClassificationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClassificationCreateDialog');"/>
+                    <p:commandButton actionListener="#{classificationController.create}" value="#{bundle.Save}" update="display,:ClassificationListPanel:ClassificationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClassificationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClassificationCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

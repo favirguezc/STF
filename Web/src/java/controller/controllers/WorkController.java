@@ -98,7 +98,7 @@ public class WorkController implements Serializable {
     }
 
     public List<Work> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findWorkEntities(signInBean.getFarm());
         }
         return items;

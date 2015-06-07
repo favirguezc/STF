@@ -7,20 +7,27 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import controller.util.CellDataExtractor;
 import controller.util.Font;
 import model.crop.Classification;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.Storage;
 import controller.util.TableRowData;
+import data.administration.CultivationDAO;
+import data.administration.LotDAO;
+import data.administration.ModuleDAO;
 import data.crop.ClassificationDAO;
 import data.util.EntityManagerFactorySingleton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -33,16 +40,20 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.administration.Cultivation;
 import model.administration.Farm;
 import model.administration.Lot;
 import model.administration.ModuleClass;
 import model.crop.ClassificationTypeEnum;
 import model.util.DateFormatter;
 import model.util.DateTools;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
@@ -282,7 +293,7 @@ public class ClassificationController implements Serializable {
     }
 
     public List<Classification> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findClassificationEntities(permissionBean.getSignInBean().getFarm());
         }
         return items;
@@ -316,6 +327,11 @@ public class ClassificationController implements Serializable {
 
     public List<Classification> getItemsAvailableSelectOne() {
         return getItems();
+    }
+
+    public void save(Classification classification) {
+        selected = classification;
+        persist(PersistAction.CREATE, null);
     }
 
     public List<Classification> readListByModule(ModuleClass module, Date startDate, Date endDate, ClassificationTypeEnum type) {
@@ -411,46 +427,133 @@ public class ClassificationController implements Serializable {
     }
 
     private void parse(String filename) {
-//        int created = 0;
-//        try {
-//            FileInputStream file = new FileInputStream(new File(filename));
-//            XSSFWorkbook workbook = new XSSFWorkbook(file);
-//            XSSFSheet sheet = workbook.getSheetAt(0);
-//            Iterator<Row> rowIterator = sheet.iterator();
-//            rowIterator.next();
-//            rowIterator.next();
-//            SoilMoisture temp = null;
-//            while (rowIterator.hasNext()) {
-//                Row row = rowIterator.next();
-//                Date date = CellDataExtractor.parseDate(row.getCell(0));
-//                double cell15 = CellDataExtractor.parseNumber(row.getCell(1));
-//                double cell30 = CellDataExtractor.parseNumber(row.getCell(2));
-//                Date time = CellDataExtractor.parseTime(row.getCell(3));
-//                if (date != null && time != null) {
-//                    try {
-//                        temp = new SoilMoisture();
-//                        temp.setFarm(permissionBean.getSignInBean().getFarm());
-//                        temp.setMeasurementDate(date);
-//                        temp.setMeasurementTime(time);
-//                        temp.setValueIn15Centimeters((float) cell15);
-//                        temp.setValueIn30Centimeters((float) cell30);
-//                        save(temp);
-//                        created++;
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                } else if (date == null) {
-//                    System.out.println("Date null");
-//                } else if (time == null) {
-//                    System.out.println("Time null");
-//                }
-//            }
-//            file.close();
-//            message = "Se crearon " + created + " nuevos registros.";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            message = "Error inesperado.";
-//        }
+        int created = 0;
+        if (permissionBean.getSignInBean().getFarm() == null) {
+            message = "Error. No hay una finca seleccionada";
+            return;
+        }
+        try {
+            FileInputStream fis = new FileInputStream(new File(filename));
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            Iterator<XSSFSheet> sheetIterator = workbook.iterator();
+            Classification temp;
+            LotDAO lotDAO = new LotDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            ModuleDAO moduleDAO = new ModuleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            CultivationDAO cultivationDAO = new CultivationDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+            Lot lot2;
+            ModuleClass moduleObject;
+            Cultivation cultivation;
+            while (sheetIterator.hasNext()) {
+                XSSFSheet sheet = sheetIterator.next();
+                Iterator<Row> rowIterator = sheet.iterator();
+                rowIterator.next();//Título de la hoja
+                rowIterator.next();//Título de la tabla
+
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    if (row.getCell(0) != null && row.getCell(0).getCellType() != Cell.CELL_TYPE_BLANK) {
+                        Date date2 = CellDataExtractor.parseDate(row.getCell(0));
+                        String lotName = row.getCell(1).getStringCellValue();
+                        String moduleName = CellDataExtractor.readString(row.getCell(2));
+                        double weightExtra = CellDataExtractor.parseNumber(row.getCell(3));
+                        double weightOne = CellDataExtractor.parseNumber(row.getCell(4));
+                        double weightTwo = CellDataExtractor.parseNumber(row.getCell(5));
+                        double weightThree = CellDataExtractor.parseNumber(row.getCell(6));
+                        double weightFour = CellDataExtractor.parseNumber(row.getCell(7));
+                        double weightFive = CellDataExtractor.parseNumber(row.getCell(8));
+                        double weightDummie = CellDataExtractor.parseNumber(row.getCell(9));
+                        double weightDamaged = CellDataExtractor.parseNumber(row.getCell(10));
+                        if (date2 != null && lotName != null && moduleName != null && (weightDamaged > 0 || weightDummie > 0 || weightExtra > 0 || weightFive > 0 || weightOne > 0 || weightFour > 0 || weightTwo > 0 || weightThree > 0)) {
+                            try {
+                                lot2 = lotDAO.findLot(lotName, permissionBean.getSignInBean().getFarm());
+                                moduleObject = moduleDAO.findModule(moduleName, lot2);
+                                cultivation = cultivationDAO.findActiveCultivationEntity(moduleObject);
+                                if (cultivation != null) {
+                                    if (weightExtra > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightExtra);
+                                        temp.setType(ClassificationTypeEnum.EXTRA);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightOne > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightOne);
+                                        temp.setType(ClassificationTypeEnum.ONE);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightTwo > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightTwo);
+                                        temp.setType(ClassificationTypeEnum.TWO);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightThree > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightThree);
+                                        temp.setType(ClassificationTypeEnum.THREE);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightFour > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightFour);
+                                        temp.setType(ClassificationTypeEnum.FOUR);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightFive > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightFive);
+                                        temp.setType(ClassificationTypeEnum.FIVE);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightDummie > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightDummie);
+                                        temp.setType(ClassificationTypeEnum.DUMMIE);
+                                        save(temp);
+                                        created++;
+                                    }
+                                    if (weightDamaged > 0) {
+                                        temp = new Classification();
+                                        temp.setCultivation(cultivation);
+                                        temp.setClassificationDate(date2);
+                                        temp.setWeight((float) weightDamaged);
+                                        temp.setType(ClassificationTypeEnum.DAMAGED);
+                                        save(temp);
+                                        created++;
+                                    }
+                                }
+                            } catch (Exception ex) {
+                            }
+                        }
+                    }
+                }
+            }
+            fis.close();
+            message = "Se crearon " + created + " nuevos registros.";
+        } catch (Exception e) {
+            message = "Error inesperado.";
+        }
+        selected = null;
     }
 
     //Chart functions

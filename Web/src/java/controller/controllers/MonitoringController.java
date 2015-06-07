@@ -86,7 +86,7 @@ public class MonitoringController implements Serializable {
     }
 
     public List<Monitoring> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findMonitoringEntities();
         }
         return items;

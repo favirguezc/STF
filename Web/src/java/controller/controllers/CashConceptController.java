@@ -197,7 +197,7 @@ public class CashConceptController implements Serializable {
     }
 
     public List<CashConcept> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 if(cashFilter != null){
                     items = getJpaController().findCashConceptEntitiesForSelectedFarm(signInBean.getFarm(),cashFilter);

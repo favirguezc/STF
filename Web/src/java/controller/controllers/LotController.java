@@ -97,7 +97,7 @@ public class LotController implements Serializable {
     }
 
     public List<Lot> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findLotEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

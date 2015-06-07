@@ -148,7 +148,7 @@ public class SaleController implements Serializable {
     }
 
     public List<Sale> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findSaleEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

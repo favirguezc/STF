@@ -75,7 +75,7 @@ public class VarietyController implements Serializable {
     }
 
     public List<Variety> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findVarietyEntities();
         }
         return items;

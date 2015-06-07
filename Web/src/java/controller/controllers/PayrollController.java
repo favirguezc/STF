@@ -185,7 +185,7 @@ public class PayrollController implements Serializable {
     }
 
     public List<Payroll> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findPayrollEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

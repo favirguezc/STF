@@ -235,7 +235,7 @@ public class TemperatureController implements Serializable {
     }
 
     public List<Temperature> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findTemperatureEntities();
         }
         return items;

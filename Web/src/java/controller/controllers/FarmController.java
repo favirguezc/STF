@@ -179,7 +179,7 @@ public class FarmController implements Serializable {
     }
 
     public List<Farm> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findFarmEntitiesForCurrentUser(signInBean.getUser());
         }
         return items;

@@ -194,7 +194,7 @@
                     <h:form enctype="multipart/form-data">
                         <p:fileUpload 
                             fileUploadListener="#{classificationController.upload}" 
-                            update=":growl" 
+                            update=":ClassificationListPanel:ClassificationListForm:datalist,:growl" 
                             dragDropSupport="true" 
                             auto="true" 
                             label="Seleccionar" 

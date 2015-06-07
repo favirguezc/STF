@@ -250,7 +250,7 @@ public class CropController implements Serializable {
     }
 
     public List<Crop> getItems() {
-        if (items == null || items.size() == 0) {
+        if (items == null || items.isEmpty()) {
             if (permissionBean.getSignInBean().getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT || permissionBean.getSignInBean().getUser().isSystemAdmin()) {
                 items = readListByFarm(null, permissionBean.getSignInBean().getFarm(), null, null);
             } else {
@@ -398,11 +398,10 @@ public class CropController implements Serializable {
             return;
         }
         try {
-            FileInputStream fis = null;
-            fis = new FileInputStream(new File(filename));
+            FileInputStream fis = new FileInputStream(new File(filename));
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             Iterator<XSSFSheet> sheetIterator = workbook.iterator();
-            Crop temp = null;
+            Crop temp;
             LotDAO lotDAO = new LotDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
             ModuleDAO moduleDAO = new ModuleDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
             PersonDAO personDAO = new PersonDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
@@ -441,15 +440,9 @@ public class CropController implements Serializable {
                                     temp.setWeight((float) weight);
                                     save(temp);
                                     created++;
-                                } else {
-                                    System.out.println("Error en los datos 2." + contractDAO.findPersonEntities(RoleEnum.WORKER, permissionBean.getSignInBean().getFarm()).contains(worker2) + " "
-                                            + lot2 + " " + moduleObject + " " + worker2 + " " + cultivation);
                                 }
                             } catch (Exception ex) {
-                                ex.printStackTrace();
                             }
-                        } else {
-                            System.out.println("Error en los datos." + date2 + " " + lotName + " " + moduleName + " " + idNumber + " " + weight);
                         }
                     }
                 }
@@ -457,7 +450,6 @@ public class CropController implements Serializable {
             fis.close();
             message = "Se crearon " + created + " nuevos registros.";
         } catch (Exception e) {
-            e.printStackTrace();
             message = "Error inesperado.";
         }
         selected = null;

@@ -122,7 +122,7 @@ public class ContractController implements Serializable {
     }
 
     public List<Contract> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findContractEntities();
         }
         return items;

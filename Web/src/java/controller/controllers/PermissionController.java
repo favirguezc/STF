@@ -86,7 +86,7 @@ public class PermissionController implements Serializable {
     }
 
     public List<Permission> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findPermissionEntities();
         }
         return items;

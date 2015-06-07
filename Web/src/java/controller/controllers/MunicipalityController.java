@@ -74,7 +74,7 @@ public class MunicipalityController implements Serializable {
     }
 
     public List<Municipality> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findMunicipalityEntities();
         }
         return items;

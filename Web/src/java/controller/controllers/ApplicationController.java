@@ -99,7 +99,7 @@ public class ApplicationController implements Serializable {
     }
 
     public List<Application> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findApplicationEntitiesForSelectedFarm(signInBean.getFarm());
         }
         return items;

@@ -344,7 +344,7 @@ public class PaymentController implements Serializable {
     }
             
     public List<Payment> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findPaymentEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

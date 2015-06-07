@@ -135,7 +135,7 @@ public class SoilMoistureController implements Serializable {
     }
 
     public List<SoilMoisture> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findSoilMoistureEntities();
         }
         return items;

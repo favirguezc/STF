@@ -76,7 +76,7 @@ public class ChemicalController implements Serializable {
     }
 
     public List<Chemical> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findChemicalEntities();
         }
         return items;

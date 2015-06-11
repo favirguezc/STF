@@ -75,7 +75,8 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundlePerson.ListPersonTitle_bloodGroup}"/>
                         </f:facet>
-                        <h:outputText value="#{item.bloodGroup} #{item.rhFactor}"/>
+                        <h:outputText value="#{item.bloodGroup} "/>
+                        <h:outputText value="#{item.rhFactor}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personController.prepareCreate}" update=":PersonCreateForm" oncomplete="PF('PersonCreateDialog').show()"/>

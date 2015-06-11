@@ -12,12 +12,26 @@
             <h:form id="CultivationViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cultivationController.selected != null}">
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_active}"/>
+                        <h:outputText value="#{cultivationController.selected.active}" title="#{bundleCultivation.ViewCultivationTitle_active}" converter="#{BooleanConverter}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_moduleObject}"/>
                         <h:outputText value="#{cultivationController.selected.moduleObject.lot.name} - #{cultivationController.selected.moduleObject.name}" title="#{bundleCultivation.ViewCultivationTitle_moduleObject}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_variety}"/>
                         <h:outputText value="#{cultivationController.selected.variety.name}" title="#{bundleCultivation.ViewCultivationTitle_variety}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_nursery}"/>
+                        <h:outputText value="#{cultivationController.selected.nursery}" title="#{bundleCultivation.ViewCultivationTitle_nursery}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_bedWidth}"/>
+                        <h:outputText value="#{cultivationController.selected.bedWidth} x #{cultivationController.selected.bedLength}" title="#{bundleCultivation.ViewCultivationTitle_bedWidth}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_beds}"/>
+                        <h:outputText value="#{cultivationController.selected.beds}" title="#{bundleCultivation.ViewCultivationTitle_beds}"/>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_plants}"/>
+                        <h:outputText value="#{cultivationController.selected.plants}" title="#{bundleCultivation.ViewCultivationTitle_plants}"/>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_plantingDate}"/>
                         <h:outputText value="#{cultivationController.selected.plantingDate}" title="#{bundleCultivation.ViewCultivationTitle_plantingDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCultivation.ViewCultivationLabel_productionStartDate}"/>
+                        <h:outputText value="#{cultivationController.selected.productionStartDate}" title="#{bundleCultivation.ViewCultivationTitle_productionStartDate}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundleCultivation.ViewCultivationLabel_observations}"/>

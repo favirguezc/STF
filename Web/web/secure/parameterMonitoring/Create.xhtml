@@ -31,7 +31,7 @@
                             <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="parameterItem"
                                            itemValue="#{parameterItem}"/>
-                            <p:ajax update="valor1 valor2 valor3" listener="#{parameterMonitoringController.value}"></p:ajax>
+                            <p:ajax update="valor1 valor2 valor3 valor4" listener="#{parameterMonitoringController.value}"></p:ajax>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Relación" for="valor1"/>
                         <p:inputText id="valor1" disabled="#{parameterMonitoringController.habilitado!=1}" value="#{parameterMonitoringController.selected.monitoringValue}" title="#{bundleParameterMonitoring.CreateParameterMonitoringTitle_monitoringValue}">
@@ -45,7 +45,9 @@
                         <p:selectOneMenu id="valor3" disabled="#{parameterMonitoringController.habilitado!=3}" value="#{parameterMonitoringController.selected.monitoringValue}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{enumController.riskValues}"/>                            
-                        </p:selectOneMenu>                        
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleParameterMonitoring.CreateParameterMonitoringLabel_monitoringValue} Presencia" for="valor4"/>
+                        <p:selectBooleanButton id="valor4" disabled="#{parameterMonitoringController.habilitado!=4}" value="#{parameterMonitoringController.selected.monitoringValue}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parameterMonitoringController.create}" value="#{bundle.Save}" update="display,:ParameterMonitoringListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParameterMonitoringCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParameterMonitoringCreateDialog.hide()"/>

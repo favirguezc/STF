@@ -90,7 +90,7 @@ public class ThermometerController implements Serializable {
     }
 
     public List<Thermometer> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findThermometerEntities();
         }
         return items;

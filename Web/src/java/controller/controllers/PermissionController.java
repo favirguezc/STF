@@ -86,7 +86,7 @@ public class PermissionController implements Serializable {
     }
 
     public List<Permission> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findPermissionEntities();
         }
         return items;
@@ -126,11 +126,11 @@ public class PermissionController implements Serializable {
                 return false;
             }
         }
-        if (signInBean.getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT && requestPath.contains(PageEnum.PERMISSION.toString().toLowerCase())) {
+        if (signInBean.getRole() == RoleEnum.ADMINISTRATIVE_ASSISTANT && requestPath.contains(PageEnum.PERMISSION.name().toLowerCase())) {
             return true;
         }
         for (PageEnum page : PageEnum.values()) {
-            if (requestPath.contains(page.toString().toLowerCase())) {
+            if (requestPath.contains(page.name().toLowerCase())) {
                 if (getJpaController().findPermission(signInBean.getRole(), page, action)) {
                     return true;
                 }

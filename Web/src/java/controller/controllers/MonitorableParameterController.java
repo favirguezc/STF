@@ -86,7 +86,7 @@ public class MonitorableParameterController implements Serializable {
     }
 
     public List<MonitorableParameter> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findMonitorableParameterEntities();
         }
         return items;

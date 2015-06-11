@@ -35,7 +35,7 @@
                                            itemValue="#{chemicalItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason1}" for="reason1" />
-                        <p:selectOneMenu id="reason1" value="#{applicationController.selected.reason1}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_reason1}">
+                        <p:selectOneMenu id="reason1" value="#{applicationController.selected.reason1}">
                             <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
                                            var="reason1Item"
                                            itemValue="#{reason1Item}"/>

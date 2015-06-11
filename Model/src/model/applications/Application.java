@@ -38,7 +38,7 @@ public class Application implements Serializable {
     private Date applicationDate;
     @ManyToOne(optional = false)
     private Chemical chemical;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private MonitorableParameter reason1;
     @ManyToOne(optional = true)
     private MonitorableParameter reason2;

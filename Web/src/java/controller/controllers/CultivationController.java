@@ -75,7 +75,7 @@ public class CultivationController implements Serializable {
     }
 
     public List<Cultivation> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findCultivationEntities();
         }
         return items;

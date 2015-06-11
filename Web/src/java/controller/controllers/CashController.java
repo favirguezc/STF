@@ -178,7 +178,7 @@ public class CashController implements Serializable {
     }
     
     public List<Cash> getItems() {
-         if (items == null) {
+         if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findCashEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

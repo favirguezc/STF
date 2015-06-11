@@ -87,7 +87,7 @@ public class InsectTrapController implements Serializable {
     }
 
     public List<InsectTrap> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findInsectTrapEntities();
         }
         return items;

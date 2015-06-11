@@ -95,7 +95,7 @@ public class PersonController implements Serializable {
     }
 
     public List<Person> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getUser().isSystemAdmin()) {
                 items = getJpaController().findPersonEntities();
             } else {

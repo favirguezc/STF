@@ -122,7 +122,7 @@ public class CostController implements Serializable {
     }
 
     public List<Cost> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findCostEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

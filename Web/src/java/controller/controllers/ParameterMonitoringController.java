@@ -96,7 +96,7 @@ public class ParameterMonitoringController implements Serializable {
     }
 
     public List<ParameterMonitoring> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findParameterMonitoringEntities();
         }
         return items;
@@ -138,8 +138,10 @@ public class ParameterMonitoringController implements Serializable {
                 habilitado = 2;
             } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.RELATION) {
                 habilitado = 1;
-            } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.RISK){
+            } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.RISK) {
                 habilitado = 3;
+            } else if (selected.getParameter().getValuationType() == ValuationTypeEnum.PRESENCE) {
+                habilitado = 4;
             }
         } else {
             habilitado = 0;

@@ -13,7 +13,8 @@ public enum ValuationTypeEnum {
 
     COUNT,
     RISK,
-    RELATION;
+    RELATION,
+    PRESENCE;
 
     @Override
     public String toString() {
@@ -24,6 +25,8 @@ public enum ValuationTypeEnum {
                 return "Riesgo";
             case RELATION:
                 return "Relación";
+            case PRESENCE:
+                return "Presencia";
             default:
                 return "";
         }

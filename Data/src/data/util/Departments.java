@@ -12,7 +12,7 @@ import model.administration.Department;
  *
  * @author fredy
  */
-public class Departamentos {
+public class Departments {
 
     public static void main(String[] args) {
         String lista = "1.	Amazonas	\n"
@@ -49,7 +49,7 @@ public class Departamentos {
                 + "32.	Vichada";
         for (String s : lista.split("\n")) {
             System.out.println(s.split("\t")[1]);
-            new DepartmentDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).create(new Department(s.split("\t")[1]));
+            //new DepartmentDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).create(new Department(s.split("\t")[1]));
         }
     }
 }

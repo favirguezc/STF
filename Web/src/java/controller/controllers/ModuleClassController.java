@@ -96,7 +96,7 @@ public class ModuleClassController implements Serializable {
     }
 
     public List<ModuleClass> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findModuleEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

@@ -22,7 +22,7 @@ import model.util.Action;
  *
  * @author fredy
  */
-public class AutorizacionFilter implements Filter {
+public class AutorizationFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {
 

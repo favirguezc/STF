@@ -137,7 +137,7 @@ public class RainFallController implements Serializable {
     }
 
     public List<RainFall> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findRainFallEntities();
         }
         return items;

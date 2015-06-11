@@ -142,7 +142,7 @@ public class ChemicalPurchaseController implements Serializable{
     }
 
     public List<ChemicalPurchase> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {
                 items = getJpaController().findChemicalPurchaseEntitiesForSelectedFarm(signInBean.getFarm());
             } else {

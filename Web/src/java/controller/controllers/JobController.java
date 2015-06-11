@@ -86,7 +86,7 @@ public class JobController implements Serializable {
     }
 
     public List<Job> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findJobEntities();
         }
         return items;

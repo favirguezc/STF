@@ -73,7 +73,7 @@ public class DepartmentController implements Serializable {
     }
 
     public List<Department> getItems() {
-        if (items == null) {
+        if (items == null || items.isEmpty()) {
             items = getJpaController().findDepartmentEntities();
         }
         return items;

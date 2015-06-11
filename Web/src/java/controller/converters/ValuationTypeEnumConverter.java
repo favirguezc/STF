@@ -26,6 +26,9 @@ public class ValuationTypeEnumConverter implements Converter {
         if (value.equals("Relación")) {
             return ValuationTypeEnum.RELATION;
         }
+        if (value.equals("Presencia")) {
+            return ValuationTypeEnum.PRESENCE;
+        }
         return null;
     }
 

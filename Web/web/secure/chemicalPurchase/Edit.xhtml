@@ -36,6 +36,18 @@
                         <h:outputText id="totalCoE" value="#{chemicalPurchaseController.selected.total}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_total}" style="font-weight: bold;" >
                             <f:convertNumber/>
                         </h:outputText>
+                        <p:outputLabel for="pay" value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_pay}"/>
+                        <p:selectBooleanCheckbox id="pay" value="#{chemicalPurchaseController.pay}" >
+                            <p:ajax update="cashLG cashPG" />
+                        </p:selectBooleanCheckbox>
+                        <h:panelGroup id="cashLG"> 
+                            <p:outputLabel value="#{bundleChemicalPurchase.EditChemicalPurchaseLabel_cash}" for="cash" rendered="#{chemicalPurchaseController.pay}"/>
+                        </h:panelGroup>
+                        <h:panelGroup id="cashPG"> 
+                            <p:selectOneMenu id="cash" value="#{chemicalPurchaseController.cash}" required="true" requiredMessage="#{bundleChemicalPurchase.EditChemicalPurchaseRequiredMessage_cash}" rendered="#{chemicalPurchaseController.pay}">
+                                <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{chemicalPurchaseController.update}" value="#{bundle.Save}" update="display,:ChemicalPurchaseListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChemicalPurchaseEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ChemicalPurchaseEditDialog.hide()"/>

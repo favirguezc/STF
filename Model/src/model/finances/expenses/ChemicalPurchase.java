@@ -8,15 +8,18 @@ package model.finances.expenses;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import model.administration.Farm;
 import model.applications.Chemical;
+import model.finances.cash.CashConcept;
 
 /**
  *
@@ -39,6 +42,8 @@ public class ChemicalPurchase implements Serializable{
     float price;
     @Column(nullable = false)
     float quantity;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CashConcept asociatedConcept;
 
     public ChemicalPurchase() {
     }
@@ -107,6 +112,14 @@ public class ChemicalPurchase implements Serializable{
         //Please insert code here.
     }
 
+    public CashConcept getAsociatedConcept() {
+        return asociatedConcept;
+    }
+
+    public void setAsociatedConcept(CashConcept asociatedConcept) {
+        this.asociatedConcept = asociatedConcept;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -116,6 +129,7 @@ public class ChemicalPurchase implements Serializable{
         hash = 61 * hash + Objects.hashCode(this.chemical);
         hash = 61 * hash + Float.floatToIntBits(this.price);
         hash = 61 * hash + Float.floatToIntBits(this.quantity);
+        hash = 61 * hash + Objects.hashCode(this.asociatedConcept);
         return hash;
     }
 
@@ -144,6 +158,9 @@ public class ChemicalPurchase implements Serializable{
             return false;
         }
         if (Float.floatToIntBits(this.quantity) != Float.floatToIntBits(other.quantity)) {
+            return false;
+        }
+        if (!Objects.equals(this.asociatedConcept, other.asociatedConcept)) {
             return false;
         }
         return true;

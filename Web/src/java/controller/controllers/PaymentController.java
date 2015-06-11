@@ -177,8 +177,8 @@ public class PaymentController implements Serializable {
                     undoPayment();
                     getJpaController().destroy(selected.getId());
                 }
-                JsfUtil.addSuccessMessage(successMessage);
                 cashConceptController.setNullItems();
+                JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

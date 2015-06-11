@@ -8,6 +8,7 @@ package model.finances.expenses;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Column;
+import javax.persistence.OneToOne;
 import model.administration.Farm;
 import model.administration.Person;
+import model.finances.cash.CashConcept;
 
 /**
  *
@@ -38,6 +41,8 @@ public class Payroll implements Serializable{
     private float total;
     @ManyToOne(optional = false)
     private Farm farm;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CashConcept asociatedConcept;
 
     public Payroll() {
     }
@@ -95,6 +100,14 @@ public class Payroll implements Serializable{
         this.farm = farm;
     }
 
+    public CashConcept getAsociatedConcept() {
+        return asociatedConcept;
+    }
+
+    public void setAsociatedConcept(CashConcept asociatedConcept) {
+        this.asociatedConcept = asociatedConcept;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -103,6 +116,7 @@ public class Payroll implements Serializable{
         hash = 71 * hash + Objects.hashCode(this.worker);
         hash = 71 * hash + Float.floatToIntBits(this.total);
         hash = 71 * hash + Objects.hashCode(this.farm);
+        hash = 71 * hash + Objects.hashCode(this.asociatedConcept);
         return hash;
     }
 
@@ -128,6 +142,9 @@ public class Payroll implements Serializable{
             return false;
         }
         if (!Objects.equals(this.farm, other.farm)) {
+            return false;
+        }
+        if (!Objects.equals(this.asociatedConcept, other.asociatedConcept)) {
             return false;
         }
         return true;

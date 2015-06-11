@@ -39,6 +39,9 @@ public class PaymentController implements Serializable {
     private SignInController signInBean;
     @ManagedProperty(value = "#{cashConceptController}")
     private CashConceptController cashConceptController;
+    @ManagedProperty(value = "#{saleController}")
+    private SaleController saleController;
+    
 
     public PaymentController() {
     }
@@ -87,6 +90,14 @@ public class PaymentController implements Serializable {
 
     public void setCashConceptController(CashConceptController cashConceptController) {
         this.cashConceptController = cashConceptController;
+    }
+
+    public SaleController getSaleController() {
+        return saleController;
+    }
+
+    public void setSaleController(SaleController saleController) {
+        this.saleController = saleController;
     }
 
     public Cash getCash() {
@@ -178,6 +189,7 @@ public class PaymentController implements Serializable {
                     getJpaController().destroy(selected.getId());
                 }
                 cashConceptController.setNullItems();
+                saleController.setNullItems();
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

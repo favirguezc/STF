@@ -96,8 +96,10 @@
                         <h:outputText value="#{saleController.dummieTypeSaleItem.totalValue}" title="#{bundleSale.ViewSaleTitle_dummieTotalValue}" >
                             <f:convertNumber/>
                         </h:outputText>
-                        <h:outputText value=" "/>
-                        <h:outputText value=" "/>
+                        <h:outputText value="#{bundleSale.ViewSaleLabel_valuePayable}"/>
+                        <h:outputText value="#{saleController.selected.valuePayable}" title="#{bundleSale.ViewSaleTitle_valuePayable}">
+                            <f:convertNumber/>
+                        </h:outputText>
                         <h:outputText value="#{bundleSale.ViewSaleLabel_totalSaleValue}" style="font-weight: bold;"/>
                         <h:outputText value="#{saleController.selected.saleTotalValue}" title="#{bundleSale.ViewSaleTitle_totalSaleValue}" style="font-weight: bold;">
                             <f:convertNumber/>

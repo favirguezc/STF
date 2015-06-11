@@ -128,12 +128,19 @@
                                 </f:facet>
                                 <h:outputText value="#{item.customer.name} #{item.customer.lastName}"/>
                             </p:column>
-                            
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundleSale.ListSaleTitle_saleTotalValue}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.saleTotalValue}">
+                                    <f:convertNumber/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundleSale.ListSaleTitle_valuePayable}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valuePayable}">
                                     <f:convertNumber/>
                                 </h:outputText>
                             </p:column>

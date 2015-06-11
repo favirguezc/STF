@@ -742,6 +742,10 @@ public class SaleController implements Serializable {
         }
     }
     
+    public void setNullItems(){
+        items = null;
+    }
+    
     public List<Sale> getItemsAvailableSelectMany() {
         return getJpaController().findSaleEntities();
     }

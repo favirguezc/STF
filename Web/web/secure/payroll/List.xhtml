@@ -20,8 +20,8 @@
                      rowsPerPageTemplate="10,20,30,40,50"
                      widgetVar="nominaTable">
                        
-                    <p:ajax event="rowSelect"   update="createButton viewButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton payButton viewButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton payButton viewButton deleteButton"/>
                     
                     <p:column>
                         <f:facet name="header">
@@ -56,8 +56,16 @@
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
+                    <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlePayroll.ListPayrollTitle_paid}"/>
+                            </f:facet>
+                            <h:outputText value="#{bundlePayroll.ListPayrollLabel_paid}" rendered="#{item.asociatedConcept != null}"/>
+                            <h:outputText value="#{bundlePayroll.ListPayrollLabel_noPaid}" rendered="#{item.asociatedConcept == null}"/>
+                        </p:column>
                     <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{payrollController.prepareCreate}" update=":PayrollCreateForm" oncomplete="PF('PayrollCreateDialog').show()"/>
+                            <p:commandButton id="payButton" icon="ui-icon-suitcase"    value="#{bundlePayroll.Pay}" update=":PayrollEditForm" oncomplete="PF('PayrollEditDialog').show()" disabled="#{empty payrollController.selected or not empty payrollController.selected.asociatedConcept}"/> 
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PayrollViewForm" oncomplete="PF('PayrollViewDialog').show()" disabled="#{empty payrollController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{payrollController.destroy}" update=":growl,datalist" disabled="#{empty payrollController.selected}"/>
                         </f:facet>    
@@ -66,6 +74,7 @@
             </h:form>
             
             <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

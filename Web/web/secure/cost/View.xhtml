@@ -38,6 +38,11 @@
                         <h:outputText value="#{costController.selected.totalPrice}" title="#{bundleCost.ViewCostTitle_totalPrice}">
                             <f:convertNumber/>
                         </h:outputText>
+                        <h:outputText value="#{bundleCost.ViewCostLabel_inCash}"/>
+                        <h:outputText value="#{bundleCost.ViewCostText_inCash}" title="#{bundleCost.ViewCostText_inCash}" rendered="#{costController.selected.asociatedConcept != null}"/>
+                        <h:outputText value="#{bundleCost.ViewCostText_noInCash}" title="#{bundleCost.ViewCostText_noInCash}" rendered="#{costController.selected.asociatedConcept == null}"/>
+                        <h:outputText value="#{bundleCost.ViewCostLabel_cash}" rendered="#{costController.selected.asociatedConcept != null}"/>
+                        <h:outputText value="#{costController.selected.asociatedConcept.cash.name}" title="#{bundleCost.ViewCostTitle_cash}" rendered="#{costController.selected.asociatedConcept != null}"/>
                     </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CostViewDialog.hide()"/>
                 </h:panelGroup>

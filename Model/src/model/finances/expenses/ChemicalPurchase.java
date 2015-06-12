@@ -42,7 +42,7 @@ public class ChemicalPurchase implements Serializable{
     float price;
     @Column(nullable = false)
     float quantity;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     private CashConcept asociatedConcept;
 
     public ChemicalPurchase() {

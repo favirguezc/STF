@@ -263,14 +263,14 @@ public class ChemicalPurchaseController implements Serializable{
         }
     }
     
-    private void createCashConcept(){
+    private void createCashConcept() throws Exception{
         if(pay){
             CashConcept concept = new CashConcept();
             setCashConcept(concept);
         }
     }
     
-    private void editCashConcept(){
+    private void editCashConcept() throws Exception{
         deleteConcept = null;
         if(pay){
             CashConcept concept = selected.getAsociatedConcept();
@@ -288,12 +288,17 @@ public class ChemicalPurchaseController implements Serializable{
         
     }
     
-    private void setCashConcept(CashConcept concept){
+    private void setCashConcept(CashConcept concept) throws Exception{
         concept.setConceptDate(selected.getPurchaseDate());
         concept.setDescription("Compra de " + selected.getChemical().getName());
         concept.setIncome(false);
         concept.setConceptValue(selected.getTotal());
         concept.setCash(cash);
+        if(selected.getAsociatedConcept() == null){
+            getConceptJpaController().create(concept);
+        }else{
+            getConceptJpaController().edit(concept);
+        }
         selected.setAsociatedConcept(concept);
     }
     

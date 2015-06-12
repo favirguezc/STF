@@ -8,14 +8,17 @@ package model.finances.expenses;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import model.administration.ModuleClass;
+import model.finances.cash.CashConcept;
 
 /**
  *
@@ -43,6 +46,8 @@ public class Cost implements Serializable{
     private float unitPrice;
     @ManyToOne(optional = false)
     private ModuleClass moduleObject;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private CashConcept asociatedConcept;
 
     public Cost() {
     }
@@ -123,6 +128,14 @@ public class Cost implements Serializable{
         this.moduleObject = moduleObject;
     }
 
+    public CashConcept getAsociatedConcept() {
+        return asociatedConcept;
+    }
+
+    public void setAsociatedConcept(CashConcept asociatedConcept) {
+        this.asociatedConcept = asociatedConcept;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -135,6 +148,7 @@ public class Cost implements Serializable{
         hash = 13 * hash + Float.floatToIntBits(this.quantity);
         hash = 13 * hash + Float.floatToIntBits(this.unitPrice);
         hash = 13 * hash + Objects.hashCode(this.moduleObject);
+        hash = 13 * hash + Objects.hashCode(this.asociatedConcept);
         return hash;
     }
 
@@ -172,6 +186,9 @@ public class Cost implements Serializable{
             return false;
         }
         if (!Objects.equals(this.moduleObject, other.moduleObject)) {
+            return false;
+        }
+        if (!Objects.equals(this.asociatedConcept, other.asociatedConcept)) {
             return false;
         }
         return true;

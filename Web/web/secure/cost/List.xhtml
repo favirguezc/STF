@@ -88,10 +88,17 @@
                             <f:convertNumber/>
                         </h:outputText>
                     </p:column>
+                    <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleCost.ListCostTitle_inCash}"/>
+                            </f:facet>
+                            <h:outputText value="#{bundleCost.ListCostLabel_inCash}" rendered="#{item.asociatedConcept != null}"/>
+                            <h:outputText value="#{bundleCost.ListCostLabel_noInCash}" rendered="#{item.asociatedConcept == null}"/>
+                        </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{costController.prepareCreate}" update=":CostCreateForm" oncomplete="PF('CostCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CostViewForm" oncomplete="PF('CostViewDialog').show()" disabled="#{empty costController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CostEditForm" oncomplete="PF('CostEditDialog').show()" disabled="#{empty costController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{costController.prepareUpdate}" update=":CostEditForm" oncomplete="PF('CostEditDialog').show()" disabled="#{empty costController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{costController.destroy}" update=":growl,datalist" disabled="#{empty costController.selected}"/>
                     </f:facet>    
                 </p:dataTable>

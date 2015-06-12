@@ -49,6 +49,18 @@
                         <h:outputText id="total" value="#{costController.selected.totalPrice}" title="#{bundleCost.CreateCostTitle_totalPrice}" style="font-weight: bold;" >
                             <f:convertNumber/>
                         </h:outputText>
+                        <p:outputLabel for="inCash" value="#{bundleCost.CreateCostLabel_inCash}"/>
+                        <p:selectBooleanCheckbox id="inCash" value="#{costController.inCash}" >
+                            <p:ajax update="cashLG cashPG" />
+                        </p:selectBooleanCheckbox>
+                        <h:panelGroup id="cashLG"> 
+                            <p:outputLabel value="#{bundleCost.CreateCostLabel_cash}" for="cash" rendered="#{costController.inCash}"/>
+                        </h:panelGroup>
+                        <h:panelGroup id="cashPG"> 
+                            <p:selectOneMenu id="cash" value="#{costController.cash}" required="true" requiredMessage="#{bundleCost.CreateCostRequiredMessage_cash}" rendered="#{costController.inCash}">
+                                <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{costController.create}" value="#{bundle.Save}" update="display,:CostListForm:datalist,:growl" oncomplete="handleSubmit(args,'CostCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CostCreateDialog.hide()"/>

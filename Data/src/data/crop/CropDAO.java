@@ -17,7 +17,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.administration.Cultivation;
 import model.administration.Farm;
 import model.administration.Lot;
 import model.administration.ModuleClass;
@@ -201,13 +200,8 @@ public class CropDAO implements Serializable {
         if(collector != null || module != null || start != null || end != null){
             queryString += " WHERE";
         }
-<<<<<<< HEAD
-        if (worker != null) {
-            queryString += " t.collector = :worker";
-=======
         if (collector != null) {
             queryString += " t.collector = :collector";
->>>>>>> origin/master
             a = true;
         }
         if (module != null) {

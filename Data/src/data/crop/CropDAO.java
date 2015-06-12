@@ -201,8 +201,13 @@ public class CropDAO implements Serializable {
         if(collector != null || module != null || start != null || end != null){
             queryString += " WHERE";
         }
+<<<<<<< HEAD
+        if (worker != null) {
+            queryString += " t.collector = :worker";
+=======
         if (collector != null) {
             queryString += " t.collector = :collector";
+>>>>>>> origin/master
             a = true;
         }
         if (module != null) {
@@ -262,7 +267,7 @@ public class CropDAO implements Serializable {
             queryString += " WHERE";
         }
         if (worker != null) {
-            queryString += " t.worker = :worker";
+            queryString += " t.collector = :worker";
             a = true;
         }
         if (lot != null) {
@@ -314,7 +319,7 @@ public class CropDAO implements Serializable {
             queryString += " WHERE";
         }
         if (worker != null) {
-            queryString += " t.worker = :worker";
+            queryString += " t.collector = :worker";
             a = true;
         }
         if (farm != null) {

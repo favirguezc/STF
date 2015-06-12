@@ -147,7 +147,7 @@ public class PayrollDAO implements Serializable {
         a = b = c = false;
         String queryString = "SELECT p FROM Payroll p WHERE p.farm = :farm";
         if (worker != null) {
-            queryString += "AND p.worker = :worker";
+            queryString += " AND p.worker = :worker";
             a = true;
         }
         if (end != null) {

@@ -187,22 +187,27 @@ public class CropDAO implements Serializable {
 
     /**
      *
-     * @param worker
+     * @param collector
      * @param module
      * @param start
      * @param end
      * @return
      */
-    public List<Crop> findCropEntities(Person worker, ModuleClass module, Date start, Date end) {
+    public List<Crop> findCropEntities(Person collector, ModuleClass module, Date start, Date end) {
         EntityManager em = getEntityManager();
         boolean a, b, c, d;
         a = b = c = d = false;
         String queryString = "SELECT t FROM Crop t";
-        if(worker != null || module != null || start != null || end != null){
+        if(collector != null || module != null || start != null || end != null){
             queryString += " WHERE";
         }
+<<<<<<< HEAD
         if (worker != null) {
             queryString += " t.collector = :worker";
+=======
+        if (collector != null) {
+            queryString += " t.collector = :collector";
+>>>>>>> origin/master
             a = true;
         }
         if (module != null) {
@@ -234,7 +239,7 @@ public class CropDAO implements Serializable {
                 query.setParameter("date2", end, TemporalType.DATE);
             }
             if (a) {
-                query.setParameter("worker", worker);
+                query.setParameter("collector", collector);
             }
             if (b) {
                 query.setParameter("module", module);

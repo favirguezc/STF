@@ -25,6 +25,9 @@ import javax.faces.convert.FacesConverter;
 import model.administration.Farm;
 import model.administration.Person;
 import model.crop.Crop;
+import model.finances.cash.Cash;
+import model.finances.cash.CashConcept;
+import model.util.DateTools;
 import model.work.Job;
 import model.work.Work;
 
@@ -35,6 +38,7 @@ public class PayrollController implements Serializable {
     private Payroll selected;
     private List<Payroll> items = null;
     private PayrollDAO jpaController = null;
+    private Cash cash;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -45,7 +49,9 @@ public class PayrollController implements Serializable {
     private WorkController workController;
     @ManagedProperty(value = "#{jobController}")
     private JobController jobController;
-
+    @ManagedProperty(value = "#{cashConceptController}")
+    private CashConceptController cashConceptController;
+    
     public PayrollController() {
     }
 
@@ -118,6 +124,22 @@ public class PayrollController implements Serializable {
         }
         return jpaController;
     }
+    
+    public CashConceptController getCashConceptController() {
+        return cashConceptController;
+    }
+
+    public void setCashConceptController(CashConceptController cashConceptController) {
+        this.cashConceptController = cashConceptController;
+    }
+    
+    public Cash getCash() {
+        return cash;
+    }
+
+    public void setCash(Cash cash) {
+        this.cash = cash;
+    }
 
     protected void setEmbeddableKeys() {
     }
@@ -151,8 +173,8 @@ public class PayrollController implements Serializable {
     }
 
     //Posiblemente no se use
-    public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayroll").getString("PayrollUpdated"));
+    public void pay() {
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePayroll").getString("PayrollPaid"));
     }
 
     public void destroy() {
@@ -170,11 +192,14 @@ public class PayrollController implements Serializable {
             }
             try {
                 if (persistAction == PersistAction.UPDATE) {
+                    createCashConcept();
                     getJpaController().edit(selected);
+                    cashConceptController.setNullItems();
                 } else if (persistAction == PersistAction.CREATE) {
                     getJpaController().create(selected);
                 } else {
                     getJpaController().destroy(selected.getId());
+                    cashConceptController.setNullItems();
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
@@ -184,6 +209,16 @@ public class PayrollController implements Serializable {
         }
     }
 
+    private void createCashConcept(){
+        CashConcept concept = new CashConcept();
+        concept.setConceptDate(selected.getDateUntil());
+        concept.setDescription("Nomina " + selected.getWorker().getName() + " " + selected.getWorker().getLastName() + " " + DateTools.getWeek_Short(selected.getDateUntil()));
+        concept.setIncome(false);
+        concept.setConceptValue(selected.getTotal());
+        concept.setCash(cash);
+        selected.setAsociatedConcept(concept);
+    }
+    
     public List<Payroll> getItems() {
         if (items == null || items.isEmpty()) {
             if (signInBean.getFarm() != null) {

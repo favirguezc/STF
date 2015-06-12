@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import data.finances.expenses.ChemicalPurchaseDAO;
 import data.finances.PriceDAO;
+import data.finances.cash.CashConceptDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +27,8 @@ import javax.faces.convert.FacesConverter;
 import model.finances.Price;
 import model.finances.expenses.ChemicalPurchase;
 import model.administration.Farm;
+import model.finances.cash.Cash;
+import model.finances.cash.CashConcept;
 
 /**
  *
@@ -39,12 +42,18 @@ public class ChemicalPurchaseController implements Serializable{
     private List<ChemicalPurchase> items = null;
     private Price price = null;
     private boolean newPrice;
+    private Cash cash;
+    private boolean pay;
+    private CashConcept deleteConcept;
     private ChemicalPurchaseDAO jpaController = null;
     private PriceDAO priceJpaController = null;
+    private CashConceptDAO conceptJpaController = null;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
+    @ManagedProperty(value = "#{cashConceptController}")
+    private CashConceptController cashConceptController;
 
     public ChemicalPurchaseController() {
     }
@@ -63,6 +72,13 @@ public class ChemicalPurchaseController implements Serializable{
         return priceJpaController;
     }
 
+    private CashConceptDAO getConceptJpaController(){
+        if(conceptJpaController == null){
+            conceptJpaController = new CashConceptDAO(EntityManagerFactorySingleton.getEntityManagerFactory());
+        }
+        return conceptJpaController;
+    }
+    
     public ChemicalPurchase getSelected() {
         return selected;
     }
@@ -86,7 +102,31 @@ public class ChemicalPurchaseController implements Serializable{
     public void setSignInBean(SignInController signInBean) {
         this.signInBean = signInBean;
     }
+
+    public CashConceptController getCashConceptController() {
+        return cashConceptController;
+    }
+
+    public void setCashConceptController(CashConceptController cashConceptController) {
+        this.cashConceptController = cashConceptController;
+    }
     
+    public Cash getCash() {
+        return cash;
+    }
+
+    public void setCash(Cash cash) {
+        this.cash = cash;
+    }
+
+    public boolean isPay() {
+        return pay;
+    }
+
+    public void setPay(boolean pay) {
+        this.pay = pay;
+    }
+
     protected void setEmbeddableKeys() {
     }
 
@@ -114,6 +154,7 @@ public class ChemicalPurchaseController implements Serializable{
     
     public ChemicalPurchase prepareCreate() {
         selected = new ChemicalPurchase();
+        pay = false;
         if (signInBean.getFarm() != null) {
             selected.setFarm(signInBean.getFarm());
             initializeEmbeddableKey();
@@ -125,7 +166,7 @@ public class ChemicalPurchaseController implements Serializable{
     }
     
     public void create() {
-        savePrice();    
+        savePrice();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleChemicalPurchase").getString("ChemicalPurchaseCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -133,6 +174,7 @@ public class ChemicalPurchaseController implements Serializable{
     }
     
     public void prepareUpdate(){
+        verifyPaid();
         price = getPriceJpaController().findPrice(selected.getChemical().getName());
     }
     
@@ -157,12 +199,18 @@ public class ChemicalPurchaseController implements Serializable{
             }
             try {
                 if (persistAction == PersistAction.UPDATE) {
+                    editCashConcept();
                     getJpaController().edit(selected);
+                    if(deleteConcept != null){
+                        getConceptJpaController().destroy(deleteConcept.getId());
+                    }
                 } else if (persistAction == PersistAction.CREATE) {
+                    createCashConcept();
                     getJpaController().create(selected);
                 } else {
                     getJpaController().destroy(selected.getId());
                 }
+                cashConceptController.setNullItems();
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -215,6 +263,48 @@ public class ChemicalPurchaseController implements Serializable{
         }
     }
     
+    private void createCashConcept(){
+        if(pay){
+            CashConcept concept = new CashConcept();
+            setCashConcept(concept);
+        }
+    }
+    
+    private void editCashConcept(){
+        deleteConcept = null;
+        if(pay){
+            CashConcept concept = selected.getAsociatedConcept();
+            if(concept == null){
+                concept = new CashConcept();   
+            }
+            setCashConcept(concept);
+        }else{
+            CashConcept concept = selected.getAsociatedConcept();
+            if(concept != null){
+                deleteConcept = concept;
+                selected.setAsociatedConcept(null);
+            }
+        }
+        
+    }
+    
+    private void setCashConcept(CashConcept concept){
+        concept.setConceptDate(selected.getPurchaseDate());
+        concept.setDescription("Compra de " + selected.getChemical().getName());
+        concept.setIncome(false);
+        concept.setConceptValue(selected.getTotal());
+        concept.setCash(cash);
+        selected.setAsociatedConcept(concept);
+    }
+    
+    public void verifyPaid(){
+        if(selected.getAsociatedConcept() != null){
+            pay = true;
+        }else{
+            pay = false;
+        }
+    }
+
     @FacesConverter(forClass = ChemicalPurchase.class)
     public static class ChemicalPurchaseConverter implements Converter {
 

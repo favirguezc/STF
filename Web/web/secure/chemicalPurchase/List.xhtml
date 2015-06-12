@@ -60,6 +60,13 @@
                                 <f:convertNumber/>
                             </h:outputText>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleChemicalPurchase.ListChemicalPurchaseTitle_paid}"/>
+                            </f:facet>
+                            <h:outputText value="#{bundleChemicalPurchase.ListChemicalPurchaseLabel_paid}" rendered="#{item.asociatedConcept != null}"/>
+                            <h:outputText value="#{bundleChemicalPurchase.ListChemicalPurchaseLabel_noPaid}" rendered="#{item.asociatedConcept == null}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{chemicalPurchaseController.prepareCreate}" update=":ChemicalPurchaseCreateForm" oncomplete="PF('ChemicalPurchaseCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ChemicalPurchaseViewForm" oncomplete="PF('ChemicalPurchaseViewDialog').show()" disabled="#{empty chemicalPurchaseController.selected}"/>

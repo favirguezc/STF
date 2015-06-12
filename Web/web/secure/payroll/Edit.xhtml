@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PayrollEditDlg" widgetVar="PayrollEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePayroll.EditPayrollTitle}">
+            <h:form id="PayrollEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{payrollController.selected != null}">
+                        <p:outputLabel value="#{bundlePayroll.EditPayrollLabel_dateUntil}" for="dateUntil" />
+                        <h:outputText id="dateUntil" value="#{payrollController.selected.dateUntil}" title="#{bundlePayroll.EditPayrollTitle_dateUntil}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <p:outputLabel value="#{bundlePayroll.EditPayrollLabel_worker}" for="worker" />
+                        <h:outputText id="worker" value="#{payrollController.selected.worker.name} #{payrollController.selected.worker.lastName}" title="#{bundlePayroll.EditPayrollTitle_worker}"/>
+                        <p:outputLabel value="#{bundlePayroll.EditPayrollLabel_cash}" for="cash"/>
+                        <p:selectOneMenu id="cash" value="#{payrollController.cash}" required="true" requiredMessage="#{bundlePayroll.EditPayrollRequiredMessage_cash}">
+                            <f:selectItems value="#{cashController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{payrollController.pay}" value="#{bundlePayroll.EditPayrollButton_pay}" update="display,:PayrollListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PayrollEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PayrollEditDialog.hide()"/>
+                </h:panelGroup>    
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

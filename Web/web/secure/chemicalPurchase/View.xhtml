@@ -30,6 +30,11 @@
                         <h:outputText value="#{chemicalPurchaseController.selected.total}" title="#{bundleChemicalPurchase.CreateChemicalPurchaseTitle_total}">
                             <f:convertNumber/>
                         </h:outputText>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_paid}"/>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseText_paid}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseText_paid}" rendered="#{chemicalPurchaseController.selected.asociatedConcept != null}"/>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseText_noPaid}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseText_noPaid}" rendered="#{chemicalPurchaseController.selected.asociatedConcept == null}"/>
+                        <h:outputText value="#{bundleChemicalPurchase.ViewChemicalPurchaseLabel_cash}" rendered="#{chemicalPurchaseController.selected.asociatedConcept != null}"/>
+                        <h:outputText value="#{chemicalPurchaseController.selected.asociatedConcept.cash.name}" title="#{bundleChemicalPurchase.ViewChemicalPurchaseTitle_cash}" rendered="#{chemicalPurchaseController.selected.asociatedConcept != null}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ChemicalPurchaseViewDialog.hide()"/>
                 </h:panelGroup>

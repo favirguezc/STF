@@ -3,9 +3,9 @@ package controller.controllers;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import data.applications.ApplicationDAO;
+import data.applications.ChemicalDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +19,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.applications.Application;
 import model.applications.Chemical;
+import model.applications.ChemicalTypeEnum;
 
 @ManagedBean(name = "applicationController")
 @SessionScoped
@@ -28,6 +29,7 @@ public class ApplicationController implements Serializable {
     private List<Application> items = null;
     private Application selected;
     private List<Chemical> chemicals;
+    private ChemicalTypeEnum chemicalType;
     @ManagedProperty(value = "#{permissionController}")
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
@@ -42,6 +44,14 @@ public class ApplicationController implements Serializable {
 
     public void setSelected(Application selected) {
         this.selected = selected;
+    }
+
+    public ChemicalTypeEnum getChemicalType() {
+        return chemicalType;
+    }
+
+    public void setChemicalType(ChemicalTypeEnum chemicalType) {
+        this.chemicalType = chemicalType;
     }
 
     public PermissionController getPermissionBean() {
@@ -106,12 +116,7 @@ public class ApplicationController implements Serializable {
     }
 
     public List<Chemical> getChemicals() {
-        chemicals = new ArrayList<Chemical>();
-        for (Chemical i : new ChemicalController().getItems()) {
-            if (i.getApplicationType() == selected.getType()) {
-                chemicals.add(i);
-            }
-        }
+        chemicals = new ChemicalDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).findChemicalEntities(chemicalType);
         return chemicals;
     }
 

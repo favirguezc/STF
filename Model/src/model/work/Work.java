@@ -32,6 +32,7 @@ public class Work implements Serializable {
     private Job job;
     @ManyToOne(optional = false)
     private Person worker;
+    private float hourlyRate;
     private float hoursSpent;
     private String observations;
 
@@ -75,6 +76,14 @@ public class Work implements Serializable {
         this.worker = worker;
     }
 
+    public float getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(float hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
     public float getHoursSpent() {
         return hoursSpent;
     }
@@ -94,13 +103,14 @@ public class Work implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 79 * hash + Objects.hashCode(this.workDate);
-        hash = 79 * hash + Objects.hashCode(this.cultivation);
-        hash = 79 * hash + Objects.hashCode(this.job);
-        hash = 79 * hash + Objects.hashCode(this.worker);
-        hash = 79 * hash + Float.floatToIntBits(this.hoursSpent);
-        hash = 79 * hash + Objects.hashCode(this.observations);
+        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.workDate);
+        hash = 47 * hash + Objects.hashCode(this.cultivation);
+        hash = 47 * hash + Objects.hashCode(this.job);
+        hash = 47 * hash + Objects.hashCode(this.worker);
+        hash = 47 * hash + Float.floatToIntBits(this.hourlyRate);
+        hash = 47 * hash + Float.floatToIntBits(this.hoursSpent);
+        hash = 47 * hash + Objects.hashCode(this.observations);
         return hash;
     }
 
@@ -126,6 +136,9 @@ public class Work implements Serializable {
             return false;
         }
         if (!Objects.equals(this.worker, other.worker)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.hourlyRate) != Float.floatToIntBits(other.hourlyRate)) {
             return false;
         }
         if (Float.floatToIntBits(this.hoursSpent) != Float.floatToIntBits(other.hoursSpent)) {

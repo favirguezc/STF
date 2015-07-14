@@ -120,7 +120,7 @@ public class PermissionController implements Serializable {
             return true;
         }
         if (signInBean.getRole() == null) {
-            if (requestPath.contains(PageEnum.INDEX.toString().toLowerCase())) {
+            if (requestPath.contains(PageEnum.NOTE.toString().toLowerCase())) {
                 return true;
             } else {
                 return false;

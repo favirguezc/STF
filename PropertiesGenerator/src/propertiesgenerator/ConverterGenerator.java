@@ -5,6 +5,7 @@
  */
 package propertiesgenerator;
 
+import model.applications.ChemicalTypeEnum;
 import model.finances.incomes.BankEnum;
 
 /**
@@ -48,7 +49,7 @@ public class ConverterGenerator {
     }
 
     public static void main(String args[]) {
-        Class c = BankEnum.class;
+        Class c = ChemicalTypeEnum.class;
         System.out.println("import javax.faces.component.UIComponent;\n"
                 + "import javax.faces.context.FacesContext;\n"
                 + "import javax.faces.convert.Converter;\n"

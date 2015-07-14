@@ -10,24 +10,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
-import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.servlet.http.HttpSession;
-import org.primefaces.component.dashboard.Dashboard;
-import org.primefaces.component.panel.Panel;
-import org.primefaces.context.RequestContext;
-import org.primefaces.model.DashboardColumn;
-import org.primefaces.model.DashboardModel;
-import org.primefaces.model.DefaultDashboardColumn;
-import org.primefaces.model.DefaultDashboardModel;
 
 @ManagedBean(name = "noteController")
 @SessionScoped
@@ -36,20 +25,10 @@ public class NoteController implements Serializable {
     private NoteDAO jpaController = null;
     private List<Note> items = null;
     private Note selected;
-    private Dashboard dashboard;
-    private DashboardModel dashboardModel;
-    private final int columnCount = 3;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
 
-    @PostConstruct
-    public void init() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Application application = fc.getApplication();
-        dashboard = (Dashboard) application.createComponent(fc, "org.primefaces.component.Dashboard", "org.primefaces.component.DashboardRenderer");
-        dashboard.setId("dashboard");
-
-        createDasboardModel();
+    public NoteController() {
     }
 
     public Note getSelected() {
@@ -59,57 +38,13 @@ public class NoteController implements Serializable {
     public void setSelected(Note selected) {
         this.selected = selected;
     }
-
-    public DashboardModel getDashboardModel() {
-        return dashboardModel;
-    }
-
-    public void setDashboardModel(DashboardModel dashboardModel) {
-        this.dashboardModel = dashboardModel;
-    }
-
+    
     public SignInController getSignInBean() {
         return signInBean;
     }
 
     public void setSignInBean(SignInController signInBean) {
         this.signInBean = signInBean;
-    }
-
-    private void addChildren() {
-        dashboard.getChildren().clear();
-        createDasboardModel();
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Application application = fc.getApplication();
-        List<Note> items1 = getItems();
-        for (int i = 0; i < items1.size(); i++) {
-            Note nota = items1.get(i);
-            Panel panel = (Panel) application.createComponent(fc, "org.primefaces.component.Panel", "org.primefaces.component.PanelRenderer");
-            panel.setId("nota_" + items1.get(i).getId());
-            panel.setHeader(items1.get(i).getTitle());
-            panel.setClosable(true);
-            panel.setToggleable(true);
-
-            dashboard.getChildren().add(panel);
-            DashboardColumn column = dashboardModel.getColumn(i % columnCount);
-            column.addWidget(panel.getId());
-            HtmlOutputText text = new HtmlOutputText();
-            text.setValue(nota.getFrom().toString());
-            panel.getChildren().add(text);
-            HtmlOutputText text2 = new HtmlOutputText();
-            text2.setValue(nota.getMessage());
-            panel.getChildren().add(text2);
-        }
-        RequestContext.getCurrentInstance().update(":NotaListForm:notaDashboard");
-    }
-
-    public Dashboard getDashboard() {
-        addChildren();
-        return dashboard;
-    }
-
-    public void setDashboard(Dashboard dashboard) {
-        this.dashboard = dashboard;
     }
 
     protected void setEmbeddableKeys() {
@@ -128,25 +63,23 @@ public class NoteController implements Serializable {
     public Note prepareCreate() {
         selected = new Note();
         initializeEmbeddableKey();
-        HttpSession session = JsfUtil.getSession();
-        SignInController loginBean = (SignInController) session.getAttribute("signInController");
-        selected.setFrom(loginBean.getUser());
+        selected.setFrom(signInBean.getUser());
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleNote").getString("NotaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleNote").getString("NoteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleNote").getString("NotaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleNote").getString("NoteUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleNote").getString("NotaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleNote").getString("NoteDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -185,15 +118,6 @@ public class NoteController implements Serializable {
 
     public List<Note> getItemsAvailableSelectOne() {
         return getJpaController().findNotaEntities();
-    }
-
-    private void createDasboardModel() {
-        dashboardModel = new DefaultDashboardModel();
-        for (int i = 0, n = columnCount; i < n; i++) {
-            DashboardColumn column = new DefaultDashboardColumn();
-            dashboardModel.addColumn(column);
-        }
-        dashboard.setModel(dashboardModel);
     }
 
     @FacesConverter(forClass = Note.class)

@@ -24,7 +24,7 @@
                                            itemValue="#{creadorItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{noteController.update}" value="#{bundle.Save}" update="display,:NoteListForm:noteDashboard,:growl" oncomplete="handleSubmit(args, 'NoteEditDialog');"/>
+                    <p:commandButton actionListener="#{noteController.update}" value="#{bundle.Save}" update="display,:NoteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NoteEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="NoteEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

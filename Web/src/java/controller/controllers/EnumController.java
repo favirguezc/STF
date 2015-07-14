@@ -13,7 +13,7 @@ import model.administration.RoleEnum;
 import model.administration.SexEnum;
 import model.applications.ApplicationMethodEnum;
 import model.applications.ApplicationMeasurementUnitEnum;
-import model.applications.ApplicationTypeEnum;
+import model.applications.ChemicalTypeEnum;
 import model.crop.ClassificationTypeEnum;
 import model.finances.expenses.CostItemEnum;
 import model.finances.expenses.CostTypeEnum;
@@ -66,8 +66,8 @@ public class EnumController {
         return BloodGroupEnum.values();
     }
 
-    public ApplicationTypeEnum[] getApplicationTypeValues() {
-        return ApplicationTypeEnum.values();
+    public ChemicalTypeEnum[] getApplicationTypeValues() {
+        return ChemicalTypeEnum.values();
     }
 
     public Action[] getActionValues() {

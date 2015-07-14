@@ -47,8 +47,8 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Finca")) {
             return PageEnum.FARM;
         }
-        if (value.equals("Index")) {
-            return PageEnum.INDEX;
+        if (value.equals("Nota")) {
+            return PageEnum.NOTE;
         }
         if (value.equals("Labor")) {
             return PageEnum.JOB;

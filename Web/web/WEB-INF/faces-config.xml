@@ -150,9 +150,9 @@
     </managed-bean>
     <managed-bean>
         <managed-bean-name>ApplicationTypeEnumConverter</managed-bean-name>
-        <managed-bean-class>controller.converters.ApplicationTypeEnumConverter</managed-bean-class>        
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>controller.converters.ChemicalTypeEnumConverter</managed-bean-class>
+            
+        <managed-bean-scope>application</managed-bean-scope></managed-bean>
     <managed-bean>
         <managed-bean-name>BankEnumConverter</managed-bean-name>
         <managed-bean-class>controller.converters.BankEnumConverter</managed-bean-class>        

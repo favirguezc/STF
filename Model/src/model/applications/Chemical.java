@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import model.monitoring.MonitorableParameter;
 
 /**
  *
@@ -21,13 +23,16 @@ public class Chemical implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @Enumerated(EnumType.STRING)
-    private ApplicationTypeEnum applicationType;
+    private ChemicalTypeEnum chemicalType;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private String activeComponent;
     @Enumerated(EnumType.STRING)
     private ApplicationMeasurementUnitEnum applicationMeasurementUnit;
+    @ManyToOne
+    private MonitorableParameter commonReasonForUse;
+    private String commonReasonsForUse;
     private float waitingPeriod;
     private float reEntryTime;
 
@@ -39,12 +44,12 @@ public class Chemical implements Serializable {
         this.id = id;
     }
 
-    public ApplicationTypeEnum getApplicationType() {
-        return applicationType;
+    public ChemicalTypeEnum getChemicalType() {
+        return chemicalType;
     }
 
-    public void setApplicationType(ApplicationTypeEnum applicationType) {
-        this.applicationType = applicationType;
+    public void setChemicalType(ChemicalTypeEnum chemicalType) {
+        this.chemicalType = chemicalType;
     }
 
     public String getName() {
@@ -71,6 +76,14 @@ public class Chemical implements Serializable {
         this.applicationMeasurementUnit = applicationMeasurementUnit;
     }
 
+    public MonitorableParameter getCommonReasonForUse() {
+        return commonReasonForUse;
+    }
+
+    public void setCommonReasonForUse(MonitorableParameter commonReasonForUse) {
+        this.commonReasonForUse = commonReasonForUse;
+    }
+
     public float getWaitingPeriod() {
         return waitingPeriod;
     }
@@ -87,16 +100,26 @@ public class Chemical implements Serializable {
         this.reEntryTime = reEntryTime;
     }
 
+    public String getCommonReasonsForUse() {
+        return commonReasonsForUse;
+    }
+
+    public void setCommonReasonsForUse(String commonReasonsForUse) {
+        this.commonReasonsForUse = commonReasonsForUse;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 43 * hash + Objects.hashCode(this.applicationType);
-        hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.activeComponent);
-        hash = 43 * hash + Objects.hashCode(this.applicationMeasurementUnit);
-        hash = 43 * hash + Float.floatToIntBits(this.waitingPeriod);
-        hash = 43 * hash + Float.floatToIntBits(this.reEntryTime);
+        int hash = 5;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.chemicalType);
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.activeComponent);
+        hash = 53 * hash + Objects.hashCode(this.applicationMeasurementUnit);
+        hash = 53 * hash + Objects.hashCode(this.commonReasonForUse);
+        hash = 53 * hash + Objects.hashCode(this.commonReasonsForUse);
+        hash = 53 * hash + Float.floatToIntBits(this.waitingPeriod);
+        hash = 53 * hash + Float.floatToIntBits(this.reEntryTime);
         return hash;
     }
 
@@ -112,7 +135,7 @@ public class Chemical implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.applicationType != other.applicationType) {
+        if (this.chemicalType != other.chemicalType) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -124,6 +147,12 @@ public class Chemical implements Serializable {
         if (this.applicationMeasurementUnit != other.applicationMeasurementUnit) {
             return false;
         }
+        if (!Objects.equals(this.commonReasonForUse, other.commonReasonForUse)) {
+            return false;
+        }
+        if (!Objects.equals(this.commonReasonsForUse, other.commonReasonsForUse)) {
+            return false;
+        }
         if (Float.floatToIntBits(this.waitingPeriod) != Float.floatToIntBits(other.waitingPeriod)) {
             return false;
         }
@@ -132,13 +161,10 @@ public class Chemical implements Serializable {
         }
         return true;
     }
-    
-    
 
     @Override
     public String toString() {
         return name;
     }
-
     
 }

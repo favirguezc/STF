@@ -174,7 +174,7 @@ public class SignInController implements Serializable {
                     buttonMessage = "Seleccionar Finca";
                     return signIn();
                 } else if (farms == null || farms.isEmpty()) {
-                    return "/faces/secure/index.xhtml";
+                    return "/faces/secure/note/List.xhtml";
                 }
             } else {
                 JsfUtil.addErrorMessage("Usuario y/o contraseña inválidos! Por favor intente de nuevo.");
@@ -190,7 +190,7 @@ public class SignInController implements Serializable {
                     return signIn();
                 } else if (roles == null || roles.isEmpty()) {
                     if (user.isSystemAdmin()) {
-                        return "/faces/secure/index.xhtml";
+                        return "/faces/secure/note/List.xhtml";
                     } else {
                         JsfUtil.addErrorMessage("El usuario no tiene roles asignados. Por favor contacte a un administrador de la farm.");
                         return signOut();
@@ -198,14 +198,14 @@ public class SignInController implements Serializable {
                 }
             } else {
                 if (user.isSystemAdmin()) {
-                    return "/faces/secure/index.xhtml";
+                    return "/faces/secure/note/List.xhtml";
                 } else {
                     JsfUtil.addErrorMessage("El campo Farm es obligatorio");
                 }
             }
         } else {
             step3rolSelected = true;
-            return "/faces/secure/index.xhtml";
+            return "/faces/secure/note/List.xhtml";
         }
         return "";
     }

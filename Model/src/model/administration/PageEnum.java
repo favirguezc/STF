@@ -21,7 +21,6 @@ public enum PageEnum {
     COST,
     DEPARTMENT,
     FARM,
-    INDEX,
     JOB,
     RAINFALL,
     LOT,
@@ -38,7 +37,8 @@ public enum PageEnum {
     THERMOMETER,
     WORK,
     INSECTTRAP,
-    MONITORABLEPARAMETER;
+    MONITORABLEPARAMETER,
+    NOTE;
 
     @Override
     public String toString() {
@@ -65,8 +65,6 @@ public enum PageEnum {
                 return "Departamento";
             case FARM:
                 return "Finca";
-            case INDEX:
-                return "Index";
             case INSECTTRAP:
                 return "Trampa De Insectos";
             case JOB:
@@ -99,6 +97,8 @@ public enum PageEnum {
                 return "Venta";
             case WORK:
                 return "Trabajo";
+            case NOTE:
+                return "Nota";
             default:
                 return "";
         }

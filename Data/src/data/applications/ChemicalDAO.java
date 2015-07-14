@@ -16,6 +16,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.applications.Chemical;
+import model.applications.ChemicalTypeEnum;
 
 /**
  *
@@ -115,6 +116,22 @@ public class ChemicalDAO implements Serializable {
 
     /**
      *
+     * @param type
+     * @return
+     */
+    public List<Chemical> findChemicalEntities(ChemicalTypeEnum type) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Chemical> query = em.createQuery("SELECT t FROM Chemical t WHERE t.chemicalType = :type", Chemical.class);
+            query.setParameter("type", type);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     *
      * @return
      */
     public List<Chemical> findChemicalEntities() {
@@ -184,7 +201,7 @@ public class ChemicalDAO implements Serializable {
      * @return
      * @throws Exception
      */
-    public Chemical findChemical(String name)throws Exception{
+    public Chemical findChemical(String name) throws Exception {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Chemical> query = em.createQuery("SELECT t FROM Chemical t WHERE t.name = :name", Chemical.class);
@@ -194,5 +211,5 @@ public class ChemicalDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

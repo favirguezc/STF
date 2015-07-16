@@ -5,7 +5,9 @@
  */
 package model.applications;
 
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,8 @@ import model.administration.Person;
  *
  * @author fredy
  */
-public class ApplicationResponsible {
+@Entity
+public class ApplicationResponsible implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

@@ -23,20 +23,26 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleWork.EditWorkLabel_job}" for="job"/>
                         <p:selectOneMenu id="job" value="#{workController.selected.job}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_job}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{jobController.itemsAvailableSelectOne}"
                                            var="jobItem"
                                            itemValue="#{jobItem}"
                                            itemLabel="#{jobItem.name}"/>
+                            <p:ajax update="hourlyRate" listener="#{workController.setDefaultHourlyRate}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleWork.EditWorkLabel_worker}" for="worker"/>
                         <p:selectOneMenu id="worker" value="#{workController.selected.worker}" required="true" requiredMessage="#{bundleWork.EditWorkRequiredMessage_worker}">
-                            <f:selectItems value="#{personController.itemsAvailableTrabajador}"
+                            <f:selectItems value="#{personController.itemsAvailableWorker}"
                                            var="workerItem"
                                            itemValue="#{workerItem}"
                                            itemLabel="#{workerItem.name} #{workerItem.lastName}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleWork.EditWorkLabel_hoursSpent}" for="hoursSpent"/>
                         <p:inputText id="hoursSpent" value="#{workController.selected.hoursSpent}" title="#{bundleWork.EditWorkTitle_hoursSpent}">
+                            <f:validateDoubleRange minimum="0"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundleWork.EditWorkLabel_hourlyRate}" for="hourlyRate"/>
+                        <p:inputText id="hourlyRate" value="#{workController.selected.hourlyRate}" title="#{bundleWork.EditWorkTitle_hourlyRate}">
                             <f:validateDoubleRange minimum="0"/>
                         </p:inputText>
                         <p:outputLabel value="#{bundleWork.EditWorkLabel_observations}" for="observations"/>

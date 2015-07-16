@@ -138,6 +138,10 @@ public class WorkController implements Serializable {
         return getJpaController().findWorkEntities(signInBean.getFarm(), trabajador, inicio, fin);
     }
 
+    public void setDefaultHourlyRate() {
+        selected.setHourlyRate(selected.getJob().getHourlyRate());
+    }
+
     @FacesConverter(forClass = Work.class)
     public static class WorkControllerConverter implements Converter {
 

@@ -12,8 +12,8 @@
             <h:form id="ChemicalViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{chemicalController.selected != null}">
-                        <h:outputText value="#{bundleChemical.ViewChemicalLabel_applicationType}"/>
-                        <h:outputText value="#{chemicalController.selected.applicationType}" title="#{bundleChemical.ViewChemicalTitle_applicationType}"/>
+                        <h:outputText value="#{bundleChemical.ViewChemicalLabel_chemicalType}"/>
+                        <h:outputText value="#{chemicalController.selected.chemicalType}" title="#{bundleChemical.ViewChemicalTitle_chemicalType}"/>
                         <h:outputText value="#{bundleChemical.ViewChemicalLabel_name}"/>
                         <h:outputText value="#{chemicalController.selected.name}" title="#{bundleChemical.ViewChemicalTitle_name}"/>
                         <h:outputText value="#{bundleChemical.ViewChemicalLabel_activeComponent}"/>

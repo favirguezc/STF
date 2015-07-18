@@ -17,6 +17,15 @@
     <class>model.crop.Classification</class>
     <class>model.crop.Crop</class>
     <class>model.crop.Variety</class>
+    <class>model.finances.Price</class>
+    <class>model.finances.cash.Cash</class>
+    <class>model.finances.cash.CashConcept</class>
+    <class>model.finances.expenses.ChemicalPurchase</class>
+    <class>model.finances.expenses.Cost</class>
+    <class>model.finances.expenses.Payroll</class>
+    <class>model.finances.incomes.Payment</class>
+    <class>model.finances.incomes.Sale</class>
+    <class>model.finances.incomes.SaleItem</class>
     <class>model.monitoring.InsectTrap</class>
     <class>model.monitoring.MonitorableParameter</class>
     <class>model.monitoring.Monitoring</class>
@@ -27,23 +36,11 @@
     <class>model.weather.Thermometer</class>
     <class>model.work.Job</class>
     <class>model.work.Work</class>
-    <class>model.finances.Price</class>
-    <class>model.finances.cash.Cash</class>
-    <class>model.finances.cash.CashConcept</class>
-    <class>model.finances.expenses.ChemicalPurchase</class>
-    <class>model.finances.expenses.Cost</class>
-    <class>model.finances.expenses.Payroll</class>
-    <class>model.finances.incomes.Payment</class>
-    <class>model.finances.incomes.Sale</class>
-    <class>model.finances.incomes.SaleItem</class>
-    <class>model.applications.ApplicatedChemical</class>
-    <class>model.applications.ApplicationResponsible</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stf?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="KmzvC6SjNmHNJPbUl2FP"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

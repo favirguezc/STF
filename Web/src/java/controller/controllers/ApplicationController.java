@@ -17,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.administration.Person;
 import model.applications.Application;
 import model.applications.Chemical;
 import model.applications.ChemicalTypeEnum;
@@ -34,9 +35,6 @@ public class ApplicationController implements Serializable {
     private PermissionController permissionBean;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
-
-    public ApplicationController() {
-    }
 
     public Application getSelected() {
         return selected;

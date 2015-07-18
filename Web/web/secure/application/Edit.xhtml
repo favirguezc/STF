@@ -10,84 +10,104 @@
 
         <p:dialog id="ApplicationEditDlg" widgetVar="ApplicationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleApplication.EditApplicationTitle}">
             <h:form id="ApplicationEditForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{applicationController.selected != null}">
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_type}" for="type" />
-                        <p:selectOneMenu id="type" value="#{applicationController.selected.type}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_type}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>  
-                            <f:selectItems value="#{enumController.applicationTypeValues}"/>
-                            <p:ajax update="chemical"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_cultivation}" for="cultivation" />
-                        <p:selectOneMenu id="cultivation" value="#{applicationController.selected.cultivation}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_cultivation}">
-                            <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
-                                           var="cultivationItem"
-                                           itemValue="#{cultivationItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizationDate}" for="authorizationDate" />
-                        <p:calendar id="authorizationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.authorizationDate}" title="#{bundleApplication.EditApplicationTitle_authorizationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizationDate}" showOn="button" locale="es"/>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_applicationDate}" for="applicationDate" />
-                        <p:calendar id="applicationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.applicationDate}" title="#{bundleApplication.EditApplicationTitle_applicationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_applicationDate}" showOn="button" locale="es"/>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical}" for="chemical" />
-                        <p:selectOneMenu id="chemical" value="#{applicationController.selected.chemical}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_chemical}">
-                            <f:selectItems value="#{applicationController.chemicals}"
-                                           var="chemicalItem"
-                                           itemValue="#{chemicalItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason1}" for="reason1" />
-                        <p:selectOneMenu id="reason1" value="#{applicationController.selected.reason1}">
-                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
-                                           var="reason1Item"
-                                           itemValue="#{reason1Item}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason2}" for="reason2" />
-                        <p:selectOneMenu id="reason2" value="#{applicationController.selected.reason2}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
-                                           var="reason2Item"
-                                           itemValue="#{reason2Item}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_reason3}" for="reason3" />
-                        <p:selectOneMenu id="reason3" value="#{applicationController.selected.reason3}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"
-                                           var="reason3Item"
-                                           itemValue="#{reason3Item}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity}" for="quantity" />
-                        <p:inputText id="quantity" value="#{applicationController.selected.quantity}" title="#{bundleApplication.EditApplicationTitle_quantity}">
-                            <f:validateDoubleRange minimum="0"/>
-                        </p:inputText>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_waterLiters}" for="waterLiters" />
-                        <p:inputText id="waterLiters" value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.EditApplicationTitle_waterLiters}">
-                            <f:validateDoubleRange minimum="0"/>
-                        </p:inputText>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_method}" for="method" />
-                        <p:selectOneMenu id="method" value="#{applicationController.selected.method}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_method}">
-                            <f:selectItems value="#{enumController.applicationMethodValues}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_responsible}" for="responsible" />
-                        <p:selectOneMenu id="responsible" value="#{applicationController.selected.responsible}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_responsible}">
-                            <f:selectItems value="#{personController.itemsAvailableWorker}"
-                                           var="responsibleItem"
-                                           itemValue="#{responsibleItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizes}" for="authorizes" />
-                        <p:selectOneMenu id="authorizes" value="#{applicationController.selected.authorizes}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizes}">
-                            <f:selectItems value="#{personController.itemsAvailableSpecialistAndFieldBoss}"
-                                           var="authorizesItem"
-                                           itemValue="#{authorizesItem}"/>
-                        </p:selectOneMenu>  
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_hoursSpent}" for="jornales" />
-                        <p:inputText id="jornales" value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.EditApplicationTitle_hoursSpent}">
-                            <f:validateDoubleRange minimum="0"/>
-                        </p:inputText>
-                        <p:outputLabel value="#{bundleApplication.EditApplicationLabel_observations}" for="observations" />
-                        <p:inputText id="observations" value="#{applicationController.selected.observations}" title="#{bundleApplication.EditApplicationTitle_observations}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{applicationController.update}" value="#{bundle.Save}" update="display,:ApplicationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ApplicationEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ApplicationEditDialog.hide()"/>
-                </h:panelGroup>
+                <p:scrollPanel style="height: 500px;width: 380px">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{applicationController.selected != null}">
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_cultivation}" for="cultivation" />
+                            <p:selectOneMenu id="cultivation" value="#{applicationController.selected.cultivation}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_cultivation}">
+                                <f:selectItems value="#{cultivationController.itemsAvailableSelectOne}"
+                                               var="cultivationItem"
+                                               itemValue="#{cultivationItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_method}" for="method"/>
+                            <p:selectOneMenu id="method" value="#{applicationController.selected.method}">
+                                <f:selectItems value="#{enumController.applicationMethodValues}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizationDate}" for="authorizationDate" />
+                            <p:calendar id="authorizationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.authorizationDate}" title="#{bundleApplication.EditApplicationTitle_authorizationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizationDate}" showOn="button"/>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_applicationDate}" for="applicationDate" />
+                            <p:calendar id="applicationDate" pattern="dd/MM/yyyy" value="#{applicationController.selected.applicationDate}" title="#{bundleApplication.EditApplicationTitle_applicationDate}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_applicationDate}" showOn="button"/>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_waterLiters}" for="waterLiters" />
+                            <p:inputText id="waterLiters" value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.EditApplicationTitle_waterLiters}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical1}" for="chemical1" />
+                            <p:selectOneMenu id="chemical1" value="#{applicationController.selected.chemical1}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_chemical1}">
+                                <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                               var="chemical1Item"
+                                               itemValue="#{chemical1Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity1}" for="quantity1" />
+                            <p:inputText id="quantity1" value="#{applicationController.selected.quantity1}" title="#{bundleApplication.EditApplicationTitle_quantity1}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical2}" for="chemical2" />
+                            <p:selectOneMenu id="chemical2" value="#{applicationController.selected.chemical2}" >
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                               var="chemical2Item"
+                                               itemValue="#{chemical2Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity2}" for="quantity2" />
+                            <p:inputText id="quantity2" value="#{applicationController.selected.quantity2}" title="#{bundleApplication.EditApplicationTitle_quantity2}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical3}" for="chemical3" />
+                            <p:selectOneMenu id="chemical3" value="#{applicationController.selected.chemical3}" >
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                               var="chemical3Item"
+                                               itemValue="#{chemical3Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity3}" for="quantity3" />
+                            <p:inputText id="quantity3" value="#{applicationController.selected.quantity3}" title="#{bundleApplication.EditApplicationTitle_quantity3}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical4}" for="chemical4" />
+                            <p:selectOneMenu id="chemical4" value="#{applicationController.selected.chemical4}" >
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                               var="chemical4Item"
+                                               itemValue="#{chemical4Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity4}" for="quantity4" />
+                            <p:inputText id="quantity4" value="#{applicationController.selected.quantity4}" title="#{bundleApplication.EditApplicationTitle_quantity4}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_chemical5}" for="chemical5" />
+                            <p:selectOneMenu id="chemical5" value="#{applicationController.selected.chemical5}" >
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{chemicalController.itemsAvailableSelectOne}"
+                                               var="chemical5Item"
+                                               itemValue="#{chemical5Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_quantity5}" for="quantity5" />
+                            <p:inputText id="quantity5" value="#{applicationController.selected.quantity5}" title="#{bundleApplication.EditApplicationTitle_quantity5}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_responsible1}" for="responsible1" />
+                            <p:selectOneMenu id="responsible1" value="#{applicationController.selected.responsible1}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_responsible1}">
+                                <f:selectItems value="#{personController.itemsAvailableWorker}"
+                                               var="responsible1Item"
+                                               itemValue="#{responsible1Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_responsible2}" for="responsible2" />
+                            <p:selectOneMenu id="responsible2" value="#{applicationController.selected.responsible2}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{personController.itemsAvailableWorker}"
+                                               var="responsible2Item"
+                                               itemValue="#{responsible2Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_responsible3}" for="responsible3" />
+                            <p:selectOneMenu id="responsible3" value="#{applicationController.selected.responsible3}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{personController.itemsAvailableWorker}"
+                                               var="responsible3Item"
+                                               itemValue="#{responsible3Item}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_authorizes}" for="authorizes" />
+                            <p:selectOneMenu id="authorizes" value="#{applicationController.selected.authorizes}" required="true" requiredMessage="#{bundleApplication.EditApplicationRequiredMessage_authorizes}">
+                                <f:selectItems value="#{personController.itemsAvailableSpecialistAndFieldBoss}"
+                                               var="authorizesItem"
+                                               itemValue="#{authorizesItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_hoursSpent}" for="hoursSpent" />
+                            <p:inputText id="hoursSpent" value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.EditApplicationTitle_hoursSpent}" />
+                            <p:outputLabel value="#{bundleApplication.EditApplicationLabel_observations}" for="observations" />
+                            <p:inputText id="observations" value="#{applicationController.selected.observations}" title="#{bundleApplication.EditApplicationTitle_observations}" />
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{applicationController.create}" value="#{bundle.Save}" update="display,:ApplicationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ApplicationEditDialog');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="ApplicationEditDialog.hide()"/>
+                    </h:panelGroup>
+                </p:scrollPanel>
             </h:form>
         </p:dialog>
 

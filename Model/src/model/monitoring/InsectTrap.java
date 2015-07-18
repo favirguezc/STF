@@ -35,6 +35,10 @@ public class InsectTrap implements Serializable {
     @ManyToOne(optional = false)
     private Farm farm;
 
+    public InsectTrap() {
+        registerDate = new Date();
+    }
+
     /**
      *
      * @return

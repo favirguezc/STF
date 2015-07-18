@@ -28,9 +28,9 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_applicationType}"/>
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_chemicalType}"/>
                         </f:facet>
-                        <h:outputText value="#{item.applicationType}"/>
+                        <h:outputText value="#{item.chemicalType}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -49,6 +49,18 @@
                             <h:outputText value="#{bundleChemical.ListChemicalTitle_applicationMeasurementUnit}"/>
                         </f:facet>
                         <h:outputText value="#{item.applicationMeasurementUnit}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_commonReasonForUse}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.commonReasonForUse.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleChemical.ListChemicalTitle_commonReasonsForUse}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.commonReasonsForUse}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

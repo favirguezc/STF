@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-        
+
         <ui:define name="title">
             <h:outputText value="#{bundle.AppName}"></h:outputText>
         </ui:define>
@@ -28,18 +28,18 @@
                         <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
                         <p:columnToggler datasource="datalist" trigger="toggler" />
                     </f:facet>
-                    
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_type}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.type}"/>
-                    </p:column>
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleApplication.ListApplicationTitle_cultivation}"/>
                         </f:facet>
-                        <h:outputText value="#{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}"/>
+                        <h:outputText value="#{item.cultivation.variety}, #{item.cultivation.moduleObject.lot.name} - #{item.cultivation.moduleObject.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleApplication.ListApplicationTitle_method}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.method}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -59,69 +59,27 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_chemical}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.chemical.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_activeComponent}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.chemical.activeComponent}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_reason1}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.reason1.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_reason2}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.reason2.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_reason3}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.reason3.name}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_waitingPeriod}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.chemical.waitingPeriod}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleChemical.ListChemicalTitle_reEntryTime}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.chemical.reEntryTime}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_quantity}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.quantity}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
                             <h:outputText value="#{bundleApplication.ListApplicationTitle_waterLiters}"/>
                         </f:facet>
                         <h:outputText value="#{item.waterLiters}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_method}"/>
+                            <h:outputText value="#{bundleApplication.ListApplicationTitle_chemicals}"/>
                         </f:facet>
-                        <h:outputText value="#{item.method}"/>
+                        <h:outputText value="#{item.chemical1.name}(#{item.chemical1.activeComponent}) #{item.quantity1}#{item.chemical1.applicationMeasurementUnit}"/>
+                        <h:outputText value=", #{item.chemical2.name}(#{item.chemical2.activeComponent}) #{item.quantity2}#{item.chemical2.applicationMeasurementUnit}" rendered="#{not empty item.chemical2}"/>
+                        <h:outputText value=", #{item.chemical3.name}(#{item.chemical3.activeComponent}) #{item.quantity3}#{item.chemical3.applicationMeasurementUnit}" rendered="#{not empty item.chemical3}"/>
+                        <h:outputText value=", #{item.chemical4.name}(#{item.chemical4.activeComponent}) #{item.quantity4}#{item.chemical4.applicationMeasurementUnit}" rendered="#{not empty item.chemical4}"/>
+                        <h:outputText value=", #{item.chemical5.name}(#{item.chemical5.activeComponent}) #{item.quantity5}#{item.chemical5.applicationMeasurementUnit}" rendered="#{not empty item.chemical5}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleApplication.ListApplicationTitle_responsible}"/>
+                            <h:outputText value="#{bundleApplication.ListApplicationTitle_responsibles}"/>
                         </f:facet>
-                        <h:outputText value="#{item.responsible.name} #{item.responsible.lastName}"/>
+                        <h:outputText value="#{item.responsible1.name} #{item.responsible1.lastName}"/>
+                        <h:outputText value="#{item.responsible2.name} #{item.responsible2.lastName}"/>
+                        <h:outputText value="#{item.responsible3.name} #{item.responsible3.lastName}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

@@ -36,6 +36,10 @@ public class Work implements Serializable {
     private float hoursSpent;
     private String observations;
 
+    public Work() {
+        workDate = new Date();
+    }
+
     public long getId() {
         return id;
     }

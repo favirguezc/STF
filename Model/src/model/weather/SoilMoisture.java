@@ -36,6 +36,10 @@ public class SoilMoisture implements Serializable {
     @ManyToOne(optional = false)
     private Farm farm;
 
+    public SoilMoisture() {
+        measurementDate = new Date();
+    }
+
     public Long getId() {
         return id;
     }

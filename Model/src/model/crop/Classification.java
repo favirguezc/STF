@@ -38,6 +38,10 @@ public class Classification implements Serializable {
     private ClassificationTypeEnum type;
     private float weight;
 
+    public Classification() {
+        classificationDate = new Date();
+    }
+
     public long getId() {
         return id;
     }

@@ -42,6 +42,7 @@ public class Temperature implements Serializable {
      *
      */
     public Temperature() {
+        measurementDate = new Date();
     }
 
     /**

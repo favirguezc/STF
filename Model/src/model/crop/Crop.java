@@ -32,6 +32,10 @@ public class Crop implements Serializable {
     private Person collector;
     private float weight;
 
+    public Crop() {
+        harvestDate = new Date();
+    }
+
     public long getId() {
         return id;
     }

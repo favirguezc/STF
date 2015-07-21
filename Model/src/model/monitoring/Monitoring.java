@@ -23,16 +23,20 @@ import model.administration.Farm;
  */
 @Entity
 public class Monitoring implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-    private long number;    
+    private long number;
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(nullable = false)
-    private Date monitoringDate;    
+    private Date monitoringDate;
     @ManyToOne(optional = false)
     private Farm farm;
+
+    public Monitoring() {
+        monitoringDate = new Date();
+    }
 
     /**
      *
@@ -123,5 +127,5 @@ public class Monitoring implements Serializable {
         }
         return true;
     }
-    
+
 }

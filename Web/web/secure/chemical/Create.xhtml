@@ -12,9 +12,9 @@
             <h:form id="ChemicalCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{chemicalController.selected != null}">
-                        <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_applicationType}" for="applicationType" />
-                        <p:selectOneMenu id="applicationType" value="#{chemicalController.selected.applicationType}" required="true">
-                            <f:selectItems value="#{enumController.applicationTypeValues}"/>
+                        <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_chemicalType}" for="chemicalType" />
+                        <p:selectOneMenu id="chemicalType" value="#{chemicalController.selected.chemicalType}" required="true">
+                            <f:selectItems value="#{enumController.chemicalTypeValues}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_name}" for="name" />
                         <p:inputText id="name" value="#{chemicalController.selected.name}" title="#{bundleChemical.CreateChemicalTitle_name}" required="true" requiredMessage="#{bundleChemical.CreateChemicalRequiredMessage_name}">
@@ -28,6 +28,13 @@
                         <p:selectOneMenu id="applicationMeasurementUnit" value="#{chemicalController.selected.applicationMeasurementUnit}">
                             <f:selectItems value="#{enumController.applicationMeasurementUnitValues}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_commonReasonForUse}" for="commonReasonForUse" />
+                        <p:selectOneMenu id="commonReasonForUse" value="#{chemicalController.selected.commonReasonForUse}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{monitorableParameterController.itemsAvailableSelectOne}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_commonReasonsForUse}" for="commonReasonsForUse" />
+                        <p:inputText id="commonReasonsForUse" value="#{chemicalController.selected.commonReasonsForUse}" title="#{bundleChemical.CreateChemicalTitle_activeComponent}"/>
                         <p:outputLabel value="#{bundleChemical.CreateChemicalLabel_waitingPeriod}" for="waitingPeriod" />
                         <p:inputText id="waitingPeriod" value="#{chemicalController.selected.waitingPeriod}" title="#{bundleChemical.CreateChemicalTitle_waitingPeriod}">
                             <f:validateDoubleRange minimum="0"/>

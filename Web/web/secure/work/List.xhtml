@@ -60,9 +60,15 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="#{bundleWork.ListWorkTitle_hourlyRate}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.hourlyRate}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{bundleWork.ListWorkTitle_totalPrice}"/>
                         </f:facet>
-                        <h:outputText value="$ #{item.hoursSpent*item.job.hourlyRate}"/>
+                        <h:outputText value="$ #{item.hoursSpent*item.hourlyRate}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

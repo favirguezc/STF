@@ -30,6 +30,10 @@ public class RainFall implements Serializable {
     @ManyToOne(optional = false)
     private Farm farm;
 
+    public RainFall() {
+        rainDate = new Date();
+    }
+
     /**
      *
      * @return
@@ -84,7 +88,7 @@ public class RainFall implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
-    }    
+    }
 
     @Override
     public int hashCode() {

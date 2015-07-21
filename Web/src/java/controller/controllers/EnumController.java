@@ -66,7 +66,7 @@ public class EnumController {
         return BloodGroupEnum.values();
     }
 
-    public ChemicalTypeEnum[] getApplicationTypeValues() {
+    public ChemicalTypeEnum[] getChemicalTypeValues() {
         return ChemicalTypeEnum.values();
     }
 

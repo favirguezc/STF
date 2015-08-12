@@ -8,10 +8,10 @@
 
     <ui:composition>
         
-        <p:dialog id="CashConceptViewDlg" widgetVar="CashConceptViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCashConceptTitle}">
+        <p:dialog id="CashConceptViewDlg" widgetVar="CashConceptViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCashConcept.ViewCashConceptTitle}">
             <h:form id="CashConceptViewForm">
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="2" rendered="#{cashConceptController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{cashConceptController.selected != null}">
                         <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_cash}"/>
                         <h:outputText value="#{cashConceptController.selected.cash.name}" title="#{bundleCashConcept.ViewCashConceptTitle_cash}"/>
                         <h:outputText value="#{bundleCashConcept.ViewCashConceptLabel_conceptDate}"/>
@@ -27,7 +27,7 @@
                         <h:outputText value="#{cashConceptController.selected.conceptValue}" title="#{bundleCashConcept.ViewCashConceptTitle_conceptValue}">
                             <f:convertNumber/>
                         </h:outputText>
-                    </h:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CashConceptViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

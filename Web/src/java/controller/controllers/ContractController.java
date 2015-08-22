@@ -123,7 +123,7 @@ public class ContractController implements Serializable {
 
     public List<Contract> getItems() {
         if (items == null || items.isEmpty()) {
-            items = getJpaController().findContractEntities();
+            items = getJpaController().findContractEntities(signInBean.getFarm());
         }
         return items;
     }

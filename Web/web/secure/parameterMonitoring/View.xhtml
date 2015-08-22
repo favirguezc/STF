@@ -13,11 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{parameterMonitoringController.selected != null}">
                         <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_monitoring}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.monitoring}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_monitoring}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.monitoring.number}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_monitoring}"/>
                         <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_cultivation}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.cultivation}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_cultivation}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.cultivation.moduleObject.lot.name} - #{parameterMonitoringController.selected.cultivation.moduleObject.name}, #{parameterMonitoringController.selected.cultivation.variety.name}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_cultivation}"/>
                         <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_parameter}"/>
-                        <h:outputText value="#{parameterMonitoringController.selected.parameter}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_parameter}"/>
+                        <h:outputText value="#{parameterMonitoringController.selected.parameter.name}" title="#{bundleParameterMonitoring.ViewParameterMonitoringTitle_parameter}"/>
                         <h:outputText value="#{bundleParameterMonitoring.ViewParameterMonitoringLabel_monitoringValue}"/>
                         <h:outputText value="#{parameterMonitoringController.selected.monitoringValue}"/>
                     </p:panelGrid>

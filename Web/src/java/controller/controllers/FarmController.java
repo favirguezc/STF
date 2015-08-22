@@ -105,7 +105,12 @@ public class FarmController implements Serializable {
     }
 
     public List<Municipality> getMunicipalities() {
-        municipalities = new MunicipalityController().getItems(department);
+
+        if (selected != null && selected.getMunicipality() != null) {
+            municipalities = new MunicipalityController().getItems(selected.getMunicipality().getDepartment());
+        } else {
+            municipalities = new MunicipalityController().getItems(department);
+        }
         return municipalities;
     }
 
@@ -139,7 +144,7 @@ public class FarmController implements Serializable {
         marker.setLatlng(event.getLatLng());
         selected.setCoordinate(new Coordinate(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
     }
-    
+
     public void onStateChange(StateChangeEvent event) {
         zoomLevel = event.getZoomLevel();
     }
@@ -155,6 +160,7 @@ public class FarmController implements Serializable {
         selected = new Farm();
         selected.setCoordinate(new Coordinate(marker.getLatlng().getLat(), marker.getLatlng().getLng()));
         selected.setOwner(signInBean.getUser());
+        department = null;
         initializeEmbeddableKey();
         return selected;
     }
@@ -213,6 +219,10 @@ public class FarmController implements Serializable {
 
     public List<Farm> getItemsAvailableSelectOne() {
         return getItems();
+    }
+
+    public void cancelCreate() {
+        selected = null;
     }
 
     @FacesConverter(forClass = Farm.class)

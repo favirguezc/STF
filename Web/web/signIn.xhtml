@@ -25,7 +25,7 @@
                                 <p:password id="password" value="#{signInController.passString}"  feedback="false"/> 
                                 <p:watermark for="password" value="Ingrese su Contraseña"/>
                             </h:panelGroup>
-                            <h:outputLabel value="Farm" rendered="#{signInController.step1userSignedIn and !signInController.step2farmSelected}"/>
+                            <h:outputLabel value="Finca" rendered="#{signInController.step1userSignedIn and !signInController.step2farmSelected}"/>
                             <p:selectOneMenu id="farm" value="#{signInController.farm}" rendered="#{signInController.step1userSignedIn and !signInController.step2farmSelected}">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{signInController.farms}"/>

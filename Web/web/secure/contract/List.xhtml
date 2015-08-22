@@ -46,12 +46,6 @@
                         </f:facet>
                         <h:outputText value="#{item.roleEnum}"/>
                     </p:column>
-                    <p:column rendered="#{signInController.user.systemAdmin}">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleContract.ListContractTitle_farm}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.farm.name}"/>
-                    </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{contractController.prepareCreate}" update=":ContractCreateForm" oncomplete="PF('ContractCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ContractViewForm" oncomplete="PF('ContractViewDialog').show()" disabled="#{empty contractController.selected}"/>

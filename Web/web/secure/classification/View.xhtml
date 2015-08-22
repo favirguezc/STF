@@ -17,7 +17,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundleClassification.ViewClassificationLabel_cultivation}"/>
-                        <h:outputText value="#{classificationController.selected.cultivation}" title="#{bundleClassification.ViewClassificationTitle_cultivation}"/>
+                        <h:outputText value="#{classificationController.selected.cultivation.moduleObject.lot.name} - #{classificationController.selected.cultivation.moduleObject.name}, #{classificationController.selected.cultivation.variety.name}" title="#{bundleClassification.ViewClassificationTitle_cultivation}"/>
                         <h:outputText value="#{bundleClassification.ViewClassificationLabel_type}"/>
                         <h:outputText value="#{classificationController.selected.type}" title="#{bundleClassification.ViewClassificationTitle_type}"/>
                         <h:outputText value="#{bundleClassification.ViewClassificationLabel_weight}"/>

@@ -18,7 +18,7 @@
                         <p:inputText id="villageName" value="#{farmController.selected.villageName}" title="#{bundleFarm.EditFarmTitle_villageName}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_villageName}"/>
                         <p:outputLabel value="#{bundleFarm.EditFarmLabel_municipality}" for="municipality" />
                         <h:panelGroup>
-                            <p:selectOneMenu id="department" value="#{farmController.department}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_department}">
+                            <p:selectOneMenu id="department" value="#{farmController.selected.municipality.department}" required="true" requiredMessage="#{bundleFarm.EditFarmRequiredMessage_department}" rendered="#{not empty farmController.selected.municipality}">
                                 <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                 <f:selectItems value="#{departmentController.itemsAvailableSelectOne}"
                                                var="departmentItem"

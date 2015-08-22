@@ -34,7 +34,7 @@
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{lotController.prepareCreate}" update=":LotCreateForm" oncomplete="PF('LotCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LotViewForm" oncomplete="PF('LotViewDialog').show()" disabled="#{empty lotController.selected}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LotViewForm" oncomplete="PF('LotViewDialog').show()" disabled="#{empty lotController.selected}" rendered="false"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LotEditForm" oncomplete="PF('LotEditDialog').show()" disabled="#{empty lotController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{lotController.destroy}" update=":growl,datalist" disabled="#{empty lotController.selected}"/>
                     </f:facet>

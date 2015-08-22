@@ -26,8 +26,7 @@
                         <p:selectOneMenu id="moduleObject" value="#{temperatureController.selected.moduleObject}" required="true" >
                             <f:selectItems value="#{moduleClassController.itemsAvailableSelectOne}"
                                            var="moduleObjectItem"
-                                           itemValue="#{moduleObjectItem}"
-                                           itemLabel="#{moduleObjectItem.lot.name} #{moduleObjectItem.name}"/>
+                                           itemValue="#{moduleObjectItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{temperatureController.create}" value="#{bundle.Save}" update="display,:TemperatureListPanel:TemperatureListForm:datalist,:growl" oncomplete="handleSubmit(args,'TemperatureCreateDialog');"/>

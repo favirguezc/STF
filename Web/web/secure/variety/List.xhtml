@@ -34,7 +34,7 @@
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{varietyController.prepareCreate}" update=":VarietyCreateForm" oncomplete="PF('VarietyCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VarietyViewForm" oncomplete="PF('VarietyViewDialog').show()" disabled="#{empty varietyController.selected}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VarietyViewForm" oncomplete="PF('VarietyViewDialog').show()" disabled="#{empty varietyController.selected}" rendered="false"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VarietyEditForm" oncomplete="PF('VarietyEditDialog').show()" disabled="#{empty varietyController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{varietyController.destroy}" update=":growl,datalist" disabled="#{empty varietyController.selected}"/>
                     </f:facet>

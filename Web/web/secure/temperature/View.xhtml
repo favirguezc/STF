@@ -27,7 +27,7 @@
                         <h:outputText value="#{bundleTemperature.ViewTemperatureLabel_dewPoint}"/>
                         <h:outputText value="#{temperatureController.selected.dewPoint}" title="#{bundleTemperature.ViewTemperatureTitle_dewPoint}"/>
                         <h:outputText value="#{bundleTemperature.ViewTemperatureLabel_moduleObject}"/>
-                        <h:outputText value="#{temperatureController.selected.moduleObject.lot.name} #{temperatureController.selected.moduleObject.name}" title="#{bundleTemperature.ViewTemperatureTitle_moduleObject}"/>
+                        <h:outputText value="#{temperatureController.selected.moduleObject.lot.name} - #{temperatureController.selected.moduleObject.name}" title="#{bundleTemperature.ViewTemperatureTitle_moduleObject}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TemperatureViewDialog.hide()"/>
                 </h:panelGroup>

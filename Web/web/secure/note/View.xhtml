@@ -17,9 +17,9 @@
                         <h:outputText value="#{bundleNote.ViewNoteLabel_message}"/>
                         <h:outputText value="#{noteController.selected.message}" title="#{bundleNote.ViewNoteTitle_message}"/>
                         <h:outputText value="#{bundleNote.ViewNoteLabel_from}"/>
-                        <h:outputText value="#{noteController.selected.from}" title="#{bundleNote.ViewNoteTitle_from}"/>
+                        <h:outputText value="#{noteController.selected.from.name} #{noteController.selected.from.lastName}" title="#{bundleNote.ViewNoteTitle_from}"/>
                         <h:outputText value="#{bundleNote.ViewNoteLabel_to}"/>
-                        <h:outputText value="#{noteController.selected.to}" title="#{bundleNote.ViewNoteTitle_to}"/>
+                        <h:outputText value="#{noteController.selected.to.name} #{noteController.selected.to.lastName}" title="#{bundleNote.ViewNoteTitle_to}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="NoteViewDialog.hide()"/>
                 </h:panelGroup>

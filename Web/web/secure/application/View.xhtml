@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{applicationController.selected != null}">
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_cultivation}"/>
-                        <h:outputText value="#{applicationController.selected.cultivation}" title="#{bundleApplication.ViewApplicationTitle_cultivation}"/>
+                        <h:outputText value="#{applicationController.selected.cultivation.variety.name}, #{applicationController.selected.cultivation.moduleObject.lot.name} - #{applicationController.selected.cultivation.moduleObject.name}" title="#{bundleApplication.ViewApplicationTitle_cultivation}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_method}"/>
                         <h:outputText value="#{applicationController.selected.method}" title="#{bundleApplication.ViewApplicationTitle_method}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_authorizationDate}"/>
@@ -27,33 +27,23 @@
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_waterLiters}"/>
                         <h:outputText value="#{applicationController.selected.waterLiters}" title="#{bundleApplication.ViewApplicationTitle_waterLiters}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical1}"/>
-                        <h:outputText value="#{applicationController.selected.chemical1}" title="#{bundleApplication.ViewApplicationTitle_chemical1}"/>
-                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity1}"/>
-                        <h:outputText value="#{applicationController.selected.quantity1}" title="#{bundleApplication.ViewApplicationTitle_quantity1}"/>
+                        <h:outputText value="#{applicationController.selected.chemical1.name} (#{applicationController.selected.chemical1.activeComponent}) #{applicationController.selected.quantity1}#{applicationController.selected.chemical1.applicationMeasurementUnit}" title="#{bundleApplication.ViewApplicationTitle_chemical1}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical2}" rendered="#{not empty applicationController.selected.chemical2}"/>
-                        <h:outputText value="#{applicationController.selected.chemical2}" title="#{bundleApplication.ViewApplicationTitle_chemical2}" rendered="#{not empty applicationController.selected.chemical2}"/>
-                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity2}" rendered="#{not empty applicationController.selected.chemical2}"/>
-                        <h:outputText value="#{applicationController.selected.quantity2}" title="#{bundleApplication.ViewApplicationTitle_quantity2}" rendered="#{not empty applicationController.selected.chemical2}"/>
+                        <h:outputText value="#{applicationController.selected.chemical2.name} (#{applicationController.selected.chemical2.activeComponent}) #{applicationController.selected.quantity2}#{applicationController.selected.chemical2.applicationMeasurementUnit}" title="#{bundleApplication.ViewApplicationTitle_chemical2}" rendered="#{not empty applicationController.selected.chemical2}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical3}" rendered="#{not empty applicationController.selected.chemical3}"/>
-                        <h:outputText value="#{applicationController.selected.chemical3}" title="#{bundleApplication.ViewApplicationTitle_chemical3}" rendered="#{not empty applicationController.selected.chemical3}"/>
-                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity3}" rendered="#{not empty applicationController.selected.chemical3}"/>
-                        <h:outputText value="#{applicationController.selected.quantity3}" title="#{bundleApplication.ViewApplicationTitle_quantity3}" rendered="#{not empty applicationController.selected.chemical3}"/>
+                        <h:outputText value="#{applicationController.selected.chemical3.name} (#{applicationController.selected.chemical3.activeComponent}) #{applicationController.selected.quantity3}#{applicationController.selected.chemical3.applicationMeasurementUnit}" title="#{bundleApplication.ViewApplicationTitle_chemical3}" rendered="#{not empty applicationController.selected.chemical3}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical4}" rendered="#{not empty applicationController.selected.chemical4}"/>
-                        <h:outputText value="#{applicationController.selected.chemical4}" title="#{bundleApplication.ViewApplicationTitle_chemical4}" rendered="#{not empty applicationController.selected.chemical4}"/>
-                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity4}" rendered="#{not empty applicationController.selected.chemical4}"/>
-                        <h:outputText value="#{applicationController.selected.quantity4}" title="#{bundleApplication.ViewApplicationTitle_quantity4}" rendered="#{not empty applicationController.selected.chemical4}"/>
+                        <h:outputText value="#{applicationController.selected.chemical4.name} (#{applicationController.selected.chemical4.activeComponent}) #{applicationController.selected.quantity4}#{applicationController.selected.chemical4.applicationMeasurementUnit}" title="#{bundleApplication.ViewApplicationTitle_chemical4}" rendered="#{not empty applicationController.selected.chemical4}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_chemical5}" rendered="#{not empty applicationController.selected.chemical5}"/>
-                        <h:outputText value="#{applicationController.selected.chemical5}" title="#{bundleApplication.ViewApplicationTitle_chemical5}" rendered="#{not empty applicationController.selected.chemical5}"/>
-                        <h:outputText value="#{bundleApplication.ViewApplicationLabel_quantity5}" rendered="#{not empty applicationController.selected.chemical5}"/>
-                        <h:outputText value="#{applicationController.selected.quantity5}" title="#{bundleApplication.ViewApplicationTitle_quantity5}" rendered="#{not empty applicationController.selected.chemical5}"/>
+                        <h:outputText value="#{applicationController.selected.chemical5.name} (#{applicationController.selected.chemical5.activeComponent}) #{applicationController.selected.quantity5}#{applicationController.selected.chemical5.applicationMeasurementUnit}" title="#{bundleApplication.ViewApplicationTitle_chemical5}" rendered="#{not empty applicationController.selected.chemical5}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_responsible1}"/>
-                        <h:outputText value="#{applicationController.selected.responsible1}" title="#{bundleApplication.ViewApplicationTitle_responsible1}"/>
+                        <h:outputText value="#{applicationController.selected.responsible1.name} #{applicationController.selected.responsible1.lastName}" title="#{bundleApplication.ViewApplicationTitle_responsible1}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_responsible2}" rendered="#{not empty applicationController.selected.responsible2}"/>
-                        <h:outputText value="#{applicationController.selected.responsible2}" title="#{bundleApplication.ViewApplicationTitle_responsible2}" rendered="#{not empty applicationController.selected.responsible2}"/>
+                        <h:outputText value="#{applicationController.selected.responsible2.name} #{applicationController.selected.responsible2.lastName}" title="#{bundleApplication.ViewApplicationTitle_responsible2}" rendered="#{not empty applicationController.selected.responsible2}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_responsible3}" rendered="#{not empty applicationController.selected.responsible3}"/>
-                        <h:outputText value="#{applicationController.selected.responsible3}" title="#{bundleApplication.ViewApplicationTitle_responsible3}" rendered="#{not empty applicationController.selected.responsible3}"/>
+                        <h:outputText value="#{applicationController.selected.responsible3.name} #{applicationController.selected.responsible3.lastName}" title="#{bundleApplication.ViewApplicationTitle_responsible3}" rendered="#{not empty applicationController.selected.responsible3}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_authorizes}"/>
-                        <h:outputText value="#{applicationController.selected.authorizes}" title="#{bundleApplication.ViewApplicationTitle_authorizes}"/>
+                        <h:outputText value="#{applicationController.selected.authorizes.name} #{applicationController.selected.authorizes.lastName}" title="#{bundleApplication.ViewApplicationTitle_authorizes}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_hoursSpent}"/>
                         <h:outputText value="#{applicationController.selected.hoursSpent}" title="#{bundleApplication.ViewApplicationTitle_hoursSpent}"/>
                         <h:outputText value="#{bundleApplication.ViewApplicationLabel_observations}"/>

@@ -11,7 +11,7 @@
         <p:dialog id="CostViewDlg" widgetVar="CostViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCost.ViewCostTitle}">
             <h:form id="CostViewForm">
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="2" rendered="#{costController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{costController.selected != null}">
                         <h:outputText value="#{bundleCost.CreateCostLabel_moduleObject}"/>
                         <h:outputText value="#{costController.selected.moduleObject.name} - #{costController.selected.moduleObject.lot.name}" title="#{bundleCost.CreateCostTitle_moduleObject}"/>
                         <h:outputText value="#{bundleCost.ViewCostLabel_costDate}"/>
@@ -43,7 +43,7 @@
                         <h:outputText value="#{bundleCost.ViewCostText_noInCash}" title="#{bundleCost.ViewCostText_noInCash}" rendered="#{costController.selected.asociatedConcept == null}"/>
                         <h:outputText value="#{bundleCost.ViewCostLabel_cash}" rendered="#{costController.selected.asociatedConcept != null}"/>
                         <h:outputText value="#{costController.selected.asociatedConcept.cash.name}" title="#{bundleCost.ViewCostTitle_cash}" rendered="#{costController.selected.asociatedConcept != null}"/>
-                    </h:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CostViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

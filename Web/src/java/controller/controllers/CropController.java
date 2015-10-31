@@ -451,6 +451,7 @@ public class CropController implements Serializable {
             message = "Se crearon " + created + " nuevos registros.";
         } catch (Exception e) {
             message = "Error inesperado.";
+            e.printStackTrace();
         }
         selected = null;
     }

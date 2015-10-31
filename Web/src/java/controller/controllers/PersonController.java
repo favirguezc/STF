@@ -7,6 +7,7 @@ import data.administration.ContractDAO;
 import data.administration.PersonDAO;
 import data.util.EntityManagerFactorySingleton;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import model.administration.Contract;
 import model.administration.RoleEnum;
 
 @ManagedBean(name = "personController")
@@ -27,6 +29,7 @@ public class PersonController implements Serializable {
     private PersonDAO jpaController = null;
     private List<Person> items = null;
     private Person selected;
+    private RoleEnum roleEnum;
     @ManagedProperty(value = "#{signInController}")
     private SignInController signInBean;
     @ManagedProperty(value = "#{permissionController}")
@@ -38,6 +41,14 @@ public class PersonController implements Serializable {
 
     public void setSelected(Person selected) {
         this.selected = selected;
+    }
+
+    public RoleEnum getRoleEnum() {
+        return roleEnum;
+    }
+
+    public void setRoleEnum(RoleEnum roleEnum) {
+        this.roleEnum = roleEnum;
     }
 
     public PermissionController getPermissionBean() {
@@ -79,6 +90,12 @@ public class PersonController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePerson").getString("PersonCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            Contract contract = new Contract();
+            contract.setDateOfSignature(new Date());
+            contract.setFarm(signInBean.getFarm());
+            contract.setPerson(selected);
+            contract.setRoleEnum(roleEnum);
+            new ContractDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).create(contract);
         }
     }
 

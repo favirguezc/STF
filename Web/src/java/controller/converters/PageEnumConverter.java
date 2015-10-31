@@ -8,7 +8,7 @@ import model.administration.PageEnum;
 
 /**
  *
- * @author fredy
+ * @author Fredy
  */
 @FacesConverter(forClass = PageEnum.class)
 public class PageEnumConverter implements Converter {
@@ -23,17 +23,17 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Administrar Cajas")) {
             return PageEnum.CASH;
         }
+        if (value.equals("Registrar en Cajas")) {
+            return PageEnum.CASHCONCEPT;
+        }
         if (value.equals("Insumo")) {
             return PageEnum.CHEMICAL;
-        }
-        if (value.equals("Clasificación")) {
-            return PageEnum.CLASSIFICATION;
         }
         if (value.equals("Compra de Insumos")) {
             return PageEnum.CHEMICALPURCHASE;
         }
-        if (value.equals("Registrar en Cajas")) {
-            return PageEnum.CASHCONCEPT;
+        if (value.equals("Clasificación")) {
+            return PageEnum.CLASSIFICATION;
         }
         if (value.equals("Contrato")) {
             return PageEnum.CONTRACT;
@@ -41,14 +41,14 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Costo")) {
             return PageEnum.COST;
         }
+        if (value.equals("Cultivo")) {
+            return PageEnum.CULTIVATION;
+        }
         if (value.equals("Departamento")) {
             return PageEnum.DEPARTMENT;
         }
         if (value.equals("Finca")) {
             return PageEnum.FARM;
-        }
-        if (value.equals("Nota")) {
-            return PageEnum.NOTE;
         }
         if (value.equals("Labor")) {
             return PageEnum.JOB;
@@ -71,6 +71,9 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Municipio")) {
             return PageEnum.MUNICIPALITY;
         }
+        if (value.equals("Pagos de Clientes")) {
+            return PageEnum.PAYMENT;
+        }
         if (value.equals("Nómina")) {
             return PageEnum.PAYROLL;
         }
@@ -79,6 +82,9 @@ public class PageEnumConverter implements Converter {
         }
         if (value.equals("Persona")) {
             return PageEnum.PERSON;
+        }
+        if (value.equals("Venta")) {
+            return PageEnum.SALE;
         }
         if (value.equals("Recolección")) {
             return PageEnum.CROP;
@@ -98,8 +104,11 @@ public class PageEnumConverter implements Converter {
         if (value.equals("Variable")) {
             return PageEnum.MONITORABLEPARAMETER;
         }
-        if (value.equals("Venta")) {
-            return PageEnum.SALE;
+        if (value.equals("Variedad")) {
+            return PageEnum.VARIETY;
+        }
+        if (value.equals("Nota")) {
+            return PageEnum.NOTE;
         }
         return null;
     }

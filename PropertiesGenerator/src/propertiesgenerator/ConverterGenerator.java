@@ -5,8 +5,7 @@
  */
 package propertiesgenerator;
 
-import model.applications.ChemicalTypeEnum;
-import model.finances.incomes.BankEnum;
+import model.administration.PageEnum;
 
 /**
  *
@@ -42,14 +41,14 @@ public class ConverterGenerator {
     private static void generarEncabezado(Class c) {
         System.out.println("/**\n"
                 + " *\n"
-                + " * @author John Fredy\n"
+                + " * @author Fredy\n"
                 + " */");
         System.out.println("@FacesConverter(forClass = " + c.getSimpleName() + ".class)\n"
                 + "public class " + c.getSimpleName() + "Converter implements Converter {");
     }
 
     public static void main(String args[]) {
-        Class c = ChemicalTypeEnum.class;
+        Class c = PageEnum.class;
         System.out.println("import javax.faces.component.UIComponent;\n"
                 + "import javax.faces.context.FacesContext;\n"
                 + "import javax.faces.convert.Converter;\n"

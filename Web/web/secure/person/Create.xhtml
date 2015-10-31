@@ -54,6 +54,10 @@
                         <p:selectOneMenu id="rhFactor" value="#{personController.selected.rhFactor}">
                             <f:selectItems value="#{enumController.rhFactorValues}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleContract.CreateContractLabel_roleEnum}" for="roleEnum" />
+                        <p:selectOneMenu id="roleEnum" value="#{personController.roleEnum}" >
+                            <f:selectItems value="#{enumController.roleValues}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{personController.create}" value="#{bundle.Save}" update="display,:PersonListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonCreateDialog.hide()"/>

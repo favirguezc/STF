@@ -54,10 +54,7 @@ public class CellDataExtractor {
     }
 
     public static double parseNumber(Cell cell) {
-        if (cell.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-            return 0;
-        }
-        if (DateUtil.isCellDateFormatted(cell)) {
+        if (cell == null || cell.getCellType() != Cell.CELL_TYPE_NUMERIC || DateUtil.isCellDateFormatted(cell)) {
             return 0;
         }
         return cell.getNumericCellValue();

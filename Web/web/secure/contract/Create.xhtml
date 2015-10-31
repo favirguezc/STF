@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundleContract.CreateContractLabel_roleEnum}" for="roleEnum" />
                         <p:selectOneMenu id="roleEnum" value="#{contractController.selected.roleEnum}" >
                             <f:selectItems value="#{enumController.roleValues}"/>
-                        </p:selectOneMenu>                        
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{contractController.create}" value="#{bundle.Save}" update="display,:ContractListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContractCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ContractCreateDialog.hide()"/>

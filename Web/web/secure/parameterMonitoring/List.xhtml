@@ -92,7 +92,7 @@
                                 </p:column>
                                 <f:facet name="footer">
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{monitoringController.prepareCreate}" update=":MonitoringCreateForm" oncomplete="PF('MonitoringCreateDialog').show()"/>
-                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoringViewForm" oncomplete="PF('MonitoringViewDialog').show()" disabled="#{empty monitoringController.selected}"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MonitoringViewForm" oncomplete="PF('MonitoringViewDialog').show()" disabled="#{empty monitoringController.selected}" rendered="false"/>
                                     <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MonitoringEditForm" oncomplete="PF('MonitoringEditDialog').show()" disabled="#{empty monitoringController.selected}"/>
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{monitoringController.destroy}" update=":growl,datalist" disabled="#{empty monitoringController.selected}"/>
                                 </f:facet>

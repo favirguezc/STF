@@ -220,22 +220,24 @@ public class SaleDAO implements Serializable {
         }
     }
     
-    public List<Sale> findSaleEntitiesPayable(Farm farm) {
+    public List<Sale> findSaleEntitiesPayable(Farm farm, Person customer) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm AND s.valuePayable > 0 ORDER BY s.saleDate ASC", Sale.class);
+            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm AND s.customer = :customer AND s.valuePayable > 0 ORDER BY s.saleDate ASC", Sale.class);
             query.setParameter("farm", farm);
+            query.setParameter("customer", customer);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
     
-    public List<Sale> findSaleEntitiesPaidAndPayable(Farm farm) {
+    public List<Sale> findSaleEntitiesPaidAndPayable(Farm farm, Person customer) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm AND s.valuePayable < s.saleTotalValue ORDER BY s.saleDate ASC", Sale.class);
+            TypedQuery<Sale> query = em.createQuery("SELECT s FROM Sale s WHERE s.farm = :farm AND s.customer = :customer AND s.valuePayable < s.saleTotalValue ORDER BY s.saleDate ASC", Sale.class);
             query.setParameter("farm", farm);
+            query.setParameter("customer", customer);
             return query.getResultList();
         } finally {
             em.close();

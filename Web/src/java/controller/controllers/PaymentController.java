@@ -220,7 +220,7 @@ public class PaymentController implements Serializable {
     }
     
     private boolean existPaymentsWithUnusedValue(){
-        List<Payment> paymentsWereNotUse = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        List<Payment> paymentsWereNotUse = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm(), selected.getCustomer());
         if(paymentsWereNotUse != null && !paymentsWereNotUse.isEmpty()){
             for(Payment payment : paymentsWereNotUse){
                 float valueForUse = payment.getPaymentValue() - payment.getUsedValue();
@@ -241,7 +241,7 @@ public class PaymentController implements Serializable {
     }
     
     private float paySalesPayable(float valueForUse){
-        List<Sale> salesPayable = getSaleJpaController().findSaleEntitiesPayable(signInBean.getFarm());
+        List<Sale> salesPayable = getSaleJpaController().findSaleEntitiesPayable(signInBean.getFarm(), selected.getCustomer());
         if(salesPayable != null && !salesPayable.isEmpty()){
             for(Sale sale : salesPayable){
                 float valuePayable = sale.getValuePayable();
@@ -282,7 +282,7 @@ public class PaymentController implements Serializable {
     }
     
     private void checkPayWithUnUsedValue(float value){
-        List<Payment> payments = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        List<Payment> payments = getJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm(), selected.getCustomer());
         if(payments != null && !payments.isEmpty()){
             int size = payments.size();
             for(Payment payment : payments){
@@ -310,7 +310,7 @@ public class PaymentController implements Serializable {
     }
     
     private void undoPaySale(float value){
-        List<Sale> paidSales = getSaleJpaController().findSaleEntitiesPaidAndPayable(signInBean.getFarm());
+        List<Sale> paidSales = getSaleJpaController().findSaleEntitiesPaidAndPayable(signInBean.getFarm(), selected.getCustomer());
         if(paidSales != null && !paidSales.isEmpty()){
             for(Sale sale : paidSales){
                 float saleValue = sale.getSaleTotalValue() - sale.getValuePayable();

@@ -18,6 +18,7 @@ import java.util.Date;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import model.administration.Farm;
+import model.administration.Person;
 import model.finances.incomes.Payment;
 
 /**
@@ -151,22 +152,24 @@ public class PaymentDAO implements Serializable {
         }
     }
     
-    public List<Payment> findPaymentEntitiesWithUnusedValue(Farm farm) {
+    public List<Payment> findPaymentEntitiesWithUnusedValue(Farm farm, Person customer) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.usedValue <> p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
+            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.customer = :customer AND p.usedValue <> p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
             query.setParameter("farm", farm);
+            query.setParameter("customer", customer);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
     
-    public List<Payment> findPaymentEntitiesWithUnusedAndUsedValue(Farm farm) {
+    public List<Payment> findPaymentEntitiesWithUnusedAndUsedValue(Farm farm, Person customer) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.usedValue <= p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
+            TypedQuery<Payment> query = em.createQuery("SELECT p FROM Payment p WHERE p.farm = :farm AND p.customer = :customer AND p.usedValue <= p.paymentValue ORDER BY p.paymentDate ASC", Payment.class);
             query.setParameter("farm", farm);
+            query.setParameter("customer", customer);
             return query.getResultList();
         } finally {
             em.close();

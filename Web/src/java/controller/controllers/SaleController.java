@@ -469,7 +469,7 @@ public class SaleController implements Serializable {
     }
 
     private float verifyPaymentsWithUnUsedValue(float valuePayable){
-        List<Payment> unUsedPays = getPaymentJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm());
+        List<Payment> unUsedPays = getPaymentJpaController().findPaymentEntitiesWithUnusedValue(signInBean.getFarm(), selected.getCustomer());
         if(unUsedPays != null && !unUsedPays.isEmpty()){
             for(Payment payment : unUsedPays){
                 float unUsedValue = payment.getPaymentValue() - payment.getUsedValue();
@@ -580,7 +580,7 @@ public class SaleController implements Serializable {
     }
     
     private void searchAndSetSurplusValuePayable(float surplusValuePayable){
-        List<Sale> sales = getJpaController().findSaleEntitiesPayable(selected.getFarm());
+        List<Sale> sales = getJpaController().findSaleEntitiesPayable(selected.getFarm(), selected.getCustomer());
         int size = sales.size();
         float value = surplusValuePayable;
         if(sales != null && !sales.isEmpty()){
@@ -616,7 +616,7 @@ public class SaleController implements Serializable {
     }
     
     private void undoPayment(float value){
-        List<Payment> payments = getPaymentJpaController().findPaymentEntitiesWithUnusedAndUsedValue(signInBean.getFarm());
+        List<Payment> payments = getPaymentJpaController().findPaymentEntitiesWithUnusedAndUsedValue(signInBean.getFarm(), selected.getCustomer());
         if(payments != null && !payments.isEmpty()){
             for(Payment payment : payments){
                 float usedValue = payment.getUsedValue();

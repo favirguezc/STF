@@ -8,6 +8,7 @@ package data.administration;
 import data.exceptions.NonexistentEntityException;
 import data.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +17,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.administration.Contract;
 import model.administration.Cultivation;
 import model.administration.ModuleClass;
 
@@ -122,7 +122,8 @@ public class CultivationDAO implements Serializable {
                 q.setFirstResult(firstResult);
             }
             List<Cultivation> resultList = q.getResultList();
-            for (Cultivation c : resultList) {
+            
+            for (Cultivation c : new ArrayList<Cultivation>(resultList)) {
                 if (!c.isActive()) {
                     resultList.remove(c);
                 }

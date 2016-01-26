@@ -49,7 +49,7 @@ public class Departments {
                 + "32.	Vichada";
         for (String s : lista.split("\n")) {
             System.out.println(s.split("\t")[1]);
-            //new DepartmentDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).create(new Department(s.split("\t")[1]));
+            new DepartmentDAO(EntityManagerFactorySingleton.getEntityManagerFactory()).create(new Department(s.split("\t")[1]));
         }
     }
 }
